@@ -1,0 +1,163 @@
+/* @personal/ui components. Values come from tokens.css only.
+   Class names are the API: DESIGN.md lists each one and when to use it. */
+
+/* ─── App shell: sidebar + main ─── */
+.shell { display: grid; grid-template-columns: var(--side) 1fr; height: 100vh; }
+.side { display: flex; flex-direction: column; gap: var(--s2); padding: var(--s5) var(--s4); border-right: 1px solid var(--rule); overflow-y: auto; }
+.brand { display: flex; align-items: center; gap: var(--s3); font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); text-transform: uppercase; letter-spacing: -0.02em; padding: 0 var(--s2) var(--s5); }
+.brand-mark { width: 14px; height: 14px; background: var(--foreground); box-shadow: 18px 0 0 -3px var(--accent); margin-right: 8px; flex: none; }
+.side-label, .side-note { padding: 0 var(--s2); }
+.side-foot { margin-top: auto; display: grid; gap: var(--s4); padding-top: var(--s5); }
+.nav { display: flex; flex-direction: column; }
+.nav-item { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s3); width: 100%; padding: var(--s2) var(--s2); color: var(--muted); }
+.nav-item:hover { color: var(--foreground); }
+.nav-item[aria-current="true"], .nav-item[aria-current="page"] { color: var(--foreground); box-shadow: inset 2px 0 0 var(--accent); padding-left: var(--s3); }
+
+.main { overflow-y: auto; padding: var(--s7) var(--s7) var(--s9); }
+.main > * { max-width: var(--content); }
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s5); flex-wrap: wrap; }
+.head-title { min-width: 0; display: grid; gap: var(--s3); }
+.tabs { display: flex; gap: var(--s5); margin-top: var(--s6); border-top: 1px solid var(--rule); }
+.tab { padding: var(--s3) 0; font-weight: 500; color: var(--muted); margin-top: -1px; }
+.tab[aria-current="page"] { color: var(--foreground); box-shadow: inset 0 2px 0 var(--foreground); }
+.tab:hover { color: var(--foreground); }
+
+/* Theme switch: three squares in a row. */
+.themes { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); }
+.theme { padding: var(--s2) 0; font-size: var(--text-xs); text-align: center; text-transform: capitalize; color: var(--muted); }
+.theme + .theme { border-left: 1px solid var(--rule); }
+.theme[aria-checked="true"] { background: var(--foreground); color: var(--background); }
+
+/* ─── Sections ─── */
+.block { margin-top: var(--s9); }
+.block:first-child { margin-top: 0; }
+.section-title { margin-bottom: var(--s4); }
+.lede { max-width: var(--measure); margin-bottom: var(--s5); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); }
+.stack { display: grid; gap: var(--s4); }
+.row-gap { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); }
+.empty { margin-top: 14vh; display: grid; gap: var(--s5); justify-items: start; max-width: var(--measure); }
+.loading { margin-top: var(--s7); color: var(--muted); }
+.note { margin-top: var(--s4); color: var(--accent-text); }
+
+/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }
+.btn:active:not(:disabled) { transform: scale(0.98); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn-solid { background: var(--foreground); color: var(--background); }
+.btn-solid:hover:not(:disabled) { background: var(--ink-2); }
+.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }
+.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }
+.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }
+.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }
+.btn-ghost { padding-left: 0; padding-right: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }
+.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }
+.btn-block { width: 100%; }
+
+/* ─── Form fields ─── */
+.field { display: grid; gap: var(--s2); min-width: 0; }
+.field-hint { font-size: var(--text-xs); color: var(--muted); }
+.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }
+.input::placeholder, .textarea::placeholder { color: var(--muted); }
+.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }
+.input[aria-invalid="true"] { border-color: var(--danger); }
+.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+.input-sm { padding: 6px 10px; font-size: var(--text-sm); }
+/* A labelled on/off: a native checkbox drawn as a square switch. */
+.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }
+.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }
+.switch input::after { content: ""; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }
+.switch input:checked { background: var(--foreground); }
+.switch input:checked::after { transform: translateX(16px); background: var(--background); }
+.switch input:disabled { opacity: 0.5; cursor: not-allowed; }
+/* Settings: label left, control right, a rule between rows. */
+.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }
+.setting + .setting { border-top: 1px solid var(--rule); }
+.setting > :first-child { display: grid; gap: 2px; }
+
+/* Segmented control: one choice of a few, always visible. */
+.seg { display: flex; align-items: center; gap: var(--s2); }
+.seg > .muted { margin-right: var(--s1); }
+.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }
+.seg-opt + .seg-opt { margin-left: calc(-1 * var(--s2) - 1px); }
+.seg-opt[aria-pressed="true"], .seg-opt[aria-checked="true"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }
+.seg-opt:not([aria-pressed="true"]):not([aria-checked="true"]):hover { color: var(--foreground); }
+
+/* ─── Lists: rows split by rules, never boxed ─── */
+.list > li + li { border-top: 1px solid var(--rule); }
+.row { display: flex; align-items: flex-start; gap: var(--s4); padding: var(--s4) 0; width: 100%; text-align: left; }
+.row-body { display: flex; flex-direction: column; gap: var(--s1); min-width: 0; flex: 1; }
+.row-title { font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
+.row-meta { font-size: var(--text-sm); color: var(--muted); }
+.row-end { white-space: nowrap; align-self: center; }
+button.row:hover .row-title, a.row:hover .row-title { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+
+/* Facts: term/value pairs in a row. */
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2) var(--s5); margin-top: var(--s7); padding-top: var(--s4); font-size: var(--text-sm); }
+.facts dd { margin-top: 2px; }
+
+/* ─── Marks ─── */
+.swatch { width: 14px; height: 14px; flex: none; margin-top: 4px; display: inline-block; }
+.check { width: 20px; height: 20px; flex: none; display: grid; place-items: center; font-size: var(--text-xs); font-weight: 500; margin-top: 2px; }
+.check-pass { border: 1px solid var(--foreground); }
+.check-fail { background: var(--accent); color: var(--on-accent); }
+.badge { display: inline-flex; align-items: center; gap: var(--s1); padding: 2px 8px; font-size: var(--text-xs); font-weight: 500; border: 1px solid var(--rule); white-space: nowrap; }
+.badge-solid { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
+.badge-accent { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.kbd { display: inline-block; padding: 0 6px; font-size: var(--text-xs); border: 1px solid var(--rule); border-bottom-width: 2px; line-height: 18px; }
+.dot { width: 8px; height: 8px; border-radius: var(--round); background: var(--accent); display: inline-block; flex: none; }
+
+/* Heat: five steps of the app's accent, for counts over time. */
+.heat-0 { background: var(--wash-2); }
+.heat-1 { background: color-mix(in srgb, var(--accent) 25%, var(--background)); }
+.heat-2 { background: color-mix(in srgb, var(--accent) 50%, var(--background)); }
+.heat-3 { background: color-mix(in srgb, var(--accent) 75%, var(--background)); }
+.heat-4 { background: var(--accent); }
+
+/* ─── Boxes ─── */
+.card { padding: var(--s5); box-shadow: inset 0 0 0 1px var(--rule); }
+.card-hover:hover { box-shadow: inset 0 0 0 1px var(--foreground); }
+.banner { display: flex; align-items: flex-start; gap: var(--s4); padding: var(--s3) var(--s4); box-shadow: inset 3px 0 0 var(--foreground); background: var(--wash); font-size: var(--text-sm); }
+.banner > :first-child { flex: 1; }
+.banner-accent { box-shadow: inset 3px 0 0 var(--accent); }
+.banner-warning { box-shadow: inset 3px 0 0 var(--warning); }
+.banner-danger { box-shadow: inset 3px 0 0 var(--danger); }
+.banner-warning strong { color: var(--warning); }
+.banner-danger strong { color: var(--danger); }
+.code-block { padding: var(--s4); background: var(--wash); box-shadow: inset 0 0 0 1px var(--rule); font-size: var(--text-sm); line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
+
+/* ─── Overlays ─── */
+/* Drawer: details for one thing, from the right, over a scrim. */
+.drawer { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-drawer); }
+.scrim { position: absolute; inset: 0; background: color-mix(in srgb, var(--surface) 35%, transparent); opacity: 0; transition: opacity var(--base); }
+.drawer.open { pointer-events: auto; }
+.drawer.open .scrim { opacity: 1; }
+.panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(640px, 94vw); background: var(--background); border-left: 1px solid var(--rule); padding: var(--s7) var(--s6); overflow-y: auto; animation: slide 0.25s var(--ease); }
+.panel-wide { width: min(1100px, 96vw); }
+@keyframes slide { from { transform: translateX(32px); opacity: 0; } to { transform: none; opacity: 1; } }
+.panel-title { margin: var(--s2) 0 var(--s6); word-break: break-word; }
+.panel-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
+.close { position: absolute; top: var(--s5); right: var(--s5); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+
+/* Dialog: a question that blocks (confirm, conflict, short form). Native <dialog>. */
+.dialog { width: min(520px, 92vw); padding: var(--s6); border: 1px solid var(--foreground); background: var(--background); color: var(--foreground); }
+.dialog::backdrop { background: color-mix(in srgb, var(--surface) 45%, transparent); }
+.dialog[open] { animation: rise-in-d var(--base) var(--ease); }
+.dialog-title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: var(--s3); }
+.dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
+@keyframes rise-in-d { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Toast: what just happened, with undo. Bottom centre, dark in every theme. */
+.toast { position: fixed; left: 50%; bottom: var(--s5); transform: translateX(-50%); z-index: var(--z-toast); display: flex; align-items: center; gap: var(--s5); padding: var(--s3) var(--s5); background: var(--surface); color: var(--surface-text); font-size: var(--text-sm); box-shadow: 0 8px 30px -12px rgba(0,0,0,.5); animation: rise-in var(--base) var(--ease); }
+.toast button:first-of-type { color: inherit; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; }
+@keyframes rise-in { from { transform: translate(-50%, 12px); opacity: 0; } to { transform: translateX(-50%); opacity: 1; } }
+
+/* ─── Narrow windows ─── */
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; height: auto; }
+  .side { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .main { padding: var(--s5) var(--s4) var(--s8); overflow: visible; }
+  .two { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; }
+}

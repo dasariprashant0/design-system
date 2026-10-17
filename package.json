@@ -1,0 +1,17 @@
+{
+  "name": "@personal/ui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared design system: tokens, base styles, components and React pieces for every personal app.",
+  "type": "module",
+  "exports": {
+    "./tokens.css": "./css/tokens.css",
+    "./base.css": "./css/base.css",
+    "./components.css": "./css/components.css",
+    "./react": "./react/index.tsx"
+  },
+  "files": ["css", "react", "DESIGN.md"],
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

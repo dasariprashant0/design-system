@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ui-gallery",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "gallery", "run", "dev", "--", "--port", "5181", "--strictPort"],
+      "port": 5181
+    }
+  ]
+}

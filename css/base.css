@@ -1,0 +1,57 @@
+/* @personal/ui base: fonts, reset, body, type roles, the one reveal. */
+@font-face { font-family: "DM Mono"; font-weight: 300; font-style: normal; font-display: swap; src: url("./fonts/dm-mono-300.woff2") format("woff2"); }
+@font-face { font-family: "DM Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("./fonts/dm-mono-400.woff2") format("woff2"); }
+@font-face { font-family: "DM Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("./fonts/dm-mono-500.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("./fonts/space-mono-400.woff2") format("woff2"); }
+@font-face { font-family: "Space Mono"; font-weight: 700; font-style: normal; font-display: swap; src: url("./fonts/space-mono-700.woff2") format("woff2"); }
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
+input, select, textarea { font: inherit; color: inherit; }
+p, h1, h2, h3, h4, dl, dd, ol, ul, figure { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+a { color: inherit; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+a:hover { text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--on-accent); }
+
+/* Film grain, as on the portfolio; static (a desktop app stays open). */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: var(--z-grain); pointer-events: none; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* Type roles. Display is for page titles and big numbers only. */
+.display { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.035em; line-height: 0.95; text-wrap: balance; }
+.display-md { font-size: var(--display-md); }
+.display-sm { font-size: var(--display-sm); letter-spacing: -0.03em; }
+.display-xl { font-size: var(--display-xl); letter-spacing: -0.04em; line-height: 1; text-transform: none; }
+.label { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.muted { color: var(--muted); }
+.small { font-size: var(--text-sm); }
+.accent { color: var(--accent-text); }
+.danger { color: var(--danger); }
+.rule-top { border-top: 1px solid var(--rule); }
+.rule-bottom { border-bottom: 1px solid var(--rule); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* The one reveal: lines slide up out of their own clipped box, once. */
+.reveal { display: block; overflow: hidden; padding-bottom: 0.06em; }
+.reveal > span { display: block; animation: rise 0.95s var(--ease) both; }
+@keyframes rise { from { transform: translateY(108%); } to { transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

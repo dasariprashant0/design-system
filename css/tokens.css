@@ -1,0 +1,119 @@
+/* @personal/ui tokens: the one source of every colour, size and timing.
+   Same names and values as the portfolio and loadout. Screens never use a
+   raw value; if a token is missing, add it here (DESIGN.md "Adding a token").
+
+   An app may override only the accent group (--accent, --accent-text,
+   --accent-2) in its own brand.css, per theme. Everything else is shared. */
+
+/* ─── Theme: Warm (default, light) ─── */
+:root,
+[data-theme="warm"] {
+  --background:   #FAFAF5;
+  --foreground:   #16120E;
+  --muted:        #706B65;   /* 4.9:1 on background */
+  --border:       #E6E1D9;
+  --surface:      #16120E;   /* always-dark panel: toasts, code */
+  --surface-text: rgba(250, 250, 245, 0.85);
+
+  --accent:       #FF4500;   /* fills, marks, focus; not body text */
+  --accent-text:  #D13900;   /* accent as text: 4.6:1 on background */
+  --accent-2:     #AAFF00;
+  --on-accent:    #16120E;   /* text on an accent fill: 5.6:1 */
+
+  --danger:       #B3261E;
+  --warning:      #8A5300;
+  --ok:           #1F6B3A;
+  color-scheme: light;
+}
+
+/* ─── Theme: Dark ─── */
+[data-theme="dark"] {
+  --background:   #111110;
+  --foreground:   #F0EDE7;
+  --muted:        #8C8279;
+  --border:       #242220;
+  --surface:      #09090A;
+  --surface-text: rgba(240, 237, 231, 0.85);
+
+  --accent:       #FF4500;
+  --accent-text:  #FF4500;
+  --accent-2:     #AAFF00;
+  --on-accent:    #111110;
+
+  --danger:       #F0847A;
+  --warning:      #E0A23A;
+  --ok:           #6FCF8E;
+  color-scheme: dark;
+}
+
+/* ─── Theme: Midnight ─── */
+[data-theme="midnight"] {
+  --background:   #060B1A;
+  --foreground:   #DDE3F5;
+  --muted:        #7680A5;
+  --border:       #0F1630;
+  --surface:      #02050F;
+  --surface-text: rgba(221, 227, 245, 0.85);
+
+  --accent:       #AAFF00;
+  --accent-text:  #AAFF00;
+  --accent-2:     #00E5FF;
+  --on-accent:    #060B1A;
+
+  --danger:       #FF8A80;
+  --warning:      #FFC857;
+  --ok:           #7CE0A3;
+  color-scheme: dark;
+}
+
+:root {
+  /* Type: Space Mono for display, DM Mono for everything else. */
+  --font-display: "Space Mono", ui-monospace, monospace;
+  --font-body:    "DM Mono", ui-monospace, monospace;
+  --text-xs:   11px;
+  --text-sm:   13px;
+  --text-base: 15px;
+  --text-lg:   18px;
+  --display-sm: clamp(28px, 3.4vw, 40px);
+  --display-md: clamp(34px, 5vw, 64px);
+  --display-xl: clamp(44px, 8vw, 104px);
+
+  /* Lines: a 20% mix of the text colour. --border alone is ~1.1:1 in the
+     dark themes, so dividers use --rule. */
+  --rule: color-mix(in srgb, var(--foreground) 20%, transparent);
+  /* Washes: hover rows, code blocks, selected cells. */
+  --wash:   color-mix(in srgb, var(--foreground) 4%, transparent);
+  --wash-2: color-mix(in srgb, var(--foreground) 9%, transparent);
+
+  /* Ink density: tell up to five kinds apart without new colours. */
+  --ink-1: var(--foreground);
+  --ink-2: color-mix(in srgb, var(--foreground) 70%, transparent);
+  --ink-3: color-mix(in srgb, var(--foreground) 45%, transparent);
+  --ink-4: color-mix(in srgb, var(--foreground) 25%, transparent);
+  --ink-5: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --hatch: repeating-linear-gradient(135deg, var(--muted) 0 1.5px, transparent 1.5px 7px);
+
+  /* Space: 4px steps. */
+  --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 24px;
+  --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+
+  /* Shape: square. One radius for the rare round thing (a ring, a dot). */
+  --radius: 0;
+  --round: 999px;
+
+  /* Motion. */
+  --ease: cubic-bezier(0.76, 0, 0.24, 1);
+  --fast: 0.12s;
+  --base: 0.2s;
+  --slow: 0.45s;
+
+  /* Layout. */
+  --side: 264px;        /* sidebar width */
+  --measure: 64ch;      /* longest comfortable line */
+  --content: 1080px;    /* widest main column */
+
+  /* Layers. */
+  --z-drawer: 40;
+  --z-grain: 50;
+  --z-toast: 60;
+}
