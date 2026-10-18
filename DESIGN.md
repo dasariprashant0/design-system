@@ -18,8 +18,12 @@ It comes from the portfolio site and was first built in loadout. Every app share
 Stack: React + TypeScript + Vite, inside Wails for desktop apps.
 
 ```bash
-npm install --save @personal/ui@file:../../design-system   # path from the app's frontend folder
+npm install --save "@personal/ui@git+https://github.com/dasariprashant0/design-system.git#<commit>"
 ```
+
+Pin a full commit hash, so CI and clean checkouts build the same kit. To take a newer kit into an app, change the hash in its
+`package.json` and run `npm install`. While changing the kit itself, `npm install --save @personal/ui@file:<path to this repo>`
+links it live; switch back to the pinned hash before you commit the app.
 
 ```ts
 // main.tsx: in this order, before the app's own CSS
@@ -31,7 +35,7 @@ import './app.css';     // app-only layouts; tokens only
 ```
 
 ```ts
-// vite.config.ts: the package is a symlink; keep it inside node_modules
+// vite.config.ts: with a file: link the package is a symlink; keep it inside node_modules so it uses the app's React
 export default defineConfig({plugins: [react()], resolve: {preserveSymlinks: true}});
 ```
 
