@@ -23,6 +23,12 @@ export function useTheme(): [Theme, (t: Theme) => void] {
         document.documentElement.dataset.theme = theme;
         try { localStorage.setItem('theme', theme); } catch { /* fine */ }
     }, [theme]);
+    // Another window of the same app changed the theme: follow it.
+    useEffect(() => {
+        const follow = (e: StorageEvent) => { if (e.key === 'theme') setTheme(storedTheme()); };
+        window.addEventListener('storage', follow);
+        return () => window.removeEventListener('storage', follow);
+    }, []);
     return [theme, setTheme];
 }
 
