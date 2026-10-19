@@ -89,6 +89,14 @@ function Gallery() {
                                 <Field label="Name" hint="Shown in the sidebar."><input className="input" placeholder="Work"/></Field>
                                 <Field label="Folder" error="That folder doesn't exist."><input className="input" aria-invalid="true" defaultValue="~/Notes/missing"/></Field>
                                 <Field label="Template"><select className="select"><option>Daily</option><option>Weekly</option></select></Field>
+                                <div className="field">
+                                    <div className="input-wrap">
+                                        <input className="input" aria-label="Add a line" placeholder="What did you just do?"/>
+                                        <button type="button" className="badge input-end">Work ▾</button>
+                                    </div>
+                                    <p className="key-hints"><span><Kbd>↩</Kbd> add</span><span><Kbd>⌘1</Kbd> done</span><span><Kbd>⌘2</Kbd> next</span></p>
+                                </div>
+                                <textarea className="input-bare" rows={1} aria-label="A line edited in place" defaultValue="A line edited in place keeps its place."/>
                             </div>
                             <div>
                                 <Setting title="Remind me at 6pm" hint="One quiet notification, weekdays only."><Switch checked={on} onChange={setOn}/></Setting>

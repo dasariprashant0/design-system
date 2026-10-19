@@ -104,6 +104,13 @@ Never use `--border` for a visible line: it is about 1.1:1 in dark themes. Use `
 
 **Grids:** use `.two` for side by side and `.stack` for a vertical list of controls. Keep `.row-gap` for a row of buttons or chips. Use no other grid systems.
 
+**Room for focus.** The focus ring is 2px drawn 3px outside a control, so it takes 5px of the space around it. Leave room for it:
+- `--s2` or more between two focusable things, and between a field and the text under it (`.field-hint` already does).
+- A control inside a field sits `--s3` in from its edge: `.input-wrap` around the input, `.input-end` on the control.
+- Text edited in place inside a row uses `.input-bare`, which pads the text by `--s2` without moving it.
+- Keyboard hints under a field are a `.key-hints` line, each key and its word in a `span`.
+- Check with Tab, not only the mouse: no ring may touch text, a border or another control.
+
 ## 6. Components: which one when
 
 | Need | Use | Not |
@@ -115,6 +122,9 @@ Never use `--border` for a visible line: it is about 1.1:1 in dark themes. Use `
 | Pick from 5 or more | `<select className="select">` in a `Field` | Custom dropdowns |
 | On/off | `Switch`; in settings, inside a `Setting` row | A checkbox for a setting |
 | Text input | `<input className="input">` in a `Field` (label above, hint or error below) | Placeholder as the label |
+| A control inside a field | `.input-wrap` + `.input-end` (`--s3` in from the edge) | A control laid over the text |
+| Edit text in place in a row | `<textarea className="input-bare">` | A bordered input that shifts the row |
+| Keys you can press | `.key-hints` of `Kbd` + word pairs | Keys run together in a sentence |
 | A list of things | `ul.list` of `Row`s (mark, title, meta, end) | Cards in a grid |
 | Details of one thing | `Drawer` from the right | A new page, a modal |
 | A question that blocks | `Dialog` (native `<dialog>`, focus trapped) | Drawer, toast |
@@ -171,5 +181,6 @@ Never use `--border` for a visible line: it is about 1.1:1 in dark themes. Use `
 - [ ] One solid button per view; danger actions offer Undo.
 - [ ] It works in warm, dark and midnight, and with the window at 900px wide.
 - [ ] Keyboard only: you can reach everything, focus is visible, and Escape closes overlays.
+- [ ] Tab through it: no focus ring touches text, a border or another control (§5, Room for focus).
 - [ ] Empty, loading and error states exist and use plain words.
 - [ ] Nothing animates except the title reveal and overlays.
