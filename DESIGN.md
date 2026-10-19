@@ -77,6 +77,7 @@ All in `css/tokens.css`. Three themes, set on `<html data-theme>` by `useTheme()
 | Ink | `--ink-1` … `--ink-5`, `--hatch` | Kinds in charts, legends, swatches |
 | Type | `--font-display`, `--font-body`, `--text-xs/sm/base/lg`, `--display-sm/md/xl` | See §4 |
 | Space | `--s1` 4 · `--s2` 8 · `--s3` 12 · `--s4` 16 · `--s5` 24 · `--s6` 32 · `--s7` 48 · `--s8` 64 · `--s9` 96 | Every margin, gap and padding |
+| Layout | `--side`, `--measure`, `--content`, `--window-pad` (= `--s6`) | Sidebar width, line length, widest column, a small window's inset |
 | Motion | `--ease`, `--fast` .12s, `--base` .2s, `--slow` .45s | See §8 |
 | Layout | `--side` 264px, `--measure` 64ch, `--content` 1080px | Sidebar, longest line, widest column |
 
@@ -94,6 +95,8 @@ Never use `--border` for a visible line: it is about 1.1:1 in dark themes. Use `
 ## 5. Layout
 
 **App shell** (`Shell`): a sidebar (`--side`) and a scrolling main column (padding `--s7`, max width `--content`). It stacks below 900px.
+
+**A small window** (Settings, a panel): `.window` with a `.window-head` (the tabs) and a scrolling `.window-body`. Both sit `--window-pad` (32px) in from every edge. Nothing in any window sits closer than `--s5` to its edge: no text, control or rule.
 
 **Sidebar, top to bottom:** `Brand`, a `.label` group name, `NavItem`s (the current one gets the accent bar), then `.side-foot` with settings and `ThemeSwitch`.
 
@@ -182,5 +185,6 @@ Never use `--border` for a visible line: it is about 1.1:1 in dark themes. Use `
 - [ ] It works in warm, dark and midnight, and with the window at 900px wide.
 - [ ] Keyboard only: you can reach everything, focus is visible, and Escape closes overlays.
 - [ ] Tab through it: no focus ring touches text, a border or another control (§5, Room for focus).
+- [ ] Nothing touches a window edge: a page keeps `--s7`, a small window `--window-pad` (§5).
 - [ ] Empty, loading and error states exist and use plain words.
 - [ ] Nothing animates except the title reveal and overlays.

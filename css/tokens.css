@@ -111,6 +111,7 @@
   --side: 264px;        /* sidebar width */
   --measure: 64ch;      /* longest comfortable line */
   --content: 1080px;    /* widest main column */
+  --window-pad: var(--s6); /* a small window's inset from every edge (Settings, a panel) */
 
   /* Layers. */
   --z-drawer: 40;

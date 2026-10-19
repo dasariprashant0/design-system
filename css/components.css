@@ -15,6 +15,10 @@
 
 .main { overflow-y: auto; padding: var(--s7) var(--s7) var(--s9); }
 .main > * { max-width: var(--content); }
+/* A small window (Settings, a panel): a head (tabs) and a scrolling body, both --window-pad in from every edge. */
+.window { display: flex; flex-direction: column; height: 100vh; }
+.window-head { padding: 0 var(--window-pad); }
+.window-body { flex: 1; min-height: 0; overflow-y: auto; padding: var(--window-pad) var(--window-pad) var(--s8); }
 .head { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s5); flex-wrap: wrap; }
 .head-title { min-width: 0; display: grid; gap: var(--s3); }
 .tabs { display: flex; gap: var(--s5); margin-top: var(--s6); border-top: 1px solid var(--rule); }
