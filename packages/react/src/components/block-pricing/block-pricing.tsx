@@ -6,6 +6,7 @@ import {Button} from '../button';
 import {Container} from '../container';
 import {Heading} from '../heading';
 import {SegmentedControl} from '../segmented-control';
+import type {RenderLink} from '../link';
 import {Text} from '../text';
 
 export type PricingInterval = 'monthly' | 'yearly';
@@ -34,6 +35,8 @@ export interface BlockPricingProps extends Omit<HTMLAttributes<HTMLElement>, 'ti
   defaultInterval?: PricingInterval;
   /** Overrides for the built-in English texts (Monthly, Yearly, Billing period, Popular, / month, / year); use it to translate. */
   labels?: Partial<{monthly: string; yearly: string; switcher: string; period: Record<PricingInterval, string>; highlight: string}>;
+  /** Renders a tier's link (the ones with `href`), so a client router can handle the click. Default a plain `<a href>`. */
+  renderLink?: RenderLink;
   /** Called when a tier's button (one without `href`) is pressed. */
   onSelect?: (tier: PricingTier, interval: PricingInterval) => void;
   /** Outline level of the section title, 1 to 5. Default 2; each tier name is one level lower. */
@@ -41,7 +44,7 @@ export interface BlockPricingProps extends Omit<HTMLAttributes<HTMLElement>, 'ti
 }
 
 /** Plan cards with a monthly or yearly switch. Prices are copy you pass in; the block does no maths. */
-export const BlockPricing = forwardRef<HTMLElement, BlockPricingProps>(function BlockPricing({title, description, tiers, defaultInterval = 'monthly', labels, onSelect, headingLevel = 2, className, ...rest}, ref) {
+export const BlockPricing = forwardRef<HTMLElement, BlockPricingProps>(function BlockPricing({title, description, tiers, defaultInterval = 'monthly', labels, renderLink, onSelect, headingLevel = 2, className, ...rest}, ref) {
   const id = useId();
   const [interval, setInterval] = useState<PricingInterval>(defaultInterval);
   const l = {monthly: 'Monthly', yearly: 'Yearly', switcher: 'Billing period', highlight: 'Popular', period: {monthly: '/ month', yearly: '/ year'}, ...labels};
@@ -75,7 +78,7 @@ export const BlockPricing = forwardRef<HTMLElement, BlockPricingProps>(function 
                 {tier.features.map((f, j) => <li key={j}>{f}</li>)}
               </ul>
               {tier.href
-                ? <Button asChild variant={tier.highlighted ? 'solid' : 'line'}><a href={tier.href}>{tier.ctaLabel}</a></Button>
+                ? <Button asChild variant={tier.highlighted ? 'solid' : 'line'}>{renderLink ? renderLink({href: tier.href, children: tier.ctaLabel}) : <a href={tier.href}>{tier.ctaLabel}</a>}</Button>
                 : <Button variant={tier.highlighted ? 'solid' : 'line'} onClick={() => onSelect?.(tier, interval)}>{tier.ctaLabel}</Button>}
             </li>
           ))}

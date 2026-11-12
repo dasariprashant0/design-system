@@ -1,4 +1,4 @@
-import {forwardRef, type AnchorHTMLAttributes} from 'react';
+import {forwardRef, type AnchorHTMLAttributes, type ReactNode} from 'react';
 import {Slot} from 'radix-ui';
 import {cx} from '../../utils/cx';
 
@@ -8,6 +8,13 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /** Use the child (a router link) instead of an anchor. */
   asChild?: boolean;
 }
+
+/**
+ * Lets blocks hand a link to your router. Return a router link built from these props, for example
+ * `renderLink={({href, ...rest}) => <RouterLink to={href} {...rest} />}` (React Router) or
+ * `renderLink={(p) => <NextLink {...p} />}` (Next.js). The block adds `className` and `aria-current` for you.
+ */
+export type RenderLink = (props: {href: string; className?: string; 'aria-current'?: 'page'; children: ReactNode}) => ReactNode;
 
 /** An anchor with the Monoline underline. */
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link({external, asChild, className, children, ...rest}, ref) {
