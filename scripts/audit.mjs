@@ -40,9 +40,11 @@ const mime = {'.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css'
 const server = createServer((req, res) => {
   const path = normalize(decodeURIComponent((req.url ?? '/').split('?')[0])).replace(/^(\.\.[/\\])+/, '');
   const file = join(dist, path === '/' || path === '.' ? 'index.html' : path);
-  if (!file.startsWith(dist) || !existsSync(file)) { res.writeHead(404); res.end('not found'); return; }
-  res.writeHead(200, {'content-type': mime[extname(file)] ?? 'application/octet-stream'});
-  res.end(readFileSync(file));
+  // Single-page app: any path without a file extension falls back to index.html, like the 404.html trick on Pages.
+  const target = existsSync(file) && extname(file) ? file : (extname(file) ? null : join(dist, 'index.html'));
+  if (!target || !target.startsWith(dist) || !existsSync(target)) { res.writeHead(404); res.end('not found'); return; }
+  res.writeHead(200, {'content-type': mime[extname(target)] ?? 'application/octet-stream'});
+  res.end(readFileSync(target));
 });
 await new Promise((r) => server.listen(0, '127.0.0.1', r));
 const base = `http://127.0.0.1:${server.address().port}/`;
@@ -96,13 +98,14 @@ await cdp('Page.addScriptToEvaluateOnNewDocument', {source: axeSource});
 await cdp('Emulation.setDeviceMetricsOverride', {width: 1280, height: 800, deviceScaleFactor: 1, mobile: false});
 await cdp('Page.navigate', {url: base});
 await new Promise((r) => setTimeout(r, 1500));
-let pages = await evaluate(`[...document.querySelectorAll('.nav-item')].map(a => a.getAttribute('href').slice(1))`);
+let pages = await evaluate(`[...document.querySelectorAll('.nav-item')].map(a => a.getAttribute('href'))`);
 if (!pages.length) { console.error('No pages found in the docs sidebar.'); cleanup(); process.exit(2); }
 const only = opt('pages', '');
-if (only) pages = pages.filter((p) => only.split(',').includes(p));
+const slug = (p) => p.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'home';
+if (only) pages = pages.filter((p) => only.split(',').includes(p.split('/').filter(Boolean).pop()));
 console.log(`Auditing ${pages.length} pages x ${THEMES.length} themes x ${ACCENTS.length} accents x ${VPS.length} viewports${VISUAL ? ' (visual)' : ''}`);
 
-const waitForPage = (page) => evaluate(`(async () => { location.hash = ${JSON.stringify(page)}; for (let i = 0; i < 60; i++) { await new Promise(r => setTimeout(r, 50)); const m = document.querySelector('.docs-main'); if (m && m.querySelector('h1') && location.hash.slice(1) === ${JSON.stringify(page)}) { await new Promise(r => setTimeout(r, 120)); return true; } } return false; })()`);
+const waitForPage = (page) => evaluate(`(async () => { const a = document.querySelector('.nav-item[href=' + JSON.stringify(${JSON.stringify(page)}) + ']'); if (!a) return false; a.click(); for (let i = 0; i < 80; i++) { await new Promise(r => setTimeout(r, 50)); const m = document.querySelector('.docs-main'); if (m && m.querySelector('h1') && location.pathname === a.pathname) { await new Promise(r => setTimeout(r, 150)); return true; } } return false; })()`);
 const setLook = (theme, accent) => evaluate(`(() => { const r = document.documentElement; r.dataset.theme = ${JSON.stringify(theme)}; r.dataset.accent = ${JSON.stringify(accent)}; return true; })()`);
 const AXE = `axe.run(document.body, {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']}, resultTypes: ['violations']}).then(r => r.violations.map(v => ({id: v.id, impact: v.impact, nodes: v.nodes.length, sample: v.nodes[0] && v.nodes[0].target.join(' ').slice(0, 120), msg: v.nodes[0] && (v.nodes[0].any[0] || v.nodes[0].all[0] || v.nodes[0].none[0] || {}).message})))`;
 
@@ -122,7 +125,7 @@ for (const vp of VPS) {
       states++;
       if (VISUAL) {
         const {data} = await cdp('Page.captureScreenshot', {format: 'png', captureBeyondViewport: false});
-        const buf = Buffer.from(data, 'base64'); const name = `${vp}-${theme}-${page}.png`; shots++;
+        const buf = Buffer.from(data, 'base64'); const name = `${vp}-${theme}-${slug(page)}.png`; shots++;
         const basePath = join(baselineDir, name);
         if (flag('update') || !existsSync(basePath)) { writeFileSync(basePath, buf); created++; }
         else if (!readFileSync(basePath).equals(buf)) { writeFileSync(join(actualDir, name), buf); changed++; note('visual-diff', name); }
