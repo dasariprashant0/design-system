@@ -20,7 +20,11 @@ export interface DatePickerProps extends Omit<CalendarProps, 'className' | 'aria
   'aria-label'?: string;
 }
 
-/** Pick a date from a popover calendar. Same `value` / `defaultValue` / `onValueChange` as Calendar. */
+/**
+ * Pick a date from a popover calendar. Same `value` / `defaultValue` / `onValueChange` as Calendar.
+ * Add `clearable` to put a "Clear date" button in the popover; it calls `onValueChange(null)` and closes.
+ * @example <DatePicker clearable value={date} onValueChange={setDate} aria-label="Due" />
+ */
 export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(function DatePicker({value, defaultValue = null, onValueChange, placeholder = 'Pick a date', format = {dateStyle: 'medium'}, locale, disabled, invalid, className, 'aria-label': label, ...cal}, ref) {
   const f = useFieldControl();
   const [inner, setInner] = useState<Date | null>(defaultValue);

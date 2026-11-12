@@ -50,4 +50,17 @@ describe('Calendar', () => {
     const {container} = render(<Calendar defaultValue={jan} locale="en-US" />);
     expect(await axe(container)).toHaveNoViolations();
   });
+  it('clears the date with a Clear date button when clearable', async () => {
+    const user = userEvent.setup();
+    const fn = vi.fn();
+    render(<Calendar defaultValue={jan} locale="en-US" clearable onValueChange={fn} />);
+    await user.click(screen.getByRole('button', {name: 'Clear date'}));
+    expect(fn).toHaveBeenCalledWith(null);
+    expect(screen.getByRole('button', {name: 'Thursday, January 15, 2026'})).toHaveAttribute('aria-pressed', 'false');
+    expect(screen.getByRole('button', {name: 'Clear date'})).toBeDisabled();
+  });
+  it('has no Clear date button by default', () => {
+    render(<Calendar defaultValue={jan} locale="en-US" />);
+    expect(screen.queryByRole('button', {name: 'Clear date'})).not.toBeInTheDocument();
+  });
 });
