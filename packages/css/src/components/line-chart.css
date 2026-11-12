@@ -1,0 +1,3 @@
+/* Line chart (also used by area chart). Shared base: chart.css. */
+.chart-point { fill: var(--background); stroke: var(--chart-c); stroke-width: 1.5; }
+.chart-guide { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 2; }

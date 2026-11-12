@@ -1,0 +1,2 @@
+/* Area chart: the filled band under each line. Shared base: chart.css and line-chart.css. */
+.chart-area { transition: fill-opacity var(--fast) var(--ease); }
