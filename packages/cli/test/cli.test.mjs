@@ -20,7 +20,8 @@ test('add copies source and css, skips meta.json, lists deps', async () => {
   assert.ok(existsSync(join(cwd, 'src/components/monoline/button/button.tsx')));
   assert.ok(existsSync(join(cwd, 'src/components/monoline/button/index.ts')));
   assert.ok(!existsSync(join(cwd, 'src/components/monoline/button/meta.json')));
-  assert.ok(readdirCss(cwd).length > 0);
+  assert.ok(existsSync(join(cwd, 'src/styles/monoline/button.css')));
+  assert.equal(readdirCss(cwd).length, 0, 'legacy numbered files are not copied');
   assert.match(r.out, /npm i radix-ui/);
 });
 
@@ -87,4 +88,14 @@ test('init writes monoline.json', async () => {
   assert.equal(JSON.parse(readFileSync(join(cwd, 'monoline.json'), 'utf8')).styles, 'src/styles/monoline');
   assert.match(r.out, /@monoline\/css/);
   assert.equal((await exec(['init'], cwd)).code, 1);
+});
+
+test('copies one layered css bundle per component, deduplicated', async () => {
+  const cwd = tmp();
+  const r = await exec(['add', 'button'], cwd);
+  const css = readFileSync(join(cwd, 'src/styles/monoline/button.css'), 'utf8');
+  assert.match(css, /^@layer monoline\.components \{/);
+  assert.match(css, /\.btn\b/);
+  assert.equal(css.split('@layer').length, 2, 'one wrapper, not one per file');
+  assert.match(r.out, /import '\.\/src\/styles\/monoline\/button\.css'/);
 });

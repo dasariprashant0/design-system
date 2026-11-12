@@ -3,6 +3,8 @@
 import {readdirSync} from 'node:fs';
 import {read, parseTokens, contrast} from './lib.mjs';
 import './check-logical.mjs';
+import './check-layers.mjs';
+import './size.mjs';
 
 const {themes, accents} = parseTokens();
 const fails = [];
