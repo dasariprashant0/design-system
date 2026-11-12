@@ -1,0 +1,49 @@
+{
+  "name": "tag",
+  "title": "Tag",
+  "category": "data-display",
+  "description": "A short label, optionally removable.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/19-avatar.css",
+      "content": "/* ─── Avatar, tag, stat ─── */\n.avatar { display: inline-grid; place-items: center; width: 32px; height: 32px; flex: none; background: var(--foreground); color: var(--background); font-size: var(--text-xs); font-weight: 500; text-transform: uppercase; overflow: hidden; }\n.avatar img { width: 100%; height: 100%; object-fit: cover; }\n.avatar-lg { width: 48px; height: 48px; font-size: var(--text-sm); }\n.avatar-line { background: transparent; color: var(--foreground); box-shadow: inset 0 0 0 1px var(--foreground); }\n.avatar-group { display: inline-flex; }\n.avatar-group > .avatar { box-shadow: 0 0 0 2px var(--background); }\n.avatar-group > .avatar + .avatar { margin-left: calc(-1 * var(--s2)); }\n.tag { display: inline-flex; align-items: center; gap: var(--s2); padding: 2px var(--s3); font-size: var(--text-sm); box-shadow: inset 0 0 0 1px var(--rule); }\n.tag button { padding: 0 var(--s1); color: var(--muted); }\n.tag button:hover { color: var(--foreground); }\n.stat { display: grid; gap: var(--s1); }\n.stat-value { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; line-height: 1; }\n.stat-note { font-size: var(--text-sm); color: var(--muted); }\n"
+    }
+  ],
+  "a11y": [
+    "The remove control is a real button named \"Remove <label>\"."
+  ],
+  "keywords": [
+    "chip",
+    "pill",
+    "label",
+    "removable"
+  ],
+  "kind": "components",
+  "import": "import {Tag} from '@monoline/react'",
+  "path": "packages/react/src/components/tag",
+  "files": [
+    "packages/react/src/components/tag/index.ts",
+    "packages/react/src/components/tag/meta.json",
+    "packages/react/src/components/tag/tag.demo.tsx",
+    "packages/react/src/components/tag/tag.test.tsx",
+    "packages/react/src/components/tag/tag.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/tag/index.ts",
+      "content": "export {Tag} from './tag';\nexport type {TagProps} from './tag';\n"
+    },
+    {
+      "path": "packages/react/src/components/tag/meta.json",
+      "content": "{\"name\":\"tag\",\"title\":\"Tag\",\"category\":\"data-display\",\"description\":\"A short label, optionally removable.\",\"status\":\"stable\",\"css\":[\"19-avatar.css\"],\"a11y\":[\"The remove control is a real button named \\\"Remove <label>\\\".\"],\"keywords\":[\"chip\",\"pill\",\"label\",\"removable\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/tag/tag.tsx",
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface TagProps extends HTMLAttributes<HTMLSpanElement> {\n  /** Shows a remove button and calls this when it is pressed. */\n  onRemove?: () => void;\n  /** Text used in the remove button's name: \"Remove <label>\". Defaults to the child text. */\n  label?: string;\n}\n\n/** A label for a category, filter or value. */\nexport const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag({onRemove, label, className, children, ...rest}, ref) {\n  const text = label ?? (typeof children === 'string' ? children : '');\n  return (\n    <span ref={ref} className={cx('tag', className)} {...rest}>\n      {children}\n      {onRemove && (\n        <button type=\"button\" onClick={onRemove} aria-label={`Remove ${text}`.trim()}>\n          <svg aria-hidden=\"true\" viewBox=\"0 0 10 10\" width=\"10\" height=\"10\"><path d=\"M1 1l8 8M9 1l-8 8\" stroke=\"currentColor\" fill=\"none\" /></svg>\n        </button>\n      )}\n    </span>\n  );\n});\n"
+    }
+  ]
+}

@@ -11,10 +11,20 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 
 ## Components
 ### layout
+- Aspect ratio (aspect-ratio, stable): Keep media or a placeholder at a fixed width-to-height ratio. Source: packages/react/src/components/aspect-ratio/
+- Container (container, stable): Centre content in a column with a sensible maximum width and side padding. Source: packages/react/src/components/container/
+- Scroll area (scroll-area, stable): A scrollable region with thin, themed scrollbars. Source: packages/react/src/components/scroll-area/
 - Separator (separator, stable): A thin rule between groups. Source: packages/react/src/components/separator/
+- Stack (stack, stable): Lay children out in a column or row with one gap from the spacing scale. Source: packages/react/src/components/stack/
+
+### typography
+- Kbd (kbd, stable): Show a keyboard key or shortcut. Source: packages/react/src/components/kbd/
 
 ### buttons
 - Button (button, stable): Triggers an action. Native button with solid, line, ghost and danger variants. Source: packages/react/src/components/button/
+- Button group (button-group, stable): Join related buttons into one segmented bar. Source: packages/react/src/components/button-group/
+- Icon button (icon-button, stable): A square button holding only an icon. The accessible name is required. Source: packages/react/src/components/icon-button/
+- Segmented control (segmented-control, stable): Pick exactly one option from a short row, shown as joined segments. Source: packages/react/src/components/segmented-control/
 - Toggle (toggle, stable): A button that stays pressed or not. Source: packages/react/src/components/toggle/
 - Toggle group (toggle-group, stable): A row of toggles where one or several can be on. Source: packages/react/src/components/toggle-group/
 
@@ -23,7 +33,11 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Field (field, stable): Connects a label, a control, a hint and an error with the right ids and ARIA. Source: packages/react/src/components/field/
 - Input (input, stable): A single-line text field. Source: packages/react/src/components/input/
 - Label (label, stable): The visible name of a form control. Source: packages/react/src/components/label/
+- Number input (number-input, stable): A numeric field with decrease and increase buttons. Source: packages/react/src/components/number-input/
+- OTP input (otp-input, stable): Enter a one-time code, one digit per box, with paste support. Source: packages/react/src/components/otp-input/
+- Password input (password-input, stable): A password field with a show/hide toggle. Source: packages/react/src/components/password-input/
 - Radio group (radio-group, stable): Pick exactly one option from a short list. Source: packages/react/src/components/radio-group/
+- Rating (rating, stable): Pick or show a score from 1 to a maximum, as stars. Source: packages/react/src/components/rating/
 - Select (select, stable): Pick one value from a list of five or more options. Source: packages/react/src/components/select/
 - Slider (slider, stable): Pick a number, or a range, by dragging or with the keyboard. Source: packages/react/src/components/slider/
 - Switch (switch, stable): An on/off setting that takes effect immediately. Source: packages/react/src/components/switch/
@@ -32,17 +46,27 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 ### data-display
 - Accordion (accordion, stable): Stacked headings that each show or hide a section. Source: packages/react/src/components/accordion/
 - Avatar (avatar, stable): A person or thing as an image with an initials fallback. Source: packages/react/src/components/avatar/
+- Avatar group (avatar-group, stable): Overlap several avatars and show how many more there are. Source: packages/react/src/components/avatar-group/
 - Badge (badge, stable): A short status word or count. Source: packages/react/src/components/badge/
 - Card (card, stable): A bordered group for one thing you can pick up or open. Source: packages/react/src/components/card/
+- Code block (code-block, stable): A block of code with a copy button. Source: packages/react/src/components/code-block/
+- Collapsible (collapsible, stable): Show or hide one region of content from a trigger. Source: packages/react/src/components/collapsible/
+- Stat (stat, stable): One number with its label and a note. Source: packages/react/src/components/stat/
+- Table (table, stable): Rows and columns of data with a header, in a horizontally scrolling wrapper. Source: packages/react/src/components/table/
+- Tag (tag, stable): A short label, optionally removable. Source: packages/react/src/components/tag/
+- Timeline (timeline, stable): A vertical list of events with times, joined by a rule. Source: packages/react/src/components/timeline/
 
 ### feedback
 - Alert (alert, stable): A message that stays on screen, with a title and a tone. Source: packages/react/src/components/alert/
+- Empty state (empty-state, stable): Say that there is nothing here yet and offer the next step. Source: packages/react/src/components/empty-state/
 - Progress (progress, stable): How far along a task is, or that it is still working. Source: packages/react/src/components/progress/
 - Skeleton (skeleton, stable): A still placeholder shaped like the content that is loading. Source: packages/react/src/components/skeleton/
 - Spinner (spinner, stable): A small indicator that something is loading. Source: packages/react/src/components/spinner/
 
 ### overlays
+- Alert dialog (alert-dialog, stable): A modal that interrupts to confirm a destructive or irreversible action. Source: packages/react/src/components/alert-dialog/
 - Dialog (dialog, stable): A modal window for a question or short task that blocks the page. Source: packages/react/src/components/dialog/
+- Drawer (drawer, stable): A panel that slides in from an edge for secondary tasks, details or navigation. Source: packages/react/src/components/drawer/
 - Dropdown menu (dropdown-menu, stable): A list of actions that opens from a button. Source: packages/react/src/components/dropdown-menu/
 - Popover (popover, stable): A floating panel of content or controls anchored to a button. Source: packages/react/src/components/popover/
 - Tooltip (tooltip, stable): Short hint text on hover and keyboard focus. Source: packages/react/src/components/tooltip/
@@ -50,4 +74,8 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 ### navigation
 - Breadcrumb (breadcrumb, stable): The path to the current page. Source: packages/react/src/components/breadcrumb/
 - Pagination (pagination, stable): Move between pages of results. Source: packages/react/src/components/pagination/
+- Stepper (stepper, stable): Show progress through a numbered sequence of steps. Source: packages/react/src/components/stepper/
 - Tabs (tabs, stable): Switch between related views in the same place. Source: packages/react/src/components/tabs/
+
+### effects
+- Marquee (marquee, stable): Scroll a row of items endlessly; pauses on hover and stops for reduced motion. Source: packages/react/src/components/marquee/

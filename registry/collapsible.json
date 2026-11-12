@@ -1,0 +1,52 @@
+{
+  "name": "collapsible",
+  "title": "Collapsible",
+  "category": "data-display",
+  "description": "Show or hide one region of content from a trigger.",
+  "status": "stable",
+  "primitive": "radix-ui/Collapsible",
+  "css": [
+    {
+      "path": "packages/css/src/components/collapsible.css",
+      "content": ".collapsible-content { padding-top: var(--s3); font-size: var(--text-sm); }\n"
+    }
+  ],
+  "a11y": [
+    "The trigger is a button with aria-expanded and aria-controls.",
+    "Space and Enter toggle it."
+  ],
+  "keywords": [
+    "disclosure",
+    "expand",
+    "toggle",
+    "details",
+    "show more"
+  ],
+  "kind": "components",
+  "import": "import {Collapsible} from '@monoline/react'",
+  "path": "packages/react/src/components/collapsible",
+  "files": [
+    "packages/react/src/components/collapsible/collapsible.demo.tsx",
+    "packages/react/src/components/collapsible/collapsible.test.tsx",
+    "packages/react/src/components/collapsible/collapsible.tsx",
+    "packages/react/src/components/collapsible/index.ts",
+    "packages/react/src/components/collapsible/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/collapsible/collapsible.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Collapsible as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport const Collapsible = Radix.Root;\nexport const CollapsibleTrigger = Radix.Trigger;\n\nexport const CollapsibleContent = forwardRef<ElementRef<typeof Radix.Content>, ComponentPropsWithoutRef<typeof Radix.Content>>(function CollapsibleContent({className, ...rest}, ref) {\n  return <Radix.Content ref={ref} className={cx('collapsible-content', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/collapsible/index.ts",
+      "content": "export {Collapsible, CollapsibleTrigger, CollapsibleContent} from './collapsible';\n"
+    },
+    {
+      "path": "packages/react/src/components/collapsible/meta.json",
+      "content": "{\"name\":\"collapsible\",\"title\":\"Collapsible\",\"category\":\"data-display\",\"description\":\"Show or hide one region of content from a trigger.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Collapsible\",\"css\":[\"collapsible.css\"],\"a11y\":[\"The trigger is a button with aria-expanded and aria-controls.\",\"Space and Enter toggle it.\"],\"keywords\":[\"disclosure\",\"expand\",\"toggle\",\"details\",\"show more\"]}\n"
+    }
+  ]
+}

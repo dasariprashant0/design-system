@@ -1,0 +1,45 @@
+{
+  "name": "aspect-ratio",
+  "title": "Aspect ratio",
+  "category": "layout",
+  "description": "Keep media or a placeholder at a fixed width-to-height ratio.",
+  "status": "stable",
+  "primitive": "radix-ui/AspectRatio",
+  "css": [],
+  "a11y": [
+    "A plain div; the content keeps its own semantics and alt text."
+  ],
+  "keywords": [
+    "16:9",
+    "ratio",
+    "image",
+    "video"
+  ],
+  "kind": "components",
+  "import": "import {AspectRatio} from '@monoline/react'",
+  "path": "packages/react/src/components/aspect-ratio",
+  "files": [
+    "packages/react/src/components/aspect-ratio/aspect-ratio.demo.tsx",
+    "packages/react/src/components/aspect-ratio/aspect-ratio.test.tsx",
+    "packages/react/src/components/aspect-ratio/aspect-ratio.tsx",
+    "packages/react/src/components/aspect-ratio/index.ts",
+    "packages/react/src/components/aspect-ratio/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/aspect-ratio/aspect-ratio.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {AspectRatio as RadixAspectRatio} from 'radix-ui';\n\nexport type AspectRatioProps = ComponentPropsWithoutRef<typeof RadixAspectRatio.Root>;\n\n/** Width / height ratio: `<AspectRatio ratio={16 / 9}>`. */\nexport const AspectRatio = forwardRef<ElementRef<typeof RadixAspectRatio.Root>, AspectRatioProps>(function AspectRatio(props, ref) {\n  return <RadixAspectRatio.Root ref={ref} {...props} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/aspect-ratio/index.ts",
+      "content": "export {AspectRatio} from './aspect-ratio';\nexport type {AspectRatioProps} from './aspect-ratio';\n"
+    },
+    {
+      "path": "packages/react/src/components/aspect-ratio/meta.json",
+      "content": "{\"name\":\"aspect-ratio\",\"title\":\"Aspect ratio\",\"category\":\"layout\",\"description\":\"Keep media or a placeholder at a fixed width-to-height ratio.\",\"status\":\"stable\",\"primitive\":\"radix-ui/AspectRatio\",\"css\":[],\"a11y\":[\"A plain div; the content keeps its own semantics and alt text.\"],\"keywords\":[\"16:9\",\"ratio\",\"image\",\"video\"]}\n"
+    }
+  ]
+}

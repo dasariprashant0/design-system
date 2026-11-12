@@ -1,0 +1,24 @@
+/* Options: change the look without touching components. Set on <html>.
+   data-font="mono" (default) | "sans" | "serif"
+   data-radius="square" (default) | "soft" | "round"
+   data-density="compact" | "comfortable" (default) | "spacious"
+   Load after components. Fonts use system stacks, nothing extra to download. */
+
+[data-font="sans"] {
+  --font-display: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body:    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+[data-font="serif"] {
+  --font-display: ui-serif, Georgia, "Times New Roman", serif;
+  --font-body:    ui-serif, Georgia, "Times New Roman", serif;
+}
+[data-font="sans"] .display, [data-font="serif"] .display { text-transform: none; letter-spacing: -0.02em; line-height: 1.05; }
+
+[data-radius="soft"]  { --radius: 6px; }
+[data-radius="round"] { --radius: 12px; }
+[data-radius="soft"] .card, [data-radius="soft"] .dialog-content, [data-radius="soft"] .alert, [data-radius="soft"] .code-block, [data-radius="soft"] .empty, [data-radius="soft"] .segmented, [data-radius="soft"] .badge, [data-radius="soft"] .tag, [data-radius="soft"] .kbd,
+[data-radius="round"] .card, [data-radius="round"] .dialog-content, [data-radius="round"] .alert, [data-radius="round"] .code-block, [data-radius="round"] .empty, [data-radius="round"] .segmented, [data-radius="round"] .badge, [data-radius="round"] .tag, [data-radius="round"] .kbd { border-radius: var(--radius); }
+[data-radius="round"] .btn, [data-radius="round"] .badge, [data-radius="round"] .tag { border-radius: var(--round); }
+
+[data-density="compact"]  { --s2: 6px;  --s3: 9px;  --s4: 12px; --s5: 18px; --s6: 24px; --s7: 36px; --text-base: 14px; --text-sm: 12px; }
+[data-density="spacious"] { --s2: 10px; --s3: 15px; --s4: 20px; --s5: 30px; --s6: 40px; --s7: 60px; --text-base: 16px; --text-sm: 14px; }

@@ -23,6 +23,25 @@ A11y:
 - The title always states the meaning in words; colour is not the only signal.
 Files: packages/react/src/components/alert/alert.demo.tsx, packages/react/src/components/alert/alert.test.tsx, packages/react/src/components/alert/alert.tsx, packages/react/src/components/alert/index.ts, packages/react/src/components/alert/meta.json
 
+## Alert dialog (alert-dialog)
+A modal that interrupts to confirm a destructive or irreversible action.
+Import: import {AlertDialog} from '@monoline/react'
+Primitive: radix-ui/AlertDialog | Status: stable
+A11y:
+- role="alertdialog" with a name from the title and a description.
+- Focus moves to the Cancel button on open and returns to the trigger on close.
+- Escape cancels; focus is trapped; the page behind is inert.
+- Clicking the overlay does not close it.
+Files: packages/react/src/components/alert-dialog/alert-dialog.demo.tsx, packages/react/src/components/alert-dialog/alert-dialog.test.tsx, packages/react/src/components/alert-dialog/alert-dialog.tsx, packages/react/src/components/alert-dialog/index.ts, packages/react/src/components/alert-dialog/meta.json
+
+## Aspect ratio (aspect-ratio)
+Keep media or a placeholder at a fixed width-to-height ratio.
+Import: import {AspectRatio} from '@monoline/react'
+Primitive: radix-ui/AspectRatio | Status: stable
+A11y:
+- A plain div; the content keeps its own semantics and alt text.
+Files: packages/react/src/components/aspect-ratio/aspect-ratio.demo.tsx, packages/react/src/components/aspect-ratio/aspect-ratio.test.tsx, packages/react/src/components/aspect-ratio/aspect-ratio.tsx, packages/react/src/components/aspect-ratio/index.ts, packages/react/src/components/aspect-ratio/meta.json
+
 ## Avatar (avatar)
 A person or thing as an image with an initials fallback.
 Import: import {Avatar} from '@monoline/react'
@@ -31,6 +50,14 @@ A11y:
 - name is required: it is the image alt text and the fallback's accessible name.
 - The fallback shows while the image loads or if it fails.
 Files: packages/react/src/components/avatar/avatar.demo.tsx, packages/react/src/components/avatar/avatar.test.tsx, packages/react/src/components/avatar/avatar.tsx, packages/react/src/components/avatar/index.ts, packages/react/src/components/avatar/meta.json
+
+## Avatar group (avatar-group)
+Overlap several avatars and show how many more there are.
+Import: import {AvatarGroup} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- role="group" with an accessible name; the overflow count is plain text.
+Files: packages/react/src/components/avatar-group/avatar-group.demo.tsx, packages/react/src/components/avatar-group/avatar-group.test.tsx, packages/react/src/components/avatar-group/avatar-group.tsx, packages/react/src/components/avatar-group/index.ts, packages/react/src/components/avatar-group/meta.json
 
 ## Badge (badge)
 A short status word or count.
@@ -60,6 +87,14 @@ A11y:
 - asChild renders a link without losing link semantics.
 Files: packages/react/src/components/button/button.demo.tsx, packages/react/src/components/button/button.test.tsx, packages/react/src/components/button/button.tsx, packages/react/src/components/button/index.ts, packages/react/src/components/button/meta.json
 
+## Button group (button-group)
+Join related buttons into one segmented bar.
+Import: import {ButtonGroup} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- role="group" with a required accessible name.
+Files: packages/react/src/components/button-group/button-group.demo.tsx, packages/react/src/components/button-group/button-group.test.tsx, packages/react/src/components/button-group/button-group.tsx, packages/react/src/components/button-group/index.ts, packages/react/src/components/button-group/meta.json
+
 ## Card (card)
 A bordered group for one thing you can pick up or open.
 Import: import {Card} from '@monoline/react'
@@ -79,6 +114,32 @@ A11y:
 - A visible label is clickable; without one, aria-label is required.
 Files: packages/react/src/components/checkbox/checkbox.demo.tsx, packages/react/src/components/checkbox/checkbox.test.tsx, packages/react/src/components/checkbox/checkbox.tsx, packages/react/src/components/checkbox/index.ts, packages/react/src/components/checkbox/meta.json
 
+## Code block (code-block)
+A block of code with a copy button.
+Import: import {CodeBlock} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The code is a pre/code element; the region has an accessible name.
+- The copy button is announced as "Copy code" and confirms with a polite live message.
+Files: packages/react/src/components/code-block/code-block.demo.tsx, packages/react/src/components/code-block/code-block.test.tsx, packages/react/src/components/code-block/code-block.tsx, packages/react/src/components/code-block/index.ts, packages/react/src/components/code-block/meta.json
+
+## Collapsible (collapsible)
+Show or hide one region of content from a trigger.
+Import: import {Collapsible} from '@monoline/react'
+Primitive: radix-ui/Collapsible | Status: stable
+A11y:
+- The trigger is a button with aria-expanded and aria-controls.
+- Space and Enter toggle it.
+Files: packages/react/src/components/collapsible/collapsible.demo.tsx, packages/react/src/components/collapsible/collapsible.test.tsx, packages/react/src/components/collapsible/collapsible.tsx, packages/react/src/components/collapsible/index.ts, packages/react/src/components/collapsible/meta.json
+
+## Container (container)
+Centre content in a column with a sensible maximum width and side padding.
+Import: import {Container} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A plain div; adds no roles.
+Files: packages/react/src/components/container/container.demo.tsx, packages/react/src/components/container/container.test.tsx, packages/react/src/components/container/container.tsx, packages/react/src/components/container/index.ts, packages/react/src/components/container/meta.json
+
 ## Dialog (dialog)
 A modal window for a question or short task that blocks the page.
 Import: import {Dialog} from '@monoline/react'
@@ -88,6 +149,16 @@ A11y:
 - Focus moves into the dialog, is trapped there, and returns to the trigger on close.
 - Escape and the Close button close it; the page behind is inert.
 Files: packages/react/src/components/dialog/dialog.demo.tsx, packages/react/src/components/dialog/dialog.test.tsx, packages/react/src/components/dialog/dialog.tsx, packages/react/src/components/dialog/index.ts, packages/react/src/components/dialog/meta.json
+
+## Drawer (drawer)
+A panel that slides in from an edge for secondary tasks, details or navigation.
+Import: import {Drawer} from '@monoline/react'
+Primitive: radix-ui/Dialog | Status: stable
+A11y:
+- role="dialog" named by the title.
+- Focus is trapped while open and returns to the trigger on close.
+- Escape and the overlay close it.
+Files: packages/react/src/components/drawer/drawer.demo.tsx, packages/react/src/components/drawer/drawer.test.tsx, packages/react/src/components/drawer/drawer.tsx, packages/react/src/components/drawer/index.ts, packages/react/src/components/drawer/meta.json
 
 ## Dropdown menu (dropdown-menu)
 A list of actions that opens from a button.
@@ -99,6 +170,14 @@ A11y:
 - The trigger has aria-haspopup and aria-expanded.
 Files: packages/react/src/components/dropdown-menu/dropdown-menu.demo.tsx, packages/react/src/components/dropdown-menu/dropdown-menu.test.tsx, packages/react/src/components/dropdown-menu/dropdown-menu.tsx, packages/react/src/components/dropdown-menu/index.ts, packages/react/src/components/dropdown-menu/meta.json
 
+## Empty state (empty-state)
+Say that there is nothing here yet and offer the next step.
+Import: import {EmptyState} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Plain heading and text; put the action in children as a button or link.
+Files: packages/react/src/components/empty-state/empty-state.demo.tsx, packages/react/src/components/empty-state/empty-state.test.tsx, packages/react/src/components/empty-state/empty-state.tsx, packages/react/src/components/empty-state/index.ts, packages/react/src/components/empty-state/meta.json
+
 ## Field (field)
 Connects a label, a control, a hint and an error with the right ids and ARIA.
 Import: import {Field} from '@monoline/react'
@@ -109,6 +188,15 @@ A11y:
 - required sets the native required attribute on the control.
 Files: packages/react/src/components/field/field.demo.tsx, packages/react/src/components/field/field.test.tsx, packages/react/src/components/field/field.tsx, packages/react/src/components/field/index.ts, packages/react/src/components/field/meta.json
 
+## Icon button (icon-button)
+A square button holding only an icon. The accessible name is required.
+Import: import {IconButton} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native button; aria-label is required by the type.
+- Space and Enter activate it.
+Files: packages/react/src/components/icon-button/icon-button.demo.tsx, packages/react/src/components/icon-button/icon-button.test.tsx, packages/react/src/components/icon-button/icon-button.tsx, packages/react/src/components/icon-button/index.ts, packages/react/src/components/icon-button/meta.json
+
 ## Input (input)
 A single-line text field.
 Import: import {Input} from '@monoline/react'
@@ -117,6 +205,14 @@ A11y:
 - Native <input>: all keyboard and autofill behaviour is the browser's.
 - Inside a Field it is labelled and described automatically; invalid sets aria-invalid.
 Files: packages/react/src/components/input/index.ts, packages/react/src/components/input/input.demo.tsx, packages/react/src/components/input/input.test.tsx, packages/react/src/components/input/input.tsx, packages/react/src/components/input/meta.json
+
+## Kbd (kbd)
+Show a keyboard key or shortcut.
+Import: import {Kbd} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native kbd element, announced as text.
+Files: packages/react/src/components/kbd/index.ts, packages/react/src/components/kbd/kbd.demo.tsx, packages/react/src/components/kbd/kbd.test.tsx, packages/react/src/components/kbd/kbd.tsx, packages/react/src/components/kbd/meta.json
 
 ## Label (label)
 The visible name of a form control.
@@ -127,6 +223,34 @@ A11y:
 - required adds a visual marker; set required on the control for assistive tech.
 Files: packages/react/src/components/label/index.ts, packages/react/src/components/label/label.demo.tsx, packages/react/src/components/label/label.test.tsx, packages/react/src/components/label/label.tsx, packages/react/src/components/label/meta.json
 
+## Marquee (marquee)
+Scroll a row of items endlessly; pauses on hover and stops for reduced motion.
+Import: import {Marquee} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The duplicate copy is aria-hidden so screen readers read the items once.
+- Pauses on hover and focus; animation is off under prefers-reduced-motion.
+Files: packages/react/src/components/marquee/index.ts, packages/react/src/components/marquee/marquee.demo.tsx, packages/react/src/components/marquee/marquee.test.tsx, packages/react/src/components/marquee/marquee.tsx, packages/react/src/components/marquee/meta.json
+
+## Number input (number-input)
+A numeric field with decrease and increase buttons.
+Import: import {NumberInput} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native input type="number"; ArrowUp/ArrowDown change the value.
+- The step buttons are named "Decrease" and "Increase" and are skipped by Tab.
+Files: packages/react/src/components/number-input/index.ts, packages/react/src/components/number-input/meta.json, packages/react/src/components/number-input/number-input.demo.tsx, packages/react/src/components/number-input/number-input.test.tsx, packages/react/src/components/number-input/number-input.tsx
+
+## OTP input (otp-input)
+Enter a one-time code, one digit per box, with paste support.
+Import: import {OtpInput} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The boxes are a group with a name; each box is labelled "Digit N of M".
+- Typing moves forward, Backspace moves back, arrows move, pasting fills all boxes.
+- inputmode="numeric" and autocomplete="one-time-code" for mobile and autofill.
+Files: packages/react/src/components/otp-input/index.ts, packages/react/src/components/otp-input/meta.json, packages/react/src/components/otp-input/otp-input.demo.tsx, packages/react/src/components/otp-input/otp-input.test.tsx, packages/react/src/components/otp-input/otp-input.tsx
+
 ## Pagination (pagination)
 Move between pages of results.
 Import: import {Pagination} from '@monoline/react'
@@ -136,6 +260,15 @@ A11y:
 - Prev and Next are disabled at the ends.
 - The gap marker is hidden from assistive tech.
 Files: packages/react/src/components/pagination/index.ts, packages/react/src/components/pagination/meta.json, packages/react/src/components/pagination/pagination.demo.tsx, packages/react/src/components/pagination/pagination.test.tsx, packages/react/src/components/pagination/pagination.tsx
+
+## Password input (password-input)
+A password field with a show/hide toggle.
+Import: import {PasswordInput} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The toggle is a button with aria-pressed named "Show password".
+- The field keeps autocomplete hints so password managers work.
+Files: packages/react/src/components/password-input/index.ts, packages/react/src/components/password-input/meta.json, packages/react/src/components/password-input/password-input.demo.tsx, packages/react/src/components/password-input/password-input.test.tsx, packages/react/src/components/password-input/password-input.tsx
 
 ## Popover (popover)
 A floating panel of content or controls anchored to a button.
@@ -165,6 +298,33 @@ A11y:
 - Arrow keys move and select; Space selects the focused item.
 - Give the group an accessible name with aria-label or aria-labelledby.
 Files: packages/react/src/components/radio-group/index.ts, packages/react/src/components/radio-group/meta.json, packages/react/src/components/radio-group/radio-group.demo.tsx, packages/react/src/components/radio-group/radio-group.test.tsx, packages/react/src/components/radio-group/radio-group.tsx
+
+## Rating (rating)
+Pick or show a score from 1 to a maximum, as stars.
+Import: import {Rating} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Editable: a radio group (native radios) with arrow-key selection; each star is named "N of M".
+- Read-only: role="img" with a text label such as "4 out of 5".
+Files: packages/react/src/components/rating/index.ts, packages/react/src/components/rating/meta.json, packages/react/src/components/rating/rating.demo.tsx, packages/react/src/components/rating/rating.test.tsx, packages/react/src/components/rating/rating.tsx
+
+## Scroll area (scroll-area)
+A scrollable region with thin, themed scrollbars.
+Import: import {ScrollArea} from '@monoline/react'
+Primitive: radix-ui/ScrollArea | Status: stable
+A11y:
+- The viewport is focusable (tabindex 0) so keyboard users can scroll it; give it an aria-label when it holds standalone content.
+- Native scrolling semantics are preserved.
+Files: packages/react/src/components/scroll-area/index.ts, packages/react/src/components/scroll-area/meta.json, packages/react/src/components/scroll-area/scroll-area.demo.tsx, packages/react/src/components/scroll-area/scroll-area.test.tsx, packages/react/src/components/scroll-area/scroll-area.tsx
+
+## Segmented control (segmented-control)
+Pick exactly one option from a short row, shown as joined segments.
+Import: import {SegmentedControl} from '@monoline/react'
+Primitive: radix-ui/ToggleGroup | Status: stable
+A11y:
+- A named radio group; arrow keys move and select, Home and End jump.
+- One option is always selected: pressing the active one does nothing.
+Files: packages/react/src/components/segmented-control/index.ts, packages/react/src/components/segmented-control/meta.json, packages/react/src/components/segmented-control/segmented-control.demo.tsx, packages/react/src/components/segmented-control/segmented-control.test.tsx, packages/react/src/components/segmented-control/segmented-control.tsx
 
 ## Select (select)
 Pick one value from a list of five or more options.
@@ -213,6 +373,31 @@ A11y:
 - Animation stops under prefers-reduced-motion.
 Files: packages/react/src/components/spinner/index.ts, packages/react/src/components/spinner/meta.json, packages/react/src/components/spinner/spinner.demo.tsx, packages/react/src/components/spinner/spinner.test.tsx, packages/react/src/components/spinner/spinner.tsx
 
+## Stack (stack)
+Lay children out in a column or row with one gap from the spacing scale.
+Import: import {Stack} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A plain div; adds no roles.
+Files: packages/react/src/components/stack/index.ts, packages/react/src/components/stack/meta.json, packages/react/src/components/stack/stack.demo.tsx, packages/react/src/components/stack/stack.test.tsx, packages/react/src/components/stack/stack.tsx
+
+## Stat (stat)
+One number with its label and a note.
+Import: import {Stat} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A description list (dl) pairs the label with its value.
+Files: packages/react/src/components/stat/index.ts, packages/react/src/components/stat/meta.json, packages/react/src/components/stat/stat.demo.tsx, packages/react/src/components/stat/stat.test.tsx, packages/react/src/components/stat/stat.tsx
+
+## Stepper (stepper)
+Show progress through a numbered sequence of steps.
+Import: import {Stepper} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- An ordered list; the current step has aria-current="step".
+- Completed steps are marked in text for assistive tech, not by colour alone.
+Files: packages/react/src/components/stepper/index.ts, packages/react/src/components/stepper/meta.json, packages/react/src/components/stepper/stepper.demo.tsx, packages/react/src/components/stepper/stepper.test.tsx, packages/react/src/components/stepper/stepper.tsx
+
 ## Switch (switch)
 An on/off setting that takes effect immediately.
 Import: import {Switch} from '@monoline/react'
@@ -221,6 +406,15 @@ A11y:
 - role=switch with aria-checked; Space and Enter toggle.
 - A visible label is clickable; without one, aria-label is required.
 Files: packages/react/src/components/switch/index.ts, packages/react/src/components/switch/meta.json, packages/react/src/components/switch/switch.demo.tsx, packages/react/src/components/switch/switch.test.tsx, packages/react/src/components/switch/switch.tsx
+
+## Table (table)
+Rows and columns of data with a header, in a horizontally scrolling wrapper.
+Import: import {Table} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native table elements with th scope and an optional caption.
+- The scroll wrapper is focusable and named so keyboard users can scroll wide tables.
+Files: packages/react/src/components/table/index.ts, packages/react/src/components/table/meta.json, packages/react/src/components/table/table.demo.tsx, packages/react/src/components/table/table.test.tsx, packages/react/src/components/table/table.tsx
 
 ## Tabs (tabs)
 Switch between related views in the same place.
@@ -232,6 +426,14 @@ A11y:
 - Give the list an accessible name with aria-label.
 Files: packages/react/src/components/tabs/index.ts, packages/react/src/components/tabs/meta.json, packages/react/src/components/tabs/tabs.demo.tsx, packages/react/src/components/tabs/tabs.test.tsx, packages/react/src/components/tabs/tabs.tsx
 
+## Tag (tag)
+A short label, optionally removable.
+Import: import {Tag} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The remove control is a real button named "Remove <label>".
+Files: packages/react/src/components/tag/index.ts, packages/react/src/components/tag/meta.json, packages/react/src/components/tag/tag.demo.tsx, packages/react/src/components/tag/tag.test.tsx, packages/react/src/components/tag/tag.tsx
+
 ## Textarea (textarea)
 A multi-line text field.
 Import: import {Textarea} from '@monoline/react'
@@ -240,6 +442,14 @@ A11y:
 - Native <textarea>.
 - Inside a Field it is labelled and described automatically; invalid sets aria-invalid.
 Files: packages/react/src/components/textarea/index.ts, packages/react/src/components/textarea/meta.json, packages/react/src/components/textarea/textarea.demo.tsx, packages/react/src/components/textarea/textarea.test.tsx, packages/react/src/components/textarea/textarea.tsx
+
+## Timeline (timeline)
+A vertical list of events with times, joined by a rule.
+Import: import {Timeline} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- An ordered list of events; the time is a real time element when a datetime is given.
+Files: packages/react/src/components/timeline/index.ts, packages/react/src/components/timeline/meta.json, packages/react/src/components/timeline/timeline.demo.tsx, packages/react/src/components/timeline/timeline.test.tsx, packages/react/src/components/timeline/timeline.tsx
 
 ## Toggle (toggle)
 A button that stays pressed or not.

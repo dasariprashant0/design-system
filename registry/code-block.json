@@ -1,0 +1,55 @@
+{
+  "name": "code-block",
+  "title": "Code block",
+  "category": "data-display",
+  "description": "A block of code with a copy button.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/code-block.css",
+      "content": "/* Code block: dark surface panel (like toasts), thin rule, copy in the header. */\n.code-block { background: var(--surface); color: var(--surface-text); border: 1px solid var(--rule); font-size: var(--text-sm); }\n.code-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); padding: var(--s2) var(--s4); border-bottom: 1px solid var(--rule); }\n.code-head .label { color: var(--surface-text); opacity: 0.7; }\n.code-copy { font-size: var(--text-xs); padding: var(--s1) var(--s2); color: var(--surface-text); border: 1px solid var(--rule); }\n.code-copy:hover { border-color: var(--surface-text); }\n.code-block pre { margin: 0; padding: var(--s4); overflow-x: auto; }\n.code-block pre:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.code-block code { font-family: var(--font-body); white-space: pre; }\n"
+    },
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-left: 0; padding-right: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+    }
+  ],
+  "a11y": [
+    "The code is a pre/code element; the region has an accessible name.",
+    "The copy button is announced as \"Copy code\" and confirms with a polite live message."
+  ],
+  "keywords": [
+    "pre",
+    "snippet",
+    "copy",
+    "source",
+    "syntax"
+  ],
+  "kind": "components",
+  "import": "import {CodeBlock} from '@monoline/react'",
+  "path": "packages/react/src/components/code-block",
+  "files": [
+    "packages/react/src/components/code-block/code-block.demo.tsx",
+    "packages/react/src/components/code-block/code-block.test.tsx",
+    "packages/react/src/components/code-block/code-block.tsx",
+    "packages/react/src/components/code-block/index.ts",
+    "packages/react/src/components/code-block/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/code-block/code-block.tsx",
+      "content": "'use client';\nimport {forwardRef, useEffect, useRef, useState, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface CodeBlockProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {\n  code: string;\n  /** Shown top left, for example a file name or \"bash\". Also names the region. */\n  title?: string;\n  /** Hide the copy button. */\n  hideCopy?: boolean;\n}\n\n/** Plain code with a copy button. Add syntax colours with your own highlighter by rendering it as children of the `code` element via CSS classes if needed. */\nexport const CodeBlock = forwardRef<HTMLDivElement, CodeBlockProps>(function CodeBlock({code, title, hideCopy, className, ...rest}, ref) {\n  const [copied, setCopied] = useState(false);\n  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);\n  useEffect(() => () => clearTimeout(timer.current), []);\n  const copy = async () => {\n    try { await navigator.clipboard.writeText(code); setCopied(true); clearTimeout(timer.current); timer.current = setTimeout(() => setCopied(false), 1800); } catch { setCopied(false); }\n  };\n  return (\n    <div ref={ref} role=\"group\" aria-label={title ?? 'Code'} className={cx('code-block', className)} {...rest}>\n      {(title || !hideCopy) && (\n        <div className=\"code-head\">\n          <span className=\"label\">{title}</span>\n          {!hideCopy && <button type=\"button\" className=\"code-copy\" onClick={copy}>{copied ? 'Copied' : 'Copy'}<span className=\"sr-only\"> code</span></button>}\n        </div>\n      )}\n      <pre tabIndex={0}><code>{code}</code></pre>\n      <span className=\"sr-only\" role=\"status\">{copied ? 'Copied to clipboard' : ''}</span>\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/code-block/index.ts",
+      "content": "export {CodeBlock} from './code-block';\nexport type {CodeBlockProps} from './code-block';\n"
+    },
+    {
+      "path": "packages/react/src/components/code-block/meta.json",
+      "content": "{\"name\":\"code-block\",\"title\":\"Code block\",\"category\":\"data-display\",\"description\":\"A block of code with a copy button.\",\"status\":\"stable\",\"css\":[\"code-block.css\",\"02-buttons.css\"],\"a11y\":[\"The code is a pre/code element; the region has an accessible name.\",\"The copy button is announced as \\\"Copy code\\\" and confirms with a polite live message.\"],\"keywords\":[\"pre\",\"snippet\",\"copy\",\"source\",\"syntax\"]}\n"
+    }
+  ]
+}

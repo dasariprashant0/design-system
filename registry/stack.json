@@ -1,0 +1,51 @@
+{
+  "name": "stack",
+  "title": "Stack",
+  "category": "layout",
+  "description": "Lay children out in a column or row with one gap from the spacing scale.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/stack.css",
+      "content": "/* Stack: a flex column or row with one gap token. */\n.stack { display: flex; flex-direction: column; gap: var(--stack-gap, var(--s3)); min-width: 0; }\n.stack-row { flex-direction: row; }\n.stack-wrap { flex-wrap: wrap; }\n.stack[data-align=\"start\"] { align-items: flex-start; }\n.stack[data-align=\"center\"] { align-items: center; }\n.stack[data-align=\"end\"] { align-items: flex-end; }\n.stack[data-align=\"stretch\"] { align-items: stretch; }\n.stack[data-justify=\"start\"] { justify-content: flex-start; }\n.stack[data-justify=\"center\"] { justify-content: center; }\n.stack[data-justify=\"end\"] { justify-content: flex-end; }\n.stack[data-justify=\"between\"] { justify-content: space-between; }\n"
+    }
+  ],
+  "a11y": [
+    "A plain div; adds no roles."
+  ],
+  "keywords": [
+    "flex",
+    "vstack",
+    "hstack",
+    "row",
+    "column",
+    "gap"
+  ],
+  "kind": "components",
+  "import": "import {Stack} from '@monoline/react'",
+  "path": "packages/react/src/components/stack",
+  "files": [
+    "packages/react/src/components/stack/index.ts",
+    "packages/react/src/components/stack/meta.json",
+    "packages/react/src/components/stack/stack.demo.tsx",
+    "packages/react/src/components/stack/stack.test.tsx",
+    "packages/react/src/components/stack/stack.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/stack/index.ts",
+      "content": "export {Stack} from './stack';\nexport type {StackProps} from './stack';\n"
+    },
+    {
+      "path": "packages/react/src/components/stack/meta.json",
+      "content": "{\"name\":\"stack\",\"title\":\"Stack\",\"category\":\"layout\",\"description\":\"Lay children out in a column or row with one gap from the spacing scale.\",\"status\":\"stable\",\"css\":[\"stack.css\"],\"a11y\":[\"A plain div; adds no roles.\"],\"keywords\":[\"flex\",\"vstack\",\"hstack\",\"row\",\"column\",\"gap\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/stack/stack.tsx",
+      "content": "import {forwardRef, type CSSProperties, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface StackProps extends HTMLAttributes<HTMLDivElement> {\n  direction?: 'column' | 'row';\n  /** Step on the spacing scale: 1 = --s1 (4px) up to 9. */\n  gap?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;\n  align?: 'start' | 'center' | 'end' | 'stretch';\n  justify?: 'start' | 'center' | 'end' | 'between';\n  wrap?: boolean;\n}\n\n/** A flex container. Use it instead of one-off margins. */\nexport const Stack = forwardRef<HTMLDivElement, StackProps>(function Stack({direction = 'column', gap = 3, align, justify, wrap, className, style, ...rest}, ref) {\n  return (\n    <div\n      ref={ref}\n      className={cx('stack', direction === 'row' && 'stack-row', wrap && 'stack-wrap', className)}\n      data-align={align}\n      data-justify={justify}\n      style={{'--stack-gap': `var(--s${gap})`, ...style} as CSSProperties}\n      {...rest}\n    />\n  );\n});\n"
+    }
+  ]
+}

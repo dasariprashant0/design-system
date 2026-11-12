@@ -26,7 +26,7 @@ for (const [theme, base] of Object.entries(themes)) {
 }
 
 // Tokens only: no raw hex in any stylesheet except tokens.css and accents.css.
-const linted = ['src/base.css', 'src/utilities.css', ...readdirSync(new URL('../src/components/', import.meta.url)).filter((f) => f.endsWith('.css')).map((f) => `src/components/${f}`)];
+const linted = ['src/options.css', 'src/base.css', 'src/utilities.css', ...readdirSync(new URL('../src/components/', import.meta.url)).filter((f) => f.endsWith('.css')).map((f) => `src/components/${f}`)];
 for (const f of linted) {
   const hits = read(f).replace(/\/\*[\s\S]*?\*\//g, '').match(/#[0-9a-fA-F]{3,8}\b(?![^(]*\))/g) || [];
   for (const h of hits) fails.push(`${f} uses a raw colour ${h}; add a token instead`);

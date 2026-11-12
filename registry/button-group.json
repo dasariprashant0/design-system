@@ -1,0 +1,55 @@
+{
+  "name": "button-group",
+  "title": "Button group",
+  "category": "buttons",
+  "description": "Join related buttons into one segmented bar.",
+  "status": "stable",
+  "uses": [
+    "button"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-left: 0; padding-right: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/button-group.css",
+      "content": "/* Button group: shared borders, one focus ring per button. */\n.btn-group { display: inline-flex; }\n.btn-group > .btn + .btn { margin-left: -1px; }\n.btn-group > .btn:focus-visible { position: relative; z-index: 1; }\n"
+    }
+  ],
+  "a11y": [
+    "role=\"group\" with a required accessible name."
+  ],
+  "keywords": [
+    "join",
+    "segmented",
+    "toolbar"
+  ],
+  "kind": "components",
+  "import": "import {ButtonGroup} from '@monoline/react'",
+  "path": "packages/react/src/components/button-group",
+  "files": [
+    "packages/react/src/components/button-group/button-group.demo.tsx",
+    "packages/react/src/components/button-group/button-group.test.tsx",
+    "packages/react/src/components/button-group/button-group.tsx",
+    "packages/react/src/components/button-group/index.ts",
+    "packages/react/src/components/button-group/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/button-group/button-group.tsx",
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface ButtonGroupProps extends HTMLAttributes<HTMLDivElement> {\n  /** Names the group for assistive tech, for example \"Text alignment\". */\n  'aria-label': string;\n}\n\n/** Buttons that act on the same thing, sharing borders. */\nexport const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup({className, ...rest}, ref) {\n  return <div ref={ref} role=\"group\" className={cx('btn-group', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/button-group/index.ts",
+      "content": "export {ButtonGroup} from './button-group';\nexport type {ButtonGroupProps} from './button-group';\n"
+    },
+    {
+      "path": "packages/react/src/components/button-group/meta.json",
+      "content": "{\"name\":\"button-group\",\"title\":\"Button group\",\"category\":\"buttons\",\"description\":\"Join related buttons into one segmented bar.\",\"status\":\"stable\",\"uses\":[\"button\"],\"css\":[\"02-buttons.css\",\"button-group.css\"],\"a11y\":[\"role=\\\"group\\\" with a required accessible name.\"],\"keywords\":[\"join\",\"segmented\",\"toolbar\"]}\n"
+    }
+  ]
+}
