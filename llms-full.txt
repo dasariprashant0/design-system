@@ -44,6 +44,19 @@ A11y:
 - With prefers-reduced-motion all items are visible at once.
 Files: packages/react/src/components/animated-list/animated-list.demo.tsx, packages/react/src/components/animated-list/animated-list.test.tsx, packages/react/src/components/animated-list/animated-list.tsx, packages/react/src/components/animated-list/index.ts, packages/react/src/components/animated-list/meta.json
 
+## Area chart (area-chart)
+A line chart filled down to zero, optionally stacked to show a running total.
+Import: import {AreaChart} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The chart is role=img with the required title as its name.
+- A visually hidden table lists every value, one row per category, for screen readers.
+- One focusable stop per category with a spoken label; Arrow keys move between them and Escape hides the tooltip.
+- The value tooltip opens on hover and on keyboard focus; stacked charts also show the total.
+- Series differ by fill pattern and dash as well as colour, and the legend names them.
+- No entrance animation under prefers-reduced-motion.
+Files: packages/react/src/components/area-chart/area-chart.demo.tsx, packages/react/src/components/area-chart/area-chart.test.tsx, packages/react/src/components/area-chart/area-chart.tsx, packages/react/src/components/area-chart/index.ts, packages/react/src/components/area-chart/meta.json
+
 ## Aspect ratio (aspect-ratio)
 Keep media or a placeholder at a fixed width-to-height ratio.
 Import: import {AspectRatio} from '@monoline/react'
@@ -87,6 +100,19 @@ A11y:
 - Plain text in a span; the word carries the meaning, not the colour.
 - For a count that changes, put it inside an aria-live region yourself.
 Files: packages/react/src/components/badge/badge.demo.tsx, packages/react/src/components/badge/badge.test.tsx, packages/react/src/components/badge/badge.tsx, packages/react/src/components/badge/index.ts, packages/react/src/components/badge/meta.json
+
+## Bar chart (bar-chart)
+Compare values across categories with vertical or horizontal bars, grouped or stacked.
+Import: import {BarChart} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The chart is role=img with the required title as its name.
+- A visually hidden table lists every value, one row per category, for screen readers.
+- One focusable stop per category with a spoken label; Arrow keys move between them and Escape hides the tooltip.
+- The value tooltip opens on hover and on keyboard focus.
+- Series differ by fill pattern as well as colour, and the legend names them.
+- No entrance animation under prefers-reduced-motion.
+Files: packages/react/src/components/bar-chart/.claude, packages/react/src/components/bar-chart/bar-chart.demo.tsx, packages/react/src/components/bar-chart/bar-chart.test.tsx, packages/react/src/components/bar-chart/bar-chart.tsx, packages/react/src/components/bar-chart/index.ts, packages/react/src/components/bar-chart/meta.json
 
 ## Bento grid (bento-grid)
 A responsive asymmetric grid of cards with column and row spans.
@@ -399,6 +425,15 @@ A11y:
 - Escape and the Close button close it; the page behind is inert.
 Files: packages/react/src/components/dialog/dialog.demo.tsx, packages/react/src/components/dialog/dialog.test.tsx, packages/react/src/components/dialog/dialog.tsx, packages/react/src/components/dialog/index.ts, packages/react/src/components/dialog/meta.json
 
+## Direction provider (direction-provider)
+Sets the reading direction (ltr or rtl) once for every Radix-based component below it.
+Import: import {DirectionProvider} from '@monoline/react'
+Primitive: radix-ui/Direction | Status: stable
+A11y:
+- Arrow keys follow the reading direction: in rtl, ArrowLeft moves to the next tab, slider step up or toolbar item.
+- Pair it with a dir attribute on html so the stylesheet mirrors layout too.
+Files: packages/react/src/components/direction-provider/.claude, packages/react/src/components/direction-provider/direction-provider.demo.tsx, packages/react/src/components/direction-provider/direction-provider.tsx, packages/react/src/components/direction-provider/index.ts, packages/react/src/components/direction-provider/meta.json
+
 ## Dot pattern (dot-pattern)
 A decorative dot grid background drawn in SVG with currentColor.
 Import: import {DotPattern} from '@monoline/react'
@@ -562,6 +597,19 @@ A11y:
 - required adds a visual marker; set required on the control for assistive tech.
 Files: packages/react/src/components/label/index.ts, packages/react/src/components/label/label.demo.tsx, packages/react/src/components/label/label.test.tsx, packages/react/src/components/label/label.tsx, packages/react/src/components/label/meta.json
 
+## Line chart (line-chart)
+Show how one or more values change across an ordered axis, with straight or stepped lines.
+Import: import {LineChart} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The chart is role=img with the required title as its name.
+- A visually hidden table lists every value, one row per category, for screen readers.
+- One focusable stop per category with a spoken label; Arrow keys move between them and Escape hides the tooltip.
+- The value tooltip opens on hover and on keyboard focus.
+- Series differ by dash pattern and marker shape as well as colour, and the legend names them.
+- No entrance animation under prefers-reduced-motion.
+Files: packages/react/src/components/line-chart/index.ts, packages/react/src/components/line-chart/line-chart.demo.tsx, packages/react/src/components/line-chart/line-chart.test.tsx, packages/react/src/components/line-chart/line-chart.tsx, packages/react/src/components/line-chart/meta.json
+
 ## Link (link)
 An underlined link. External links open safely and say so.
 Import: import {Link} from '@monoline/react'
@@ -673,6 +721,19 @@ A11y:
 - The toggle is a button with aria-pressed named "Show password".
 - The field keeps autocomplete hints so password managers work.
 Files: packages/react/src/components/password-input/index.ts, packages/react/src/components/password-input/meta.json, packages/react/src/components/password-input/password-input.demo.tsx, packages/react/src/components/password-input/password-input.test.tsx, packages/react/src/components/password-input/password-input.tsx
+
+## Pie chart (pie-chart)
+Parts of a whole as a pie, or a donut with innerRadius.
+Import: import {PieChart} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The chart is role=img with the required title as its name.
+- A visually hidden table lists every slice with its value and share.
+- One focusable stop per slice with a spoken label; Arrow keys move between them and Escape hides the tooltip.
+- The value tooltip opens on hover and on keyboard focus.
+- Slices differ by fill pattern as well as colour, and the legend lists each with its value and share.
+- No entrance animation under prefers-reduced-motion.
+Files: packages/react/src/components/pie-chart/index.ts, packages/react/src/components/pie-chart/meta.json, packages/react/src/components/pie-chart/pie-chart.demo.tsx, packages/react/src/components/pie-chart/pie-chart.test.tsx, packages/react/src/components/pie-chart/pie-chart.tsx
 
 ## Popover (popover)
 A floating panel of content or controls anchored to a button.
@@ -786,6 +847,16 @@ A11y:
 - Arrow keys step; Home and End jump to the ends; PageUp and PageDown take larger steps.
 - aria-label is required; a range labels its thumbs minimum and maximum.
 Files: packages/react/src/components/slider/index.ts, packages/react/src/components/slider/meta.json, packages/react/src/components/slider/slider.demo.tsx, packages/react/src/components/slider/slider.test.tsx, packages/react/src/components/slider/slider.tsx
+
+## Sparkline (sparkline)
+A tiny inline trend line for a table cell or a sentence.
+Import: import {Sparkline} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- role=img with the required title as its name.
+- A visually hidden table (table roles on spans, valid inside a paragraph) lists every value for screen readers.
+- Decorative at a glance: it has no tooltip and no tab stops.
+Files: packages/react/src/components/sparkline/index.ts, packages/react/src/components/sparkline/meta.json, packages/react/src/components/sparkline/sparkline.demo.tsx, packages/react/src/components/sparkline/sparkline.test.tsx, packages/react/src/components/sparkline/sparkline.tsx
 
 ## Spinner (spinner)
 A small indicator that something is loading.

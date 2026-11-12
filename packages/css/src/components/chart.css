@@ -33,7 +33,7 @@
 .chart-tip[data-align="end"] { transform: translate(-100%, calc(-100% - var(--s2))); }
 .chart-tip-title { color: var(--muted); margin-bottom: var(--s1); }
 .chart-tip-row { display: flex; align-items: center; gap: var(--s2); }
-.chart-tip-value { margin-left: auto; padding-left: var(--s3); }
+.chart-tip-value { margin-inline-start: auto; padding-inline-start: var(--s3); }
 
 .chart-legend { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); margin: var(--s3) 0 0; padding: 0; list-style: none; font-size: var(--text-xs); }
 .chart-legend li { display: inline-flex; align-items: center; gap: var(--s2); }

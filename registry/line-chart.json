@@ -1,0 +1,61 @@
+{
+  "name": "line-chart",
+  "title": "Line chart",
+  "category": "data-display",
+  "description": "Show how one or more values change across an ordered axis, with straight or stepped lines.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/chart.css",
+      "content": "/* Shared base for the SVG charts (bar, line, area, pie). Series k is styled by .chart-s0 to .chart-s4: a colour (--chart-c),\n   plus a fill pattern, dash and marker set in the SVG itself, so series never rely on colour alone. */\n.chart { position: relative; display: block; width: 100%; font-family: var(--font-body); color: var(--foreground); }\n.chart-plot { position: relative; width: 100%; }\n.chart-svg, .chart-hits { display: block; width: 100%; height: auto; overflow: visible; }\n.chart-hits { position: absolute; inset: 0; pointer-events: none; }\n\n.chart-s0 { --chart-c: var(--accent); }\n.chart-s1 { --chart-c: var(--foreground); }\n.chart-s2 { --chart-c: var(--ink-2); }\n.chart-s3 { --chart-c: var(--ink-3); }\n.chart-s4 { --chart-c: var(--accent-2); }\n\n.chart-tick { font-size: var(--text-xs); fill: var(--muted); }\n.chart-value { font-size: var(--text-xs); fill: var(--foreground); }\n.chart-rule { stroke: var(--rule); stroke-width: 1; }\n.chart-zero { stroke: var(--ink-3); stroke-width: 1; }\n.chart-outline { stroke: var(--foreground); stroke-width: 1; }\n.chart-outline[data-active] { stroke-width: 2; }\n.chart-pat { stroke: var(--chart-c); fill: none; }\n.chart-pat-dot { fill: var(--chart-c); }\n.chart-line { fill: none; stroke: var(--chart-c); stroke-width: 2; stroke-linejoin: round; }\n.chart-area { stroke: none; }\n.chart-area.chart-s0 { fill-opacity: 0.3; }\n\n/* Keyboard and pointer layer: one transparent target per category or slice, above the drawing. */\n.chart-hit { fill: transparent; pointer-events: all; outline: none; }\n.chart-hit[data-active] { fill: var(--wash); }\n.chart-hit:focus-visible { stroke: var(--foreground); stroke-width: 2; }\n\n.chart-tip { position: absolute; z-index: 1; padding: var(--s2) var(--s3); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); font-size: var(--text-xs); white-space: nowrap; pointer-events: none; transform: translate(-50%, calc(-100% - var(--s2))); }\n.chart-tip[data-align=\"start\"] { transform: translate(0, calc(-100% - var(--s2))); }\n.chart-tip[data-align=\"end\"] { transform: translate(-100%, calc(-100% - var(--s2))); }\n.chart-tip-title { color: var(--muted); margin-bottom: var(--s1); }\n.chart-tip-row { display: flex; align-items: center; gap: var(--s2); }\n.chart-tip-value { margin-inline-start: auto; padding-inline-start: var(--s3); }\n\n.chart-legend { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); margin: var(--s3) 0 0; padding: 0; list-style: none; font-size: var(--text-xs); }\n.chart-legend li { display: inline-flex; align-items: center; gap: var(--s2); }\n.chart-legend-detail { color: var(--muted); }\n.chart-swatch { flex: none; overflow: visible; }\n\n.chart-empty { display: grid; place-items: center; min-height: var(--s9); padding: var(--s5); border: 1px dashed var(--rule); color: var(--muted); font-size: var(--text-sm); }\n\n/* A left-to-right wipe on first paint. Skipped entirely when the user asks for less motion. */\n@media (prefers-reduced-motion: no-preference) {\n  .chart-marks { animation: chart-reveal var(--slow) var(--ease) backwards; }\n}\n@keyframes chart-reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(-8px); } }\n"
+    },
+    {
+      "path": "packages/css/src/components/line-chart.css",
+      "content": "/* Line chart (also used by area chart). Shared base: chart.css. */\n.chart-point { fill: var(--background); stroke: var(--chart-c); stroke-width: 1.5; }\n.chart-guide { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 2; }\n"
+    }
+  ],
+  "a11y": [
+    "The chart is role=img with the required title as its name.",
+    "A visually hidden table lists every value, one row per category, for screen readers.",
+    "One focusable stop per category with a spoken label; Arrow keys move between them and Escape hides the tooltip.",
+    "The value tooltip opens on hover and on keyboard focus.",
+    "Series differ by dash pattern and marker shape as well as colour, and the legend names them.",
+    "No entrance animation under prefers-reduced-motion."
+  ],
+  "keywords": [
+    "chart",
+    "graph",
+    "trend",
+    "time series",
+    "step",
+    "svg",
+    "data"
+  ],
+  "kind": "components",
+  "import": "import {LineChart} from '@monoline/react'",
+  "path": "packages/react/src/components/line-chart",
+  "files": [
+    "packages/react/src/components/line-chart/index.ts",
+    "packages/react/src/components/line-chart/line-chart.demo.tsx",
+    "packages/react/src/components/line-chart/line-chart.test.tsx",
+    "packages/react/src/components/line-chart/line-chart.tsx",
+    "packages/react/src/components/line-chart/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/line-chart/index.ts",
+      "content": "export {LineChart} from './line-chart';\nexport type {LineChartProps} from './line-chart';\n"
+    },
+    {
+      "path": "packages/react/src/components/line-chart/line-chart.tsx",
+      "content": "'use client';\nimport {forwardRef} from 'react';\nimport {SeriesChart, type SeriesChartProps} from '../../utils/chart-series';\n\nexport interface LineChartProps extends SeriesChartProps {\n  /** Mark each data point. A single point is always marked. */\n  showPoints?: boolean;\n}\n\n/** Line chart in plain SVG. Series differ by dash pattern and marker shape as well as colour. The value axis follows the data (it does not have to include 0). */\nexport const LineChart = forwardRef<HTMLDivElement, LineChartProps>(function LineChart(props, ref) {\n  return <SeriesChart ref={ref} kind=\"line\" {...props} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/line-chart/meta.json",
+      "content": "{\"name\":\"line-chart\",\"title\":\"Line chart\",\"category\":\"data-display\",\"description\":\"Show how one or more values change across an ordered axis, with straight or stepped lines.\",\"status\":\"stable\",\"css\":[\"chart.css\",\"line-chart.css\"],\"a11y\":[\"The chart is role=img with the required title as its name.\",\"A visually hidden table lists every value, one row per category, for screen readers.\",\"One focusable stop per category with a spoken label; Arrow keys move between them and Escape hides the tooltip.\",\"The value tooltip opens on hover and on keyboard focus.\",\"Series differ by dash pattern and marker shape as well as colour, and the legend names them.\",\"No entrance animation under prefers-reduced-motion.\"],\"keywords\":[\"chart\",\"graph\",\"trend\",\"time series\",\"step\",\"svg\",\"data\"]}\n"
+    }
+  ]
+}

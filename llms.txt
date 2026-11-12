@@ -14,6 +14,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Aspect ratio (aspect-ratio, stable): Keep media or a placeholder at a fixed width-to-height ratio. Source: packages/react/src/components/aspect-ratio/
 - Box (box, stable): A div with padding and a thin border mapped to the spacing tokens. Source: packages/react/src/components/box/
 - Container (container, stable): Centre content in a column with a sensible maximum width and side padding. Source: packages/react/src/components/container/
+- Direction provider (direction-provider, stable): Sets the reading direction (ltr or rtl) once for every Radix-based component below it. Source: packages/react/src/components/direction-provider/
 - Flex (flex, stable): A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case. Source: packages/react/src/components/flex/
 - Grid (grid, stable): A responsive grid of equal columns with one gap. Source: packages/react/src/components/grid/
 - Scroll area (scroll-area, stable): A scrollable region with thin, themed scrollbars. Source: packages/react/src/components/scroll-area/
@@ -64,9 +65,11 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 
 ### data-display
 - Accordion (accordion, stable): Stacked headings that each show or hide a section. Source: packages/react/src/components/accordion/
+- Area chart (area-chart, stable): A line chart filled down to zero, optionally stacked to show a running total. Source: packages/react/src/components/area-chart/
 - Avatar (avatar, stable): A person or thing as an image with an initials fallback. Source: packages/react/src/components/avatar/
 - Avatar group (avatar-group, stable): Overlap several avatars and show how many more there are. Source: packages/react/src/components/avatar-group/
 - Badge (badge, stable): A short status word or count. Source: packages/react/src/components/badge/
+- Bar chart (bar-chart, stable): Compare values across categories with vertical or horizontal bars, grouped or stacked. Source: packages/react/src/components/bar-chart/
 - Card (card, stable): A bordered group for one thing you can pick up or open. Source: packages/react/src/components/card/
 - Carousel (carousel, stable): A row of slides you scroll or step through with buttons. Source: packages/react/src/components/carousel/
 - Code block (code-block, stable): A block of code with a copy button. Source: packages/react/src/components/code-block/
@@ -74,6 +77,9 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Data table (data-table, stable): A table with sortable columns, row selection and pagination. Source: packages/react/src/components/data-table/
 - Description list (description-list, stable): Label and value pairs, like the details of a record. Source: packages/react/src/components/description-list/
 - Image (image, stable): An image with required alt text, a ratio, and a fallback when it fails to load. Source: packages/react/src/components/image/
+- Line chart (line-chart, stable): Show how one or more values change across an ordered axis, with straight or stepped lines. Source: packages/react/src/components/line-chart/
+- Pie chart (pie-chart, stable): Parts of a whole as a pie, or a donut with innerRadius. Source: packages/react/src/components/pie-chart/
+- Sparkline (sparkline, stable): A tiny inline trend line for a table cell or a sentence. Source: packages/react/src/components/sparkline/
 - Stat (stat, stable): One number with its label and a note. Source: packages/react/src/components/stat/
 - Table (table, stable): Rows and columns of data with a header, in a horizontally scrolling wrapper. Source: packages/react/src/components/table/
 - Tag (tag, stable): A short label, optionally removable. Source: packages/react/src/components/tag/

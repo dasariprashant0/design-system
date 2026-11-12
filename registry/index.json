@@ -131,6 +131,44 @@
       ]
     },
     {
+      "name": "area-chart",
+      "title": "Area chart",
+      "category": "data-display",
+      "description": "A line chart filled down to zero, optionally stacked to show a running total.",
+      "status": "stable",
+      "css": [
+        "chart.css",
+        "line-chart.css",
+        "area-chart.css"
+      ],
+      "a11y": [
+        "The chart is role=img with the required title as its name.",
+        "A visually hidden table lists every value, one row per category, for screen readers.",
+        "One focusable stop per category with a spoken label; Arrow keys move between them and Escape hides the tooltip.",
+        "The value tooltip opens on hover and on keyboard focus; stacked charts also show the total.",
+        "Series differ by fill pattern and dash as well as colour, and the legend names them.",
+        "No entrance animation under prefers-reduced-motion."
+      ],
+      "keywords": [
+        "chart",
+        "graph",
+        "stacked",
+        "trend",
+        "svg",
+        "data"
+      ],
+      "kind": "components",
+      "import": "import {AreaChart} from '@monoline/react'",
+      "path": "packages/react/src/components/area-chart",
+      "files": [
+        "packages/react/src/components/area-chart/area-chart.demo.tsx",
+        "packages/react/src/components/area-chart/area-chart.test.tsx",
+        "packages/react/src/components/area-chart/area-chart.tsx",
+        "packages/react/src/components/area-chart/index.ts",
+        "packages/react/src/components/area-chart/meta.json"
+      ]
+    },
+    {
       "name": "aspect-ratio",
       "title": "Aspect ratio",
       "category": "layout",
@@ -284,6 +322,46 @@
         "packages/react/src/components/badge/badge.tsx",
         "packages/react/src/components/badge/index.ts",
         "packages/react/src/components/badge/meta.json"
+      ]
+    },
+    {
+      "name": "bar-chart",
+      "title": "Bar chart",
+      "category": "data-display",
+      "description": "Compare values across categories with vertical or horizontal bars, grouped or stacked.",
+      "status": "stable",
+      "css": [
+        "chart.css",
+        "bar-chart.css"
+      ],
+      "a11y": [
+        "The chart is role=img with the required title as its name.",
+        "A visually hidden table lists every value, one row per category, for screen readers.",
+        "One focusable stop per category with a spoken label; Arrow keys move between them and Escape hides the tooltip.",
+        "The value tooltip opens on hover and on keyboard focus.",
+        "Series differ by fill pattern as well as colour, and the legend names them.",
+        "No entrance animation under prefers-reduced-motion."
+      ],
+      "keywords": [
+        "chart",
+        "graph",
+        "bars",
+        "histogram",
+        "stacked",
+        "grouped",
+        "svg",
+        "data"
+      ],
+      "kind": "components",
+      "import": "import {BarChart} from '@monoline/react'",
+      "path": "packages/react/src/components/bar-chart",
+      "files": [
+        "packages/react/src/components/bar-chart/.claude",
+        "packages/react/src/components/bar-chart/bar-chart.demo.tsx",
+        "packages/react/src/components/bar-chart/bar-chart.test.tsx",
+        "packages/react/src/components/bar-chart/bar-chart.tsx",
+        "packages/react/src/components/bar-chart/index.ts",
+        "packages/react/src/components/bar-chart/meta.json"
       ]
     },
     {
@@ -1470,6 +1548,37 @@
       ]
     },
     {
+      "name": "direction-provider",
+      "title": "Direction provider",
+      "category": "layout",
+      "description": "Sets the reading direction (ltr or rtl) once for every Radix-based component below it.",
+      "status": "stable",
+      "primitive": "radix-ui/Direction",
+      "css": [],
+      "a11y": [
+        "Arrow keys follow the reading direction: in rtl, ArrowLeft moves to the next tab, slider step up or toolbar item.",
+        "Pair it with a dir attribute on html so the stylesheet mirrors layout too."
+      ],
+      "keywords": [
+        "rtl",
+        "ltr",
+        "direction",
+        "arabic",
+        "hebrew",
+        "i18n"
+      ],
+      "kind": "components",
+      "import": "import {DirectionProvider} from '@monoline/react'",
+      "path": "packages/react/src/components/direction-provider",
+      "files": [
+        "packages/react/src/components/direction-provider/.claude",
+        "packages/react/src/components/direction-provider/direction-provider.demo.tsx",
+        "packages/react/src/components/direction-provider/direction-provider.tsx",
+        "packages/react/src/components/direction-provider/index.ts",
+        "packages/react/src/components/direction-provider/meta.json"
+      ]
+    },
+    {
       "name": "dot-pattern",
       "title": "Dot pattern",
       "category": "effects",
@@ -2036,6 +2145,44 @@
       ]
     },
     {
+      "name": "line-chart",
+      "title": "Line chart",
+      "category": "data-display",
+      "description": "Show how one or more values change across an ordered axis, with straight or stepped lines.",
+      "status": "stable",
+      "css": [
+        "chart.css",
+        "line-chart.css"
+      ],
+      "a11y": [
+        "The chart is role=img with the required title as its name.",
+        "A visually hidden table lists every value, one row per category, for screen readers.",
+        "One focusable stop per category with a spoken label; Arrow keys move between them and Escape hides the tooltip.",
+        "The value tooltip opens on hover and on keyboard focus.",
+        "Series differ by dash pattern and marker shape as well as colour, and the legend names them.",
+        "No entrance animation under prefers-reduced-motion."
+      ],
+      "keywords": [
+        "chart",
+        "graph",
+        "trend",
+        "time series",
+        "step",
+        "svg",
+        "data"
+      ],
+      "kind": "components",
+      "import": "import {LineChart} from '@monoline/react'",
+      "path": "packages/react/src/components/line-chart",
+      "files": [
+        "packages/react/src/components/line-chart/index.ts",
+        "packages/react/src/components/line-chart/line-chart.demo.tsx",
+        "packages/react/src/components/line-chart/line-chart.test.tsx",
+        "packages/react/src/components/line-chart/line-chart.tsx",
+        "packages/react/src/components/line-chart/meta.json"
+      ]
+    },
+    {
       "name": "link",
       "title": "Link",
       "category": "typography",
@@ -2428,6 +2575,44 @@
       ]
     },
     {
+      "name": "pie-chart",
+      "title": "Pie chart",
+      "category": "data-display",
+      "description": "Parts of a whole as a pie, or a donut with innerRadius.",
+      "status": "stable",
+      "css": [
+        "chart.css",
+        "pie-chart.css"
+      ],
+      "a11y": [
+        "The chart is role=img with the required title as its name.",
+        "A visually hidden table lists every slice with its value and share.",
+        "One focusable stop per slice with a spoken label; Arrow keys move between them and Escape hides the tooltip.",
+        "The value tooltip opens on hover and on keyboard focus.",
+        "Slices differ by fill pattern as well as colour, and the legend lists each with its value and share.",
+        "No entrance animation under prefers-reduced-motion."
+      ],
+      "keywords": [
+        "chart",
+        "donut",
+        "doughnut",
+        "share",
+        "proportion",
+        "svg",
+        "data"
+      ],
+      "kind": "components",
+      "import": "import {PieChart} from '@monoline/react'",
+      "path": "packages/react/src/components/pie-chart",
+      "files": [
+        "packages/react/src/components/pie-chart/index.ts",
+        "packages/react/src/components/pie-chart/meta.json",
+        "packages/react/src/components/pie-chart/pie-chart.demo.tsx",
+        "packages/react/src/components/pie-chart/pie-chart.test.tsx",
+        "packages/react/src/components/pie-chart/pie-chart.tsx"
+      ]
+    },
+    {
       "name": "popover",
       "title": "Popover",
       "category": "overlays",
@@ -2804,6 +2989,39 @@
         "packages/react/src/components/slider/slider.demo.tsx",
         "packages/react/src/components/slider/slider.test.tsx",
         "packages/react/src/components/slider/slider.tsx"
+      ]
+    },
+    {
+      "name": "sparkline",
+      "title": "Sparkline",
+      "category": "data-display",
+      "description": "A tiny inline trend line for a table cell or a sentence.",
+      "status": "stable",
+      "css": [
+        "sparkline.css"
+      ],
+      "a11y": [
+        "role=img with the required title as its name.",
+        "A visually hidden table (table roles on spans, valid inside a paragraph) lists every value for screen readers.",
+        "Decorative at a glance: it has no tooltip and no tab stops."
+      ],
+      "keywords": [
+        "chart",
+        "trend",
+        "inline",
+        "mini",
+        "svg",
+        "data"
+      ],
+      "kind": "components",
+      "import": "import {Sparkline} from '@monoline/react'",
+      "path": "packages/react/src/components/sparkline",
+      "files": [
+        "packages/react/src/components/sparkline/index.ts",
+        "packages/react/src/components/sparkline/meta.json",
+        "packages/react/src/components/sparkline/sparkline.demo.tsx",
+        "packages/react/src/components/sparkline/sparkline.test.tsx",
+        "packages/react/src/components/sparkline/sparkline.tsx"
       ]
     },
     {

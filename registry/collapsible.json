@@ -38,7 +38,7 @@
   "source": [
     {
       "path": "packages/react/src/components/collapsible/collapsible.tsx",
-      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Collapsible as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport const Collapsible = Radix.Root;\nexport const CollapsibleTrigger = Radix.Trigger;\n\nexport const CollapsibleContent = forwardRef<ElementRef<typeof Radix.Content>, ComponentPropsWithoutRef<typeof Radix.Content>>(function CollapsibleContent({className, ...rest}, ref) {\n  return <Radix.Content ref={ref} className={cx('collapsible-content', className)} {...rest} />;\n});\n"
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Collapsible as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** A single open-and-close region. Holds the open state (`open`, `defaultOpen`, `onOpenChange`); put a `CollapsibleTrigger` and `CollapsibleContent` inside. */\nexport const Collapsible = Radix.Root;\n/** The button that toggles the region; use `asChild` to render your own element. */\nexport const CollapsibleTrigger = Radix.Trigger;\n\n/** The region that is shown or hidden. */\nexport const CollapsibleContent = forwardRef<ElementRef<typeof Radix.Content>, ComponentPropsWithoutRef<typeof Radix.Content>>(function CollapsibleContent({className, ...rest}, ref) {\n  return <Radix.Content ref={ref} className={cx('collapsible-content', className)} {...rest} />;\n});\n"
     },
     {
       "path": "packages/react/src/components/collapsible/index.ts",

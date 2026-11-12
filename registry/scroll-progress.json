@@ -7,7 +7,7 @@
   "css": [
     {
       "path": "packages/css/src/components/scroll-progress.css",
-      "content": "/* Scroll progress: --scroll-progress (0 to 1) scales the bar. No transition: it follows the scroll directly. */\n.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: var(--z-drawer); pointer-events: none; }\n.scroll-progress-bar { height: 100%; background: var(--accent); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; }\n"
+      "content": "/* Scroll progress: --scroll-progress (0 to 1) scales the bar. No transition: it follows the scroll directly. */\n.scroll-progress { position: fixed; top: 0; inset-inline-start: 0; inset-inline-end: 0; height: 2px; z-index: var(--z-drawer); pointer-events: none; }\n.scroll-progress-bar { height: 100%; background: var(--accent); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; }\n[dir=\"rtl\"] .scroll-progress-bar { transform-origin: right; }\n"
     }
   ],
   "a11y": [

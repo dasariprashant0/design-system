@@ -1,0 +1,61 @@
+{
+  "name": "pie-chart",
+  "title": "Pie chart",
+  "category": "data-display",
+  "description": "Parts of a whole as a pie, or a donut with innerRadius.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/chart.css",
+      "content": "/* Shared base for the SVG charts (bar, line, area, pie). Series k is styled by .chart-s0 to .chart-s4: a colour (--chart-c),\n   plus a fill pattern, dash and marker set in the SVG itself, so series never rely on colour alone. */\n.chart { position: relative; display: block; width: 100%; font-family: var(--font-body); color: var(--foreground); }\n.chart-plot { position: relative; width: 100%; }\n.chart-svg, .chart-hits { display: block; width: 100%; height: auto; overflow: visible; }\n.chart-hits { position: absolute; inset: 0; pointer-events: none; }\n\n.chart-s0 { --chart-c: var(--accent); }\n.chart-s1 { --chart-c: var(--foreground); }\n.chart-s2 { --chart-c: var(--ink-2); }\n.chart-s3 { --chart-c: var(--ink-3); }\n.chart-s4 { --chart-c: var(--accent-2); }\n\n.chart-tick { font-size: var(--text-xs); fill: var(--muted); }\n.chart-value { font-size: var(--text-xs); fill: var(--foreground); }\n.chart-rule { stroke: var(--rule); stroke-width: 1; }\n.chart-zero { stroke: var(--ink-3); stroke-width: 1; }\n.chart-outline { stroke: var(--foreground); stroke-width: 1; }\n.chart-outline[data-active] { stroke-width: 2; }\n.chart-pat { stroke: var(--chart-c); fill: none; }\n.chart-pat-dot { fill: var(--chart-c); }\n.chart-line { fill: none; stroke: var(--chart-c); stroke-width: 2; stroke-linejoin: round; }\n.chart-area { stroke: none; }\n.chart-area.chart-s0 { fill-opacity: 0.3; }\n\n/* Keyboard and pointer layer: one transparent target per category or slice, above the drawing. */\n.chart-hit { fill: transparent; pointer-events: all; outline: none; }\n.chart-hit[data-active] { fill: var(--wash); }\n.chart-hit:focus-visible { stroke: var(--foreground); stroke-width: 2; }\n\n.chart-tip { position: absolute; z-index: 1; padding: var(--s2) var(--s3); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); font-size: var(--text-xs); white-space: nowrap; pointer-events: none; transform: translate(-50%, calc(-100% - var(--s2))); }\n.chart-tip[data-align=\"start\"] { transform: translate(0, calc(-100% - var(--s2))); }\n.chart-tip[data-align=\"end\"] { transform: translate(-100%, calc(-100% - var(--s2))); }\n.chart-tip-title { color: var(--muted); margin-bottom: var(--s1); }\n.chart-tip-row { display: flex; align-items: center; gap: var(--s2); }\n.chart-tip-value { margin-inline-start: auto; padding-inline-start: var(--s3); }\n\n.chart-legend { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); margin: var(--s3) 0 0; padding: 0; list-style: none; font-size: var(--text-xs); }\n.chart-legend li { display: inline-flex; align-items: center; gap: var(--s2); }\n.chart-legend-detail { color: var(--muted); }\n.chart-swatch { flex: none; overflow: visible; }\n\n.chart-empty { display: grid; place-items: center; min-height: var(--s9); padding: var(--s5); border: 1px dashed var(--rule); color: var(--muted); font-size: var(--text-sm); }\n\n/* A left-to-right wipe on first paint. Skipped entirely when the user asks for less motion. */\n@media (prefers-reduced-motion: no-preference) {\n  .chart-marks { animation: chart-reveal var(--slow) var(--ease) backwards; }\n}\n@keyframes chart-reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(-8px); } }\n"
+    },
+    {
+      "path": "packages/css/src/components/pie-chart.css",
+      "content": "/* Pie and donut chart. Shared base: chart.css. */\n.chart-slice { stroke-linejoin: round; transition: stroke-width var(--fast) var(--ease); }\n"
+    }
+  ],
+  "a11y": [
+    "The chart is role=img with the required title as its name.",
+    "A visually hidden table lists every slice with its value and share.",
+    "One focusable stop per slice with a spoken label; Arrow keys move between them and Escape hides the tooltip.",
+    "The value tooltip opens on hover and on keyboard focus.",
+    "Slices differ by fill pattern as well as colour, and the legend lists each with its value and share.",
+    "No entrance animation under prefers-reduced-motion."
+  ],
+  "keywords": [
+    "chart",
+    "donut",
+    "doughnut",
+    "share",
+    "proportion",
+    "svg",
+    "data"
+  ],
+  "kind": "components",
+  "import": "import {PieChart} from '@monoline/react'",
+  "path": "packages/react/src/components/pie-chart",
+  "files": [
+    "packages/react/src/components/pie-chart/index.ts",
+    "packages/react/src/components/pie-chart/meta.json",
+    "packages/react/src/components/pie-chart/pie-chart.demo.tsx",
+    "packages/react/src/components/pie-chart/pie-chart.test.tsx",
+    "packages/react/src/components/pie-chart/pie-chart.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/pie-chart/index.ts",
+      "content": "export {PieChart} from './pie-chart';\nexport type {PieChartProps} from './pie-chart';\n"
+    },
+    {
+      "path": "packages/react/src/components/pie-chart/meta.json",
+      "content": "{\"name\":\"pie-chart\",\"title\":\"Pie chart\",\"category\":\"data-display\",\"description\":\"Parts of a whole as a pie, or a donut with innerRadius.\",\"status\":\"stable\",\"css\":[\"chart.css\",\"pie-chart.css\"],\"a11y\":[\"The chart is role=img with the required title as its name.\",\"A visually hidden table lists every slice with its value and share.\",\"One focusable stop per slice with a spoken label; Arrow keys move between them and Escape hides the tooltip.\",\"The value tooltip opens on hover and on keyboard focus.\",\"Slices differ by fill pattern as well as colour, and the legend lists each with its value and share.\",\"No entrance animation under prefers-reduced-motion.\"],\"keywords\":[\"chart\",\"donut\",\"doughnut\",\"share\",\"proportion\",\"svg\",\"data\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/pie-chart/pie-chart.tsx",
+      "content": "'use client';\nimport {forwardRef, type HTMLAttributes, type ReactElement} from 'react';\nimport {ChartShell, fillFor, type Hit} from '../../utils/chart-parts';\nimport {arcCentroid, arcPath, formatFull, normalize, pieArcs, SERIES_STYLES, type ChartDatum} from '../../utils/chart';\n\nexport interface PieChartProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  /** Accessible name and table caption. Required. */\n  title: string;\n  /** Slices: `[{label: 'Search', value: 40}]`. Negative values count as 0. */\n  data: ChartDatum[];\n  /** Hole size as a fraction of the radius, from 0 (pie) to just under 1. 0.6 makes a donut. Default 0. */\n  innerRadius?: number;\n  /** Chart height in px. Default 240. */\n  height?: number;\n  /** Format a value for the legend, tooltip and table. */\n  valueFormat?: (value: number) => string;\n}\n\nconst pct = (f: number) => `${Math.round(f * 1000) / 10}%`;\n\n/** Pie or donut chart in plain SVG. Slices differ by fill pattern as well as colour; the legend lists every slice with its value and share. */\nexport const PieChart = forwardRef<HTMLDivElement, PieChartProps>(function PieChart({title, data, innerRadius = 0, height = 240, valueFormat, ...rest}, ref) {\n  const {labels, series} = normalize(data, undefined, undefined, 'Value');\n  const arcs = pieArcs(series[0]?.values ?? []);\n  const total = arcs.reduce((a, s) => a + s.value, 0);\n  const fmt = valueFormat ?? formatFull;\n  const hole = Math.min(0.95, Math.max(0, innerRadius));\n\n  return (\n    <ChartShell\n      ref={ref} title={title} height={height} empty={labels.length === 0 || total <= 0} {...rest}\n      legend={labels.map((l, i) => ({name: l, k: i, kind: 'fill' as const, detail: `${fmt(arcs[i]!.value)} · ${pct(arcs[i]!.fraction)}`}))}\n      table={{head: ['Slice', 'Value', 'Share'], rows: labels.map((l, i) => [l, fmt(arcs[i]!.value), pct(arcs[i]!.fraction)])}}\n      build={(w, active, uid) => {\n        const cx = w / 2, cy = height / 2, r = Math.max(8, Math.min(w, height) / 2 - 6), inner = r * hole;\n        const slices: ReactElement[] = [], hits: Hit[] = [];\n        arcs.forEach((a, i) => {\n          if (a.value <= 0) return;\n          const d = arcPath(cx, cy, r, inner, a.start, a.end);\n          slices.push(<path key={i} className=\"chart-slice chart-outline\" data-active={active === `c${i}` ? '' : undefined} d={d} style={{fill: fillFor(uid, i)}} />);\n          const c = arcCentroid(cx, cy, (r + inner) / 2, a.start, a.end);\n          hits.push({id: `c${i}`, label: `${labels[i]}: ${fmt(a.value)} (${pct(a.fraction)})`, x: c.x, y: c.y, shape: {kind: 'path', d}, title: labels[i]!, rows: [{value: `${fmt(a.value)} · ${pct(a.fraction)}`, k: i % SERIES_STYLES}]});\n        });\n        return {visual: <g className=\"chart-marks\">{slices}</g>, hits};\n      }}\n    />\n  );\n});\n"
+    }
+  ]
+}

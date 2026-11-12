@@ -10,9 +10,11 @@ export interface BarChartProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   data?: ChartDatum[];
   /** Several series: `[{name: 'Visits', values: [3, 5]}]`, with `labels` for the categories. */
   series?: ChartSeries[];
+  /** Category labels for the x axis (or y axis when horizontal), one per value in `series`. */
   labels?: string[];
   /** Name of the single series when `data` is used. Default "Value". */
   seriesName?: string;
+  /** `vertical` draws columns, `horizontal` draws rows (better for long labels). Default `vertical`. */
   orientation?: 'vertical' | 'horizontal';
   /** Stack series on top of each other instead of side by side. */
   stacked?: boolean;
