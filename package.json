@@ -12,6 +12,8 @@
     "test": "npm run test -w @monoline/react",
     "typecheck": "npm run typecheck -w @monoline/react && npm run typecheck -w apps/docs",
     "check": "npm run check -w @monoline/css && npm run typecheck && npm run test",
-    "registry": "npm run registry -w @monoline/react"
+    "registry": "npm run registry -w @monoline/react",
+    "cli": "node packages/cli/bin/monoline.mjs",
+    "test:cli": "npm test -w monoline"
   }
 }

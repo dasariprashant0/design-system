@@ -1,0 +1,12 @@
+{
+  "name": "monoline",
+  "version": "0.3.0",
+  "description": "Copy Monoline components into your project: monoline add button dialog.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {"type": "git", "url": "git+https://github.com/dasariprashant0/design-system.git", "directory": "packages/cli"},
+  "bin": {"monoline": "./bin/monoline.mjs"},
+  "files": ["bin", "src"],
+  "engines": {"node": ">=20"},
+  "scripts": {"test": "node --test test/"}
+}

@@ -1,0 +1,19 @@
+name: New component
+description: Propose a component the kit does not have yet.
+labels: [component]
+body:
+  - type: input
+    id: name
+    attributes: {label: Name, placeholder: tree-view}
+    validations: {required: true}
+  - type: textarea
+    id: use
+    attributes: {label: What is it for, and when should you not use it?}
+    validations: {required: true}
+  - type: input
+    id: refs
+    attributes: {label: Similar components elsewhere, description: "shadcn/ui, Radix, Mantine, Ant Design and so on."}
+  - type: textarea
+    id: a11y
+    attributes: {label: Keyboard and screen reader behaviour, description: "Which ARIA pattern does it follow?"}
+    validations: {required: true}
