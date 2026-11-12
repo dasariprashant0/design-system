@@ -1,0 +1,17 @@
+/* Flex: a flex container with one gap token. */
+.flex { display: flex; flex-direction: row; gap: var(--flex-gap, 0); min-width: 0; }
+.flex-inline { display: inline-flex; }
+.flex-wrap { flex-wrap: wrap; }
+.flex[data-direction="column"] { flex-direction: column; }
+.flex[data-direction="row-reverse"] { flex-direction: row-reverse; }
+.flex[data-direction="column-reverse"] { flex-direction: column-reverse; }
+.flex[data-align="start"] { align-items: flex-start; }
+.flex[data-align="center"] { align-items: center; }
+.flex[data-align="end"] { align-items: flex-end; }
+.flex[data-align="stretch"] { align-items: stretch; }
+.flex[data-align="baseline"] { align-items: baseline; }
+.flex[data-justify="start"] { justify-content: flex-start; }
+.flex[data-justify="center"] { justify-content: center; }
+.flex[data-justify="end"] { justify-content: flex-end; }
+.flex[data-justify="between"] { justify-content: space-between; }
+.flex[data-justify="around"] { justify-content: space-around; }

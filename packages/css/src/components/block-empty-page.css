@@ -1,0 +1,5 @@
+/* Block: empty page. */
+.block-empty-page { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s4); min-height: 60vh; padding: var(--s8) var(--s5); text-align: center; }
+.block-empty-page-code { font-family: var(--font-display); font-weight: 700; font-size: var(--display-xl); line-height: 0.9; letter-spacing: -0.04em; color: var(--ink-4); }
+.block-empty-page-description { max-width: var(--measure); }
+.block-empty-page-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); margin-top: var(--s3); }

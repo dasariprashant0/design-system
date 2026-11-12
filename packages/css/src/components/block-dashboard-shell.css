@@ -1,0 +1,18 @@
+/* Block: dashboard shell. Sidebar from 800px up; a drawer below. */
+.block-shell { display: grid; grid-template-columns: minmax(0, 1fr); min-height: var(--shell-min-height, 28rem); border: 1px solid var(--rule); }
+.block-shell-side { display: none; flex-direction: column; gap: var(--s5); padding: var(--s5) var(--s4); border-right: 1px solid var(--rule); }
+.block-shell-brand { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); padding-inline: var(--s3); }
+.block-shell-nav { display: flex; flex-direction: column; }
+.block-shell-link { display: block; padding: var(--s2) var(--s3); font-size: var(--text-sm); color: var(--muted); text-decoration: none; border-left: 2px solid transparent; }
+.block-shell-link:hover { color: var(--foreground); background: var(--wash); }
+.block-shell-link[aria-current="page"] { color: var(--foreground); border-left-color: var(--accent); background: var(--wash); }
+.block-shell-link:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.block-shell-body { display: flex; flex-direction: column; min-width: 0; }
+.block-shell-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); padding: var(--s3) var(--s5); border-bottom: 1px solid var(--rule); }
+.block-shell-top-end { display: flex; align-items: center; gap: var(--s3); margin-left: auto; }
+.block-shell-content { flex: 1; padding-block: var(--s6); }
+@media (min-width: 800px) {
+  .block-shell { grid-template-columns: var(--side) minmax(0, 1fr); }
+  .block-shell-side { display: flex; }
+  .block-shell-menu { display: none; }
+}
