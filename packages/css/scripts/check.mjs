@@ -26,6 +26,13 @@ for (const [theme, base] of Object.entries(themes)) {
   }
 }
 
+// Code colours sit on the always-dark --surface of every theme.
+{
+  const tokens = read('src/tokens.css');
+  const codeColours = [...tokens.matchAll(/--(code-[a-z]+):\s*(#[0-9A-Fa-f]{6})/g)];
+  for (const [theme, base] of Object.entries(themes)) for (const [, name, hex] of codeColours) need(`${theme} --${name} on surface`, hex, base['--surface'], 4.5);
+}
+
 // Tokens only: no raw hex in any stylesheet except tokens.css and accents.css.
 const linted = ['src/options.css', 'src/base.css', 'src/utilities.css', ...readdirSync(new URL('../src/components/', import.meta.url)).filter((f) => f.endsWith('.css')).map((f) => `src/components/${f}`)];
 for (const f of linted) {

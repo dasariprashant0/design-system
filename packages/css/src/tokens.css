@@ -67,6 +67,16 @@
 }
 
 :root {
+  /* Code colours. The code panel is always dark (--surface), so these are one set for every theme.
+     `npm run check` tests each against all three surfaces for 4.5:1. */
+  --code-keyword: #FF9A70;
+  --code-string:  #A8E6A1;
+  --code-number:  #F5CD7A;
+  --code-comment: #9A9EAD;
+  --code-tag:     #7FC8FF;
+  --code-attr:    #F0A8D4;
+  --code-fn:      #D6B4FF;
+
   /* Type: Space Mono for display, DM Mono for everything else. */
   --font-display: "Space Mono", ui-monospace, monospace;
   --font-body:    "DM Mono", ui-monospace, monospace;
