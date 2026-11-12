@@ -1,0 +1,66 @@
+{
+  "name": "overflow-list",
+  "title": "Overflow list",
+  "category": "layout",
+  "description": "A row of items that shows as many as fit and puts the rest in a '+N' menu.",
+  "status": "stable",
+  "uses": [
+    "button",
+    "dropdown-menu"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { min-height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { min-height: var(--control-sm); padding: 6px 12px; font-size: var(--text-xs); }\n.btn-lg { min-height: var(--control-lg); padding: 14px 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { min-height: 0; }\n.btn-block { width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/17-dropdown-menu.css",
+      "content": "/* ─── Dropdown menu: <details class=\"dropdown\">; monoline.js closes it on Escape and outside click ─── */\n.dropdown { position: relative; display: inline-block; }\n.dropdown > summary { list-style: none; cursor: pointer; }\n.dropdown > summary::-webkit-details-marker { display: none; }\n.menu { position: absolute; inset-inline-start: 0; top: calc(100% + var(--s2)); z-index: var(--z-drawer); min-width: 200px; background: var(--background); border: 1px solid var(--foreground); padding: var(--s1) 0; }\n.menu-end { inset-inline-start: auto; inset-inline-end: 0; }\n.menu-item { overflow-wrap: anywhere; display: flex; justify-content: space-between; gap: var(--s5); width: 100%; padding: var(--s2) var(--s4); font-size: var(--text-sm); text-align: start; }\n.menu-item:hover, .menu-item:focus-visible { background: var(--foreground); color: var(--background); outline-offset: -2px; }\n.menu-item.danger:hover { background: var(--danger); color: var(--background); }\n.menu-sep { border: 0; border-top: 1px solid var(--rule); margin: var(--s1) 0; }\n"
+    },
+    {
+      "path": "packages/css/src/components/overflow-list.css",
+      "content": "/* Overflow list: one clipped row. Items that do not fit stay in flow for measuring but are hidden and out of the tab order. */\n.overflow-list { display: flex; align-items: center; gap: var(--s2); min-width: 0; overflow: hidden; position: relative; }\n.overflow-list-items { display: flex; flex-wrap: nowrap; gap: var(--s2); margin: 0; padding: 0; list-style: none; min-width: 0; }\n.overflow-list-item { flex: none; white-space: nowrap; }\n.overflow-list-item[data-hidden] { visibility: hidden; position: absolute; pointer-events: none; }\n.overflow-list-more { flex: none; }\n"
+    }
+  ],
+  "a11y": [
+    "Items that do not fit are visibility:hidden, so they are neither focusable nor read out; the same items are reachable in the menu.",
+    "The '+N' button is named '3 more items' (customisable with moreLabel) and opens a menu: Enter, Space or ArrowDown opens, arrows move, Escape closes and returns focus to the button.",
+    "Layout is recalculated by a ResizeObserver when the container or the items change."
+  ],
+  "keywords": [
+    "truncate",
+    "collapse",
+    "more",
+    "breadcrumbs",
+    "tags",
+    "toolbar",
+    "responsive"
+  ],
+  "kind": "components",
+  "import": "import {OverflowList} from '@monoline/react'",
+  "path": "packages/react/src/components/overflow-list",
+  "files": [
+    "packages/react/src/components/overflow-list/index.ts",
+    "packages/react/src/components/overflow-list/meta.json",
+    "packages/react/src/components/overflow-list/overflow-list.demo.tsx",
+    "packages/react/src/components/overflow-list/overflow-list.test.tsx",
+    "packages/react/src/components/overflow-list/overflow-list.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/overflow-list/index.ts",
+      "content": "export {OverflowList} from './overflow-list';\nexport type {OverflowItem, OverflowListProps} from './overflow-list';\n"
+    },
+    {
+      "path": "packages/react/src/components/overflow-list/meta.json",
+      "content": "{\"name\":\"overflow-list\",\"title\":\"Overflow list\",\"category\":\"layout\",\"description\":\"A row of items that shows as many as fit and puts the rest in a '+N' menu.\",\"status\":\"stable\",\"uses\":[\"button\",\"dropdown-menu\"],\"css\":[\"02-buttons.css\",\"17-dropdown-menu.css\",\"overflow-list.css\"],\"a11y\":[\"Items that do not fit are visibility:hidden, so they are neither focusable nor read out; the same items are reachable in the menu.\",\"The '+N' button is named '3 more items' (customisable with moreLabel) and opens a menu: Enter, Space or ArrowDown opens, arrows move, Escape closes and returns focus to the button.\",\"Layout is recalculated by a ResizeObserver when the container or the items change.\"],\"keywords\":[\"truncate\",\"collapse\",\"more\",\"breadcrumbs\",\"tags\",\"toolbar\",\"responsive\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/overflow-list/overflow-list.tsx",
+      "content": "'use client';\nimport {forwardRef, useEffect, useLayoutEffect, useRef, useState, type HTMLAttributes, type ReactNode} from 'react';\nimport {Button} from '../button';\nimport {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from '../dropdown-menu';\nimport {cx} from '../../utils/cx';\n\nconst useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;\n\nexport interface OverflowItem {\n  /** Unique key for the item. */\n  id: string;\n  /** What is shown, inline when it fits and as a menu item when it does not. */\n  label: ReactNode;\n  /** Called when the item is chosen from the \"+N\" menu. Inline items handle their own clicks inside `label`. */\n  onSelect?: () => void;\n  /** Greys the item out in the menu. */\n  disabled?: boolean;\n}\n\nexport interface OverflowListProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {\n  /** The items in order. As many as fit are shown; the rest move into a \"+N\" menu. */\n  items: OverflowItem[];\n  /** Accessible name of the \"+N\" button, given the number of hidden items. Default \"N more items\". */\n  moreLabel?: (hidden: number) => string;\n}\n\n/** How many of `widths` fit in `avail`, leaving room for a `more` button when some must be dropped. */\nfunction fit(avail: number, widths: number[], gap: number, more: number) {\n  const total = widths.reduce((a, w, i) => a + w + (i ? gap : 0), 0);\n  if (total <= avail) return widths.length;\n  let used = more + gap, n = 0;\n  for (const w of widths) {\n    const next = used + w + (n ? gap : 0);\n    if (next > avail) break;\n    used = next; n++;\n  }\n  return n;\n}\n\n/**\n * A single row of items that shows as many as fit and moves the rest into a \"+N\" menu, recalculating when the width changes (ResizeObserver).\n * Hidden items stay measurable but are not focusable or read out; the menu is a Radix dropdown, so it is fully keyboard operable.\n * @example <OverflowList items={tags.map((t) => ({id: t, label: <Tag>{t}</Tag>}))} />\n */\nexport const OverflowList = forwardRef<HTMLDivElement, OverflowListProps>(function OverflowList({items, moreLabel = (n) => `${n} more ${n === 1 ? 'item' : 'items'}`, className, ...rest}, ref) {\n  const [shown, setShown] = useState(items.length);\n  const root = useRef<HTMLDivElement | null>(null);\n  const list = useRef<HTMLUListElement>(null);\n  const more = useRef<HTMLSpanElement>(null);\n  const moreWidth = useRef(40);\n\n  const measure = () => {\n    const ul = list.current, el = root.current;\n    if (!ul || !el) return;\n    if (more.current) moreWidth.current = more.current.offsetWidth || moreWidth.current;\n    const widths = Array.from(ul.children, (c) => (c as HTMLElement).offsetWidth);\n    const gap = parseFloat(getComputedStyle(ul).columnGap) || 0;\n    setShown(fit(el.clientWidth, widths, gap, moreWidth.current));\n  };\n  useIsoLayoutEffect(measure, [items]);\n  useEffect(() => {\n    if (!root.current || typeof ResizeObserver === 'undefined') return;\n    const ro = new ResizeObserver(measure);\n    ro.observe(root.current);\n    return () => ro.disconnect();\n  }, []);\n\n  const hidden = items.slice(shown);\n  return (\n    <div ref={(el) => { root.current = el; if (typeof ref === 'function') ref(el); else if (ref) ref.current = el; }} className={cx('overflow-list', className)} {...rest}>\n      <ul ref={list} className=\"overflow-list-items\">\n        {items.map((it, i) => <li key={it.id} className=\"overflow-list-item\" data-hidden={i >= shown || undefined}>{it.label}</li>)}\n      </ul>\n      {hidden.length > 0 && (\n        <span ref={more} className=\"overflow-list-more\">\n          <DropdownMenu>\n            <DropdownMenuTrigger asChild>\n              <Button size=\"sm\" aria-label={moreLabel(hidden.length)}>+{hidden.length}</Button>\n            </DropdownMenuTrigger>\n            <DropdownMenuContent align=\"end\">\n              {hidden.map((it) => <DropdownMenuItem key={it.id} disabled={it.disabled} onSelect={it.onSelect}>{it.label}</DropdownMenuItem>)}\n            </DropdownMenuContent>\n          </DropdownMenu>\n        </span>\n      )}\n    </div>\n  );\n});\n"
+    }
+  ]
+}

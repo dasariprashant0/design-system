@@ -386,6 +386,16 @@ A11y:
 - Every action must also exist elsewhere in the UI for people who cannot open it.
 Files: packages/react/src/components/context-menu/context-menu.demo.tsx, packages/react/src/components/context-menu/context-menu.test.tsx, packages/react/src/components/context-menu/context-menu.tsx, packages/react/src/components/context-menu/index.ts, packages/react/src/components/context-menu/meta.json
 
+## Copy button (copy-button)
+A button that copies a value to the clipboard, shows 'Copied' for a moment and announces it.
+Import: import {CopyButton} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native button; the icon-only form is named by the label prop (default 'Copy').
+- The result is announced in a polite role=status region: 'Copied' or 'Copy failed'.
+- The text button changes its visible text to the copied label and resets itself.
+Files: packages/react/src/components/copy-button/copy-button.demo.tsx, packages/react/src/components/copy-button/copy-button.test.tsx, packages/react/src/components/copy-button/copy-button.tsx, packages/react/src/components/copy-button/index.ts, packages/react/src/components/copy-button/meta.json
+
 ## Data grid (data-grid)
 A virtualised, keyboard-navigable grid for very large data sets, with sortable columns and row selection.
 Import: import {DataGrid} from '@monoline/react'
@@ -418,6 +428,17 @@ A11y:
 - Choosing a date closes the dialog and returns focus to the trigger; Escape closes without changing.
 - All calendar keyboard behaviour applies inside.
 Files: packages/react/src/components/date-picker/date-picker.demo.tsx, packages/react/src/components/date-picker/date-picker.test.tsx, packages/react/src/components/date-picker/date-picker.tsx, packages/react/src/components/date-picker/index.ts, packages/react/src/components/date-picker/meta.json
+
+## Date range picker (date-range-picker)
+A button that opens a range calendar and two typed date fields.
+Import: import {DateRangePicker} from '@monoline/react'
+Primitive: radix-ui/Popover | Status: stable
+A11y:
+- The trigger is a button naming the field and the current range; it opens a dialog with two text fields and the calendar.
+- Typed fields are labelled Start and End, accept YYYY-MM-DD, apply on Enter or blur and mark aria-invalid with an alert message when the text is not a pickable date.
+- Choosing the end date closes the dialog and returns focus to the trigger; Escape closes without changing.
+- All range-calendar keyboard behaviour applies inside.
+Files: packages/react/src/components/date-range-picker/date-range-picker.demo.tsx, packages/react/src/components/date-range-picker/date-range-picker.test.tsx, packages/react/src/components/date-range-picker/date-range-picker.tsx, packages/react/src/components/date-range-picker/index.ts, packages/react/src/components/date-range-picker/meta.json
 
 ## Description list (description-list)
 Label and value pairs, like the details of a record.
@@ -583,6 +604,17 @@ A11y:
 - The fallback shows the alt text so the content is not lost when loading fails.
 Files: packages/react/src/components/image/image.demo.tsx, packages/react/src/components/image/image.test.tsx, packages/react/src/components/image/image.tsx, packages/react/src/components/image/index.ts, packages/react/src/components/image/meta.json
 
+## Image gallery (image-gallery)
+A thumbnail grid that opens a lightbox with previous and next.
+Import: import {ImageGallery} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Each thumbnail is a button named by the image's required alt text, with aria-haspopup=dialog.
+- The lightbox is a modal dialog titled 'Image 2 of 5'; focus moves in, is trapped, and returns to the thumbnail on close.
+- ArrowLeft and ArrowRight (swapped in RTL) and the Previous and Next buttons move through the images and wrap; a horizontal swipe does the same; Escape closes.
+- A polite status message announces the new image's alt text and position. Neighbouring images are preloaded.
+Files: packages/react/src/components/image-gallery/image-gallery.demo.tsx, packages/react/src/components/image-gallery/image-gallery.test.tsx, packages/react/src/components/image-gallery/image-gallery.tsx, packages/react/src/components/image-gallery/index.ts, packages/react/src/components/image-gallery/meta.json
+
 ## Input (input)
 A single-line text field.
 Import: import {Input} from '@monoline/react'
@@ -640,6 +672,17 @@ A11y:
 - Pauses on hover and focus; animation is off under prefers-reduced-motion.
 Files: packages/react/src/components/marquee/index.ts, packages/react/src/components/marquee/marquee.demo.tsx, packages/react/src/components/marquee/marquee.test.tsx, packages/react/src/components/marquee/marquee.tsx, packages/react/src/components/marquee/meta.json
 
+## Mentions (mentions)
+A textarea that suggests people when you type @.
+Import: import {Mentions} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The textarea keeps its native textbox role (ARIA does not allow combobox on a textarea) and adds aria-haspopup="listbox", aria-autocomplete="list", aria-controls while the list is open and aria-activedescendant for the highlighted option; the list is a listbox of options.
+- ArrowDown/ArrowUp move the highlight, Enter or Tab insert the mention, Escape closes the list without inserting; focus never leaves the textarea.
+- A polite status region announces how many suggestions there are, and when they are loading or empty.
+- Async loading ignores answers for outdated queries so the list never shows stale results.
+Files: packages/react/src/components/mentions/index.ts, packages/react/src/components/mentions/mentions.demo.tsx, packages/react/src/components/mentions/mentions.test.tsx, packages/react/src/components/mentions/mentions.tsx, packages/react/src/components/mentions/meta.json
+
 ## Menubar (menubar)
 A horizontal bar of menus, like File, Edit and View in a desktop app.
 Import: import {Menubar} from '@monoline/react'
@@ -678,6 +721,17 @@ A11y:
 - The current page link has aria-current="page".
 Files: packages/react/src/components/navigation-menu/index.ts, packages/react/src/components/navigation-menu/meta.json, packages/react/src/components/navigation-menu/navigation-menu.demo.tsx, packages/react/src/components/navigation-menu/navigation-menu.test.tsx, packages/react/src/components/navigation-menu/navigation-menu.tsx
 
+## Notification center (notification-center)
+A bell button with an unread count that opens a list of notifications, with mark read, clear and an empty state.
+Import: import {NotificationCenter} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The bell is a button named 'Notifications, 3 unread'; the visible count badge is aria-hidden so the number is announced once.
+- The panel is a labelled dialog: Escape or an outside click closes it and focus returns to the bell.
+- Unread items are bold, start with a visually hidden 'Unread:' and have a 'Mark read' button named after the item; unread is never shown by colour alone.
+- 'Mark all read' and 'Clear all' are disabled when they have nothing to do; an empty list shows plain text.
+Files: packages/react/src/components/notification-center/index.ts, packages/react/src/components/notification-center/meta.json, packages/react/src/components/notification-center/notification-center.demo.tsx, packages/react/src/components/notification-center/notification-center.test.tsx, packages/react/src/components/notification-center/notification-center.tsx
+
 ## Number input (number-input)
 A numeric field with decrease and increase buttons.
 Import: import {NumberInput} from '@monoline/react'
@@ -714,6 +768,16 @@ A11y:
 - Typing moves forward, Backspace moves back, arrows move, pasting fills all boxes.
 - inputmode="numeric" and autocomplete="one-time-code" for mobile and autofill.
 Files: packages/react/src/components/otp-input/index.ts, packages/react/src/components/otp-input/meta.json, packages/react/src/components/otp-input/otp-input.demo.tsx, packages/react/src/components/otp-input/otp-input.test.tsx, packages/react/src/components/otp-input/otp-input.tsx
+
+## Overflow list (overflow-list)
+A row of items that shows as many as fit and puts the rest in a '+N' menu.
+Import: import {OverflowList} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Items that do not fit are visibility:hidden, so they are neither focusable nor read out; the same items are reachable in the menu.
+- The '+N' button is named '3 more items' (customisable with moreLabel) and opens a menu: Enter, Space or ArrowDown opens, arrows move, Escape closes and returns focus to the button.
+- Layout is recalculated by a ResizeObserver when the container or the items change.
+Files: packages/react/src/components/overflow-list/index.ts, packages/react/src/components/overflow-list/meta.json, packages/react/src/components/overflow-list/overflow-list.demo.tsx, packages/react/src/components/overflow-list/overflow-list.test.tsx, packages/react/src/components/overflow-list/overflow-list.tsx
 
 ## Pagination (pagination)
 Move between pages of results.
@@ -776,6 +840,19 @@ A11y:
 - Give the group an accessible name with aria-label or aria-labelledby.
 Files: packages/react/src/components/radio-group/index.ts, packages/react/src/components/radio-group/meta.json, packages/react/src/components/radio-group/radio-group.demo.tsx, packages/react/src/components/radio-group/radio-group.test.tsx, packages/react/src/components/radio-group/radio-group.tsx
 
+## Range calendar (range-calendar)
+A month grid for picking a start and an end date.
+Import: import {RangeCalendar} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- role="grid" with column headers; one day is in the tab order (roving tabindex).
+- Enter or Space on a day sets the start, then the end; Escape while picking clears the start.
+- Arrow keys move by day and week, Home/End to the start and end of the week, PageUp/PageDown by month; arrows are mirrored in right-to-left.
+- The days between start and focus are previewed while picking, by hover and by keyboard.
+- Each day button has a full date name; start and end have aria-pressed; a status region announces the chosen range.
+- Disabled days (min, max, isDateDisabled) are real disabled buttons.
+Files: packages/react/src/components/range-calendar/index.ts, packages/react/src/components/range-calendar/meta.json, packages/react/src/components/range-calendar/range-calendar.demo.tsx, packages/react/src/components/range-calendar/range-calendar.test.tsx, packages/react/src/components/range-calendar/range-calendar.tsx
+
 ## Rating (rating)
 Pick or show a score from 1 to a maximum, as stars.
 Import: import {Rating} from '@monoline/react'
@@ -784,6 +861,17 @@ A11y:
 - Editable: a radio group (native radios) with arrow-key selection; each star is named "N of M".
 - Read-only: role="img" with a text label such as "4 out of 5".
 Files: packages/react/src/components/rating/index.ts, packages/react/src/components/rating/meta.json, packages/react/src/components/rating/rating.demo.tsx, packages/react/src/components/rating/rating.test.tsx, packages/react/src/components/rating/rating.tsx
+
+## Resizable (resizable)
+Panels separated by handles you drag or move with the keyboard.
+Import: import {Resizable} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Each handle is a focusable role="separator" with aria-orientation, aria-valuenow, aria-valuemin, aria-valuemax and aria-controls pointing at the panel it resizes.
+- Arrow keys resize by the step (horizontal groups use Left/Right, vertical groups Up/Down; mirrored in right-to-left); PageUp/PageDown resize by double; Home and End jump to the limits.
+- minSize and maxSize are enforced for both keyboard and pointer, and are reflected in aria-valuemin and aria-valuemax.
+- Handles are at least 24 CSS px to grab and show the focus ring.
+Files: packages/react/src/components/resizable/index.ts, packages/react/src/components/resizable/meta.json, packages/react/src/components/resizable/resizable.demo.tsx, packages/react/src/components/resizable/resizable.test.tsx, packages/react/src/components/resizable/resizable.tsx
 
 ## Rich text editor (rich-text-editor)
 A dependency-free rich text editor with a formatting toolbar and sanitized HTML in and out.
@@ -796,6 +884,16 @@ A11y:
 - The link prompt is a labelled popover; an invalid address is announced as an alert and links are limited to http, https and mailto.
 - Pasted content is sanitized to a small tag allowlist; disabled and read-only set aria-disabled and aria-readonly and turn the toolbar off.
 Files: packages/react/src/components/rich-text-editor/exec-command.ts, packages/react/src/components/rich-text-editor/index.ts, packages/react/src/components/rich-text-editor/meta.json, packages/react/src/components/rich-text-editor/rich-text-editor.demo.tsx, packages/react/src/components/rich-text-editor/rich-text-editor.test.tsx, packages/react/src/components/rich-text-editor/rich-text-editor.tsx, packages/react/src/components/rich-text-editor/sanitize.ts
+
+## Rolling number (rolling-number)
+A number whose digits roll to the new value when it changes. Screen readers read the final value.
+Import: import {RollingNumber} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The animated digits are aria-hidden; the formatted final value is plain text for screen readers.
+- With prefers-reduced-motion the digits change without rolling.
+- Not interactive: no focus stops.
+Files: packages/react/src/components/rolling-number/index.ts, packages/react/src/components/rolling-number/meta.json, packages/react/src/components/rolling-number/rolling-number.demo.tsx, packages/react/src/components/rolling-number/rolling-number.test.tsx, packages/react/src/components/rolling-number/rolling-number.tsx
 
 ## Scroll area (scroll-area)
 A scrollable region with thin, themed scrollbars.
@@ -871,6 +969,17 @@ A11y:
 - Arrow keys step; Home and End jump to the ends; PageUp and PageDown take larger steps.
 - aria-label is required; a range labels its thumbs minimum and maximum.
 Files: packages/react/src/components/slider/index.ts, packages/react/src/components/slider/meta.json, packages/react/src/components/slider/slider.demo.tsx, packages/react/src/components/slider/slider.test.tsx, packages/react/src/components/slider/slider.tsx
+
+## Sortable list (sortable-list)
+A list the user reorders by dragging a handle or with the keyboard, with live announcements.
+Import: import {SortableList} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Each row has a handle button named 'Reorder <item>' with aria-pressed while picked up and a description of the keys.
+- Space or Enter picks an item up; the arrow keys (or Home and End) move it; Space or Enter drops it; Escape cancels and restores the order; Tab cancels.
+- A polite live region announces: picked up, moved to position N of M, dropped, cancelled.
+- Pointer drag uses the same handle; reordering never depends on dragging alone.
+Files: packages/react/src/components/sortable-list/index.ts, packages/react/src/components/sortable-list/meta.json, packages/react/src/components/sortable-list/sortable-list.demo.tsx, packages/react/src/components/sortable-list/sortable-list.test.tsx, packages/react/src/components/sortable-list/sortable-list.tsx
 
 ## Sparkline (sparkline)
 A tiny inline trend line for a table cell or a sentence.
@@ -998,6 +1107,17 @@ A11y:
 - Inside a Field it is labelled and described automatically; invalid sets aria-invalid.
 Files: packages/react/src/components/textarea/index.ts, packages/react/src/components/textarea/meta.json, packages/react/src/components/textarea/textarea.demo.tsx, packages/react/src/components/textarea/textarea.test.tsx, packages/react/src/components/textarea/textarea.tsx
 
+## Time field (time-field)
+Hour, minute and AM/PM segments you step with arrow keys or type into.
+Import: import {TimeField} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A named group of spin buttons (Hour, Minute, AM or PM), each with aria-valuenow, aria-valuemin, aria-valuemax and aria-valuetext.
+- ArrowUp/ArrowDown step a segment (minutes by the step prop), PageUp/PageDown step further, Home/End jump to the limits, Backspace clears.
+- Typing digits fills a segment and moves to the next; A and P set AM and PM.
+- ArrowLeft/ArrowRight move between segments and are mirrored in right-to-left.
+Files: packages/react/src/components/time-field/index.ts, packages/react/src/components/time-field/meta.json, packages/react/src/components/time-field/time-field.demo.tsx, packages/react/src/components/time-field/time-field.test.tsx, packages/react/src/components/time-field/time-field.tsx
+
 ## Time picker (time-picker)
 Pick a time of day with hour, minute and AM/PM segments, using the browser's own control.
 Import: import {TimePicker} from '@monoline/react'
@@ -1064,6 +1184,18 @@ A11y:
 - Never the only place for essential information: touch users do not get hover.
 Files: packages/react/src/components/tooltip/index.ts, packages/react/src/components/tooltip/meta.json, packages/react/src/components/tooltip/tooltip.demo.tsx, packages/react/src/components/tooltip/tooltip.test.tsx, packages/react/src/components/tooltip/tooltip.tsx
 
+## Tour (tour)
+A guided walkthrough: a spotlight on one element at a time with a card and Next, Back and Skip.
+Import: import {Tour} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The step card is a dialog named by its title and described by its text; it takes focus on every step.
+- Tab stays inside the card; Escape ends the tour and focus returns to where it was.
+- ArrowRight and ArrowLeft move between steps when the card has focus (mirrored in right-to-left).
+- Each step is announced politely as "Step n of m"; the highlighted element scrolls into view.
+- The overlay and spotlight are hidden from assistive technology; animation stops under prefers-reduced-motion.
+Files: packages/react/src/components/tour/index.ts, packages/react/src/components/tour/meta.json, packages/react/src/components/tour/tour.demo.tsx, packages/react/src/components/tour/tour.test.tsx, packages/react/src/components/tour/tour.tsx
+
 ## Tree (tree)
 A nested list of items that open and close, with one selected item.
 Import: import {Tree} from '@monoline/react'
@@ -1075,6 +1207,18 @@ A11y:
 - Enter or Space selects; typing letters jumps to the next label that starts with them. The tree needs an aria-label.
 Files: packages/react/src/components/tree/index.ts, packages/react/src/components/tree/meta.json, packages/react/src/components/tree/tree.demo.tsx, packages/react/src/components/tree/tree.test.tsx, packages/react/src/components/tree/tree.tsx
 
+## Tree select (tree-select)
+A select whose options are a nested tree, with search and single or multiple selection.
+Import: import {TreeSelect} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- An input with role=combobox, aria-haspopup=tree and aria-activedescendant; focus never leaves the input.
+- The popup is role=tree: each treeitem has aria-level, aria-setsize, aria-posinset, aria-selected and (for branches) aria-expanded; aria-multiselectable in multiple mode.
+- ArrowDown/ArrowUp open the list and move; ArrowRight opens a branch then enters it; ArrowLeft closes it then goes to the parent (swapped in RTL); Enter selects or toggles; Escape closes.
+- Typing filters the tree to matching nodes and their parents, opened automatically; an empty result shows text.
+- Selection is shown in the input as text ('A, B' or '3 selected') and a check mark, not colour.
+Files: packages/react/src/components/tree-select/index.ts, packages/react/src/components/tree-select/meta.json, packages/react/src/components/tree-select/tree-select.demo.tsx, packages/react/src/components/tree-select/tree-select.test.tsx, packages/react/src/components/tree-select/tree-select.tsx
+
 ## Typewriter (typewriter)
 Type a string one character at a time. Static for reduced motion.
 Import: import {Typewriter} from '@monoline/react'
@@ -1083,6 +1227,16 @@ A11y:
 - Screen readers get the full text at once from an sr-only copy; the typed characters are aria-hidden.
 - With prefers-reduced-motion the full text shows immediately and the caret does not blink.
 Files: packages/react/src/components/typewriter/index.ts, packages/react/src/components/typewriter/meta.json, packages/react/src/components/typewriter/typewriter.demo.tsx, packages/react/src/components/typewriter/typewriter.test.tsx, packages/react/src/components/typewriter/typewriter.tsx
+
+## Virtual list (virtual-list)
+A windowed list for thousands of rows: only the rows in view are in the page.
+Import: import {VirtualList} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- role=list with listitem rows; every row carries aria-posinset and aria-setsize so the position in the full list is announced.
+- Roving tabindex: one row is in the tab order. ArrowUp/ArrowDown, PageUp/PageDown, Home and End move focus and scroll the row into view.
+- The list needs an aria-label.
+Files: packages/react/src/components/virtual-list/index.ts, packages/react/src/components/virtual-list/meta.json, packages/react/src/components/virtual-list/virtual-list.demo.tsx, packages/react/src/components/virtual-list/virtual-list.test.tsx, packages/react/src/components/virtual-list/virtual-list.tsx
 
 ## useClickOutside (use-click-outside)
 Calls a function when a pointer goes down outside an element, to close menus and popovers.

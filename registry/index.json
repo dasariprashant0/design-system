@@ -1402,6 +1402,45 @@
       ]
     },
     {
+      "name": "copy-button",
+      "title": "Copy button",
+      "category": "buttons",
+      "description": "A button that copies a value to the clipboard, shows 'Copied' for a moment and announces it.",
+      "status": "stable",
+      "uses": [
+        "button",
+        "icon-button",
+        "use-clipboard"
+      ],
+      "css": [
+        "02-buttons.css",
+        "icon-button.css",
+        "copy-button.css"
+      ],
+      "a11y": [
+        "Native button; the icon-only form is named by the label prop (default 'Copy').",
+        "The result is announced in a polite role=status region: 'Copied' or 'Copy failed'.",
+        "The text button changes its visible text to the copied label and resets itself."
+      ],
+      "keywords": [
+        "clipboard",
+        "copy",
+        "code",
+        "share",
+        "snippet"
+      ],
+      "kind": "components",
+      "import": "import {CopyButton} from '@monoline/react'",
+      "path": "packages/react/src/components/copy-button",
+      "files": [
+        "packages/react/src/components/copy-button/copy-button.demo.tsx",
+        "packages/react/src/components/copy-button/copy-button.test.tsx",
+        "packages/react/src/components/copy-button/copy-button.tsx",
+        "packages/react/src/components/copy-button/index.ts",
+        "packages/react/src/components/copy-button/meta.json"
+      ]
+    },
+    {
       "name": "data-grid",
       "title": "Data grid",
       "category": "data-display",
@@ -1523,6 +1562,50 @@
         "packages/react/src/components/date-picker/date-picker.tsx",
         "packages/react/src/components/date-picker/index.ts",
         "packages/react/src/components/date-picker/meta.json"
+      ]
+    },
+    {
+      "name": "date-range-picker",
+      "title": "Date range picker",
+      "category": "forms",
+      "description": "A button that opens a range calendar and two typed date fields.",
+      "status": "stable",
+      "primitive": "radix-ui/Popover",
+      "uses": [
+        "range-calendar",
+        "popover",
+        "field"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "popover.css",
+        "calendar.css",
+        "date-picker.css",
+        "range-calendar.css",
+        "date-range-picker.css"
+      ],
+      "a11y": [
+        "The trigger is a button naming the field and the current range; it opens a dialog with two text fields and the calendar.",
+        "Typed fields are labelled Start and End, accept YYYY-MM-DD, apply on Enter or blur and mark aria-invalid with an alert message when the text is not a pickable date.",
+        "Choosing the end date closes the dialog and returns focus to the trigger; Escape closes without changing.",
+        "All range-calendar keyboard behaviour applies inside."
+      ],
+      "keywords": [
+        "daterange",
+        "date range picker",
+        "between dates",
+        "booking",
+        "period"
+      ],
+      "kind": "components",
+      "import": "import {DateRangePicker} from '@monoline/react'",
+      "path": "packages/react/src/components/date-range-picker",
+      "files": [
+        "packages/react/src/components/date-range-picker/date-range-picker.demo.tsx",
+        "packages/react/src/components/date-range-picker/date-range-picker.test.tsx",
+        "packages/react/src/components/date-range-picker/date-range-picker.tsx",
+        "packages/react/src/components/date-range-picker/index.ts",
+        "packages/react/src/components/date-range-picker/meta.json"
       ]
     },
     {
@@ -2091,6 +2174,47 @@
       ]
     },
     {
+      "name": "image-gallery",
+      "title": "Image gallery",
+      "category": "data-display",
+      "description": "A thumbnail grid that opens a lightbox with previous and next.",
+      "status": "stable",
+      "uses": [
+        "button",
+        "dialog"
+      ],
+      "css": [
+        "02-buttons.css",
+        "dialog.css",
+        "image-gallery.css"
+      ],
+      "a11y": [
+        "Each thumbnail is a button named by the image's required alt text, with aria-haspopup=dialog.",
+        "The lightbox is a modal dialog titled 'Image 2 of 5'; focus moves in, is trapped, and returns to the thumbnail on close.",
+        "ArrowLeft and ArrowRight (swapped in RTL) and the Previous and Next buttons move through the images and wrap; a horizontal swipe does the same; Escape closes.",
+        "A polite status message announces the new image's alt text and position. Neighbouring images are preloaded."
+      ],
+      "keywords": [
+        "lightbox",
+        "photos",
+        "carousel",
+        "grid",
+        "thumbnails",
+        "preview",
+        "media"
+      ],
+      "kind": "components",
+      "import": "import {ImageGallery} from '@monoline/react'",
+      "path": "packages/react/src/components/image-gallery",
+      "files": [
+        "packages/react/src/components/image-gallery/image-gallery.demo.tsx",
+        "packages/react/src/components/image-gallery/image-gallery.test.tsx",
+        "packages/react/src/components/image-gallery/image-gallery.tsx",
+        "packages/react/src/components/image-gallery/index.ts",
+        "packages/react/src/components/image-gallery/meta.json"
+      ]
+    },
+    {
       "name": "input",
       "title": "Input",
       "category": "forms",
@@ -2282,6 +2406,40 @@
       ]
     },
     {
+      "name": "mentions",
+      "title": "Mentions",
+      "category": "forms",
+      "description": "A textarea that suggests people when you type @.",
+      "status": "stable",
+      "css": [
+        "03-form-fields.css",
+        "mentions.css"
+      ],
+      "a11y": [
+        "The textarea keeps its native textbox role (ARIA does not allow combobox on a textarea) and adds aria-haspopup=\"listbox\", aria-autocomplete=\"list\", aria-controls while the list is open and aria-activedescendant for the highlighted option; the list is a listbox of options.",
+        "ArrowDown/ArrowUp move the highlight, Enter or Tab insert the mention, Escape closes the list without inserting; focus never leaves the textarea.",
+        "A polite status region announces how many suggestions there are, and when they are loading or empty.",
+        "Async loading ignores answers for outdated queries so the list never shows stale results."
+      ],
+      "keywords": [
+        "at mention",
+        "tagging",
+        "autocomplete",
+        "comment box",
+        "@"
+      ],
+      "kind": "components",
+      "import": "import {Mentions} from '@monoline/react'",
+      "path": "packages/react/src/components/mentions",
+      "files": [
+        "packages/react/src/components/mentions/index.ts",
+        "packages/react/src/components/mentions/mentions.demo.tsx",
+        "packages/react/src/components/mentions/mentions.test.tsx",
+        "packages/react/src/components/mentions/mentions.tsx",
+        "packages/react/src/components/mentions/meta.json"
+      ]
+    },
+    {
       "name": "menubar",
       "title": "Menubar",
       "category": "navigation",
@@ -2418,6 +2576,49 @@
       ]
     },
     {
+      "name": "notification-center",
+      "title": "Notification center",
+      "category": "feedback",
+      "description": "A bell button with an unread count that opens a list of notifications, with mark read, clear and an empty state.",
+      "status": "stable",
+      "uses": [
+        "button",
+        "icon-button",
+        "popover"
+      ],
+      "css": [
+        "02-buttons.css",
+        "05-marks.css",
+        "icon-button.css",
+        "popover.css",
+        "notification-center.css"
+      ],
+      "a11y": [
+        "The bell is a button named 'Notifications, 3 unread'; the visible count badge is aria-hidden so the number is announced once.",
+        "The panel is a labelled dialog: Escape or an outside click closes it and focus returns to the bell.",
+        "Unread items are bold, start with a visually hidden 'Unread:' and have a 'Mark read' button named after the item; unread is never shown by colour alone.",
+        "'Mark all read' and 'Clear all' are disabled when they have nothing to do; an empty list shows plain text."
+      ],
+      "keywords": [
+        "bell",
+        "alerts",
+        "inbox",
+        "unread",
+        "badge",
+        "notifications"
+      ],
+      "kind": "components",
+      "import": "import {NotificationCenter} from '@monoline/react'",
+      "path": "packages/react/src/components/notification-center",
+      "files": [
+        "packages/react/src/components/notification-center/index.ts",
+        "packages/react/src/components/notification-center/meta.json",
+        "packages/react/src/components/notification-center/notification-center.demo.tsx",
+        "packages/react/src/components/notification-center/notification-center.test.tsx",
+        "packages/react/src/components/notification-center/notification-center.tsx"
+      ]
+    },
+    {
       "name": "number-input",
       "title": "Number input",
       "category": "forms",
@@ -2546,6 +2747,46 @@
         "packages/react/src/components/otp-input/otp-input.demo.tsx",
         "packages/react/src/components/otp-input/otp-input.test.tsx",
         "packages/react/src/components/otp-input/otp-input.tsx"
+      ]
+    },
+    {
+      "name": "overflow-list",
+      "title": "Overflow list",
+      "category": "layout",
+      "description": "A row of items that shows as many as fit and puts the rest in a '+N' menu.",
+      "status": "stable",
+      "uses": [
+        "button",
+        "dropdown-menu"
+      ],
+      "css": [
+        "02-buttons.css",
+        "17-dropdown-menu.css",
+        "overflow-list.css"
+      ],
+      "a11y": [
+        "Items that do not fit are visibility:hidden, so they are neither focusable nor read out; the same items are reachable in the menu.",
+        "The '+N' button is named '3 more items' (customisable with moreLabel) and opens a menu: Enter, Space or ArrowDown opens, arrows move, Escape closes and returns focus to the button.",
+        "Layout is recalculated by a ResizeObserver when the container or the items change."
+      ],
+      "keywords": [
+        "truncate",
+        "collapse",
+        "more",
+        "breadcrumbs",
+        "tags",
+        "toolbar",
+        "responsive"
+      ],
+      "kind": "components",
+      "import": "import {OverflowList} from '@monoline/react'",
+      "path": "packages/react/src/components/overflow-list",
+      "files": [
+        "packages/react/src/components/overflow-list/index.ts",
+        "packages/react/src/components/overflow-list/meta.json",
+        "packages/react/src/components/overflow-list/overflow-list.demo.tsx",
+        "packages/react/src/components/overflow-list/overflow-list.test.tsx",
+        "packages/react/src/components/overflow-list/overflow-list.tsx"
       ]
     },
     {
@@ -2742,6 +2983,42 @@
       ]
     },
     {
+      "name": "range-calendar",
+      "title": "Range calendar",
+      "category": "forms",
+      "description": "A month grid for picking a start and an end date.",
+      "status": "stable",
+      "css": [
+        "calendar.css",
+        "range-calendar.css"
+      ],
+      "a11y": [
+        "role=\"grid\" with column headers; one day is in the tab order (roving tabindex).",
+        "Enter or Space on a day sets the start, then the end; Escape while picking clears the start.",
+        "Arrow keys move by day and week, Home/End to the start and end of the week, PageUp/PageDown by month; arrows are mirrored in right-to-left.",
+        "The days between start and focus are previewed while picking, by hover and by keyboard.",
+        "Each day button has a full date name; start and end have aria-pressed; a status region announces the chosen range.",
+        "Disabled days (min, max, isDateDisabled) are real disabled buttons."
+      ],
+      "keywords": [
+        "date range",
+        "between dates",
+        "booking",
+        "period",
+        "daterange"
+      ],
+      "kind": "components",
+      "import": "import {RangeCalendar} from '@monoline/react'",
+      "path": "packages/react/src/components/range-calendar",
+      "files": [
+        "packages/react/src/components/range-calendar/index.ts",
+        "packages/react/src/components/range-calendar/meta.json",
+        "packages/react/src/components/range-calendar/range-calendar.demo.tsx",
+        "packages/react/src/components/range-calendar/range-calendar.test.tsx",
+        "packages/react/src/components/range-calendar/range-calendar.tsx"
+      ]
+    },
+    {
       "name": "rating",
       "title": "Rating",
       "category": "forms",
@@ -2769,6 +3046,40 @@
         "packages/react/src/components/rating/rating.demo.tsx",
         "packages/react/src/components/rating/rating.test.tsx",
         "packages/react/src/components/rating/rating.tsx"
+      ]
+    },
+    {
+      "name": "resizable",
+      "title": "Resizable",
+      "category": "layout",
+      "description": "Panels separated by handles you drag or move with the keyboard.",
+      "status": "stable",
+      "css": [
+        "resizable.css"
+      ],
+      "a11y": [
+        "Each handle is a focusable role=\"separator\" with aria-orientation, aria-valuenow, aria-valuemin, aria-valuemax and aria-controls pointing at the panel it resizes.",
+        "Arrow keys resize by the step (horizontal groups use Left/Right, vertical groups Up/Down; mirrored in right-to-left); PageUp/PageDown resize by double; Home and End jump to the limits.",
+        "minSize and maxSize are enforced for both keyboard and pointer, and are reflected in aria-valuemin and aria-valuemax.",
+        "Handles are at least 24 CSS px to grab and show the focus ring."
+      ],
+      "keywords": [
+        "split pane",
+        "splitter",
+        "panels",
+        "divider",
+        "drag to resize",
+        "layout"
+      ],
+      "kind": "components",
+      "import": "import {Resizable} from '@monoline/react'",
+      "path": "packages/react/src/components/resizable",
+      "files": [
+        "packages/react/src/components/resizable/index.ts",
+        "packages/react/src/components/resizable/meta.json",
+        "packages/react/src/components/resizable/resizable.demo.tsx",
+        "packages/react/src/components/resizable/resizable.test.tsx",
+        "packages/react/src/components/resizable/resizable.tsx"
       ]
     },
     {
@@ -2818,6 +3129,38 @@
         "packages/react/src/components/rich-text-editor/rich-text-editor.test.tsx",
         "packages/react/src/components/rich-text-editor/rich-text-editor.tsx",
         "packages/react/src/components/rich-text-editor/sanitize.ts"
+      ]
+    },
+    {
+      "name": "rolling-number",
+      "title": "Rolling number",
+      "category": "effects",
+      "description": "A number whose digits roll to the new value when it changes. Screen readers read the final value.",
+      "status": "stable",
+      "css": [
+        "rolling-number.css"
+      ],
+      "a11y": [
+        "The animated digits are aria-hidden; the formatted final value is plain text for screen readers.",
+        "With prefers-reduced-motion the digits change without rolling.",
+        "Not interactive: no focus stops."
+      ],
+      "keywords": [
+        "counter",
+        "odometer",
+        "animated number",
+        "ticker",
+        "stat"
+      ],
+      "kind": "components",
+      "import": "import {RollingNumber} from '@monoline/react'",
+      "path": "packages/react/src/components/rolling-number",
+      "files": [
+        "packages/react/src/components/rolling-number/index.ts",
+        "packages/react/src/components/rolling-number/meta.json",
+        "packages/react/src/components/rolling-number/rolling-number.demo.tsx",
+        "packages/react/src/components/rolling-number/rolling-number.test.tsx",
+        "packages/react/src/components/rolling-number/rolling-number.tsx"
       ]
     },
     {
@@ -3075,6 +3418,40 @@
         "packages/react/src/components/slider/slider.demo.tsx",
         "packages/react/src/components/slider/slider.test.tsx",
         "packages/react/src/components/slider/slider.tsx"
+      ]
+    },
+    {
+      "name": "sortable-list",
+      "title": "Sortable list",
+      "category": "data-display",
+      "description": "A list the user reorders by dragging a handle or with the keyboard, with live announcements.",
+      "status": "stable",
+      "css": [
+        "sortable-list.css"
+      ],
+      "a11y": [
+        "Each row has a handle button named 'Reorder <item>' with aria-pressed while picked up and a description of the keys.",
+        "Space or Enter picks an item up; the arrow keys (or Home and End) move it; Space or Enter drops it; Escape cancels and restores the order; Tab cancels.",
+        "A polite live region announces: picked up, moved to position N of M, dropped, cancelled.",
+        "Pointer drag uses the same handle; reordering never depends on dragging alone."
+      ],
+      "keywords": [
+        "drag and drop",
+        "reorder",
+        "sortable",
+        "dnd",
+        "kanban",
+        "rank"
+      ],
+      "kind": "components",
+      "import": "import {SortableList} from '@monoline/react'",
+      "path": "packages/react/src/components/sortable-list",
+      "files": [
+        "packages/react/src/components/sortable-list/index.ts",
+        "packages/react/src/components/sortable-list/meta.json",
+        "packages/react/src/components/sortable-list/sortable-list.demo.tsx",
+        "packages/react/src/components/sortable-list/sortable-list.test.tsx",
+        "packages/react/src/components/sortable-list/sortable-list.tsx"
       ]
     },
     {
@@ -3518,6 +3895,41 @@
       ]
     },
     {
+      "name": "time-field",
+      "title": "Time field",
+      "category": "forms",
+      "description": "Hour, minute and AM/PM segments you step with arrow keys or type into.",
+      "status": "stable",
+      "css": [
+        "03-form-fields.css",
+        "time-field.css"
+      ],
+      "a11y": [
+        "A named group of spin buttons (Hour, Minute, AM or PM), each with aria-valuenow, aria-valuemin, aria-valuemax and aria-valuetext.",
+        "ArrowUp/ArrowDown step a segment (minutes by the step prop), PageUp/PageDown step further, Home/End jump to the limits, Backspace clears.",
+        "Typing digits fills a segment and moves to the next; A and P set AM and PM.",
+        "ArrowLeft/ArrowRight move between segments and are mirrored in right-to-left."
+      ],
+      "keywords": [
+        "time",
+        "clock",
+        "hour",
+        "minute",
+        "timepicker",
+        "am pm"
+      ],
+      "kind": "components",
+      "import": "import {TimeField} from '@monoline/react'",
+      "path": "packages/react/src/components/time-field",
+      "files": [
+        "packages/react/src/components/time-field/index.ts",
+        "packages/react/src/components/time-field/meta.json",
+        "packages/react/src/components/time-field/time-field.demo.tsx",
+        "packages/react/src/components/time-field/time-field.test.tsx",
+        "packages/react/src/components/time-field/time-field.tsx"
+      ]
+    },
+    {
       "name": "time-picker",
       "title": "Time picker",
       "category": "forms",
@@ -3739,6 +4151,43 @@
       ]
     },
     {
+      "name": "tour",
+      "title": "Tour",
+      "category": "overlays",
+      "description": "A guided walkthrough: a spotlight on one element at a time with a card and Next, Back and Skip.",
+      "status": "stable",
+      "css": [
+        "02-buttons.css",
+        "tour.css"
+      ],
+      "a11y": [
+        "The step card is a dialog named by its title and described by its text; it takes focus on every step.",
+        "Tab stays inside the card; Escape ends the tour and focus returns to where it was.",
+        "ArrowRight and ArrowLeft move between steps when the card has focus (mirrored in right-to-left).",
+        "Each step is announced politely as \"Step n of m\"; the highlighted element scrolls into view.",
+        "The overlay and spotlight are hidden from assistive technology; animation stops under prefers-reduced-motion."
+      ],
+      "keywords": [
+        "onboarding",
+        "walkthrough",
+        "product tour",
+        "coachmark",
+        "spotlight",
+        "intro",
+        "guide"
+      ],
+      "kind": "components",
+      "import": "import {Tour} from '@monoline/react'",
+      "path": "packages/react/src/components/tour",
+      "files": [
+        "packages/react/src/components/tour/index.ts",
+        "packages/react/src/components/tour/meta.json",
+        "packages/react/src/components/tour/tour.demo.tsx",
+        "packages/react/src/components/tour/tour.test.tsx",
+        "packages/react/src/components/tour/tour.tsx"
+      ]
+    },
+    {
       "name": "tree",
       "title": "Tree",
       "category": "data-display",
@@ -3773,6 +4222,48 @@
       ]
     },
     {
+      "name": "tree-select",
+      "title": "Tree select",
+      "category": "forms",
+      "description": "A select whose options are a nested tree, with search and single or multiple selection.",
+      "status": "stable",
+      "uses": [
+        "tree",
+        "combobox",
+        "input"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "tree-select.css"
+      ],
+      "a11y": [
+        "An input with role=combobox, aria-haspopup=tree and aria-activedescendant; focus never leaves the input.",
+        "The popup is role=tree: each treeitem has aria-level, aria-setsize, aria-posinset, aria-selected and (for branches) aria-expanded; aria-multiselectable in multiple mode.",
+        "ArrowDown/ArrowUp open the list and move; ArrowRight opens a branch then enters it; ArrowLeft closes it then goes to the parent (swapped in RTL); Enter selects or toggles; Escape closes.",
+        "Typing filters the tree to matching nodes and their parents, opened automatically; an empty result shows text.",
+        "Selection is shown in the input as text ('A, B' or '3 selected') and a check mark, not colour."
+      ],
+      "keywords": [
+        "cascader",
+        "hierarchy",
+        "category picker",
+        "folder picker",
+        "nested select",
+        "treeselect",
+        "multi select"
+      ],
+      "kind": "components",
+      "import": "import {TreeSelect} from '@monoline/react'",
+      "path": "packages/react/src/components/tree-select",
+      "files": [
+        "packages/react/src/components/tree-select/index.ts",
+        "packages/react/src/components/tree-select/meta.json",
+        "packages/react/src/components/tree-select/tree-select.demo.tsx",
+        "packages/react/src/components/tree-select/tree-select.test.tsx",
+        "packages/react/src/components/tree-select/tree-select.tsx"
+      ]
+    },
+    {
       "name": "typewriter",
       "title": "Typewriter",
       "category": "effects",
@@ -3800,6 +4291,39 @@
         "packages/react/src/components/typewriter/typewriter.demo.tsx",
         "packages/react/src/components/typewriter/typewriter.test.tsx",
         "packages/react/src/components/typewriter/typewriter.tsx"
+      ]
+    },
+    {
+      "name": "virtual-list",
+      "title": "Virtual list",
+      "category": "data-display",
+      "description": "A windowed list for thousands of rows: only the rows in view are in the page.",
+      "status": "stable",
+      "css": [
+        "virtual-list.css"
+      ],
+      "a11y": [
+        "role=list with listitem rows; every row carries aria-posinset and aria-setsize so the position in the full list is announced.",
+        "Roving tabindex: one row is in the tab order. ArrowUp/ArrowDown, PageUp/PageDown, Home and End move focus and scroll the row into view.",
+        "The list needs an aria-label."
+      ],
+      "keywords": [
+        "windowing",
+        "virtualized",
+        "infinite",
+        "large list",
+        "scroll",
+        "performance"
+      ],
+      "kind": "components",
+      "import": "import {VirtualList} from '@monoline/react'",
+      "path": "packages/react/src/components/virtual-list",
+      "files": [
+        "packages/react/src/components/virtual-list/index.ts",
+        "packages/react/src/components/virtual-list/meta.json",
+        "packages/react/src/components/virtual-list/virtual-list.demo.tsx",
+        "packages/react/src/components/virtual-list/virtual-list.test.tsx",
+        "packages/react/src/components/virtual-list/virtual-list.tsx"
       ]
     },
     {

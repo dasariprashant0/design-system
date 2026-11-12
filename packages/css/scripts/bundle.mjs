@@ -3,7 +3,7 @@
 //   parts       every src/components/*.css file on its own, wrapped in the components layer
 //   components  one bundle per React component: exactly the files its meta.json `css` lists
 //   all         core + every component (dist/monoline.css)
-import {readdirSync, readFileSync} from 'node:fs';
+import {existsSync, readdirSync, readFileSync} from 'node:fs';
 import {read} from './lib.mjs';
 
 // Declared once, at the top of core.css (and monoline.css). The order is the cascade: later layers win,
@@ -31,7 +31,7 @@ export function bundles() {
 
   const index = {};
   const components = {};
-  const names = readdirSync(META_DIR, {withFileTypes: true}).filter((d) => d.isDirectory()).map((d) => d.name).sort();
+  const names = readdirSync(META_DIR, {withFileTypes: true}).filter((d) => d.isDirectory() && !d.name.startsWith('.') && existsSync(new URL(`${d.name}/meta.json`, META_DIR))).map((d) => d.name).sort(); // skip dotfolders (.claude) and folders without a meta.json
   for (const name of names) {
     const meta = JSON.parse(readFileSync(new URL(`${name}/meta.json`, META_DIR), 'utf8'));
     for (const f of meta.css) if (!order.includes(f)) throw new Error(`${name}/meta.json lists ${f}, not found in src/components`);

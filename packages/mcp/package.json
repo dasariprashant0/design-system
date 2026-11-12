@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "repository": {"type": "git", "url": "git+https://github.com/dasariprashant0/design-system.git", "directory": "packages/mcp"},
-  "bin": {"monoline-mcp": "./bin/monoline-mcp.mjs"},
+  "bin": {"monoline-mcp": "bin/monoline-mcp.mjs"},
   "files": ["bin", "src"],
   "engines": {"node": ">=20"},
   "scripts": {"test": "node --test"}

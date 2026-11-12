@@ -11,7 +11,7 @@
   "css": [
     {
       "path": "packages/css/src/components/segmented-control.css",
-      "content": "/* Segmented control: joined toggles, one always on. */\n.segmented { display: inline-flex; border: 1px solid var(--foreground); }\n.segment { padding: var(--s2) var(--s4); font-size: var(--text-sm); color: var(--muted); background: transparent; }\n.segment + .segment { border-inline-start: 1px solid var(--rule); }\n.segment:hover:not(:disabled) { color: var(--foreground); }\n.segment[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.segment:disabled { opacity: 0.5; cursor: not-allowed; }\n.segment:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n"
+      "content": "/* Segmented control: joined toggles, one always on. */\n.segmented { display: inline-flex; border: 1px solid var(--foreground); }\n.segment { padding: var(--s2) var(--s4); font-size: var(--text-sm); color: var(--muted); background: transparent; }\n.segment + .segment { border-inline-start: 1px solid var(--rule); }\n.segment:not([data-state=\"on\"]):hover:not(:disabled) { color: var(--foreground); }\n.segment[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.segment:disabled { opacity: 0.5; cursor: not-allowed; }\n.segment:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n"
     }
   ],
   "a11y": [

@@ -7,7 +7,7 @@
   "css": [
     {
       "path": "packages/css/src/components/grid.css",
-      "content": ".grid { display: grid; gap: var(--grid-gap, var(--s4)); }\n.grid-auto { grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min, 16rem), 100%), 1fr)); }\n.grid-fixed { grid-template-columns: repeat(var(--grid-cols, 2), minmax(0, 1fr)); }\n@media (max-width: 40rem) { .grid-fixed { grid-template-columns: minmax(0, 1fr); } }\n"
+      "content": "/* The legacy utility `.grid` (utilities.css, later in the bundle) sets its own columns and gap, so the component's\n   rules need two classes to win: found when Grid columns={4} rendered three columns in a real app. */\n.grid { display: grid; gap: var(--grid-gap, var(--s4)); }\n.grid.grid-auto, .grid.grid-fixed { gap: var(--grid-gap, var(--s4)); }\n.grid.grid-auto { grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min, 16rem), 100%), 1fr)); }\n.grid.grid-fixed { grid-template-columns: repeat(var(--grid-cols, 2), minmax(0, 1fr)); }\n@media (max-width: 40rem) { .grid.grid-fixed { grid-template-columns: minmax(0, 1fr); } }\n"
     }
   ],
   "a11y": [
