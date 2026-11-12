@@ -7,3 +7,7 @@ packages/react/src/index.ts
 apps/docs/src/props.generated.json
 audit/
 audit-all-accents.txt
+apps/docs/src/page/demos.generated.json
+apps/docs/src/page/styling.generated.json
+apps/docs/public/docs/
+apps/docs/public/llms.txt
