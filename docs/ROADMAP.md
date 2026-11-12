@@ -41,7 +41,7 @@ Status key: `done` · `in progress` · `open`. Update this table in the PR that 
 Priority = how many of the ten UI libraries ship it. Status is `done` once the folder exists in `packages/react/src/components/`; the matrix regenerates from that (`node docs/research/build-matrix.mjs`).
 
 **Phase 1: close the gap on common components (in 3+ libraries).**
-- P1a, small and native-first: stack, container, aspect-ratio, icon-button, button-group, kbd, tag, avatar-group, empty-state, stat, collapsible, scroll-area, table, stepper, timeline, code-block, password-input, number-input, rating, otp-input, segmented-control, alert-dialog, drawer. (All built in this pass except for the ones listed as P1b/P1c: stack, container, aspect-ratio, icon-button, button-group, kbd, tag, avatar-group, empty-state, stat, collapsible, scroll-area, table, stepper, timeline, code-block, password-input, number-input, rating, otp-input, segmented-control, alert-dialog, drawer, marquee are `done`.)
+- P1a, small and native-first: stack, container, aspect-ratio, icon-button, button-group, kbd, tag, avatar-group, empty-state, stat, collapsible, scroll-area, table, stepper, timeline, code-block, password-input, number-input, rating, otp-input, segmented-control, alert-dialog, drawer. (All `done`.)
 - P1b, accessibility-critical, needs Radix or careful ARIA, heavy model: combobox, autocomplete, multi-select, calendar, date-picker, time-picker, command, context-menu, hover-card, menubar, navigation-menu, toast, toolbar, tree, carousel, file-upload, native-select, fieldset, form helpers, data-table.
 - P1c, layout primitives: box, flex, grid, text, heading, link, description-list, image, navbar, sidebar, app-shell.
 
@@ -51,7 +51,13 @@ Priority = how many of the ten UI libraries ship it. Status is `done` once the f
 
 **Cross-cutting.** Docs site redesign with theme/accent/font/radius/density controls; `npx monoline add <component>` CLI that copies sources from `registry/`; per-component `meta.json`; hooks (use-disclosure, use-media-query, use-clipboard, use-debounce, use-hotkeys, use-click-outside, use-local-storage); visual regression and axe in CI.
 
-### Status after the second pass (71 components)
+### Status (118 components and hooks, 153 demos, 666 tests)
 
-Done in P1b/P1c: combobox, calendar, date-picker, context-menu, hover-card, menubar, navigation-menu, toast, toolbar, native-select, fieldset, carousel, file-upload, text, heading, link, grid, description-list, image.
-Still open from the matrix (3+ libraries): autocomplete (free-text variant of combobox), form helpers, box, flex (Stack covers most of flex), tree. Also open: multi-select, tags-input, time-picker, command palette, data-table, color-picker, hooks, the `npx monoline add` CLI, effects other than marquee, blocks, visual regression CI.
+**Done.** Every component that appears in three or more of the ten surveyed libraries (the matrix reports 0 missing), plus the `monoline` CLI, 12 hooks, 13 effects, 11 page blocks, nine accents, font/corner/density options, the docs site with guides, the registry and `llms*` files, and a test that renders every demo with axe.
+
+**Open (next up).**
+- Pixel-diff visual regression in CI (needs a browser-automation dev dependency and a baseline).
+- Verify the CLI against the real GitHub registry URL once the repo is pushed; publish `@monoline/css`, `@monoline/react` and `monoline` to npm.
+- Phase 2: chart wrapper, rich text editor, virtualised data grid, react-hook-form adapters, i18n and RTL pass, a theme builder page in the docs.
+- Per-component props tables in the docs (generated from the TypeScript types).
+- Hooks coverage still below Mantine's (use-hover, use-long-press, use-intersection, use-scroll-spy, use-hash and others).
