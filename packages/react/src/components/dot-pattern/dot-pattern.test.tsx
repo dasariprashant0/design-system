@@ -25,6 +25,42 @@ describe('DotPattern', () => {
     render(<DotPattern ref={ref} fade className="x" />);
     expect(ref.current).toHaveClass('dot-pattern', 'dot-pattern-fade', 'x');
   });
+  it('uses the defaults gap 16 and radius 1', () => {
+    const {container} = render(<DotPattern />);
+    const p = container.querySelector('pattern')!;
+    expect(p).toHaveAttribute('width', '16');
+    expect(p).toHaveAttribute('height', '16');
+    const c = container.querySelector('circle')!;
+    expect(c).toHaveAttribute('cx', '8');
+    expect(c).toHaveAttribute('cy', '8');
+    expect(c).toHaveAttribute('r', '1');
+  });
+  it('centres the dot in the cell for any gap, including odd and fractional ones', () => {
+    const {container} = render(<DotPattern gap={7} radius={2.5} />);
+    expect(container.querySelector('circle')).toHaveAttribute('cx', '3.5');
+    expect(container.querySelector('circle')).toHaveAttribute('r', '2.5');
+  });
+  it('fills the whole svg with the pattern it defines', () => {
+    const {container} = render(<DotPattern />);
+    const id = container.querySelector('pattern')!.id;
+    expect(id).toMatch(/^dot-[^:]+$/);
+    expect(container.querySelector('rect')).toHaveAttribute('fill', `url(#${id})`);
+    expect(container.querySelector('rect')).toHaveAttribute('width', '100%');
+  });
+  it('paints with currentColor so the colour is inherited', () => {
+    const {container} = render(<DotPattern />);
+    expect(container.querySelector('circle')).toHaveAttribute('fill', 'currentColor');
+  });
+  it('does not add the fade class by default and lets callers pass svg props', () => {
+    const {container} = render(<DotPattern data-testid="d" width={50} />);
+    const s = container.querySelector('svg')!;
+    expect(s).not.toHaveClass('dot-pattern-fade');
+    expect(s).toHaveAttribute('width', '50');
+  });
+  it('zero radius still renders without throwing', () => {
+    const {container} = render(<DotPattern radius={0} />);
+    expect(container.querySelector('circle')).toHaveAttribute('r', '0');
+  });
   it('has no axe violations', async () => {
     const {container} = render(<DotPattern />);
     expect(await axe(container)).toHaveNoViolations();
