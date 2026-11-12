@@ -15,12 +15,15 @@ type Name = {'aria-label': string; 'aria-labelledby'?: string} | {'aria-labelled
 export type RichTextEditorProps = Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange' | 'aria-label' | 'aria-labelledby'> & Name & {
   /** Controlled content as an HTML string. It is sanitized with `sanitizeHtml` before it is shown. */
   value?: string;
+  /** Initial HTML when uncontrolled. Sanitized with `sanitizeHtml` before it is shown. */
   defaultValue?: string;
   /** Called with sanitized HTML after every edit. */
   onValueChange?: (html: string) => void;
   /** Shown while the editor is empty (a data attribute and CSS, not a text node). */
   placeholder?: string;
+  /** Disables editing and the toolbar. */
   disabled?: boolean;
+  /** Shows the content without letting anyone change it; the toolbar is disabled. */
   readOnly?: boolean;
   /** Names the formatting toolbar. */
   toolbarLabel?: string;

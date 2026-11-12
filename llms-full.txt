@@ -386,6 +386,18 @@ A11y:
 - Every action must also exist elsewhere in the UI for people who cannot open it.
 Files: packages/react/src/components/context-menu/context-menu.demo.tsx, packages/react/src/components/context-menu/context-menu.test.tsx, packages/react/src/components/context-menu/context-menu.tsx, packages/react/src/components/context-menu/index.ts, packages/react/src/components/context-menu/meta.json
 
+## Data grid (data-grid)
+A virtualised, keyboard-navigable grid for very large data sets, with sortable columns and row selection.
+Import: import {DataGrid} from '@monoline/react'
+Primitive: none | Status: beta
+A11y:
+- role="grid" with aria-rowcount, aria-colcount, aria-rowindex and aria-colindex so assistive technology knows the full size although only visible rows are in the DOM.
+- Roving tabindex: one Tab stop; arrow keys move between cells, Home and End go to the row ends, Ctrl+Home and Ctrl+End to the first and last cell, PageUp and PageDown move a screenful.
+- Sortable headers carry aria-sort (ascending, descending, none); Enter or Space on a focused header sorts.
+- With selectionMode, rows carry aria-selected and Space or a click toggles the focused row; the grid is aria-multiselectable in multiple mode.
+- The header row stays visible while scrolling; an empty grid shows an empty state.
+Files: packages/react/src/components/data-grid/data-grid.demo.tsx, packages/react/src/components/data-grid/data-grid.test.tsx, packages/react/src/components/data-grid/data-grid.tsx, packages/react/src/components/data-grid/index.ts, packages/react/src/components/data-grid/meta.json
+
 ## Data table (data-table)
 A table with sortable columns, row selection and pagination.
 Import: import {DataTable} from '@monoline/react'
@@ -772,6 +784,18 @@ A11y:
 - Editable: a radio group (native radios) with arrow-key selection; each star is named "N of M".
 - Read-only: role="img" with a text label such as "4 out of 5".
 Files: packages/react/src/components/rating/index.ts, packages/react/src/components/rating/meta.json, packages/react/src/components/rating/rating.demo.tsx, packages/react/src/components/rating/rating.test.tsx, packages/react/src/components/rating/rating.tsx
+
+## Rich text editor (rich-text-editor)
+A dependency-free rich text editor with a formatting toolbar and sanitized HTML in and out.
+Import: import {RichTextEditor} from '@monoline/react'
+Primitive: none | Status: beta
+A11y:
+- The editing region has role="textbox", aria-multiline and an accessible name; the toolbar is a named toolbar with one tab stop and arrow-key movement.
+- Toggle buttons (bold, italic, underline, lists, headings, quote) carry aria-pressed that follows the selection.
+- Cmd/Ctrl+B, I, U and K apply bold, italic, underline and open the link prompt; Escape in the toolbar returns focus to the editor.
+- The link prompt is a labelled popover; an invalid address is announced as an alert and links are limited to http, https and mailto.
+- Pasted content is sanitized to a small tag allowlist; disabled and read-only set aria-disabled and aria-readonly and turn the toolbar off.
+Files: packages/react/src/components/rich-text-editor/exec-command.ts, packages/react/src/components/rich-text-editor/index.ts, packages/react/src/components/rich-text-editor/meta.json, packages/react/src/components/rich-text-editor/rich-text-editor.demo.tsx, packages/react/src/components/rich-text-editor/rich-text-editor.test.tsx, packages/react/src/components/rich-text-editor/rich-text-editor.tsx, packages/react/src/components/rich-text-editor/sanitize.ts
 
 ## Scroll area (scroll-area)
 A scrollable region with thin, themed scrollbars.

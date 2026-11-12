@@ -56,6 +56,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Password input (password-input, stable): A password field with a show/hide toggle. Source: packages/react/src/components/password-input/
 - Radio group (radio-group, stable): Pick exactly one option from a short list. Source: packages/react/src/components/radio-group/
 - Rating (rating, stable): Pick or show a score from 1 to a maximum, as stars. Source: packages/react/src/components/rating/
+- Rich text editor (rich-text-editor, beta): A dependency-free rich text editor with a formatting toolbar and sanitized HTML in and out. Source: packages/react/src/components/rich-text-editor/
 - Select (select, stable): Pick one value from a list of five or more options. Source: packages/react/src/components/select/
 - Slider (slider, stable): Pick a number, or a range, by dragging or with the keyboard. Source: packages/react/src/components/slider/
 - Switch (switch, stable): An on/off setting that takes effect immediately. Source: packages/react/src/components/switch/
@@ -74,6 +75,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Carousel (carousel, stable): A row of slides you scroll or step through with buttons. Source: packages/react/src/components/carousel/
 - Code block (code-block, stable): A block of code with a copy button. Source: packages/react/src/components/code-block/
 - Collapsible (collapsible, stable): Show or hide one region of content from a trigger. Source: packages/react/src/components/collapsible/
+- Data grid (data-grid, beta): A virtualised, keyboard-navigable grid for very large data sets, with sortable columns and row selection. Source: packages/react/src/components/data-grid/
 - Data table (data-table, stable): A table with sortable columns, row selection and pagination. Source: packages/react/src/components/data-table/
 - Description list (description-list, stable): Label and value pairs, like the details of a record. Source: packages/react/src/components/description-list/
 - Image (image, stable): An image with required alt text, a ratio, and a fallback when it fails to load. Source: packages/react/src/components/image/

@@ -24,7 +24,9 @@ export interface DataGridSort { id: string; direction: 'asc' | 'desc' }
 type Name = {'aria-label': string; 'aria-labelledby'?: string} | {'aria-labelledby': string; 'aria-label'?: string};
 
 export type DataGridProps<T> = Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'aria-label' | 'aria-labelledby'> & Name & {
+  /** The column definitions: id, header, how to read each cell, width and sortability. */
   columns: DataGridColumn<T>[];
+  /** All the rows. Only the visible ones are rendered, so tens of thousands are fine. */
   rows: T[];
   /** Stable id per row, used for selection. Default: the row's position in `rows`. */
   getRowId?: (row: T, index: number) => string;
@@ -34,13 +36,19 @@ export type DataGridProps<T> = Omit<HTMLAttributes<HTMLDivElement>, 'children' |
   height?: number | string;
   /** Extra rows rendered above and below the visible ones. Default 5. */
   overscan?: number;
+  /** Whether rows can be selected: `none` (default), `single` or `multiple`. */
   selectionMode?: 'none' | 'single' | 'multiple';
+  /** Controlled selected row ids. Pair with `onSelectedIdsChange`. */
   selectedIds?: string[];
+  /** Initially selected row ids when uncontrolled. */
   defaultSelectedIds?: string[];
+  /** Called with the new list of selected row ids. */
   onSelectedIdsChange?: (ids: string[]) => void;
   /** Controlled sort; `null` is unsorted. */
   sort?: DataGridSort | null;
+  /** Initial sort when uncontrolled; `null` is unsorted. */
   defaultSort?: DataGridSort | null;
+  /** Called with the new sort, or `null` when sorting is cleared. */
   onSortChange?: (sort: DataGridSort | null) => void;
   /** Do not sort in the grid: `rows` arrive already ordered (server-side sorting). */
   manualSort?: boolean;
@@ -276,4 +284,9 @@ function DataGridInner<T>(
   );
 }
 
+/**
+ * A virtualised, keyboard-navigable grid for large data sets (role="grid"). Arrow keys, Home/End and
+ * PageUp/PageDown move between cells; only visible rows are mounted.
+ * @example <DataGrid aria-label="Orders" columns={columns} rows={rows} height={400} />
+ */
 export const DataGrid = forwardRef(DataGridInner) as <T>(props: DataGridProps<T> & {ref?: Ref<HTMLDivElement>}) => ReactElement;
