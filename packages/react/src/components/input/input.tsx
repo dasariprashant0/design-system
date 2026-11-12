@@ -3,6 +3,7 @@ import {cx} from '../../utils/cx';
 import {useFieldControl} from '../field';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+  /** `md` (default) or `sm` for dense layouts. */
   size?: 'sm' | 'md';
   /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */
   invalid?: boolean;

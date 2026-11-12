@@ -5,12 +5,17 @@ import {cx} from '../../utils/cx';
 export interface RatingProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
   /** Names the control, for example "Rate this article". */
   'aria-label': string;
+  /** The current score (0 to `max`) when controlled. Pair with `onValueChange`. */
   value?: number;
+  /** The initial score when uncontrolled. Default 0. */
   defaultValue?: number;
+  /** Called with the new score (1 to `max`) when the user picks a star. */
   onValueChange?: (value: number) => void;
+  /** Number of stars. Default 5. */
   max?: number;
   /** Shows the score without letting anyone change it. */
   readOnly?: boolean;
+  /** Name of the underlying radio inputs, so the score submits with a native form. A unique name is generated if omitted. */
   name?: string;
 }
 

@@ -5,10 +5,13 @@ import {Heading} from '../heading';
 import {Text} from '../text';
 
 export interface BlockCtaProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
+  /** The one-sentence call to action, rendered as the section heading. */
   title: ReactNode;
+  /** Optional muted supporting line under the title. */
   description?: ReactNode;
   /** The next step: a solid Button and maybe a line one. */
   actions: ReactNode;
+  /** Outline level of the title, 1 to 5. Default 2. */
   headingLevel?: 1 | 2 | 3 | 4 | 5;
 }
 

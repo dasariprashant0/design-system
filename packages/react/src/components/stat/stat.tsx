@@ -2,7 +2,9 @@ import {forwardRef, type HTMLAttributes, type ReactNode} from 'react';
 import {cx} from '../../utils/cx';
 
 export interface StatProps extends HTMLAttributes<HTMLDListElement> {
+  /** What the number measures, for example "Active users". */
   label: ReactNode;
+  /** The metric itself, shown large. Include the unit or currency in the text. */
   value: ReactNode;
   /** A short note: a change, a period, a unit. */
   note?: ReactNode;

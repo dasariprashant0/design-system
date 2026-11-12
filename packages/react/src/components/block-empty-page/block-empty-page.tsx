@@ -6,7 +6,9 @@ import {Text} from '../text';
 export interface BlockEmptyPageProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /** A short code such as "404" or "Empty". Decorative. */
   code?: ReactNode;
+  /** The message headline, for example "Page not found". */
   title: ReactNode;
+  /** Optional muted sentence explaining what happened or what to do next. */
   description?: ReactNode;
   /** The way out: a solid Button or link, and maybe a second. */
   actions?: ReactNode;

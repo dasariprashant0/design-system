@@ -26,11 +26,13 @@ export function useFieldControl(): {id?: string; 'aria-describedby'?: string; 'a
 }
 
 export interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+  /** The visible label of the control. Required so every control has a name. */
   label: ReactNode;
   /** Help text shown under the control. */
   hint?: ReactNode;
   /** Error message. Its presence marks the control invalid and it is announced politely. */
   error?: ReactNode;
+  /** Marks the control as required: adds a required marker to the label and sets `required` on the control. Default false. */
   required?: boolean;
   /** The control: Input, Textarea, Select trigger, etc. */
   children: ReactNode;

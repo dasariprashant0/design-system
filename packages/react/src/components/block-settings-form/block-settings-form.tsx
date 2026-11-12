@@ -35,14 +35,21 @@ export interface SettingsSection {
 }
 
 export interface BlockSettingsFormProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onSubmit'> {
+  /** Heading of the settings page. */
   title: ReactNode;
+  /** Optional muted line under the heading. */
   description?: ReactNode;
+  /** The groups of settings; each has a `legend`, optional `description` and a list of switch or select `items`. */
   sections: SettingsSection[];
+  /** Text of the submit button. Default "Save changes". */
   saveLabel?: ReactNode;
+  /** Text of the button that restores the initial values. Default "Reset". */
   resetLabel?: ReactNode;
   /** Called with every control's value: switches are `true` or `false`, selects their value. */
   onSubmit?: (values: Record<string, string | boolean>) => void;
+  /** Shows a spinner on the save button while you save. */
   loading?: boolean;
+  /** Outline level of the title, 1 to 3. Default 1. */
   headingLevel?: 1 | 2 | 3;
 }
 

@@ -2,8 +2,11 @@ import {forwardRef, type HTMLAttributes, type ReactNode} from 'react';
 import {cx} from '../../utils/cx';
 
 export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  /** Meaning of the message: `info` (default), `success`, `warning` or `danger`. `warning` and `danger` are announced at once to screen readers. */
   tone?: 'info' | 'success' | 'warning' | 'danger';
+  /** The headline of the message. Required: the words carry the meaning, the colour is only extra. */
   title: ReactNode;
+  /** Optional longer explanation shown under the title. */
   children?: ReactNode;
 }
 

@@ -3,12 +3,17 @@ import {forwardRef, useRef, useState, type HTMLAttributes, type KeyboardEvent} f
 import {cx} from '../../utils/cx';
 
 export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
+  /** The selected date when controlled; `null` means none. Pair with `onValueChange`. */
   value?: Date | null;
+  /** The initially selected date when uncontrolled. Default none. */
   defaultValue?: Date | null;
+  /** Called with the date the user picks. */
   onValueChange?: (date: Date) => void;
   /** First day of the week: 0 = Sunday, 1 = Monday. */
   weekStartsOn?: 0 | 1;
+  /** Earliest selectable date; earlier days are disabled. */
   min?: Date;
+  /** Latest selectable date; later days are disabled. */
   max?: Date;
   /** BCP 47 locale for month and day names. */
   locale?: string;

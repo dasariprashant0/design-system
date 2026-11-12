@@ -3,6 +3,7 @@ import {forwardRef, useEffect, useRef, useState, type HTMLAttributes} from 'reac
 import {cx} from '../../utils/cx';
 
 export interface CodeBlockProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+  /** The text to show and to copy. Rendered as plain text, never as HTML. */
   code: string;
   /** Shown top left, for example a file name or "bash". Also names the region. */
   title?: string;

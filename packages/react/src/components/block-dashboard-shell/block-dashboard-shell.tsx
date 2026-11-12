@@ -16,6 +16,7 @@ export interface ShellNavItem {
 export interface BlockDashboardShellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Your logo or name, shown above the navigation. */
   brand?: ReactNode;
+  /** The navigation links shown in the sidebar and in the small-screen drawer. */
   nav: ShellNavItem[];
   /** Names the navigation landmark. Default "Main". */
   navLabel?: string;

@@ -8,9 +8,11 @@ export interface AutocompleteProps extends Omit<InputHTMLAttributes<HTMLInputEle
   suggestions: string[];
   /** The text in the field. */
   value?: string;
+  /** Initial text when the field is uncontrolled. Default empty. */
   defaultValue?: string;
   /** Called with the text on every change, and with the suggestion when one is picked. */
   onValueChange?: (value: string) => void;
+  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */
   invalid?: boolean;
 }
 

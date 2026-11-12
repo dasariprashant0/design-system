@@ -2,7 +2,9 @@ import {forwardRef, type HTMLAttributes, type ReactNode} from 'react';
 import {cx} from '../../utils/cx';
 
 export interface EmptyStateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  /** Short headline saying what is missing, for example "No projects yet". */
   title: ReactNode;
+  /** Optional sentence explaining why it is empty or what to do next. */
   description?: ReactNode;
   /** Optional inline SVG, `aria-hidden`. */
   icon?: ReactNode;

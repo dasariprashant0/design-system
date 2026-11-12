@@ -6,11 +6,15 @@ import {cx} from '../../utils/cx';
 import {useFieldControl} from '../field';
 
 export interface DatePickerProps extends Omit<CalendarProps, 'className' | 'aria-label'> {
+  /** Text shown on the button while no date is chosen. Default "Pick a date". */
   placeholder?: string;
   /** Intl options for the text on the button. Default: medium date. */
   format?: Intl.DateTimeFormatOptions;
+  /** Stops the user opening the calendar. */
   disabled?: boolean;
+  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */
   invalid?: boolean;
+  /** Extra class name for the trigger button. */
   className?: string;
   /** Names the control when it is not inside a Field. */
   'aria-label'?: string;

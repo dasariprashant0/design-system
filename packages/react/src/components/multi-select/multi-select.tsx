@@ -11,13 +11,17 @@ export interface MultiSelectOption {
 }
 
 export interface MultiSelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'onChange' | 'role' | 'size'> {
+  /** The choices, each with a `value`, a `label` and an optional `disabled`. The user filters them by typing part of the label. */
   options: MultiSelectOption[];
+  /** The chosen option values when controlled. Pair with `onValueChange`. */
   value?: string[];
+  /** The initially chosen option values when uncontrolled. Default empty. */
   defaultValue?: string[];
   /** Called with the full list of chosen values. */
   onValueChange?: (value: string[]) => void;
   /** Shown when nothing matches. */
   emptyText?: string;
+  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */
   invalid?: boolean;
 }
 

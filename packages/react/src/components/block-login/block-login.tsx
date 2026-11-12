@@ -15,8 +15,11 @@ export interface LoginValues {
 }
 
 export interface BlockLoginProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onSubmit'> {
+  /** Heading of the form. Default "Sign in". */
   title?: ReactNode;
+  /** Optional muted line under the heading. */
   description?: ReactNode;
+  /** Text of the submit button. Default "Sign in". */
   submitLabel?: ReactNode;
   /** Called with the values once they pass validation. */
   onSubmit?: (values: LoginValues) => void;
@@ -26,6 +29,7 @@ export interface BlockLoginProps extends Omit<HTMLAttributes<HTMLElement>, 'titl
   footer?: ReactNode;
   /** Replace the validation messages (translate them, or change the tone). */
   messages?: Partial<{email: string; emailInvalid: string; password: string}>;
+  /** Outline level of the title, 1 to 3. Default 1 because a login page is usually the page's h1. */
   headingLevel?: 1 | 2 | 3;
 }
 

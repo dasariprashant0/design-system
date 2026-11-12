@@ -17,18 +17,25 @@ export interface CommandItem {
 }
 
 export interface CommandProps {
+  /** The actions to list, each with an `id`, `label` and optional `group`, `keywords`, `hint`, `disabled` and `onSelect`. */
   items: CommandItem[];
+  /** Whether the palette is open when controlled. Pair with `onOpenChange`. */
   open?: boolean;
+  /** Whether the palette starts open when uncontrolled. Default false. */
   defaultOpen?: boolean;
+  /** Called with the new open state when the palette opens or closes. */
   onOpenChange?: (open: boolean) => void;
   /** A global key that toggles the palette, like `mod+k` (`mod` is Cmd on Mac, Ctrl elsewhere). */
   shortcut?: string;
   /** Names the dialog. Visually hidden. */
   title?: string;
+  /** Placeholder text of the search box. Default "Type a command". */
   placeholder?: string;
+  /** Message shown when no item matches the search. Default "No results". */
   emptyText?: string;
   /** Optional trigger element, rendered as-is (use a Button with aria-haspopup="dialog"). */
   trigger?: ReactNode;
+  /** Extra class name for the palette panel. */
   className?: string;
 }
 

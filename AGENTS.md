@@ -96,6 +96,14 @@ WCAG 2.2 AA. For each component, `meta.json` `a11y` lists the keyboard and scree
 
 Vitest + Testing Library + `vitest-axe`. Test behaviour users see (roles, names, keyboard), not implementation. Cover: renders and default props, each variant class, controlled and uncontrolled use, keyboard operation, disabled, ref forwarding, `asChild` if supported, axe. Portal content (dialogs, menus) is found via `screen`, not `container`.
 
+## Doc comments are required: `npm run check` enforces them
+
+Every prop in an exported `*Props` interface or type, every exported component and every exported hook needs a `/** ... */` comment. The docs site props tables and the AI registry are generated from these comments, so a missing one is a hole in the docs.
+
+- Prop: one plain sentence saying what it does and when to use it, with the default or allowed values (`/** Shows a spinner and ignores clicks. Default false. */`).
+- Component or hook: one or two sentences, plus a one-line `@example` where it helps. For a hook, say what it returns, its parameters and what it does during server rendering.
+- `npm run check` runs `packages/react/scripts/check-docs.mjs`, which lists each file, line and name that is missing a comment and exits 1. Run `npm run check:docs -w @monoline/react` to run only this check.
+
 ## Parallel work: ownership rules
 
 Several agents may build at once, each in its own worktree. To avoid conflicts:

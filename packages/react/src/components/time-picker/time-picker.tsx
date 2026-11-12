@@ -6,8 +6,11 @@ import {useFieldControl} from '../field';
 export interface TimePickerProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'value' | 'defaultValue' | 'onChange' | 'size'> {
   /** 24-hour "HH:mm" (or "HH:mm:ss" when `step` is under 60), or '' for no time. */
   value?: string;
+  /** The initial time as 24-hour "HH:mm" when uncontrolled. Default empty. */
   defaultValue?: string;
+  /** Called with the new time as 24-hour "HH:mm" (or '' when cleared). */
   onValueChange?: (value: string) => void;
+  /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */
   invalid?: boolean;
 }
 

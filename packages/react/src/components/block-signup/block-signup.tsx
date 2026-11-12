@@ -16,8 +16,11 @@ export interface SignupValues {
 }
 
 export interface BlockSignupProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onSubmit'> {
+  /** Heading of the form. Default "Create your account". */
   title?: ReactNode;
+  /** Optional muted line under the heading. */
   description?: ReactNode;
+  /** Text of the submit button. Default "Create account". */
   submitLabel?: ReactNode;
   /** Called with the values once they pass validation. */
   onSubmit?: (values: SignupValues) => void;
@@ -29,6 +32,7 @@ export interface BlockSignupProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   messages?: Partial<{name: string; email: string; emailInvalid: string; password: string; passwordShort: string}>;
   /** Shortest password accepted. Default 8. */
   passwordMin?: number;
+  /** Outline level of the title, 1 to 3. Default 1 because a signup page is usually the page's h1. */
   headingLevel?: 1 | 2 | 3;
 }
 
