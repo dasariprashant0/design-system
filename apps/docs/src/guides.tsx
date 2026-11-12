@@ -2,13 +2,12 @@
 import type {ReactNode} from 'react';
 import {CodeBlock} from '@monoline/react';
 import {ThemeBuilder} from './theme-builder';
+import {Section, P} from './guide-parts';
+import {forms} from './guides-forms';
+import {i18n, accessibility, contributing} from './guides-more';
 
 export interface Guide {slug: string; title: string; summary: string; body: () => ReactNode}
 
-const Section = ({title, children}: {title: string; children: ReactNode}) => (
-  <section className="block"><h2 className="label">{title}</h2>{children}</section>
-);
-const P = ({children}: {children: ReactNode}) => <p className="prose">{children}</p>;
 
 const gettingStarted = () => (
   <>
@@ -144,5 +143,9 @@ export const guides: Guide[] = [
   {slug: 'cli', title: 'CLI', summary: 'Copy components into your project with npx monoline.', body: cli},
   {slug: 'theming', title: 'Theming', summary: 'Themes, accents, fonts, corners, density and tokens.', body: theming},
   {slug: 'theme-builder', title: 'Theme builder', summary: 'Try the options and custom colours, then copy the CSS.', body: () => <ThemeBuilder />},
+  {slug: 'forms', title: 'Forms and validation', summary: 'Field, Form and react-hook-form, Zod, error summaries and submit states.', body: forms},
+  {slug: 'i18n', title: 'i18n and RTL', summary: 'Direction, locale props, Intl formatting, long text and translated copy.', body: i18n},
+  {slug: 'accessibility', title: 'Accessibility', summary: 'The commitments, how they are checked and what is not covered yet.', body: accessibility},
+  {slug: 'contributing', title: 'Contributing a component', summary: 'The recipe, a worked example, the checklist and the generated files.', body: contributing},
   {slug: 'for-ai-tools', title: 'For AI tools', summary: 'llms.txt, the registry and meta.json.', body: forAi},
 ];
