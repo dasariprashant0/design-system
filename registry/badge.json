@@ -1,0 +1,50 @@
+{
+  "name": "badge",
+  "title": "Badge",
+  "category": "data-display",
+  "description": "A short status word or count.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/05-marks.css",
+      "content": "/* ─── Marks ─── */\n.swatch { width: 14px; height: 14px; flex: none; margin-top: 4px; display: inline-block; }\n.check { width: 20px; height: 20px; flex: none; display: grid; place-items: center; font-size: var(--text-xs); font-weight: 500; margin-top: 2px; }\n.check-pass { border: 1px solid var(--foreground); }\n.check-fail { background: var(--accent); color: var(--on-accent); }\n.badge { display: inline-flex; align-items: center; gap: var(--s1); padding: 2px 8px; font-size: var(--text-xs); font-weight: 500; border: 1px solid var(--rule); white-space: nowrap; }\n.badge-solid { background: var(--foreground); color: var(--background); border-color: var(--foreground); }\n.badge-accent { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }\n.kbd { display: inline-block; padding: 0 6px; font-size: var(--text-xs); border: 1px solid var(--rule); border-bottom-width: 2px; line-height: 18px; }\n/* A line of keyboard hints under a field: each key with its word, groups --s3 apart. */\n.key-hints { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); font-size: var(--text-xs); color: var(--muted); }\n.key-hints > span { display: inline-flex; align-items: center; gap: var(--s1); }\n.dot { width: 8px; height: 8px; border-radius: var(--round); background: var(--accent); display: inline-block; flex: none; }\n\n/* Heat: five steps of the app's accent, for counts over time. */\n.heat-0 { background: var(--wash-2); }\n.heat-1 { background: color-mix(in srgb, var(--accent) 25%, var(--background)); }\n.heat-2 { background: color-mix(in srgb, var(--accent) 50%, var(--background)); }\n.heat-3 { background: color-mix(in srgb, var(--accent) 75%, var(--background)); }\n.heat-4 { background: var(--accent); }\n"
+    }
+  ],
+  "a11y": [
+    "Plain text in a span; the word carries the meaning, not the colour.",
+    "For a count that changes, put it inside an aria-live region yourself."
+  ],
+  "keywords": [
+    "status",
+    "pill",
+    "chip",
+    "count"
+  ],
+  "kind": "components",
+  "import": "import {Badge} from '@monoline/react'",
+  "path": "packages/react/src/components/badge",
+  "files": [
+    "packages/react/src/components/badge/badge.demo.tsx",
+    "packages/react/src/components/badge/badge.test.tsx",
+    "packages/react/src/components/badge/badge.tsx",
+    "packages/react/src/components/badge/index.ts",
+    "packages/react/src/components/badge/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/badge/badge.tsx",
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {\n  /** `accent` only for \"new\" or \"now\". */\n  variant?: 'outline' | 'solid' | 'accent';\n}\n\n/** A short status word or count. Never rely on its colour alone: the text carries the meaning. */\nexport const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge({variant = 'outline', className, ...rest}, ref) {\n  return <span ref={ref} className={cx('badge', variant === 'solid' && 'badge-solid', variant === 'accent' && 'badge-accent', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/badge/index.ts",
+      "content": "export {Badge} from './badge';\nexport type {BadgeProps} from './badge';\n"
+    },
+    {
+      "path": "packages/react/src/components/badge/meta.json",
+      "content": "{\"name\":\"badge\",\"title\":\"Badge\",\"category\":\"data-display\",\"description\":\"A short status word or count.\",\"status\":\"stable\",\"css\":[\"05-marks.css\"],\"a11y\":[\"Plain text in a span; the word carries the meaning, not the colour.\",\"For a count that changes, put it inside an aria-live region yourself.\"],\"keywords\":[\"status\",\"pill\",\"chip\",\"count\"]}\n"
+    }
+  ]
+}

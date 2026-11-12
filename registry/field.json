@@ -1,0 +1,57 @@
+{
+  "name": "field",
+  "title": "Field",
+  "category": "forms",
+  "description": "Connects a label, a control, a hint and an error with the right ids and ARIA.",
+  "status": "stable",
+  "uses": [
+    "label"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { padding: 6px 10px; font-size: var(--text-sm); }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-right: var(--s9); }\n.input-end { position: absolute; right: var(--s3); top: 50%; transform: translateY(-50%); }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(16px); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-right: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-left: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/11-field-states.css",
+      "content": "/* ─── Field states ─── */\n.field-error { font-size: var(--text-xs); color: var(--danger); margin-top: var(--s1); }\n.field-ok { font-size: var(--text-xs); color: var(--ok); margin-top: var(--s1); }\n.input[data-valid=\"true\"] { border-color: var(--ok); }\n.input:disabled, .select:disabled, .textarea:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }\n.input[readonly] { background: var(--wash); border-color: var(--rule); }\n.input-group { display: flex; min-width: 0; }\n.input-group > .input { flex: 1; }\n.input-affix { display: inline-flex; align-items: center; padding: 0 var(--s3); border: 1px solid var(--foreground); color: var(--muted); font-size: var(--text-sm); white-space: nowrap; }\n.input-affix:first-child { border-right: 0; }\n.input-affix:last-child { border-left: 0; }\n.field-required::after { content: \" *\"; color: var(--danger); }\n.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s4); }\n"
+    }
+  ],
+  "a11y": [
+    "The label is bound to the control by id, so it has an accessible name.",
+    "Hint and error are linked with aria-describedby; an error sets aria-invalid and is announced via role=alert.",
+    "required sets the native required attribute on the control."
+  ],
+  "keywords": [
+    "form",
+    "validation",
+    "input wrapper"
+  ],
+  "kind": "components",
+  "import": "import {Field} from '@monoline/react'",
+  "path": "packages/react/src/components/field",
+  "files": [
+    "packages/react/src/components/field/field.demo.tsx",
+    "packages/react/src/components/field/field.test.tsx",
+    "packages/react/src/components/field/field.tsx",
+    "packages/react/src/components/field/index.ts",
+    "packages/react/src/components/field/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/field/field.tsx",
+      "content": "import {createContext, forwardRef, useContext, useId, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Label} from '../label';\n\ninterface FieldContextValue {\n  id: string;\n  invalid: boolean;\n  required: boolean;\n  describedBy: string | undefined;\n}\nconst FieldContext = createContext<FieldContextValue | null>(null);\n\n/**\n * Props a form control should spread to join its surrounding Field: id, aria-describedby, aria-invalid, required.\n * Outside a Field it returns an empty object, so controls work alone too.\n */\nexport function useFieldControl(): {id?: string; 'aria-describedby'?: string; 'aria-invalid'?: true; required?: true} {\n  const ctx = useContext(FieldContext);\n  if (!ctx) return {};\n  return {\n    id: ctx.id,\n    'aria-describedby': ctx.describedBy,\n    'aria-invalid': ctx.invalid ? true : undefined,\n    required: ctx.required ? true : undefined,\n  };\n}\n\nexport interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {\n  label: ReactNode;\n  /** Help text shown under the control. */\n  hint?: ReactNode;\n  /** Error message. Its presence marks the control invalid and it is announced politely. */\n  error?: ReactNode;\n  required?: boolean;\n  /** The control: Input, Textarea, Select trigger, etc. */\n  children: ReactNode;\n}\n\n/**\n * Wires a label, a control, a hint and an error together with the right ids and ARIA, so you never do it by hand.\n * @example <Field label=\"Email\" hint=\"We never share it.\" error={err}><Input type=\"email\" /></Field>\n */\nexport const Field = forwardRef<HTMLDivElement, FieldProps>(function Field({label, hint, error, required = false, className, children, ...rest}, ref) {\n  const base = useId();\n  const hintId = hint ? `${base}-hint` : undefined;\n  const errorId = error ? `${base}-error` : undefined;\n  const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;\n  return (\n    <FieldContext.Provider value={{id: `${base}-control`, invalid: Boolean(error), required, describedBy}}>\n      <div ref={ref} className={cx('field', className)} {...rest}>\n        <Label htmlFor={`${base}-control`} required={required}>{label}</Label>\n        {children}\n        {hint && <span id={hintId} className=\"field-hint\">{hint}</span>}\n        {error && <span id={errorId} className=\"field-error\" role=\"alert\">{error}</span>}\n      </div>\n    </FieldContext.Provider>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/field/index.ts",
+      "content": "export {Field, useFieldControl} from './field';\nexport type {FieldProps} from './field';\n"
+    },
+    {
+      "path": "packages/react/src/components/field/meta.json",
+      "content": "{\"name\":\"field\",\"title\":\"Field\",\"category\":\"forms\",\"description\":\"Connects a label, a control, a hint and an error with the right ids and ARIA.\",\"status\":\"stable\",\"uses\":[\"label\"],\"css\":[\"03-form-fields.css\",\"11-field-states.css\"],\"a11y\":[\"The label is bound to the control by id, so it has an accessible name.\",\"Hint and error are linked with aria-describedby; an error sets aria-invalid and is announced via role=alert.\",\"required sets the native required attribute on the control.\"],\"keywords\":[\"form\",\"validation\",\"input wrapper\"]}\n"
+    }
+  ]
+}

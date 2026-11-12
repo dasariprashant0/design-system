@@ -1,0 +1,2 @@
+/* Radix tooltip content. The legacy .tip-wrap/.tip CSS-only tooltip still works. */
+.tooltip { z-index: var(--z-toast); padding: var(--s1) var(--s3); background: var(--surface); color: var(--surface-text); font-size: var(--text-xs); max-width: 280px; animation: dialog-fade var(--fast) var(--ease); }

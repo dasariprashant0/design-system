@@ -1,0 +1,1 @@
+{"name":"separator","title":"Separator","category":"layout","description":"A thin rule between groups.","status":"stable","primitive":"radix-ui/Separator","css":["separator.css"],"a11y":["Decorative by default: role=none so screen readers skip it.","With decorative=false it is role=separator with aria-orientation."],"keywords":["divider","rule","hr"]}

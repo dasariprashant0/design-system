@@ -1,0 +1,1 @@
+{"name":"skeleton","title":"Skeleton","category":"feedback","description":"A still placeholder shaped like the content that is loading.","status":"stable","css":["13-loading.css"],"a11y":["aria-hidden: it carries no information.","Pair with an aria-busy region or a Spinner so loading is announced once."],"keywords":["placeholder","loading","shimmer"]}

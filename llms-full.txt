@@ -4,6 +4,43 @@
 
 Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rules). Every component is a folder with source, test, demo and meta.json.
 
+## Accordion (accordion)
+Stacked headings that each show or hide a section.
+Import: import {Accordion} from '@monoline/react'
+Primitive: radix-ui/Accordion | Status: stable
+A11y:
+- Each trigger is a button inside a heading with aria-expanded and aria-controls.
+- Enter and Space toggle; Arrow keys, Home and End move between triggers.
+- single or multiple open items; collapsible lets the last one close.
+Files: packages/react/src/components/accordion/accordion.demo.tsx, packages/react/src/components/accordion/accordion.test.tsx, packages/react/src/components/accordion/accordion.tsx, packages/react/src/components/accordion/index.ts, packages/react/src/components/accordion/meta.json
+
+## Alert (alert)
+A message that stays on screen, with a title and a tone.
+Import: import {Alert} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- danger and warning are role=alert and announced at once; info and success are role=status and polite.
+- The title always states the meaning in words; colour is not the only signal.
+Files: packages/react/src/components/alert/alert.demo.tsx, packages/react/src/components/alert/alert.test.tsx, packages/react/src/components/alert/alert.tsx, packages/react/src/components/alert/index.ts, packages/react/src/components/alert/meta.json
+
+## Avatar (avatar)
+A person or thing as an image with an initials fallback.
+Import: import {Avatar} from '@monoline/react'
+Primitive: radix-ui/Avatar | Status: stable
+A11y:
+- name is required: it is the image alt text and the fallback's accessible name.
+- The fallback shows while the image loads or if it fails.
+Files: packages/react/src/components/avatar/avatar.demo.tsx, packages/react/src/components/avatar/avatar.test.tsx, packages/react/src/components/avatar/avatar.tsx, packages/react/src/components/avatar/index.ts, packages/react/src/components/avatar/meta.json
+
+## Badge (badge)
+A short status word or count.
+Import: import {Badge} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Plain text in a span; the word carries the meaning, not the colour.
+- For a count that changes, put it inside an aria-live region yourself.
+Files: packages/react/src/components/badge/badge.demo.tsx, packages/react/src/components/badge/badge.test.tsx, packages/react/src/components/badge/badge.tsx, packages/react/src/components/badge/index.ts, packages/react/src/components/badge/meta.json
+
 ## Button (button)
 Triggers an action. Native button with solid, line, ghost and danger variants.
 Import: import {Button} from '@monoline/react'
@@ -13,3 +50,145 @@ A11y:
 - loading sets aria-busy and blocks clicks while keeping the label.
 - asChild renders a link without losing link semantics.
 Files: packages/react/src/components/button/button.demo.tsx, packages/react/src/components/button/button.test.tsx, packages/react/src/components/button/button.tsx, packages/react/src/components/button/index.ts, packages/react/src/components/button/meta.json
+
+## Card (card)
+A bordered group for one thing you can pick up or open.
+Import: import {Card} from '@monoline/react'
+Primitive: radix-ui/Slot | Status: stable
+A11y:
+- Plain divs and a heading; no roles added.
+- With asChild on a link or button the whole card is one keyboard-focusable control.
+Files: packages/react/src/components/card/card.demo.tsx, packages/react/src/components/card/card.test.tsx, packages/react/src/components/card/card.tsx, packages/react/src/components/card/index.ts, packages/react/src/components/card/meta.json
+
+## Checkbox (checkbox)
+A box to turn one choice on or off, with an indeterminate state.
+Import: import {Checkbox} from '@monoline/react'
+Primitive: radix-ui/Checkbox | Status: stable
+A11y:
+- role=checkbox; Space toggles; Tab focuses.
+- indeterminate is exposed as aria-checked=mixed.
+- A visible label is clickable; without one, aria-label is required.
+Files: packages/react/src/components/checkbox/checkbox.demo.tsx, packages/react/src/components/checkbox/checkbox.test.tsx, packages/react/src/components/checkbox/checkbox.tsx, packages/react/src/components/checkbox/index.ts, packages/react/src/components/checkbox/meta.json
+
+## Dialog (dialog)
+A modal window for a question or short task that blocks the page.
+Import: import {Dialog} from '@monoline/react'
+Primitive: radix-ui/Dialog | Status: stable
+A11y:
+- role=dialog with aria-modal; the title names it and the description describes it.
+- Focus moves into the dialog, is trapped there, and returns to the trigger on close.
+- Escape and the Close button close it; the page behind is inert.
+Files: packages/react/src/components/dialog/dialog.demo.tsx, packages/react/src/components/dialog/dialog.test.tsx, packages/react/src/components/dialog/dialog.tsx, packages/react/src/components/dialog/index.ts, packages/react/src/components/dialog/meta.json
+
+## Field (field)
+Connects a label, a control, a hint and an error with the right ids and ARIA.
+Import: import {Field} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The label is bound to the control by id, so it has an accessible name.
+- Hint and error are linked with aria-describedby; an error sets aria-invalid and is announced via role=alert.
+- required sets the native required attribute on the control.
+Files: packages/react/src/components/field/field.demo.tsx, packages/react/src/components/field/field.test.tsx, packages/react/src/components/field/field.tsx, packages/react/src/components/field/index.ts, packages/react/src/components/field/meta.json
+
+## Input (input)
+A single-line text field.
+Import: import {Input} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native <input>: all keyboard and autofill behaviour is the browser's.
+- Inside a Field it is labelled and described automatically; invalid sets aria-invalid.
+Files: packages/react/src/components/input/index.ts, packages/react/src/components/input/input.demo.tsx, packages/react/src/components/input/input.test.tsx, packages/react/src/components/input/input.tsx, packages/react/src/components/input/meta.json
+
+## Label (label)
+The visible name of a form control.
+Import: import {Label} from '@monoline/react'
+Primitive: radix-ui/Label | Status: stable
+A11y:
+- A real <label>: clicking it focuses the control it names.
+- required adds a visual marker; set required on the control for assistive tech.
+Files: packages/react/src/components/label/index.ts, packages/react/src/components/label/label.demo.tsx, packages/react/src/components/label/label.test.tsx, packages/react/src/components/label/label.tsx, packages/react/src/components/label/meta.json
+
+## Progress (progress)
+How far along a task is, or that it is still working.
+Import: import {Progress} from '@monoline/react'
+Primitive: radix-ui/Progress | Status: stable
+A11y:
+- role=progressbar with aria-valuenow, aria-valuemin and aria-valuemax.
+- Indeterminate omits aria-valuenow.
+- aria-label is required.
+Files: packages/react/src/components/progress/index.ts, packages/react/src/components/progress/meta.json, packages/react/src/components/progress/progress.demo.tsx, packages/react/src/components/progress/progress.test.tsx, packages/react/src/components/progress/progress.tsx
+
+## Radio group (radio-group)
+Pick exactly one option from a short list.
+Import: import {RadioGroup} from '@monoline/react'
+Primitive: radix-ui/RadioGroup | Status: stable
+A11y:
+- role=radiogroup with role=radio items; one Tab stop for the group.
+- Arrow keys move and select; Space selects the focused item.
+- Give the group an accessible name with aria-label or aria-labelledby.
+Files: packages/react/src/components/radio-group/index.ts, packages/react/src/components/radio-group/meta.json, packages/react/src/components/radio-group/radio-group.demo.tsx, packages/react/src/components/radio-group/radio-group.test.tsx, packages/react/src/components/radio-group/radio-group.tsx
+
+## Separator (separator)
+A thin rule between groups.
+Import: import {Separator} from '@monoline/react'
+Primitive: radix-ui/Separator | Status: stable
+A11y:
+- Decorative by default: role=none so screen readers skip it.
+- With decorative=false it is role=separator with aria-orientation.
+Files: packages/react/src/components/separator/index.ts, packages/react/src/components/separator/meta.json, packages/react/src/components/separator/separator.demo.tsx, packages/react/src/components/separator/separator.test.tsx, packages/react/src/components/separator/separator.tsx
+
+## Skeleton (skeleton)
+A still placeholder shaped like the content that is loading.
+Import: import {Skeleton} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- aria-hidden: it carries no information.
+- Pair with an aria-busy region or a Spinner so loading is announced once.
+Files: packages/react/src/components/skeleton/index.ts, packages/react/src/components/skeleton/meta.json, packages/react/src/components/skeleton/skeleton.demo.tsx, packages/react/src/components/skeleton/skeleton.test.tsx, packages/react/src/components/skeleton/skeleton.tsx
+
+## Spinner (spinner)
+A small indicator that something is loading.
+Import: import {Spinner} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- role=status with an aria-label; polite, not interrupting.
+- Animation stops under prefers-reduced-motion.
+Files: packages/react/src/components/spinner/index.ts, packages/react/src/components/spinner/meta.json, packages/react/src/components/spinner/spinner.demo.tsx, packages/react/src/components/spinner/spinner.test.tsx, packages/react/src/components/spinner/spinner.tsx
+
+## Switch (switch)
+An on/off setting that takes effect immediately.
+Import: import {Switch} from '@monoline/react'
+Primitive: radix-ui/Switch | Status: stable
+A11y:
+- role=switch with aria-checked; Space and Enter toggle.
+- A visible label is clickable; without one, aria-label is required.
+Files: packages/react/src/components/switch/index.ts, packages/react/src/components/switch/meta.json, packages/react/src/components/switch/switch.demo.tsx, packages/react/src/components/switch/switch.test.tsx, packages/react/src/components/switch/switch.tsx
+
+## Tabs (tabs)
+Switch between related views in the same place.
+Import: import {Tabs} from '@monoline/react'
+Primitive: radix-ui/Tabs | Status: stable
+A11y:
+- role=tablist, tab and tabpanel with aria-selected and aria-controls.
+- Arrow keys move between tabs, Home and End jump; only the active tab is a Tab stop.
+- Give the list an accessible name with aria-label.
+Files: packages/react/src/components/tabs/index.ts, packages/react/src/components/tabs/meta.json, packages/react/src/components/tabs/tabs.demo.tsx, packages/react/src/components/tabs/tabs.test.tsx, packages/react/src/components/tabs/tabs.tsx
+
+## Textarea (textarea)
+A multi-line text field.
+Import: import {Textarea} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native <textarea>.
+- Inside a Field it is labelled and described automatically; invalid sets aria-invalid.
+Files: packages/react/src/components/textarea/index.ts, packages/react/src/components/textarea/meta.json, packages/react/src/components/textarea/textarea.demo.tsx, packages/react/src/components/textarea/textarea.test.tsx, packages/react/src/components/textarea/textarea.tsx
+
+## Tooltip (tooltip)
+Short hint text on hover and keyboard focus.
+Import: import {Tooltip} from '@monoline/react'
+Primitive: radix-ui/Tooltip | Status: stable
+A11y:
+- Shows on hover and on keyboard focus; the trigger gets aria-describedby while it is open.
+- Escape dismisses it; it stays open while the pointer is over it.
+- Never the only place for essential information: touch users do not get hover.
+Files: packages/react/src/components/tooltip/index.ts, packages/react/src/components/tooltip/meta.json, packages/react/src/components/tooltip/tooltip.demo.tsx, packages/react/src/components/tooltip/tooltip.test.tsx, packages/react/src/components/tooltip/tooltip.tsx

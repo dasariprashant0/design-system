@@ -10,5 +10,36 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - [registry/index.json](registry/index.json): machine-readable component list
 
 ## Components
+### layout
+- Separator (separator, stable): A thin rule between groups. Source: packages/react/src/components/separator/
+
 ### buttons
 - Button (button, stable): Triggers an action. Native button with solid, line, ghost and danger variants. Source: packages/react/src/components/button/
+
+### forms
+- Checkbox (checkbox, stable): A box to turn one choice on or off, with an indeterminate state. Source: packages/react/src/components/checkbox/
+- Field (field, stable): Connects a label, a control, a hint and an error with the right ids and ARIA. Source: packages/react/src/components/field/
+- Input (input, stable): A single-line text field. Source: packages/react/src/components/input/
+- Label (label, stable): The visible name of a form control. Source: packages/react/src/components/label/
+- Radio group (radio-group, stable): Pick exactly one option from a short list. Source: packages/react/src/components/radio-group/
+- Switch (switch, stable): An on/off setting that takes effect immediately. Source: packages/react/src/components/switch/
+- Textarea (textarea, stable): A multi-line text field. Source: packages/react/src/components/textarea/
+
+### data-display
+- Accordion (accordion, stable): Stacked headings that each show or hide a section. Source: packages/react/src/components/accordion/
+- Avatar (avatar, stable): A person or thing as an image with an initials fallback. Source: packages/react/src/components/avatar/
+- Badge (badge, stable): A short status word or count. Source: packages/react/src/components/badge/
+- Card (card, stable): A bordered group for one thing you can pick up or open. Source: packages/react/src/components/card/
+
+### feedback
+- Alert (alert, stable): A message that stays on screen, with a title and a tone. Source: packages/react/src/components/alert/
+- Progress (progress, stable): How far along a task is, or that it is still working. Source: packages/react/src/components/progress/
+- Skeleton (skeleton, stable): A still placeholder shaped like the content that is loading. Source: packages/react/src/components/skeleton/
+- Spinner (spinner, stable): A small indicator that something is loading. Source: packages/react/src/components/spinner/
+
+### overlays
+- Dialog (dialog, stable): A modal window for a question or short task that blocks the page. Source: packages/react/src/components/dialog/
+- Tooltip (tooltip, stable): Short hint text on hover and keyboard focus. Source: packages/react/src/components/tooltip/
+
+### navigation
+- Tabs (tabs, stable): Switch between related views in the same place. Source: packages/react/src/components/tabs/

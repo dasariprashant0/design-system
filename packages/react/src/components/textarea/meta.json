@@ -1,0 +1,1 @@
+{"name":"textarea","title":"Textarea","category":"forms","description":"A multi-line text field.","status":"stable","uses":["field"],"css":["03-form-fields.css","11-field-states.css"],"a11y":["Native <textarea>.","Inside a Field it is labelled and described automatically; invalid sets aria-invalid."],"keywords":["multiline","text area","form"]}

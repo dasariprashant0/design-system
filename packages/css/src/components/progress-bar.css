@@ -1,0 +1,5 @@
+/* Radix progress. The legacy <progress class="progress"> in 12-range.css still works for native markup. */
+.progress-bar { position: relative; display: block; width: 100%; height: 8px; border: 1px solid var(--foreground); overflow: hidden; }
+.progress-fill { display: block; height: 100%; background: var(--accent); transition: width var(--base) var(--ease); }
+.progress-bar[data-state="indeterminate"] { background: var(--hatch); }
+.progress-bar[data-state="indeterminate"] .progress-fill { width: 0; }

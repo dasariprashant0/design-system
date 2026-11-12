@@ -1,0 +1,49 @@
+{
+  "name": "label",
+  "title": "Label",
+  "category": "forms",
+  "description": "The visible name of a form control.",
+  "status": "stable",
+  "primitive": "radix-ui/Label",
+  "css": [
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { padding: 6px 10px; font-size: var(--text-sm); }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-right: var(--s9); }\n.input-end { position: absolute; right: var(--s3); top: 50%; transform: translateY(-50%); }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(16px); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-right: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-left: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    }
+  ],
+  "a11y": [
+    "A real <label>: clicking it focuses the control it names.",
+    "required adds a visual marker; set required on the control for assistive tech."
+  ],
+  "keywords": [
+    "form",
+    "caption"
+  ],
+  "kind": "components",
+  "import": "import {Label} from '@monoline/react'",
+  "path": "packages/react/src/components/label",
+  "files": [
+    "packages/react/src/components/label/index.ts",
+    "packages/react/src/components/label/label.demo.tsx",
+    "packages/react/src/components/label/label.test.tsx",
+    "packages/react/src/components/label/label.tsx",
+    "packages/react/src/components/label/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/label/index.ts",
+      "content": "export {Label} from './label';\nexport type {LabelProps} from './label';\n"
+    },
+    {
+      "path": "packages/react/src/components/label/label.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Label as RadixLabel} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface LabelProps extends ComponentPropsWithoutRef<typeof RadixLabel.Root> {\n  /** Adds a required marker. Pair with `required` on the control. */\n  required?: boolean;\n}\n\n/** A `<label>` styled as a Monoline label. Clicking it focuses the control it points to with `htmlFor`. */\nexport const Label = forwardRef<ElementRef<typeof RadixLabel.Root>, LabelProps>(function Label({className, required, ...rest}, ref) {\n  return <RadixLabel.Root ref={ref} className={cx('label', required && 'field-required', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/label/meta.json",
+      "content": "{\"name\":\"label\",\"title\":\"Label\",\"category\":\"forms\",\"description\":\"The visible name of a form control.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Label\",\"css\":[\"03-form-fields.css\"],\"a11y\":[\"A real <label>: clicking it focuses the control it names.\",\"required adds a visual marker; set required on the control for assistive tech.\"],\"keywords\":[\"form\",\"caption\"]}\n"
+    }
+  ]
+}

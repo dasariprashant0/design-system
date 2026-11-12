@@ -1,0 +1,51 @@
+{
+  "name": "tooltip",
+  "title": "Tooltip",
+  "category": "overlays",
+  "description": "Short hint text on hover and keyboard focus.",
+  "status": "stable",
+  "primitive": "radix-ui/Tooltip",
+  "css": [
+    {
+      "path": "packages/css/src/components/tooltip.css",
+      "content": "/* Radix tooltip content. The legacy .tip-wrap/.tip CSS-only tooltip still works. */\n.tooltip { z-index: var(--z-toast); padding: var(--s1) var(--s3); background: var(--surface); color: var(--surface-text); font-size: var(--text-xs); max-width: 280px; animation: dialog-fade var(--fast) var(--ease); }\n"
+    }
+  ],
+  "a11y": [
+    "Shows on hover and on keyboard focus; the trigger gets aria-describedby while it is open.",
+    "Escape dismisses it; it stays open while the pointer is over it.",
+    "Never the only place for essential information: touch users do not get hover."
+  ],
+  "keywords": [
+    "hint",
+    "title",
+    "hover"
+  ],
+  "kind": "components",
+  "import": "import {Tooltip} from '@monoline/react'",
+  "path": "packages/react/src/components/tooltip",
+  "files": [
+    "packages/react/src/components/tooltip/index.ts",
+    "packages/react/src/components/tooltip/meta.json",
+    "packages/react/src/components/tooltip/tooltip.demo.tsx",
+    "packages/react/src/components/tooltip/tooltip.test.tsx",
+    "packages/react/src/components/tooltip/tooltip.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/tooltip/index.ts",
+      "content": "export {Tooltip, TooltipProvider, TooltipContent} from './tooltip';\nexport type {TooltipProps} from './tooltip';\n"
+    },
+    {
+      "path": "packages/react/src/components/tooltip/meta.json",
+      "content": "{\"name\":\"tooltip\",\"title\":\"Tooltip\",\"category\":\"overlays\",\"description\":\"Short hint text on hover and keyboard focus.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Tooltip\",\"css\":[\"tooltip.css\"],\"a11y\":[\"Shows on hover and on keyboard focus; the trigger gets aria-describedby while it is open.\",\"Escape dismisses it; it stays open while the pointer is over it.\",\"Never the only place for essential information: touch users do not get hover.\"],\"keywords\":[\"hint\",\"title\",\"hover\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/tooltip/tooltip.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type ReactNode} from 'react';\nimport {Tooltip as RadixTooltip} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** Wrap your app (or a region) once. Sets the shared open delay. */\nexport const TooltipProvider = RadixTooltip.Provider;\n\nexport interface TooltipProps {\n  /** The text shown. Keep it short; it repeats or extends a label and must never hold essential information alone. */\n  content: ReactNode;\n  /** The trigger element. It receives aria-describedby when open. */\n  children: ReactNode;\n  side?: 'top' | 'right' | 'bottom' | 'left';\n  delayDuration?: number;\n  open?: boolean;\n  defaultOpen?: boolean;\n  onOpenChange?: (open: boolean) => void;\n}\n\n/**\n * Hint text on hover and keyboard focus. Escape dismisses it.\n * @example <Tooltip content=\"Saved to ~/Notes\"><Button>Save</Button></Tooltip>\n */\nexport function Tooltip({content, children, side = 'top', delayDuration, open, defaultOpen, onOpenChange}: TooltipProps) {\n  return (\n    <RadixTooltip.Root delayDuration={delayDuration} open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>\n      <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>\n      <RadixTooltip.Portal>\n        <RadixTooltip.Content side={side} sideOffset={6} className=\"tooltip\">{content}</RadixTooltip.Content>\n      </RadixTooltip.Portal>\n    </RadixTooltip.Root>\n  );\n}\n\nexport const TooltipContent = forwardRef<ElementRef<typeof RadixTooltip.Content>, ComponentPropsWithoutRef<typeof RadixTooltip.Content>>(function TooltipContent({className, sideOffset = 6, ...rest}, ref) {\n  return <RadixTooltip.Content ref={ref} sideOffset={sideOffset} className={cx('tooltip', className)} {...rest} />;\n});\n"
+    }
+  ]
+}

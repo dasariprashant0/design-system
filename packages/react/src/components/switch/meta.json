@@ -1,0 +1,1 @@
+{"name":"switch","title":"Switch","category":"forms","description":"An on/off setting that takes effect immediately.","status":"stable","primitive":"radix-ui/Switch","uses":["field"],"css":["checkbox.css"],"a11y":["role=switch with aria-checked; Space and Enter toggle.","A visible label is clickable; without one, aria-label is required."],"keywords":["toggle","on off","setting"]}

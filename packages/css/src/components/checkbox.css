@@ -1,0 +1,14 @@
+/* Checkbox, radio and switch built on Radix (button + data-state). The legacy .choice/.switch classes still style native inputs. */
+.checkbox, .radio { appearance: none; flex: none; width: 18px; height: 18px; margin: 0; padding: 0; display: inline-grid; place-items: center; border: 1px solid var(--foreground); background: transparent; color: var(--background); cursor: pointer; transition: background var(--fast); }
+.radio { border-radius: var(--round); }
+.checkbox[data-state="checked"], .checkbox[data-state="indeterminate"], .radio[data-state="checked"] { background: var(--foreground); }
+.checkbox:disabled, .radio:disabled, .sw:disabled { opacity: 0.5; cursor: not-allowed; }
+.checkbox[aria-invalid="true"], .radio[aria-invalid="true"] { border-color: var(--danger); }
+.checkbox-mark { width: 10px; height: 10px; }
+.radio-dot { width: 8px; height: 8px; border-radius: var(--round); background: var(--background); }
+.radio-group { display: grid; gap: var(--s3); }
+.radio-group[data-orientation="horizontal"] { display: flex; flex-wrap: wrap; gap: var(--s5); }
+.sw { flex: none; width: 36px; height: 20px; padding: 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }
+.sw[data-state="checked"] { background: var(--foreground); }
+.sw-thumb { display: block; width: 12px; height: 12px; background: var(--foreground); transform: translateX(3px); transition: transform var(--base) var(--ease), background var(--fast); }
+.sw[data-state="checked"] .sw-thumb { transform: translateX(19px); background: var(--background); }

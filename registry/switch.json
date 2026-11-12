@@ -1,0 +1,53 @@
+{
+  "name": "switch",
+  "title": "Switch",
+  "category": "forms",
+  "description": "An on/off setting that takes effect immediately.",
+  "status": "stable",
+  "primitive": "radix-ui/Switch",
+  "uses": [
+    "field"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/checkbox.css",
+      "content": "/* Checkbox, radio and switch built on Radix (button + data-state). The legacy .choice/.switch classes still style native inputs. */\n.checkbox, .radio { appearance: none; flex: none; width: 18px; height: 18px; margin: 0; padding: 0; display: inline-grid; place-items: center; border: 1px solid var(--foreground); background: transparent; color: var(--background); cursor: pointer; transition: background var(--fast); }\n.radio { border-radius: var(--round); }\n.checkbox[data-state=\"checked\"], .checkbox[data-state=\"indeterminate\"], .radio[data-state=\"checked\"] { background: var(--foreground); }\n.checkbox:disabled, .radio:disabled, .sw:disabled { opacity: 0.5; cursor: not-allowed; }\n.checkbox[aria-invalid=\"true\"], .radio[aria-invalid=\"true\"] { border-color: var(--danger); }\n.checkbox-mark { width: 10px; height: 10px; }\n.radio-dot { width: 8px; height: 8px; border-radius: var(--round); background: var(--background); }\n.radio-group { display: grid; gap: var(--s3); }\n.radio-group[data-orientation=\"horizontal\"] { display: flex; flex-wrap: wrap; gap: var(--s5); }\n.sw { flex: none; width: 36px; height: 20px; padding: 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }\n.sw[data-state=\"checked\"] { background: var(--foreground); }\n.sw-thumb { display: block; width: 12px; height: 12px; background: var(--foreground); transform: translateX(3px); transition: transform var(--base) var(--ease), background var(--fast); }\n.sw[data-state=\"checked\"] .sw-thumb { transform: translateX(19px); background: var(--background); }\n"
+    }
+  ],
+  "a11y": [
+    "role=switch with aria-checked; Space and Enter toggle.",
+    "A visible label is clickable; without one, aria-label is required."
+  ],
+  "keywords": [
+    "toggle",
+    "on off",
+    "setting"
+  ],
+  "kind": "components",
+  "import": "import {Switch} from '@monoline/react'",
+  "path": "packages/react/src/components/switch",
+  "files": [
+    "packages/react/src/components/switch/index.ts",
+    "packages/react/src/components/switch/meta.json",
+    "packages/react/src/components/switch/switch.demo.tsx",
+    "packages/react/src/components/switch/switch.test.tsx",
+    "packages/react/src/components/switch/switch.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/switch/index.ts",
+      "content": "export {Switch} from './switch';\nexport type {SwitchProps} from './switch';\n"
+    },
+    {
+      "path": "packages/react/src/components/switch/meta.json",
+      "content": "{\"name\":\"switch\",\"title\":\"Switch\",\"category\":\"forms\",\"description\":\"An on/off setting that takes effect immediately.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Switch\",\"uses\":[\"field\"],\"css\":[\"checkbox.css\"],\"a11y\":[\"role=switch with aria-checked; Space and Enter toggle.\",\"A visible label is clickable; without one, aria-label is required.\"],\"keywords\":[\"toggle\",\"on off\",\"setting\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/switch/switch.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type ReactNode} from 'react';\nimport {Switch as RadixSwitch} from 'radix-ui';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\nexport interface SwitchProps extends Omit<ComponentPropsWithoutRef<typeof RadixSwitch.Root>, 'children'> {\n  /** Visible label. Without it, give the switch an `aria-label`. */\n  label?: ReactNode;\n}\n\n/** An on/off setting that applies at once. Use a Checkbox for a choice you submit later. */\nexport const Switch = forwardRef<ElementRef<typeof RadixSwitch.Root>, SwitchProps>(function Switch({label, className, id, ...rest}, ref) {\n  const f = useFieldControl();\n  const sw = (\n    <RadixSwitch.Root ref={ref} id={id ?? f.id} className={cx('sw', className)} aria-describedby={f['aria-describedby']} {...rest}>\n      <RadixSwitch.Thumb className=\"sw-thumb\" />\n    </RadixSwitch.Root>\n  );\n  return label ? <label className=\"choice\" style={{alignItems: 'center'}}>{sw}<span>{label}</span></label> : sw;\n});\n"
+    }
+  ]
+}

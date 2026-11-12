@@ -1,0 +1,7 @@
+/* Card parts. The legacy .card/.card-hover (06-boxes.css) draws the border. */
+.card-header { display: grid; gap: var(--s1); margin-bottom: var(--s4); }
+.card-title { font-weight: 500; font-size: var(--text-lg); }
+.card-description { color: var(--muted); font-size: var(--text-sm); }
+.card-content { display: grid; gap: var(--s3); }
+.card-footer { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; margin-top: var(--s5); }
+a.card, button.card { display: block; text-align: left; text-decoration: none; color: inherit; width: 100%; }

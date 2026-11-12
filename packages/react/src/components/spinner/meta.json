@@ -1,0 +1,1 @@
+{"name":"spinner","title":"Spinner","category":"feedback","description":"A small indicator that something is loading.","status":"stable","css":["13-loading.css"],"a11y":["role=status with an aria-label; polite, not interrupting.","Animation stops under prefers-reduced-motion."],"keywords":["loading","busy","wait"]}

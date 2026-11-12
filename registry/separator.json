@@ -1,0 +1,50 @@
+{
+  "name": "separator",
+  "title": "Separator",
+  "category": "layout",
+  "description": "A thin rule between groups.",
+  "status": "stable",
+  "primitive": "radix-ui/Separator",
+  "css": [
+    {
+      "path": "packages/css/src/components/separator.css",
+      "content": ".separator { flex: none; background: var(--rule); border: 0; }\n.separator[data-orientation=\"horizontal\"] { height: 1px; width: 100%; margin: var(--s4) 0; }\n.separator[data-orientation=\"vertical\"] { width: 1px; align-self: stretch; margin: 0 var(--s3); }\n"
+    }
+  ],
+  "a11y": [
+    "Decorative by default: role=none so screen readers skip it.",
+    "With decorative=false it is role=separator with aria-orientation."
+  ],
+  "keywords": [
+    "divider",
+    "rule",
+    "hr"
+  ],
+  "kind": "components",
+  "import": "import {Separator} from '@monoline/react'",
+  "path": "packages/react/src/components/separator",
+  "files": [
+    "packages/react/src/components/separator/index.ts",
+    "packages/react/src/components/separator/meta.json",
+    "packages/react/src/components/separator/separator.demo.tsx",
+    "packages/react/src/components/separator/separator.test.tsx",
+    "packages/react/src/components/separator/separator.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/separator/index.ts",
+      "content": "export {Separator} from './separator';\n"
+    },
+    {
+      "path": "packages/react/src/components/separator/meta.json",
+      "content": "{\"name\":\"separator\",\"title\":\"Separator\",\"category\":\"layout\",\"description\":\"A thin rule between groups.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Separator\",\"css\":[\"separator.css\"],\"a11y\":[\"Decorative by default: role=none so screen readers skip it.\",\"With decorative=false it is role=separator with aria-orientation.\"],\"keywords\":[\"divider\",\"rule\",\"hr\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/separator/separator.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Separator as RadixSeparator} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** A thin rule. Decorative by default (hidden from assistive tech); pass `decorative={false}` when it really divides content. */\nexport const Separator = forwardRef<ElementRef<typeof RadixSeparator.Root>, ComponentPropsWithoutRef<typeof RadixSeparator.Root>>(function Separator({className, orientation = 'horizontal', decorative = true, ...rest}, ref) {\n  return <RadixSeparator.Root ref={ref} orientation={orientation} decorative={decorative} className={cx('separator', className)} {...rest} />;\n});\n"
+    }
+  ]
+}

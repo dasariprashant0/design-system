@@ -1,0 +1,58 @@
+{
+  "name": "checkbox",
+  "title": "Checkbox",
+  "category": "forms",
+  "description": "A box to turn one choice on or off, with an indeterminate state.",
+  "status": "stable",
+  "primitive": "radix-ui/Checkbox",
+  "uses": [
+    "field"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/checkbox.css",
+      "content": "/* Checkbox, radio and switch built on Radix (button + data-state). The legacy .choice/.switch classes still style native inputs. */\n.checkbox, .radio { appearance: none; flex: none; width: 18px; height: 18px; margin: 0; padding: 0; display: inline-grid; place-items: center; border: 1px solid var(--foreground); background: transparent; color: var(--background); cursor: pointer; transition: background var(--fast); }\n.radio { border-radius: var(--round); }\n.checkbox[data-state=\"checked\"], .checkbox[data-state=\"indeterminate\"], .radio[data-state=\"checked\"] { background: var(--foreground); }\n.checkbox:disabled, .radio:disabled, .sw:disabled { opacity: 0.5; cursor: not-allowed; }\n.checkbox[aria-invalid=\"true\"], .radio[aria-invalid=\"true\"] { border-color: var(--danger); }\n.checkbox-mark { width: 10px; height: 10px; }\n.radio-dot { width: 8px; height: 8px; border-radius: var(--round); background: var(--background); }\n.radio-group { display: grid; gap: var(--s3); }\n.radio-group[data-orientation=\"horizontal\"] { display: flex; flex-wrap: wrap; gap: var(--s5); }\n.sw { flex: none; width: 36px; height: 20px; padding: 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }\n.sw[data-state=\"checked\"] { background: var(--foreground); }\n.sw-thumb { display: block; width: 12px; height: 12px; background: var(--foreground); transform: translateX(3px); transition: transform var(--base) var(--ease), background var(--fast); }\n.sw[data-state=\"checked\"] .sw-thumb { transform: translateX(19px); background: var(--background); }\n"
+    },
+    {
+      "path": "packages/css/src/components/10-choices.css",
+      "content": "/* ─── Choices: checkbox and radio, native inputs redrawn ─── */\n.choice { display: inline-flex; align-items: flex-start; gap: var(--s3); cursor: pointer; line-height: 1.4; }\n.choice input { appearance: none; flex: none; width: 18px; height: 18px; margin: 1px 0 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }\n.choice input[type=\"radio\"] { border-radius: var(--round); }\n.choice input:checked { background: var(--foreground); }\n.choice input[type=\"checkbox\"]:checked::after { content: \"\"; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px; border: solid var(--background); border-width: 0 2px 2px 0; transform: rotate(45deg); }\n.choice input[type=\"radio\"]:checked::after { content: \"\"; position: absolute; inset: 4px; border-radius: var(--round); background: var(--background); }\n.choice input[type=\"checkbox\"]:indeterminate { background: var(--foreground); }\n.choice input[type=\"checkbox\"]:indeterminate::after { content: \"\"; position: absolute; left: 3px; right: 3px; top: 7px; height: 2px; background: var(--background); }\n.choice input:disabled { opacity: 0.5; cursor: not-allowed; }\n.choice:has(input:disabled) { color: var(--muted); cursor: not-allowed; }\n.choice-group { display: grid; gap: var(--s3); border: 0; padding: 0; margin: 0; min-width: 0; }\n.choice-group > legend { padding: 0; margin-bottom: var(--s3); }\n"
+    }
+  ],
+  "a11y": [
+    "role=checkbox; Space toggles; Tab focuses.",
+    "indeterminate is exposed as aria-checked=mixed.",
+    "A visible label is clickable; without one, aria-label is required."
+  ],
+  "keywords": [
+    "tick",
+    "check",
+    "boolean"
+  ],
+  "kind": "components",
+  "import": "import {Checkbox} from '@monoline/react'",
+  "path": "packages/react/src/components/checkbox",
+  "files": [
+    "packages/react/src/components/checkbox/checkbox.demo.tsx",
+    "packages/react/src/components/checkbox/checkbox.test.tsx",
+    "packages/react/src/components/checkbox/checkbox.tsx",
+    "packages/react/src/components/checkbox/index.ts",
+    "packages/react/src/components/checkbox/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/checkbox/checkbox.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type ReactNode} from 'react';\nimport {Checkbox as RadixCheckbox} from 'radix-ui';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\nexport interface CheckboxProps extends Omit<ComponentPropsWithoutRef<typeof RadixCheckbox.Root>, 'children'> {\n  /** Visible label. Without it, give the checkbox an `aria-label`. */\n  label?: ReactNode;\n  invalid?: boolean;\n}\n\nconst Check = () => <svg className=\"checkbox-mark\" viewBox=\"0 0 10 10\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" aria-hidden=\"true\"><path d=\"M1.5 5.5l2.5 2.5 4.5-5.5\" /></svg>;\nconst Dash = () => <svg className=\"checkbox-mark\" viewBox=\"0 0 10 10\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" aria-hidden=\"true\"><path d=\"M2 5h6\" /></svg>;\n\n/**\n * Checkbox with indeterminate support. `checked` is `boolean | 'indeterminate'`.\n * @example <Checkbox label=\"Replies\" defaultChecked onCheckedChange={setOn} />\n */\nexport const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, CheckboxProps>(function Checkbox({label, invalid, className, id, ...rest}, ref) {\n  const f = useFieldControl();\n  const box = (\n    <RadixCheckbox.Root ref={ref} id={id ?? f.id} className={cx('checkbox', className)} aria-invalid={invalid || f['aria-invalid']} aria-describedby={f['aria-describedby']} {...rest}>\n      <RadixCheckbox.Indicator>{rest.checked === 'indeterminate' ? <Dash /> : <Check />}</RadixCheckbox.Indicator>\n    </RadixCheckbox.Root>\n  );\n  return label ? <label className=\"choice\">{box}<span>{label}</span></label> : box;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/checkbox/index.ts",
+      "content": "export {Checkbox} from './checkbox';\nexport type {CheckboxProps} from './checkbox';\n"
+    },
+    {
+      "path": "packages/react/src/components/checkbox/meta.json",
+      "content": "{\"name\":\"checkbox\",\"title\":\"Checkbox\",\"category\":\"forms\",\"description\":\"A box to turn one choice on or off, with an indeterminate state.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Checkbox\",\"uses\":[\"field\"],\"css\":[\"checkbox.css\",\"10-choices.css\"],\"a11y\":[\"role=checkbox; Space toggles; Tab focuses.\",\"indeterminate is exposed as aria-checked=mixed.\",\"A visible label is clickable; without one, aria-label is required.\"],\"keywords\":[\"tick\",\"check\",\"boolean\"]}\n"
+    }
+  ]
+}

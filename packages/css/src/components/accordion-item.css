@@ -1,0 +1,10 @@
+/* Radix accordion: item, trigger, content. The legacy details.accordion still works for CSS-only markup. */
+.acc-item { border-top: 1px solid var(--rule); }
+.acc-item:last-child { border-bottom: 1px solid var(--rule); }
+.acc-header { margin: 0; display: flex; }
+.acc-trigger { flex: 1; display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); padding: var(--s4) 0; font-weight: 500; text-align: left; }
+.acc-trigger::after { content: "+"; color: var(--muted); font-weight: 400; }
+.acc-trigger[data-state="open"]::after { content: "−"; }
+.acc-trigger:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+.acc-content { overflow: hidden; }
+.acc-body { padding: 0 0 var(--s5); max-width: var(--measure); color: var(--muted); }

@@ -1,0 +1,11 @@
+/* Tabs on Radix: state comes from data-state. The legacy .tab[aria-selected] rules still work for CSS-only markup. */
+.tabs-root { display: grid; gap: var(--s4); }
+.tabs-root[data-orientation="vertical"] { grid-template-columns: max-content 1fr; align-items: start; }
+.tabs-list { display: flex; gap: var(--s5); border-bottom: 1px solid var(--rule); }
+.tabs-list[data-orientation="vertical"] { flex-direction: column; gap: 0; border-bottom: 0; border-right: 1px solid var(--rule); }
+.tabs-trigger { padding: var(--s3) 0; margin-bottom: -1px; font-weight: 500; color: var(--muted); border-bottom: 2px solid transparent; }
+.tabs-list[data-orientation="vertical"] .tabs-trigger { padding: var(--s2) var(--s4) var(--s2) 0; margin: 0 -1px 0 0; border-bottom: 0; border-right: 2px solid transparent; text-align: left; }
+.tabs-trigger:hover:not(:disabled) { color: var(--foreground); }
+.tabs-trigger[data-state="active"] { color: var(--foreground); border-color: var(--foreground); }
+.tabs-trigger:disabled { opacity: 0.5; cursor: not-allowed; }
+.tabs-content:focus-visible { outline-offset: 4px; }

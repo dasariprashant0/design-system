@@ -1,0 +1,54 @@
+{
+  "name": "radio-group",
+  "title": "Radio group",
+  "category": "forms",
+  "description": "Pick exactly one option from a short list.",
+  "status": "stable",
+  "primitive": "radix-ui/RadioGroup",
+  "css": [
+    {
+      "path": "packages/css/src/components/checkbox.css",
+      "content": "/* Checkbox, radio and switch built on Radix (button + data-state). The legacy .choice/.switch classes still style native inputs. */\n.checkbox, .radio { appearance: none; flex: none; width: 18px; height: 18px; margin: 0; padding: 0; display: inline-grid; place-items: center; border: 1px solid var(--foreground); background: transparent; color: var(--background); cursor: pointer; transition: background var(--fast); }\n.radio { border-radius: var(--round); }\n.checkbox[data-state=\"checked\"], .checkbox[data-state=\"indeterminate\"], .radio[data-state=\"checked\"] { background: var(--foreground); }\n.checkbox:disabled, .radio:disabled, .sw:disabled { opacity: 0.5; cursor: not-allowed; }\n.checkbox[aria-invalid=\"true\"], .radio[aria-invalid=\"true\"] { border-color: var(--danger); }\n.checkbox-mark { width: 10px; height: 10px; }\n.radio-dot { width: 8px; height: 8px; border-radius: var(--round); background: var(--background); }\n.radio-group { display: grid; gap: var(--s3); }\n.radio-group[data-orientation=\"horizontal\"] { display: flex; flex-wrap: wrap; gap: var(--s5); }\n.sw { flex: none; width: 36px; height: 20px; padding: 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }\n.sw[data-state=\"checked\"] { background: var(--foreground); }\n.sw-thumb { display: block; width: 12px; height: 12px; background: var(--foreground); transform: translateX(3px); transition: transform var(--base) var(--ease), background var(--fast); }\n.sw[data-state=\"checked\"] .sw-thumb { transform: translateX(19px); background: var(--background); }\n"
+    },
+    {
+      "path": "packages/css/src/components/10-choices.css",
+      "content": "/* ─── Choices: checkbox and radio, native inputs redrawn ─── */\n.choice { display: inline-flex; align-items: flex-start; gap: var(--s3); cursor: pointer; line-height: 1.4; }\n.choice input { appearance: none; flex: none; width: 18px; height: 18px; margin: 1px 0 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }\n.choice input[type=\"radio\"] { border-radius: var(--round); }\n.choice input:checked { background: var(--foreground); }\n.choice input[type=\"checkbox\"]:checked::after { content: \"\"; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px; border: solid var(--background); border-width: 0 2px 2px 0; transform: rotate(45deg); }\n.choice input[type=\"radio\"]:checked::after { content: \"\"; position: absolute; inset: 4px; border-radius: var(--round); background: var(--background); }\n.choice input[type=\"checkbox\"]:indeterminate { background: var(--foreground); }\n.choice input[type=\"checkbox\"]:indeterminate::after { content: \"\"; position: absolute; left: 3px; right: 3px; top: 7px; height: 2px; background: var(--background); }\n.choice input:disabled { opacity: 0.5; cursor: not-allowed; }\n.choice:has(input:disabled) { color: var(--muted); cursor: not-allowed; }\n.choice-group { display: grid; gap: var(--s3); border: 0; padding: 0; margin: 0; min-width: 0; }\n.choice-group > legend { padding: 0; margin-bottom: var(--s3); }\n"
+    }
+  ],
+  "a11y": [
+    "role=radiogroup with role=radio items; one Tab stop for the group.",
+    "Arrow keys move and select; Space selects the focused item.",
+    "Give the group an accessible name with aria-label or aria-labelledby."
+  ],
+  "keywords": [
+    "option",
+    "single choice"
+  ],
+  "kind": "components",
+  "import": "import {RadioGroup} from '@monoline/react'",
+  "path": "packages/react/src/components/radio-group",
+  "files": [
+    "packages/react/src/components/radio-group/index.ts",
+    "packages/react/src/components/radio-group/meta.json",
+    "packages/react/src/components/radio-group/radio-group.demo.tsx",
+    "packages/react/src/components/radio-group/radio-group.test.tsx",
+    "packages/react/src/components/radio-group/radio-group.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/radio-group/index.ts",
+      "content": "export {RadioGroup, RadioGroupItem} from './radio-group';\nexport type {RadioGroupItemProps} from './radio-group';\n"
+    },
+    {
+      "path": "packages/react/src/components/radio-group/meta.json",
+      "content": "{\"name\":\"radio-group\",\"title\":\"Radio group\",\"category\":\"forms\",\"description\":\"Pick exactly one option from a short list.\",\"status\":\"stable\",\"primitive\":\"radix-ui/RadioGroup\",\"css\":[\"checkbox.css\",\"10-choices.css\"],\"a11y\":[\"role=radiogroup with role=radio items; one Tab stop for the group.\",\"Arrow keys move and select; Space selects the focused item.\",\"Give the group an accessible name with aria-label or aria-labelledby.\"],\"keywords\":[\"option\",\"single choice\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/radio-group/radio-group.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type ReactNode} from 'react';\nimport {RadioGroup as RadixRadioGroup} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport const RadioGroup = forwardRef<ElementRef<typeof RadixRadioGroup.Root>, ComponentPropsWithoutRef<typeof RadixRadioGroup.Root>>(function RadioGroup({className, ...rest}, ref) {\n  return <RadixRadioGroup.Root ref={ref} className={cx('radio-group', className)} {...rest} />;\n});\n\nexport interface RadioGroupItemProps extends Omit<ComponentPropsWithoutRef<typeof RadixRadioGroup.Item>, 'children'> {\n  label?: ReactNode;\n}\n\n/** One option in a RadioGroup. Arrow keys move between options; only the selected one is a Tab stop. */\nexport const RadioGroupItem = forwardRef<ElementRef<typeof RadixRadioGroup.Item>, RadioGroupItemProps>(function RadioGroupItem({label, className, ...rest}, ref) {\n  const item = (\n    <RadixRadioGroup.Item ref={ref} className={cx('radio', className)} {...rest}>\n      <RadixRadioGroup.Indicator className=\"radio-dot\" />\n    </RadixRadioGroup.Item>\n  );\n  return label ? <label className=\"choice\">{item}<span>{label}</span></label> : item;\n});\n"
+    }
+  ]
+}

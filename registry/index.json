@@ -3,6 +3,128 @@
   "version": "0.3.0",
   "components": [
     {
+      "name": "accordion",
+      "title": "Accordion",
+      "category": "data-display",
+      "description": "Stacked headings that each show or hide a section.",
+      "status": "stable",
+      "primitive": "radix-ui/Accordion",
+      "css": [
+        "accordion-item.css",
+        "15-accordion.css"
+      ],
+      "a11y": [
+        "Each trigger is a button inside a heading with aria-expanded and aria-controls.",
+        "Enter and Space toggle; Arrow keys, Home and End move between triggers.",
+        "single or multiple open items; collapsible lets the last one close."
+      ],
+      "keywords": [
+        "faq",
+        "collapse",
+        "expand"
+      ],
+      "kind": "components",
+      "import": "import {Accordion} from '@monoline/react'",
+      "path": "packages/react/src/components/accordion",
+      "files": [
+        "packages/react/src/components/accordion/accordion.demo.tsx",
+        "packages/react/src/components/accordion/accordion.test.tsx",
+        "packages/react/src/components/accordion/accordion.tsx",
+        "packages/react/src/components/accordion/index.ts",
+        "packages/react/src/components/accordion/meta.json"
+      ]
+    },
+    {
+      "name": "alert",
+      "title": "Alert",
+      "category": "feedback",
+      "description": "A message that stays on screen, with a title and a tone.",
+      "status": "stable",
+      "css": [
+        "alert.css"
+      ],
+      "a11y": [
+        "danger and warning are role=alert and announced at once; info and success are role=status and polite.",
+        "The title always states the meaning in words; colour is not the only signal."
+      ],
+      "keywords": [
+        "notice",
+        "message",
+        "banner",
+        "callout"
+      ],
+      "kind": "components",
+      "import": "import {Alert} from '@monoline/react'",
+      "path": "packages/react/src/components/alert",
+      "files": [
+        "packages/react/src/components/alert/alert.demo.tsx",
+        "packages/react/src/components/alert/alert.test.tsx",
+        "packages/react/src/components/alert/alert.tsx",
+        "packages/react/src/components/alert/index.ts",
+        "packages/react/src/components/alert/meta.json"
+      ]
+    },
+    {
+      "name": "avatar",
+      "title": "Avatar",
+      "category": "data-display",
+      "description": "A person or thing as an image with an initials fallback.",
+      "status": "stable",
+      "primitive": "radix-ui/Avatar",
+      "css": [
+        "19-avatar.css"
+      ],
+      "a11y": [
+        "name is required: it is the image alt text and the fallback's accessible name.",
+        "The fallback shows while the image loads or if it fails."
+      ],
+      "keywords": [
+        "profile",
+        "user",
+        "picture"
+      ],
+      "kind": "components",
+      "import": "import {Avatar} from '@monoline/react'",
+      "path": "packages/react/src/components/avatar",
+      "files": [
+        "packages/react/src/components/avatar/avatar.demo.tsx",
+        "packages/react/src/components/avatar/avatar.test.tsx",
+        "packages/react/src/components/avatar/avatar.tsx",
+        "packages/react/src/components/avatar/index.ts",
+        "packages/react/src/components/avatar/meta.json"
+      ]
+    },
+    {
+      "name": "badge",
+      "title": "Badge",
+      "category": "data-display",
+      "description": "A short status word or count.",
+      "status": "stable",
+      "css": [
+        "05-marks.css"
+      ],
+      "a11y": [
+        "Plain text in a span; the word carries the meaning, not the colour.",
+        "For a count that changes, put it inside an aria-live region yourself."
+      ],
+      "keywords": [
+        "status",
+        "pill",
+        "chip",
+        "count"
+      ],
+      "kind": "components",
+      "import": "import {Badge} from '@monoline/react'",
+      "path": "packages/react/src/components/badge",
+      "files": [
+        "packages/react/src/components/badge/badge.demo.tsx",
+        "packages/react/src/components/badge/badge.test.tsx",
+        "packages/react/src/components/badge/badge.tsx",
+        "packages/react/src/components/badge/index.ts",
+        "packages/react/src/components/badge/meta.json"
+      ]
+    },
+    {
       "name": "button",
       "title": "Button",
       "category": "buttons",
@@ -32,6 +154,478 @@
         "packages/react/src/components/button/button.tsx",
         "packages/react/src/components/button/index.ts",
         "packages/react/src/components/button/meta.json"
+      ]
+    },
+    {
+      "name": "card",
+      "title": "Card",
+      "category": "data-display",
+      "description": "A bordered group for one thing you can pick up or open.",
+      "status": "stable",
+      "primitive": "radix-ui/Slot",
+      "css": [
+        "06-boxes.css",
+        "card.css"
+      ],
+      "a11y": [
+        "Plain divs and a heading; no roles added.",
+        "With asChild on a link or button the whole card is one keyboard-focusable control."
+      ],
+      "keywords": [
+        "panel",
+        "tile",
+        "container"
+      ],
+      "kind": "components",
+      "import": "import {Card} from '@monoline/react'",
+      "path": "packages/react/src/components/card",
+      "files": [
+        "packages/react/src/components/card/card.demo.tsx",
+        "packages/react/src/components/card/card.test.tsx",
+        "packages/react/src/components/card/card.tsx",
+        "packages/react/src/components/card/index.ts",
+        "packages/react/src/components/card/meta.json"
+      ]
+    },
+    {
+      "name": "checkbox",
+      "title": "Checkbox",
+      "category": "forms",
+      "description": "A box to turn one choice on or off, with an indeterminate state.",
+      "status": "stable",
+      "primitive": "radix-ui/Checkbox",
+      "uses": [
+        "field"
+      ],
+      "css": [
+        "checkbox.css",
+        "10-choices.css"
+      ],
+      "a11y": [
+        "role=checkbox; Space toggles; Tab focuses.",
+        "indeterminate is exposed as aria-checked=mixed.",
+        "A visible label is clickable; without one, aria-label is required."
+      ],
+      "keywords": [
+        "tick",
+        "check",
+        "boolean"
+      ],
+      "kind": "components",
+      "import": "import {Checkbox} from '@monoline/react'",
+      "path": "packages/react/src/components/checkbox",
+      "files": [
+        "packages/react/src/components/checkbox/checkbox.demo.tsx",
+        "packages/react/src/components/checkbox/checkbox.test.tsx",
+        "packages/react/src/components/checkbox/checkbox.tsx",
+        "packages/react/src/components/checkbox/index.ts",
+        "packages/react/src/components/checkbox/meta.json"
+      ]
+    },
+    {
+      "name": "dialog",
+      "title": "Dialog",
+      "category": "overlays",
+      "description": "A modal window for a question or short task that blocks the page.",
+      "status": "stable",
+      "primitive": "radix-ui/Dialog",
+      "css": [
+        "dialog.css"
+      ],
+      "a11y": [
+        "role=dialog with aria-modal; the title names it and the description describes it.",
+        "Focus moves into the dialog, is trapped there, and returns to the trigger on close.",
+        "Escape and the Close button close it; the page behind is inert."
+      ],
+      "keywords": [
+        "modal",
+        "popup",
+        "confirm"
+      ],
+      "kind": "components",
+      "import": "import {Dialog} from '@monoline/react'",
+      "path": "packages/react/src/components/dialog",
+      "files": [
+        "packages/react/src/components/dialog/dialog.demo.tsx",
+        "packages/react/src/components/dialog/dialog.test.tsx",
+        "packages/react/src/components/dialog/dialog.tsx",
+        "packages/react/src/components/dialog/index.ts",
+        "packages/react/src/components/dialog/meta.json"
+      ]
+    },
+    {
+      "name": "field",
+      "title": "Field",
+      "category": "forms",
+      "description": "Connects a label, a control, a hint and an error with the right ids and ARIA.",
+      "status": "stable",
+      "uses": [
+        "label"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "11-field-states.css"
+      ],
+      "a11y": [
+        "The label is bound to the control by id, so it has an accessible name.",
+        "Hint and error are linked with aria-describedby; an error sets aria-invalid and is announced via role=alert.",
+        "required sets the native required attribute on the control."
+      ],
+      "keywords": [
+        "form",
+        "validation",
+        "input wrapper"
+      ],
+      "kind": "components",
+      "import": "import {Field} from '@monoline/react'",
+      "path": "packages/react/src/components/field",
+      "files": [
+        "packages/react/src/components/field/field.demo.tsx",
+        "packages/react/src/components/field/field.test.tsx",
+        "packages/react/src/components/field/field.tsx",
+        "packages/react/src/components/field/index.ts",
+        "packages/react/src/components/field/meta.json"
+      ]
+    },
+    {
+      "name": "input",
+      "title": "Input",
+      "category": "forms",
+      "description": "A single-line text field.",
+      "status": "stable",
+      "uses": [
+        "field"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "11-field-states.css"
+      ],
+      "a11y": [
+        "Native <input>: all keyboard and autofill behaviour is the browser's.",
+        "Inside a Field it is labelled and described automatically; invalid sets aria-invalid."
+      ],
+      "keywords": [
+        "text",
+        "textbox",
+        "form"
+      ],
+      "kind": "components",
+      "import": "import {Input} from '@monoline/react'",
+      "path": "packages/react/src/components/input",
+      "files": [
+        "packages/react/src/components/input/index.ts",
+        "packages/react/src/components/input/input.demo.tsx",
+        "packages/react/src/components/input/input.test.tsx",
+        "packages/react/src/components/input/input.tsx",
+        "packages/react/src/components/input/meta.json"
+      ]
+    },
+    {
+      "name": "label",
+      "title": "Label",
+      "category": "forms",
+      "description": "The visible name of a form control.",
+      "status": "stable",
+      "primitive": "radix-ui/Label",
+      "css": [
+        "03-form-fields.css"
+      ],
+      "a11y": [
+        "A real <label>: clicking it focuses the control it names.",
+        "required adds a visual marker; set required on the control for assistive tech."
+      ],
+      "keywords": [
+        "form",
+        "caption"
+      ],
+      "kind": "components",
+      "import": "import {Label} from '@monoline/react'",
+      "path": "packages/react/src/components/label",
+      "files": [
+        "packages/react/src/components/label/index.ts",
+        "packages/react/src/components/label/label.demo.tsx",
+        "packages/react/src/components/label/label.test.tsx",
+        "packages/react/src/components/label/label.tsx",
+        "packages/react/src/components/label/meta.json"
+      ]
+    },
+    {
+      "name": "progress",
+      "title": "Progress",
+      "category": "feedback",
+      "description": "How far along a task is, or that it is still working.",
+      "status": "stable",
+      "primitive": "radix-ui/Progress",
+      "css": [
+        "progress-bar.css"
+      ],
+      "a11y": [
+        "role=progressbar with aria-valuenow, aria-valuemin and aria-valuemax.",
+        "Indeterminate omits aria-valuenow.",
+        "aria-label is required."
+      ],
+      "keywords": [
+        "loading",
+        "bar",
+        "upload"
+      ],
+      "kind": "components",
+      "import": "import {Progress} from '@monoline/react'",
+      "path": "packages/react/src/components/progress",
+      "files": [
+        "packages/react/src/components/progress/index.ts",
+        "packages/react/src/components/progress/meta.json",
+        "packages/react/src/components/progress/progress.demo.tsx",
+        "packages/react/src/components/progress/progress.test.tsx",
+        "packages/react/src/components/progress/progress.tsx"
+      ]
+    },
+    {
+      "name": "radio-group",
+      "title": "Radio group",
+      "category": "forms",
+      "description": "Pick exactly one option from a short list.",
+      "status": "stable",
+      "primitive": "radix-ui/RadioGroup",
+      "css": [
+        "checkbox.css",
+        "10-choices.css"
+      ],
+      "a11y": [
+        "role=radiogroup with role=radio items; one Tab stop for the group.",
+        "Arrow keys move and select; Space selects the focused item.",
+        "Give the group an accessible name with aria-label or aria-labelledby."
+      ],
+      "keywords": [
+        "option",
+        "single choice"
+      ],
+      "kind": "components",
+      "import": "import {RadioGroup} from '@monoline/react'",
+      "path": "packages/react/src/components/radio-group",
+      "files": [
+        "packages/react/src/components/radio-group/index.ts",
+        "packages/react/src/components/radio-group/meta.json",
+        "packages/react/src/components/radio-group/radio-group.demo.tsx",
+        "packages/react/src/components/radio-group/radio-group.test.tsx",
+        "packages/react/src/components/radio-group/radio-group.tsx"
+      ]
+    },
+    {
+      "name": "separator",
+      "title": "Separator",
+      "category": "layout",
+      "description": "A thin rule between groups.",
+      "status": "stable",
+      "primitive": "radix-ui/Separator",
+      "css": [
+        "separator.css"
+      ],
+      "a11y": [
+        "Decorative by default: role=none so screen readers skip it.",
+        "With decorative=false it is role=separator with aria-orientation."
+      ],
+      "keywords": [
+        "divider",
+        "rule",
+        "hr"
+      ],
+      "kind": "components",
+      "import": "import {Separator} from '@monoline/react'",
+      "path": "packages/react/src/components/separator",
+      "files": [
+        "packages/react/src/components/separator/index.ts",
+        "packages/react/src/components/separator/meta.json",
+        "packages/react/src/components/separator/separator.demo.tsx",
+        "packages/react/src/components/separator/separator.test.tsx",
+        "packages/react/src/components/separator/separator.tsx"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "title": "Skeleton",
+      "category": "feedback",
+      "description": "A still placeholder shaped like the content that is loading.",
+      "status": "stable",
+      "css": [
+        "13-loading.css"
+      ],
+      "a11y": [
+        "aria-hidden: it carries no information.",
+        "Pair with an aria-busy region or a Spinner so loading is announced once."
+      ],
+      "keywords": [
+        "placeholder",
+        "loading",
+        "shimmer"
+      ],
+      "kind": "components",
+      "import": "import {Skeleton} from '@monoline/react'",
+      "path": "packages/react/src/components/skeleton",
+      "files": [
+        "packages/react/src/components/skeleton/index.ts",
+        "packages/react/src/components/skeleton/meta.json",
+        "packages/react/src/components/skeleton/skeleton.demo.tsx",
+        "packages/react/src/components/skeleton/skeleton.test.tsx",
+        "packages/react/src/components/skeleton/skeleton.tsx"
+      ]
+    },
+    {
+      "name": "spinner",
+      "title": "Spinner",
+      "category": "feedback",
+      "description": "A small indicator that something is loading.",
+      "status": "stable",
+      "css": [
+        "13-loading.css"
+      ],
+      "a11y": [
+        "role=status with an aria-label; polite, not interrupting.",
+        "Animation stops under prefers-reduced-motion."
+      ],
+      "keywords": [
+        "loading",
+        "busy",
+        "wait"
+      ],
+      "kind": "components",
+      "import": "import {Spinner} from '@monoline/react'",
+      "path": "packages/react/src/components/spinner",
+      "files": [
+        "packages/react/src/components/spinner/index.ts",
+        "packages/react/src/components/spinner/meta.json",
+        "packages/react/src/components/spinner/spinner.demo.tsx",
+        "packages/react/src/components/spinner/spinner.test.tsx",
+        "packages/react/src/components/spinner/spinner.tsx"
+      ]
+    },
+    {
+      "name": "switch",
+      "title": "Switch",
+      "category": "forms",
+      "description": "An on/off setting that takes effect immediately.",
+      "status": "stable",
+      "primitive": "radix-ui/Switch",
+      "uses": [
+        "field"
+      ],
+      "css": [
+        "checkbox.css"
+      ],
+      "a11y": [
+        "role=switch with aria-checked; Space and Enter toggle.",
+        "A visible label is clickable; without one, aria-label is required."
+      ],
+      "keywords": [
+        "toggle",
+        "on off",
+        "setting"
+      ],
+      "kind": "components",
+      "import": "import {Switch} from '@monoline/react'",
+      "path": "packages/react/src/components/switch",
+      "files": [
+        "packages/react/src/components/switch/index.ts",
+        "packages/react/src/components/switch/meta.json",
+        "packages/react/src/components/switch/switch.demo.tsx",
+        "packages/react/src/components/switch/switch.test.tsx",
+        "packages/react/src/components/switch/switch.tsx"
+      ]
+    },
+    {
+      "name": "tabs",
+      "title": "Tabs",
+      "category": "navigation",
+      "description": "Switch between related views in the same place.",
+      "status": "stable",
+      "primitive": "radix-ui/Tabs",
+      "css": [
+        "tabs.css",
+        "18-navigation.css"
+      ],
+      "a11y": [
+        "role=tablist, tab and tabpanel with aria-selected and aria-controls.",
+        "Arrow keys move between tabs, Home and End jump; only the active tab is a Tab stop.",
+        "Give the list an accessible name with aria-label."
+      ],
+      "keywords": [
+        "tabbed",
+        "panels",
+        "segments"
+      ],
+      "kind": "components",
+      "import": "import {Tabs} from '@monoline/react'",
+      "path": "packages/react/src/components/tabs",
+      "files": [
+        "packages/react/src/components/tabs/index.ts",
+        "packages/react/src/components/tabs/meta.json",
+        "packages/react/src/components/tabs/tabs.demo.tsx",
+        "packages/react/src/components/tabs/tabs.test.tsx",
+        "packages/react/src/components/tabs/tabs.tsx"
+      ]
+    },
+    {
+      "name": "textarea",
+      "title": "Textarea",
+      "category": "forms",
+      "description": "A multi-line text field.",
+      "status": "stable",
+      "uses": [
+        "field"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "11-field-states.css"
+      ],
+      "a11y": [
+        "Native <textarea>.",
+        "Inside a Field it is labelled and described automatically; invalid sets aria-invalid."
+      ],
+      "keywords": [
+        "multiline",
+        "text area",
+        "form"
+      ],
+      "kind": "components",
+      "import": "import {Textarea} from '@monoline/react'",
+      "path": "packages/react/src/components/textarea",
+      "files": [
+        "packages/react/src/components/textarea/index.ts",
+        "packages/react/src/components/textarea/meta.json",
+        "packages/react/src/components/textarea/textarea.demo.tsx",
+        "packages/react/src/components/textarea/textarea.test.tsx",
+        "packages/react/src/components/textarea/textarea.tsx"
+      ]
+    },
+    {
+      "name": "tooltip",
+      "title": "Tooltip",
+      "category": "overlays",
+      "description": "Short hint text on hover and keyboard focus.",
+      "status": "stable",
+      "primitive": "radix-ui/Tooltip",
+      "css": [
+        "tooltip.css"
+      ],
+      "a11y": [
+        "Shows on hover and on keyboard focus; the trigger gets aria-describedby while it is open.",
+        "Escape dismisses it; it stays open while the pointer is over it.",
+        "Never the only place for essential information: touch users do not get hover."
+      ],
+      "keywords": [
+        "hint",
+        "title",
+        "hover"
+      ],
+      "kind": "components",
+      "import": "import {Tooltip} from '@monoline/react'",
+      "path": "packages/react/src/components/tooltip",
+      "files": [
+        "packages/react/src/components/tooltip/index.ts",
+        "packages/react/src/components/tooltip/meta.json",
+        "packages/react/src/components/tooltip/tooltip.demo.tsx",
+        "packages/react/src/components/tooltip/tooltip.test.tsx",
+        "packages/react/src/components/tooltip/tooltip.tsx"
       ]
     }
   ]

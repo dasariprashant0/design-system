@@ -1,0 +1,54 @@
+{
+  "name": "card",
+  "title": "Card",
+  "category": "data-display",
+  "description": "A bordered group for one thing you can pick up or open.",
+  "status": "stable",
+  "primitive": "radix-ui/Slot",
+  "css": [
+    {
+      "path": "packages/css/src/components/06-boxes.css",
+      "content": "/* ─── Boxes ─── */\n.card { padding: var(--s5); box-shadow: inset 0 0 0 1px var(--rule); }\n.card-hover:hover { box-shadow: inset 0 0 0 1px var(--foreground); }\n.banner { display: flex; align-items: flex-start; gap: var(--s4); padding: var(--s3) var(--s4); box-shadow: inset 3px 0 0 var(--foreground); background: var(--wash); font-size: var(--text-sm); }\n.banner > :first-child { flex: 1; }\n.banner-accent { box-shadow: inset 3px 0 0 var(--accent); }\n.banner-warning { box-shadow: inset 3px 0 0 var(--warning); }\n.banner-danger { box-shadow: inset 3px 0 0 var(--danger); }\n.banner-warning strong { color: var(--warning); }\n.banner-danger strong { color: var(--danger); }\n.code-block { padding: var(--s4); background: var(--wash); box-shadow: inset 0 0 0 1px var(--rule); font-size: var(--text-sm); line-height: 1.6; white-space: pre-wrap; word-break: break-word; }\n"
+    },
+    {
+      "path": "packages/css/src/components/card.css",
+      "content": "/* Card parts. The legacy .card/.card-hover (06-boxes.css) draws the border. */\n.card-header { display: grid; gap: var(--s1); margin-bottom: var(--s4); }\n.card-title { font-weight: 500; font-size: var(--text-lg); }\n.card-description { color: var(--muted); font-size: var(--text-sm); }\n.card-content { display: grid; gap: var(--s3); }\n.card-footer { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; margin-top: var(--s5); }\na.card, button.card { display: block; text-align: left; text-decoration: none; color: inherit; width: 100%; }\n"
+    }
+  ],
+  "a11y": [
+    "Plain divs and a heading; no roles added.",
+    "With asChild on a link or button the whole card is one keyboard-focusable control."
+  ],
+  "keywords": [
+    "panel",
+    "tile",
+    "container"
+  ],
+  "kind": "components",
+  "import": "import {Card} from '@monoline/react'",
+  "path": "packages/react/src/components/card",
+  "files": [
+    "packages/react/src/components/card/card.demo.tsx",
+    "packages/react/src/components/card/card.test.tsx",
+    "packages/react/src/components/card/card.tsx",
+    "packages/react/src/components/card/index.ts",
+    "packages/react/src/components/card/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/card/card.tsx",
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {Slot} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface CardProps extends HTMLAttributes<HTMLDivElement> {\n  /** Adds a hover outline. Use with `asChild` on a link or button so the whole card is one control. */\n  interactive?: boolean;\n  asChild?: boolean;\n}\n\n/** A bordered group for one thing you can pick up or open. Prefer rules and space over cards for everything else. */\nexport const Card = forwardRef<HTMLDivElement, CardProps>(function Card({interactive, asChild, className, ...rest}, ref) {\n  const Comp = asChild ? Slot.Root : 'div';\n  return <Comp ref={ref} className={cx('card', interactive && 'card-hover', className)} {...rest} />;\n});\n\nconst part = (name: string, tag: 'div' | 'h3' | 'p', cls: string) => {\n  const C = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(function Part({className, ...rest}, ref) {\n    const T = tag as 'div';\n    return <T ref={ref as never} className={cx(cls, className)} {...rest} />;\n  });\n  C.displayName = name;\n  return C;\n};\n\nexport const CardHeader = part('CardHeader', 'div', 'card-header');\nexport const CardTitle = part('CardTitle', 'h3', 'card-title');\nexport const CardDescription = part('CardDescription', 'p', 'card-description');\nexport const CardContent = part('CardContent', 'div', 'card-content');\nexport const CardFooter = part('CardFooter', 'div', 'card-footer');\n"
+    },
+    {
+      "path": "packages/react/src/components/card/index.ts",
+      "content": "export {Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter} from './card';\nexport type {CardProps} from './card';\n"
+    },
+    {
+      "path": "packages/react/src/components/card/meta.json",
+      "content": "{\"name\":\"card\",\"title\":\"Card\",\"category\":\"data-display\",\"description\":\"A bordered group for one thing you can pick up or open.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Slot\",\"css\":[\"06-boxes.css\",\"card.css\"],\"a11y\":[\"Plain divs and a heading; no roles added.\",\"With asChild on a link or button the whole card is one keyboard-focusable control.\"],\"keywords\":[\"panel\",\"tile\",\"container\"]}\n"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "alert",
+  "title": "Alert",
+  "category": "feedback",
+  "description": "A message that stays on screen, with a title and a tone.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/alert.css",
+      "content": "/* Alert: a lasting message with a title. Same left-bar language as .banner. */\n.alert { display: grid; gap: var(--s1); padding: var(--s3) var(--s4); background: var(--wash); box-shadow: inset 3px 0 0 var(--foreground); font-size: var(--text-sm); }\n.alert-title { font-weight: 500; }\n.alert-description { color: var(--muted); }\n.alert[data-tone=\"success\"] { box-shadow: inset 3px 0 0 var(--ok); }\n.alert[data-tone=\"warning\"] { box-shadow: inset 3px 0 0 var(--warning); }\n.alert[data-tone=\"danger\"] { box-shadow: inset 3px 0 0 var(--danger); }\n.alert[data-tone=\"success\"] .alert-title { color: var(--ok); }\n.alert[data-tone=\"warning\"] .alert-title { color: var(--warning); }\n.alert[data-tone=\"danger\"] .alert-title { color: var(--danger); }\n"
+    }
+  ],
+  "a11y": [
+    "danger and warning are role=alert and announced at once; info and success are role=status and polite.",
+    "The title always states the meaning in words; colour is not the only signal."
+  ],
+  "keywords": [
+    "notice",
+    "message",
+    "banner",
+    "callout"
+  ],
+  "kind": "components",
+  "import": "import {Alert} from '@monoline/react'",
+  "path": "packages/react/src/components/alert",
+  "files": [
+    "packages/react/src/components/alert/alert.demo.tsx",
+    "packages/react/src/components/alert/alert.test.tsx",
+    "packages/react/src/components/alert/alert.tsx",
+    "packages/react/src/components/alert/index.ts",
+    "packages/react/src/components/alert/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/alert/alert.tsx",
+      "content": "import {forwardRef, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  tone?: 'info' | 'success' | 'warning' | 'danger';\n  title: ReactNode;\n  children?: ReactNode;\n}\n\n/**\n * A message that stays on screen. `danger` and `warning` use role=\"alert\" (announced at once); others use role=\"status\".\n * Always has a title: the word carries the meaning, the colour is extra.\n */\nexport const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert({tone = 'info', title, children, className, ...rest}, ref) {\n  const urgent = tone === 'danger' || tone === 'warning';\n  return (\n    <div ref={ref} role={urgent ? 'alert' : 'status'} data-tone={tone} className={cx('alert', className)} {...rest}>\n      <div className=\"alert-title\">{title}</div>\n      {children && <div className=\"alert-description\">{children}</div>}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/alert/index.ts",
+      "content": "export {Alert} from './alert';\nexport type {AlertProps} from './alert';\n"
+    },
+    {
+      "path": "packages/react/src/components/alert/meta.json",
+      "content": "{\"name\":\"alert\",\"title\":\"Alert\",\"category\":\"feedback\",\"description\":\"A message that stays on screen, with a title and a tone.\",\"status\":\"stable\",\"css\":[\"alert.css\"],\"a11y\":[\"danger and warning are role=alert and announced at once; info and success are role=status and polite.\",\"The title always states the meaning in words; colour is not the only signal.\"],\"keywords\":[\"notice\",\"message\",\"banner\",\"callout\"]}\n"
+    }
+  ]
+}
