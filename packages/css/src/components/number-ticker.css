@@ -1,0 +1,2 @@
+/* Number ticker: digits keep a fixed width so the count never shifts the layout. */
+.number-ticker { font-variant-numeric: tabular-nums; }

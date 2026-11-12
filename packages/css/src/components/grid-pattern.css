@@ -1,0 +1,3 @@
+/* Grid pattern: fills the positioned parent, sits behind content, takes its colour from `color`. */
+.grid-pattern { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--rule); pointer-events: none; }
+.grid-pattern-fade { mask-image: radial-gradient(ellipse at center, var(--foreground) 0%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at center, var(--foreground) 0%, transparent 75%); }
