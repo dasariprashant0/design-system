@@ -1,0 +1,50 @@
+{
+  "name": "popover",
+  "title": "Popover",
+  "category": "overlays",
+  "description": "A floating panel of content or controls anchored to a button.",
+  "status": "stable",
+  "primitive": "radix-ui/Popover",
+  "css": [
+    {
+      "path": "packages/css/src/components/popover.css",
+      "content": "/* Popover, dropdown menu and select content on Radix: a bordered panel above the page. */\n.popover { z-index: var(--z-drawer); min-width: 200px; max-width: min(360px, 92vw); padding: var(--s4); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.popover:focus-visible { outline-offset: 2px; }\n.menu-content { z-index: var(--z-drawer); min-width: 200px; padding: var(--s1) 0; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.menu-content .menu-item { cursor: pointer; }\n.menu-content .menu-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.menu-content .menu-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.menu-content .menu-item[data-variant=\"danger\"][data-highlighted] { background: var(--danger); }\n.menu-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.menu-indicator { width: 14px; display: inline-flex; justify-content: center; }\n.menu-item-check { display: flex; align-items: center; gap: var(--s3); }\n"
+    }
+  ],
+  "a11y": [
+    "The trigger has aria-expanded and aria-controls; the panel is role=dialog.",
+    "Focus moves into the panel; Escape or an outside click closes it and focus returns to the trigger."
+  ],
+  "keywords": [
+    "floating",
+    "popup",
+    "overlay"
+  ],
+  "kind": "components",
+  "import": "import {Popover} from '@monoline/react'",
+  "path": "packages/react/src/components/popover",
+  "files": [
+    "packages/react/src/components/popover/index.ts",
+    "packages/react/src/components/popover/meta.json",
+    "packages/react/src/components/popover/popover.demo.tsx",
+    "packages/react/src/components/popover/popover.test.tsx",
+    "packages/react/src/components/popover/popover.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/popover/index.ts",
+      "content": "export {Popover, PopoverTrigger, PopoverAnchor, PopoverClose, PopoverContent} from './popover';\n"
+    },
+    {
+      "path": "packages/react/src/components/popover/meta.json",
+      "content": "{\"name\":\"popover\",\"title\":\"Popover\",\"category\":\"overlays\",\"description\":\"A floating panel of content or controls anchored to a button.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Popover\",\"css\":[\"popover.css\"],\"a11y\":[\"The trigger has aria-expanded and aria-controls; the panel is role=dialog.\",\"Focus moves into the panel; Escape or an outside click closes it and focus returns to the trigger.\"],\"keywords\":[\"floating\",\"popup\",\"overlay\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/popover/popover.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Popover as RadixPopover} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport const Popover = RadixPopover.Root;\nexport const PopoverTrigger = RadixPopover.Trigger;\nexport const PopoverAnchor = RadixPopover.Anchor;\nexport const PopoverClose = RadixPopover.Close;\n\n/** A floating panel anchored to its trigger. Focus moves in, Escape closes and returns focus to the trigger. */\nexport const PopoverContent = forwardRef<ElementRef<typeof RadixPopover.Content>, ComponentPropsWithoutRef<typeof RadixPopover.Content>>(function PopoverContent({className, sideOffset = 8, align = 'start', ...rest}, ref) {\n  return (\n    <RadixPopover.Portal>\n      <RadixPopover.Content ref={ref} sideOffset={sideOffset} align={align} className={cx('popover', className)} {...rest} />\n    </RadixPopover.Portal>\n  );\n});\n"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "dropdown-menu",
+  "title": "Dropdown menu",
+  "category": "overlays",
+  "description": "A list of actions that opens from a button.",
+  "status": "stable",
+  "primitive": "radix-ui/DropdownMenu",
+  "css": [
+    {
+      "path": "packages/css/src/components/popover.css",
+      "content": "/* Popover, dropdown menu and select content on Radix: a bordered panel above the page. */\n.popover { z-index: var(--z-drawer); min-width: 200px; max-width: min(360px, 92vw); padding: var(--s4); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.popover:focus-visible { outline-offset: 2px; }\n.menu-content { z-index: var(--z-drawer); min-width: 200px; padding: var(--s1) 0; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.menu-content .menu-item { cursor: pointer; }\n.menu-content .menu-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.menu-content .menu-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.menu-content .menu-item[data-variant=\"danger\"][data-highlighted] { background: var(--danger); }\n.menu-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.menu-indicator { width: 14px; display: inline-flex; justify-content: center; }\n.menu-item-check { display: flex; align-items: center; gap: var(--s3); }\n"
+    },
+    {
+      "path": "packages/css/src/components/17-dropdown-menu.css",
+      "content": "/* ─── Dropdown menu: <details class=\"dropdown\">; monoline.js closes it on Escape and outside click ─── */\n.dropdown { position: relative; display: inline-block; }\n.dropdown > summary { list-style: none; cursor: pointer; }\n.dropdown > summary::-webkit-details-marker { display: none; }\n.menu { position: absolute; left: 0; top: calc(100% + var(--s2)); z-index: var(--z-drawer); min-width: 200px; background: var(--background); border: 1px solid var(--foreground); padding: var(--s1) 0; }\n.menu-end { left: auto; right: 0; }\n.menu-item { display: flex; justify-content: space-between; gap: var(--s5); width: 100%; padding: var(--s2) var(--s4); font-size: var(--text-sm); text-align: left; }\n.menu-item:hover, .menu-item:focus-visible { background: var(--foreground); color: var(--background); outline-offset: -2px; }\n.menu-item.danger:hover { background: var(--danger); color: var(--background); }\n.menu-sep { border: 0; border-top: 1px solid var(--rule); margin: var(--s1) 0; }\n"
+    }
+  ],
+  "a11y": [
+    "role=menu with menuitem, menuitemcheckbox and menuitemradio items.",
+    "Arrow keys move, Enter and Space activate, Escape closes and returns focus, type-ahead jumps to an item.",
+    "The trigger has aria-haspopup and aria-expanded."
+  ],
+  "keywords": [
+    "menu",
+    "actions",
+    "context",
+    "options"
+  ],
+  "kind": "components",
+  "import": "import {DropdownMenu} from '@monoline/react'",
+  "path": "packages/react/src/components/dropdown-menu",
+  "files": [
+    "packages/react/src/components/dropdown-menu/dropdown-menu.demo.tsx",
+    "packages/react/src/components/dropdown-menu/dropdown-menu.test.tsx",
+    "packages/react/src/components/dropdown-menu/dropdown-menu.tsx",
+    "packages/react/src/components/dropdown-menu/index.ts",
+    "packages/react/src/components/dropdown-menu/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/dropdown-menu/dropdown-menu.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {DropdownMenu as RadixMenu} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport const DropdownMenu = RadixMenu.Root;\nexport const DropdownMenuTrigger = RadixMenu.Trigger;\nexport const DropdownMenuGroup = RadixMenu.Group;\nexport const DropdownMenuRadioGroup = RadixMenu.RadioGroup;\n\nexport const DropdownMenuContent = forwardRef<ElementRef<typeof RadixMenu.Content>, ComponentPropsWithoutRef<typeof RadixMenu.Content>>(function DropdownMenuContent({className, sideOffset = 6, align = 'start', ...rest}, ref) {\n  return <RadixMenu.Portal><RadixMenu.Content ref={ref} sideOffset={sideOffset} align={align} className={cx('menu-content', className)} {...rest} /></RadixMenu.Portal>;\n});\n\nexport interface DropdownMenuItemProps extends ComponentPropsWithoutRef<typeof RadixMenu.Item> {\n  /** `danger` highlights in the danger colour. */\n  tone?: 'default' | 'danger';\n}\nexport const DropdownMenuItem = forwardRef<ElementRef<typeof RadixMenu.Item>, DropdownMenuItemProps>(function DropdownMenuItem({className, tone = 'default', ...rest}, ref) {\n  return <RadixMenu.Item ref={ref} data-variant={tone} className={cx('menu-item', className)} {...rest} />;\n});\n\nexport const DropdownMenuCheckboxItem = forwardRef<ElementRef<typeof RadixMenu.CheckboxItem>, ComponentPropsWithoutRef<typeof RadixMenu.CheckboxItem>>(function DropdownMenuCheckboxItem({className, children, ...rest}, ref) {\n  return <RadixMenu.CheckboxItem ref={ref} className={cx('menu-item', className)} {...rest}><span className=\"menu-item-check\"><span className=\"menu-indicator\"><RadixMenu.ItemIndicator>✓</RadixMenu.ItemIndicator></span>{children}</span></RadixMenu.CheckboxItem>;\n});\n\nexport const DropdownMenuRadioItem = forwardRef<ElementRef<typeof RadixMenu.RadioItem>, ComponentPropsWithoutRef<typeof RadixMenu.RadioItem>>(function DropdownMenuRadioItem({className, children, ...rest}, ref) {\n  return <RadixMenu.RadioItem ref={ref} className={cx('menu-item', className)} {...rest}><span className=\"menu-item-check\"><span className=\"menu-indicator\"><RadixMenu.ItemIndicator>●</RadixMenu.ItemIndicator></span>{children}</span></RadixMenu.RadioItem>;\n});\n\nexport const DropdownMenuLabel = forwardRef<ElementRef<typeof RadixMenu.Label>, ComponentPropsWithoutRef<typeof RadixMenu.Label>>(function DropdownMenuLabel({className, ...rest}, ref) {\n  return <RadixMenu.Label ref={ref} className={cx('menu-label', className)} {...rest} />;\n});\nexport const DropdownMenuSeparator = forwardRef<ElementRef<typeof RadixMenu.Separator>, ComponentPropsWithoutRef<typeof RadixMenu.Separator>>(function DropdownMenuSeparator({className, ...rest}, ref) {\n  return <RadixMenu.Separator ref={ref} className={cx('menu-sep', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/dropdown-menu/index.ts",
+      "content": "export {DropdownMenu, DropdownMenuTrigger, DropdownMenuGroup, DropdownMenuRadioGroup, DropdownMenuContent, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuRadioItem, DropdownMenuLabel, DropdownMenuSeparator} from './dropdown-menu';\nexport type {DropdownMenuItemProps} from './dropdown-menu';\n"
+    },
+    {
+      "path": "packages/react/src/components/dropdown-menu/meta.json",
+      "content": "{\"name\":\"dropdown-menu\",\"title\":\"Dropdown menu\",\"category\":\"overlays\",\"description\":\"A list of actions that opens from a button.\",\"status\":\"stable\",\"primitive\":\"radix-ui/DropdownMenu\",\"css\":[\"popover.css\",\"17-dropdown-menu.css\"],\"a11y\":[\"role=menu with menuitem, menuitemcheckbox and menuitemradio items.\",\"Arrow keys move, Enter and Space activate, Escape closes and returns focus, type-ahead jumps to an item.\",\"The trigger has aria-haspopup and aria-expanded.\"],\"keywords\":[\"menu\",\"actions\",\"context\",\"options\"]}\n"
+    }
+  ]
+}

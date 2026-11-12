@@ -15,6 +15,8 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 
 ### buttons
 - Button (button, stable): Triggers an action. Native button with solid, line, ghost and danger variants. Source: packages/react/src/components/button/
+- Toggle (toggle, stable): A button that stays pressed or not. Source: packages/react/src/components/toggle/
+- Toggle group (toggle-group, stable): A row of toggles where one or several can be on. Source: packages/react/src/components/toggle-group/
 
 ### forms
 - Checkbox (checkbox, stable): A box to turn one choice on or off, with an indeterminate state. Source: packages/react/src/components/checkbox/
@@ -22,6 +24,8 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Input (input, stable): A single-line text field. Source: packages/react/src/components/input/
 - Label (label, stable): The visible name of a form control. Source: packages/react/src/components/label/
 - Radio group (radio-group, stable): Pick exactly one option from a short list. Source: packages/react/src/components/radio-group/
+- Select (select, stable): Pick one value from a list of five or more options. Source: packages/react/src/components/select/
+- Slider (slider, stable): Pick a number, or a range, by dragging or with the keyboard. Source: packages/react/src/components/slider/
 - Switch (switch, stable): An on/off setting that takes effect immediately. Source: packages/react/src/components/switch/
 - Textarea (textarea, stable): A multi-line text field. Source: packages/react/src/components/textarea/
 
@@ -39,7 +43,11 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 
 ### overlays
 - Dialog (dialog, stable): A modal window for a question or short task that blocks the page. Source: packages/react/src/components/dialog/
+- Dropdown menu (dropdown-menu, stable): A list of actions that opens from a button. Source: packages/react/src/components/dropdown-menu/
+- Popover (popover, stable): A floating panel of content or controls anchored to a button. Source: packages/react/src/components/popover/
 - Tooltip (tooltip, stable): Short hint text on hover and keyboard focus. Source: packages/react/src/components/tooltip/
 
 ### navigation
+- Breadcrumb (breadcrumb, stable): The path to the current page. Source: packages/react/src/components/breadcrumb/
+- Pagination (pagination, stable): Move between pages of results. Source: packages/react/src/components/pagination/
 - Tabs (tabs, stable): Switch between related views in the same place. Source: packages/react/src/components/tabs/

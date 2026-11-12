@@ -1,0 +1,17 @@
+/* Text, heading, stack, kbd helpers used by the React primitives. */
+.text { margin: 0; }
+.text-sm { font-size: var(--text-sm); }
+.text-xs { font-size: var(--text-xs); }
+.text-lg { font-size: var(--text-lg); }
+.text-muted { color: var(--muted); }
+.text-accent { color: var(--accent-text); }
+.text-danger { color: var(--danger); }
+.text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.heading { font-weight: 500; line-height: 1.2; text-wrap: balance; }
+.heading-sm { font-size: var(--text-lg); }
+.heading-md { font-size: var(--display-sm); }
+.heading-display { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.95; }
+.heading-display.heading-md { font-size: var(--display-md); }
+.heading-display.heading-sm { font-size: var(--display-sm); }
+.stack { display: flex; flex-direction: column; gap: var(--stack-gap, var(--s4)); }
+.stack[data-direction="row"] { flex-direction: row; flex-wrap: wrap; align-items: center; }

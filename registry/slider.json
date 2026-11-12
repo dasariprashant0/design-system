@@ -1,0 +1,55 @@
+{
+  "name": "slider",
+  "title": "Slider",
+  "category": "forms",
+  "description": "Pick a number, or a range, by dragging or with the keyboard.",
+  "status": "stable",
+  "primitive": "radix-ui/Slider",
+  "css": [
+    {
+      "path": "packages/css/src/components/slider.css",
+      "content": "/* Slider and toggle on Radix. */\n.slider { position: relative; display: flex; align-items: center; width: 100%; height: 20px; touch-action: none; user-select: none; }\n.slider-track { position: relative; flex: 1; height: 2px; background: var(--rule); }\n.slider-range { position: absolute; height: 100%; background: var(--foreground); }\n.slider-thumb { display: block; width: 14px; height: 14px; background: var(--foreground); border: 0; cursor: grab; }\n.slider[data-disabled] { opacity: 0.5; }\n.toggle { padding: var(--s2) var(--s4); border: 1px solid var(--rule); color: var(--muted); font-size: var(--text-sm); }\n.toggle:hover:not(:disabled) { color: var(--foreground); border-color: var(--foreground); }\n.toggle[data-state=\"on\"] { background: var(--foreground); color: var(--background); border-color: var(--foreground); }\n.toggle:disabled { opacity: 0.5; cursor: not-allowed; }\n.toggle-group { display: inline-flex; gap: var(--s2); }\n"
+    },
+    {
+      "path": "packages/css/src/components/12-range.css",
+      "content": "/* ─── Range, progress, meter ─── */\n.range { appearance: none; width: 100%; height: 20px; background: transparent; cursor: pointer; }\n.range::-webkit-slider-runnable-track { height: 2px; background: var(--foreground); }\n.range::-moz-range-track { height: 2px; background: var(--foreground); }\n.range::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; margin-top: -6px; background: var(--foreground); border: 0; border-radius: var(--radius); }\n.range::-moz-range-thumb { width: 14px; height: 14px; background: var(--foreground); border: 0; border-radius: var(--radius); }\n.range:disabled { opacity: 0.5; cursor: not-allowed; }\n.progress { appearance: none; display: block; width: 100%; height: 8px; border: 1px solid var(--foreground); background: transparent; border-radius: var(--radius); overflow: hidden; }\n.progress::-webkit-progress-bar { background: transparent; }\n.progress::-webkit-progress-value { background: var(--accent); }\n.progress::-moz-progress-bar { background: var(--accent); }\n.progress:indeterminate { background: var(--hatch); }\n"
+    }
+  ],
+  "a11y": [
+    "Each thumb is role=slider with aria-valuenow, min and max.",
+    "Arrow keys step; Home and End jump to the ends; PageUp and PageDown take larger steps.",
+    "aria-label is required; a range labels its thumbs minimum and maximum."
+  ],
+  "keywords": [
+    "range",
+    "volume",
+    "number"
+  ],
+  "kind": "components",
+  "import": "import {Slider} from '@monoline/react'",
+  "path": "packages/react/src/components/slider",
+  "files": [
+    "packages/react/src/components/slider/index.ts",
+    "packages/react/src/components/slider/meta.json",
+    "packages/react/src/components/slider/slider.demo.tsx",
+    "packages/react/src/components/slider/slider.test.tsx",
+    "packages/react/src/components/slider/slider.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/slider/index.ts",
+      "content": "export {Slider} from './slider';\nexport type {SliderProps} from './slider';\n"
+    },
+    {
+      "path": "packages/react/src/components/slider/meta.json",
+      "content": "{\"name\":\"slider\",\"title\":\"Slider\",\"category\":\"forms\",\"description\":\"Pick a number, or a range, by dragging or with the keyboard.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Slider\",\"css\":[\"slider.css\",\"12-range.css\"],\"a11y\":[\"Each thumb is role=slider with aria-valuenow, min and max.\",\"Arrow keys step; Home and End jump to the ends; PageUp and PageDown take larger steps.\",\"aria-label is required; a range labels its thumbs minimum and maximum.\"],\"keywords\":[\"range\",\"volume\",\"number\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/slider/slider.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Slider as RadixSlider} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface SliderProps extends Omit<ComponentPropsWithoutRef<typeof RadixSlider.Root>, 'value' | 'defaultValue' | 'onValueChange'> {\n  /** A number for one thumb, or [low, high] for a range. */\n  value?: number | [number, number];\n  defaultValue?: number | [number, number];\n  onValueChange?: (value: number[]) => void;\n  /** Accessible name for each thumb. One string for a single thumb, or [low, high] labels for a range. */\n  'aria-label': string;\n}\n\nconst arr = (v: number | [number, number] | undefined) => (v === undefined ? undefined : Array.isArray(v) ? v : [v]);\n\n/** One thumb or two. Arrow keys step, Home and End jump to the ends, PageUp and PageDown take larger steps. */\nexport const Slider = forwardRef<ElementRef<typeof RadixSlider.Root>, SliderProps>(function Slider({value, defaultValue, className, 'aria-label': label, ...rest}, ref) {\n  const v = arr(value), d = arr(defaultValue) ?? (v ? undefined : [0]);\n  const count = (v ?? d ?? [0]).length;\n  return (\n    <RadixSlider.Root ref={ref} value={v} defaultValue={d} className={cx('slider', className)} {...rest}>\n      <RadixSlider.Track className=\"slider-track\"><RadixSlider.Range className=\"slider-range\" /></RadixSlider.Track>\n      {Array.from({length: count}, (_, i) => (\n        <RadixSlider.Thumb key={i} className=\"slider-thumb\" aria-label={count > 1 ? `${label} ${i === 0 ? 'minimum' : 'maximum'}` : label} />\n      ))}\n    </RadixSlider.Root>\n  );\n});\n"
+    }
+  ]
+}

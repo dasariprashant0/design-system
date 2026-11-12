@@ -1,0 +1,51 @@
+{
+  "name": "toggle-group",
+  "title": "Toggle group",
+  "category": "buttons",
+  "description": "A row of toggles where one or several can be on.",
+  "status": "stable",
+  "primitive": "radix-ui/ToggleGroup",
+  "css": [
+    {
+      "path": "packages/css/src/components/slider.css",
+      "content": "/* Slider and toggle on Radix. */\n.slider { position: relative; display: flex; align-items: center; width: 100%; height: 20px; touch-action: none; user-select: none; }\n.slider-track { position: relative; flex: 1; height: 2px; background: var(--rule); }\n.slider-range { position: absolute; height: 100%; background: var(--foreground); }\n.slider-thumb { display: block; width: 14px; height: 14px; background: var(--foreground); border: 0; cursor: grab; }\n.slider[data-disabled] { opacity: 0.5; }\n.toggle { padding: var(--s2) var(--s4); border: 1px solid var(--rule); color: var(--muted); font-size: var(--text-sm); }\n.toggle:hover:not(:disabled) { color: var(--foreground); border-color: var(--foreground); }\n.toggle[data-state=\"on\"] { background: var(--foreground); color: var(--background); border-color: var(--foreground); }\n.toggle:disabled { opacity: 0.5; cursor: not-allowed; }\n.toggle-group { display: inline-flex; gap: var(--s2); }\n"
+    }
+  ],
+  "a11y": [
+    "single type is role=radiogroup with radio items; multiple type is a group of toggle buttons.",
+    "Arrow keys move focus between items; Space and Enter toggle.",
+    "Give the group an aria-label."
+  ],
+  "keywords": [
+    "segmented",
+    "options",
+    "button group"
+  ],
+  "kind": "components",
+  "import": "import {ToggleGroup} from '@monoline/react'",
+  "path": "packages/react/src/components/toggle-group",
+  "files": [
+    "packages/react/src/components/toggle-group/index.ts",
+    "packages/react/src/components/toggle-group/meta.json",
+    "packages/react/src/components/toggle-group/toggle-group.demo.tsx",
+    "packages/react/src/components/toggle-group/toggle-group.test.tsx",
+    "packages/react/src/components/toggle-group/toggle-group.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/toggle-group/index.ts",
+      "content": "export {ToggleGroup, ToggleGroupItem} from './toggle-group';\n"
+    },
+    {
+      "path": "packages/react/src/components/toggle-group/meta.json",
+      "content": "{\"name\":\"toggle-group\",\"title\":\"Toggle group\",\"category\":\"buttons\",\"description\":\"A row of toggles where one or several can be on.\",\"status\":\"stable\",\"primitive\":\"radix-ui/ToggleGroup\",\"css\":[\"slider.css\"],\"a11y\":[\"single type is role=radiogroup with radio items; multiple type is a group of toggle buttons.\",\"Arrow keys move focus between items; Space and Enter toggle.\",\"Give the group an aria-label.\"],\"keywords\":[\"segmented\",\"options\",\"button group\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/toggle-group/toggle-group.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {ToggleGroup as RadixToggleGroup} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** `type=\"single\"` for one choice (like a segmented control) or `type=\"multiple\"`. Arrow keys move between items. */\nexport const ToggleGroup = forwardRef<ElementRef<typeof RadixToggleGroup.Root>, ComponentPropsWithoutRef<typeof RadixToggleGroup.Root>>(function ToggleGroup({className, ...rest}, ref) {\n  return <RadixToggleGroup.Root ref={ref} className={cx('toggle-group', className)} {...rest} />;\n});\nexport const ToggleGroupItem = forwardRef<ElementRef<typeof RadixToggleGroup.Item>, ComponentPropsWithoutRef<typeof RadixToggleGroup.Item>>(function ToggleGroupItem({className, ...rest}, ref) {\n  return <RadixToggleGroup.Item ref={ref} className={cx('toggle', className)} {...rest} />;\n});\n"
+    }
+  ]
+}

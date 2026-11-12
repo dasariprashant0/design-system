@@ -41,6 +41,15 @@ A11y:
 - For a count that changes, put it inside an aria-live region yourself.
 Files: packages/react/src/components/badge/badge.demo.tsx, packages/react/src/components/badge/badge.test.tsx, packages/react/src/components/badge/badge.tsx, packages/react/src/components/badge/index.ts, packages/react/src/components/badge/meta.json
 
+## Breadcrumb (breadcrumb)
+The path to the current page.
+Import: import {Breadcrumb} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A nav landmark with an aria-label, containing an ordered list.
+- The current page has aria-current=page and is not a link.
+Files: packages/react/src/components/breadcrumb/breadcrumb.demo.tsx, packages/react/src/components/breadcrumb/breadcrumb.test.tsx, packages/react/src/components/breadcrumb/breadcrumb.tsx, packages/react/src/components/breadcrumb/index.ts, packages/react/src/components/breadcrumb/meta.json
+
 ## Button (button)
 Triggers an action. Native button with solid, line, ghost and danger variants.
 Import: import {Button} from '@monoline/react'
@@ -80,6 +89,16 @@ A11y:
 - Escape and the Close button close it; the page behind is inert.
 Files: packages/react/src/components/dialog/dialog.demo.tsx, packages/react/src/components/dialog/dialog.test.tsx, packages/react/src/components/dialog/dialog.tsx, packages/react/src/components/dialog/index.ts, packages/react/src/components/dialog/meta.json
 
+## Dropdown menu (dropdown-menu)
+A list of actions that opens from a button.
+Import: import {DropdownMenu} from '@monoline/react'
+Primitive: radix-ui/DropdownMenu | Status: stable
+A11y:
+- role=menu with menuitem, menuitemcheckbox and menuitemradio items.
+- Arrow keys move, Enter and Space activate, Escape closes and returns focus, type-ahead jumps to an item.
+- The trigger has aria-haspopup and aria-expanded.
+Files: packages/react/src/components/dropdown-menu/dropdown-menu.demo.tsx, packages/react/src/components/dropdown-menu/dropdown-menu.test.tsx, packages/react/src/components/dropdown-menu/dropdown-menu.tsx, packages/react/src/components/dropdown-menu/index.ts, packages/react/src/components/dropdown-menu/meta.json
+
 ## Field (field)
 Connects a label, a control, a hint and an error with the right ids and ARIA.
 Import: import {Field} from '@monoline/react'
@@ -108,6 +127,25 @@ A11y:
 - required adds a visual marker; set required on the control for assistive tech.
 Files: packages/react/src/components/label/index.ts, packages/react/src/components/label/label.demo.tsx, packages/react/src/components/label/label.test.tsx, packages/react/src/components/label/label.tsx, packages/react/src/components/label/meta.json
 
+## Pagination (pagination)
+Move between pages of results.
+Import: import {Pagination} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A nav landmark; each page is a button named "Page N" and the current one has aria-current=page.
+- Prev and Next are disabled at the ends.
+- The gap marker is hidden from assistive tech.
+Files: packages/react/src/components/pagination/index.ts, packages/react/src/components/pagination/meta.json, packages/react/src/components/pagination/pagination.demo.tsx, packages/react/src/components/pagination/pagination.test.tsx, packages/react/src/components/pagination/pagination.tsx
+
+## Popover (popover)
+A floating panel of content or controls anchored to a button.
+Import: import {Popover} from '@monoline/react'
+Primitive: radix-ui/Popover | Status: stable
+A11y:
+- The trigger has aria-expanded and aria-controls; the panel is role=dialog.
+- Focus moves into the panel; Escape or an outside click closes it and focus returns to the trigger.
+Files: packages/react/src/components/popover/index.ts, packages/react/src/components/popover/meta.json, packages/react/src/components/popover/popover.demo.tsx, packages/react/src/components/popover/popover.test.tsx, packages/react/src/components/popover/popover.tsx
+
 ## Progress (progress)
 How far along a task is, or that it is still working.
 Import: import {Progress} from '@monoline/react'
@@ -128,6 +166,16 @@ A11y:
 - Give the group an accessible name with aria-label or aria-labelledby.
 Files: packages/react/src/components/radio-group/index.ts, packages/react/src/components/radio-group/meta.json, packages/react/src/components/radio-group/radio-group.demo.tsx, packages/react/src/components/radio-group/radio-group.test.tsx, packages/react/src/components/radio-group/radio-group.tsx
 
+## Select (select)
+Pick one value from a list of five or more options.
+Import: import {Select} from '@monoline/react'
+Primitive: radix-ui/Select | Status: stable
+A11y:
+- Trigger is role=combobox with aria-expanded; the list is role=listbox with option items.
+- Arrow keys, Home, End and type-ahead move; Enter selects; Escape closes.
+- Inside a Field it is labelled by the Field's label.
+Files: packages/react/src/components/select/index.ts, packages/react/src/components/select/meta.json, packages/react/src/components/select/select.demo.tsx, packages/react/src/components/select/select.test.tsx, packages/react/src/components/select/select.tsx
+
 ## Separator (separator)
 A thin rule between groups.
 Import: import {Separator} from '@monoline/react'
@@ -145,6 +193,16 @@ A11y:
 - aria-hidden: it carries no information.
 - Pair with an aria-busy region or a Spinner so loading is announced once.
 Files: packages/react/src/components/skeleton/index.ts, packages/react/src/components/skeleton/meta.json, packages/react/src/components/skeleton/skeleton.demo.tsx, packages/react/src/components/skeleton/skeleton.test.tsx, packages/react/src/components/skeleton/skeleton.tsx
+
+## Slider (slider)
+Pick a number, or a range, by dragging or with the keyboard.
+Import: import {Slider} from '@monoline/react'
+Primitive: radix-ui/Slider | Status: stable
+A11y:
+- Each thumb is role=slider with aria-valuenow, min and max.
+- Arrow keys step; Home and End jump to the ends; PageUp and PageDown take larger steps.
+- aria-label is required; a range labels its thumbs minimum and maximum.
+Files: packages/react/src/components/slider/index.ts, packages/react/src/components/slider/meta.json, packages/react/src/components/slider/slider.demo.tsx, packages/react/src/components/slider/slider.test.tsx, packages/react/src/components/slider/slider.tsx
 
 ## Spinner (spinner)
 A small indicator that something is loading.
@@ -182,6 +240,25 @@ A11y:
 - Native <textarea>.
 - Inside a Field it is labelled and described automatically; invalid sets aria-invalid.
 Files: packages/react/src/components/textarea/index.ts, packages/react/src/components/textarea/meta.json, packages/react/src/components/textarea/textarea.demo.tsx, packages/react/src/components/textarea/textarea.test.tsx, packages/react/src/components/textarea/textarea.tsx
+
+## Toggle (toggle)
+A button that stays pressed or not.
+Import: import {Toggle} from '@monoline/react'
+Primitive: radix-ui/Toggle | Status: stable
+A11y:
+- A button with aria-pressed; Space and Enter toggle it.
+- Icon-only toggles need an aria-label.
+Files: packages/react/src/components/toggle/index.ts, packages/react/src/components/toggle/meta.json, packages/react/src/components/toggle/toggle.demo.tsx, packages/react/src/components/toggle/toggle.test.tsx, packages/react/src/components/toggle/toggle.tsx
+
+## Toggle group (toggle-group)
+A row of toggles where one or several can be on.
+Import: import {ToggleGroup} from '@monoline/react'
+Primitive: radix-ui/ToggleGroup | Status: stable
+A11y:
+- single type is role=radiogroup with radio items; multiple type is a group of toggle buttons.
+- Arrow keys move focus between items; Space and Enter toggle.
+- Give the group an aria-label.
+Files: packages/react/src/components/toggle-group/index.ts, packages/react/src/components/toggle-group/meta.json, packages/react/src/components/toggle-group/toggle-group.demo.tsx, packages/react/src/components/toggle-group/toggle-group.test.tsx, packages/react/src/components/toggle-group/toggle-group.tsx
 
 ## Tooltip (tooltip)
 Short hint text on hover and keyboard focus.

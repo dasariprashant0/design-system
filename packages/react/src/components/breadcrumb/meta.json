@@ -1,0 +1,1 @@
+{"name":"breadcrumb","title":"Breadcrumb","category":"navigation","description":"The path to the current page.","status":"stable","css":["18-navigation.css","09-links.css"],"a11y":["A nav landmark with an aria-label, containing an ordered list.","The current page has aria-current=page and is not a link."],"keywords":["path","trail","navigation"]}

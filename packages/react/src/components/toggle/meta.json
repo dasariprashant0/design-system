@@ -1,0 +1,1 @@
+{"name":"toggle","title":"Toggle","category":"buttons","description":"A button that stays pressed or not.","status":"stable","primitive":"radix-ui/Toggle","css":["slider.css"],"a11y":["A button with aria-pressed; Space and Enter toggle it.","Icon-only toggles need an aria-label."],"keywords":["pressed","bold","on off button"]}

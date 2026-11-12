@@ -1,0 +1,11 @@
+/* Popover, dropdown menu and select content on Radix: a bordered panel above the page. */
+.popover { z-index: var(--z-drawer); min-width: 200px; max-width: min(360px, 92vw); padding: var(--s4); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }
+.popover:focus-visible { outline-offset: 2px; }
+.menu-content { z-index: var(--z-drawer); min-width: 200px; padding: var(--s1) 0; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }
+.menu-content .menu-item { cursor: pointer; }
+.menu-content .menu-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }
+.menu-content .menu-item[data-disabled] { opacity: 0.5; pointer-events: none; }
+.menu-content .menu-item[data-variant="danger"][data-highlighted] { background: var(--danger); }
+.menu-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.menu-indicator { width: 14px; display: inline-flex; justify-content: center; }
+.menu-item-check { display: flex; align-items: center; gap: var(--s3); }

@@ -1,0 +1,54 @@
+{
+  "name": "select",
+  "title": "Select",
+  "category": "forms",
+  "description": "Pick one value from a list of five or more options.",
+  "status": "stable",
+  "primitive": "radix-ui/Select",
+  "uses": [
+    "field"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/select.css",
+      "content": "/* Select on Radix. The trigger matches .input; the list is a .menu-content. */\n.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; padding: 12px 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: left; }\n.select-trigger[data-placeholder] { color: var(--muted); }\n.select-trigger[aria-invalid=\"true\"] { border-color: var(--danger); }\n.select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }\n.select-trigger::after { content: \"↓\"; color: var(--muted); }\n.select-content { z-index: var(--z-drawer); min-width: var(--radix-select-trigger-width); max-height: min(320px, var(--radix-select-content-available-height)); overflow: hidden; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); }\n.select-viewport { padding: var(--s1) 0; }\n.select-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.select-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.select-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.select-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n"
+    }
+  ],
+  "a11y": [
+    "Trigger is role=combobox with aria-expanded; the list is role=listbox with option items.",
+    "Arrow keys, Home, End and type-ahead move; Enter selects; Escape closes.",
+    "Inside a Field it is labelled by the Field's label."
+  ],
+  "keywords": [
+    "dropdown",
+    "picker",
+    "combobox"
+  ],
+  "kind": "components",
+  "import": "import {Select} from '@monoline/react'",
+  "path": "packages/react/src/components/select",
+  "files": [
+    "packages/react/src/components/select/index.ts",
+    "packages/react/src/components/select/meta.json",
+    "packages/react/src/components/select/select.demo.tsx",
+    "packages/react/src/components/select/select.test.tsx",
+    "packages/react/src/components/select/select.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/select/index.ts",
+      "content": "export {Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectItem, SelectLabel} from './select';\nexport type {SelectTriggerProps} from './select';\n"
+    },
+    {
+      "path": "packages/react/src/components/select/meta.json",
+      "content": "{\"name\":\"select\",\"title\":\"Select\",\"category\":\"forms\",\"description\":\"Pick one value from a list of five or more options.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Select\",\"uses\":[\"field\"],\"css\":[\"select.css\"],\"a11y\":[\"Trigger is role=combobox with aria-expanded; the list is role=listbox with option items.\",\"Arrow keys, Home, End and type-ahead move; Enter selects; Escape closes.\",\"Inside a Field it is labelled by the Field's label.\"],\"keywords\":[\"dropdown\",\"picker\",\"combobox\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/select/select.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Select as RadixSelect} from 'radix-ui';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\nexport const Select = RadixSelect.Root;\nexport const SelectGroup = RadixSelect.Group;\nexport const SelectValue = RadixSelect.Value;\n\nexport interface SelectTriggerProps extends ComponentPropsWithoutRef<typeof RadixSelect.Trigger> {\n  invalid?: boolean;\n}\n/** The button that shows the chosen value. Inside a Field it is labelled and described automatically. */\nexport const SelectTrigger = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectTriggerProps>(function SelectTrigger({className, invalid, children, id, ...rest}, ref) {\n  const f = useFieldControl();\n  return (\n    <RadixSelect.Trigger ref={ref} id={id ?? f.id} aria-describedby={f['aria-describedby']} aria-invalid={invalid || f['aria-invalid']} className={cx('select-trigger', className)} {...rest}>\n      {children}\n    </RadixSelect.Trigger>\n  );\n});\n\nexport const SelectContent = forwardRef<ElementRef<typeof RadixSelect.Content>, ComponentPropsWithoutRef<typeof RadixSelect.Content>>(function SelectContent({className, children, position = 'popper', sideOffset = 4, ...rest}, ref) {\n  return (\n    <RadixSelect.Portal>\n      <RadixSelect.Content ref={ref} position={position} sideOffset={sideOffset} className={cx('select-content', className)} {...rest}>\n        <RadixSelect.Viewport className=\"select-viewport\">{children}</RadixSelect.Viewport>\n      </RadixSelect.Content>\n    </RadixSelect.Portal>\n  );\n});\n\nexport const SelectItem = forwardRef<ElementRef<typeof RadixSelect.Item>, ComponentPropsWithoutRef<typeof RadixSelect.Item>>(function SelectItem({className, children, ...rest}, ref) {\n  return (\n    <RadixSelect.Item ref={ref} className={cx('select-item', className)} {...rest}>\n      <RadixSelect.ItemText>{children}</RadixSelect.ItemText>\n      <RadixSelect.ItemIndicator>✓</RadixSelect.ItemIndicator>\n    </RadixSelect.Item>\n  );\n});\n\nexport const SelectLabel = forwardRef<ElementRef<typeof RadixSelect.Label>, ComponentPropsWithoutRef<typeof RadixSelect.Label>>(function SelectLabel({className, ...rest}, ref) {\n  return <RadixSelect.Label ref={ref} className={cx('select-label', className)} {...rest} />;\n});\n"
+    }
+  ]
+}
