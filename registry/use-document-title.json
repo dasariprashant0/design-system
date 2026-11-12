@@ -1,0 +1,43 @@
+{
+  "name": "use-document-title",
+  "title": "useDocumentTitle",
+  "category": "hooks",
+  "description": "Set document.title while a component is mounted, then restore it.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "Sets the page title, which screen readers announce on navigation. Make each view title unique and meaningful."
+  ],
+  "keywords": [
+    "title",
+    "head",
+    "tab"
+  ],
+  "kind": "hooks",
+  "import": "import {UseDocumentTitle} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-document-title",
+  "files": [
+    "packages/react/src/hooks/use-document-title/index.ts",
+    "packages/react/src/hooks/use-document-title/meta.json",
+    "packages/react/src/hooks/use-document-title/use-document-title.demo.tsx",
+    "packages/react/src/hooks/use-document-title/use-document-title.test.tsx",
+    "packages/react/src/hooks/use-document-title/use-document-title.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-document-title/index.ts",
+      "content": "export {useDocumentTitle} from './use-document-title';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-document-title/meta.json",
+      "content": "{\"name\":\"use-document-title\",\"title\":\"useDocumentTitle\",\"category\":\"hooks\",\"description\":\"Set document.title while a component is mounted, then restore it.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"Sets the page title, which screen readers announce on navigation. Make each view title unique and meaningful.\"],\"keywords\":[\"title\",\"head\",\"tab\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-document-title/use-document-title.ts",
+      "content": "'use client';\nimport {useEffect} from 'react';\n\n/** Sets `document.title` while mounted and restores the previous title on unmount. Does nothing on the server. */\nexport function useDocumentTitle(title: string): void {\n  useEffect(() => {\n    const prev = document.title;\n    document.title = title;\n    return () => { document.title = prev; };\n  }, [title]);\n}\n"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import {cx} from '../../utils/cx';
 export const ToggleGroup = forwardRef<ElementRef<typeof RadixToggleGroup.Root>, ComponentPropsWithoutRef<typeof RadixToggleGroup.Root>>(function ToggleGroup({className, ...rest}, ref) {
   return <RadixToggleGroup.Root ref={ref} className={cx('toggle-group', className)} {...rest} />;
 });
+/** One toggle button in a `ToggleGroup`; give it a `value` and an accessible name. */
 export const ToggleGroupItem = forwardRef<ElementRef<typeof RadixToggleGroup.Item>, ComponentPropsWithoutRef<typeof RadixToggleGroup.Item>>(function ToggleGroupItem({className, ...rest}, ref) {
   return <RadixToggleGroup.Item ref={ref} className={cx('toggle', className)} {...rest} />;
 });

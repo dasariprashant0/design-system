@@ -1,0 +1,53 @@
+{
+  "name": "sparkline",
+  "title": "Sparkline",
+  "category": "data-display",
+  "description": "A tiny inline trend line for a table cell or a sentence.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/sparkline.css",
+      "content": "/* Sparkline: a tiny inline trend. Sits in a line of text or a table cell. */\n.sparkline { position: relative; display: inline-block; vertical-align: middle; line-height: 0; }\n.sparkline svg { display: block; overflow: visible; }\n.sparkline-line { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }\n.sparkline-area { fill: var(--accent); fill-opacity: 0.2; stroke: none; }\n.sparkline-dot { fill: var(--accent); }\n.sparkline-empty { font-size: var(--text-xs); line-height: normal; color: var(--muted); }\n"
+    }
+  ],
+  "a11y": [
+    "role=img with the required title as its name.",
+    "A visually hidden table (table roles on spans, valid inside a paragraph) lists every value for screen readers.",
+    "Decorative at a glance: it has no tooltip and no tab stops."
+  ],
+  "keywords": [
+    "chart",
+    "trend",
+    "inline",
+    "mini",
+    "svg",
+    "data"
+  ],
+  "kind": "components",
+  "import": "import {Sparkline} from '@monoline/react'",
+  "path": "packages/react/src/components/sparkline",
+  "files": [
+    "packages/react/src/components/sparkline/index.ts",
+    "packages/react/src/components/sparkline/meta.json",
+    "packages/react/src/components/sparkline/sparkline.demo.tsx",
+    "packages/react/src/components/sparkline/sparkline.test.tsx",
+    "packages/react/src/components/sparkline/sparkline.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/sparkline/index.ts",
+      "content": "export {Sparkline} from './sparkline';\nexport type {SparklineProps} from './sparkline';\n"
+    },
+    {
+      "path": "packages/react/src/components/sparkline/meta.json",
+      "content": "{\"name\":\"sparkline\",\"title\":\"Sparkline\",\"category\":\"data-display\",\"description\":\"A tiny inline trend line for a table cell or a sentence.\",\"status\":\"stable\",\"css\":[\"sparkline.css\"],\"a11y\":[\"role=img with the required title as its name.\",\"A visually hidden table (table roles on spans, valid inside a paragraph) lists every value for screen readers.\",\"Decorative at a glance: it has no tooltip and no tab stops.\"],\"keywords\":[\"chart\",\"trend\",\"inline\",\"mini\",\"svg\",\"data\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/sparkline/sparkline.tsx",
+      "content": "'use client';\nimport {forwardRef, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {formatFull, linearScale, polyline, r2} from '../../utils/chart';\n\nexport interface SparklineProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'title'> {\n  /** Accessible name. Required. */\n  title: string;\n  /** Values in order. Non-finite values count as 0. */\n  data: number[];\n  /** Names for the values, used in the screen reader table. Default: 1, 2, 3... */\n  labels?: string[];\n  /** Fill under the line. */\n  area?: boolean;\n  /** Width in px. Default 96. */\n  width?: number;\n  /** Height in px. Default 24. */\n  height?: number;\n  /** Format a value for the screen reader table. */\n  valueFormat?: (value: number) => string;\n}\n\n/** A tiny inline trend: no axes, no tooltip, the last value marked. The full values are in a visually hidden table. */\nexport const Sparkline = forwardRef<HTMLSpanElement, SparklineProps>(function Sparkline({title, data, labels, area = false, width = 96, height = 24, valueFormat, className, ...rest}, ref) {\n  const vals = data.map((v) => (Number.isFinite(v) ? v : 0));\n  if (!vals.length) return <span ref={ref} className={cx('sparkline', 'sparkline-empty', className)} role=\"img\" aria-label={`${title}: no data`} {...rest}>No data</span>;\n  const fmt = valueFormat ?? formatFull;\n  const pad = 3, n = vals.length;\n  const y = linearScale(Math.min(...vals), Math.max(...vals), height - pad, pad);\n  const xs = vals.map((_, i) => (n === 1 ? width / 2 : pad + (i * (width - 2 * pad)) / (n - 1)));\n  const ys = vals.map(y);\n  const line = polyline(xs, ys);\n  return (\n    <span ref={ref} className={cx('sparkline', className)} {...rest}>\n      <svg role=\"img\" aria-label={title} width={width} height={height} viewBox={`0 0 ${width} ${height}`}>\n        {area && <path className=\"sparkline-area\" d={`${line}L${r2(xs[n - 1]!)} ${height}L${r2(xs[0]!)} ${height}Z`} />}\n        <path className=\"sparkline-line\" d={line} />\n        <circle className=\"sparkline-dot\" cx={r2(xs[n - 1]!)} cy={r2(ys[n - 1]!)} r=\"2.5\" />\n      </svg>\n      {/* Spans with table roles, not a <table>: a sparkline sits inside a paragraph, where a real table is invalid HTML. */}\n      <span role=\"table\" aria-label={title} className=\"sr-only\">\n        <span role=\"rowgroup\"><span role=\"row\"><span role=\"columnheader\">Point</span><span role=\"columnheader\">Value</span></span></span>\n        <span role=\"rowgroup\">{vals.map((v, i) => <span role=\"row\" key={i}><span role=\"rowheader\">{labels?.[i] ?? String(i + 1)}</span><span role=\"cell\">{fmt(v)}</span></span>)}</span>\n      </span>\n    </span>\n  );\n});\n"
+    }
+  ]
+}

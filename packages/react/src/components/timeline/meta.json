@@ -1,0 +1,1 @@
+{"name":"timeline","title":"Timeline","category":"data-display","description":"A vertical list of events with times, joined by a rule.","status":"stable","css":["timeline.css"],"a11y":["An ordered list of events; the time is a real time element when a datetime is given."],"keywords":["history","activity","changelog","events"]}

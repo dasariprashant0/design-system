@@ -1,0 +1,1 @@
+{"name":"use-hover","title":"useHover","category":"hooks","description":"Track whether the pointer is over an element.","status":"stable","css":[],"a11y":["No DOM output. Hover is pointer-only: never hide essential content or actions behind it."],"keywords":["hover","pointer","mouseover"]}

@@ -1,0 +1,50 @@
+{
+  "name": "typewriter",
+  "title": "Typewriter",
+  "category": "effects",
+  "description": "Type a string one character at a time. Static for reduced motion.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/typewriter.css",
+      "content": "/* Typewriter: the caret is a thin rule that blinks; it stops for reduced motion. */\n.typewriter-caret { display: inline-block; width: 1px; height: 1em; margin-inline-start: 2px; vertical-align: text-bottom; background: currentColor; animation: typewriter-blink 1s steps(1) infinite; }\n@keyframes typewriter-blink { 50% { opacity: 0; } }\n@media (prefers-reduced-motion: reduce) { .typewriter-caret { animation: none; } }\n"
+    }
+  ],
+  "a11y": [
+    "Screen readers get the full text at once from an sr-only copy; the typed characters are aria-hidden.",
+    "With prefers-reduced-motion the full text shows immediately and the caret does not blink."
+  ],
+  "keywords": [
+    "typing",
+    "type effect",
+    "text animation",
+    "caret"
+  ],
+  "kind": "components",
+  "import": "import {Typewriter} from '@monoline/react'",
+  "path": "packages/react/src/components/typewriter",
+  "files": [
+    "packages/react/src/components/typewriter/index.ts",
+    "packages/react/src/components/typewriter/meta.json",
+    "packages/react/src/components/typewriter/typewriter.demo.tsx",
+    "packages/react/src/components/typewriter/typewriter.test.tsx",
+    "packages/react/src/components/typewriter/typewriter.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/typewriter/index.ts",
+      "content": "export {Typewriter} from './typewriter';\nexport type {TypewriterProps} from './typewriter';\n"
+    },
+    {
+      "path": "packages/react/src/components/typewriter/meta.json",
+      "content": "{\"name\":\"typewriter\",\"title\":\"Typewriter\",\"category\":\"effects\",\"description\":\"Type a string one character at a time. Static for reduced motion.\",\"status\":\"stable\",\"css\":[\"typewriter.css\"],\"a11y\":[\"Screen readers get the full text at once from an sr-only copy; the typed characters are aria-hidden.\",\"With prefers-reduced-motion the full text shows immediately and the caret does not blink.\"],\"keywords\":[\"typing\",\"type effect\",\"text animation\",\"caret\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/typewriter/typewriter.tsx",
+      "content": "'use client';\nimport {forwardRef, useEffect, useRef, useState, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {usePrefersReducedMotion} from '../number-ticker/use-reduced-motion';\n\nexport interface TypewriterProps extends HTMLAttributes<HTMLSpanElement> {\n  /** The string to type. Screen readers get all of it at once. */\n  text: string;\n  /** Milliseconds per character. Default 40. */\n  speed?: number;\n  /** Milliseconds to wait before the first character. Default 0. */\n  delay?: number;\n  /** Show a blinking caret. Default true. */\n  cursor?: boolean;\n  /** Called once the last character is shown (also straight away for reduced motion). */\n  onComplete?: () => void;\n}\n\n/**\n * Types `text` one character at a time. With `prefers-reduced-motion` the full string shows at once.\n * The typed characters are `aria-hidden`; an `sr-only` copy holds the whole text.\n */\nexport const Typewriter = forwardRef<HTMLSpanElement, TypewriterProps>(function Typewriter({text, speed = 40, delay = 0, cursor = true, onComplete, className, ...rest}, ref) {\n  const chars = Array.from(text); // by code point, so an emoji is never cut in half\n  const [count, setCount] = useState(chars.length);\n  const reduced = usePrefersReducedMotion();\n  const done = useRef(onComplete);\n  done.current = onComplete;\n\n  useEffect(() => {\n    const len = Array.from(text).length;\n    if (reduced) { setCount(len); done.current?.(); return; }\n    let timer: ReturnType<typeof setTimeout>;\n    let n = 0;\n    const tick = () => {\n      n += 1;\n      setCount(n);\n      if (n < len) timer = setTimeout(tick, speed); else done.current?.();\n    };\n    setCount(0);\n    timer = setTimeout(tick, delay || speed);\n    return () => clearTimeout(timer);\n  }, [text, speed, delay, reduced]);\n\n  return (\n    <span ref={ref} className={cx('typewriter', className)} {...rest}>\n      <span className=\"sr-only\">{text}</span>\n      <span aria-hidden=\"true\">{chars.slice(0, count).join('')}{cursor && <span className=\"typewriter-caret\" />}</span>\n    </span>\n  );\n});\n"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+/* Code block: dark panel (always dark, like toasts), thin rule, square corners. The copy button is an icon button
+   inside the panel: in the header row when there is a title, otherwise floating in the top corner. */
+.code-block { position: relative; background: var(--surface); color: var(--surface-text); border: 1px solid var(--rule); font-size: var(--text-sm); }
+.code-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: var(--s7); padding-block: var(--s1); padding-inline: var(--s4) var(--s2); border-bottom: 1px solid var(--rule); }
+.code-title { font-size: var(--text-xs); letter-spacing: 0.04em; color: var(--surface-text); opacity: 0.75; overflow-wrap: anywhere; }
+.code-copy { display: inline-grid; place-items: center; flex: none; width: var(--s6); height: var(--s6); color: var(--surface-text); opacity: 0.8; border: 1px solid transparent; }
+.code-copy:hover { opacity: 1; border-color: var(--rule); background: var(--wash); }
+.code-copy[data-copied] { color: var(--code-string); opacity: 1; }
+.code-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; opacity: 1; }
+.code-block[data-headless] .code-copy { position: absolute; inset-block-start: var(--s2); inset-inline-end: var(--s2); z-index: 1; }
+.code-block[data-headless] pre { padding-inline-end: var(--s8); }
+.code-block pre { margin: 0; padding: var(--s4); overflow-x: auto; line-height: 1.6; tab-size: 2; }
+.code-block pre:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.code-block code { font-family: var(--font-body); white-space: pre; display: block; width: max-content; min-width: 100%; }
+.code-block pre[data-lines] { counter-reset: line; }
+.code-block pre[data-lines] .code-line::before { counter-increment: line; content: counter(line); display: inline-block; width: 2.5ch; margin-inline-end: var(--s4); text-align: end; color: var(--code-comment); opacity: 0.7; user-select: none; }
+.tok-keyword { color: var(--code-keyword); }
+.tok-string { color: var(--code-string); }
+.tok-number { color: var(--code-number); }
+.tok-comment { color: var(--code-comment); font-style: italic; }
+.tok-tag { color: var(--code-tag); }
+.tok-attr { color: var(--code-attr); }
+.tok-fn { color: var(--code-fn); }

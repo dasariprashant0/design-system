@@ -1,0 +1,25 @@
+name: Bug report
+description: Something looks wrong or does not work.
+labels: [bug]
+body:
+  - type: input
+    id: component
+    attributes: {label: Component, placeholder: button}
+    validations: {required: true}
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: Include the markup or code. Accessibility bugs are the highest priority.
+    validations: {required: true}
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Theme
+      options: [warm, dark, midnight]
+  - type: input
+    id: accent
+    attributes: {label: Accent}
+  - type: input
+    id: env
+    attributes: {label: Browser, screen reader and package version, placeholder: Firefox 130, VoiceOver, "@monoline/react 0.3.0"}

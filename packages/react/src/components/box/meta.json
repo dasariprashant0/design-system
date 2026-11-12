@@ -1,0 +1,1 @@
+{"name":"box","title":"Box","category":"layout","description":"A div with padding and a thin border mapped to the spacing tokens.","status":"stable","css":["box.css"],"a11y":["A plain element; adds no roles. Use asChild to render a landmark such as section."],"keywords":["div","padding","wrapper","inset","border"]}

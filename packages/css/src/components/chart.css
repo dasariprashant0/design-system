@@ -1,0 +1,49 @@
+/* Shared base for the SVG charts (bar, line, area, pie). Series k is styled by .chart-s0 to .chart-s4: a colour (--chart-c),
+   plus a fill pattern, dash and marker set in the SVG itself, so series never rely on colour alone. */
+.chart { position: relative; display: block; width: 100%; font-family: var(--font-body); color: var(--foreground); }
+.chart-plot { position: relative; width: 100%; }
+.chart-svg, .chart-hits { display: block; width: 100%; height: auto; overflow: visible; }
+.chart-hits { position: absolute; inset: 0; pointer-events: none; }
+
+.chart-s0 { --chart-c: var(--accent); }
+.chart-s1 { --chart-c: var(--foreground); }
+.chart-s2 { --chart-c: var(--ink-2); }
+.chart-s3 { --chart-c: var(--ink-3); }
+.chart-s4 { --chart-c: var(--accent-2); }
+
+.chart-tick { font-size: var(--text-xs); fill: var(--muted); }
+.chart-value { font-size: var(--text-xs); fill: var(--foreground); }
+.chart-rule { stroke: var(--rule); stroke-width: 1; }
+.chart-zero { stroke: var(--ink-3); stroke-width: 1; }
+.chart-outline { stroke: var(--foreground); stroke-width: 1; }
+.chart-outline[data-active] { stroke-width: 2; }
+.chart-pat { stroke: var(--chart-c); fill: none; }
+.chart-pat-dot { fill: var(--chart-c); }
+.chart-line { fill: none; stroke: var(--chart-c); stroke-width: 2; stroke-linejoin: round; }
+.chart-area { stroke: none; }
+.chart-area.chart-s0 { fill-opacity: 0.3; }
+
+/* Keyboard and pointer layer: one transparent target per category or slice, above the drawing. */
+.chart-hit { fill: transparent; pointer-events: all; outline: none; }
+.chart-hit[data-active] { fill: var(--wash); }
+.chart-hit:focus-visible { stroke: var(--foreground); stroke-width: 2; }
+
+.chart-tip { position: absolute; z-index: 1; padding: var(--s2) var(--s3); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); font-size: var(--text-xs); white-space: nowrap; pointer-events: none; transform: translate(-50%, calc(-100% - var(--s2))); }
+.chart-tip[data-align="start"] { transform: translate(0, calc(-100% - var(--s2))); }
+.chart-tip[data-align="end"] { transform: translate(-100%, calc(-100% - var(--s2))); }
+.chart-tip-title { color: var(--muted); margin-bottom: var(--s1); }
+.chart-tip-row { display: flex; align-items: center; gap: var(--s2); }
+.chart-tip-value { margin-inline-start: auto; padding-inline-start: var(--s3); }
+
+.chart-legend { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); margin: var(--s3) 0 0; padding: 0; list-style: none; font-size: var(--text-xs); }
+.chart-legend li { display: inline-flex; align-items: center; gap: var(--s2); }
+.chart-legend-detail { color: var(--muted); }
+.chart-swatch { flex: none; overflow: visible; }
+
+.chart-empty { display: grid; place-items: center; min-height: var(--s9); padding: var(--s5); border: 1px dashed var(--rule); color: var(--muted); font-size: var(--text-sm); }
+
+/* A left-to-right wipe on first paint. Skipped entirely when the user asks for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .chart-marks { animation: chart-reveal var(--slow) var(--ease) backwards; }
+}
+@keyframes chart-reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(-8px); } }

@@ -1,0 +1,61 @@
+{
+  "name": "time-picker",
+  "title": "Time picker",
+  "category": "forms",
+  "description": "Pick a time of day with hour, minute and AM/PM segments, using the browser's own control.",
+  "status": "stable",
+  "uses": [
+    "input",
+    "field"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { padding: 6px 10px; font-size: var(--text-sm); }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-inline-end: var(--s9); }\n.input-end { position: absolute; inset-inline-end: var(--s3); top: 50%; transform: translateY(-50%); min-height: var(--s6); min-width: var(--s6); display: inline-grid; place-items: center; }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; inset-inline-start: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(calc(16px * var(--dir, 1))); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-inline-end: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-inline-start: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/time-picker.css",
+      "content": "/* Time picker: the native control wearing .input; keeps it compact and themed. */\n.time-picker { width: auto; min-width: 10ch; font-variant-numeric: tabular-nums; color-scheme: light dark; }\n.time-picker::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.7; }\n.time-picker:disabled { opacity: 0.5; cursor: not-allowed; }\n"
+    }
+  ],
+  "a11y": [
+    "Native input type=\"time\": the browser exposes hour, minute and AM/PM as spinbuttons.",
+    "ArrowUp/ArrowDown change a segment, ArrowLeft/ArrowRight or Tab move between segments, typing digits fills one.",
+    "The control takes its name from a label or aria-label; min, max and step are passed through."
+  ],
+  "keywords": [
+    "time",
+    "clock",
+    "hours",
+    "minutes",
+    "am pm",
+    "hour"
+  ],
+  "kind": "components",
+  "import": "import {TimePicker} from '@monoline/react'",
+  "path": "packages/react/src/components/time-picker",
+  "files": [
+    "packages/react/src/components/time-picker/index.ts",
+    "packages/react/src/components/time-picker/meta.json",
+    "packages/react/src/components/time-picker/time-picker.demo.tsx",
+    "packages/react/src/components/time-picker/time-picker.test.tsx",
+    "packages/react/src/components/time-picker/time-picker.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/time-picker/index.ts",
+      "content": "export {TimePicker} from './time-picker';\nexport type {TimePickerProps} from './time-picker';\n"
+    },
+    {
+      "path": "packages/react/src/components/time-picker/meta.json",
+      "content": "{\"name\":\"time-picker\",\"title\":\"Time picker\",\"category\":\"forms\",\"description\":\"Pick a time of day with hour, minute and AM/PM segments, using the browser's own control.\",\"status\":\"stable\",\"uses\":[\"input\",\"field\"],\"css\":[\"03-form-fields.css\",\"time-picker.css\"],\"a11y\":[\"Native input type=\\\"time\\\": the browser exposes hour, minute and AM/PM as spinbuttons.\",\"ArrowUp/ArrowDown change a segment, ArrowLeft/ArrowRight or Tab move between segments, typing digits fills one.\",\"The control takes its name from a label or aria-label; min, max and step are passed through.\"],\"keywords\":[\"time\",\"clock\",\"hours\",\"minutes\",\"am pm\",\"hour\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/time-picker/time-picker.tsx",
+      "content": "'use client';\nimport {forwardRef, useState, type InputHTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\nexport interface TimePickerProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'value' | 'defaultValue' | 'onChange' | 'size'> {\n  /** 24-hour \"HH:mm\" (or \"HH:mm:ss\" when `step` is under 60), or '' for no time. */\n  value?: string;\n  /** The initial time as 24-hour \"HH:mm\" when uncontrolled. Default empty. */\n  defaultValue?: string;\n  /** Called with the new time as 24-hour \"HH:mm\" (or '' when cleared). */\n  onValueChange?: (value: string) => void;\n  /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */\n  invalid?: boolean;\n}\n\n/**\n * A time field built on the native `<input type=\"time\">`: the browser supplies the hour,\n * minute and AM/PM segments (spinbuttons), the picker and the keyboard handling. Whether\n * AM/PM is shown follows the user's locale, as the platform decides. The value is always 24-hour.\n */\nexport const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(function TimePicker({value, defaultValue = '', onValueChange, invalid, className, ...rest}, ref) {\n  const f = useFieldControl();\n  const [inner, setInner] = useState(defaultValue);\n  return (\n    <input\n      ref={ref}\n      type=\"time\"\n      className={cx('input time-picker', className)}\n      {...f}\n      {...(invalid ? {'aria-invalid': true as const} : {})}\n      value={value ?? inner}\n      onChange={(e) => { if (value === undefined) setInner(e.target.value); onValueChange?.(e.target.value); }}\n      {...rest}\n    />\n  );\n});\n"
+    }
+  ]
+}

@@ -5,7 +5,9 @@ import {cx} from '../../utils/cx';
 export interface SliderProps extends Omit<ComponentPropsWithoutRef<typeof RadixSlider.Root>, 'value' | 'defaultValue' | 'onValueChange'> {
   /** A number for one thumb, or [low, high] for a range. */
   value?: number | [number, number];
+  /** The starting value when uncontrolled: a number for one thumb or `[low, high]` for a range. Default 0. */
   defaultValue?: number | [number, number];
+  /** Called with an array holding the value of each thumb while the user drags or uses the keyboard. */
   onValueChange?: (value: number[]) => void;
   /** Accessible name for each thumb. One string for a single thumb, or [low, high] labels for a range. */
   'aria-label': string;

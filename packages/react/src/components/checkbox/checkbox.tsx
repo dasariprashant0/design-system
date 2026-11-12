@@ -6,6 +6,7 @@ import {useFieldControl} from '../field';
 export interface CheckboxProps extends Omit<ComponentPropsWithoutRef<typeof RadixCheckbox.Root>, 'children'> {
   /** Visible label. Without it, give the checkbox an `aria-label`. */
   label?: ReactNode;
+  /** Marks the checkbox as having an error: sets `aria-invalid` and shows the error border. */
   invalid?: boolean;
 }
 

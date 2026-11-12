@@ -1,0 +1,44 @@
+{
+  "name": "use-previous",
+  "title": "usePrevious",
+  "category": "hooks",
+  "description": "The value from the previous render, for comparing a change.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output."
+  ],
+  "keywords": [
+    "previous",
+    "compare",
+    "diff",
+    "change"
+  ],
+  "kind": "hooks",
+  "import": "import {UsePrevious} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-previous",
+  "files": [
+    "packages/react/src/hooks/use-previous/index.ts",
+    "packages/react/src/hooks/use-previous/meta.json",
+    "packages/react/src/hooks/use-previous/use-previous.demo.tsx",
+    "packages/react/src/hooks/use-previous/use-previous.test.tsx",
+    "packages/react/src/hooks/use-previous/use-previous.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-previous/index.ts",
+      "content": "export {usePrevious} from './use-previous';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-previous/meta.json",
+      "content": "{\"name\":\"use-previous\",\"title\":\"usePrevious\",\"category\":\"hooks\",\"description\":\"The value from the previous render, for comparing a change.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output.\"],\"keywords\":[\"previous\",\"compare\",\"diff\",\"change\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-previous/use-previous.ts",
+      "content": "'use client';\nimport {useEffect, useRef} from 'react';\n\n/** The value from the previous render (`undefined` on the first). */\nexport function usePrevious<T>(value: T): T | undefined {\n  const ref = useRef<T | undefined>(undefined);\n\n  useEffect(() => {\n    ref.current = value;\n  }, [value]);\n\n  return ref.current;\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "use-click-outside",
+  "title": "useClickOutside",
+  "category": "hooks",
+  "description": "Calls a function when a pointer goes down outside an element, to close menus and popovers.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. Close popovers with Escape too; this hook covers pointer only.",
+    "Listens to pointerdown on the document and removes the listener on unmount."
+  ],
+  "keywords": [
+    "outside",
+    "dismiss",
+    "popover",
+    "close",
+    "pointer"
+  ],
+  "kind": "hooks",
+  "import": "import {UseClickOutside} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-click-outside",
+  "files": [
+    "packages/react/src/hooks/use-click-outside/index.ts",
+    "packages/react/src/hooks/use-click-outside/meta.json",
+    "packages/react/src/hooks/use-click-outside/use-click-outside.demo.tsx",
+    "packages/react/src/hooks/use-click-outside/use-click-outside.test.tsx",
+    "packages/react/src/hooks/use-click-outside/use-click-outside.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-click-outside/index.ts",
+      "content": "export {useClickOutside} from './use-click-outside';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-click-outside/meta.json",
+      "content": "{\"name\":\"use-click-outside\",\"title\":\"useClickOutside\",\"category\":\"hooks\",\"description\":\"Calls a function when a pointer goes down outside an element, to close menus and popovers.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. Close popovers with Escape too; this hook covers pointer only.\",\"Listens to pointerdown on the document and removes the listener on unmount.\"],\"keywords\":[\"outside\",\"dismiss\",\"popover\",\"close\",\"pointer\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-click-outside/use-click-outside.ts",
+      "content": "'use client';\nimport {useEffect, useRef} from 'react';\n\n/**\n * Calls `onOutside` when a pointer goes down outside the element this ref is attached to.\n * Use it to close popovers and menus. Does nothing while the ref is unattached.\n * Content rendered in a portal is outside the ref's DOM subtree, so put the portal inside the ref or check it in `onOutside`.\n */\nexport function useClickOutside<T extends HTMLElement = HTMLElement>(\n  onOutside: (event: Event) => void,\n  enabled = true,\n) {\n  const ref = useRef<T | null>(null);\n  const callbackRef = useRef(onOutside);\n\n  useEffect(() => {\n    callbackRef.current = onOutside;\n  });\n\n  useEffect(() => {\n    if (!enabled) return;\n    const onPointerDown = (event: Event) => {\n      const node = ref.current;\n      if (!node) return;\n      if (event.target instanceof Node && node.contains(event.target)) return;\n      callbackRef.current(event);\n    };\n    document.addEventListener('pointerdown', onPointerDown);\n    return () => document.removeEventListener('pointerdown', onPointerDown);\n  }, [enabled]);\n\n  return ref;\n}\n"
+    }
+  ]
+}

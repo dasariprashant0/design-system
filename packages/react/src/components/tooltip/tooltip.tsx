@@ -10,10 +10,15 @@ export interface TooltipProps {
   content: ReactNode;
   /** The trigger element. It receives aria-describedby when open. */
   children: ReactNode;
+  /** Which side of the trigger the tooltip appears on: `top` (default), `right`, `bottom` or `left`. */
   side?: 'top' | 'right' | 'bottom' | 'left';
+  /** Milliseconds to wait before showing on hover. Defaults to the `TooltipProvider` value. */
   delayDuration?: number;
+  /** Whether the tooltip is open when controlled. Pair with `onOpenChange`. */
   open?: boolean;
+  /** Whether the tooltip starts open when uncontrolled. Default false. */
   defaultOpen?: boolean;
+  /** Called with the new open state when the tooltip shows or hides. */
   onOpenChange?: (open: boolean) => void;
 }
 
@@ -32,6 +37,7 @@ export function Tooltip({content, children, side = 'top', delayDuration, open, d
   );
 }
 
+/** The floating tooltip box, for building a tooltip from the Radix parts instead of `Tooltip`. */
 export const TooltipContent = forwardRef<ElementRef<typeof RadixTooltip.Content>, ComponentPropsWithoutRef<typeof RadixTooltip.Content>>(function TooltipContent({className, sideOffset = 6, ...rest}, ref) {
   return <RadixTooltip.Content ref={ref} sideOffset={sideOffset} className={cx('tooltip', className)} {...rest} />;
 });

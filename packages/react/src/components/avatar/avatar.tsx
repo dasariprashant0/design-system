@@ -7,7 +7,9 @@ export interface AvatarProps extends Omit<ComponentPropsWithoutRef<typeof RadixA
   src?: string;
   /** The person's name. Used as the image alt text and to make initials; required so it always has a name. */
   name: string;
+  /** `md` (default) or `lg`. */
   size?: 'md' | 'lg';
+  /** `solid` (default) fills the circle; `line` draws only an outline. */
   variant?: 'solid' | 'line';
 }
 

@@ -1,0 +1,50 @@
+{
+  "name": "stepper",
+  "title": "Stepper",
+  "category": "navigation",
+  "description": "Show progress through a numbered sequence of steps.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/18-navigation.css",
+      "content": "/* ─── Navigation: breadcrumb, pager, steps, top bar ─── */\n.crumbs { min-width: 0; display: flex; flex-wrap: wrap; gap: var(--s2); font-size: var(--text-sm); color: var(--muted); }\n.crumbs li + li::before { content: \"/\"; margin-inline-end: var(--s2); color: var(--ink-3); }\n.crumbs [aria-current=\"page\"] { color: var(--foreground); }\n.pager { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); font-size: var(--text-sm); }\n.pager a, .pager button { min-width: 36px; padding: var(--s2) var(--s3); text-align: center; border: 1px solid var(--rule); text-decoration: none; }\n.pager a:hover, .pager button:hover:not(:disabled) { border-color: var(--foreground); }\n.pager [aria-current=\"page\"] { background: var(--foreground); color: var(--background); border-color: var(--foreground); }\n.pager button:disabled { opacity: 0.5; cursor: not-allowed; }\n.steps { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--s3); counter-reset: step; }\n.step { counter-increment: step; padding-top: var(--s3); border-top: 2px solid var(--rule); font-size: var(--text-sm); color: var(--muted); }\n.step::before { content: counter(step, decimal-leading-zero); display: block; font-size: var(--text-xs); }\n.step[data-state=\"done\"] { border-top-color: var(--foreground); color: var(--foreground); }\n.step[aria-current=\"step\"] { border-top-color: var(--accent); color: var(--foreground); font-weight: 500; }\n.topbar { display: flex; align-items: center; gap: var(--s5); padding: var(--s4) var(--s5); border-bottom: 1px solid var(--rule); flex-wrap: wrap; }\n.topbar .brand { padding: 0; }\n.topbar-nav { display: flex; flex-wrap: wrap; gap: var(--s5); margin-inline-end: auto; font-size: var(--text-sm); }\n.topbar-nav a { text-decoration: none; color: var(--muted); }\n.topbar-nav a:hover, .topbar-nav a[aria-current=\"page\"] { color: var(--foreground); }\n.tab[aria-selected=\"true\"] { color: var(--foreground); box-shadow: inset 0 2px 0 var(--foreground); }\n.tabpanel { padding-top: var(--s5); }\n.tabpanel[hidden] { display: none; }\n[dir=\"rtl\"] .crumbs li + li::before { display: inline-block; transform: scaleX(-1); }\n"
+    }
+  ],
+  "a11y": [
+    "An ordered list; the current step has aria-current=\"step\".",
+    "Completed steps are marked in text for assistive tech, not by colour alone."
+  ],
+  "keywords": [
+    "steps",
+    "wizard",
+    "progress",
+    "checkout"
+  ],
+  "kind": "components",
+  "import": "import {Stepper} from '@monoline/react'",
+  "path": "packages/react/src/components/stepper",
+  "files": [
+    "packages/react/src/components/stepper/index.ts",
+    "packages/react/src/components/stepper/meta.json",
+    "packages/react/src/components/stepper/stepper.demo.tsx",
+    "packages/react/src/components/stepper/stepper.test.tsx",
+    "packages/react/src/components/stepper/stepper.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/stepper/index.ts",
+      "content": "export {Stepper} from './stepper';\nexport type {StepperProps, StepperStep} from './stepper';\n"
+    },
+    {
+      "path": "packages/react/src/components/stepper/meta.json",
+      "content": "{\"name\":\"stepper\",\"title\":\"Stepper\",\"category\":\"navigation\",\"description\":\"Show progress through a numbered sequence of steps.\",\"status\":\"stable\",\"css\":[\"18-navigation.css\"],\"a11y\":[\"An ordered list; the current step has aria-current=\\\"step\\\".\",\"Completed steps are marked in text for assistive tech, not by colour alone.\"],\"keywords\":[\"steps\",\"wizard\",\"progress\",\"checkout\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/stepper/stepper.tsx",
+      "content": "import {forwardRef, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface StepperStep {\n  title: ReactNode;\n  description?: ReactNode;\n}\n\nexport interface StepperProps extends HTMLAttributes<HTMLOListElement> {\n  /** The steps in order, each with a `title` and optional `description`. */\n  steps: StepperStep[];\n  /** Zero-based index of the current step. Earlier steps are done. */\n  current: number;\n}\n\n/** A read-only step indicator. Navigation between steps is the page's job. */\nexport const Stepper = forwardRef<HTMLOListElement, StepperProps>(function Stepper({steps, current, className, ...rest}, ref) {\n  return (\n    <ol ref={ref} className={cx('steps', className)} {...rest}>\n      {steps.map((s, i) => {\n        const state = i < current ? 'done' : i === current ? 'current' : 'todo';\n        return (\n          <li key={i} className=\"step\" data-state={state === 'done' ? 'done' : undefined} aria-current={state === 'current' ? 'step' : undefined}>\n            {s.title}\n            {state === 'done' && <span className=\"sr-only\"> (completed)</span>}\n            {s.description && <div className=\"muted small\">{s.description}</div>}\n          </li>\n        );\n      })}\n    </ol>\n  );\n});\n"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "number-input",
+  "title": "Number input",
+  "category": "forms",
+  "description": "A numeric field with decrease and increase buttons.",
+  "status": "stable",
+  "uses": [
+    "input",
+    "field"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { padding: 6px 10px; font-size: var(--text-sm); }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-inline-end: var(--s9); }\n.input-end { position: absolute; inset-inline-end: var(--s3); top: 50%; transform: translateY(-50%); min-height: var(--s6); min-width: var(--s6); display: inline-grid; place-items: center; }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; inset-inline-start: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(calc(16px * var(--dir, 1))); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-inline-end: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-inline-start: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/number-input.css",
+      "content": "/* Number input: native field between two step buttons. */\n.number-input { display: flex; align-items: stretch; width: 100%; }\n.number-input .number-field { text-align: center; border-inline-start: 0; border-inline-end: 0; appearance: textfield; -moz-appearance: textfield; }\n.number-input .number-field::-webkit-outer-spin-button, .number-input .number-field::-webkit-inner-spin-button { appearance: none; margin: 0; }\n.number-step { flex: none; width: var(--s7); border: 1px solid var(--foreground); background: transparent; color: var(--foreground); }\n.number-step:hover:not(:disabled) { background: var(--wash-2); }\n.number-step:disabled { opacity: 0.5; cursor: not-allowed; }\n.number-step:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n"
+    }
+  ],
+  "a11y": [
+    "Native input type=\"number\"; ArrowUp/ArrowDown change the value.",
+    "The step buttons are named \"Decrease\" and \"Increase\" and are skipped by Tab."
+  ],
+  "keywords": [
+    "stepper",
+    "quantity",
+    "spinner",
+    "numeric"
+  ],
+  "kind": "components",
+  "import": "import {NumberInput} from '@monoline/react'",
+  "path": "packages/react/src/components/number-input",
+  "files": [
+    "packages/react/src/components/number-input/index.ts",
+    "packages/react/src/components/number-input/meta.json",
+    "packages/react/src/components/number-input/number-input.demo.tsx",
+    "packages/react/src/components/number-input/number-input.test.tsx",
+    "packages/react/src/components/number-input/number-input.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/number-input/index.ts",
+      "content": "export {NumberInput} from './number-input';\nexport type {NumberInputProps} from './number-input';\n"
+    },
+    {
+      "path": "packages/react/src/components/number-input/meta.json",
+      "content": "{\"name\":\"number-input\",\"title\":\"Number input\",\"category\":\"forms\",\"description\":\"A numeric field with decrease and increase buttons.\",\"status\":\"stable\",\"uses\":[\"input\",\"field\"],\"css\":[\"03-form-fields.css\",\"number-input.css\"],\"a11y\":[\"Native input type=\\\"number\\\"; ArrowUp/ArrowDown change the value.\",\"The step buttons are named \\\"Decrease\\\" and \\\"Increase\\\" and are skipped by Tab.\"],\"keywords\":[\"stepper\",\"quantity\",\"spinner\",\"numeric\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/number-input/number-input.tsx",
+      "content": "'use client';\nimport {forwardRef, useImperativeHandle, useRef, type InputHTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\nexport interface NumberInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {\n  /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */\n  invalid?: boolean;\n}\n\n/** Native number input with step buttons. Use `min`, `max`, `step` like on any input. Works controlled or not. */\nexport const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(function NumberInput({invalid, className, disabled, readOnly, ...rest}, ref) {\n  const f = useFieldControl();\n  const inner = useRef<HTMLInputElement>(null);\n  useImperativeHandle(ref, () => inner.current!);\n  const bump = (dir: 1 | -1) => {\n    const el = inner.current;\n    if (!el) return;\n    if (dir === 1) el.stepUp(); else el.stepDown();\n    el.dispatchEvent(new Event('input', {bubbles: true}));\n    el.focus();\n  };\n  const off = disabled || readOnly;\n  return (\n    <div className=\"number-input\">\n      <button type=\"button\" className=\"number-step\" aria-label=\"Decrease\" tabIndex={-1} disabled={off} onClick={() => bump(-1)}>−</button>\n      <input ref={inner} type=\"number\" className={cx('input number-field', className)} disabled={disabled} readOnly={readOnly} {...f} {...(invalid ? {'aria-invalid': true as const} : {})} {...rest} />\n      <button type=\"button\" className=\"number-step\" aria-label=\"Increase\" tabIndex={-1} disabled={off} onClick={() => bump(1)}>+</button>\n    </div>\n  );\n});\n"
+    }
+  ]
+}

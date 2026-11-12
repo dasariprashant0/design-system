@@ -1,0 +1,44 @@
+{
+  "name": "use-intersection",
+  "title": "useIntersection",
+  "category": "hooks",
+  "description": "Know whether an element is in view, with an IntersectionObserver.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. When IntersectionObserver is unavailable, it reports not intersecting."
+  ],
+  "keywords": [
+    "in view",
+    "visible",
+    "lazy",
+    "scroll"
+  ],
+  "kind": "hooks",
+  "import": "import {UseIntersection} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-intersection",
+  "files": [
+    "packages/react/src/hooks/use-intersection/index.ts",
+    "packages/react/src/hooks/use-intersection/meta.json",
+    "packages/react/src/hooks/use-intersection/use-intersection.demo.tsx",
+    "packages/react/src/hooks/use-intersection/use-intersection.test.tsx",
+    "packages/react/src/hooks/use-intersection/use-intersection.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-intersection/index.ts",
+      "content": "export {useIntersection} from './use-intersection';\nexport type {UseIntersectionOptions} from './use-intersection';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-intersection/meta.json",
+      "content": "{\"name\":\"use-intersection\",\"title\":\"useIntersection\",\"category\":\"hooks\",\"description\":\"Know whether an element is in view, with an IntersectionObserver.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. When IntersectionObserver is unavailable, it reports not intersecting.\"],\"keywords\":[\"in view\",\"visible\",\"lazy\",\"scroll\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-intersection/use-intersection.ts",
+      "content": "'use client';\nimport {useCallback, useEffect, useRef, useState, type RefCallback} from 'react';\n\nexport interface UseIntersectionOptions extends IntersectionObserverInit {\n  /** Stop observing after the first time it is visible. */\n  once?: boolean;\n}\n\n/** Returns `[ref, entry]`; `entry?.isIntersecting` says if it is in view. */\nexport function useIntersection<T extends Element = Element>({once, root, rootMargin, threshold}: UseIntersectionOptions = {}): [RefCallback<T>, IntersectionObserverEntry | null] {\n  const [entry, setEntry] = useState<IntersectionObserverEntry | null>(null);\n  const observer = useRef<IntersectionObserver | null>(null);\n  const ref = useCallback<RefCallback<T>>((el) => {\n    observer.current?.disconnect();\n    observer.current = null;\n    if (!el || typeof IntersectionObserver === 'undefined') return;\n    observer.current = new IntersectionObserver(([e]) => {\n      if (!e) return;\n      setEntry(e);\n      if (once && e.isIntersecting) observer.current?.disconnect();\n    }, {root, rootMargin, threshold});\n    observer.current.observe(el);\n  }, [once, root, rootMargin, threshold]);\n  useEffect(() => () => observer.current?.disconnect(), []);\n  return [ref, entry];\n}\n"
+    }
+  ]
+}

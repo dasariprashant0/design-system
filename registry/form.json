@@ -1,0 +1,56 @@
+{
+  "name": "form",
+  "title": "Form",
+  "category": "forms",
+  "description": "A form wrapper with a submit helper, an error summary that links to invalid fields, and an actions footer.",
+  "status": "stable",
+  "uses": [
+    "field",
+    "button"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/form.css",
+      "content": "/* Form: vertical rhythm, error summary, actions footer. */\n.form { display: flex; flex-direction: column; gap: var(--s5); min-width: 0; }\n.form-errors { border: 1px solid var(--danger); padding: var(--s4); font-size: var(--text-sm); }\n.form-errors-title { font-weight: 500; color: var(--danger); margin-bottom: var(--s2); }\n.form-errors ul { margin: 0; padding-inline-start: var(--s5); }\n.form-errors a { color: var(--foreground); text-decoration: underline; text-underline-offset: 3px; }\n.form-errors a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }\n.form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); padding-top: var(--s4); border-top: 1px solid var(--rule); }\n"
+    }
+  ],
+  "a11y": [
+    "A native form; give it an accessible name with aria-label or aria-labelledby when the page has several.",
+    "The error summary is a role=alert region at the top; each item is a link that moves focus to the invalid control.",
+    "Pass each message to its Field too, so the control carries aria-invalid and aria-describedby."
+  ],
+  "keywords": [
+    "submit",
+    "validation",
+    "errors",
+    "error summary",
+    "actions"
+  ],
+  "kind": "components",
+  "import": "import {Form} from '@monoline/react'",
+  "path": "packages/react/src/components/form",
+  "files": [
+    "packages/react/src/components/form/form.demo.tsx",
+    "packages/react/src/components/form/form.test.tsx",
+    "packages/react/src/components/form/form.tsx",
+    "packages/react/src/components/form/index.ts",
+    "packages/react/src/components/form/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/form/form.tsx",
+      "content": "'use client';\nimport {forwardRef, useCallback, useRef, type FormEvent, type FormHTMLAttributes, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface FormError {\n  /** The `name` of the invalid control. The summary link focuses it. */\n  name: string;\n  message: ReactNode;\n}\n\nexport interface FormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {\n  /** Called with the submit event. Combine with `preventDefault` when you handle the form in JS. */\n  onSubmit?: (event: FormEvent<HTMLFormElement>) => void;\n  /** Call `event.preventDefault()` before `onSubmit`, for forms handled in JS. Off by default so native posts still work. */\n  preventDefault?: boolean;\n  /** Errors to list in a summary at the top of the form. Also pass each message to its `Field` as `error`. */\n  errors?: FormError[];\n  /** Heading of the summary. Default \"Fix these to continue\". */\n  errorsTitle?: ReactNode;\n}\n\n/**\n * A `<form>` with an optional error summary and a submit helper.\n * The summary is a `role=\"alert\"` region at the top; each item links to its control and moves focus there.\n * Build the fields with `Field` and end the form with `FormActions`.\n */\nexport const Form = forwardRef<HTMLFormElement, FormProps>(function Form({onSubmit, preventDefault, errors, errorsTitle = 'Fix these to continue', className, children, ...rest}, ref) {\n  const inner = useRef<HTMLFormElement | null>(null);\n  const setRef = useCallback((el: HTMLFormElement | null) => {\n    inner.current = el;\n    if (typeof ref === 'function') ref(el);\n    else if (ref) ref.current = el;\n  }, [ref]);\n  const focusField = (name: string) => {\n    const el = inner.current?.elements.namedItem(name);\n    if (el instanceof HTMLElement) el.focus();\n  };\n  return (\n    <form\n      ref={setRef}\n      className={cx('form', className)}\n      onSubmit={(e) => { if (preventDefault) e.preventDefault(); onSubmit?.(e); }}\n      {...rest}\n    >\n      {errors && errors.length > 0 && (\n        <div className=\"form-errors\" role=\"alert\">\n          <p className=\"form-errors-title\">{errorsTitle}</p>\n          <ul>\n            {errors.map((err) => (\n              <li key={err.name}>\n                <a href={`#${err.name}`} onClick={(e) => { e.preventDefault(); focusField(err.name); }}>{err.message}</a>\n              </li>\n            ))}\n          </ul>\n        </div>\n      )}\n      {children}\n    </form>\n  );\n});\n\n/** The footer row with the submit and cancel buttons. One solid Button per form. */\nexport const FormActions = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function FormActions({className, ...rest}, ref) {\n  return <div ref={ref} className={cx('form-actions', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/form/index.ts",
+      "content": "export {Form, FormActions} from './form';\nexport type {FormProps, FormError} from './form';\n"
+    },
+    {
+      "path": "packages/react/src/components/form/meta.json",
+      "content": "{\"name\":\"form\",\"title\":\"Form\",\"category\":\"forms\",\"description\":\"A form wrapper with a submit helper, an error summary that links to invalid fields, and an actions footer.\",\"status\":\"stable\",\"uses\":[\"field\",\"button\"],\"css\":[\"form.css\"],\"a11y\":[\"A native form; give it an accessible name with aria-label or aria-labelledby when the page has several.\",\"The error summary is a role=alert region at the top; each item is a link that moves focus to the invalid control.\",\"Pass each message to its Field too, so the control carries aria-invalid and aria-describedby.\"],\"keywords\":[\"submit\",\"validation\",\"errors\",\"error summary\",\"actions\"]}\n"
+    }
+  ]
+}

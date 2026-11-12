@@ -5,6 +5,7 @@ import {cx} from '../../utils/cx';
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   /** Adds a hover outline. Use with `asChild` on a link or button so the whole card is one control. */
   interactive?: boolean;
+  /** Render the child element (a link, an `article`) with the card styles instead of a `div`. */
   asChild?: boolean;
 }
 
@@ -23,8 +24,13 @@ const part = (name: string, tag: 'div' | 'h3' | 'p', cls: string) => {
   return C;
 };
 
+/** Top part of a `Card`: holds the title and description. */
 export const CardHeader = part('CardHeader', 'div', 'card-header');
+/** The card's title, rendered as an `h3`. */
 export const CardTitle = part('CardTitle', 'h3', 'card-title');
+/** A muted supporting sentence under the title. */
 export const CardDescription = part('CardDescription', 'p', 'card-description');
+/** The main body of a `Card`. */
 export const CardContent = part('CardContent', 'div', 'card-content');
+/** Bottom part of a `Card`, usually for actions. */
 export const CardFooter = part('CardFooter', 'div', 'card-footer');

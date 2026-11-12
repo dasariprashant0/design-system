@@ -1,0 +1,1 @@
+{"name":"use-hash","title":"useHash","category":"hooks","description":"Read and set location.hash as state.","status":"stable","css":[],"a11y":["No DOM output. Changing the hash adds a history entry, so Back works."],"keywords":["location","anchor","router","fragment"]}

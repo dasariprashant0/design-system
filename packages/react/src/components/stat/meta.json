@@ -1,0 +1,1 @@
+{"name":"stat","title":"Stat","category":"data-display","description":"One number with its label and a note.","status":"stable","css":["19-avatar.css"],"a11y":["A description list (dl) pairs the label with its value."],"keywords":["metric","kpi","number","statistic"]}

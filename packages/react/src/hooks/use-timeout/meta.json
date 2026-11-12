@@ -1,0 +1,1 @@
+{"name":"use-timeout","title":"useTimeout","category":"hooks","description":"Run a callback after a delay, with start and clear controls.","status":"stable","css":[],"a11y":["No DOM output."],"keywords":["setTimeout","delay","later"]}

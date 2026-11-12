@@ -1,0 +1,1 @@
+{"name":"use-long-press","title":"useLongPress","category":"hooks","description":"Call a handler when an element is held down, cancelling if the pointer moves or lifts early.","status":"stable","css":[],"a11y":["Press and hold is hard for many people: always offer a normal click or keyboard action for the same result."],"keywords":["hold","press and hold","touch","context"]}

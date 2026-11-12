@@ -1,0 +1,43 @@
+{
+  "name": "use-hover",
+  "title": "useHover",
+  "category": "hooks",
+  "description": "Track whether the pointer is over an element.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. Hover is pointer-only: never hide essential content or actions behind it."
+  ],
+  "keywords": [
+    "hover",
+    "pointer",
+    "mouseover"
+  ],
+  "kind": "hooks",
+  "import": "import {UseHover} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-hover",
+  "files": [
+    "packages/react/src/hooks/use-hover/index.ts",
+    "packages/react/src/hooks/use-hover/meta.json",
+    "packages/react/src/hooks/use-hover/use-hover.demo.tsx",
+    "packages/react/src/hooks/use-hover/use-hover.test.tsx",
+    "packages/react/src/hooks/use-hover/use-hover.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-hover/index.ts",
+      "content": "export {useHover} from './use-hover';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-hover/meta.json",
+      "content": "{\"name\":\"use-hover\",\"title\":\"useHover\",\"category\":\"hooks\",\"description\":\"Track whether the pointer is over an element.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. Hover is pointer-only: never hide essential content or actions behind it.\"],\"keywords\":[\"hover\",\"pointer\",\"mouseover\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-hover/use-hover.ts",
+      "content": "'use client';\nimport {useCallback, useEffect, useRef, useState, type RefCallback} from 'react';\n\n/** Returns `[ref, hovered]`. Attach `ref` to the element. Pointer only, so keep it for decoration. */\nexport function useHover<T extends HTMLElement = HTMLElement>(): [RefCallback<T>, boolean] {\n  const [hovered, setHovered] = useState(false);\n  const node = useRef<T | null>(null);\n  const on = useCallback(() => setHovered(true), []);\n  const off = useCallback(() => setHovered(false), []);\n  const ref = useCallback<RefCallback<T>>((el) => {\n    if (node.current) { node.current.removeEventListener('mouseenter', on); node.current.removeEventListener('mouseleave', off); }\n    node.current = el;\n    if (el) { el.addEventListener('mouseenter', on); el.addEventListener('mouseleave', off); }\n  }, [on, off]);\n  useEffect(() => () => { node.current?.removeEventListener('mouseenter', on); node.current?.removeEventListener('mouseleave', off); }, [on, off]);\n  return [ref, hovered];\n}\n"
+    }
+  ]
+}

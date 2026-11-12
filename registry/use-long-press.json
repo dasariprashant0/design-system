@@ -1,0 +1,44 @@
+{
+  "name": "use-long-press",
+  "title": "useLongPress",
+  "category": "hooks",
+  "description": "Call a handler when an element is held down, cancelling if the pointer moves or lifts early.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "Press and hold is hard for many people: always offer a normal click or keyboard action for the same result."
+  ],
+  "keywords": [
+    "hold",
+    "press and hold",
+    "touch",
+    "context"
+  ],
+  "kind": "hooks",
+  "import": "import {UseLongPress} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-long-press",
+  "files": [
+    "packages/react/src/hooks/use-long-press/index.ts",
+    "packages/react/src/hooks/use-long-press/meta.json",
+    "packages/react/src/hooks/use-long-press/use-long-press.demo.tsx",
+    "packages/react/src/hooks/use-long-press/use-long-press.test.tsx",
+    "packages/react/src/hooks/use-long-press/use-long-press.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-long-press/index.ts",
+      "content": "export {useLongPress} from './use-long-press';\nexport type {UseLongPressOptions} from './use-long-press';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-long-press/meta.json",
+      "content": "{\"name\":\"use-long-press\",\"title\":\"useLongPress\",\"category\":\"hooks\",\"description\":\"Call a handler when an element is held down, cancelling if the pointer moves or lifts early.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"Press and hold is hard for many people: always offer a normal click or keyboard action for the same result.\"],\"keywords\":[\"hold\",\"press and hold\",\"touch\",\"context\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-long-press/use-long-press.ts",
+      "content": "'use client';\nimport {useCallback, useEffect, useRef, type PointerEvent} from 'react';\n\nexport interface UseLongPressOptions {\n  /** Hold time in milliseconds. Default 500. */\n  delay?: number;\n  /** Movement in pixels that cancels the press. Default 10. */\n  tolerance?: number;\n}\n\n/** Returns pointer handlers to spread on an element: `<button {...useLongPress(fn)}>`. */\nexport function useLongPress(onLongPress: () => void, {delay = 500, tolerance = 10}: UseLongPressOptions = {}) {\n  const fn = useRef(onLongPress);\n  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);\n  const origin = useRef<{x: number; y: number} | null>(null);\n  useEffect(() => { fn.current = onLongPress; });\n  const cancel = useCallback(() => { clearTimeout(timer.current); origin.current = null; }, []);\n  useEffect(() => cancel, [cancel]);\n  return {\n    onPointerDown: (e: PointerEvent) => {\n      origin.current = {x: e.clientX, y: e.clientY};\n      clearTimeout(timer.current);\n      timer.current = setTimeout(() => { origin.current = null; fn.current(); }, delay);\n    },\n    onPointerMove: (e: PointerEvent) => {\n      const o = origin.current;\n      if (o && Math.hypot(e.clientX - o.x, e.clientY - o.y) > tolerance) cancel();\n    },\n    onPointerUp: cancel,\n    onPointerLeave: cancel,\n    onPointerCancel: cancel,\n  };\n}\n"
+    }
+  ]
+}

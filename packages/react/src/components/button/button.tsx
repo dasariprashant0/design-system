@@ -5,6 +5,7 @@ import {cx} from '../../utils/cx';
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** `solid` is the one main action per view. `line` for the rest, `ghost` for inline links, `danger` for destructive. */
   variant?: 'solid' | 'line' | 'ghost' | 'danger';
+  /** `md` (default) or `sm` for dense toolbars and table rows. */
   size?: 'sm' | 'md';
   /** Shows a spinner, sets `aria-busy` and ignores clicks. The label stays so the width does not jump. */
   loading?: boolean;

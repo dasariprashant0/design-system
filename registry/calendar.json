@@ -1,0 +1,51 @@
+{
+  "name": "calendar",
+  "title": "Calendar",
+  "category": "forms",
+  "description": "A month grid for picking one date.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/calendar.css",
+      "content": ".calendar { display: inline-grid; gap: var(--s3); padding: var(--s4); border: 1px solid var(--foreground); background: var(--background); }\n.calendar-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }\n.calendar-title { font-weight: 500; font-size: var(--text-sm); }\n.calendar-nav { width: var(--s6); height: var(--s6); border: 1px solid var(--rule); }\n.calendar-nav:hover { border-color: var(--foreground); }\n.calendar-grid { border-collapse: collapse; }\n.calendar-grid th { font-size: var(--text-xs); font-weight: 400; color: var(--muted); padding: var(--s1) 0; text-transform: uppercase; }\n.calendar-grid td { padding: 0; text-align: center; }\n.calendar-day { width: var(--s6); height: var(--s6); font-size: var(--text-sm); }\n.calendar-day:hover:not(:disabled) { background: var(--wash-2); }\n.calendar-day[data-outside] { color: var(--muted); }\n.calendar-day[data-today] { box-shadow: inset 0 0 0 1px var(--accent); }\n.calendar-day[aria-pressed=\"true\"] { background: var(--foreground); color: var(--background); }\n.calendar-day:disabled { opacity: 0.35; cursor: not-allowed; }\n.calendar-day:focus-visible, .calendar-nav:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }\n[dir=\"rtl\"] .calendar-nav { transform: scaleX(-1); }\n"
+    }
+  ],
+  "a11y": [
+    "role=\"grid\" with column headers; one day is in the tab order (roving tabindex).",
+    "Arrow keys move by day and week, Home/End to the start and end of the week, PageUp/PageDown by month.",
+    "Each day button has a full date name; the selected day has aria-pressed and today has aria-current=\"date\"."
+  ],
+  "keywords": [
+    "date",
+    "month",
+    "datepicker",
+    "schedule"
+  ],
+  "kind": "components",
+  "import": "import {Calendar} from '@monoline/react'",
+  "path": "packages/react/src/components/calendar",
+  "files": [
+    "packages/react/src/components/calendar/calendar.demo.tsx",
+    "packages/react/src/components/calendar/calendar.test.tsx",
+    "packages/react/src/components/calendar/calendar.tsx",
+    "packages/react/src/components/calendar/index.ts",
+    "packages/react/src/components/calendar/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/calendar/calendar.tsx",
+      "content": "'use client';\nimport {forwardRef, useRef, useState, type HTMLAttributes, type KeyboardEvent} from 'react';\nimport {cx} from '../../utils/cx';\nimport {useIsRtl} from '../../utils/direction';\n\nexport interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {\n  /** The selected date when controlled; `null` means none. Pair with `onValueChange`. */\n  value?: Date | null;\n  /** The initially selected date when uncontrolled. Default none. */\n  defaultValue?: Date | null;\n  /** Called with the date the user picks. */\n  onValueChange?: (date: Date) => void;\n  /** First day of the week: 0 = Sunday, 1 = Monday. */\n  weekStartsOn?: 0 | 1;\n  /** Earliest selectable date; earlier days are disabled. */\n  min?: Date;\n  /** Latest selectable date; later days are disabled. */\n  max?: Date;\n  /** BCP 47 locale for month and day names. */\n  locale?: string;\n}\n\nconst day = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());\nconst same = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();\nconst add = (d: Date, n: number) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);\nconst addMonths = (d: Date, n: number) => { const t = new Date(d.getFullYear(), d.getMonth() + n, 1); const last = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate(); return new Date(t.getFullYear(), t.getMonth(), Math.min(d.getDate(), last)); };\n\n/** Pick a date. Controlled with `value` + `onValueChange`, or uncontrolled. */\nexport const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calendar({value, defaultValue = null, onValueChange, weekStartsOn = 0, min, max, locale, className, ...rest}, ref) {\n  const [inner, setInner] = useState<Date | null>(defaultValue);\n  const selected = value === undefined ? inner : value;\n  const [focus, setFocus] = useState<Date>(() => day(selected ?? new Date()));\n  const grid = useRef<HTMLTableElement>(null);\n  const isRtl = useIsRtl();\n  const today = day(new Date());\n  const first = new Date(focus.getFullYear(), focus.getMonth(), 1);\n  const offset = (first.getDay() - weekStartsOn + 7) % 7;\n  const start = add(first, -offset);\n  const weeks = Array.from({length: 6}, (_, w) => Array.from({length: 7}, (_, d) => add(start, w * 7 + d)));\n  const month = new Intl.DateTimeFormat(locale, {month: 'long', year: 'numeric'}).format(focus);\n  const weekday = (d: Date, style: 'short' | 'long') => new Intl.DateTimeFormat(locale, {weekday: style}).format(d);\n  const full = (d: Date) => new Intl.DateTimeFormat(locale, {dateStyle: 'full'}).format(d);\n  const off = (d: Date) => (min && d < day(min)) || (max && d > day(max));\n  const choose = (d: Date) => { if (off(d)) return; if (value === undefined) setInner(d); onValueChange?.(d); };\n  const go = (d: Date) => { setFocus(d); requestAnimationFrame(() => grid.current?.querySelector<HTMLButtonElement>('button[tabindex=\"0\"]')?.focus()); };\n\n  const keydown = (e: KeyboardEvent<HTMLTableElement>) => {\n    const h = isRtl(e.currentTarget) ? -1 : 1; // ArrowRight is the previous day in rtl\n    const k: Record<string, Date> = {\n      ArrowLeft: add(focus, -h), ArrowRight: add(focus, h), ArrowUp: add(focus, -7), ArrowDown: add(focus, 7),\n      Home: add(focus, -((focus.getDay() - weekStartsOn + 7) % 7)), End: add(focus, 6 - ((focus.getDay() - weekStartsOn + 7) % 7)),\n      PageUp: addMonths(focus, -1), PageDown: addMonths(focus, 1),\n    };\n    const next = k[e.key];\n    if (next) { e.preventDefault(); go(next); }\n  };\n\n  return (\n    <div ref={ref} className={cx('calendar', className)} {...rest}>\n      <div className=\"calendar-head\">\n        <button type=\"button\" className=\"calendar-nav\" aria-label=\"Previous month\" onClick={() => setFocus(addMonths(focus, -1))}>‹</button>\n        <div className=\"calendar-title\" aria-live=\"polite\">{month}</div>\n        <button type=\"button\" className=\"calendar-nav\" aria-label=\"Next month\" onClick={() => setFocus(addMonths(focus, 1))}>›</button>\n      </div>\n      <table ref={grid} role=\"grid\" aria-label={month} className=\"calendar-grid\" onKeyDown={keydown}>\n        <thead>\n          <tr>{weeks[0]!.map((d) => <th key={d.getDay()} scope=\"col\" abbr={weekday(d, 'long')}>{weekday(d, 'short').slice(0, 2)}</th>)}</tr>\n        </thead>\n        <tbody>\n          {weeks.map((w, i) => (\n            <tr key={i}>\n              {w.map((d) => {\n                const outside = d.getMonth() !== focus.getMonth();\n                const isSel = !!selected && same(d, selected);\n                return (\n                  <td key={d.toISOString()} role=\"gridcell\" aria-selected={isSel || undefined}>\n                    <button\n                      type=\"button\"\n                      tabIndex={same(d, focus) ? 0 : -1}\n                      className=\"calendar-day\"\n                      data-outside={outside || undefined}\n                      data-today={same(d, today) || undefined}\n                      aria-label={full(d)}\n                      aria-pressed={isSel}\n                      aria-current={same(d, today) ? 'date' : undefined}\n                      disabled={!!off(d)}\n                      onClick={() => { choose(d); setFocus(d); }}\n                    >{d.getDate()}</button>\n                  </td>\n                );\n              })}\n            </tr>\n          ))}\n        </tbody>\n      </table>\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/calendar/index.ts",
+      "content": "export {Calendar} from './calendar';\nexport type {CalendarProps} from './calendar';\n"
+    },
+    {
+      "path": "packages/react/src/components/calendar/meta.json",
+      "content": "{\"name\":\"calendar\",\"title\":\"Calendar\",\"category\":\"forms\",\"description\":\"A month grid for picking one date.\",\"status\":\"stable\",\"css\":[\"calendar.css\"],\"a11y\":[\"role=\\\"grid\\\" with column headers; one day is in the tab order (roving tabindex).\",\"Arrow keys move by day and week, Home/End to the start and end of the week, PageUp/PageDown by month.\",\"Each day button has a full date name; the selected day has aria-pressed and today has aria-current=\\\"date\\\".\"],\"keywords\":[\"date\",\"month\",\"datepicker\",\"schedule\"]}\n"
+    }
+  ]
+}

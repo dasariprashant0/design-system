@@ -1,0 +1,54 @@
+{
+  "name": "confetti",
+  "title": "Confetti",
+  "category": "effects",
+  "description": "A short burst of square confetti on a canvas, triggered by a prop or a ref method.",
+  "status": "stable",
+  "uses": [
+    "button"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/confetti.css",
+      "content": "/* Confetti: a window-sized canvas above everything that never takes the pointer. */\n.confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: var(--z-toast); }\n"
+    }
+  ],
+  "a11y": [
+    "The canvas is aria-hidden and ignores the pointer, so it never blocks or announces anything.",
+    "Off under prefers-reduced-motion: no burst is drawn. Announce the event it celebrates in text as well."
+  ],
+  "keywords": [
+    "celebrate",
+    "burst",
+    "success",
+    "particles",
+    "canvas"
+  ],
+  "kind": "components",
+  "import": "import {Confetti} from '@monoline/react'",
+  "path": "packages/react/src/components/confetti",
+  "files": [
+    "packages/react/src/components/confetti/confetti.demo.tsx",
+    "packages/react/src/components/confetti/confetti.test.tsx",
+    "packages/react/src/components/confetti/confetti.tsx",
+    "packages/react/src/components/confetti/index.ts",
+    "packages/react/src/components/confetti/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/confetti/confetti.tsx",
+      "content": "'use client';\nimport {forwardRef, useCallback, useEffect, useImperativeHandle, useRef, type CanvasHTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {prefersReducedMotion} from '../number-ticker/use-reduced-motion';\n\nexport interface ConfettiHandle {\n  /** Throw a burst. Does nothing under `prefers-reduced-motion`. */\n  fire: () => void;\n}\n\nexport interface ConfettiProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, 'children'> {\n  /** Fires a burst each time this number changes (not on mount). Or call `ref.current.fire()`. */\n  burst?: number;\n  /** Pieces per burst. Default 60. */\n  count?: number;\n  /** Where the burst starts, as 0 to 1 of the window. Default the centre. */\n  origin?: {x: number; y: number};\n  /** Fill colours. Default: the accent, foreground and muted tokens. */\n  colors?: string[];\n}\n\ntype Piece = {x: number; y: number; vx: number; vy: number; rot: number; vr: number; w: number; h: number; color: string; life: number};\n\n/**\n * A short burst of square confetti on a canvas that covers the window and ignores the pointer. Trigger it with `burst` or `fire()`.\n * Decorative (`aria-hidden`); announce the event it celebrates some other way. Off for reduced motion.\n */\nexport const Confetti = forwardRef<ConfettiHandle, ConfettiProps>(function Confetti({burst, count = 60, origin = {x: 0.5, y: 0.5}, colors, className, ...rest}, ref) {\n  const canvas = useRef<HTMLCanvasElement>(null);\n  const raf = useRef(0);\n  const props = useRef({count, origin, colors});\n  props.current = {count, origin, colors};\n\n  const fire = useCallback(() => {\n    const el = canvas.current;\n    if (!el || prefersReducedMotion() || typeof requestAnimationFrame === 'undefined') return;\n    const ctx = el.getContext('2d');\n    if (!ctx) return;\n    const {count: n, origin: o, colors: given} = props.current;\n    el.width = window.innerWidth;\n    el.height = window.innerHeight;\n    const style = getComputedStyle(el);\n    const palette = given ?? ['--accent', '--foreground', '--muted'].map((t) => style.getPropertyValue(t).trim()).filter(Boolean);\n    if (!palette.length) palette.push('currentColor');\n    const pieces: Piece[] = Array.from({length: n}, (_, i) => {\n      const a = Math.random() * Math.PI * 2;\n      const s = 4 + Math.random() * 8;\n      return {x: o.x * el.width, y: o.y * el.height, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 4, rot: Math.random() * 6, vr: (Math.random() - 0.5) * 0.4, w: 4 + Math.random() * 6, h: 4 + Math.random() * 6, color: palette[i % palette.length]!, life: 70 + Math.random() * 40};\n    });\n    cancelAnimationFrame(raf.current);\n    const step = () => {\n      ctx.clearRect(0, 0, el.width, el.height);\n      let alive = 0;\n      for (const p of pieces) {\n        p.life -= 1;\n        if (p.life <= 0) continue;\n        alive += 1;\n        p.vy += 0.25; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.rot += p.vr;\n        ctx.save();\n        ctx.globalAlpha = Math.min(1, p.life / 30);\n        ctx.translate(p.x, p.y);\n        ctx.rotate(p.rot);\n        ctx.fillStyle = p.color;\n        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);\n        ctx.restore();\n      }\n      if (alive) raf.current = requestAnimationFrame(step); else ctx.clearRect(0, 0, el.width, el.height);\n    };\n    raf.current = requestAnimationFrame(step);\n  }, []);\n\n  useImperativeHandle(ref, () => ({fire}), [fire]);\n\n  const first = useRef(true);\n  useEffect(() => {\n    if (first.current) { first.current = false; return; }\n    fire();\n  }, [burst, fire]);\n  useEffect(() => () => cancelAnimationFrame(raf.current), []);\n\n  return <canvas ref={canvas} aria-hidden=\"true\" className={cx('confetti', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/confetti/index.ts",
+      "content": "export {Confetti} from './confetti';\nexport type {ConfettiHandle, ConfettiProps} from './confetti';\n"
+    },
+    {
+      "path": "packages/react/src/components/confetti/meta.json",
+      "content": "{\"name\":\"confetti\",\"title\":\"Confetti\",\"category\":\"effects\",\"description\":\"A short burst of square confetti on a canvas, triggered by a prop or a ref method.\",\"status\":\"stable\",\"uses\":[\"button\"],\"css\":[\"confetti.css\"],\"a11y\":[\"The canvas is aria-hidden and ignores the pointer, so it never blocks or announces anything.\",\"Off under prefers-reduced-motion: no burst is drawn. Announce the event it celebrates in text as well.\"],\"keywords\":[\"celebrate\",\"burst\",\"success\",\"particles\",\"canvas\"]}\n"
+    }
+  ]
+}

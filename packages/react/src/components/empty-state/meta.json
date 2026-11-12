@@ -1,0 +1,1 @@
+{"name":"empty-state","title":"Empty state","category":"feedback","description":"Say that there is nothing here yet and offer the next step.","status":"stable","css":["empty-state.css"],"a11y":["Plain heading and text; put the action in children as a button or link."],"keywords":["no results","blank","zero data","placeholder"]}

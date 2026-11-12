@@ -1,0 +1,43 @@
+{
+  "name": "use-mounted",
+  "title": "useMounted",
+  "category": "hooks",
+  "description": "True after the first client render. Use it to avoid server and client markup differences.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output."
+  ],
+  "keywords": [
+    "hydration",
+    "ssr",
+    "client only"
+  ],
+  "kind": "hooks",
+  "import": "import {UseMounted} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-mounted",
+  "files": [
+    "packages/react/src/hooks/use-mounted/index.ts",
+    "packages/react/src/hooks/use-mounted/meta.json",
+    "packages/react/src/hooks/use-mounted/use-mounted.demo.tsx",
+    "packages/react/src/hooks/use-mounted/use-mounted.test.tsx",
+    "packages/react/src/hooks/use-mounted/use-mounted.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-mounted/index.ts",
+      "content": "export {useMounted} from './use-mounted';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-mounted/meta.json",
+      "content": "{\"name\":\"use-mounted\",\"title\":\"useMounted\",\"category\":\"hooks\",\"description\":\"True after the first client render. Use it to avoid server and client markup differences.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output.\"],\"keywords\":[\"hydration\",\"ssr\",\"client only\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-mounted/use-mounted.ts",
+      "content": "'use client';\nimport {useEffect, useState} from 'react';\n\n/** False on the server and during the first render, true afterwards. */\nexport function useMounted(): boolean {\n  const [mounted, setMounted] = useState(false);\n  useEffect(() => setMounted(true), []);\n  return mounted;\n}\n"
+    }
+  ]
+}

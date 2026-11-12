@@ -1,0 +1,49 @@
+{
+  "name": "empty-state",
+  "title": "Empty state",
+  "category": "feedback",
+  "description": "Say that there is nothing here yet and offer the next step.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/empty-state.css",
+      "content": "/* Empty state: centred message inside a dashed frame. */\n.empty { display: grid; justify-items: center; gap: var(--s3); padding: var(--s7) var(--s5); text-align: center; border: 1px dashed var(--rule); }\n.empty-icon { color: var(--muted); font-size: var(--text-lg); }\n.empty-title { font-size: var(--text-lg); font-weight: 500; }\n.empty-description { color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.empty-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); margin-top: var(--s2); }\n"
+    }
+  ],
+  "a11y": [
+    "Plain heading and text; put the action in children as a button or link."
+  ],
+  "keywords": [
+    "no results",
+    "blank",
+    "zero data",
+    "placeholder"
+  ],
+  "kind": "components",
+  "import": "import {EmptyState} from '@monoline/react'",
+  "path": "packages/react/src/components/empty-state",
+  "files": [
+    "packages/react/src/components/empty-state/empty-state.demo.tsx",
+    "packages/react/src/components/empty-state/empty-state.test.tsx",
+    "packages/react/src/components/empty-state/empty-state.tsx",
+    "packages/react/src/components/empty-state/index.ts",
+    "packages/react/src/components/empty-state/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/empty-state/empty-state.tsx",
+      "content": "import {forwardRef, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface EmptyStateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  /** Short headline saying what is missing, for example \"No projects yet\". */\n  title: ReactNode;\n  /** Optional sentence explaining why it is empty or what to do next. */\n  description?: ReactNode;\n  /** Optional inline SVG, `aria-hidden`. */\n  icon?: ReactNode;\n  /** The next step: a Button or link. */\n  children?: ReactNode;\n}\n\n/** Shown when a list, search or table has nothing to display. */\nexport const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(function EmptyState({title, description, icon, children, className, ...rest}, ref) {\n  return (\n    <div ref={ref} className={cx('empty', className)} {...rest}>\n      {icon && <div className=\"empty-icon\" aria-hidden=\"true\">{icon}</div>}\n      <h3 className=\"empty-title\">{title}</h3>\n      {description && <p className=\"empty-description\">{description}</p>}\n      {children && <div className=\"empty-actions\">{children}</div>}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/empty-state/index.ts",
+      "content": "export {EmptyState} from './empty-state';\nexport type {EmptyStateProps} from './empty-state';\n"
+    },
+    {
+      "path": "packages/react/src/components/empty-state/meta.json",
+      "content": "{\"name\":\"empty-state\",\"title\":\"Empty state\",\"category\":\"feedback\",\"description\":\"Say that there is nothing here yet and offer the next step.\",\"status\":\"stable\",\"css\":[\"empty-state.css\"],\"a11y\":[\"Plain heading and text; put the action in children as a button or link.\"],\"keywords\":[\"no results\",\"blank\",\"zero data\",\"placeholder\"]}\n"
+    }
+  ]
+}

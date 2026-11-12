@@ -1,0 +1,4 @@
+/* Button group: shared borders, one focus ring per button. */
+.btn-group { display: inline-flex; }
+.btn-group > .btn + .btn { margin-inline-start: -1px; }
+.btn-group > .btn:focus-visible { position: relative; z-index: 1; }

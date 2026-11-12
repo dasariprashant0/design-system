@@ -1,0 +1,4 @@
+.date-trigger { text-align: start; }
+.date-trigger[data-empty] { color: var(--muted); }
+.date-popover { padding: 0; max-width: none; border: 0; }
+.date-popover .calendar { border: 1px solid var(--foreground); }

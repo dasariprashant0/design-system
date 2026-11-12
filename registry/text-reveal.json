@@ -1,0 +1,51 @@
+{
+  "name": "text-reveal",
+  "title": "Text reveal",
+  "category": "effects",
+  "description": "Fade a sentence in word by word. Static for reduced motion.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/text-reveal.css",
+      "content": "/* Text reveal: each word fades in after (index * step). Opacity only, so nothing reflows. */\n.text-reveal-word { display: inline-block; animation: text-reveal-in var(--slow) var(--ease) both; animation-delay: calc(var(--i) * var(--text-reveal-step, 80ms)); }\n@keyframes text-reveal-in { from { opacity: 0; } to { opacity: 1; } }\n@media (prefers-reduced-motion: reduce) { .text-reveal-word { animation: none; } }\n"
+    }
+  ],
+  "a11y": [
+    "The text stays real text in reading order; nothing is hidden from assistive tech.",
+    "With prefers-reduced-motion every word is visible at once."
+  ],
+  "keywords": [
+    "fade in",
+    "words",
+    "stagger",
+    "headline",
+    "reveal"
+  ],
+  "kind": "components",
+  "import": "import {TextReveal} from '@monoline/react'",
+  "path": "packages/react/src/components/text-reveal",
+  "files": [
+    "packages/react/src/components/text-reveal/index.ts",
+    "packages/react/src/components/text-reveal/meta.json",
+    "packages/react/src/components/text-reveal/text-reveal.demo.tsx",
+    "packages/react/src/components/text-reveal/text-reveal.test.tsx",
+    "packages/react/src/components/text-reveal/text-reveal.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/text-reveal/index.ts",
+      "content": "export {TextReveal} from './text-reveal';\nexport type {TextRevealProps} from './text-reveal';\n"
+    },
+    {
+      "path": "packages/react/src/components/text-reveal/meta.json",
+      "content": "{\"name\":\"text-reveal\",\"title\":\"Text reveal\",\"category\":\"effects\",\"description\":\"Fade a sentence in word by word. Static for reduced motion.\",\"status\":\"stable\",\"css\":[\"text-reveal.css\"],\"a11y\":[\"The text stays real text in reading order; nothing is hidden from assistive tech.\",\"With prefers-reduced-motion every word is visible at once.\"],\"keywords\":[\"fade in\",\"words\",\"stagger\",\"headline\",\"reveal\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/text-reveal/text-reveal.tsx",
+      "content": "import {forwardRef, type CSSProperties, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface TextRevealProps extends HTMLAttributes<HTMLParagraphElement> {\n  /** The sentence to reveal, word by word. */\n  text: string;\n  /** Milliseconds between words. Default 80. */\n  stagger?: number;\n}\n\n/** Words fade in one after another on mount. Pure CSS, so the text is ordinary text to assistive tech. Static under reduced motion. */\nexport const TextReveal = forwardRef<HTMLParagraphElement, TextRevealProps>(function TextReveal({text, stagger = 80, className, style, ...rest}, ref) {\n  const words = text.split(/\\s+/).filter(Boolean);\n  return (\n    <p ref={ref} className={cx('text-reveal', className)} style={{'--text-reveal-step': `${stagger}ms`, ...style} as CSSProperties} {...rest}>\n      {words.map((w, i) => (\n        <span key={i}>\n          <span className=\"text-reveal-word\" style={{'--i': i} as CSSProperties}>{w}</span>\n          {i < words.length - 1 ? ' ' : null}\n        </span>\n      ))}\n    </p>\n  );\n});\n"
+    }
+  ]
+}

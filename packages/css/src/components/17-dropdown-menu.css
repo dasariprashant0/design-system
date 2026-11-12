@@ -2,9 +2,9 @@
 .dropdown { position: relative; display: inline-block; }
 .dropdown > summary { list-style: none; cursor: pointer; }
 .dropdown > summary::-webkit-details-marker { display: none; }
-.menu { position: absolute; left: 0; top: calc(100% + var(--s2)); z-index: var(--z-drawer); min-width: 200px; background: var(--background); border: 1px solid var(--foreground); padding: var(--s1) 0; }
-.menu-end { left: auto; right: 0; }
-.menu-item { display: flex; justify-content: space-between; gap: var(--s5); width: 100%; padding: var(--s2) var(--s4); font-size: var(--text-sm); text-align: left; }
+.menu { position: absolute; inset-inline-start: 0; top: calc(100% + var(--s2)); z-index: var(--z-drawer); min-width: 200px; background: var(--background); border: 1px solid var(--foreground); padding: var(--s1) 0; }
+.menu-end { inset-inline-start: auto; inset-inline-end: 0; }
+.menu-item { overflow-wrap: anywhere; display: flex; justify-content: space-between; gap: var(--s5); width: 100%; padding: var(--s2) var(--s4); font-size: var(--text-sm); text-align: start; }
 .menu-item:hover, .menu-item:focus-visible { background: var(--foreground); color: var(--background); outline-offset: -2px; }
 .menu-item.danger:hover { background: var(--danger); color: var(--background); }
 .menu-sep { border: 0; border-top: 1px solid var(--rule); margin: var(--s1) 0; }

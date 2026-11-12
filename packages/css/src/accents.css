@@ -18,3 +18,19 @@
 [data-accent="violet"] { --accent: #7C3AED; --accent-text: #6D28D9; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
 [data-accent="violet"][data-theme="dark"] { --accent: #A78BFA; --accent-text: #A78BFA; --accent-2: #E0A23A; --on-accent: #150B33; }
 [data-accent="violet"][data-theme="midnight"] { --accent: #B49CFF; --accent-text: #B49CFF; --accent-2: #FFC857; --on-accent: #150B33; }
+
+[data-accent="rose"] { --accent: #E11D48; --accent-text: #BE123C; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
+[data-accent="rose"][data-theme="dark"] { --accent: #FB7185; --accent-text: #FB7185; --accent-2: #E0A23A; --on-accent: #2A0710; }
+[data-accent="rose"][data-theme="midnight"] { --accent: #FDA4AF; --accent-text: #FDA4AF; --accent-2: #FFC857; --on-accent: #2A0710; }
+
+[data-accent="teal"] { --accent: #0F766E; --accent-text: #0F766E; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
+[data-accent="teal"][data-theme="dark"] { --accent: #2DD4BF; --accent-text: #2DD4BF; --accent-2: #E0A23A; --on-accent: #04201D; }
+[data-accent="teal"][data-theme="midnight"] { --accent: #5EEAD4; --accent-text: #5EEAD4; --accent-2: #FFC857; --on-accent: #04201D; }
+
+[data-accent="amber"] { --accent: #B45309; --accent-text: #92400E; --accent-2: #0E7A5F; --on-accent: #FFFFFF; }
+[data-accent="amber"][data-theme="dark"] { --accent: #FBBF24; --accent-text: #FBBF24; --accent-2: #45C29C; --on-accent: #231703; }
+[data-accent="amber"][data-theme="midnight"] { --accent: #FCD34D; --accent-text: #FCD34D; --accent-2: #5FD6B2; --on-accent: #231703; }
+
+[data-accent="slate"] { --accent: #334155; --accent-text: #334155; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
+[data-accent="slate"][data-theme="dark"] { --accent: #CBD5E1; --accent-text: #CBD5E1; --accent-2: #E0A23A; --on-accent: #0F172A; }
+[data-accent="slate"][data-theme="midnight"] { --accent: #E2E8F0; --accent-text: #E2E8F0; --accent-2: #FFC857; --on-accent: #0F172A; }

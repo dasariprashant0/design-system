@@ -1,0 +1,56 @@
+{
+  "name": "icon-button",
+  "title": "Icon button",
+  "category": "buttons",
+  "description": "A square button holding only an icon. The accessible name is required.",
+  "status": "stable",
+  "uses": [
+    "button"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/icon-button.css",
+      "content": "/* Icon button: a square .btn. */\n.btn-icon { padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn-icon.btn-sm { padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
+    }
+  ],
+  "a11y": [
+    "Native button; aria-label is required by the type.",
+    "Space and Enter activate it."
+  ],
+  "keywords": [
+    "icon",
+    "action",
+    "toolbar"
+  ],
+  "kind": "components",
+  "import": "import {IconButton} from '@monoline/react'",
+  "path": "packages/react/src/components/icon-button",
+  "files": [
+    "packages/react/src/components/icon-button/icon-button.demo.tsx",
+    "packages/react/src/components/icon-button/icon-button.test.tsx",
+    "packages/react/src/components/icon-button/icon-button.tsx",
+    "packages/react/src/components/icon-button/index.ts",
+    "packages/react/src/components/icon-button/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/icon-button/icon-button.tsx",
+      "content": "import {forwardRef} from 'react';\nimport {Button, type ButtonProps} from '../button';\nimport {cx} from '../../utils/cx';\n\nexport interface IconButtonProps extends Omit<ButtonProps, 'aria-label' | 'children'> {\n  /** Required: what the button does, because there is no visible text. */\n  'aria-label': string;\n  /** An inline SVG with `currentColor` and `aria-hidden`. */\n  children: React.ReactNode;\n}\n\n/** A square button for one icon. */\nexport const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton({className, ...rest}, ref) {\n  return <Button ref={ref} className={cx('btn-icon', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/icon-button/index.ts",
+      "content": "export {IconButton} from './icon-button';\nexport type {IconButtonProps} from './icon-button';\n"
+    },
+    {
+      "path": "packages/react/src/components/icon-button/meta.json",
+      "content": "{\"name\":\"icon-button\",\"title\":\"Icon button\",\"category\":\"buttons\",\"description\":\"A square button holding only an icon. The accessible name is required.\",\"status\":\"stable\",\"uses\":[\"button\"],\"css\":[\"02-buttons.css\",\"icon-button.css\"],\"a11y\":[\"Native button; aria-label is required by the type.\",\"Space and Enter activate it.\"],\"keywords\":[\"icon\",\"action\",\"toolbar\"]}\n"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "table",
+  "title": "Table",
+  "category": "data-display",
+  "description": "Rows and columns of data with a header, in a horizontally scrolling wrapper.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/14-table.css",
+      "content": "/* ─── Table ─── */\n.table-wrap { overflow-x: auto; max-width: 100%; }\n.table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }\n.table th { text-align: start; font-size: var(--text-xs); font-weight: 400; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding-block: var(--s3); padding-inline: 0 var(--s4); border-bottom: 1px solid var(--foreground); white-space: nowrap; }\n.table td { padding-block: var(--s3); padding-inline: 0 var(--s4); border-bottom: 1px solid var(--rule); vertical-align: top; }\n.table tbody tr:hover { background: var(--wash); }\n.table .num { text-align: end; padding-inline-end: 0; padding-inline-start: var(--s4); }\n.table caption { text-align: start; padding-bottom: var(--s3); color: var(--muted); font-size: var(--text-xs); }\n"
+    }
+  ],
+  "a11y": [
+    "Native table elements with th scope and an optional caption.",
+    "The scroll wrapper is focusable and named so keyboard users can scroll wide tables."
+  ],
+  "keywords": [
+    "grid",
+    "rows",
+    "columns",
+    "data"
+  ],
+  "kind": "components",
+  "import": "import {Table} from '@monoline/react'",
+  "path": "packages/react/src/components/table",
+  "files": [
+    "packages/react/src/components/table/index.ts",
+    "packages/react/src/components/table/meta.json",
+    "packages/react/src/components/table/table.demo.tsx",
+    "packages/react/src/components/table/table.test.tsx",
+    "packages/react/src/components/table/table.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/table/index.ts",
+      "content": "export {Table, TableCaption, TableHeader, TableBody, TableRow, TableHead, TableCell} from './table';\n"
+    },
+    {
+      "path": "packages/react/src/components/table/meta.json",
+      "content": "{\"name\":\"table\",\"title\":\"Table\",\"category\":\"data-display\",\"description\":\"Rows and columns of data with a header, in a horizontally scrolling wrapper.\",\"status\":\"stable\",\"css\":[\"14-table.css\"],\"a11y\":[\"Native table elements with th scope and an optional caption.\",\"The scroll wrapper is focusable and named so keyboard users can scroll wide tables.\"],\"keywords\":[\"grid\",\"rows\",\"columns\",\"data\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/table/table.tsx",
+      "content": "import {forwardRef, type HTMLAttributes, type TableHTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface TableProps extends TableHTMLAttributes<HTMLTableElement> {\n  /** Names the scrollable wrapper. Give it when the table can overflow. */\n  wrapperLabel?: string;\n}\n\n/** A data table. Compose with TableHeader, TableBody, TableRow, TableHead and TableCell. */\nexport const Table = forwardRef<HTMLTableElement, TableProps>(function Table({wrapperLabel, className, ...rest}, ref) {\n  return (\n    <div className=\"table-wrap\" tabIndex={0} role=\"region\" aria-label={wrapperLabel ?? 'Table'}>\n      <table ref={ref} className={cx('table', className)} {...rest} />\n    </div>\n  );\n});\n\n/** A visible caption that names the table; screen readers announce it first. */\nexport const TableCaption = forwardRef<HTMLTableCaptionElement, HTMLAttributes<HTMLTableCaptionElement>>(function TableCaption(props, ref) { return <caption ref={ref} {...props} />; });\n/** The `thead`: holds the row of column headings. */\nexport const TableHeader = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTMLTableSectionElement>>(function TableHeader(props, ref) { return <thead ref={ref} {...props} />; });\n/** The `tbody`: holds the data rows. */\nexport const TableBody = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTMLTableSectionElement>>(function TableBody(props, ref) { return <tbody ref={ref} {...props} />; });\n/** One row, `tr`, inside the header or body. */\nexport const TableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTableRowElement>>(function TableRow(props, ref) { return <tr ref={ref} {...props} />; });\n\nexport interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {\n  /** Right-aligns numbers. */\n  numeric?: boolean;\n}\n/** A column or row heading cell (`th`). Defaults to `scope=\"col\"`; use `numeric` for number columns. */\nexport const TableHead = forwardRef<HTMLTableCellElement, ThHTMLAttributes<HTMLTableCellElement> & {numeric?: boolean}>(function TableHead({numeric, className, scope = 'col', ...rest}, ref) {\n  return <th ref={ref} scope={scope} className={cx(numeric && 'num', className)} {...rest} />;\n});\n/** A data cell (`td`). Use `numeric` to right-align numbers. */\nexport const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(function TableCell({numeric, className, ...rest}, ref) {\n  return <td ref={ref} className={cx(numeric && 'num', className)} {...rest} />;\n});\n"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+/* Empty state: centred message inside a dashed frame. */
+.empty { display: grid; justify-items: center; gap: var(--s3); padding: var(--s7) var(--s5); text-align: center; border: 1px dashed var(--rule); }
+.empty-icon { color: var(--muted); font-size: var(--text-lg); }
+.empty-title { font-size: var(--text-lg); font-weight: 500; }
+.empty-description { color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }
+.empty-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); margin-top: var(--s2); }

@@ -1,0 +1,4 @@
+/* Time picker: the native control wearing .input; keeps it compact and themed. */
+.time-picker { width: auto; min-width: 10ch; font-variant-numeric: tabular-nums; color-scheme: light dark; }
+.time-picker::-webkit-calendar-picker-indicator { cursor: pointer; opacity: 0.7; }
+.time-picker:disabled { opacity: 0.5; cursor: not-allowed; }

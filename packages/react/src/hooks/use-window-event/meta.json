@@ -1,0 +1,1 @@
+{"name":"use-window-event","title":"useWindowEvent","category":"hooks","description":"Add a typed window event listener that is removed on unmount.","status":"stable","css":[],"a11y":["No DOM output."],"keywords":["addEventListener","resize","keydown","scroll"]}

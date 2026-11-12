@@ -1,0 +1,1 @@
+{"name":"use-toggle","title":"useToggle","category":"hooks","description":"Cycle through a list of values, or flip a boolean.","status":"stable","css":[],"a11y":["No DOM output."],"keywords":["boolean","cycle","switch","flip"]}

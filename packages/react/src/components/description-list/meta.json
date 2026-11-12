@@ -1,0 +1,1 @@
+{"name":"description-list","title":"Description list","category":"data-display","description":"Label and value pairs, like the details of a record.","status":"stable","css":["description-list.css"],"a11y":["A native dl with dt and dd, so assistive tech pairs each label with its value."],"keywords":["key value","details","dl","properties","meta"]}

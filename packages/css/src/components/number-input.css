@@ -1,0 +1,8 @@
+/* Number input: native field between two step buttons. */
+.number-input { display: flex; align-items: stretch; width: 100%; }
+.number-input .number-field { text-align: center; border-inline-start: 0; border-inline-end: 0; appearance: textfield; -moz-appearance: textfield; }
+.number-input .number-field::-webkit-outer-spin-button, .number-input .number-field::-webkit-inner-spin-button { appearance: none; margin: 0; }
+.number-step { flex: none; width: var(--s7); border: 1px solid var(--foreground); background: transparent; color: var(--foreground); }
+.number-step:hover:not(:disabled) { background: var(--wash-2); }
+.number-step:disabled { opacity: 0.5; cursor: not-allowed; }
+.number-step:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }

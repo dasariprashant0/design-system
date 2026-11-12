@@ -1,0 +1,47 @@
+{
+  "name": "use-disclosure",
+  "title": "useDisclosure",
+  "category": "hooks",
+  "description": "Open and closed state with open, close and toggle functions, and callbacks when it changes.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. Pair with aria-expanded and aria-controls on the trigger.",
+    "Callbacks run only when the state actually changes, not on mount."
+  ],
+  "keywords": [
+    "toggle",
+    "open",
+    "close",
+    "show",
+    "hide",
+    "state"
+  ],
+  "kind": "hooks",
+  "import": "import {UseDisclosure} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-disclosure",
+  "files": [
+    "packages/react/src/hooks/use-disclosure/index.ts",
+    "packages/react/src/hooks/use-disclosure/meta.json",
+    "packages/react/src/hooks/use-disclosure/use-disclosure.demo.tsx",
+    "packages/react/src/hooks/use-disclosure/use-disclosure.test.tsx",
+    "packages/react/src/hooks/use-disclosure/use-disclosure.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-disclosure/index.ts",
+      "content": "export {useDisclosure} from './use-disclosure';\nexport type {UseDisclosureOptions, UseDisclosureReturn} from './use-disclosure';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-disclosure/meta.json",
+      "content": "{\"name\":\"use-disclosure\",\"title\":\"useDisclosure\",\"category\":\"hooks\",\"description\":\"Open and closed state with open, close and toggle functions, and callbacks when it changes.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. Pair with aria-expanded and aria-controls on the trigger.\",\"Callbacks run only when the state actually changes, not on mount.\"],\"keywords\":[\"toggle\",\"open\",\"close\",\"show\",\"hide\",\"state\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-disclosure/use-disclosure.ts",
+      "content": "'use client';\nimport {useCallback, useRef, useState} from 'react';\n\nexport interface UseDisclosureOptions {\n  /** Open on first render. Default `false`. */\n  initialOpen?: boolean;\n  /** Called when the state changes from closed to open. Not called on mount. */\n  onOpen?: () => void;\n  /** Called when the state changes from open to closed. Not called on mount. */\n  onClose?: () => void;\n}\n\nexport interface UseDisclosureReturn {\n  isOpen: boolean;\n  open: () => void;\n  close: () => void;\n  toggle: () => void;\n}\n\n/**\n * Boolean open/closed state with stable `open`, `close` and `toggle` functions.\n * Callbacks fire only when the state actually changes.\n */\nexport function useDisclosure({initialOpen = false, onOpen, onClose}: UseDisclosureOptions = {}): UseDisclosureReturn {\n  const [isOpen, setIsOpen] = useState(initialOpen);\n  // Mirrors the state so two calls in the same tick do not both fire callbacks.\n  const latest = useRef({isOpen, onOpen, onClose});\n  latest.current.onOpen = onOpen;\n  latest.current.onClose = onClose;\n\n  const set = useCallback((next: boolean) => {\n    const cur = latest.current;\n    if (cur.isOpen === next) return;\n    cur.isOpen = next;\n    setIsOpen(next);\n    if (next) cur.onOpen?.();\n    else cur.onClose?.();\n  }, []);\n\n  const open = useCallback(() => set(true), [set]);\n  const close = useCallback(() => set(false), [set]);\n  const toggle = useCallback(() => set(!latest.current.isOpen), [set]);\n\n  return {isOpen, open, close, toggle};\n}\n"
+    }
+  ]
+}

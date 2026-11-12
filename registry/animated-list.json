@@ -1,0 +1,52 @@
+{
+  "name": "animated-list",
+  "title": "Animated list",
+  "category": "effects",
+  "description": "A list whose items enter one by one without shifting the layout.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/animated-list.css",
+      "content": "/* Animated list: opacity-only entrance staggered by (index * step); items hold their space so nothing shifts. */\n.animated-list { list-style: none; margin: 0; padding: 0; }\n.animated-list-item { animation: animated-list-in var(--slow) var(--ease) both; animation-delay: calc(var(--i) * var(--animated-list-step, 300ms)); }\n@keyframes animated-list-in { from { opacity: 0; } to { opacity: 1; } }\n@media (prefers-reduced-motion: reduce) { .animated-list-item { animation: none; } }\n"
+    }
+  ],
+  "a11y": [
+    "A real <ul> with <li> items, so list semantics and counts are announced.",
+    "Items fade in with opacity only and keep their space from the first frame; there is no layout shift.",
+    "With prefers-reduced-motion all items are visible at once."
+  ],
+  "keywords": [
+    "stagger",
+    "notifications",
+    "feed",
+    "sequence",
+    "list"
+  ],
+  "kind": "components",
+  "import": "import {AnimatedList} from '@monoline/react'",
+  "path": "packages/react/src/components/animated-list",
+  "files": [
+    "packages/react/src/components/animated-list/animated-list.demo.tsx",
+    "packages/react/src/components/animated-list/animated-list.test.tsx",
+    "packages/react/src/components/animated-list/animated-list.tsx",
+    "packages/react/src/components/animated-list/index.ts",
+    "packages/react/src/components/animated-list/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/animated-list/animated-list.tsx",
+      "content": "import {Children, forwardRef, type CSSProperties, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface AnimatedListProps extends HTMLAttributes<HTMLUListElement> {\n  /** Milliseconds between one item entering and the next. Default 300. */\n  interval?: number;\n}\n\n/**\n * A list whose items fade in one after another when it mounts. Every item holds its place from the first frame (opacity only),\n * so nothing shifts. A real `<ul>`; one item per child. Static under reduced motion.\n */\nexport const AnimatedList = forwardRef<HTMLUListElement, AnimatedListProps>(function AnimatedList({interval = 300, className, style, children, ...rest}, ref) {\n  return (\n    <ul ref={ref} className={cx('animated-list', className)} style={{'--animated-list-step': `${interval}ms`, ...style} as CSSProperties} {...rest}>\n      {Children.toArray(children).map((child, i) => (\n        <li key={i} className=\"animated-list-item\" style={{'--i': i} as CSSProperties}>{child}</li>\n      ))}\n    </ul>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/animated-list/index.ts",
+      "content": "export {AnimatedList} from './animated-list';\nexport type {AnimatedListProps} from './animated-list';\n"
+    },
+    {
+      "path": "packages/react/src/components/animated-list/meta.json",
+      "content": "{\"name\":\"animated-list\",\"title\":\"Animated list\",\"category\":\"effects\",\"description\":\"A list whose items enter one by one without shifting the layout.\",\"status\":\"stable\",\"css\":[\"animated-list.css\"],\"a11y\":[\"A real <ul> with <li> items, so list semantics and counts are announced.\",\"Items fade in with opacity only and keep their space from the first frame; there is no layout shift.\",\"With prefers-reduced-motion all items are visible at once.\"],\"keywords\":[\"stagger\",\"notifications\",\"feed\",\"sequence\",\"list\"]}\n"
+    }
+  ]
+}

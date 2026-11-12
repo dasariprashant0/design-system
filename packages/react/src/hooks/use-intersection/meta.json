@@ -1,0 +1,1 @@
+{"name":"use-intersection","title":"useIntersection","category":"hooks","description":"Know whether an element is in view, with an IntersectionObserver.","status":"stable","css":[],"a11y":["No DOM output. When IntersectionObserver is unavailable, it reports not intersecting."],"keywords":["in view","visible","lazy","scroll"]}

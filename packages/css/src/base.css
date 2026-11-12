@@ -5,6 +5,10 @@
 @font-face { font-family: "Space Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("./fonts/space-mono-400.woff2") format("woff2"); }
 @font-face { font-family: "Space Mono"; font-weight: 700; font-style: normal; font-display: swap; src: url("./fonts/space-mono-700.woff2") format("woff2"); }
 
+/* --dir is 1 in LTR and -1 in RTL; multiply horizontal offsets by it so slides, thumbs and bars flip. Set dir on <html> or any wrapper. */
+:root, [dir="ltr"] { --dir: 1; }
+[dir="rtl"] { --dir: -1; }
+
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #root { height: 100%; }
 body {

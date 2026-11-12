@@ -1,0 +1,2 @@
+/* Pie and donut chart. Shared base: chart.css. */
+.chart-slice { stroke-linejoin: round; transition: stroke-width var(--fast) var(--ease); }

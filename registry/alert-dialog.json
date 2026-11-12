@@ -1,0 +1,57 @@
+{
+  "name": "alert-dialog",
+  "title": "Alert dialog",
+  "category": "overlays",
+  "description": "A modal that interrupts to confirm a destructive or irreversible action.",
+  "status": "stable",
+  "primitive": "radix-ui/AlertDialog",
+  "css": [
+    {
+      "path": "packages/css/src/components/dialog.css",
+      "content": "/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }\n"
+    },
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+    }
+  ],
+  "a11y": [
+    "role=\"alertdialog\" with a name from the title and a description.",
+    "Focus moves to the Cancel button on open and returns to the trigger on close.",
+    "Escape cancels; focus is trapped; the page behind is inert.",
+    "Clicking the overlay does not close it."
+  ],
+  "keywords": [
+    "confirm",
+    "destructive",
+    "delete",
+    "modal"
+  ],
+  "kind": "components",
+  "import": "import {AlertDialog} from '@monoline/react'",
+  "path": "packages/react/src/components/alert-dialog",
+  "files": [
+    "packages/react/src/components/alert-dialog/alert-dialog.demo.tsx",
+    "packages/react/src/components/alert-dialog/alert-dialog.test.tsx",
+    "packages/react/src/components/alert-dialog/alert-dialog.tsx",
+    "packages/react/src/components/alert-dialog/index.ts",
+    "packages/react/src/components/alert-dialog/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/alert-dialog/alert-dialog.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type HTMLAttributes} from 'react';\nimport {AlertDialog as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** The root of a confirmation dialog that must be answered. Holds the open state; put `AlertDialogTrigger` and `AlertDialogContent` inside. Unlike `Dialog` it cannot be dismissed by clicking outside. */\nexport const AlertDialog = Radix.Root;\n/** The element (usually a `Button`) that opens the alert dialog; use `asChild` to render your own element. */\nexport const AlertDialogTrigger = Radix.Trigger;\n\n/** The panel with its overlay. Always include a title and description. */\nexport const AlertDialogContent = forwardRef<ElementRef<typeof Radix.Content>, ComponentPropsWithoutRef<typeof Radix.Content>>(function AlertDialogContent({className, ...rest}, ref) {\n  return (\n    <Radix.Portal>\n      <Radix.Overlay className=\"dialog-overlay\" />\n      <Radix.Content ref={ref} className={cx('dialog-content', className)} {...rest} />\n    </Radix.Portal>\n  );\n});\n\n/** Wrapper for the title and description at the top of the dialog. */\nexport const AlertDialogHeader = ({className, ...rest}: HTMLAttributes<HTMLDivElement>) => <div className={cx('dialog-header', className)} {...rest} />;\n/** Wrapper for the action buttons at the bottom of the dialog (usually `AlertDialogCancel` then `AlertDialogAction`). */\nexport const AlertDialogFooter = ({className, ...rest}: HTMLAttributes<HTMLDivElement>) => <div className={cx('dialog-footer', className)} {...rest} />;\n\n/** The dialog's accessible name, rendered as the heading. Required. */\nexport const AlertDialogTitle = forwardRef<ElementRef<typeof Radix.Title>, ComponentPropsWithoutRef<typeof Radix.Title>>(function AlertDialogTitle({className, ...rest}, ref) {\n  return <Radix.Title ref={ref} className={cx('dialog-title', className)} {...rest} />;\n});\n/** Explains what will happen if the user confirms; read out when the dialog opens. Required. */\nexport const AlertDialogDescription = forwardRef<ElementRef<typeof Radix.Description>, ComponentPropsWithoutRef<typeof Radix.Description>>(function AlertDialogDescription({className, ...rest}, ref) {\n  return <Radix.Description ref={ref} className={cx('dialog-description', className)} {...rest} />;\n});\n\n/** Confirms. Styled as the danger button by default; pass `className=\"btn-solid\"` for a non-destructive confirm. */\nexport const AlertDialogAction = forwardRef<ElementRef<typeof Radix.Action>, ComponentPropsWithoutRef<typeof Radix.Action>>(function AlertDialogAction({className, ...rest}, ref) {\n  return <Radix.Action ref={ref} className={cx('btn btn-danger', className)} {...rest} />;\n});\n/** Cancels. Receives focus first so Enter never confirms by accident. */\nexport const AlertDialogCancel = forwardRef<ElementRef<typeof Radix.Cancel>, ComponentPropsWithoutRef<typeof Radix.Cancel>>(function AlertDialogCancel({className, ...rest}, ref) {\n  return <Radix.Cancel ref={ref} className={cx('btn btn-line', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/alert-dialog/index.ts",
+      "content": "export {AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel} from './alert-dialog';\n"
+    },
+    {
+      "path": "packages/react/src/components/alert-dialog/meta.json",
+      "content": "{\"name\":\"alert-dialog\",\"title\":\"Alert dialog\",\"category\":\"overlays\",\"description\":\"A modal that interrupts to confirm a destructive or irreversible action.\",\"status\":\"stable\",\"primitive\":\"radix-ui/AlertDialog\",\"css\":[\"dialog.css\",\"02-buttons.css\"],\"a11y\":[\"role=\\\"alertdialog\\\" with a name from the title and a description.\",\"Focus moves to the Cancel button on open and returns to the trigger on close.\",\"Escape cancels; focus is trapped; the page behind is inert.\",\"Clicking the overlay does not close it.\"],\"keywords\":[\"confirm\",\"destructive\",\"delete\",\"modal\"]}\n"
+    }
+  ]
+}

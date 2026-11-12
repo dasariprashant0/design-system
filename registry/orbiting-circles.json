@@ -1,0 +1,52 @@
+{
+  "name": "orbiting-circles",
+  "title": "Orbiting circles",
+  "category": "effects",
+  "description": "Small items circling a centre. Decorative.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/orbiting-circles.css",
+      "content": "/* Orbiting circles: each item sits at an angle of 360deg / n * i and the delay spreads the same offsets while turning.\n   The `translate` property centres the item, so the keyframe `transform` only has to rotate out and counter-rotate back. */\n.orbit { position: relative; display: grid; place-items: center; width: calc(var(--orbit-radius) * 2 + var(--s7)); aspect-ratio: 1; }\n.orbit-ring { position: absolute; width: calc(var(--orbit-radius) * 2); aspect-ratio: 1; border: 1px solid var(--rule); border-radius: var(--round); }\n.orbit-center { position: relative; }\n.orbit-item { position: absolute; top: 50%; left: 50%; translate: -50% -50%; transform: rotate(calc(360deg / var(--n) * var(--i))) translateX(var(--orbit-radius)) rotate(calc(-360deg / var(--n) * var(--i))); animation: orbit-turn var(--orbit-duration) linear infinite; animation-delay: calc(var(--orbit-duration) / var(--n) * var(--i) * -1); } /* physical: centred with translate, same in both directions */\n.orbit-reverse .orbit-item { animation-direction: reverse; }\n@keyframes orbit-turn { from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); } to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); } }\n@media (prefers-reduced-motion: reduce) { .orbit-item { animation: none; } }\n"
+    }
+  ],
+  "a11y": [
+    "Decorative: the whole element is aria-hidden, so nothing inside it is read or reachable by assistive tech.",
+    "Under prefers-reduced-motion the items stop, evenly spaced around the ring."
+  ],
+  "keywords": [
+    "orbit",
+    "rotate",
+    "icons",
+    "integrations",
+    "hero",
+    "animation"
+  ],
+  "kind": "components",
+  "import": "import {OrbitingCircles} from '@monoline/react'",
+  "path": "packages/react/src/components/orbiting-circles",
+  "files": [
+    "packages/react/src/components/orbiting-circles/index.ts",
+    "packages/react/src/components/orbiting-circles/meta.json",
+    "packages/react/src/components/orbiting-circles/orbiting-circles.demo.tsx",
+    "packages/react/src/components/orbiting-circles/orbiting-circles.test.tsx",
+    "packages/react/src/components/orbiting-circles/orbiting-circles.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/orbiting-circles/index.ts",
+      "content": "export {OrbitingCircles} from './orbiting-circles';\nexport type {OrbitingCirclesProps} from './orbiting-circles';\n"
+    },
+    {
+      "path": "packages/react/src/components/orbiting-circles/meta.json",
+      "content": "{\"name\":\"orbiting-circles\",\"title\":\"Orbiting circles\",\"category\":\"effects\",\"description\":\"Small items circling a centre. Decorative.\",\"status\":\"stable\",\"css\":[\"orbiting-circles.css\"],\"a11y\":[\"Decorative: the whole element is aria-hidden, so nothing inside it is read or reachable by assistive tech.\",\"Under prefers-reduced-motion the items stop, evenly spaced around the ring.\"],\"keywords\":[\"orbit\",\"rotate\",\"icons\",\"integrations\",\"hero\",\"animation\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/orbiting-circles/orbiting-circles.tsx",
+      "content": "import {Children, forwardRef, type CSSProperties, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface OrbitingCirclesProps extends HTMLAttributes<HTMLDivElement> {\n  /** Orbit radius in px. Default 96. */\n  radius?: number;\n  /** Seconds for one full turn. Default 20. */\n  duration?: number;\n  /** Turn the other way. */\n  reverse?: boolean;\n  /** Draw the orbit as a thin ring. Default true. */\n  ring?: boolean;\n  /** Fixed content in the centre. */\n  center?: ReactNode;\n}\n\n/**\n * Small items (icons, logos) circling a centre. Purely decorative: the whole thing is `aria-hidden`, so do not put anything\n * users must read or operate inside it. Items sit evenly spaced and stay still under reduced motion.\n */\nexport const OrbitingCircles = forwardRef<HTMLDivElement, OrbitingCirclesProps>(function OrbitingCircles({radius = 96, duration = 20, reverse, ring = true, center, className, style, children, ...rest}, ref) {\n  const items = Children.toArray(children);\n  return (\n    <div ref={ref} aria-hidden=\"true\" className={cx('orbit', reverse && 'orbit-reverse', className)} style={{'--orbit-radius': `${radius}px`, '--orbit-duration': `${duration}s`, '--n': items.length, ...style} as CSSProperties} {...rest}>\n      {ring && <span className=\"orbit-ring\" />}\n      {center != null && <span className=\"orbit-center\">{center}</span>}\n      {items.map((child, i) => (\n        <span key={i} className=\"orbit-item\" style={{'--i': i} as CSSProperties}>{child}</span>\n      ))}\n    </div>\n  );\n});\n"
+    }
+  ]
+}

@@ -8,7 +8,7 @@
 .btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }
 .btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }
 .btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }
-.btn-ghost { padding-left: 0; padding-right: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+.btn-ghost { padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
 .btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }
 .btn-sm { padding: 6px 12px; font-size: var(--text-xs); }
 .btn-block { width: 100%; }

@@ -1,0 +1,9 @@
+/* Orbiting circles: each item sits at an angle of 360deg / n * i and the delay spreads the same offsets while turning.
+   The `translate` property centres the item, so the keyframe `transform` only has to rotate out and counter-rotate back. */
+.orbit { position: relative; display: grid; place-items: center; width: calc(var(--orbit-radius) * 2 + var(--s7)); aspect-ratio: 1; }
+.orbit-ring { position: absolute; width: calc(var(--orbit-radius) * 2); aspect-ratio: 1; border: 1px solid var(--rule); border-radius: var(--round); }
+.orbit-center { position: relative; }
+.orbit-item { position: absolute; top: 50%; left: 50%; translate: -50% -50%; transform: rotate(calc(360deg / var(--n) * var(--i))) translateX(var(--orbit-radius)) rotate(calc(-360deg / var(--n) * var(--i))); animation: orbit-turn var(--orbit-duration) linear infinite; animation-delay: calc(var(--orbit-duration) / var(--n) * var(--i) * -1); } /* physical: centred with translate, same in both directions */
+.orbit-reverse .orbit-item { animation-direction: reverse; }
+@keyframes orbit-turn { from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); } to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); } }
+@media (prefers-reduced-motion: reduce) { .orbit-item { animation: none; } }

@@ -1,0 +1,46 @@
+{
+  "name": "use-clipboard",
+  "title": "useClipboard",
+  "category": "hooks",
+  "description": "Copy text with the Clipboard API, with a copied flag that resets after a delay and an error when it fails.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. Pair the copied state with a visible or aria-live status message in the UI.",
+    "A failed copy returns false and sets error; it never throws."
+  ],
+  "keywords": [
+    "copy",
+    "clipboard",
+    "paste",
+    "writeText"
+  ],
+  "kind": "hooks",
+  "import": "import {UseClipboard} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-clipboard",
+  "files": [
+    "packages/react/src/hooks/use-clipboard/.claude",
+    "packages/react/src/hooks/use-clipboard/index.ts",
+    "packages/react/src/hooks/use-clipboard/meta.json",
+    "packages/react/src/hooks/use-clipboard/use-clipboard.demo.tsx",
+    "packages/react/src/hooks/use-clipboard/use-clipboard.test.tsx",
+    "packages/react/src/hooks/use-clipboard/use-clipboard.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-clipboard/index.ts",
+      "content": "export {useClipboard} from './use-clipboard';\nexport type {UseClipboardOptions, UseClipboardReturn} from './use-clipboard';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-clipboard/meta.json",
+      "content": "{\"name\":\"use-clipboard\",\"title\":\"useClipboard\",\"category\":\"hooks\",\"description\":\"Copy text with the Clipboard API, with a copied flag that resets after a delay and an error when it fails.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. Pair the copied state with a visible or aria-live status message in the UI.\",\"A failed copy returns false and sets error; it never throws.\"],\"keywords\":[\"copy\",\"clipboard\",\"paste\",\"writeText\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-clipboard/use-clipboard.ts",
+      "content": "'use client';\nimport {useCallback, useEffect, useRef, useState} from 'react';\n\nexport interface UseClipboardOptions {\n  /** How long `copied` stays true, in milliseconds. Default 2000. */\n  timeout?: number;\n}\n\nexport interface UseClipboardReturn {\n  /** True for `timeout` ms after a successful copy. */\n  copied: boolean;\n  /** The last failure, cleared by the next copy. */\n  error: Error | null;\n  /** Copies text. Resolves `true` on success, `false` on failure (never throws). */\n  copy: (value: string) => Promise<boolean>;\n}\n\n/** Copy text with the Clipboard API, with a `copied` flag that resets after a delay. */\nexport function useClipboard({timeout = 2000}: UseClipboardOptions = {}): UseClipboardReturn {\n  const [copied, setCopied] = useState(false);\n  const [error, setError] = useState<Error | null>(null);\n  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);\n\n  useEffect(() => () => clearTimeout(timer.current), []);\n\n  const copy = useCallback(\n    async (value: string): Promise<boolean> => {\n      try {\n        // Only touched inside copy(), so rendering on the server is safe.\n        if (typeof navigator === 'undefined' || !navigator.clipboard?.writeText) {\n          throw new Error('Clipboard API is not available here.');\n        }\n        await navigator.clipboard.writeText(value);\n        setError(null);\n        setCopied(true);\n        clearTimeout(timer.current);\n        timer.current = setTimeout(() => setCopied(false), timeout);\n        return true;\n      } catch (cause) {\n        clearTimeout(timer.current);\n        setCopied(false);\n        setError(cause instanceof Error ? cause : new Error(String(cause)));\n        return false;\n      }\n    },\n    [timeout],\n  );\n\n  return {copied, error, copy};\n}\n"
+    }
+  ]
+}

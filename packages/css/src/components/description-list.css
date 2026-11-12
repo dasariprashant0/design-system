@@ -1,0 +1,5 @@
+.dlist { display: grid; margin: 0; font-size: var(--text-sm); }
+.dlist-row { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr; gap: var(--s4); padding: var(--s3) 0; border-bottom: 1px solid var(--rule); }
+.dlist-row dt { color: var(--muted); }
+.dlist-row dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.dlist-stacked .dlist-row { grid-template-columns: minmax(0, 1fr); gap: var(--s1); }

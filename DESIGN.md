@@ -195,3 +195,7 @@ Never use `--border` for a visible line: it is about 1.1:1 in dark themes. Use `
 - [ ] Nothing touches a window edge: a page keeps `--s7`, a small window `--window-pad` (§5).
 - [ ] Empty, loading and error states exist and use plain words.
 - [ ] Nothing animates except the title reveal and overlays.
+
+## Options: font, corners, density, accents
+
+`packages/css/src/options.css` lets users change the look without editing components. Set on `<html>`: `data-font="mono|sans|serif"`, `data-radius="square|soft|round"`, `data-density="compact|comfortable|spacious"`. Nine accents (`orange, green, blue, violet, rose, teal, amber, slate` plus the default) all pass the contrast rules in §1 in every theme; `npm run check` enforces it. Monospace and square corners remain the default identity.

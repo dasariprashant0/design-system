@@ -1,0 +1,59 @@
+{
+  "name": "combobox",
+  "title": "Combobox",
+  "category": "forms",
+  "description": "Type to filter a list and pick one option.",
+  "status": "stable",
+  "uses": [
+    "field"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { padding: 6px 10px; font-size: var(--text-sm); }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-inline-end: var(--s9); }\n.input-end { position: absolute; inset-inline-end: var(--s3); top: 50%; transform: translateY(-50%); min-height: var(--s6); min-width: var(--s6); display: inline-grid; place-items: center; }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; inset-inline-start: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(calc(16px * var(--dir, 1))); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-inline-end: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-inline-start: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/combobox.css",
+      "content": "/* Combobox: the input is the normal .input; the list drops below it. */\n.combobox { position: relative; width: 100%; }\n.combobox-list { position: absolute; inset-inline-start: 0; inset-inline-end: 0; top: calc(100% + var(--s1)); z-index: var(--z-drawer); max-height: 16rem; overflow-y: auto; margin: 0; padding: var(--s1) 0; list-style: none; background: var(--background); border: 1px solid var(--foreground); }\n.combobox-option { padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.combobox-option[data-active] { background: var(--foreground); color: var(--background); }\n.combobox-option[aria-selected=\"true\"]::after { content: \" ✓\"; }\n.combobox-option[aria-disabled=\"true\"] { opacity: 0.5; cursor: not-allowed; }\n.combobox-empty { padding: var(--s3) var(--s4); font-size: var(--text-sm); color: var(--muted); }\n"
+    }
+  ],
+  "a11y": [
+    "ARIA 1.2 combobox: the input has role=\"combobox\" with aria-expanded, aria-controls and aria-activedescendant.",
+    "ArrowDown/ArrowUp move through options, Enter picks, Escape closes (and clears the typed text on a second press), Tab leaves.",
+    "Options are in a listbox with aria-selected; an empty result is announced as text."
+  ],
+  "keywords": [
+    "autocomplete",
+    "typeahead",
+    "search select",
+    "filter",
+    "searchable select"
+  ],
+  "kind": "components",
+  "import": "import {Combobox} from '@monoline/react'",
+  "path": "packages/react/src/components/combobox",
+  "files": [
+    "packages/react/src/components/combobox/combobox.demo.tsx",
+    "packages/react/src/components/combobox/combobox.test.tsx",
+    "packages/react/src/components/combobox/combobox.tsx",
+    "packages/react/src/components/combobox/index.ts",
+    "packages/react/src/components/combobox/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/combobox/combobox.tsx",
+      "content": "'use client';\nimport {forwardRef, useId, useRef, useState, type InputHTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\nexport interface ComboboxOption {\n  value: string;\n  label: string;\n  disabled?: boolean;\n}\n\nexport interface ComboboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'onChange' | 'role' | 'size'> {\n  /** The choices, each with a `value`, a `label` and an optional `disabled`. The user filters them by typing part of the label. */\n  options: ComboboxOption[];\n  /** The selected option's `value` when controlled; `''` means none. Pair with `onValueChange`. */\n  value?: string;\n  /** The initially selected option's `value` when uncontrolled. Default none. */\n  defaultValue?: string;\n  /** Called with the chosen option's value, or '' when cleared. */\n  onValueChange?: (value: string) => void;\n  /** Shown when nothing matches. */\n  emptyText?: string;\n  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */\n  invalid?: boolean;\n}\n\n/** A searchable single select. Controlled with `value` + `onValueChange`, or uncontrolled with `defaultValue`. */\nexport const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Combobox({options, value, defaultValue = '', onValueChange, emptyText = 'No matches', invalid, className, onBlur, onKeyDown, ...rest}, ref) {\n  const f = useFieldControl();\n  const listId = useId();\n  const [inner, setInner] = useState(defaultValue);\n  const current = value ?? inner;\n  const selected = options.find((o) => o.value === current);\n  const [text, setText] = useState<string | null>(null); // null = show the selected label\n  const [open, setOpen] = useState(false);\n  const [active, setActive] = useState(0);\n  const root = useRef<HTMLDivElement>(null);\n  const query = (text ?? '').trim().toLowerCase();\n  const shown = text === null ? options : options.filter((o) => o.label.toLowerCase().includes(query));\n  const optId = (i: number) => `${listId}-${i}`;\n\n  const pick = (o: ComboboxOption) => {\n    if (o.disabled) return;\n    if (value === undefined) setInner(o.value);\n    onValueChange?.(o.value);\n    setText(null); setOpen(false);\n  };\n  const move = (dir: 1 | -1) => {\n    if (!shown.length) return;\n    let i = active;\n    for (let n = 0; n < shown.length; n++) { i = (i + dir + shown.length) % shown.length; if (!shown[i]!.disabled) break; }\n    setActive(i);\n  };\n  const keydown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n    onKeyDown?.(e);\n    if (e.defaultPrevented) return;\n    if (e.key === 'ArrowDown') { e.preventDefault(); if (!open) { setOpen(true); } else move(1); }\n    else if (e.key === 'ArrowUp') { e.preventDefault(); if (!open) setOpen(true); else move(-1); }\n    else if (e.key === 'Enter' && open && shown[active]) { e.preventDefault(); pick(shown[active]!); }\n    else if (e.key === 'Escape') { if (open) { e.preventDefault(); setOpen(false); } else if (text !== null) { setText(null); } }\n    else if (e.key === 'Home' && open) { e.preventDefault(); setActive(0); }\n    else if (e.key === 'End' && open) { e.preventDefault(); setActive(Math.max(0, shown.length - 1)); }\n  };\n\n  return (\n    <div ref={root} className={cx('combobox', className)}>\n      <input\n        ref={ref}\n        type=\"text\"\n        role=\"combobox\"\n        autoComplete=\"off\"\n        className=\"input\"\n        aria-expanded={open}\n        aria-controls={listId}\n        aria-autocomplete=\"list\"\n        aria-activedescendant={open && shown[active] ? optId(active) : undefined}\n        {...f}\n        {...(invalid ? {'aria-invalid': true as const} : {})}\n        value={text ?? selected?.label ?? ''}\n        onChange={(e) => { setText(e.target.value); setActive(0); setOpen(true); if (!e.target.value && value === undefined) { setInner(''); onValueChange?.(''); } }}\n        onFocus={() => setOpen(true)}\n        onClick={() => setOpen(true)}\n        onBlur={(e) => { onBlur?.(e); setOpen(false); setText(null); }}\n        onKeyDown={keydown}\n        {...rest}\n      />\n      {open && (\n        <ul id={listId} role=\"listbox\" className=\"combobox-list\" aria-label={rest['aria-label']}>\n          {shown.length === 0 && <li className=\"combobox-empty\" role=\"presentation\">{emptyText}</li>}\n          {shown.map((o, i) => (\n            <li\n              key={o.value}\n              id={optId(i)}\n              role=\"option\"\n              aria-selected={o.value === current}\n              aria-disabled={o.disabled || undefined}\n              data-active={i === active || undefined}\n              className=\"combobox-option\"\n              onMouseDown={(e) => e.preventDefault()}\n              onMouseEnter={() => setActive(i)}\n              onClick={() => pick(o)}\n            >{o.label}</li>\n          ))}\n        </ul>\n      )}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/combobox/index.ts",
+      "content": "export {Combobox} from './combobox';\nexport type {ComboboxProps, ComboboxOption} from './combobox';\n"
+    },
+    {
+      "path": "packages/react/src/components/combobox/meta.json",
+      "content": "{\"name\":\"combobox\",\"title\":\"Combobox\",\"category\":\"forms\",\"description\":\"Type to filter a list and pick one option.\",\"status\":\"stable\",\"uses\":[\"field\"],\"css\":[\"03-form-fields.css\",\"combobox.css\"],\"a11y\":[\"ARIA 1.2 combobox: the input has role=\\\"combobox\\\" with aria-expanded, aria-controls and aria-activedescendant.\",\"ArrowDown/ArrowUp move through options, Enter picks, Escape closes (and clears the typed text on a second press), Tab leaves.\",\"Options are in a listbox with aria-selected; an empty result is announced as text.\"],\"keywords\":[\"autocomplete\",\"typeahead\",\"search select\",\"filter\",\"searchable select\"]}\n"
+    }
+  ]
+}

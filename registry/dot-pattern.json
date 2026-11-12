@@ -1,0 +1,51 @@
+{
+  "name": "dot-pattern",
+  "title": "Dot pattern",
+  "category": "effects",
+  "description": "A decorative dot grid background drawn in SVG with currentColor.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/dot-pattern.css",
+      "content": "/* Dot pattern: fills the positioned parent, sits behind content, takes its colour from `color`. */\n.dot-pattern { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--rule); pointer-events: none; }\n.dot-pattern-fade { mask-image: radial-gradient(ellipse at center, var(--foreground) 0%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at center, var(--foreground) 0%, transparent 75%); }\n"
+    }
+  ],
+  "a11y": [
+    "Decorative: aria-hidden and not focusable, so it adds nothing to the reading order.",
+    "Static; no motion."
+  ],
+  "keywords": [
+    "background",
+    "dots",
+    "grid",
+    "texture",
+    "decoration"
+  ],
+  "kind": "components",
+  "import": "import {DotPattern} from '@monoline/react'",
+  "path": "packages/react/src/components/dot-pattern",
+  "files": [
+    "packages/react/src/components/dot-pattern/dot-pattern.demo.tsx",
+    "packages/react/src/components/dot-pattern/dot-pattern.test.tsx",
+    "packages/react/src/components/dot-pattern/dot-pattern.tsx",
+    "packages/react/src/components/dot-pattern/index.ts",
+    "packages/react/src/components/dot-pattern/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/dot-pattern/dot-pattern.tsx",
+      "content": "import {forwardRef, useId, type SVGAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface DotPatternProps extends Omit<SVGAttributes<SVGSVGElement>, 'children'> {\n  /** Distance between dot centres, in px. Default 16. */\n  gap?: number;\n  /** Dot radius, in px. Default 1. */\n  radius?: number;\n  /** Fade the pattern out towards the edges. */\n  fade?: boolean;\n}\n\n/** A decorative dot grid that fills its positioned parent. Colour comes from `currentColor` (default `--rule`). Always `aria-hidden`. */\nexport const DotPattern = forwardRef<SVGSVGElement, DotPatternProps>(function DotPattern({gap = 16, radius = 1, fade, className, ...rest}, ref) {\n  const id = `dot-${useId().replace(/:/g, '')}`;\n  return (\n    <svg ref={ref} aria-hidden=\"true\" focusable=\"false\" className={cx('dot-pattern', fade && 'dot-pattern-fade', className)} {...rest}>\n      <defs>\n        <pattern id={id} width={gap} height={gap} patternUnits=\"userSpaceOnUse\">\n          <circle cx={gap / 2} cy={gap / 2} r={radius} fill=\"currentColor\" />\n        </pattern>\n      </defs>\n      <rect width=\"100%\" height=\"100%\" fill={`url(#${id})`} />\n    </svg>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/dot-pattern/index.ts",
+      "content": "export {DotPattern} from './dot-pattern';\nexport type {DotPatternProps} from './dot-pattern';\n"
+    },
+    {
+      "path": "packages/react/src/components/dot-pattern/meta.json",
+      "content": "{\"name\":\"dot-pattern\",\"title\":\"Dot pattern\",\"category\":\"effects\",\"description\":\"A decorative dot grid background drawn in SVG with currentColor.\",\"status\":\"stable\",\"css\":[\"dot-pattern.css\"],\"a11y\":[\"Decorative: aria-hidden and not focusable, so it adds nothing to the reading order.\",\"Static; no motion.\"],\"keywords\":[\"background\",\"dots\",\"grid\",\"texture\",\"decoration\"]}\n"
+    }
+  ]
+}

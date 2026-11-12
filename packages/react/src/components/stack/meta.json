@@ -1,0 +1,1 @@
+{"name":"stack","title":"Stack","category":"layout","description":"Lay children out in a column or row with one gap from the spacing scale.","status":"stable","css":["stack.css"],"a11y":["A plain div; adds no roles."],"keywords":["flex","vstack","hstack","row","column","gap"]}

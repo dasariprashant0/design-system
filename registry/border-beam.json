@@ -1,0 +1,51 @@
+{
+  "name": "border-beam",
+  "title": "Border beam",
+  "category": "effects",
+  "description": "A thin bordered box with a light that travels around its edge. CSS only.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/border-beam.css",
+      "content": "/* Border beam: a conic gradient rotates behind a mask that keeps only the 1px edge. */\n@property --border-beam-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }\n.border-beam { position: relative; border: 1px solid var(--rule); }\n.border-beam-light { position: absolute; inset: -1px; border: 1px solid transparent; pointer-events: none; background: conic-gradient(from var(--border-beam-angle), transparent 0 75%, var(--accent) 100%) border-box; -webkit-mask: linear-gradient(var(--foreground) 0 0) padding-box, linear-gradient(var(--foreground) 0 0); -webkit-mask-composite: xor; mask: linear-gradient(var(--foreground) 0 0) padding-box exclude, linear-gradient(var(--foreground) 0 0); animation: border-beam-spin var(--border-beam-duration, 6s) linear infinite; }\n@keyframes border-beam-spin { to { --border-beam-angle: 360deg; } }\n@media (prefers-reduced-motion: reduce) { .border-beam-light { display: none; } }\n"
+    }
+  ],
+  "a11y": [
+    "The beam is aria-hidden and decorative; the content keeps its normal reading order.",
+    "The beam is hidden under prefers-reduced-motion, leaving a plain thin border."
+  ],
+  "keywords": [
+    "glow",
+    "animated border",
+    "highlight",
+    "light",
+    "card"
+  ],
+  "kind": "components",
+  "import": "import {BorderBeam} from '@monoline/react'",
+  "path": "packages/react/src/components/border-beam",
+  "files": [
+    "packages/react/src/components/border-beam/border-beam.demo.tsx",
+    "packages/react/src/components/border-beam/border-beam.test.tsx",
+    "packages/react/src/components/border-beam/border-beam.tsx",
+    "packages/react/src/components/border-beam/index.ts",
+    "packages/react/src/components/border-beam/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/border-beam/border-beam.tsx",
+      "content": "import {forwardRef, type CSSProperties, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface BorderBeamProps extends HTMLAttributes<HTMLDivElement> {\n  /** Seconds for the light to travel once around. Default 6. */\n  duration?: number;\n}\n\n/** A box with a thin rule and a light that travels around it. CSS only; the beam is decorative and off for reduced motion. */\nexport const BorderBeam = forwardRef<HTMLDivElement, BorderBeamProps>(function BorderBeam({duration = 6, className, style, children, ...rest}, ref) {\n  return (\n    <div ref={ref} className={cx('border-beam', className)} style={{'--border-beam-duration': `${duration}s`, ...style} as CSSProperties} {...rest}>\n      <span className=\"border-beam-light\" aria-hidden=\"true\" />\n      {children}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/border-beam/index.ts",
+      "content": "export {BorderBeam} from './border-beam';\nexport type {BorderBeamProps} from './border-beam';\n"
+    },
+    {
+      "path": "packages/react/src/components/border-beam/meta.json",
+      "content": "{\"name\":\"border-beam\",\"title\":\"Border beam\",\"category\":\"effects\",\"description\":\"A thin bordered box with a light that travels around its edge. CSS only.\",\"status\":\"stable\",\"css\":[\"border-beam.css\"],\"a11y\":[\"The beam is aria-hidden and decorative; the content keeps its normal reading order.\",\"The beam is hidden under prefers-reduced-motion, leaving a plain thin border.\"],\"keywords\":[\"glow\",\"animated border\",\"highlight\",\"light\",\"card\"]}\n"
+    }
+  ]
+}

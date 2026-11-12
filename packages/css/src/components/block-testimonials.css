@@ -1,0 +1,12 @@
+/* Block: testimonials. */
+.block-testimonials { padding-block: var(--s8); }
+.block-testimonials-title { margin-bottom: var(--s6); }
+.block-testimonials-grid { display: grid; gap: var(--s5); grid-template-columns: 1fr; }
+.block-testimonial { margin: 0; display: flex; flex-direction: column; justify-content: space-between; gap: var(--s5); padding: var(--s5); border: 1px solid var(--rule); min-width: 0; }
+.block-testimonial blockquote { margin: 0; font-size: var(--text-lg); line-height: 1.4; }
+.block-testimonial figcaption { display: flex; align-items: center; gap: var(--s3); font-size: var(--text-sm); }
+.block-testimonial figcaption > span:last-child { display: flex; flex-direction: column; }
+.block-testimonial-avatar { display: inline-flex; }
+.block-testimonial-name { font-weight: 500; }
+.block-testimonial-role { color: var(--muted); }
+@media (min-width: 760px) { .block-testimonials-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }

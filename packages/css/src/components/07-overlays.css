@@ -4,22 +4,22 @@
 .scrim { position: absolute; inset: 0; background: color-mix(in srgb, var(--surface) 35%, transparent); opacity: 0; transition: opacity var(--base); }
 .drawer.open { pointer-events: auto; }
 .drawer.open .scrim { opacity: 1; }
-.panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(640px, 94vw); background: var(--background); border-left: 1px solid var(--rule); padding: var(--s7) var(--s6); overflow-y: auto; animation: slide 0.25s var(--ease); }
+.panel { position: absolute; top: 0; inset-inline-end: 0; bottom: 0; width: min(640px, 94vw); background: var(--background); border-inline-start: 1px solid var(--rule); padding: var(--s7) var(--s6); overflow-y: auto; animation: slide 0.25s var(--ease); }
 .panel-wide { width: min(1100px, 96vw); }
-@keyframes slide { from { transform: translateX(32px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes slide { from { transform: translateX(calc(32px * var(--dir, 1))); opacity: 0; } to { transform: none; opacity: 1; } }
 .panel-title { margin: var(--s2) 0 var(--s6); word-break: break-word; }
 .panel-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
-.close { position: absolute; top: var(--s5); right: var(--s5); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+.close { position: absolute; top: var(--s5); inset-inline-end: var(--s5); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
 
 /* Dialog: a question that blocks (confirm, conflict, short form). Native <dialog>. */
 .dialog { width: min(520px, 92vw); padding: var(--s6); border: 1px solid var(--foreground); background: var(--background); color: var(--foreground); }
 .dialog::backdrop { background: color-mix(in srgb, var(--surface) 45%, transparent); }
 .dialog[open] { animation: rise-in-d var(--base) var(--ease); }
-.dialog-title { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: var(--s3); }
+.dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: var(--s3); }
 .dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
 @keyframes rise-in-d { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
 
 /* Toast: what just happened, with undo. Bottom centre, dark in every theme. */
-.toast { position: fixed; left: 50%; bottom: var(--s5); transform: translateX(-50%); z-index: var(--z-toast); display: flex; align-items: center; gap: var(--s5); padding: var(--s3) var(--s5); background: var(--surface); color: var(--surface-text); font-size: var(--text-sm); box-shadow: 0 8px 30px -12px rgba(0,0,0,.5); animation: rise-in var(--base) var(--ease); }
+.toast { position: fixed; left: 50%; bottom: var(--s5); transform: translateX(-50%); z-index: var(--z-toast); display: flex; align-items: center; gap: var(--s5); padding: var(--s3) var(--s5); background: var(--surface); color: var(--surface-text); font-size: var(--text-sm); box-shadow: 0 8px 30px -12px rgba(0,0,0,.5); animation: rise-in var(--base) var(--ease); } /* physical: centred with translate, same in both directions */
 .toast button:first-of-type { color: inherit; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; }
 @keyframes rise-in { from { transform: translate(-50%, 12px); opacity: 0; } to { transform: translateX(-50%); opacity: 1; } }

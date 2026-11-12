@@ -1,0 +1,48 @@
+{
+  "name": "direction-provider",
+  "title": "Direction provider",
+  "category": "layout",
+  "description": "Sets the reading direction (ltr or rtl) once for every Radix-based component below it.",
+  "status": "stable",
+  "primitive": "radix-ui/Direction",
+  "css": [],
+  "a11y": [
+    "Arrow keys follow the reading direction: in rtl, ArrowLeft moves to the next tab, slider step up or toolbar item.",
+    "Pair it with a dir attribute on html so the stylesheet mirrors layout too."
+  ],
+  "keywords": [
+    "rtl",
+    "ltr",
+    "direction",
+    "arabic",
+    "hebrew",
+    "i18n"
+  ],
+  "kind": "components",
+  "import": "import {DirectionProvider} from '@monoline/react'",
+  "path": "packages/react/src/components/direction-provider",
+  "files": [
+    "packages/react/src/components/direction-provider/.claude",
+    "packages/react/src/components/direction-provider/direction-provider.demo.tsx",
+    "packages/react/src/components/direction-provider/direction-provider.tsx",
+    "packages/react/src/components/direction-provider/index.ts",
+    "packages/react/src/components/direction-provider/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/direction-provider/direction-provider.tsx",
+      "content": "'use client';\nimport type {ReactNode} from 'react';\nimport {Direction} from 'radix-ui';\n\nexport interface DirectionProviderProps {\n  /** Reading direction for everything below: `ltr` or `rtl`. */\n  dir: 'ltr' | 'rtl';\n  /** The part of the app that should use this direction. */\n  children?: ReactNode;\n}\n\n/**\n * Set the reading direction once for every Radix-based component below it (tabs, slider, menus,\n * select, toggle group, accordion, navigation menu) and for Monoline's own arrow-key widgets.\n * Also put `dir` on `<html>` (or a wrapper) so the CSS flips: the provider does not render an element.\n * @example <DirectionProvider dir=\"rtl\"><App /></DirectionProvider>\n */\nexport function DirectionProvider({dir, children}: DirectionProviderProps) {\n  return <Direction.Provider dir={dir}>{children}</Direction.Provider>;\n}\n\n/** The direction set by the nearest `DirectionProvider`, `'ltr'` when there is none. */\nexport const useDirection = Direction.useDirection;\n"
+    },
+    {
+      "path": "packages/react/src/components/direction-provider/index.ts",
+      "content": "export {DirectionProvider, useDirection} from './direction-provider';\nexport type {DirectionProviderProps} from './direction-provider';\n"
+    },
+    {
+      "path": "packages/react/src/components/direction-provider/meta.json",
+      "content": "{\"name\":\"direction-provider\",\"title\":\"Direction provider\",\"category\":\"layout\",\"description\":\"Sets the reading direction (ltr or rtl) once for every Radix-based component below it.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Direction\",\"css\":[],\"a11y\":[\"Arrow keys follow the reading direction: in rtl, ArrowLeft moves to the next tab, slider step up or toolbar item.\",\"Pair it with a dir attribute on html so the stylesheet mirrors layout too.\"],\"keywords\":[\"rtl\",\"ltr\",\"direction\",\"arabic\",\"hebrew\",\"i18n\"]}\n"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "heading",
+  "title": "Heading",
+  "category": "typography",
+  "description": "A heading whose level (for structure) is separate from its size (for looks).",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/heading.css",
+      "content": ".heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading-md { font-size: var(--text-lg); }\n.heading-sm { font-size: var(--text-base); }\n"
+    }
+  ],
+  "a11y": [
+    "Renders a real h1 to h6; choose the level for the outline, not the size."
+  ],
+  "keywords": [
+    "title",
+    "h1",
+    "display",
+    "header"
+  ],
+  "kind": "components",
+  "import": "import {Heading} from '@monoline/react'",
+  "path": "packages/react/src/components/heading",
+  "files": [
+    "packages/react/src/components/heading/heading.demo.tsx",
+    "packages/react/src/components/heading/heading.test.tsx",
+    "packages/react/src/components/heading/heading.tsx",
+    "packages/react/src/components/heading/index.ts",
+    "packages/react/src/components/heading/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/heading/heading.tsx",
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {\n  /** Document outline level, 1 to 6. */\n  level?: 1 | 2 | 3 | 4 | 5 | 6;\n  /** Look. Defaults follow the level. `display` uses the display font. */\n  size?: 'display' | 'xl' | 'lg' | 'md' | 'sm';\n}\n\nconst defaults = {1: 'display', 2: 'xl', 3: 'lg', 4: 'md', 5: 'sm', 6: 'sm'} as const;\n\n/** `<Heading level={2}>Pricing</Heading>`. */\nexport const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(function Heading({level = 2, size, className, ...rest}, ref) {\n  const Tag = `h${level}` as 'h2';\n  return <Tag ref={ref} className={cx('heading', `heading-${size ?? defaults[level]}`, className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/heading/index.ts",
+      "content": "export {Heading} from './heading';\nexport type {HeadingProps} from './heading';\n"
+    },
+    {
+      "path": "packages/react/src/components/heading/meta.json",
+      "content": "{\"name\":\"heading\",\"title\":\"Heading\",\"category\":\"typography\",\"description\":\"A heading whose level (for structure) is separate from its size (for looks).\",\"status\":\"stable\",\"css\":[\"heading.css\"],\"a11y\":[\"Renders a real h1 to h6; choose the level for the outline, not the size.\"],\"keywords\":[\"title\",\"h1\",\"display\",\"header\"]}\n"
+    }
+  ]
+}

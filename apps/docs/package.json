@@ -4,10 +4,14 @@
   "version": "0.3.0",
   "type": "module",
   "scripts": {
+    "gen": "node scripts/gen-props.mjs && node scripts/gen-demos.mjs && node scripts/gen-styling.mjs && node scripts/gen-markdown.mjs",
+    "predev": "npm run gen",
     "dev": "vite",
+    "prebuild": "npm run gen",
     "build": "vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:docs": "node --test scripts"
   },
   "dependencies": {
     "@monoline/react": "*",

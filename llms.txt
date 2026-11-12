@@ -1,8 +1,8 @@
 # Monoline
 
-> Open-source UI kit: a plain CSS core (@monoline/css) with accessible React components (@monoline/react). Three themes, four accents, no Tailwind, no runtime CSS-in-JS.
+> Open-source UI kit: a plain CSS core (@monoline/css) with accessible React components (@monoline/react). Three themes, nine accents, font, corner and density options, no Tailwind, no runtime CSS-in-JS.
 
-Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rules). Every component is a folder with source, test, demo and meta.json.
+Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rules). Every component is a folder with source, test, demo and meta.json. Install the packages, or copy one component with npx monoline add <name> (source in registry/<name>.json).
 
 ## Docs
 - [AGENTS.md](AGENTS.md): rules for AI agents and contributors
@@ -11,43 +11,160 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 
 ## Components
 ### layout
+- Aspect ratio (aspect-ratio, stable): Keep media or a placeholder at a fixed width-to-height ratio. Source: packages/react/src/components/aspect-ratio/
+- Box (box, stable): A div with padding and a thin border mapped to the spacing tokens. Source: packages/react/src/components/box/
+- Container (container, stable): Centre content in a column with a sensible maximum width and side padding. Source: packages/react/src/components/container/
+- Direction provider (direction-provider, stable): Sets the reading direction (ltr or rtl) once for every Radix-based component below it. Source: packages/react/src/components/direction-provider/
+- Flex (flex, stable): A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case. Source: packages/react/src/components/flex/
+- Grid (grid, stable): A responsive grid of equal columns with one gap. Source: packages/react/src/components/grid/
+- Scroll area (scroll-area, stable): A scrollable region with thin, themed scrollbars. Source: packages/react/src/components/scroll-area/
 - Separator (separator, stable): A thin rule between groups. Source: packages/react/src/components/separator/
+- Stack (stack, stable): Lay children out in a column or row with one gap from the spacing scale. Source: packages/react/src/components/stack/
+
+### typography
+- Heading (heading, stable): A heading whose level (for structure) is separate from its size (for looks). Source: packages/react/src/components/heading/
+- Kbd (kbd, stable): Show a keyboard key or shortcut. Source: packages/react/src/components/kbd/
+- Link (link, stable): An underlined link. External links open safely and say so. Source: packages/react/src/components/link/
+- Text (text, stable): Body text with a size and tone from the scale. Source: packages/react/src/components/text/
 
 ### buttons
 - Button (button, stable): Triggers an action. Native button with solid, line, ghost and danger variants. Source: packages/react/src/components/button/
+- Button group (button-group, stable): Join related buttons into one segmented bar. Source: packages/react/src/components/button-group/
+- Icon button (icon-button, stable): A square button holding only an icon. The accessible name is required. Source: packages/react/src/components/icon-button/
+- Segmented control (segmented-control, stable): Pick exactly one option from a short row, shown as joined segments. Source: packages/react/src/components/segmented-control/
 - Toggle (toggle, stable): A button that stays pressed or not. Source: packages/react/src/components/toggle/
 - Toggle group (toggle-group, stable): A row of toggles where one or several can be on. Source: packages/react/src/components/toggle-group/
+- Toolbar (toolbar, stable): A row of related controls that share one tab stop and arrow-key movement. Source: packages/react/src/components/toolbar/
 
 ### forms
+- Autocomplete (autocomplete, stable): A text field that suggests values while you type and accepts anything you enter. Source: packages/react/src/components/autocomplete/
+- Calendar (calendar, stable): A month grid for picking one date. Source: packages/react/src/components/calendar/
 - Checkbox (checkbox, stable): A box to turn one choice on or off, with an indeterminate state. Source: packages/react/src/components/checkbox/
+- Color picker (color-picker, stable): Choose a colour from preset swatches, the native colour control, or a hex value. Source: packages/react/src/components/color-picker/
+- Combobox (combobox, stable): Type to filter a list and pick one option. Source: packages/react/src/components/combobox/
+- Date picker (date-picker, stable): A button that opens a calendar and shows the chosen date. Source: packages/react/src/components/date-picker/
 - Field (field, stable): Connects a label, a control, a hint and an error with the right ids and ARIA. Source: packages/react/src/components/field/
+- Fieldset (fieldset, stable): Group related controls under one legend. Source: packages/react/src/components/fieldset/
+- File upload (file-upload, stable): Choose files by browsing or dropping them, and see what is selected. Source: packages/react/src/components/file-upload/
+- Form (form, stable): A form wrapper with a submit helper, an error summary that links to invalid fields, and an actions footer. Source: packages/react/src/components/form/
 - Input (input, stable): A single-line text field. Source: packages/react/src/components/input/
 - Label (label, stable): The visible name of a form control. Source: packages/react/src/components/label/
+- Multi select (multi-select, stable): Type to filter a list and pick several options, shown as removable tags. Source: packages/react/src/components/multi-select/
+- Native select (native-select, stable): The browser select, styled. Best on mobile and for long simple lists. Source: packages/react/src/components/native-select/
+- Number input (number-input, stable): A numeric field with decrease and increase buttons. Source: packages/react/src/components/number-input/
+- OTP input (otp-input, stable): Enter a one-time code, one digit per box, with paste support. Source: packages/react/src/components/otp-input/
+- Password input (password-input, stable): A password field with a show/hide toggle. Source: packages/react/src/components/password-input/
 - Radio group (radio-group, stable): Pick exactly one option from a short list. Source: packages/react/src/components/radio-group/
+- Rating (rating, stable): Pick or show a score from 1 to a maximum, as stars. Source: packages/react/src/components/rating/
+- Rich text editor (rich-text-editor, beta): A dependency-free rich text editor with a formatting toolbar and sanitized HTML in and out. Source: packages/react/src/components/rich-text-editor/
 - Select (select, stable): Pick one value from a list of five or more options. Source: packages/react/src/components/select/
 - Slider (slider, stable): Pick a number, or a range, by dragging or with the keyboard. Source: packages/react/src/components/slider/
 - Switch (switch, stable): An on/off setting that takes effect immediately. Source: packages/react/src/components/switch/
+- Tags input (tags-input, stable): Type text and press Enter or comma to add it as a removable tag. Source: packages/react/src/components/tags-input/
 - Textarea (textarea, stable): A multi-line text field. Source: packages/react/src/components/textarea/
+- Time picker (time-picker, stable): Pick a time of day with hour, minute and AM/PM segments, using the browser's own control. Source: packages/react/src/components/time-picker/
 
 ### data-display
 - Accordion (accordion, stable): Stacked headings that each show or hide a section. Source: packages/react/src/components/accordion/
+- Area chart (area-chart, stable): A line chart filled down to zero, optionally stacked to show a running total. Source: packages/react/src/components/area-chart/
 - Avatar (avatar, stable): A person or thing as an image with an initials fallback. Source: packages/react/src/components/avatar/
+- Avatar group (avatar-group, stable): Overlap several avatars and show how many more there are. Source: packages/react/src/components/avatar-group/
 - Badge (badge, stable): A short status word or count. Source: packages/react/src/components/badge/
+- Bar chart (bar-chart, stable): Compare values across categories with vertical or horizontal bars, grouped or stacked. Source: packages/react/src/components/bar-chart/
 - Card (card, stable): A bordered group for one thing you can pick up or open. Source: packages/react/src/components/card/
+- Carousel (carousel, stable): A row of slides you scroll or step through with buttons. Source: packages/react/src/components/carousel/
+- Code block (code-block, stable): A block of code with a copy button. Source: packages/react/src/components/code-block/
+- Collapsible (collapsible, stable): Show or hide one region of content from a trigger. Source: packages/react/src/components/collapsible/
+- Data grid (data-grid, beta): A virtualised, keyboard-navigable grid for very large data sets, with sortable columns and row selection. Source: packages/react/src/components/data-grid/
+- Data table (data-table, stable): A table with sortable columns, row selection and pagination. Source: packages/react/src/components/data-table/
+- Description list (description-list, stable): Label and value pairs, like the details of a record. Source: packages/react/src/components/description-list/
+- Image (image, stable): An image with required alt text, a ratio, and a fallback when it fails to load. Source: packages/react/src/components/image/
+- Line chart (line-chart, stable): Show how one or more values change across an ordered axis, with straight or stepped lines. Source: packages/react/src/components/line-chart/
+- Pie chart (pie-chart, stable): Parts of a whole as a pie, or a donut with innerRadius. Source: packages/react/src/components/pie-chart/
+- Sparkline (sparkline, stable): A tiny inline trend line for a table cell or a sentence. Source: packages/react/src/components/sparkline/
+- Stat (stat, stable): One number with its label and a note. Source: packages/react/src/components/stat/
+- Table (table, stable): Rows and columns of data with a header, in a horizontally scrolling wrapper. Source: packages/react/src/components/table/
+- Tag (tag, stable): A short label, optionally removable. Source: packages/react/src/components/tag/
+- Timeline (timeline, stable): A vertical list of events with times, joined by a rule. Source: packages/react/src/components/timeline/
+- Tree (tree, stable): A nested list of items that open and close, with one selected item. Source: packages/react/src/components/tree/
 
 ### feedback
 - Alert (alert, stable): A message that stays on screen, with a title and a tone. Source: packages/react/src/components/alert/
+- Empty state (empty-state, stable): Say that there is nothing here yet and offer the next step. Source: packages/react/src/components/empty-state/
 - Progress (progress, stable): How far along a task is, or that it is still working. Source: packages/react/src/components/progress/
 - Skeleton (skeleton, stable): A still placeholder shaped like the content that is loading. Source: packages/react/src/components/skeleton/
 - Spinner (spinner, stable): A small indicator that something is loading. Source: packages/react/src/components/spinner/
+- Toast (toast, stable): A short message that appears briefly and does not block the page. Source: packages/react/src/components/toast/
 
 ### overlays
+- Alert dialog (alert-dialog, stable): A modal that interrupts to confirm a destructive or irreversible action. Source: packages/react/src/components/alert-dialog/
+- Command (command, stable): A searchable palette of actions that opens over the page, with an optional global shortcut. Source: packages/react/src/components/command/
+- Context menu (context-menu, stable): A menu of actions opened by right click or long press on an area. Source: packages/react/src/components/context-menu/
 - Dialog (dialog, stable): A modal window for a question or short task that blocks the page. Source: packages/react/src/components/dialog/
+- Drawer (drawer, stable): A panel that slides in from an edge for secondary tasks, details or navigation. Source: packages/react/src/components/drawer/
 - Dropdown menu (dropdown-menu, stable): A list of actions that opens from a button. Source: packages/react/src/components/dropdown-menu/
+- Hover card (hover-card, stable): Preview extra content when a link or element is hovered or focused. Source: packages/react/src/components/hover-card/
 - Popover (popover, stable): A floating panel of content or controls anchored to a button. Source: packages/react/src/components/popover/
 - Tooltip (tooltip, stable): Short hint text on hover and keyboard focus. Source: packages/react/src/components/tooltip/
 
 ### navigation
 - Breadcrumb (breadcrumb, stable): The path to the current page. Source: packages/react/src/components/breadcrumb/
+- Menubar (menubar, stable): A horizontal bar of menus, like File, Edit and View in a desktop app. Source: packages/react/src/components/menubar/
+- Navigation menu (navigation-menu, stable): Site navigation with links and menus that open panels of links. Source: packages/react/src/components/navigation-menu/
 - Pagination (pagination, stable): Move between pages of results. Source: packages/react/src/components/pagination/
+- Stepper (stepper, stable): Show progress through a numbered sequence of steps. Source: packages/react/src/components/stepper/
 - Tabs (tabs, stable): Switch between related views in the same place. Source: packages/react/src/components/tabs/
+
+### effects
+- Animated list (animated-list, stable): A list whose items enter one by one without shifting the layout. Source: packages/react/src/components/animated-list/
+- Bento grid (bento-grid, stable): A responsive asymmetric grid of cards with column and row spans. Source: packages/react/src/components/bento-grid/
+- Border beam (border-beam, stable): A thin bordered box with a light that travels around its edge. CSS only. Source: packages/react/src/components/border-beam/
+- Confetti (confetti, stable): A short burst of square confetti on a canvas, triggered by a prop or a ref method. Source: packages/react/src/components/confetti/
+- Dot pattern (dot-pattern, stable): A decorative dot grid background drawn in SVG with currentColor. Source: packages/react/src/components/dot-pattern/
+- Grid pattern (grid-pattern, stable): A decorative line grid background drawn in SVG with currentColor. Source: packages/react/src/components/grid-pattern/
+- Marquee (marquee, stable): Scroll a row of items endlessly; pauses on hover and stops for reduced motion. Source: packages/react/src/components/marquee/
+- Number ticker (number-ticker, stable): Count up to a number when it scrolls into view. Shows the final value at once for reduced motion. Source: packages/react/src/components/number-ticker/
+- Orbiting circles (orbiting-circles, stable): Small items circling a centre. Decorative. Source: packages/react/src/components/orbiting-circles/
+- Scroll progress (scroll-progress, stable): A thin bar fixed to the top of the window that fills as the page scrolls. Source: packages/react/src/components/scroll-progress/
+- Shimmer button (shimmer-button, stable): The Button with a light sweep across it. Still a native button. Source: packages/react/src/components/shimmer-button/
+- Spotlight (spotlight, stable): A surface with a soft highlight that follows the pointer. Source: packages/react/src/components/spotlight/
+- Text reveal (text-reveal, stable): Fade a sentence in word by word. Static for reduced motion. Source: packages/react/src/components/text-reveal/
+- Typewriter (typewriter, stable): Type a string one character at a time. Static for reduced motion. Source: packages/react/src/components/typewriter/
+
+### blocks
+- Call to action block (block-cta, beta): A closing call to action with one sentence and one next step. Source: packages/react/src/components/block-cta/
+- Dashboard shell block (block-dashboard-shell, beta): App frame with sidebar, top bar and content that collapses to a drawer on small screens. Source: packages/react/src/components/block-dashboard-shell/
+- Empty page block (block-empty-page, beta): A full-page message for not found, nothing yet or no access. Source: packages/react/src/components/block-empty-page/
+- Feature grid block (block-feature-grid, beta): A section title above a responsive grid of short features. Source: packages/react/src/components/block-feature-grid/
+- Footer block (block-footer, beta): A site footer with brand, link columns and small print. Source: packages/react/src/components/block-footer/
+- Hero block (block-hero, beta): A page opener with eyebrow, title, description, actions and optional media. Source: packages/react/src/components/block-hero/
+- Login block (block-login, beta): Email and password sign-in form with validation messages. Source: packages/react/src/components/block-login/
+- Pricing block (block-pricing, beta): Plan cards with a monthly and yearly switch. Source: packages/react/src/components/block-pricing/
+- Settings form block (block-settings-form, beta): Settings sections of switches and selects, each in a fieldset. Source: packages/react/src/components/block-settings-form/
+- Sign-up block (block-signup, beta): Name, email and password account form with validation messages. Source: packages/react/src/components/block-signup/
+- Testimonials block (block-testimonials, beta): Quotes with their authors, as figures with blockquotes. Source: packages/react/src/components/block-testimonials/
+
+### hooks
+- useClickOutside (use-click-outside, stable): Calls a function when a pointer goes down outside an element, to close menus and popovers. Source: packages/react/src/hooks/use-click-outside/
+- useClipboard (use-clipboard, stable): Copy text with the Clipboard API, with a copied flag that resets after a delay and an error when it fails. Source: packages/react/src/hooks/use-clipboard/
+- useControllableState (use-controllable-state, stable): The value, defaultValue and onChange pattern for custom components that can be controlled or uncontrolled. Source: packages/react/src/hooks/use-controllable-state/
+- useCounter (use-counter, stable): A number with increment, decrement, set and reset, bounded by optional min and max. Source: packages/react/src/hooks/use-counter/
+- useDebounce (use-debounce, stable): Debounced value and debounced callback: wait for input to settle before acting. Source: packages/react/src/hooks/use-debounce/
+- useDisclosure (use-disclosure, stable): Open and closed state with open, close and toggle functions, and callbacks when it changes. Source: packages/react/src/hooks/use-disclosure/
+- useDocumentTitle (use-document-title, stable): Set document.title while a component is mounted, then restore it. Source: packages/react/src/hooks/use-document-title/
+- useFocusTrap (use-focus-trap, stable): Keeps Tab focus inside an element while it is active, and returns focus when it closes. Source: packages/react/src/hooks/use-focus-trap/
+- useHash (use-hash, stable): Read and set location.hash as state. Source: packages/react/src/hooks/use-hash/
+- useHotkeys (use-hotkeys, stable): Keyboard shortcuts such as mod+k or escape, ignored while typing in fields unless allowed. Source: packages/react/src/hooks/use-hotkeys/
+- useHover (use-hover, stable): Track whether the pointer is over an element. Source: packages/react/src/hooks/use-hover/
+- useIntersection (use-intersection, stable): Know whether an element is in view, with an IntersectionObserver. Source: packages/react/src/hooks/use-intersection/
+- useInterval (use-interval, stable): Calls a function on a timer, with a null delay to pause it. Cleared on unmount. Source: packages/react/src/hooks/use-interval/
+- useLocalStorage (use-local-storage, stable): A JSON value kept in localStorage, shaped like useState, that stays in sync across tabs. Source: packages/react/src/hooks/use-local-storage/
+- useLongPress (use-long-press, stable): Call a handler when an element is held down, cancelling if the pointer moves or lifts early. Source: packages/react/src/hooks/use-long-press/
+- useMediaQuery (use-media-query, stable): Whether a CSS media query matches, updated live, and safe to render on the server. Source: packages/react/src/hooks/use-media-query/
+- useMounted (use-mounted, stable): True after the first client render. Use it to avoid server and client markup differences. Source: packages/react/src/hooks/use-mounted/
+- usePrevious (use-previous, stable): The value from the previous render, for comparing a change. Source: packages/react/src/hooks/use-previous/
+- useReducedMotion (use-reduced-motion, stable): Whether the user has asked the system to reduce motion, for skipping or simplifying animation in code. Source: packages/react/src/hooks/use-reduced-motion/
+- useScrollSpy (use-scroll-spy, stable): Find which section is currently in view, for a table of contents or sticky nav. Source: packages/react/src/hooks/use-scroll-spy/
+- useTimeout (use-timeout, stable): Run a callback after a delay, with start and clear controls. Source: packages/react/src/hooks/use-timeout/
+- useToggle (use-toggle, stable): Cycle through a list of values, or flip a boolean. Source: packages/react/src/hooks/use-toggle/
+- useWindowEvent (use-window-event, stable): Add a typed window event listener that is removed on unmount. Source: packages/react/src/hooks/use-window-event/

@@ -20,7 +20,8 @@
     "dev": "vite build --watch",
     "test": "npm run gen && vitest run",
     "test:watch": "vitest",
-    "typecheck": "npm run gen && tsc --noEmit"
+    "typecheck": "npm run gen && tsc --noEmit",
+    "check:docs": "node scripts/check-docs.mjs"
   },
   "dependencies": {
     "radix-ui": "^1.4.2"

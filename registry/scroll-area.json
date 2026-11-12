@@ -1,0 +1,50 @@
+{
+  "name": "scroll-area",
+  "title": "Scroll area",
+  "category": "layout",
+  "description": "A scrollable region with thin, themed scrollbars.",
+  "status": "stable",
+  "primitive": "radix-ui/ScrollArea",
+  "css": [
+    {
+      "path": "packages/css/src/components/scroll-area.css",
+      "content": "/* Scroll area on Radix: thin rule-coloured scrollbars, square thumb. */\n.scroll-area { position: relative; overflow: hidden; }\n.scroll-viewport { width: 100%; height: 100%; }\n.scroll-viewport:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.scroll-bar { display: flex; user-select: none; touch-action: none; padding: 2px; background: transparent; }\n.scroll-bar[data-orientation=\"vertical\"] { width: var(--s3); }\n.scroll-bar[data-orientation=\"horizontal\"] { flex-direction: column; height: var(--s3); }\n.scroll-thumb { flex: 1; position: relative; background: var(--ink-3); }\n.scroll-thumb:hover { background: var(--ink-2); }\n"
+    }
+  ],
+  "a11y": [
+    "The viewport is focusable (tabindex 0) so keyboard users can scroll it; give it an aria-label when it holds standalone content.",
+    "Native scrolling semantics are preserved."
+  ],
+  "keywords": [
+    "overflow",
+    "scrollbar",
+    "viewport"
+  ],
+  "kind": "components",
+  "import": "import {ScrollArea} from '@monoline/react'",
+  "path": "packages/react/src/components/scroll-area",
+  "files": [
+    "packages/react/src/components/scroll-area/index.ts",
+    "packages/react/src/components/scroll-area/meta.json",
+    "packages/react/src/components/scroll-area/scroll-area.demo.tsx",
+    "packages/react/src/components/scroll-area/scroll-area.test.tsx",
+    "packages/react/src/components/scroll-area/scroll-area.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/scroll-area/index.ts",
+      "content": "export {ScrollArea} from './scroll-area';\nexport type {ScrollAreaProps} from './scroll-area';\n"
+    },
+    {
+      "path": "packages/react/src/components/scroll-area/meta.json",
+      "content": "{\"name\":\"scroll-area\",\"title\":\"Scroll area\",\"category\":\"layout\",\"description\":\"A scrollable region with thin, themed scrollbars.\",\"status\":\"stable\",\"primitive\":\"radix-ui/ScrollArea\",\"css\":[\"scroll-area.css\"],\"a11y\":[\"The viewport is focusable (tabindex 0) so keyboard users can scroll it; give it an aria-label when it holds standalone content.\",\"Native scrolling semantics are preserved.\"],\"keywords\":[\"overflow\",\"scrollbar\",\"viewport\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/scroll-area/scroll-area.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {ScrollArea as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface ScrollAreaProps extends ComponentPropsWithoutRef<typeof Radix.Root> {\n  /** Which scrollbars to render. */\n  orientation?: 'vertical' | 'horizontal' | 'both';\n  /** Passed to the focusable viewport, e.g. a name for the region. */\n  viewportProps?: ComponentPropsWithoutRef<typeof Radix.Viewport>;\n}\n\n/** Give it a height or width; content that overflows scrolls. */\nexport const ScrollArea = forwardRef<ElementRef<typeof Radix.Root>, ScrollAreaProps>(function ScrollArea({orientation = 'vertical', viewportProps, className, children, ...rest}, ref) {\n  return (\n    <Radix.Root ref={ref} className={cx('scroll-area', className)} {...rest}>\n      <Radix.Viewport tabIndex={0} className=\"scroll-viewport\" {...viewportProps}>{children}</Radix.Viewport>\n      {orientation !== 'horizontal' && <Radix.Scrollbar orientation=\"vertical\" className=\"scroll-bar\"><Radix.Thumb className=\"scroll-thumb\" /></Radix.Scrollbar>}\n      {orientation !== 'vertical' && <Radix.Scrollbar orientation=\"horizontal\" className=\"scroll-bar\"><Radix.Thumb className=\"scroll-thumb\" /></Radix.Scrollbar>}\n    </Radix.Root>\n  );\n});\n"
+    }
+  ]
+}

@@ -37,6 +37,8 @@
 .nowrap { white-space: nowrap; }
 .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mt-auto { margin-top: auto; }
-.text-right { text-align: right; }
+.text-start { text-align: start; }
+.text-end { text-align: end; }
+.text-right { text-align: right; } /* physical: explicit right alignment, use .text-end to follow direction */
 .hide-sm { } @media (max-width: 600px) { .hide-sm { display: none !important; } }
 .show-sm { display: none; } @media (max-width: 600px) { .show-sm { display: initial; } }

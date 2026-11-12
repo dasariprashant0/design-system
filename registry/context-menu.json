@@ -1,0 +1,55 @@
+{
+  "name": "context-menu",
+  "title": "Context menu",
+  "category": "overlays",
+  "description": "A menu of actions opened by right click or long press on an area.",
+  "status": "stable",
+  "primitive": "radix-ui/ContextMenu",
+  "css": [
+    {
+      "path": "packages/css/src/components/popover.css",
+      "content": "/* Popover, dropdown menu and select content on Radix: a bordered panel above the page. */\n.popover { z-index: var(--z-drawer); min-width: 200px; max-width: min(360px, 92vw); padding: var(--s4); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.popover:focus-visible { outline-offset: 2px; }\n.menu-content { z-index: var(--z-drawer); min-width: 200px; padding: var(--s1) 0; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.menu-content .menu-item { cursor: pointer; }\n.menu-content .menu-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.menu-content .menu-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.menu-content .menu-item[data-variant=\"danger\"][data-highlighted] { background: var(--danger); }\n.menu-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.menu-indicator { width: 14px; display: inline-flex; justify-content: center; }\n.menu-item-check { display: flex; align-items: center; gap: var(--s3); }\n"
+    },
+    {
+      "path": "packages/css/src/components/17-dropdown-menu.css",
+      "content": "/* ─── Dropdown menu: <details class=\"dropdown\">; monoline.js closes it on Escape and outside click ─── */\n.dropdown { position: relative; display: inline-block; }\n.dropdown > summary { list-style: none; cursor: pointer; }\n.dropdown > summary::-webkit-details-marker { display: none; }\n.menu { position: absolute; inset-inline-start: 0; top: calc(100% + var(--s2)); z-index: var(--z-drawer); min-width: 200px; background: var(--background); border: 1px solid var(--foreground); padding: var(--s1) 0; }\n.menu-end { inset-inline-start: auto; inset-inline-end: 0; }\n.menu-item { overflow-wrap: anywhere; display: flex; justify-content: space-between; gap: var(--s5); width: 100%; padding: var(--s2) var(--s4); font-size: var(--text-sm); text-align: start; }\n.menu-item:hover, .menu-item:focus-visible { background: var(--foreground); color: var(--background); outline-offset: -2px; }\n.menu-item.danger:hover { background: var(--danger); color: var(--background); }\n.menu-sep { border: 0; border-top: 1px solid var(--rule); margin: var(--s1) 0; }\n"
+    }
+  ],
+  "a11y": [
+    "Opens with right click, long press or the context-menu key (Shift+F10).",
+    "Arrow keys move, Enter or Space selects, Escape closes and returns focus.",
+    "Every action must also exist elsewhere in the UI for people who cannot open it."
+  ],
+  "keywords": [
+    "right click",
+    "menu",
+    "actions"
+  ],
+  "kind": "components",
+  "import": "import {ContextMenu} from '@monoline/react'",
+  "path": "packages/react/src/components/context-menu",
+  "files": [
+    "packages/react/src/components/context-menu/context-menu.demo.tsx",
+    "packages/react/src/components/context-menu/context-menu.test.tsx",
+    "packages/react/src/components/context-menu/context-menu.tsx",
+    "packages/react/src/components/context-menu/index.ts",
+    "packages/react/src/components/context-menu/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/context-menu/context-menu.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {ContextMenu as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** The root of a right-click (or long-press) menu. Put a `ContextMenuTrigger` and a `ContextMenuContent` inside. */\nexport const ContextMenu = Radix.Root;\n/** The area that opens the menu when right-clicked or long-pressed; use `asChild` to make your own element the area. */\nexport const ContextMenuTrigger = Radix.Trigger;\n\n/** The floating panel that lists the menu entries, rendered in a portal. */\nexport const ContextMenuContent = forwardRef<ElementRef<typeof Radix.Content>, ComponentPropsWithoutRef<typeof Radix.Content>>(function ContextMenuContent({className, ...rest}, ref) {\n  return <Radix.Portal><Radix.Content ref={ref} className={cx('menu-content', className)} {...rest} /></Radix.Portal>;\n});\n\n/** A thin line that separates groups of entries. */\nexport const ContextMenuSeparator = forwardRef<ElementRef<typeof Radix.Separator>, ComponentPropsWithoutRef<typeof Radix.Separator>>(function ContextMenuSeparator({className, ...rest}, ref) {\n  return <Radix.Separator ref={ref} className={cx('menu-sep', className)} {...rest} />;\n});\n/** A non-interactive heading for a group of entries. */\nexport const ContextMenuLabel = forwardRef<ElementRef<typeof Radix.Label>, ComponentPropsWithoutRef<typeof Radix.Label>>(function ContextMenuLabel({className, ...rest}, ref) {\n  return <Radix.Label ref={ref} className={cx('menu-label', className)} {...rest} />;\n});\nexport interface ContextMenuItemProps extends ComponentPropsWithoutRef<typeof Radix.Item> {\n  /** `danger` highlights in the danger colour. */\n  tone?: 'default' | 'danger';\n}\n/** One action in the menu; call `onSelect` when it is chosen. */\nexport const ContextMenuItem = forwardRef<ElementRef<typeof Radix.Item>, ContextMenuItemProps>(function ContextMenuItem({className, tone = 'default', ...rest}, ref) {\n  return <Radix.Item ref={ref} data-variant={tone} className={cx('menu-item', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/context-menu/index.ts",
+      "content": "export {ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuSeparator} from './context-menu';\nexport type {ContextMenuItemProps} from './context-menu';\n"
+    },
+    {
+      "path": "packages/react/src/components/context-menu/meta.json",
+      "content": "{\"name\":\"context-menu\",\"title\":\"Context menu\",\"category\":\"overlays\",\"description\":\"A menu of actions opened by right click or long press on an area.\",\"status\":\"stable\",\"primitive\":\"radix-ui/ContextMenu\",\"css\":[\"popover.css\",\"17-dropdown-menu.css\"],\"a11y\":[\"Opens with right click, long press or the context-menu key (Shift+F10).\",\"Arrow keys move, Enter or Space selects, Escape closes and returns focus.\",\"Every action must also exist elsewhere in the UI for people who cannot open it.\"],\"keywords\":[\"right click\",\"menu\",\"actions\"]}\n"
+    }
+  ]
+}

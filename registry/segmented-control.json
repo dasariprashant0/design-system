@@ -1,0 +1,54 @@
+{
+  "name": "segmented-control",
+  "title": "Segmented control",
+  "category": "buttons",
+  "description": "Pick exactly one option from a short row, shown as joined segments.",
+  "status": "stable",
+  "primitive": "radix-ui/ToggleGroup",
+  "uses": [
+    "toggle-group"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/segmented-control.css",
+      "content": "/* Segmented control: joined toggles, one always on. */\n.segmented { display: inline-flex; border: 1px solid var(--foreground); }\n.segment { padding: var(--s2) var(--s4); font-size: var(--text-sm); color: var(--muted); background: transparent; }\n.segment + .segment { border-inline-start: 1px solid var(--rule); }\n.segment:hover:not(:disabled) { color: var(--foreground); }\n.segment[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.segment:disabled { opacity: 0.5; cursor: not-allowed; }\n.segment:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n"
+    }
+  ],
+  "a11y": [
+    "A named radio group; arrow keys move and select, Home and End jump.",
+    "One option is always selected: pressing the active one does nothing."
+  ],
+  "keywords": [
+    "tabs",
+    "switcher",
+    "radio",
+    "view toggle"
+  ],
+  "kind": "components",
+  "import": "import {SegmentedControl} from '@monoline/react'",
+  "path": "packages/react/src/components/segmented-control",
+  "files": [
+    "packages/react/src/components/segmented-control/index.ts",
+    "packages/react/src/components/segmented-control/meta.json",
+    "packages/react/src/components/segmented-control/segmented-control.demo.tsx",
+    "packages/react/src/components/segmented-control/segmented-control.test.tsx",
+    "packages/react/src/components/segmented-control/segmented-control.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/segmented-control/index.ts",
+      "content": "export {SegmentedControl} from './segmented-control';\nexport type {SegmentedControlProps, SegmentedOption} from './segmented-control';\n"
+    },
+    {
+      "path": "packages/react/src/components/segmented-control/meta.json",
+      "content": "{\"name\":\"segmented-control\",\"title\":\"Segmented control\",\"category\":\"buttons\",\"description\":\"Pick exactly one option from a short row, shown as joined segments.\",\"status\":\"stable\",\"primitive\":\"radix-ui/ToggleGroup\",\"uses\":[\"toggle-group\"],\"css\":[\"segmented-control.css\"],\"a11y\":[\"A named radio group; arrow keys move and select, Home and End jump.\",\"One option is always selected: pressing the active one does nothing.\"],\"keywords\":[\"tabs\",\"switcher\",\"radio\",\"view toggle\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/segmented-control/segmented-control.tsx",
+      "content": "'use client';\nimport {forwardRef, useState, type ComponentPropsWithoutRef, type ElementRef, type ReactNode} from 'react';\nimport {ToggleGroup as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface SegmentedOption {\n  value: string;\n  label: ReactNode;\n  disabled?: boolean;\n}\n\nexport interface SegmentedControlProps extends Omit<ComponentPropsWithoutRef<typeof Radix.Root>, 'type' | 'value' | 'defaultValue' | 'onValueChange' | 'children' | 'dir'> {\n  /** The segments to show, each with a `value`, a `label` and an optional `disabled`. */\n  options: SegmentedOption[];\n  /** The selected segment's `value` when controlled. Pair with `onValueChange`. */\n  value?: string;\n  /** The segment selected at first when uncontrolled. Defaults to the first option. */\n  defaultValue?: string;\n  /** Called with the new segment's `value` when the user picks a different one. */\n  onValueChange?: (value: string) => void;\n  /** Names the control, for example \"View\". */\n  'aria-label': string;\n}\n\n/** A single choice among a few options. Unlike ToggleGroup it can never be empty. */\nexport const SegmentedControl = forwardRef<ElementRef<typeof Radix.Root>, SegmentedControlProps>(function SegmentedControl({options, value, defaultValue, onValueChange, className, ...rest}, ref) {\n  const [inner, setInner] = useState(defaultValue ?? options[0]?.value ?? '');\n  const current = value ?? inner;\n  return (\n    <Radix.Root\n      ref={ref}\n      type=\"single\"\n      className={cx('segmented', className)}\n      value={current}\n      onValueChange={(v) => { if (!v) return; if (value === undefined) setInner(v); onValueChange?.(v); }}\n      {...rest}\n    >\n      {options.map((o) => <Radix.Item key={o.value} value={o.value} disabled={o.disabled} className=\"segment\">{o.label}</Radix.Item>)}\n    </Radix.Root>\n  );\n});\n"
+    }
+  ]
+}

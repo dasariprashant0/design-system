@@ -1,0 +1,15 @@
+/* Drawer: a Radix Dialog pinned to an edge. Overlay, header and footer reuse dialog.css. */
+.drawer-content { position: fixed; z-index: var(--z-drawer); display: flex; flex-direction: column; gap: var(--s4); padding: var(--s6); background: var(--background); color: var(--foreground); border: 0 solid var(--foreground); overflow-y: auto; }
+.drawer-content:focus { outline: none; }
+.drawer-content[data-side="right"] { top: 0; right: 0; bottom: 0; width: min(420px, 100vw); border-left-width: 1px; animation: drawer-in-right var(--base) var(--ease); } /* physical: explicit right edge, use data-side="end" to follow direction */
+.drawer-content[data-side="end"] { top: 0; inset-inline-end: 0; bottom: 0; width: min(420px, 100vw); border-inline-start-width: 1px; animation: drawer-in-end var(--base) var(--ease); }
+.drawer-content[data-side="left"] { top: 0; left: 0; bottom: 0; width: min(420px, 100vw); border-right-width: 1px; animation: drawer-in-left var(--base) var(--ease); } /* physical: explicit left edge, use data-side="start" to follow direction */
+.drawer-content[data-side="start"] { top: 0; inset-inline-start: 0; bottom: 0; width: min(420px, 100vw); border-inline-end-width: 1px; animation: drawer-in-start var(--base) var(--ease); }
+.drawer-content[data-side="top"] { top: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-bottom-width: 1px; animation: drawer-in-top var(--base) var(--ease); }
+.drawer-content[data-side="bottom"] { bottom: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-top-width: 1px; animation: drawer-in-bottom var(--base) var(--ease); }
+@keyframes drawer-in-right { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes drawer-in-left { from { transform: translateX(-100%); } to { transform: none; } }
+@keyframes drawer-in-end { from { transform: translateX(calc(100% * var(--dir, 1))); } to { transform: none; } }
+@keyframes drawer-in-start { from { transform: translateX(calc(-100% * var(--dir, 1))); } to { transform: none; } }
+@keyframes drawer-in-top { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes drawer-in-bottom { from { transform: translateY(100%); } to { transform: none; } }

@@ -8,7 +8,8 @@ Monoline is an open-source UI kit with two layers:
 
 | Layer | Package | What |
 |---|---|---|
-| Core | `packages/css` → `@monoline/css` | Plain CSS: tokens, 3 themes, accents, base, one stylesheet per component. Works with any framework or none. |
+| Core | `packages/css` → `@monoline/css` | Plain CSS: tokens, 3 themes, 9 accents, look options (font, corners, density), base, one stylesheet per component. Works with any framework or none. |
+| CLI | `packages/cli` → `monoline` | `npx monoline add <component>` copies a component and its CSS from `registry/` into a project. No dependencies. |
 | React | `packages/react` → `@monoline/react` | Accessible, typed React components that render the core's classes. Complex behaviour comes from Radix (`radix-ui`). |
 | Docs | `apps/docs` | The documentation site. Discovers components automatically. |
 | Registry | `registry/`, `llms.txt`, `llms-full.txt` | Generated, machine-readable component list and source for AI tools. |
@@ -30,7 +31,7 @@ npm run registry                          # regenerate registry/ and llms*.txt
 ## Where things live
 
 ```
-packages/css/src/tokens.css, base.css, accents.css, utilities.css
+packages/css/src/tokens.css, base.css, accents.css, options.css, utilities.css
 packages/css/src/components/NN-name.css   legacy numbered files (keep order) and <name>.css for new ones
 packages/css/js/monoline.js               optional vanilla behaviours for CSS-only users
 packages/react/src/components/<name>/     one folder per component (see recipe)
@@ -95,22 +96,31 @@ WCAG 2.2 AA. For each component, `meta.json` `a11y` lists the keyboard and scree
 
 Vitest + Testing Library + `vitest-axe`. Test behaviour users see (roles, names, keyboard), not implementation. Cover: renders and default props, each variant class, controlled and uncontrolled use, keyboard operation, disabled, ref forwarding, `asChild` if supported, axe. Portal content (dialogs, menus) is found via `screen`, not `container`.
 
+## Doc comments are required: `npm run check` enforces them
+
+Every prop in an exported `*Props` interface or type, every exported component and every exported hook needs a `/** ... */` comment. The docs site props tables and the AI registry are generated from these comments, so a missing one is a hole in the docs.
+
+- Prop: one plain sentence saying what it does and when to use it, with the default or allowed values (`/** Shows a spinner and ignores clicks. Default false. */`).
+- Component or hook: one or two sentences, plus a one-line `@example` where it helps. For a hook, say what it returns, its parameters and what it does during server rendering.
+- `npm run check` runs `packages/react/scripts/check-docs.mjs`, which lists each file, line and name that is missing a comment and exits 1. Run `npm run check:docs -w @monoline/react` to run only this check.
+
 ## Parallel work: ownership rules
 
 Several agents may build at once, each in its own worktree. To avoid conflicts:
 
 1. Work only inside the folders and CSS files your task owns (listed in `docs/ROADMAP.md`). Do not edit another category's component or CSS files; open a note in your report instead.
 2. Never hand-edit or commit generated files: `packages/react/src/index.ts`, `registry/`, `llms.txt`, `llms-full.txt`, any `dist/`.
-3. Shared files (`tokens.css`, `base.css`, `accents.css`, `utilities.css`, `package.json`, `AGENTS.md`, `DESIGN.md`) belong to the `core` task. If you need a token, add it in your own CSS file as a component-scoped custom property (`--dialog-width`) and note it in your report.
+3. Shared files (`tokens.css`, `base.css`, `accents.css`, `options.css`, `utilities.css`, `package.json`, `AGENTS.md`, `DESIGN.md`) belong to the `core` task. If you need a token, add it in your own CSS file as a component-scoped custom property (`--dialog-width`) and note it in your report.
 4. Commit early and small, on your own branch. Message style: `button: add loading state`.
 5. Finish with the Definition of done below, and report: what you built, what you could not finish, anything another task must change.
 
 ## Definition of done (per component)
 
 - [ ] Folder has all five files; `meta.json` valid; `index.ts` exports component and `*Props` types.
-- [ ] CSS in its own file, tokens only, works in warm/dark/midnight and all four accents, at 360px and 1200px.
+- [ ] CSS in its own file, tokens only, works in warm/dark/midnight, all nine accents and the font/corner/density options, at 360px and 1200px.
 - [ ] Keyboard and screen reader behaviour implemented, listed in `meta.json`, and tested.
 - [ ] `npm test`, `npm run typecheck` and `npm run check` pass.
+- [ ] Your demos render in `packages/react/src/all-demos.test.tsx` (axe, no console errors; it runs automatically).
 - [ ] The docs site shows every demo with no console errors (`npm run dev`, check the page).
 - [ ] Copy follows `DESIGN.md` §7 (verbs, plain words, no exclamation marks).
 - [ ] No new dependency, or the reason is in the report.

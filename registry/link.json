@@ -1,0 +1,54 @@
+{
+  "name": "link",
+  "title": "Link",
+  "category": "typography",
+  "description": "An underlined link. External links open safely and say so.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/09-links.css",
+      "content": "/* ─── Links, dividers, skip link ─── */\n.link { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.link:hover { text-decoration-color: currentColor; }\n.divider { border: 0; border-top: 1px solid var(--rule); margin: var(--s5) 0; }\n.skip-link { position: absolute; inset-inline-start: var(--s4); top: -100px; z-index: var(--z-toast); padding: var(--s3) var(--s4); background: var(--foreground); color: var(--background); }\n.skip-link:focus { top: var(--s4); }\n"
+    },
+    {
+      "path": "packages/css/src/components/link.css",
+      "content": ".link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }\n"
+    }
+  ],
+  "a11y": [
+    "A real anchor with a visible underline; focus ring shared with other controls.",
+    "External links get rel=\"noopener noreferrer\" and a hidden \"(opens in a new tab)\"."
+  ],
+  "keywords": [
+    "anchor",
+    "href",
+    "a",
+    "external"
+  ],
+  "kind": "components",
+  "import": "import {Link} from '@monoline/react'",
+  "path": "packages/react/src/components/link",
+  "files": [
+    "packages/react/src/components/link/index.ts",
+    "packages/react/src/components/link/link.demo.tsx",
+    "packages/react/src/components/link/link.test.tsx",
+    "packages/react/src/components/link/link.tsx",
+    "packages/react/src/components/link/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/link/index.ts",
+      "content": "export {Link} from './link';\nexport type {LinkProps} from './link';\n"
+    },
+    {
+      "path": "packages/react/src/components/link/link.tsx",
+      "content": "import {forwardRef, type AnchorHTMLAttributes} from 'react';\nimport {Slot} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {\n  /** Opens in a new tab with `rel=\"noopener noreferrer\"` and announces that. */\n  external?: boolean;\n  /** Use the child (a router link) instead of an anchor. */\n  asChild?: boolean;\n}\n\n/** An anchor with the Monoline underline. */\nexport const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link({external, asChild, className, children, ...rest}, ref) {\n  const Comp = asChild ? Slot.Root : 'a';\n  const extra = external ? {target: '_blank', rel: 'noopener noreferrer'} : {};\n  return (\n    <Comp ref={ref} className={cx('link', className)} {...extra} {...rest}>\n      {asChild ? children : <>{children}{external && <span className=\"sr-only\"> (opens in a new tab)</span>}</>}\n    </Comp>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/link/meta.json",
+      "content": "{\"name\":\"link\",\"title\":\"Link\",\"category\":\"typography\",\"description\":\"An underlined link. External links open safely and say so.\",\"status\":\"stable\",\"css\":[\"09-links.css\",\"link.css\"],\"a11y\":[\"A real anchor with a visible underline; focus ring shared with other controls.\",\"External links get rel=\\\"noopener noreferrer\\\" and a hidden \\\"(opens in a new tab)\\\".\"],\"keywords\":[\"anchor\",\"href\",\"a\",\"external\"]}\n"
+    }
+  ]
+}

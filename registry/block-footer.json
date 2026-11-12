@@ -1,0 +1,62 @@
+{
+  "name": "block-footer",
+  "title": "Footer block",
+  "category": "blocks",
+  "description": "A site footer with brand, link columns and small print.",
+  "status": "beta",
+  "uses": [
+    "container",
+    "link"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/container.css",
+      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; margin-inline: auto; padding-inline: var(--s5); }\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
+    },
+    {
+      "path": "packages/css/src/components/link.css",
+      "content": ".link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }\n"
+    },
+    {
+      "path": "packages/css/src/components/block-footer.css",
+      "content": "/* Block: footer. */\n.block-footer { padding-block: var(--s7) var(--s6); border-top: 1px solid var(--foreground); }\n.block-footer-top { display: grid; gap: var(--s6); grid-template-columns: 1fr; }\n.block-footer-brand { display: flex; flex-direction: column; gap: var(--s2); max-width: 36ch; font-size: var(--text-sm); color: var(--muted); }\n.block-footer-name { font-family: var(--font-display); font-weight: 700; color: var(--foreground); font-size: var(--text-lg); }\n.block-footer-columns { display: grid; gap: var(--s6); grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }\n.block-footer-heading { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 500; margin-bottom: var(--s3); }\n.block-footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s2); font-size: var(--text-sm); }\n.block-footer-legal { margin-top: var(--s7); padding-top: var(--s4); border-top: 1px solid var(--rule); font-size: var(--text-xs); color: var(--muted); }\n@media (min-width: 860px) { .block-footer-top { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); } }\n"
+    }
+  ],
+  "a11y": [
+    "A footer element: the page contentinfo landmark. Use one per page.",
+    "Each link column is a nav named by its title, with a heading at the chosen level."
+  ],
+  "keywords": [
+    "footer",
+    "site links",
+    "legal",
+    "sitemap"
+  ],
+  "kind": "components",
+  "import": "import {BlockFooter} from '@monoline/react'",
+  "path": "packages/react/src/components/block-footer",
+  "files": [
+    "packages/react/src/components/block-footer/block-footer.demo.tsx",
+    "packages/react/src/components/block-footer/block-footer.test.tsx",
+    "packages/react/src/components/block-footer/block-footer.tsx",
+    "packages/react/src/components/block-footer/index.ts",
+    "packages/react/src/components/block-footer/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/block-footer/block-footer.tsx",
+      "content": "import {forwardRef, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Container} from '../container';\nimport {Link} from '../link';\n\nexport interface FooterLink {\n  label: ReactNode;\n  href: string;\n}\nexport interface FooterColumn {\n  /** Also names the column's `nav` landmark, so keep it plain text. */\n  title: string;\n  links: FooterLink[];\n}\n\nexport interface BlockFooterProps extends HTMLAttributes<HTMLElement> {\n  /** Your logo or name. */\n  brand?: ReactNode;\n  /** Optional short sentence about the product, shown under the brand. */\n  description?: ReactNode;\n  /** Groups of links; each column has a `title` and a list of `links` and becomes its own labelled `nav`. */\n  columns: FooterColumn[];\n  /** Small print: copyright, legal links. */\n  legal?: ReactNode;\n  /** Outline level of the column titles. */\n  headingLevel?: 2 | 3 | 4 | 5 | 6;\n}\n\n/** A site footer: brand, link columns and small print. Renders a `footer` (the page's contentinfo landmark). */\nexport const BlockFooter = forwardRef<HTMLElement, BlockFooterProps>(function BlockFooter({brand, description, columns, legal, headingLevel = 2, className, ...rest}, ref) {\n  const H = `h${headingLevel}` as 'h2';\n  return (\n    <footer ref={ref} className={cx('block-footer', className)} {...rest}>\n      <Container>\n        <div className=\"block-footer-top\">\n          {(brand || description) && (\n            <div className=\"block-footer-brand\">\n              {brand && <div className=\"block-footer-name\">{brand}</div>}\n              {description && <p>{description}</p>}\n            </div>\n          )}\n          <div className=\"block-footer-columns\">\n            {columns.map((col) => (\n              <nav key={col.title} aria-label={col.title} className=\"block-footer-col\">\n                <H className=\"block-footer-heading\">{col.title}</H>\n                <ul role=\"list\">\n                  {col.links.map((l) => <li key={l.href + String(l.label)}><Link href={l.href}>{l.label}</Link></li>)}\n                </ul>\n              </nav>\n            ))}\n          </div>\n        </div>\n        {legal && <div className=\"block-footer-legal\">{legal}</div>}\n      </Container>\n    </footer>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/block-footer/index.ts",
+      "content": "export {BlockFooter} from './block-footer';\nexport type {BlockFooterProps, FooterColumn, FooterLink} from './block-footer';\n"
+    },
+    {
+      "path": "packages/react/src/components/block-footer/meta.json",
+      "content": "{\"name\": \"block-footer\", \"title\": \"Footer block\", \"category\": \"blocks\", \"description\": \"A site footer with brand, link columns and small print.\", \"status\": \"beta\", \"uses\": [\"container\", \"link\"], \"css\": [\"container.css\", \"link.css\", \"block-footer.css\"], \"a11y\": [\"A footer element: the page contentinfo landmark. Use one per page.\", \"Each link column is a nav named by its title, with a heading at the chosen level.\"], \"keywords\": [\"footer\", \"site links\", \"legal\", \"sitemap\"]}"
+    }
+  ]
+}
