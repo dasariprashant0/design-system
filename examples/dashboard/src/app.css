@@ -1,0 +1,3 @@
+.stats { margin-block: var(--s5); }
+.filters { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: end; margin-block: var(--s5); }
+.charts { display: grid; gap: var(--s5); grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); margin-block: var(--s5); }

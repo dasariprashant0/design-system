@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "lib": ["ES2023", "DOM", "DOM.Iterable"], "module": "ESNext", "moduleResolution": "Bundler",
+    "jsx": "react-jsx", "strict": true, "noUncheckedIndexedAccess": true, "noUnusedLocals": true, "noUnusedParameters": true,
+    "skipLibCheck": false, "isolatedModules": true, "verbatimModuleSyntax": true, "noEmit": true,
+    "types": ["vite/client"],
+    "paths": {
+      "@monoline/react": ["../../packages/react/dist/index.d.ts"],
+      "@monoline/css": ["../../packages/css/dist/monoline.css"]
+    }
+  }
+}
