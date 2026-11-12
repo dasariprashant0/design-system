@@ -27,4 +27,15 @@ describe('useToggle', () => {
     act(() => result.current[1]('zzz'));
     expect(result.current[0]).toBe('c');
   });
+  it('starts on with useToggle(true)', () => {
+    const {result} = renderHook(() => useToggle(true));
+    expect(result.current[0]).toBe(true);
+    act(() => result.current[1]());
+    expect(result.current[0]).toBe(false);
+  });
+  it('flips when passed straight to onClick (the event is not a value)', () => {
+    const {result} = renderHook(() => useToggle(false));
+    act(() => result.current[1](new MouseEvent('click')));
+    expect(result.current[0]).toBe(true);
+  });
 });

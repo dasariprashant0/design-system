@@ -40,5 +40,35 @@ for (const f of linted) {
   for (const h of hits) fails.push(`${f} uses a raw colour ${h}; add a token instead`);
 }
 
+// WCAG 2.5.8: the form error summary links are list items, not inline text, so each needs a 24px target.
+// (Found by axe in a real app: the links were 17px tall.)
+{
+  const rule = read('src/components/form.css').split('\n').find((l) => l.startsWith('.form-errors a {')) ?? '';
+  if (!/display:\s*inline-block/.test(rule) || !/padding-block:\s*var\(--s1\)/.test(rule)) fails.push('form.css: .form-errors a must be inline-block with padding-block: var(--s1) (24px target)');
+}
+
+// The legacy utility `.grid` comes later in the bundle and would override the Grid component's columns and gap.
+for (const l of read('src/components/grid.css').replace(/\/\*[\s\S]*?\*\//g, '').split('\n')) {
+  if (/^\.grid-(auto|fixed)\b/.test(l.trim())) fails.push(`grid.css: "${l.slice(0, 40)}" must be written .grid.grid-... so the legacy .grid utility cannot override it`);
+}
+
+// A Stat without a note sits in a grid row next to Stats with one; it must not stretch and push its value down.
+if (!/^\.stat \{[^}]*align-content:\s*start/m.test(read('src/components/19-avatar.css'))) fails.push('19-avatar.css: .stat needs align-content: start so values line up across a row');
+
+// Hover must not restyle an "on" control: `.x:hover:not(:disabled)` (3 classes' worth) beats `.x[data-state="on"]` (2), so
+// hovering a selected segment/toggle/day made light text sit on a light fill. Found by hovering after a click in a real app.
+for (const [file, sel, on] of [['segmented-control.css', '.segment', 'data-state="on"'], ['slider.css', '.toggle', 'data-state="on"'], ['toolbar.css', '.toolbar-item', 'data-state="on"'], ['calendar.css', '.calendar-day', 'aria-pressed="true"']]) {
+  for (const l of read(`src/components/${file}`).split('\n')) {
+    if (l.startsWith(`${sel}:`) && l.includes(':hover') && !l.includes(`[${on}]`)) fails.push(`${file}: "${l.slice(0, 60)}" must exclude the selected state with :not([${on}])`);
+  }
+}
+
+// typography.css (later in the bundle) also defines .heading-md and .heading-sm; Heading size="md" rendered at 34px, not the
+// documented 18px, so every block sub-title was oversized. The component's rules must win by specificity.
+{
+  const h = read('src/components/heading.css');
+  for (const s of ['md', 'sm']) if (!h.includes(`.heading.heading-${s} {`)) fails.push(`heading.css: write .heading.heading-${s} (two classes) so typography.css cannot override the documented size`);
+}
+
 if (fails.length) { console.error(fails.map((f) => 'FAIL ' + f).join('\n')); process.exit(1); }
 console.log(`ok: ${n} contrast checks across ${Object.keys(themes).length} themes and ${Object.keys(accents).length + 1} accents; no raw colours in components.`);

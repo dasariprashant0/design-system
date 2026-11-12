@@ -1,0 +1,6 @@
+.site-header { border-block-end: 1px solid var(--rule); }
+.site-header .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding-block: var(--s3); flex-wrap: wrap; }
+.site-header nav { display: flex; gap: var(--s4); flex-wrap: wrap; }
+.band { padding-block: 0; } /* the blocks already carry their own section padding */
+.logos { display: flex; flex-wrap: wrap; gap: var(--s5); justify-content: center; opacity: .8; }
+.code-peek { border: 1px solid var(--rule); padding: var(--s4); overflow-x: auto; }

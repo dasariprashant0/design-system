@@ -9,6 +9,6 @@
 .tag { overflow-wrap: anywhere; display: inline-flex; align-items: center; gap: var(--s2); padding: 2px var(--s3); font-size: var(--text-sm); box-shadow: inset 0 0 0 1px var(--rule); }
 .tag button { padding: 0 var(--s1); color: var(--muted); }
 .tag button:hover { color: var(--foreground); }
-.stat { display: grid; gap: var(--s1); }
+.stat { display: grid; gap: var(--s1); align-content: start; /* a Stat without a note must not stretch its rows in a taller grid cell */ }
 .stat-value { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; line-height: 1; }
 .stat-note { font-size: var(--text-sm); color: var(--muted); }
