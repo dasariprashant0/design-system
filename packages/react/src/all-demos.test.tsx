@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 // Renders every demo of every component and hook once: it must not throw, must not log React errors
 // (invalid nesting, missing keys, act warnings) and must have no axe violations. A new component's demo
 // is picked up automatically, so a broken demo fails here before it reaches the docs site.
