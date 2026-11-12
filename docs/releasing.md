@@ -177,6 +177,7 @@ Add `--tag` to `version` only if you want the local tag now. The workflow create
 - **`git working tree is not clean`**: commit the release files (often the `LICENSE` copies).
 - **`already on npm`**: expected when re-running a half-finished publish. It is skipped, not an error.
 - **`dist/ is missing`**: run `npm run build` first.
+- **`bin path "./bin/..." starts with "./"`**: npm's publish step silently drops that bin entry, so `npx monoline` would break. In `packages/cli/package.json` write `"bin": {"monoline": "bin/monoline.mjs"}`.
 - **`is not in the tarball`**: a `files` entry in that package's `package.json` leaves out something the exports need.
 - **`402 Payment Required` or `You must sign up for private packages`**: the scope was created as paid or the package is set private. Scoped packages need `"publishConfig": {"access": "public"}`, which is already in each package.
 - **`EOTP` or `one-time password required`**: 2FA is on for this account. Use the code from your app, or use the CI token.
