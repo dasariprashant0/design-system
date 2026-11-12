@@ -4,3 +4,4 @@ dist/
 .DS_Store
 coverage/
 packages/react/src/index.ts
+apps/docs/src/props.generated.json

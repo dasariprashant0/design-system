@@ -4,7 +4,9 @@
   "version": "0.3.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/gen-props.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/gen-props.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"

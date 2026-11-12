@@ -65,3 +65,6 @@ code { font-family: var(--font-body); background: var(--wash-2); padding: 0 var(
 .pager-link:hover { border-color: var(--foreground); }
 .pager-next { text-align: right; grid-column: 2; }
 @media (max-width: 880px) { .kv { grid-template-columns: minmax(0, 1fr); gap: var(--s1); } .kv dd { margin-bottom: var(--s3); } }
+.props-table td { vertical-align: top; }
+.props-type { white-space: normal; overflow-wrap: anywhere; font-size: var(--text-xs); }
+.props-table td:last-child { min-width: 14rem; }
