@@ -1,0 +1,6 @@
+.carousel { display: grid; gap: var(--s3); }
+.carousel-track { display: flex; gap: var(--s3); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.carousel-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.carousel-slide { flex: 0 0 min(80%, 20rem); scroll-snap-align: start; }
+.carousel-controls { display: flex; gap: var(--s2); justify-content: flex-end; }
+@media (prefers-reduced-motion: reduce) { .carousel-track { scroll-behavior: auto; } }

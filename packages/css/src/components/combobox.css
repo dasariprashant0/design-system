@@ -1,0 +1,8 @@
+/* Combobox: the input is the normal .input; the list drops below it. */
+.combobox { position: relative; width: 100%; }
+.combobox-list { position: absolute; left: 0; right: 0; top: calc(100% + var(--s1)); z-index: var(--z-drawer); max-height: 16rem; overflow-y: auto; margin: 0; padding: var(--s1) 0; list-style: none; background: var(--background); border: 1px solid var(--foreground); }
+.combobox-option { padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }
+.combobox-option[data-active] { background: var(--foreground); color: var(--background); }
+.combobox-option[aria-selected="true"]::after { content: " ✓"; }
+.combobox-option[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.combobox-empty { padding: var(--s3) var(--s4); font-size: var(--text-sm); color: var(--muted); }
