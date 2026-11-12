@@ -1,0 +1,59 @@
+{
+  "name": "autocomplete",
+  "title": "Autocomplete",
+  "category": "forms",
+  "description": "A text field that suggests values while you type and accepts anything you enter.",
+  "status": "stable",
+  "uses": [
+    "field"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { padding: 6px 10px; font-size: var(--text-sm); }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-right: var(--s9); }\n.input-end { position: absolute; right: var(--s3); top: 50%; transform: translateY(-50%); }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(16px); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-right: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-left: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/autocomplete.css",
+      "content": "/* Autocomplete: the input is the normal .input; the suggestions drop below it. */\n.autocomplete { position: relative; width: 100%; }\n.autocomplete-list { position: absolute; left: 0; right: 0; top: calc(100% + var(--s1)); z-index: var(--z-drawer); max-height: 16rem; overflow-y: auto; margin: 0; padding: var(--s1) 0; list-style: none; background: var(--background); border: 1px solid var(--foreground); }\n.autocomplete-option { padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.autocomplete-option[data-active] { background: var(--foreground); color: var(--background); }\n"
+    }
+  ],
+  "a11y": [
+    "ARIA 1.2 combobox with aria-autocomplete=\"list\", aria-expanded, aria-controls and aria-activedescendant.",
+    "ArrowDown/ArrowUp move through suggestions, Enter picks the active one (or keeps typed text), Escape closes.",
+    "The field value is always the typed or picked text; nothing is forced to match a suggestion."
+  ],
+  "keywords": [
+    "suggest",
+    "typeahead",
+    "free text",
+    "datalist",
+    "search"
+  ],
+  "kind": "components",
+  "import": "import {Autocomplete} from '@monoline/react'",
+  "path": "packages/react/src/components/autocomplete",
+  "files": [
+    "packages/react/src/components/autocomplete/autocomplete.demo.tsx",
+    "packages/react/src/components/autocomplete/autocomplete.test.tsx",
+    "packages/react/src/components/autocomplete/autocomplete.tsx",
+    "packages/react/src/components/autocomplete/index.ts",
+    "packages/react/src/components/autocomplete/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/autocomplete/autocomplete.tsx",
+      "content": "'use client';\nimport {forwardRef, useId, useState, type InputHTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\nexport interface AutocompleteProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'onChange' | 'role' | 'size'> {\n  /** Suggestions shown while typing; matched by substring, case-insensitive. */\n  suggestions: string[];\n  /** The text in the field. */\n  value?: string;\n  defaultValue?: string;\n  /** Called with the text on every change, and with the suggestion when one is picked. */\n  onValueChange?: (value: string) => void;\n  invalid?: boolean;\n}\n\n/**\n * A text field with suggestions. Modelled on `Combobox`; differences: the value IS the text,\n * so anything typed is accepted, not only list items. No option is active until you press\n * ArrowDown, so Enter keeps your own text. The list only opens once there is something to\n * match, and has no empty state.\n */\nexport const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(function Autocomplete({suggestions, value, defaultValue = '', onValueChange, invalid, className, onBlur, onKeyDown, ...rest}, ref) {\n  const f = useFieldControl();\n  const listId = useId();\n  const [inner, setInner] = useState(defaultValue);\n  const text = value ?? inner;\n  const [open, setOpen] = useState(false);\n  const [active, setActive] = useState(-1);\n  const q = text.trim().toLowerCase();\n  const shown = q ? suggestions.filter((s) => s.toLowerCase().includes(q) && s !== text) : [];\n  const isOpen = open && shown.length > 0;\n  const optId = (i: number) => `${listId}-${i}`;\n\n  const set = (v: string) => { if (value === undefined) setInner(v); onValueChange?.(v); };\n  const pick = (s: string) => { set(s); setOpen(false); setActive(-1); };\n\n  return (\n    <div className={cx('autocomplete', className)}>\n      <input\n        ref={ref}\n        type=\"text\"\n        role=\"combobox\"\n        autoComplete=\"off\"\n        className=\"input\"\n        aria-expanded={isOpen}\n        aria-controls={listId}\n        aria-autocomplete=\"list\"\n        aria-activedescendant={isOpen && active >= 0 ? optId(active) : undefined}\n        {...f}\n        {...(invalid ? {'aria-invalid': true as const} : {})}\n        value={text}\n        onChange={(e) => { set(e.target.value); setActive(-1); setOpen(true); }}\n        onBlur={(e) => { onBlur?.(e); setOpen(false); setActive(-1); }}\n        onKeyDown={(e) => {\n          onKeyDown?.(e);\n          if (e.defaultPrevented) return;\n          if (e.key === 'ArrowDown') { e.preventDefault(); setOpen(true); if (shown.length) setActive((active + 1) % shown.length); }\n          else if (e.key === 'ArrowUp') { e.preventDefault(); setOpen(true); if (shown.length) setActive((active <= 0 ? shown.length : active) - 1); }\n          else if (e.key === 'Enter' && isOpen && active >= 0) { e.preventDefault(); pick(shown[active]!); }\n          else if (e.key === 'Escape' && isOpen) { e.preventDefault(); setOpen(false); setActive(-1); }\n        }}\n        {...rest}\n      />\n      {isOpen && (\n        <ul id={listId} role=\"listbox\" className=\"autocomplete-list\" aria-label={rest['aria-label']}>\n          {shown.map((s, i) => (\n            <li\n              key={s}\n              id={optId(i)}\n              role=\"option\"\n              aria-selected={i === active}\n              data-active={i === active || undefined}\n              className=\"autocomplete-option\"\n              onMouseDown={(e) => e.preventDefault()}\n              onMouseEnter={() => setActive(i)}\n              onClick={() => pick(s)}\n            >{s}</li>\n          ))}\n        </ul>\n      )}\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/autocomplete/index.ts",
+      "content": "export {Autocomplete} from './autocomplete';\nexport type {AutocompleteProps} from './autocomplete';\n"
+    },
+    {
+      "path": "packages/react/src/components/autocomplete/meta.json",
+      "content": "{\"name\":\"autocomplete\",\"title\":\"Autocomplete\",\"category\":\"forms\",\"description\":\"A text field that suggests values while you type and accepts anything you enter.\",\"status\":\"stable\",\"uses\":[\"field\"],\"css\":[\"03-form-fields.css\",\"autocomplete.css\"],\"a11y\":[\"ARIA 1.2 combobox with aria-autocomplete=\\\"list\\\", aria-expanded, aria-controls and aria-activedescendant.\",\"ArrowDown/ArrowUp move through suggestions, Enter picks the active one (or keeps typed text), Escape closes.\",\"The field value is always the typed or picked text; nothing is forced to match a suggestion.\"],\"keywords\":[\"suggest\",\"typeahead\",\"free text\",\"datalist\",\"search\"]}\n"
+    }
+  ]
+}

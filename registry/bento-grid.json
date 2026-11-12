@@ -1,0 +1,52 @@
+{
+  "name": "bento-grid",
+  "title": "Bento grid",
+  "category": "effects",
+  "description": "A responsive asymmetric grid of cards with column and row spans.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/bento-grid.css",
+      "content": "/* Bento grid: 1 column, then 2, then 3. Spans are clamped to the column count at each step. */\n.bento-grid { display: grid; grid-template-columns: 1fr; grid-auto-rows: minmax(10rem, auto); gap: var(--s3); }\n.bento-card { min-width: 0; padding: var(--s5); border: 1px solid var(--rule); background: var(--surface); }\n@media (min-width: 40rem) {\n  .bento-grid { grid-template-columns: repeat(2, 1fr); }\n  .bento-col-2, .bento-col-3 { grid-column: span 2; }\n  .bento-row-2 { grid-row: span 2; }\n}\n@media (min-width: 64rem) {\n  .bento-grid { grid-template-columns: repeat(3, 1fr); }\n  .bento-col-3 { grid-column: span 3; }\n}\n"
+    }
+  ],
+  "a11y": [
+    "Plain divs in source order, so reading and tab order match the visual order on phones and follow the DOM elsewhere.",
+    "Spans collapse to a single column on narrow screens; nothing depends on colour or motion."
+  ],
+  "keywords": [
+    "layout",
+    "tiles",
+    "masonry",
+    "features",
+    "cards",
+    "grid"
+  ],
+  "kind": "components",
+  "import": "import {BentoGrid} from '@monoline/react'",
+  "path": "packages/react/src/components/bento-grid",
+  "files": [
+    "packages/react/src/components/bento-grid/bento-grid.demo.tsx",
+    "packages/react/src/components/bento-grid/bento-grid.test.tsx",
+    "packages/react/src/components/bento-grid/bento-grid.tsx",
+    "packages/react/src/components/bento-grid/index.ts",
+    "packages/react/src/components/bento-grid/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/bento-grid/bento-grid.tsx",
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport type BentoGridProps = HTMLAttributes<HTMLDivElement>;\n\nexport interface BentoCardProps extends HTMLAttributes<HTMLDivElement> {\n  /** Columns to span once the grid has room for them. Default 1. */\n  colSpan?: 1 | 2 | 3;\n  /** Rows to span. Default 1. */\n  rowSpan?: 1 | 2;\n}\n\n/** A responsive grid for an asymmetric set of cards: one column on phones, two on tablets, three on desktops. */\nexport const BentoGrid = forwardRef<HTMLDivElement, BentoGridProps>(function BentoGrid({className, ...rest}, ref) {\n  return <div ref={ref} className={cx('bento-grid', className)} {...rest} />;\n});\n\n/** One tile in a `BentoGrid`. Spans only apply when there are enough columns, so phones always get a single stack. */\nexport const BentoCard = forwardRef<HTMLDivElement, BentoCardProps>(function BentoCard({colSpan = 1, rowSpan = 1, className, ...rest}, ref) {\n  return <div ref={ref} className={cx('bento-card', colSpan > 1 && `bento-col-${colSpan}`, rowSpan > 1 && `bento-row-${rowSpan}`, className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/bento-grid/index.ts",
+      "content": "export {BentoCard, BentoGrid} from './bento-grid';\nexport type {BentoCardProps, BentoGridProps} from './bento-grid';\n"
+    },
+    {
+      "path": "packages/react/src/components/bento-grid/meta.json",
+      "content": "{\"name\":\"bento-grid\",\"title\":\"Bento grid\",\"category\":\"effects\",\"description\":\"A responsive asymmetric grid of cards with column and row spans.\",\"status\":\"stable\",\"css\":[\"bento-grid.css\"],\"a11y\":[\"Plain divs in source order, so reading and tab order match the visual order on phones and follow the DOM elsewhere.\",\"Spans collapse to a single column on narrow screens; nothing depends on colour or motion.\"],\"keywords\":[\"layout\",\"tiles\",\"masonry\",\"features\",\"cards\",\"grid\"]}\n"
+    }
+  ]
+}

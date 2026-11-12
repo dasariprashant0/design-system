@@ -1,0 +1,45 @@
+{
+  "name": "use-media-query",
+  "title": "useMediaQuery",
+  "category": "hooks",
+  "description": "Whether a CSS media query matches, updated live, and safe to render on the server.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. The first render returns defaultValue so server and client markup match.",
+    "Listens to matchMedia changes and removes the listener on unmount."
+  ],
+  "keywords": [
+    "breakpoint",
+    "responsive",
+    "viewport",
+    "matchMedia"
+  ],
+  "kind": "hooks",
+  "import": "import {UseMediaQuery} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-media-query",
+  "files": [
+    "packages/react/src/hooks/use-media-query/index.ts",
+    "packages/react/src/hooks/use-media-query/meta.json",
+    "packages/react/src/hooks/use-media-query/use-media-query.demo.tsx",
+    "packages/react/src/hooks/use-media-query/use-media-query.test.tsx",
+    "packages/react/src/hooks/use-media-query/use-media-query.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-media-query/index.ts",
+      "content": "export {useMediaQuery} from './use-media-query';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-media-query/meta.json",
+      "content": "{\"name\":\"use-media-query\",\"title\":\"useMediaQuery\",\"category\":\"hooks\",\"description\":\"Whether a CSS media query matches, updated live, and safe to render on the server.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. The first render returns defaultValue so server and client markup match.\",\"Listens to matchMedia changes and removes the listener on unmount.\"],\"keywords\":[\"breakpoint\",\"responsive\",\"viewport\",\"matchMedia\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-media-query/use-media-query.ts",
+      "content": "'use client';\nimport {useEffect, useState} from 'react';\n\n/**\n * Whether a CSS media query matches, and keeps up with changes.\n * The first render (server and client) returns `defaultValue`, so markup\n * matches during hydration; the real value arrives after mount.\n */\nexport function useMediaQuery(query: string, defaultValue = false): boolean {\n  const [matches, setMatches] = useState(defaultValue);\n\n  useEffect(() => {\n    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return;\n    const list = window.matchMedia(query);\n    const update = () => setMatches(list.matches);\n    update();\n    list.addEventListener('change', update);\n    return () => list.removeEventListener('change', update);\n  }, [query]);\n\n  return matches;\n}\n"
+    }
+  ]
+}

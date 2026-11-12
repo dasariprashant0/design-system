@@ -1,0 +1,56 @@
+{
+  "name": "number-ticker",
+  "title": "Number ticker",
+  "category": "effects",
+  "description": "Count up to a number when it scrolls into view. Shows the final value at once for reduced motion.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/number-ticker.css",
+      "content": "/* Number ticker: digits keep a fixed width so the count never shifts the layout. */\n.number-ticker { font-variant-numeric: tabular-nums; }\n"
+    }
+  ],
+  "a11y": [
+    "Screen readers get the final number from an sr-only copy; the animated frames are aria-hidden.",
+    "With prefers-reduced-motion the final number shows immediately and nothing animates."
+  ],
+  "keywords": [
+    "counter",
+    "count up",
+    "stat",
+    "metric",
+    "animate number"
+  ],
+  "kind": "components",
+  "import": "import {NumberTicker} from '@monoline/react'",
+  "path": "packages/react/src/components/number-ticker",
+  "files": [
+    "packages/react/src/components/number-ticker/index.ts",
+    "packages/react/src/components/number-ticker/meta.json",
+    "packages/react/src/components/number-ticker/number-ticker.demo.tsx",
+    "packages/react/src/components/number-ticker/number-ticker.test.tsx",
+    "packages/react/src/components/number-ticker/number-ticker.tsx",
+    "packages/react/src/components/number-ticker/use-reduced-motion.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/number-ticker/index.ts",
+      "content": "export {NumberTicker} from './number-ticker';\nexport type {NumberTickerProps} from './number-ticker';\n"
+    },
+    {
+      "path": "packages/react/src/components/number-ticker/meta.json",
+      "content": "{\"name\":\"number-ticker\",\"title\":\"Number ticker\",\"category\":\"effects\",\"description\":\"Count up to a number when it scrolls into view. Shows the final value at once for reduced motion.\",\"status\":\"stable\",\"css\":[\"number-ticker.css\"],\"a11y\":[\"Screen readers get the final number from an sr-only copy; the animated frames are aria-hidden.\",\"With prefers-reduced-motion the final number shows immediately and nothing animates.\"],\"keywords\":[\"counter\",\"count up\",\"stat\",\"metric\",\"animate number\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/number-ticker/number-ticker.tsx",
+      "content": "'use client';\nimport {forwardRef, useEffect, useRef, useState, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {usePrefersReducedMotion} from './use-reduced-motion';\n\nexport interface NumberTickerProps extends HTMLAttributes<HTMLSpanElement> {\n  /** The number to count to. Screen readers get this, never the frames in between. */\n  value: number;\n  /** Where the count starts. Default 0. */\n  from?: number;\n  /** Milliseconds for the count. Default 1500. */\n  duration?: number;\n  /** Digits after the decimal point. Default 0. */\n  decimals?: number;\n  /** Custom formatting, for currency or units. Overrides `decimals`. */\n  format?: (n: number) => string;\n}\n\n/**\n * Counts up to `value` once it scrolls into view. With `prefers-reduced-motion` it shows the final number straight away.\n * The visible digits are `aria-hidden`; an `sr-only` copy holds the final number.\n * @example <NumberTicker value={1200} format={(n) => n.toLocaleString()} />\n */\nexport const NumberTicker = forwardRef<HTMLSpanElement, NumberTickerProps>(function NumberTicker({value, from = 0, duration = 1500, decimals = 0, format, className, ...rest}, ref) {\n  const [shown, setShown] = useState(value);\n  const reduced = usePrefersReducedMotion();\n  const local = useRef<HTMLSpanElement | null>(null);\n  const fmt = format ?? ((n: number) => n.toLocaleString(undefined, {minimumFractionDigits: decimals, maximumFractionDigits: decimals}));\n\n  useEffect(() => {\n    if (reduced || typeof requestAnimationFrame === 'undefined') { setShown(value); return; }\n    let raf = 0;\n    let io: IntersectionObserver | undefined;\n    const run = () => {\n      const t0 = performance.now();\n      const step = (t: number) => {\n        const p = Math.min(1, (t - t0) / duration);\n        setShown(from + (value - from) * (1 - (1 - p) ** 3));\n        if (p < 1) raf = requestAnimationFrame(step);\n      };\n      raf = requestAnimationFrame(step);\n    };\n    setShown(from);\n    if (local.current && typeof IntersectionObserver !== 'undefined') {\n      io = new IntersectionObserver(([entry]) => { if (entry?.isIntersecting) { io?.disconnect(); run(); } });\n      io.observe(local.current);\n    } else run();\n    return () => { cancelAnimationFrame(raf); io?.disconnect(); };\n  }, [value, from, duration, reduced]);\n\n  return (\n    <span ref={(node) => { local.current = node; if (typeof ref === 'function') ref(node); else if (ref) ref.current = node; }} className={cx('number-ticker', className)} {...rest}>\n      <span className=\"sr-only\">{fmt(value)}</span>\n      <span aria-hidden=\"true\">{fmt(shown)}</span>\n    </span>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/number-ticker/use-reduced-motion.ts",
+      "content": "'use client';\nimport {useEffect, useState} from 'react';\n\nconst QUERY = '(prefers-reduced-motion: reduce)';\n\n/** True when the user asked for less motion. Guarded: jsdom and old browsers have no matchMedia. Safe to call at event time. */\nexport function prefersReducedMotion(): boolean {\n  return typeof window !== 'undefined' && !!window.matchMedia?.(QUERY)?.matches;\n}\n\n/** Tracks `prefers-reduced-motion`. First render is `false` so server and client markup match. Shared by the effects components. */\nexport function usePrefersReducedMotion(): boolean {\n  const [reduced, setReduced] = useState(false);\n  useEffect(() => {\n    const mq = typeof window !== 'undefined' ? window.matchMedia?.(QUERY) : undefined;\n    if (!mq) return;\n    setReduced(mq.matches);\n    const on = (e: MediaQueryListEvent) => setReduced(e.matches);\n    mq.addEventListener?.('change', on);\n    return () => mq.removeEventListener?.('change', on);\n  }, []);\n  return reduced;\n}\n"
+    }
+  ]
+}

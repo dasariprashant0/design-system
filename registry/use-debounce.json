@@ -1,0 +1,46 @@
+{
+  "name": "use-debounce",
+  "title": "useDebounce",
+  "category": "hooks",
+  "description": "Debounced value and debounced callback: wait for input to settle before acting.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. Use for search fields so the list updates after typing stops.",
+    "A pending callback is dropped on unmount."
+  ],
+  "keywords": [
+    "throttle",
+    "delay",
+    "search",
+    "input",
+    "settle"
+  ],
+  "kind": "hooks",
+  "import": "import {UseDebounce} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-debounce",
+  "files": [
+    "packages/react/src/hooks/use-debounce/index.ts",
+    "packages/react/src/hooks/use-debounce/meta.json",
+    "packages/react/src/hooks/use-debounce/use-debounce.demo.tsx",
+    "packages/react/src/hooks/use-debounce/use-debounce.test.tsx",
+    "packages/react/src/hooks/use-debounce/use-debounce.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-debounce/index.ts",
+      "content": "export {useDebounce, useDebouncedCallback} from './use-debounce';\nexport type {UseDebouncedCallbackReturn} from './use-debounce';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-debounce/meta.json",
+      "content": "{\"name\":\"use-debounce\",\"title\":\"useDebounce\",\"category\":\"hooks\",\"description\":\"Debounced value and debounced callback: wait for input to settle before acting.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. Use for search fields so the list updates after typing stops.\",\"A pending callback is dropped on unmount.\"],\"keywords\":[\"throttle\",\"delay\",\"search\",\"input\",\"settle\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-debounce/use-debounce.ts",
+      "content": "'use client';\nimport {useCallback, useEffect, useRef, useState} from 'react';\n\n/** A copy of `value` that only updates after it has stopped changing for `delay` ms. */\nexport function useDebounce<T>(value: T, delay = 300): T {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const id = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(id);\n  }, [value, delay]);\n\n  return debounced;\n}\n\nexport interface UseDebouncedCallbackReturn<A extends unknown[]> {\n  /** Schedules `fn` to run `delay` ms after the last call. */\n  call: (...args: A) => void;\n  /** Drops the pending call, if any. */\n  cancel: () => void;\n}\n\n/**\n * Debounced function: `call` runs `fn` only after `delay` ms with no new calls.\n * `fn` is read at call time, so it can close over fresh props without re-creating `call`.\n * A pending call is dropped on unmount.\n */\nexport function useDebouncedCallback<A extends unknown[]>(\n  fn: (...args: A) => void,\n  delay = 300,\n): UseDebouncedCallbackReturn<A> {\n  const fnRef = useRef(fn);\n  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);\n\n  useEffect(() => {\n    fnRef.current = fn;\n  }, [fn]);\n\n  useEffect(() => () => clearTimeout(timer.current), []);\n\n  const cancel = useCallback(() => clearTimeout(timer.current), []);\n\n  const call = useCallback(\n    (...args: A) => {\n      clearTimeout(timer.current);\n      timer.current = setTimeout(() => fnRef.current(...args), delay);\n    },\n    [delay],\n  );\n\n  return {call, cancel};\n}\n"
+    }
+  ]
+}

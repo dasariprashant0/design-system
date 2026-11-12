@@ -34,6 +34,16 @@ A11y:
 - Clicking the overlay does not close it.
 Files: packages/react/src/components/alert-dialog/alert-dialog.demo.tsx, packages/react/src/components/alert-dialog/alert-dialog.test.tsx, packages/react/src/components/alert-dialog/alert-dialog.tsx, packages/react/src/components/alert-dialog/index.ts, packages/react/src/components/alert-dialog/meta.json
 
+## Animated list (animated-list)
+A list whose items enter one by one without shifting the layout.
+Import: import {AnimatedList} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A real <ul> with <li> items, so list semantics and counts are announced.
+- Items fade in with opacity only and keep their space from the first frame; there is no layout shift.
+- With prefers-reduced-motion all items are visible at once.
+Files: packages/react/src/components/animated-list/animated-list.demo.tsx, packages/react/src/components/animated-list/animated-list.test.tsx, packages/react/src/components/animated-list/animated-list.tsx, packages/react/src/components/animated-list/index.ts, packages/react/src/components/animated-list/meta.json
+
 ## Aspect ratio (aspect-ratio)
 Keep media or a placeholder at a fixed width-to-height ratio.
 Import: import {AspectRatio} from '@monoline/react'
@@ -41,6 +51,16 @@ Primitive: radix-ui/AspectRatio | Status: stable
 A11y:
 - A plain div; the content keeps its own semantics and alt text.
 Files: packages/react/src/components/aspect-ratio/aspect-ratio.demo.tsx, packages/react/src/components/aspect-ratio/aspect-ratio.test.tsx, packages/react/src/components/aspect-ratio/aspect-ratio.tsx, packages/react/src/components/aspect-ratio/index.ts, packages/react/src/components/aspect-ratio/meta.json
+
+## Autocomplete (autocomplete)
+A text field that suggests values while you type and accepts anything you enter.
+Import: import {Autocomplete} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- ARIA 1.2 combobox with aria-autocomplete="list", aria-expanded, aria-controls and aria-activedescendant.
+- ArrowDown/ArrowUp move through suggestions, Enter picks the active one (or keeps typed text), Escape closes.
+- The field value is always the typed or picked text; nothing is forced to match a suggestion.
+Files: packages/react/src/components/autocomplete/autocomplete.demo.tsx, packages/react/src/components/autocomplete/autocomplete.test.tsx, packages/react/src/components/autocomplete/autocomplete.tsx, packages/react/src/components/autocomplete/index.ts, packages/react/src/components/autocomplete/meta.json
 
 ## Avatar (avatar)
 A person or thing as an image with an initials fallback.
@@ -67,6 +87,24 @@ A11y:
 - Plain text in a span; the word carries the meaning, not the colour.
 - For a count that changes, put it inside an aria-live region yourself.
 Files: packages/react/src/components/badge/badge.demo.tsx, packages/react/src/components/badge/badge.test.tsx, packages/react/src/components/badge/badge.tsx, packages/react/src/components/badge/index.ts, packages/react/src/components/badge/meta.json
+
+## Bento grid (bento-grid)
+A responsive asymmetric grid of cards with column and row spans.
+Import: import {BentoGrid} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Plain divs in source order, so reading and tab order match the visual order on phones and follow the DOM elsewhere.
+- Spans collapse to a single column on narrow screens; nothing depends on colour or motion.
+Files: packages/react/src/components/bento-grid/bento-grid.demo.tsx, packages/react/src/components/bento-grid/bento-grid.test.tsx, packages/react/src/components/bento-grid/bento-grid.tsx, packages/react/src/components/bento-grid/index.ts, packages/react/src/components/bento-grid/meta.json
+
+## Border beam (border-beam)
+A thin bordered box with a light that travels around its edge. CSS only.
+Import: import {BorderBeam} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The beam is aria-hidden and decorative; the content keeps its normal reading order.
+- The beam is hidden under prefers-reduced-motion, leaving a plain thin border.
+Files: packages/react/src/components/border-beam/border-beam.demo.tsx, packages/react/src/components/border-beam/border-beam.test.tsx, packages/react/src/components/border-beam/border-beam.tsx, packages/react/src/components/border-beam/index.ts, packages/react/src/components/border-beam/meta.json
 
 ## Breadcrumb (breadcrumb)
 The path to the current page.
@@ -152,6 +190,16 @@ A11y:
 - Space and Enter toggle it.
 Files: packages/react/src/components/collapsible/collapsible.demo.tsx, packages/react/src/components/collapsible/collapsible.test.tsx, packages/react/src/components/collapsible/collapsible.tsx, packages/react/src/components/collapsible/index.ts, packages/react/src/components/collapsible/meta.json
 
+## Color picker (color-picker)
+Choose a colour from preset swatches, the native colour control, or a hex value.
+Import: import {ColorPicker} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A group with an accessible name; each swatch is a button named by its hex value, with aria-pressed for the current colour.
+- The native colour input and the hex text field each have their own name.
+- The hex field sets aria-invalid and points to an error message with aria-describedby until the value is valid; colour is never the only signal because the hex text is always shown.
+Files: packages/react/src/components/color-picker/color-picker.demo.tsx, packages/react/src/components/color-picker/color-picker.test.tsx, packages/react/src/components/color-picker/color-picker.tsx, packages/react/src/components/color-picker/index.ts, packages/react/src/components/color-picker/meta.json
+
 ## Combobox (combobox)
 Type to filter a list and pick one option.
 Import: import {Combobox} from '@monoline/react'
@@ -161,6 +209,26 @@ A11y:
 - ArrowDown/ArrowUp move through options, Enter picks, Escape closes (and clears the typed text on a second press), Tab leaves.
 - Options are in a listbox with aria-selected; an empty result is announced as text.
 Files: packages/react/src/components/combobox/combobox.demo.tsx, packages/react/src/components/combobox/combobox.test.tsx, packages/react/src/components/combobox/combobox.tsx, packages/react/src/components/combobox/index.ts, packages/react/src/components/combobox/meta.json
+
+## Command (command)
+A searchable palette of actions that opens over the page, with an optional global shortcut.
+Import: import {Command} from '@monoline/react'
+Primitive: radix-ui/Dialog | Status: stable
+A11y:
+- A modal dialog named by a hidden title; focus moves to the search input and returns to the opener on close.
+- The input is an ARIA combobox controlling a listbox of grouped options; focus stays in the input and aria-activedescendant names the active option.
+- ArrowUp and ArrowDown move (skipping disabled items), Home and End jump, Enter runs the item, Escape closes.
+- The shortcut prop toggles the palette from anywhere (mod is Cmd on Mac, Ctrl elsewhere); result count is announced through a status region.
+Files: packages/react/src/components/command/command.demo.tsx, packages/react/src/components/command/command.test.tsx, packages/react/src/components/command/command.tsx, packages/react/src/components/command/index.ts, packages/react/src/components/command/meta.json
+
+## Confetti (confetti)
+A short burst of square confetti on a canvas, triggered by a prop or a ref method.
+Import: import {Confetti} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The canvas is aria-hidden and ignores the pointer, so it never blocks or announces anything.
+- Off under prefers-reduced-motion: no burst is drawn. Announce the event it celebrates in text as well.
+Files: packages/react/src/components/confetti/confetti.demo.tsx, packages/react/src/components/confetti/confetti.test.tsx, packages/react/src/components/confetti/confetti.tsx, packages/react/src/components/confetti/index.ts, packages/react/src/components/confetti/meta.json
 
 ## Container (container)
 Centre content in a column with a sensible maximum width and side padding.
@@ -179,6 +247,17 @@ A11y:
 - Arrow keys move, Enter or Space selects, Escape closes and returns focus.
 - Every action must also exist elsewhere in the UI for people who cannot open it.
 Files: packages/react/src/components/context-menu/context-menu.demo.tsx, packages/react/src/components/context-menu/context-menu.test.tsx, packages/react/src/components/context-menu/context-menu.tsx, packages/react/src/components/context-menu/index.ts, packages/react/src/components/context-menu/meta.json
+
+## Data table (data-table)
+A table with sortable columns, row selection and pagination.
+Import: import {DataTable} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native table; sortable headers hold a real button and the th carries aria-sort (ascending, descending, none).
+- Each row and the select-all box are checkboxes with names; select-all shows the indeterminate state for a partial selection.
+- The count of selected rows is announced through a status region.
+- An empty result shows an empty state inside the table; pagination is a nav landmark of buttons.
+Files: packages/react/src/components/data-table/data-table.demo.tsx, packages/react/src/components/data-table/data-table.test.tsx, packages/react/src/components/data-table/data-table.tsx, packages/react/src/components/data-table/index.ts, packages/react/src/components/data-table/meta.json
 
 ## Date picker (date-picker)
 A button that opens a calendar and shows the chosen date.
@@ -207,6 +286,15 @@ A11y:
 - Focus moves into the dialog, is trapped there, and returns to the trigger on close.
 - Escape and the Close button close it; the page behind is inert.
 Files: packages/react/src/components/dialog/dialog.demo.tsx, packages/react/src/components/dialog/dialog.test.tsx, packages/react/src/components/dialog/dialog.tsx, packages/react/src/components/dialog/index.ts, packages/react/src/components/dialog/meta.json
+
+## Dot pattern (dot-pattern)
+A decorative dot grid background drawn in SVG with currentColor.
+Import: import {DotPattern} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Decorative: aria-hidden and not focusable, so it adds nothing to the reading order.
+- Static; no motion.
+Files: packages/react/src/components/dot-pattern/dot-pattern.demo.tsx, packages/react/src/components/dot-pattern/dot-pattern.test.tsx, packages/react/src/components/dot-pattern/dot-pattern.tsx, packages/react/src/components/dot-pattern/index.ts, packages/react/src/components/dot-pattern/meta.json
 
 ## Drawer (drawer)
 A panel that slides in from an edge for secondary tasks, details or navigation.
@@ -272,6 +360,15 @@ Primitive: none | Status: stable
 A11y:
 - A plain div; source order is reading order.
 Files: packages/react/src/components/grid/grid.demo.tsx, packages/react/src/components/grid/grid.test.tsx, packages/react/src/components/grid/grid.tsx, packages/react/src/components/grid/index.ts, packages/react/src/components/grid/meta.json
+
+## Grid pattern (grid-pattern)
+A decorative line grid background drawn in SVG with currentColor.
+Import: import {GridPattern} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Decorative: aria-hidden and not focusable, so it adds nothing to the reading order.
+- Static; no motion.
+Files: packages/react/src/components/grid-pattern/grid-pattern.demo.tsx, packages/react/src/components/grid-pattern/grid-pattern.test.tsx, packages/react/src/components/grid-pattern/grid-pattern.tsx, packages/react/src/components/grid-pattern/index.ts, packages/react/src/components/grid-pattern/meta.json
 
 ## Heading (heading)
 A heading whose level (for structure) is separate from its size (for looks).
@@ -362,6 +459,16 @@ A11y:
 - Escape closes the open menu and returns focus to its trigger.
 Files: packages/react/src/components/menubar/index.ts, packages/react/src/components/menubar/menubar.demo.tsx, packages/react/src/components/menubar/menubar.test.tsx, packages/react/src/components/menubar/menubar.tsx, packages/react/src/components/menubar/meta.json
 
+## Multi select (multi-select)
+Type to filter a list and pick several options, shown as removable tags.
+Import: import {MultiSelect} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- ARIA 1.2 combobox with a listbox that has aria-multiselectable; options carry aria-selected.
+- ArrowDown/ArrowUp move, Enter toggles the active option, Escape closes, Tab leaves.
+- Backspace in an empty field removes the last tag; each tag has a button named "Remove <label>".
+Files: packages/react/src/components/multi-select/index.ts, packages/react/src/components/multi-select/meta.json, packages/react/src/components/multi-select/multi-select.demo.tsx, packages/react/src/components/multi-select/multi-select.test.tsx, packages/react/src/components/multi-select/multi-select.tsx
+
 ## Native select (native-select)
 The browser select, styled. Best on mobile and for long simple lists.
 Import: import {NativeSelect} from '@monoline/react'
@@ -389,6 +496,24 @@ A11y:
 - Native input type="number"; ArrowUp/ArrowDown change the value.
 - The step buttons are named "Decrease" and "Increase" and are skipped by Tab.
 Files: packages/react/src/components/number-input/index.ts, packages/react/src/components/number-input/meta.json, packages/react/src/components/number-input/number-input.demo.tsx, packages/react/src/components/number-input/number-input.test.tsx, packages/react/src/components/number-input/number-input.tsx
+
+## Number ticker (number-ticker)
+Count up to a number when it scrolls into view. Shows the final value at once for reduced motion.
+Import: import {NumberTicker} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Screen readers get the final number from an sr-only copy; the animated frames are aria-hidden.
+- With prefers-reduced-motion the final number shows immediately and nothing animates.
+Files: packages/react/src/components/number-ticker/index.ts, packages/react/src/components/number-ticker/meta.json, packages/react/src/components/number-ticker/number-ticker.demo.tsx, packages/react/src/components/number-ticker/number-ticker.test.tsx, packages/react/src/components/number-ticker/number-ticker.tsx, packages/react/src/components/number-ticker/use-reduced-motion.ts
+
+## Orbiting circles (orbiting-circles)
+Small items circling a centre. Decorative.
+Import: import {OrbitingCircles} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Decorative: the whole element is aria-hidden, so nothing inside it is read or reachable by assistive tech.
+- Under prefers-reduced-motion the items stop, evenly spaced around the ring.
+Files: packages/react/src/components/orbiting-circles/index.ts, packages/react/src/components/orbiting-circles/meta.json, packages/react/src/components/orbiting-circles/orbiting-circles.demo.tsx, packages/react/src/components/orbiting-circles/orbiting-circles.test.tsx, packages/react/src/components/orbiting-circles/orbiting-circles.tsx
 
 ## OTP input (otp-input)
 Enter a one-time code, one digit per box, with paste support.
@@ -466,6 +591,16 @@ A11y:
 - Native scrolling semantics are preserved.
 Files: packages/react/src/components/scroll-area/index.ts, packages/react/src/components/scroll-area/meta.json, packages/react/src/components/scroll-area/scroll-area.demo.tsx, packages/react/src/components/scroll-area/scroll-area.test.tsx, packages/react/src/components/scroll-area/scroll-area.tsx
 
+## Scroll progress (scroll-progress)
+A thin bar fixed to the top of the window that fills as the page scrolls.
+Import: import {ScrollProgress} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Decorative and aria-hidden by default.
+- With `label` it is a progressbar with aria-valuenow from 0 to 100, updated as the page scrolls.
+- No transition, so there is no motion beyond the scroll itself.
+Files: packages/react/src/components/scroll-progress/index.ts, packages/react/src/components/scroll-progress/meta.json, packages/react/src/components/scroll-progress/scroll-progress.demo.tsx, packages/react/src/components/scroll-progress/scroll-progress.test.tsx, packages/react/src/components/scroll-progress/scroll-progress.tsx
+
 ## Segmented control (segmented-control)
 Pick exactly one option from a short row, shown as joined segments.
 Import: import {SegmentedControl} from '@monoline/react'
@@ -494,6 +629,15 @@ A11y:
 - With decorative=false it is role=separator with aria-orientation.
 Files: packages/react/src/components/separator/index.ts, packages/react/src/components/separator/meta.json, packages/react/src/components/separator/separator.demo.tsx, packages/react/src/components/separator/separator.test.tsx, packages/react/src/components/separator/separator.tsx
 
+## Shimmer button (shimmer-button)
+The Button with a light sweep across it. Still a native button.
+Import: import {ShimmerButton} from '@monoline/react'
+Primitive: radix-ui/Slot | Status: stable
+A11y:
+- Native <button>: Enter and Space activate, Tab focuses; behaviour comes from Button.
+- The sweep is a pseudo-element, never read aloud, and is off under prefers-reduced-motion.
+Files: packages/react/src/components/shimmer-button/index.ts, packages/react/src/components/shimmer-button/meta.json, packages/react/src/components/shimmer-button/shimmer-button.demo.tsx, packages/react/src/components/shimmer-button/shimmer-button.test.tsx, packages/react/src/components/shimmer-button/shimmer-button.tsx
+
 ## Skeleton (skeleton)
 A still placeholder shaped like the content that is loading.
 Import: import {Skeleton} from '@monoline/react'
@@ -521,6 +665,16 @@ A11y:
 - role=status with an aria-label; polite, not interrupting.
 - Animation stops under prefers-reduced-motion.
 Files: packages/react/src/components/spinner/index.ts, packages/react/src/components/spinner/meta.json, packages/react/src/components/spinner/spinner.demo.tsx, packages/react/src/components/spinner/spinner.test.tsx, packages/react/src/components/spinner/spinner.tsx
+
+## Spotlight (spotlight)
+A surface with a soft highlight that follows the pointer.
+Import: import {Spotlight} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Pointer only and purely visual: no keyboard behaviour depends on it, and the glow is a pseudo-element that is never read aloud.
+- Content keeps its normal order and focus ring; the glow only appears for hover-capable pointers.
+- No fade transition under prefers-reduced-motion.
+Files: packages/react/src/components/spotlight/index.ts, packages/react/src/components/spotlight/meta.json, packages/react/src/components/spotlight/spotlight.demo.tsx, packages/react/src/components/spotlight/spotlight.test.tsx, packages/react/src/components/spotlight/spotlight.tsx
 
 ## Stack (stack)
 Lay children out in a column or row with one gap from the spacing scale.
@@ -583,6 +737,16 @@ A11y:
 - The remove control is a real button named "Remove <label>".
 Files: packages/react/src/components/tag/index.ts, packages/react/src/components/tag/meta.json, packages/react/src/components/tag/tag.demo.tsx, packages/react/src/components/tag/tag.test.tsx, packages/react/src/components/tag/tag.tsx
 
+## Tags input (tags-input)
+Type text and press Enter or comma to add it as a removable tag.
+Import: import {TagsInput} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A native text input; Enter or comma adds the tag, and leaving the field adds pending text.
+- Backspace in an empty field removes the last tag.
+- Each tag has a button named "Remove <tag>"; the field takes its name from a label or aria-label.
+Files: packages/react/src/components/tags-input/index.ts, packages/react/src/components/tags-input/meta.json, packages/react/src/components/tags-input/tags-input.demo.tsx, packages/react/src/components/tags-input/tags-input.test.tsx, packages/react/src/components/tags-input/tags-input.tsx
+
 ## Text (text)
 Body text with a size and tone from the scale.
 Import: import {Text} from '@monoline/react'
@@ -590,6 +754,15 @@ Primitive: none | Status: stable
 A11y:
 - A plain p (or the child with asChild); tone is never the only signal, so pair danger text with words.
 Files: packages/react/src/components/text/index.ts, packages/react/src/components/text/meta.json, packages/react/src/components/text/text.demo.tsx, packages/react/src/components/text/text.test.tsx, packages/react/src/components/text/text.tsx
+
+## Text reveal (text-reveal)
+Fade a sentence in word by word. Static for reduced motion.
+Import: import {TextReveal} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- The text stays real text in reading order; nothing is hidden from assistive tech.
+- With prefers-reduced-motion every word is visible at once.
+Files: packages/react/src/components/text-reveal/index.ts, packages/react/src/components/text-reveal/meta.json, packages/react/src/components/text-reveal/text-reveal.demo.tsx, packages/react/src/components/text-reveal/text-reveal.test.tsx, packages/react/src/components/text-reveal/text-reveal.tsx
 
 ## Textarea (textarea)
 A multi-line text field.
@@ -599,6 +772,16 @@ A11y:
 - Native <textarea>.
 - Inside a Field it is labelled and described automatically; invalid sets aria-invalid.
 Files: packages/react/src/components/textarea/index.ts, packages/react/src/components/textarea/meta.json, packages/react/src/components/textarea/textarea.demo.tsx, packages/react/src/components/textarea/textarea.test.tsx, packages/react/src/components/textarea/textarea.tsx
+
+## Time picker (time-picker)
+Pick a time of day with hour, minute and AM/PM segments, using the browser's own control.
+Import: import {TimePicker} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native input type="time": the browser exposes hour, minute and AM/PM as spinbuttons.
+- ArrowUp/ArrowDown change a segment, ArrowLeft/ArrowRight or Tab move between segments, typing digits fills one.
+- The control takes its name from a label or aria-label; min, max and step are passed through.
+Files: packages/react/src/components/time-picker/index.ts, packages/react/src/components/time-picker/meta.json, packages/react/src/components/time-picker/time-picker.demo.tsx, packages/react/src/components/time-picker/time-picker.test.tsx, packages/react/src/components/time-picker/time-picker.tsx
 
 ## Timeline (timeline)
 A vertical list of events with times, joined by a rule.
@@ -655,3 +838,129 @@ A11y:
 - Escape dismisses it; it stays open while the pointer is over it.
 - Never the only place for essential information: touch users do not get hover.
 Files: packages/react/src/components/tooltip/index.ts, packages/react/src/components/tooltip/meta.json, packages/react/src/components/tooltip/tooltip.demo.tsx, packages/react/src/components/tooltip/tooltip.test.tsx, packages/react/src/components/tooltip/tooltip.tsx
+
+## Tree (tree)
+A nested list of items that open and close, with one selected item.
+Import: import {Tree} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- role=tree with treeitem children and role=group for branches; aria-expanded on branches, aria-selected on every item, aria-level on each.
+- Roving tabindex: one item is in the tab order; Tab enters and leaves the tree as one stop.
+- ArrowUp/ArrowDown move, ArrowRight opens a branch then enters it, ArrowLeft closes it then goes to the parent, Home and End jump.
+- Enter or Space selects; typing letters jumps to the next label that starts with them. The tree needs an aria-label.
+Files: packages/react/src/components/tree/index.ts, packages/react/src/components/tree/meta.json, packages/react/src/components/tree/tree.demo.tsx, packages/react/src/components/tree/tree.test.tsx, packages/react/src/components/tree/tree.tsx
+
+## Typewriter (typewriter)
+Type a string one character at a time. Static for reduced motion.
+Import: import {Typewriter} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Screen readers get the full text at once from an sr-only copy; the typed characters are aria-hidden.
+- With prefers-reduced-motion the full text shows immediately and the caret does not blink.
+Files: packages/react/src/components/typewriter/index.ts, packages/react/src/components/typewriter/meta.json, packages/react/src/components/typewriter/typewriter.demo.tsx, packages/react/src/components/typewriter/typewriter.test.tsx, packages/react/src/components/typewriter/typewriter.tsx
+
+## useClickOutside (use-click-outside)
+Calls a function when a pointer goes down outside an element, to close menus and popovers.
+Import: import {UseClickOutside} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. Close popovers with Escape too; this hook covers pointer only.
+- Listens to pointerdown on the document and removes the listener on unmount.
+Files: packages/react/src/hooks/use-click-outside/index.ts, packages/react/src/hooks/use-click-outside/meta.json, packages/react/src/hooks/use-click-outside/use-click-outside.demo.tsx, packages/react/src/hooks/use-click-outside/use-click-outside.test.tsx, packages/react/src/hooks/use-click-outside/use-click-outside.ts
+
+## useClipboard (use-clipboard)
+Copy text with the Clipboard API, with a copied flag that resets after a delay and an error when it fails.
+Import: import {UseClipboard} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. Pair the copied state with a visible or aria-live status message in the UI.
+- A failed copy returns false and sets error; it never throws.
+Files: packages/react/src/hooks/use-clipboard/index.ts, packages/react/src/hooks/use-clipboard/meta.json, packages/react/src/hooks/use-clipboard/use-clipboard.demo.tsx, packages/react/src/hooks/use-clipboard/use-clipboard.test.tsx, packages/react/src/hooks/use-clipboard/use-clipboard.ts
+
+## useControllableState (use-controllable-state)
+The value, defaultValue and onChange pattern for custom components that can be controlled or uncontrolled.
+Import: import {UseControllableState} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. Lets a custom widget accept value/defaultValue/onValueChange like the Monoline components do.
+- onChange fires only when the new value differs from the current one.
+Files: packages/react/src/hooks/use-controllable-state/index.ts, packages/react/src/hooks/use-controllable-state/meta.json, packages/react/src/hooks/use-controllable-state/use-controllable-state.demo.tsx, packages/react/src/hooks/use-controllable-state/use-controllable-state.test.tsx, packages/react/src/hooks/use-controllable-state/use-controllable-state.ts
+
+## useDebounce (use-debounce)
+Debounced value and debounced callback: wait for input to settle before acting.
+Import: import {UseDebounce} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. Use for search fields so the list updates after typing stops.
+- A pending callback is dropped on unmount.
+Files: packages/react/src/hooks/use-debounce/index.ts, packages/react/src/hooks/use-debounce/meta.json, packages/react/src/hooks/use-debounce/use-debounce.demo.tsx, packages/react/src/hooks/use-debounce/use-debounce.test.tsx, packages/react/src/hooks/use-debounce/use-debounce.ts
+
+## useDisclosure (use-disclosure)
+Open and closed state with open, close and toggle functions, and callbacks when it changes.
+Import: import {UseDisclosure} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. Pair with aria-expanded and aria-controls on the trigger.
+- Callbacks run only when the state actually changes, not on mount.
+Files: packages/react/src/hooks/use-disclosure/index.ts, packages/react/src/hooks/use-disclosure/meta.json, packages/react/src/hooks/use-disclosure/use-disclosure.demo.tsx, packages/react/src/hooks/use-disclosure/use-disclosure.test.tsx, packages/react/src/hooks/use-disclosure/use-disclosure.ts
+
+## useFocusTrap (use-focus-trap)
+Keeps Tab focus inside an element while it is active, and returns focus when it closes.
+Import: import {UseFocusTrap} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Tab and Shift+Tab cycle inside the container while active. Focus moves in on activation.
+- Focus returns to the element that had it before when the trap ends. Escape to close is the caller's job.
+Files: packages/react/src/hooks/use-focus-trap/index.ts, packages/react/src/hooks/use-focus-trap/meta.json, packages/react/src/hooks/use-focus-trap/use-focus-trap.demo.tsx, packages/react/src/hooks/use-focus-trap/use-focus-trap.test.tsx, packages/react/src/hooks/use-focus-trap/use-focus-trap.ts
+
+## useHotkeys (use-hotkeys)
+Keyboard shortcuts such as mod+k or escape, ignored while typing in fields unless allowed.
+Import: import {UseHotkeys} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. Shortcuts are additions: every control must still be reachable by keyboard and Tab.
+- mod means Cmd on macOS and Ctrl elsewhere. Typing in inputs is ignored unless allowInInputs is set.
+Files: packages/react/src/hooks/use-hotkeys/index.ts, packages/react/src/hooks/use-hotkeys/meta.json, packages/react/src/hooks/use-hotkeys/use-hotkeys.demo.tsx, packages/react/src/hooks/use-hotkeys/use-hotkeys.test.tsx, packages/react/src/hooks/use-hotkeys/use-hotkeys.ts
+
+## useInterval (use-interval)
+Calls a function on a timer, with a null delay to pause it. Cleared on unmount.
+Import: import {UseInterval} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. Clears its timer on unmount so nothing runs after the component is gone.
+- Pass null as the delay to pause.
+Files: packages/react/src/hooks/use-interval/index.ts, packages/react/src/hooks/use-interval/meta.json, packages/react/src/hooks/use-interval/use-interval.demo.tsx, packages/react/src/hooks/use-interval/use-interval.test.tsx, packages/react/src/hooks/use-interval/use-interval.ts
+
+## useLocalStorage (use-local-storage)
+A JSON value kept in localStorage, shaped like useState, that stays in sync across tabs.
+Import: import {UseLocalStorage} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. Storage failures (blocked, full) fall back to memory and do not throw.
+- Other tabs receive changes through the storage event.
+Files: packages/react/src/hooks/use-local-storage/index.ts, packages/react/src/hooks/use-local-storage/meta.json, packages/react/src/hooks/use-local-storage/use-local-storage.demo.tsx, packages/react/src/hooks/use-local-storage/use-local-storage.test.tsx, packages/react/src/hooks/use-local-storage/use-local-storage.ts
+
+## useMediaQuery (use-media-query)
+Whether a CSS media query matches, updated live, and safe to render on the server.
+Import: import {UseMediaQuery} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. The first render returns defaultValue so server and client markup match.
+- Listens to matchMedia changes and removes the listener on unmount.
+Files: packages/react/src/hooks/use-media-query/index.ts, packages/react/src/hooks/use-media-query/meta.json, packages/react/src/hooks/use-media-query/use-media-query.demo.tsx, packages/react/src/hooks/use-media-query/use-media-query.test.tsx, packages/react/src/hooks/use-media-query/use-media-query.ts
+
+## usePrevious (use-previous)
+The value from the previous render, for comparing a change.
+Import: import {UsePrevious} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output.
+Files: packages/react/src/hooks/use-previous/index.ts, packages/react/src/hooks/use-previous/meta.json, packages/react/src/hooks/use-previous/use-previous.demo.tsx, packages/react/src/hooks/use-previous/use-previous.test.tsx, packages/react/src/hooks/use-previous/use-previous.ts
+
+## useReducedMotion (use-reduced-motion)
+Whether the user has asked the system to reduce motion, for skipping or simplifying animation in code.
+Import: import {UseReducedMotion} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- No DOM output. CSS already disables animation under prefers-reduced-motion; use this for JS-driven motion.
+Files: packages/react/src/hooks/use-reduced-motion/index.ts, packages/react/src/hooks/use-reduced-motion/meta.json, packages/react/src/hooks/use-reduced-motion/use-reduced-motion.demo.tsx, packages/react/src/hooks/use-reduced-motion/use-reduced-motion.test.tsx, packages/react/src/hooks/use-reduced-motion/use-reduced-motion.ts

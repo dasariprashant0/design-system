@@ -1,0 +1,46 @@
+{
+  "name": "use-focus-trap",
+  "title": "useFocusTrap",
+  "category": "hooks",
+  "description": "Keeps Tab focus inside an element while it is active, and returns focus when it closes.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "Tab and Shift+Tab cycle inside the container while active. Focus moves in on activation.",
+    "Focus returns to the element that had it before when the trap ends. Escape to close is the caller's job."
+  ],
+  "keywords": [
+    "modal",
+    "dialog",
+    "focus",
+    "trap",
+    "keyboard"
+  ],
+  "kind": "hooks",
+  "import": "import {UseFocusTrap} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-focus-trap",
+  "files": [
+    "packages/react/src/hooks/use-focus-trap/index.ts",
+    "packages/react/src/hooks/use-focus-trap/meta.json",
+    "packages/react/src/hooks/use-focus-trap/use-focus-trap.demo.tsx",
+    "packages/react/src/hooks/use-focus-trap/use-focus-trap.test.tsx",
+    "packages/react/src/hooks/use-focus-trap/use-focus-trap.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-focus-trap/index.ts",
+      "content": "export {useFocusTrap} from './use-focus-trap';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-focus-trap/meta.json",
+      "content": "{\"name\":\"use-focus-trap\",\"title\":\"useFocusTrap\",\"category\":\"hooks\",\"description\":\"Keeps Tab focus inside an element while it is active, and returns focus when it closes.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"Tab and Shift+Tab cycle inside the container while active. Focus moves in on activation.\",\"Focus returns to the element that had it before when the trap ends. Escape to close is the caller's job.\"],\"keywords\":[\"modal\",\"dialog\",\"focus\",\"trap\",\"keyboard\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-focus-trap/use-focus-trap.ts",
+      "content": "'use client';\nimport {useEffect, useRef} from 'react';\n\nconst FOCUSABLE = [\n  'a[href]',\n  'area[href]',\n  'button:not([disabled])',\n  'input:not([disabled]):not([type=\"hidden\"])',\n  'select:not([disabled])',\n  'textarea:not([disabled])',\n  'iframe',\n  '[contenteditable]:not([contenteditable=\"false\"])',\n  '[tabindex]:not([tabindex=\"-1\"])',\n].join(',');\n\n/**\n * Keeps Tab and Shift+Tab inside the element this ref is attached to while `active` is true.\n * Focus moves to the first focusable element on activation, and goes back to the element that\n * had focus before when the trap deactivates or unmounts.\n * Visibility is not checked (jsdom has no layout); hidden elements with `tabindex` are still reached.\n */\nexport function useFocusTrap<T extends HTMLElement = HTMLElement>(active: boolean) {\n  const ref = useRef<T | null>(null);\n\n  useEffect(() => {\n    const container = ref.current;\n    if (!active || !container) return;\n\n    const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null;\n    const items = () => Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE));\n\n    if (!container.hasAttribute('tabindex')) container.tabIndex = -1;\n    (items()[0] ?? container).focus();\n\n    const onKeyDown = (event: KeyboardEvent) => {\n      if (event.key !== 'Tab') return;\n      const list = items();\n      const first = list[0];\n      const last = list[list.length - 1];\n      if (!first || !last) {\n        event.preventDefault();\n        container.focus();\n        return;\n      }\n      const current = document.activeElement;\n      const inside = current instanceof Node && container.contains(current);\n      if (event.shiftKey && (!inside || current === first || current === container)) {\n        event.preventDefault();\n        last.focus();\n      } else if (!event.shiftKey && (!inside || current === last)) {\n        event.preventDefault();\n        first.focus();\n      }\n    };\n\n    // Focus that gets out by mouse or script comes back in.\n    const onFocusIn = (event: FocusEvent) => {\n      if (event.target instanceof Node && container.contains(event.target)) return;\n      (items()[0] ?? container).focus();\n    };\n\n    document.addEventListener('keydown', onKeyDown);\n    document.addEventListener('focusin', onFocusIn);\n    return () => {\n      document.removeEventListener('keydown', onKeyDown);\n      document.removeEventListener('focusin', onFocusIn);\n      if (previous?.isConnected) previous.focus();\n    };\n  }, [active]);\n\n  return ref;\n}\n"
+    }
+  ]
+}

@@ -99,6 +99,38 @@
       ]
     },
     {
+      "name": "animated-list",
+      "title": "Animated list",
+      "category": "effects",
+      "description": "A list whose items enter one by one without shifting the layout.",
+      "status": "stable",
+      "css": [
+        "animated-list.css"
+      ],
+      "a11y": [
+        "A real <ul> with <li> items, so list semantics and counts are announced.",
+        "Items fade in with opacity only and keep their space from the first frame; there is no layout shift.",
+        "With prefers-reduced-motion all items are visible at once."
+      ],
+      "keywords": [
+        "stagger",
+        "notifications",
+        "feed",
+        "sequence",
+        "list"
+      ],
+      "kind": "components",
+      "import": "import {AnimatedList} from '@monoline/react'",
+      "path": "packages/react/src/components/animated-list",
+      "files": [
+        "packages/react/src/components/animated-list/animated-list.demo.tsx",
+        "packages/react/src/components/animated-list/animated-list.test.tsx",
+        "packages/react/src/components/animated-list/animated-list.tsx",
+        "packages/react/src/components/animated-list/index.ts",
+        "packages/react/src/components/animated-list/meta.json"
+      ]
+    },
+    {
       "name": "aspect-ratio",
       "title": "Aspect ratio",
       "category": "layout",
@@ -124,6 +156,42 @@
         "packages/react/src/components/aspect-ratio/aspect-ratio.tsx",
         "packages/react/src/components/aspect-ratio/index.ts",
         "packages/react/src/components/aspect-ratio/meta.json"
+      ]
+    },
+    {
+      "name": "autocomplete",
+      "title": "Autocomplete",
+      "category": "forms",
+      "description": "A text field that suggests values while you type and accepts anything you enter.",
+      "status": "stable",
+      "uses": [
+        "field"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "autocomplete.css"
+      ],
+      "a11y": [
+        "ARIA 1.2 combobox with aria-autocomplete=\"list\", aria-expanded, aria-controls and aria-activedescendant.",
+        "ArrowDown/ArrowUp move through suggestions, Enter picks the active one (or keeps typed text), Escape closes.",
+        "The field value is always the typed or picked text; nothing is forced to match a suggestion."
+      ],
+      "keywords": [
+        "suggest",
+        "typeahead",
+        "free text",
+        "datalist",
+        "search"
+      ],
+      "kind": "components",
+      "import": "import {Autocomplete} from '@monoline/react'",
+      "path": "packages/react/src/components/autocomplete",
+      "files": [
+        "packages/react/src/components/autocomplete/autocomplete.demo.tsx",
+        "packages/react/src/components/autocomplete/autocomplete.test.tsx",
+        "packages/react/src/components/autocomplete/autocomplete.tsx",
+        "packages/react/src/components/autocomplete/index.ts",
+        "packages/react/src/components/autocomplete/meta.json"
       ]
     },
     {
@@ -216,6 +284,69 @@
         "packages/react/src/components/badge/badge.tsx",
         "packages/react/src/components/badge/index.ts",
         "packages/react/src/components/badge/meta.json"
+      ]
+    },
+    {
+      "name": "bento-grid",
+      "title": "Bento grid",
+      "category": "effects",
+      "description": "A responsive asymmetric grid of cards with column and row spans.",
+      "status": "stable",
+      "css": [
+        "bento-grid.css"
+      ],
+      "a11y": [
+        "Plain divs in source order, so reading and tab order match the visual order on phones and follow the DOM elsewhere.",
+        "Spans collapse to a single column on narrow screens; nothing depends on colour or motion."
+      ],
+      "keywords": [
+        "layout",
+        "tiles",
+        "masonry",
+        "features",
+        "cards",
+        "grid"
+      ],
+      "kind": "components",
+      "import": "import {BentoGrid} from '@monoline/react'",
+      "path": "packages/react/src/components/bento-grid",
+      "files": [
+        "packages/react/src/components/bento-grid/bento-grid.demo.tsx",
+        "packages/react/src/components/bento-grid/bento-grid.test.tsx",
+        "packages/react/src/components/bento-grid/bento-grid.tsx",
+        "packages/react/src/components/bento-grid/index.ts",
+        "packages/react/src/components/bento-grid/meta.json"
+      ]
+    },
+    {
+      "name": "border-beam",
+      "title": "Border beam",
+      "category": "effects",
+      "description": "A thin bordered box with a light that travels around its edge. CSS only.",
+      "status": "stable",
+      "css": [
+        "border-beam.css"
+      ],
+      "a11y": [
+        "The beam is aria-hidden and decorative; the content keeps its normal reading order.",
+        "The beam is hidden under prefers-reduced-motion, leaving a plain thin border."
+      ],
+      "keywords": [
+        "glow",
+        "animated border",
+        "highlight",
+        "light",
+        "card"
+      ],
+      "kind": "components",
+      "import": "import {BorderBeam} from '@monoline/react'",
+      "path": "packages/react/src/components/border-beam",
+      "files": [
+        "packages/react/src/components/border-beam/border-beam.demo.tsx",
+        "packages/react/src/components/border-beam/border-beam.test.tsx",
+        "packages/react/src/components/border-beam/border-beam.tsx",
+        "packages/react/src/components/border-beam/index.ts",
+        "packages/react/src/components/border-beam/meta.json"
       ]
     },
     {
@@ -505,6 +636,43 @@
       ]
     },
     {
+      "name": "color-picker",
+      "title": "Color picker",
+      "category": "forms",
+      "description": "Choose a colour from preset swatches, the native colour control, or a hex value.",
+      "status": "stable",
+      "uses": [
+        "input"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "color-picker.css"
+      ],
+      "a11y": [
+        "A group with an accessible name; each swatch is a button named by its hex value, with aria-pressed for the current colour.",
+        "The native colour input and the hex text field each have their own name.",
+        "The hex field sets aria-invalid and points to an error message with aria-describedby until the value is valid; colour is never the only signal because the hex text is always shown."
+      ],
+      "keywords": [
+        "colour",
+        "color",
+        "swatch",
+        "hex",
+        "palette",
+        "eyedropper"
+      ],
+      "kind": "components",
+      "import": "import {ColorPicker} from '@monoline/react'",
+      "path": "packages/react/src/components/color-picker",
+      "files": [
+        "packages/react/src/components/color-picker/color-picker.demo.tsx",
+        "packages/react/src/components/color-picker/color-picker.test.tsx",
+        "packages/react/src/components/color-picker/color-picker.tsx",
+        "packages/react/src/components/color-picker/index.ts",
+        "packages/react/src/components/color-picker/meta.json"
+      ]
+    },
+    {
       "name": "combobox",
       "title": "Combobox",
       "category": "forms",
@@ -538,6 +706,76 @@
         "packages/react/src/components/combobox/combobox.tsx",
         "packages/react/src/components/combobox/index.ts",
         "packages/react/src/components/combobox/meta.json"
+      ]
+    },
+    {
+      "name": "command",
+      "title": "Command",
+      "category": "overlays",
+      "description": "A searchable palette of actions that opens over the page, with an optional global shortcut.",
+      "status": "stable",
+      "primitive": "radix-ui/Dialog",
+      "css": [
+        "dialog.css",
+        "command.css"
+      ],
+      "a11y": [
+        "A modal dialog named by a hidden title; focus moves to the search input and returns to the opener on close.",
+        "The input is an ARIA combobox controlling a listbox of grouped options; focus stays in the input and aria-activedescendant names the active option.",
+        "ArrowUp and ArrowDown move (skipping disabled items), Home and End jump, Enter runs the item, Escape closes.",
+        "The shortcut prop toggles the palette from anywhere (mod is Cmd on Mac, Ctrl elsewhere); result count is announced through a status region."
+      ],
+      "keywords": [
+        "palette",
+        "cmdk",
+        "spotlight",
+        "quick actions",
+        "search",
+        "shortcut"
+      ],
+      "kind": "components",
+      "import": "import {Command} from '@monoline/react'",
+      "path": "packages/react/src/components/command",
+      "files": [
+        "packages/react/src/components/command/command.demo.tsx",
+        "packages/react/src/components/command/command.test.tsx",
+        "packages/react/src/components/command/command.tsx",
+        "packages/react/src/components/command/index.ts",
+        "packages/react/src/components/command/meta.json"
+      ]
+    },
+    {
+      "name": "confetti",
+      "title": "Confetti",
+      "category": "effects",
+      "description": "A short burst of square confetti on a canvas, triggered by a prop or a ref method.",
+      "status": "stable",
+      "uses": [
+        "button"
+      ],
+      "css": [
+        "confetti.css"
+      ],
+      "a11y": [
+        "The canvas is aria-hidden and ignores the pointer, so it never blocks or announces anything.",
+        "Off under prefers-reduced-motion: no burst is drawn. Announce the event it celebrates in text as well."
+      ],
+      "keywords": [
+        "celebrate",
+        "burst",
+        "success",
+        "particles",
+        "canvas"
+      ],
+      "kind": "components",
+      "import": "import {Confetti} from '@monoline/react'",
+      "path": "packages/react/src/components/confetti",
+      "files": [
+        "packages/react/src/components/confetti/confetti.demo.tsx",
+        "packages/react/src/components/confetti/confetti.test.tsx",
+        "packages/react/src/components/confetti/confetti.tsx",
+        "packages/react/src/components/confetti/index.ts",
+        "packages/react/src/components/confetti/meta.json"
       ]
     },
     {
@@ -598,6 +836,50 @@
         "packages/react/src/components/context-menu/context-menu.tsx",
         "packages/react/src/components/context-menu/index.ts",
         "packages/react/src/components/context-menu/meta.json"
+      ]
+    },
+    {
+      "name": "data-table",
+      "title": "Data table",
+      "category": "data-display",
+      "description": "A table with sortable columns, row selection and pagination.",
+      "status": "stable",
+      "uses": [
+        "table",
+        "checkbox",
+        "pagination",
+        "empty-state"
+      ],
+      "css": [
+        "14-table.css",
+        "checkbox.css",
+        "18-navigation.css",
+        "empty-state.css",
+        "data-table.css"
+      ],
+      "a11y": [
+        "Native table; sortable headers hold a real button and the th carries aria-sort (ascending, descending, none).",
+        "Each row and the select-all box are checkboxes with names; select-all shows the indeterminate state for a partial selection.",
+        "The count of selected rows is announced through a status region.",
+        "An empty result shows an empty state inside the table; pagination is a nav landmark of buttons."
+      ],
+      "keywords": [
+        "grid",
+        "sort",
+        "datagrid",
+        "paginate",
+        "select rows",
+        "list"
+      ],
+      "kind": "components",
+      "import": "import {DataTable} from '@monoline/react'",
+      "path": "packages/react/src/components/data-table",
+      "files": [
+        "packages/react/src/components/data-table/data-table.demo.tsx",
+        "packages/react/src/components/data-table/data-table.test.tsx",
+        "packages/react/src/components/data-table/data-table.tsx",
+        "packages/react/src/components/data-table/index.ts",
+        "packages/react/src/components/data-table/meta.json"
       ]
     },
     {
@@ -699,6 +981,37 @@
         "packages/react/src/components/dialog/dialog.tsx",
         "packages/react/src/components/dialog/index.ts",
         "packages/react/src/components/dialog/meta.json"
+      ]
+    },
+    {
+      "name": "dot-pattern",
+      "title": "Dot pattern",
+      "category": "effects",
+      "description": "A decorative dot grid background drawn in SVG with currentColor.",
+      "status": "stable",
+      "css": [
+        "dot-pattern.css"
+      ],
+      "a11y": [
+        "Decorative: aria-hidden and not focusable, so it adds nothing to the reading order.",
+        "Static; no motion."
+      ],
+      "keywords": [
+        "background",
+        "dots",
+        "grid",
+        "texture",
+        "decoration"
+      ],
+      "kind": "components",
+      "import": "import {DotPattern} from '@monoline/react'",
+      "path": "packages/react/src/components/dot-pattern",
+      "files": [
+        "packages/react/src/components/dot-pattern/dot-pattern.demo.tsx",
+        "packages/react/src/components/dot-pattern/dot-pattern.test.tsx",
+        "packages/react/src/components/dot-pattern/dot-pattern.tsx",
+        "packages/react/src/components/dot-pattern/index.ts",
+        "packages/react/src/components/dot-pattern/meta.json"
       ]
     },
     {
@@ -919,6 +1232,37 @@
         "packages/react/src/components/grid/grid.tsx",
         "packages/react/src/components/grid/index.ts",
         "packages/react/src/components/grid/meta.json"
+      ]
+    },
+    {
+      "name": "grid-pattern",
+      "title": "Grid pattern",
+      "category": "effects",
+      "description": "A decorative line grid background drawn in SVG with currentColor.",
+      "status": "stable",
+      "css": [
+        "grid-pattern.css"
+      ],
+      "a11y": [
+        "Decorative: aria-hidden and not focusable, so it adds nothing to the reading order.",
+        "Static; no motion."
+      ],
+      "keywords": [
+        "background",
+        "grid",
+        "lines",
+        "graph paper",
+        "decoration"
+      ],
+      "kind": "components",
+      "import": "import {GridPattern} from '@monoline/react'",
+      "path": "packages/react/src/components/grid-pattern",
+      "files": [
+        "packages/react/src/components/grid-pattern/grid-pattern.demo.tsx",
+        "packages/react/src/components/grid-pattern/grid-pattern.test.tsx",
+        "packages/react/src/components/grid-pattern/grid-pattern.tsx",
+        "packages/react/src/components/grid-pattern/index.ts",
+        "packages/react/src/components/grid-pattern/meta.json"
       ]
     },
     {
@@ -1232,6 +1576,45 @@
       ]
     },
     {
+      "name": "multi-select",
+      "title": "Multi select",
+      "category": "forms",
+      "description": "Type to filter a list and pick several options, shown as removable tags.",
+      "status": "stable",
+      "uses": [
+        "field",
+        "tag"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "19-avatar.css",
+        "multi-select.css"
+      ],
+      "a11y": [
+        "ARIA 1.2 combobox with a listbox that has aria-multiselectable; options carry aria-selected.",
+        "ArrowDown/ArrowUp move, Enter toggles the active option, Escape closes, Tab leaves.",
+        "Backspace in an empty field removes the last tag; each tag has a button named \"Remove <label>\"."
+      ],
+      "keywords": [
+        "multiselect",
+        "multiple",
+        "tags",
+        "chips",
+        "filter",
+        "searchable"
+      ],
+      "kind": "components",
+      "import": "import {MultiSelect} from '@monoline/react'",
+      "path": "packages/react/src/components/multi-select",
+      "files": [
+        "packages/react/src/components/multi-select/index.ts",
+        "packages/react/src/components/multi-select/meta.json",
+        "packages/react/src/components/multi-select/multi-select.demo.tsx",
+        "packages/react/src/components/multi-select/multi-select.test.tsx",
+        "packages/react/src/components/multi-select/multi-select.tsx"
+      ]
+    },
+    {
       "name": "native-select",
       "title": "Native select",
       "category": "forms",
@@ -1329,6 +1712,70 @@
         "packages/react/src/components/number-input/number-input.demo.tsx",
         "packages/react/src/components/number-input/number-input.test.tsx",
         "packages/react/src/components/number-input/number-input.tsx"
+      ]
+    },
+    {
+      "name": "number-ticker",
+      "title": "Number ticker",
+      "category": "effects",
+      "description": "Count up to a number when it scrolls into view. Shows the final value at once for reduced motion.",
+      "status": "stable",
+      "css": [
+        "number-ticker.css"
+      ],
+      "a11y": [
+        "Screen readers get the final number from an sr-only copy; the animated frames are aria-hidden.",
+        "With prefers-reduced-motion the final number shows immediately and nothing animates."
+      ],
+      "keywords": [
+        "counter",
+        "count up",
+        "stat",
+        "metric",
+        "animate number"
+      ],
+      "kind": "components",
+      "import": "import {NumberTicker} from '@monoline/react'",
+      "path": "packages/react/src/components/number-ticker",
+      "files": [
+        "packages/react/src/components/number-ticker/index.ts",
+        "packages/react/src/components/number-ticker/meta.json",
+        "packages/react/src/components/number-ticker/number-ticker.demo.tsx",
+        "packages/react/src/components/number-ticker/number-ticker.test.tsx",
+        "packages/react/src/components/number-ticker/number-ticker.tsx",
+        "packages/react/src/components/number-ticker/use-reduced-motion.ts"
+      ]
+    },
+    {
+      "name": "orbiting-circles",
+      "title": "Orbiting circles",
+      "category": "effects",
+      "description": "Small items circling a centre. Decorative.",
+      "status": "stable",
+      "css": [
+        "orbiting-circles.css"
+      ],
+      "a11y": [
+        "Decorative: the whole element is aria-hidden, so nothing inside it is read or reachable by assistive tech.",
+        "Under prefers-reduced-motion the items stop, evenly spaced around the ring."
+      ],
+      "keywords": [
+        "orbit",
+        "rotate",
+        "icons",
+        "integrations",
+        "hero",
+        "animation"
+      ],
+      "kind": "components",
+      "import": "import {OrbitingCircles} from '@monoline/react'",
+      "path": "packages/react/src/components/orbiting-circles",
+      "files": [
+        "packages/react/src/components/orbiting-circles/index.ts",
+        "packages/react/src/components/orbiting-circles/meta.json",
+        "packages/react/src/components/orbiting-circles/orbiting-circles.demo.tsx",
+        "packages/react/src/components/orbiting-circles/orbiting-circles.test.tsx",
+        "packages/react/src/components/orbiting-circles/orbiting-circles.tsx"
       ]
     },
     {
@@ -1579,6 +2026,37 @@
       ]
     },
     {
+      "name": "scroll-progress",
+      "title": "Scroll progress",
+      "category": "effects",
+      "description": "A thin bar fixed to the top of the window that fills as the page scrolls.",
+      "status": "stable",
+      "css": [
+        "scroll-progress.css"
+      ],
+      "a11y": [
+        "Decorative and aria-hidden by default.",
+        "With `label` it is a progressbar with aria-valuenow from 0 to 100, updated as the page scrolls.",
+        "No transition, so there is no motion beyond the scroll itself."
+      ],
+      "keywords": [
+        "reading progress",
+        "scroll bar",
+        "indicator",
+        "page progress"
+      ],
+      "kind": "components",
+      "import": "import {ScrollProgress} from '@monoline/react'",
+      "path": "packages/react/src/components/scroll-progress",
+      "files": [
+        "packages/react/src/components/scroll-progress/index.ts",
+        "packages/react/src/components/scroll-progress/meta.json",
+        "packages/react/src/components/scroll-progress/scroll-progress.demo.tsx",
+        "packages/react/src/components/scroll-progress/scroll-progress.test.tsx",
+        "packages/react/src/components/scroll-progress/scroll-progress.tsx"
+      ]
+    },
+    {
       "name": "segmented-control",
       "title": "Segmented control",
       "category": "buttons",
@@ -1677,6 +2155,43 @@
       ]
     },
     {
+      "name": "shimmer-button",
+      "title": "Shimmer button",
+      "category": "effects",
+      "description": "The Button with a light sweep across it. Still a native button.",
+      "status": "stable",
+      "primitive": "radix-ui/Slot",
+      "uses": [
+        "button"
+      ],
+      "css": [
+        "02-buttons.css",
+        "13-loading.css",
+        "shimmer-button.css"
+      ],
+      "a11y": [
+        "Native <button>: Enter and Space activate, Tab focuses; behaviour comes from Button.",
+        "The sweep is a pseudo-element, never read aloud, and is off under prefers-reduced-motion."
+      ],
+      "keywords": [
+        "cta",
+        "animated button",
+        "shine",
+        "glow",
+        "button"
+      ],
+      "kind": "components",
+      "import": "import {ShimmerButton} from '@monoline/react'",
+      "path": "packages/react/src/components/shimmer-button",
+      "files": [
+        "packages/react/src/components/shimmer-button/index.ts",
+        "packages/react/src/components/shimmer-button/meta.json",
+        "packages/react/src/components/shimmer-button/shimmer-button.demo.tsx",
+        "packages/react/src/components/shimmer-button/shimmer-button.test.tsx",
+        "packages/react/src/components/shimmer-button/shimmer-button.tsx"
+      ]
+    },
+    {
       "name": "skeleton",
       "title": "Skeleton",
       "category": "feedback",
@@ -1764,6 +2279,39 @@
         "packages/react/src/components/spinner/spinner.demo.tsx",
         "packages/react/src/components/spinner/spinner.test.tsx",
         "packages/react/src/components/spinner/spinner.tsx"
+      ]
+    },
+    {
+      "name": "spotlight",
+      "title": "Spotlight",
+      "category": "effects",
+      "description": "A surface with a soft highlight that follows the pointer.",
+      "status": "stable",
+      "css": [
+        "spotlight.css"
+      ],
+      "a11y": [
+        "Pointer only and purely visual: no keyboard behaviour depends on it, and the glow is a pseudo-element that is never read aloud.",
+        "Content keeps its normal order and focus ring; the glow only appears for hover-capable pointers.",
+        "No fade transition under prefers-reduced-motion."
+      ],
+      "keywords": [
+        "hover",
+        "glow",
+        "cursor",
+        "highlight",
+        "card",
+        "pointer"
+      ],
+      "kind": "components",
+      "import": "import {Spotlight} from '@monoline/react'",
+      "path": "packages/react/src/components/spotlight",
+      "files": [
+        "packages/react/src/components/spotlight/index.ts",
+        "packages/react/src/components/spotlight/meta.json",
+        "packages/react/src/components/spotlight/spotlight.demo.tsx",
+        "packages/react/src/components/spotlight/spotlight.test.tsx",
+        "packages/react/src/components/spotlight/spotlight.tsx"
       ]
     },
     {
@@ -1981,6 +2529,44 @@
       ]
     },
     {
+      "name": "tags-input",
+      "title": "Tags input",
+      "category": "forms",
+      "description": "Type text and press Enter or comma to add it as a removable tag.",
+      "status": "stable",
+      "uses": [
+        "field",
+        "tag"
+      ],
+      "css": [
+        "19-avatar.css",
+        "tags-input.css"
+      ],
+      "a11y": [
+        "A native text input; Enter or comma adds the tag, and leaving the field adds pending text.",
+        "Backspace in an empty field removes the last tag.",
+        "Each tag has a button named \"Remove <tag>\"; the field takes its name from a label or aria-label."
+      ],
+      "keywords": [
+        "tags",
+        "chips",
+        "token field",
+        "keywords",
+        "labels",
+        "free text"
+      ],
+      "kind": "components",
+      "import": "import {TagsInput} from '@monoline/react'",
+      "path": "packages/react/src/components/tags-input",
+      "files": [
+        "packages/react/src/components/tags-input/index.ts",
+        "packages/react/src/components/tags-input/meta.json",
+        "packages/react/src/components/tags-input/tags-input.demo.tsx",
+        "packages/react/src/components/tags-input/tags-input.test.tsx",
+        "packages/react/src/components/tags-input/tags-input.tsx"
+      ]
+    },
+    {
       "name": "text",
       "title": "Text",
       "category": "typography",
@@ -2007,6 +2593,37 @@
         "packages/react/src/components/text/text.demo.tsx",
         "packages/react/src/components/text/text.test.tsx",
         "packages/react/src/components/text/text.tsx"
+      ]
+    },
+    {
+      "name": "text-reveal",
+      "title": "Text reveal",
+      "category": "effects",
+      "description": "Fade a sentence in word by word. Static for reduced motion.",
+      "status": "stable",
+      "css": [
+        "text-reveal.css"
+      ],
+      "a11y": [
+        "The text stays real text in reading order; nothing is hidden from assistive tech.",
+        "With prefers-reduced-motion every word is visible at once."
+      ],
+      "keywords": [
+        "fade in",
+        "words",
+        "stagger",
+        "headline",
+        "reveal"
+      ],
+      "kind": "components",
+      "import": "import {TextReveal} from '@monoline/react'",
+      "path": "packages/react/src/components/text-reveal",
+      "files": [
+        "packages/react/src/components/text-reveal/index.ts",
+        "packages/react/src/components/text-reveal/meta.json",
+        "packages/react/src/components/text-reveal/text-reveal.demo.tsx",
+        "packages/react/src/components/text-reveal/text-reveal.test.tsx",
+        "packages/react/src/components/text-reveal/text-reveal.tsx"
       ]
     },
     {
@@ -2040,6 +2657,44 @@
         "packages/react/src/components/textarea/textarea.demo.tsx",
         "packages/react/src/components/textarea/textarea.test.tsx",
         "packages/react/src/components/textarea/textarea.tsx"
+      ]
+    },
+    {
+      "name": "time-picker",
+      "title": "Time picker",
+      "category": "forms",
+      "description": "Pick a time of day with hour, minute and AM/PM segments, using the browser's own control.",
+      "status": "stable",
+      "uses": [
+        "input",
+        "field"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "time-picker.css"
+      ],
+      "a11y": [
+        "Native input type=\"time\": the browser exposes hour, minute and AM/PM as spinbuttons.",
+        "ArrowUp/ArrowDown change a segment, ArrowLeft/ArrowRight or Tab move between segments, typing digits fills one.",
+        "The control takes its name from a label or aria-label; min, max and step are passed through."
+      ],
+      "keywords": [
+        "time",
+        "clock",
+        "hours",
+        "minutes",
+        "am pm",
+        "hour"
+      ],
+      "kind": "components",
+      "import": "import {TimePicker} from '@monoline/react'",
+      "path": "packages/react/src/components/time-picker",
+      "files": [
+        "packages/react/src/components/time-picker/index.ts",
+        "packages/react/src/components/time-picker/meta.json",
+        "packages/react/src/components/time-picker/time-picker.demo.tsx",
+        "packages/react/src/components/time-picker/time-picker.test.tsx",
+        "packages/react/src/components/time-picker/time-picker.tsx"
       ]
     },
     {
@@ -2223,6 +2878,411 @@
         "packages/react/src/components/tooltip/tooltip.demo.tsx",
         "packages/react/src/components/tooltip/tooltip.test.tsx",
         "packages/react/src/components/tooltip/tooltip.tsx"
+      ]
+    },
+    {
+      "name": "tree",
+      "title": "Tree",
+      "category": "data-display",
+      "description": "A nested list of items that open and close, with one selected item.",
+      "status": "stable",
+      "css": [
+        "tree.css"
+      ],
+      "a11y": [
+        "role=tree with treeitem children and role=group for branches; aria-expanded on branches, aria-selected on every item, aria-level on each.",
+        "Roving tabindex: one item is in the tab order; Tab enters and leaves the tree as one stop.",
+        "ArrowUp/ArrowDown move, ArrowRight opens a branch then enters it, ArrowLeft closes it then goes to the parent, Home and End jump.",
+        "Enter or Space selects; typing letters jumps to the next label that starts with them. The tree needs an aria-label."
+      ],
+      "keywords": [
+        "treeview",
+        "file tree",
+        "hierarchy",
+        "nested",
+        "outline",
+        "folders"
+      ],
+      "kind": "components",
+      "import": "import {Tree} from '@monoline/react'",
+      "path": "packages/react/src/components/tree",
+      "files": [
+        "packages/react/src/components/tree/index.ts",
+        "packages/react/src/components/tree/meta.json",
+        "packages/react/src/components/tree/tree.demo.tsx",
+        "packages/react/src/components/tree/tree.test.tsx",
+        "packages/react/src/components/tree/tree.tsx"
+      ]
+    },
+    {
+      "name": "typewriter",
+      "title": "Typewriter",
+      "category": "effects",
+      "description": "Type a string one character at a time. Static for reduced motion.",
+      "status": "stable",
+      "css": [
+        "typewriter.css"
+      ],
+      "a11y": [
+        "Screen readers get the full text at once from an sr-only copy; the typed characters are aria-hidden.",
+        "With prefers-reduced-motion the full text shows immediately and the caret does not blink."
+      ],
+      "keywords": [
+        "typing",
+        "type effect",
+        "text animation",
+        "caret"
+      ],
+      "kind": "components",
+      "import": "import {Typewriter} from '@monoline/react'",
+      "path": "packages/react/src/components/typewriter",
+      "files": [
+        "packages/react/src/components/typewriter/index.ts",
+        "packages/react/src/components/typewriter/meta.json",
+        "packages/react/src/components/typewriter/typewriter.demo.tsx",
+        "packages/react/src/components/typewriter/typewriter.test.tsx",
+        "packages/react/src/components/typewriter/typewriter.tsx"
+      ]
+    },
+    {
+      "name": "use-click-outside",
+      "title": "useClickOutside",
+      "category": "hooks",
+      "description": "Calls a function when a pointer goes down outside an element, to close menus and popovers.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. Close popovers with Escape too; this hook covers pointer only.",
+        "Listens to pointerdown on the document and removes the listener on unmount."
+      ],
+      "keywords": [
+        "outside",
+        "dismiss",
+        "popover",
+        "close",
+        "pointer"
+      ],
+      "kind": "hooks",
+      "import": "import {UseClickOutside} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-click-outside",
+      "files": [
+        "packages/react/src/hooks/use-click-outside/index.ts",
+        "packages/react/src/hooks/use-click-outside/meta.json",
+        "packages/react/src/hooks/use-click-outside/use-click-outside.demo.tsx",
+        "packages/react/src/hooks/use-click-outside/use-click-outside.test.tsx",
+        "packages/react/src/hooks/use-click-outside/use-click-outside.ts"
+      ]
+    },
+    {
+      "name": "use-clipboard",
+      "title": "useClipboard",
+      "category": "hooks",
+      "description": "Copy text with the Clipboard API, with a copied flag that resets after a delay and an error when it fails.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. Pair the copied state with a visible or aria-live status message in the UI.",
+        "A failed copy returns false and sets error; it never throws."
+      ],
+      "keywords": [
+        "copy",
+        "clipboard",
+        "paste",
+        "writeText"
+      ],
+      "kind": "hooks",
+      "import": "import {UseClipboard} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-clipboard",
+      "files": [
+        "packages/react/src/hooks/use-clipboard/index.ts",
+        "packages/react/src/hooks/use-clipboard/meta.json",
+        "packages/react/src/hooks/use-clipboard/use-clipboard.demo.tsx",
+        "packages/react/src/hooks/use-clipboard/use-clipboard.test.tsx",
+        "packages/react/src/hooks/use-clipboard/use-clipboard.ts"
+      ]
+    },
+    {
+      "name": "use-controllable-state",
+      "title": "useControllableState",
+      "category": "hooks",
+      "description": "The value, defaultValue and onChange pattern for custom components that can be controlled or uncontrolled.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. Lets a custom widget accept value/defaultValue/onValueChange like the Monoline components do.",
+        "onChange fires only when the new value differs from the current one."
+      ],
+      "keywords": [
+        "controlled",
+        "uncontrolled",
+        "value",
+        "state"
+      ],
+      "kind": "hooks",
+      "import": "import {UseControllableState} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-controllable-state",
+      "files": [
+        "packages/react/src/hooks/use-controllable-state/index.ts",
+        "packages/react/src/hooks/use-controllable-state/meta.json",
+        "packages/react/src/hooks/use-controllable-state/use-controllable-state.demo.tsx",
+        "packages/react/src/hooks/use-controllable-state/use-controllable-state.test.tsx",
+        "packages/react/src/hooks/use-controllable-state/use-controllable-state.ts"
+      ]
+    },
+    {
+      "name": "use-debounce",
+      "title": "useDebounce",
+      "category": "hooks",
+      "description": "Debounced value and debounced callback: wait for input to settle before acting.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. Use for search fields so the list updates after typing stops.",
+        "A pending callback is dropped on unmount."
+      ],
+      "keywords": [
+        "throttle",
+        "delay",
+        "search",
+        "input",
+        "settle"
+      ],
+      "kind": "hooks",
+      "import": "import {UseDebounce} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-debounce",
+      "files": [
+        "packages/react/src/hooks/use-debounce/index.ts",
+        "packages/react/src/hooks/use-debounce/meta.json",
+        "packages/react/src/hooks/use-debounce/use-debounce.demo.tsx",
+        "packages/react/src/hooks/use-debounce/use-debounce.test.tsx",
+        "packages/react/src/hooks/use-debounce/use-debounce.ts"
+      ]
+    },
+    {
+      "name": "use-disclosure",
+      "title": "useDisclosure",
+      "category": "hooks",
+      "description": "Open and closed state with open, close and toggle functions, and callbacks when it changes.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. Pair with aria-expanded and aria-controls on the trigger.",
+        "Callbacks run only when the state actually changes, not on mount."
+      ],
+      "keywords": [
+        "toggle",
+        "open",
+        "close",
+        "show",
+        "hide",
+        "state"
+      ],
+      "kind": "hooks",
+      "import": "import {UseDisclosure} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-disclosure",
+      "files": [
+        "packages/react/src/hooks/use-disclosure/index.ts",
+        "packages/react/src/hooks/use-disclosure/meta.json",
+        "packages/react/src/hooks/use-disclosure/use-disclosure.demo.tsx",
+        "packages/react/src/hooks/use-disclosure/use-disclosure.test.tsx",
+        "packages/react/src/hooks/use-disclosure/use-disclosure.ts"
+      ]
+    },
+    {
+      "name": "use-focus-trap",
+      "title": "useFocusTrap",
+      "category": "hooks",
+      "description": "Keeps Tab focus inside an element while it is active, and returns focus when it closes.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "Tab and Shift+Tab cycle inside the container while active. Focus moves in on activation.",
+        "Focus returns to the element that had it before when the trap ends. Escape to close is the caller's job."
+      ],
+      "keywords": [
+        "modal",
+        "dialog",
+        "focus",
+        "trap",
+        "keyboard"
+      ],
+      "kind": "hooks",
+      "import": "import {UseFocusTrap} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-focus-trap",
+      "files": [
+        "packages/react/src/hooks/use-focus-trap/index.ts",
+        "packages/react/src/hooks/use-focus-trap/meta.json",
+        "packages/react/src/hooks/use-focus-trap/use-focus-trap.demo.tsx",
+        "packages/react/src/hooks/use-focus-trap/use-focus-trap.test.tsx",
+        "packages/react/src/hooks/use-focus-trap/use-focus-trap.ts"
+      ]
+    },
+    {
+      "name": "use-hotkeys",
+      "title": "useHotkeys",
+      "category": "hooks",
+      "description": "Keyboard shortcuts such as mod+k or escape, ignored while typing in fields unless allowed.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. Shortcuts are additions: every control must still be reachable by keyboard and Tab.",
+        "mod means Cmd on macOS and Ctrl elsewhere. Typing in inputs is ignored unless allowInInputs is set."
+      ],
+      "keywords": [
+        "shortcut",
+        "keybinding",
+        "keyboard",
+        "command",
+        "cmd+k"
+      ],
+      "kind": "hooks",
+      "import": "import {UseHotkeys} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-hotkeys",
+      "files": [
+        "packages/react/src/hooks/use-hotkeys/index.ts",
+        "packages/react/src/hooks/use-hotkeys/meta.json",
+        "packages/react/src/hooks/use-hotkeys/use-hotkeys.demo.tsx",
+        "packages/react/src/hooks/use-hotkeys/use-hotkeys.test.tsx",
+        "packages/react/src/hooks/use-hotkeys/use-hotkeys.ts"
+      ]
+    },
+    {
+      "name": "use-interval",
+      "title": "useInterval",
+      "category": "hooks",
+      "description": "Calls a function on a timer, with a null delay to pause it. Cleared on unmount.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. Clears its timer on unmount so nothing runs after the component is gone.",
+        "Pass null as the delay to pause."
+      ],
+      "keywords": [
+        "timer",
+        "setInterval",
+        "poll",
+        "repeat",
+        "tick"
+      ],
+      "kind": "hooks",
+      "import": "import {UseInterval} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-interval",
+      "files": [
+        "packages/react/src/hooks/use-interval/index.ts",
+        "packages/react/src/hooks/use-interval/meta.json",
+        "packages/react/src/hooks/use-interval/use-interval.demo.tsx",
+        "packages/react/src/hooks/use-interval/use-interval.test.tsx",
+        "packages/react/src/hooks/use-interval/use-interval.ts"
+      ]
+    },
+    {
+      "name": "use-local-storage",
+      "title": "useLocalStorage",
+      "category": "hooks",
+      "description": "A JSON value kept in localStorage, shaped like useState, that stays in sync across tabs.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. Storage failures (blocked, full) fall back to memory and do not throw.",
+        "Other tabs receive changes through the storage event."
+      ],
+      "keywords": [
+        "persist",
+        "storage",
+        "preference",
+        "session"
+      ],
+      "kind": "hooks",
+      "import": "import {UseLocalStorage} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-local-storage",
+      "files": [
+        "packages/react/src/hooks/use-local-storage/index.ts",
+        "packages/react/src/hooks/use-local-storage/meta.json",
+        "packages/react/src/hooks/use-local-storage/use-local-storage.demo.tsx",
+        "packages/react/src/hooks/use-local-storage/use-local-storage.test.tsx",
+        "packages/react/src/hooks/use-local-storage/use-local-storage.ts"
+      ]
+    },
+    {
+      "name": "use-media-query",
+      "title": "useMediaQuery",
+      "category": "hooks",
+      "description": "Whether a CSS media query matches, updated live, and safe to render on the server.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. The first render returns defaultValue so server and client markup match.",
+        "Listens to matchMedia changes and removes the listener on unmount."
+      ],
+      "keywords": [
+        "breakpoint",
+        "responsive",
+        "viewport",
+        "matchMedia"
+      ],
+      "kind": "hooks",
+      "import": "import {UseMediaQuery} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-media-query",
+      "files": [
+        "packages/react/src/hooks/use-media-query/index.ts",
+        "packages/react/src/hooks/use-media-query/meta.json",
+        "packages/react/src/hooks/use-media-query/use-media-query.demo.tsx",
+        "packages/react/src/hooks/use-media-query/use-media-query.test.tsx",
+        "packages/react/src/hooks/use-media-query/use-media-query.ts"
+      ]
+    },
+    {
+      "name": "use-previous",
+      "title": "usePrevious",
+      "category": "hooks",
+      "description": "The value from the previous render, for comparing a change.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output."
+      ],
+      "keywords": [
+        "previous",
+        "compare",
+        "diff",
+        "change"
+      ],
+      "kind": "hooks",
+      "import": "import {UsePrevious} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-previous",
+      "files": [
+        "packages/react/src/hooks/use-previous/index.ts",
+        "packages/react/src/hooks/use-previous/meta.json",
+        "packages/react/src/hooks/use-previous/use-previous.demo.tsx",
+        "packages/react/src/hooks/use-previous/use-previous.test.tsx",
+        "packages/react/src/hooks/use-previous/use-previous.ts"
+      ]
+    },
+    {
+      "name": "use-reduced-motion",
+      "title": "useReducedMotion",
+      "category": "hooks",
+      "description": "Whether the user has asked the system to reduce motion, for skipping or simplifying animation in code.",
+      "status": "stable",
+      "css": [],
+      "a11y": [
+        "No DOM output. CSS already disables animation under prefers-reduced-motion; use this for JS-driven motion."
+      ],
+      "keywords": [
+        "motion",
+        "animation",
+        "accessibility",
+        "prefers-reduced-motion"
+      ],
+      "kind": "hooks",
+      "import": "import {UseReducedMotion} from '@monoline/react'",
+      "path": "packages/react/src/hooks/use-reduced-motion",
+      "files": [
+        "packages/react/src/hooks/use-reduced-motion/index.ts",
+        "packages/react/src/hooks/use-reduced-motion/meta.json",
+        "packages/react/src/hooks/use-reduced-motion/use-reduced-motion.demo.tsx",
+        "packages/react/src/hooks/use-reduced-motion/use-reduced-motion.test.tsx",
+        "packages/react/src/hooks/use-reduced-motion/use-reduced-motion.ts"
       ]
     }
   ]

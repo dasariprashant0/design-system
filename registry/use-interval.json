@@ -1,0 +1,46 @@
+{
+  "name": "use-interval",
+  "title": "useInterval",
+  "category": "hooks",
+  "description": "Calls a function on a timer, with a null delay to pause it. Cleared on unmount.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. Clears its timer on unmount so nothing runs after the component is gone.",
+    "Pass null as the delay to pause."
+  ],
+  "keywords": [
+    "timer",
+    "setInterval",
+    "poll",
+    "repeat",
+    "tick"
+  ],
+  "kind": "hooks",
+  "import": "import {UseInterval} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-interval",
+  "files": [
+    "packages/react/src/hooks/use-interval/index.ts",
+    "packages/react/src/hooks/use-interval/meta.json",
+    "packages/react/src/hooks/use-interval/use-interval.demo.tsx",
+    "packages/react/src/hooks/use-interval/use-interval.test.tsx",
+    "packages/react/src/hooks/use-interval/use-interval.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-interval/index.ts",
+      "content": "export {useInterval} from './use-interval';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-interval/meta.json",
+      "content": "{\"name\":\"use-interval\",\"title\":\"useInterval\",\"category\":\"hooks\",\"description\":\"Calls a function on a timer, with a null delay to pause it. Cleared on unmount.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. Clears its timer on unmount so nothing runs after the component is gone.\",\"Pass null as the delay to pause.\"],\"keywords\":[\"timer\",\"setInterval\",\"poll\",\"repeat\",\"tick\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-interval/use-interval.ts",
+      "content": "'use client';\nimport {useEffect, useRef} from 'react';\n\n/**\n * Calls `callback` every `delay` ms. Pass `null` to pause. The interval is cleared on unmount.\n * The latest callback is used, so it can read current state without restarting the timer.\n */\nexport function useInterval(callback: () => void, delay: number | null): void {\n  const callbackRef = useRef(callback);\n\n  useEffect(() => {\n    callbackRef.current = callback;\n  }, [callback]);\n\n  useEffect(() => {\n    if (delay === null) return;\n    const id = setInterval(() => callbackRef.current(), delay);\n    return () => clearInterval(id);\n  }, [delay]);\n}\n"
+    }
+  ]
+}

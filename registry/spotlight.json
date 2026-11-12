@@ -1,0 +1,53 @@
+{
+  "name": "spotlight",
+  "title": "Spotlight",
+  "category": "effects",
+  "description": "A surface with a soft highlight that follows the pointer.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/spotlight.css",
+      "content": "/* Spotlight: a radial glow under the content, centred on the pointer. Only for hover-capable pointers. */\n.spotlight { position: relative; }\n.spotlight > * { position: relative; }\n@media (hover: hover) {\n  .spotlight::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity var(--slow) var(--ease); background: radial-gradient(var(--spotlight-size, 240px) circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%); }\n  .spotlight:hover::before { opacity: 1; }\n}\n@media (prefers-reduced-motion: reduce) { .spotlight::before { transition: none; } }\n"
+    }
+  ],
+  "a11y": [
+    "Pointer only and purely visual: no keyboard behaviour depends on it, and the glow is a pseudo-element that is never read aloud.",
+    "Content keeps its normal order and focus ring; the glow only appears for hover-capable pointers.",
+    "No fade transition under prefers-reduced-motion."
+  ],
+  "keywords": [
+    "hover",
+    "glow",
+    "cursor",
+    "highlight",
+    "card",
+    "pointer"
+  ],
+  "kind": "components",
+  "import": "import {Spotlight} from '@monoline/react'",
+  "path": "packages/react/src/components/spotlight",
+  "files": [
+    "packages/react/src/components/spotlight/index.ts",
+    "packages/react/src/components/spotlight/meta.json",
+    "packages/react/src/components/spotlight/spotlight.demo.tsx",
+    "packages/react/src/components/spotlight/spotlight.test.tsx",
+    "packages/react/src/components/spotlight/spotlight.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/spotlight/index.ts",
+      "content": "export {Spotlight} from './spotlight';\nexport type {SpotlightProps} from './spotlight';\n"
+    },
+    {
+      "path": "packages/react/src/components/spotlight/meta.json",
+      "content": "{\"name\":\"spotlight\",\"title\":\"Spotlight\",\"category\":\"effects\",\"description\":\"A surface with a soft highlight that follows the pointer.\",\"status\":\"stable\",\"css\":[\"spotlight.css\"],\"a11y\":[\"Pointer only and purely visual: no keyboard behaviour depends on it, and the glow is a pseudo-element that is never read aloud.\",\"Content keeps its normal order and focus ring; the glow only appears for hover-capable pointers.\",\"No fade transition under prefers-reduced-motion.\"],\"keywords\":[\"hover\",\"glow\",\"cursor\",\"highlight\",\"card\",\"pointer\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/spotlight/spotlight.tsx",
+      "content": "'use client';\nimport {forwardRef, useRef, type CSSProperties, type HTMLAttributes, type PointerEvent} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface SpotlightProps extends HTMLAttributes<HTMLDivElement> {\n  /** Radius of the glow in px. Default 240. */\n  size?: number;\n}\n\n/**\n * A surface with a soft highlight that follows the pointer. Pointer only: keyboard and touch users see the plain surface and lose nothing.\n * The glow is a pseudo-element, so it is never read aloud. No transition under reduced motion.\n */\nexport const Spotlight = forwardRef<HTMLDivElement, SpotlightProps>(function Spotlight({size = 240, className, style, onPointerMove, children, ...rest}, ref) {\n  const local = useRef<HTMLDivElement | null>(null);\n  const move = (e: PointerEvent<HTMLDivElement>) => {\n    const el = local.current;\n    if (el) {\n      const r = el.getBoundingClientRect();\n      el.style.setProperty('--spotlight-x', `${e.clientX - r.left}px`);\n      el.style.setProperty('--spotlight-y', `${e.clientY - r.top}px`);\n    }\n    onPointerMove?.(e);\n  };\n  return (\n    <div ref={(node) => { local.current = node; if (typeof ref === 'function') ref(node); else if (ref) ref.current = node; }} className={cx('spotlight', className)} style={{'--spotlight-size': `${size}px`, ...style} as CSSProperties} onPointerMove={move} {...rest}>\n      {children}\n    </div>\n  );\n});\n"
+    }
+  ]
+}

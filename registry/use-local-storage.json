@@ -1,0 +1,45 @@
+{
+  "name": "use-local-storage",
+  "title": "useLocalStorage",
+  "category": "hooks",
+  "description": "A JSON value kept in localStorage, shaped like useState, that stays in sync across tabs.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. Storage failures (blocked, full) fall back to memory and do not throw.",
+    "Other tabs receive changes through the storage event."
+  ],
+  "keywords": [
+    "persist",
+    "storage",
+    "preference",
+    "session"
+  ],
+  "kind": "hooks",
+  "import": "import {UseLocalStorage} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-local-storage",
+  "files": [
+    "packages/react/src/hooks/use-local-storage/index.ts",
+    "packages/react/src/hooks/use-local-storage/meta.json",
+    "packages/react/src/hooks/use-local-storage/use-local-storage.demo.tsx",
+    "packages/react/src/hooks/use-local-storage/use-local-storage.test.tsx",
+    "packages/react/src/hooks/use-local-storage/use-local-storage.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-local-storage/index.ts",
+      "content": "export {useLocalStorage} from './use-local-storage';\nexport type {SetLocalStorageValue} from './use-local-storage';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-local-storage/meta.json",
+      "content": "{\"name\":\"use-local-storage\",\"title\":\"useLocalStorage\",\"category\":\"hooks\",\"description\":\"A JSON value kept in localStorage, shaped like useState, that stays in sync across tabs.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. Storage failures (blocked, full) fall back to memory and do not throw.\",\"Other tabs receive changes through the storage event.\"],\"keywords\":[\"persist\",\"storage\",\"preference\",\"session\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-local-storage/use-local-storage.ts",
+      "content": "'use client';\nimport {useCallback, useEffect, useRef, useState} from 'react';\n\nexport type SetLocalStorageValue<T> = (next: T | ((prev: T) => T)) => void;\n\nfunction parse<T>(raw: string, fallback: T): T {\n  try {\n    return JSON.parse(raw) as T;\n  } catch {\n    return fallback;\n  }\n}\n\n/**\n * A JSON value in `localStorage`, shaped like `useState`.\n * - Server and first client render use `initialValue`; the stored value loads after mount (no hydration mismatch).\n * - Changes in other tabs arrive through the `storage` event.\n * - Storage can throw (private mode, quota, blocked): reads fall back to `initialValue`, writes still update state.\n */\nexport function useLocalStorage<T>(key: string, initialValue: T): [T, SetLocalStorageValue<T>] {\n  const initialRef = useRef(initialValue);\n  const [value, setValue] = useState<T>(initialValue);\n\n  // Load the stored value after mount.\n  useEffect(() => {\n    let next = initialRef.current;\n    try {\n      const raw = window.localStorage.getItem(key);\n      if (raw !== null) next = parse(raw, initialRef.current);\n    } catch {\n      // Storage unavailable: keep the initial value.\n    }\n    setValue(next);\n  }, [key]);\n\n  // Keep other tabs in sync. A null key means localStorage.clear() ran elsewhere.\n  useEffect(() => {\n    const onStorage = (event: StorageEvent) => {\n      if (event.key !== null && event.key !== key) return;\n      if (event.key === null || event.newValue === null) {\n        setValue(initialRef.current);\n        return;\n      }\n      setValue(parse(event.newValue, initialRef.current));\n    };\n    window.addEventListener('storage', onStorage);\n    return () => window.removeEventListener('storage', onStorage);\n  }, [key]);\n\n  const set = useCallback<SetLocalStorageValue<T>>(\n    (next) => {\n      const resolved = typeof next === 'function' ? (next as (prev: T) => T)(value) : next;\n      setValue(resolved);\n      try {\n        window.localStorage.setItem(key, JSON.stringify(resolved));\n      } catch {\n        // Quota or blocked storage: the in-memory value still updates.\n      }\n    },\n    [key, value],\n  );\n\n  return [value, set];\n}\n"
+    }
+  ]
+}
