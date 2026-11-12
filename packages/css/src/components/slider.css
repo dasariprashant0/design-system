@@ -5,7 +5,7 @@
 .slider-thumb { display: block; width: 14px; height: 14px; background: var(--foreground); border: 0; cursor: grab; }
 .slider[data-disabled] { opacity: 0.5; }
 .toggle { padding: var(--s2) var(--s4); border: 1px solid var(--rule); color: var(--muted); font-size: var(--text-sm); }
-.toggle:hover:not(:disabled) { color: var(--foreground); border-color: var(--foreground); }
+.toggle:not([data-state="on"]):hover:not(:disabled) { color: var(--foreground); border-color: var(--foreground); }
 .toggle[data-state="on"] { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
 .toggle:disabled { opacity: 0.5; cursor: not-allowed; }
 .toggle-group { display: inline-flex; gap: var(--s2); }

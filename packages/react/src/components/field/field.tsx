@@ -46,6 +46,7 @@ export interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childr
 
 /**
  * Wires a label, a control, a hint and an error together with the right ids and ARIA, so you never do it by hand.
+ * A Field has no outer spacing: put several in a `Form` (or a `Stack`) to get the gap between them.
  * @example <Field label="Email" hint="We never share it." error={err}><Input type="email" /></Field>
  */
 export const Field = forwardRef<HTMLDivElement, FieldProps>(function Field({label, hint, error, required = false, className, children, ...rest}, ref) {

@@ -1,0 +1,5 @@
+.auth { min-height: 100dvh; display: grid; place-items: center; padding: var(--s5); }
+.auth-card { width: min(26rem, 100%); }
+.page { max-width: 48rem; margin-inline: auto; padding: var(--s5); }
+.setting-row { display: flex; justify-content: space-between; align-items: center; gap: var(--s4); padding-block: var(--s3); border-block-end: 1px solid var(--rule); }
+.danger-zone { border: 1px solid var(--danger); padding: var(--s4); margin-block-start: var(--s5); }
