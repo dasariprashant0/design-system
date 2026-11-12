@@ -1,0 +1,1 @@
+{"name":"use-debounce","title":"useDebounce","category":"hooks","description":"Debounced value and debounced callback: wait for input to settle before acting.","status":"stable","css":[],"a11y":["No DOM output. Use for search fields so the list updates after typing stops.","A pending callback is dropped on unmount."],"keywords":["throttle","delay","search","input","settle"]}
