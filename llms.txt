@@ -12,7 +12,9 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 ## Components
 ### layout
 - Aspect ratio (aspect-ratio, stable): Keep media or a placeholder at a fixed width-to-height ratio. Source: packages/react/src/components/aspect-ratio/
+- Box (box, stable): A div with padding and a thin border mapped to the spacing tokens. Source: packages/react/src/components/box/
 - Container (container, stable): Centre content in a column with a sensible maximum width and side padding. Source: packages/react/src/components/container/
+- Flex (flex, stable): A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case. Source: packages/react/src/components/flex/
 - Grid (grid, stable): A responsive grid of equal columns with one gap. Source: packages/react/src/components/grid/
 - Scroll area (scroll-area, stable): A scrollable region with thin, themed scrollbars. Source: packages/react/src/components/scroll-area/
 - Separator (separator, stable): A thin rule between groups. Source: packages/react/src/components/separator/
@@ -43,6 +45,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Field (field, stable): Connects a label, a control, a hint and an error with the right ids and ARIA. Source: packages/react/src/components/field/
 - Fieldset (fieldset, stable): Group related controls under one legend. Source: packages/react/src/components/fieldset/
 - File upload (file-upload, stable): Choose files by browsing or dropping them, and see what is selected. Source: packages/react/src/components/file-upload/
+- Form (form, stable): A form wrapper with a submit helper, an error summary that links to invalid fields, and an actions footer. Source: packages/react/src/components/form/
 - Input (input, stable): A single-line text field. Source: packages/react/src/components/input/
 - Label (label, stable): The visible name of a form control. Source: packages/react/src/components/label/
 - Multi select (multi-select, stable): Type to filter a list and pick several options, shown as removable tags. Source: packages/react/src/components/multi-select/
@@ -119,6 +122,19 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Spotlight (spotlight, stable): A surface with a soft highlight that follows the pointer. Source: packages/react/src/components/spotlight/
 - Text reveal (text-reveal, stable): Fade a sentence in word by word. Static for reduced motion. Source: packages/react/src/components/text-reveal/
 - Typewriter (typewriter, stable): Type a string one character at a time. Static for reduced motion. Source: packages/react/src/components/typewriter/
+
+### blocks
+- Call to action block (block-cta, beta): A closing call to action with one sentence and one next step. Source: packages/react/src/components/block-cta/
+- Dashboard shell block (block-dashboard-shell, beta): App frame with sidebar, top bar and content that collapses to a drawer on small screens. Source: packages/react/src/components/block-dashboard-shell/
+- Empty page block (block-empty-page, beta): A full-page message for not found, nothing yet or no access. Source: packages/react/src/components/block-empty-page/
+- Feature grid block (block-feature-grid, beta): A section title above a responsive grid of short features. Source: packages/react/src/components/block-feature-grid/
+- Footer block (block-footer, beta): A site footer with brand, link columns and small print. Source: packages/react/src/components/block-footer/
+- Hero block (block-hero, beta): A page opener with eyebrow, title, description, actions and optional media. Source: packages/react/src/components/block-hero/
+- Login block (block-login, beta): Email and password sign-in form with validation messages. Source: packages/react/src/components/block-login/
+- Pricing block (block-pricing, beta): Plan cards with a monthly and yearly switch. Source: packages/react/src/components/block-pricing/
+- Settings form block (block-settings-form, beta): Settings sections of switches and selects, each in a fieldset. Source: packages/react/src/components/block-settings-form/
+- Sign-up block (block-signup, beta): Name, email and password account form with validation messages. Source: packages/react/src/components/block-signup/
+- Testimonials block (block-testimonials, beta): Quotes with their authors, as figures with blockquotes. Source: packages/react/src/components/block-testimonials/
 
 ### hooks
 - useClickOutside (use-click-outside, stable): Calls a function when a pointer goes down outside an element, to close menus and popovers. Source: packages/react/src/hooks/use-click-outside/

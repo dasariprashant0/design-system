@@ -1,0 +1,51 @@
+{
+  "name": "flex",
+  "title": "Flex",
+  "category": "layout",
+  "description": "A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/flex.css",
+      "content": "/* Flex: a flex container with one gap token. */\n.flex { display: flex; flex-direction: row; gap: var(--flex-gap, 0); min-width: 0; }\n.flex-inline { display: inline-flex; }\n.flex-wrap { flex-wrap: wrap; }\n.flex[data-direction=\"column\"] { flex-direction: column; }\n.flex[data-direction=\"row-reverse\"] { flex-direction: row-reverse; }\n.flex[data-direction=\"column-reverse\"] { flex-direction: column-reverse; }\n.flex[data-align=\"start\"] { align-items: flex-start; }\n.flex[data-align=\"center\"] { align-items: center; }\n.flex[data-align=\"end\"] { align-items: flex-end; }\n.flex[data-align=\"stretch\"] { align-items: stretch; }\n.flex[data-align=\"baseline\"] { align-items: baseline; }\n.flex[data-justify=\"start\"] { justify-content: flex-start; }\n.flex[data-justify=\"center\"] { justify-content: center; }\n.flex[data-justify=\"end\"] { justify-content: flex-end; }\n.flex[data-justify=\"between\"] { justify-content: space-between; }\n.flex[data-justify=\"around\"] { justify-content: space-around; }\n"
+    }
+  ],
+  "a11y": [
+    "A plain element; adds no roles. Reversed directions change visual order only, so keep the source order meaningful."
+  ],
+  "keywords": [
+    "flexbox",
+    "row",
+    "column",
+    "align",
+    "justify",
+    "inline-flex"
+  ],
+  "kind": "components",
+  "import": "import {Flex} from '@monoline/react'",
+  "path": "packages/react/src/components/flex",
+  "files": [
+    "packages/react/src/components/flex/flex.demo.tsx",
+    "packages/react/src/components/flex/flex.test.tsx",
+    "packages/react/src/components/flex/flex.tsx",
+    "packages/react/src/components/flex/index.ts",
+    "packages/react/src/components/flex/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/flex/flex.tsx",
+      "content": "import {forwardRef, type CSSProperties, type HTMLAttributes} from 'react';\nimport {Slot} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface FlexProps extends HTMLAttributes<HTMLDivElement> {\n  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';\n  wrap?: boolean;\n  align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';\n  justify?: 'start' | 'center' | 'end' | 'between' | 'around';\n  /** Step on the spacing scale: 1 = --s1 up to 9. */\n  gap?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;\n  /** `inline-flex` instead of `flex`. */\n  inline?: boolean;\n  asChild?: boolean;\n}\n\n/**\n * A flex container with every flex direction, `baseline` and `around`, and an inline form.\n * Prefer `Stack` for the common case (a column or row with one gap); use `Flex` when you need reversed order,\n * baseline alignment, space-around or an inline container.\n */\nexport const Flex = forwardRef<HTMLDivElement, FlexProps>(function Flex({direction = 'row', wrap, align, justify, gap, inline, asChild, className, style, ...rest}, ref) {\n  const Comp = asChild ? Slot.Root : 'div';\n  return (\n    <Comp\n      ref={ref}\n      className={cx('flex', inline && 'flex-inline', wrap && 'flex-wrap', className)}\n      data-direction={direction}\n      data-align={align}\n      data-justify={justify}\n      style={{...(gap ? {'--flex-gap': `var(--s${gap})`} : {}), ...style} as CSSProperties}\n      {...rest}\n    />\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/flex/index.ts",
+      "content": "export {Flex} from './flex';\nexport type {FlexProps} from './flex';\n"
+    },
+    {
+      "path": "packages/react/src/components/flex/meta.json",
+      "content": "{\"name\":\"flex\",\"title\":\"Flex\",\"category\":\"layout\",\"description\":\"A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case.\",\"status\":\"stable\",\"css\":[\"flex.css\"],\"a11y\":[\"A plain element; adds no roles. Reversed directions change visual order only, so keep the source order meaningful.\"],\"keywords\":[\"flexbox\",\"row\",\"column\",\"align\",\"justify\",\"inline-flex\"]}\n"
+    }
+  ]
+}

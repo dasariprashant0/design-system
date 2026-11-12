@@ -1,0 +1,62 @@
+{
+  "name": "block-testimonials",
+  "title": "Testimonials block",
+  "category": "blocks",
+  "description": "Quotes with their authors, as figures with blockquotes.",
+  "status": "beta",
+  "uses": [
+    "container",
+    "heading"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/container.css",
+      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; margin-inline: auto; padding-inline: var(--s5); }\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
+    },
+    {
+      "path": "packages/css/src/components/heading.css",
+      "content": ".heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading-md { font-size: var(--text-lg); }\n.heading-sm { font-size: var(--text-base); }\n"
+    },
+    {
+      "path": "packages/css/src/components/block-testimonials.css",
+      "content": "/* Block: testimonials. */\n.block-testimonials { padding-block: var(--s8); }\n.block-testimonials-title { margin-bottom: var(--s6); }\n.block-testimonials-grid { display: grid; gap: var(--s5); grid-template-columns: 1fr; }\n.block-testimonial { margin: 0; display: flex; flex-direction: column; justify-content: space-between; gap: var(--s5); padding: var(--s5); border: 1px solid var(--rule); min-width: 0; }\n.block-testimonial blockquote { margin: 0; font-size: var(--text-lg); line-height: 1.4; }\n.block-testimonial figcaption { display: flex; align-items: center; gap: var(--s3); font-size: var(--text-sm); }\n.block-testimonial figcaption > span:last-child { display: flex; flex-direction: column; }\n.block-testimonial-avatar { display: inline-flex; }\n.block-testimonial-name { font-weight: 500; }\n.block-testimonial-role { color: var(--muted); }\n@media (min-width: 760px) { .block-testimonials-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }\n"
+    }
+  ],
+  "a11y": [
+    "Each quote is a figure with a blockquote and a figcaption.",
+    "Avatars are decorative and hidden from assistive technology."
+  ],
+  "keywords": [
+    "quotes",
+    "reviews",
+    "social proof",
+    "customers"
+  ],
+  "kind": "components",
+  "import": "import {BlockTestimonials} from '@monoline/react'",
+  "path": "packages/react/src/components/block-testimonials",
+  "files": [
+    "packages/react/src/components/block-testimonials/block-testimonials.demo.tsx",
+    "packages/react/src/components/block-testimonials/block-testimonials.test.tsx",
+    "packages/react/src/components/block-testimonials/block-testimonials.tsx",
+    "packages/react/src/components/block-testimonials/index.ts",
+    "packages/react/src/components/block-testimonials/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/block-testimonials/block-testimonials.tsx",
+      "content": "import {forwardRef, useId, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Container} from '../container';\nimport {Heading} from '../heading';\n\nexport interface Testimonial {\n  quote: ReactNode;\n  name: ReactNode;\n  /** Role and company, for example \"Design lead, Example Co\". */\n  role?: ReactNode;\n  /** An `Avatar` or image, decorative. */\n  avatar?: ReactNode;\n}\n\nexport interface BlockTestimonialsProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {\n  title: ReactNode;\n  items: Testimonial[];\n  headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;\n}\n\n/** A row of quotes with their authors. Each is a `figure` with a `blockquote` and a `figcaption`. */\nexport const BlockTestimonials = forwardRef<HTMLElement, BlockTestimonialsProps>(function BlockTestimonials({title, items, headingLevel = 2, className, ...rest}, ref) {\n  const id = useId();\n  return (\n    <section ref={ref} className={cx('block-testimonials', className)} aria-labelledby={id} {...rest}>\n      <Container>\n        <Heading id={id} level={headingLevel} className=\"block-testimonials-title\">{title}</Heading>\n        <div className=\"block-testimonials-grid\">\n          {items.map((t, i) => (\n            <figure key={i} className=\"block-testimonial\">\n              <blockquote>{t.quote}</blockquote>\n              <figcaption>\n                {t.avatar && <span className=\"block-testimonial-avatar\" aria-hidden=\"true\">{t.avatar}</span>}\n                <span>\n                  <span className=\"block-testimonial-name\">{t.name}</span>\n                  {t.role && <span className=\"block-testimonial-role\">{t.role}</span>}\n                </span>\n              </figcaption>\n            </figure>\n          ))}\n        </div>\n      </Container>\n    </section>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/block-testimonials/index.ts",
+      "content": "export {BlockTestimonials} from './block-testimonials';\nexport type {BlockTestimonialsProps, Testimonial} from './block-testimonials';\n"
+    },
+    {
+      "path": "packages/react/src/components/block-testimonials/meta.json",
+      "content": "{\"name\": \"block-testimonials\", \"title\": \"Testimonials block\", \"category\": \"blocks\", \"description\": \"Quotes with their authors, as figures with blockquotes.\", \"status\": \"beta\", \"uses\": [\"container\", \"heading\"], \"css\": [\"container.css\", \"heading.css\", \"block-testimonials.css\"], \"a11y\": [\"Each quote is a figure with a blockquote and a figcaption.\", \"Avatars are decorative and hidden from assistive technology.\"], \"keywords\": [\"quotes\", \"reviews\", \"social proof\", \"customers\"]}"
+    }
+  ]
+}

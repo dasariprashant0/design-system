@@ -319,6 +319,462 @@
       ]
     },
     {
+      "name": "block-cta",
+      "title": "Call to action block",
+      "category": "blocks",
+      "description": "A closing call to action with one sentence and one next step.",
+      "status": "beta",
+      "uses": [
+        "container",
+        "heading",
+        "text",
+        "button"
+      ],
+      "css": [
+        "container.css",
+        "heading.css",
+        "text.css",
+        "02-buttons.css",
+        "block-cta.css"
+      ],
+      "a11y": [
+        "A section named by its title; actions are ordinary buttons or links."
+      ],
+      "keywords": [
+        "cta",
+        "call to action",
+        "banner",
+        "conversion"
+      ],
+      "kind": "components",
+      "import": "import {BlockCta} from '@monoline/react'",
+      "path": "packages/react/src/components/block-cta",
+      "files": [
+        "packages/react/src/components/block-cta/block-cta.demo.tsx",
+        "packages/react/src/components/block-cta/block-cta.test.tsx",
+        "packages/react/src/components/block-cta/block-cta.tsx",
+        "packages/react/src/components/block-cta/index.ts",
+        "packages/react/src/components/block-cta/meta.json"
+      ]
+    },
+    {
+      "name": "block-dashboard-shell",
+      "title": "Dashboard shell block",
+      "category": "blocks",
+      "description": "App frame with sidebar, top bar and content that collapses to a drawer on small screens.",
+      "status": "beta",
+      "uses": [
+        "container",
+        "stack",
+        "drawer",
+        "button"
+      ],
+      "css": [
+        "container.css",
+        "stack.css",
+        "02-buttons.css",
+        "dialog.css",
+        "drawer.css",
+        "block-dashboard-shell.css"
+      ],
+      "a11y": [
+        "The sidebar and the drawer hold the same navigation landmark, named by navLabel; the current page has aria-current=\"page\".",
+        "Below 800px the sidebar is hidden and a Menu button opens a left drawer: focus is trapped, Escape closes it and focus returns to the button.",
+        "Choosing a link closes the drawer. The content is a main landmark; put one h1 in it."
+      ],
+      "keywords": [
+        "dashboard",
+        "app shell",
+        "sidebar",
+        "layout",
+        "admin"
+      ],
+      "kind": "components",
+      "import": "import {BlockDashboardShell} from '@monoline/react'",
+      "path": "packages/react/src/components/block-dashboard-shell",
+      "files": [
+        "packages/react/src/components/block-dashboard-shell/block-dashboard-shell.demo.tsx",
+        "packages/react/src/components/block-dashboard-shell/block-dashboard-shell.test.tsx",
+        "packages/react/src/components/block-dashboard-shell/block-dashboard-shell.tsx",
+        "packages/react/src/components/block-dashboard-shell/index.ts",
+        "packages/react/src/components/block-dashboard-shell/meta.json"
+      ]
+    },
+    {
+      "name": "block-empty-page",
+      "title": "Empty page block",
+      "category": "blocks",
+      "description": "A full-page message for not found, nothing yet or no access.",
+      "status": "beta",
+      "uses": [
+        "heading",
+        "text"
+      ],
+      "css": [
+        "heading.css",
+        "text.css",
+        "block-empty-page.css"
+      ],
+      "a11y": [
+        "A section named by its title, with the title as the page heading.",
+        "The large code is decorative and hidden from assistive technology."
+      ],
+      "keywords": [
+        "404",
+        "not found",
+        "empty",
+        "error page"
+      ],
+      "kind": "components",
+      "import": "import {BlockEmptyPage} from '@monoline/react'",
+      "path": "packages/react/src/components/block-empty-page",
+      "files": [
+        "packages/react/src/components/block-empty-page/block-empty-page.demo.tsx",
+        "packages/react/src/components/block-empty-page/block-empty-page.test.tsx",
+        "packages/react/src/components/block-empty-page/block-empty-page.tsx",
+        "packages/react/src/components/block-empty-page/index.ts",
+        "packages/react/src/components/block-empty-page/meta.json"
+      ]
+    },
+    {
+      "name": "block-feature-grid",
+      "title": "Feature grid block",
+      "category": "blocks",
+      "description": "A section title above a responsive grid of short features.",
+      "status": "beta",
+      "uses": [
+        "container",
+        "heading",
+        "text"
+      ],
+      "css": [
+        "container.css",
+        "heading.css",
+        "text.css",
+        "block-feature-grid.css"
+      ],
+      "a11y": [
+        "A section named by its title; features are a list of items.",
+        "Feature titles are headings one level below the section title, so the outline stays in order."
+      ],
+      "keywords": [
+        "features",
+        "benefits",
+        "grid",
+        "landing"
+      ],
+      "kind": "components",
+      "import": "import {BlockFeatureGrid} from '@monoline/react'",
+      "path": "packages/react/src/components/block-feature-grid",
+      "files": [
+        "packages/react/src/components/block-feature-grid/block-feature-grid.demo.tsx",
+        "packages/react/src/components/block-feature-grid/block-feature-grid.test.tsx",
+        "packages/react/src/components/block-feature-grid/block-feature-grid.tsx",
+        "packages/react/src/components/block-feature-grid/index.ts",
+        "packages/react/src/components/block-feature-grid/meta.json"
+      ]
+    },
+    {
+      "name": "block-footer",
+      "title": "Footer block",
+      "category": "blocks",
+      "description": "A site footer with brand, link columns and small print.",
+      "status": "beta",
+      "uses": [
+        "container",
+        "link"
+      ],
+      "css": [
+        "container.css",
+        "link.css",
+        "block-footer.css"
+      ],
+      "a11y": [
+        "A footer element: the page contentinfo landmark. Use one per page.",
+        "Each link column is a nav named by its title, with a heading at the chosen level."
+      ],
+      "keywords": [
+        "footer",
+        "site links",
+        "legal",
+        "sitemap"
+      ],
+      "kind": "components",
+      "import": "import {BlockFooter} from '@monoline/react'",
+      "path": "packages/react/src/components/block-footer",
+      "files": [
+        "packages/react/src/components/block-footer/block-footer.demo.tsx",
+        "packages/react/src/components/block-footer/block-footer.test.tsx",
+        "packages/react/src/components/block-footer/block-footer.tsx",
+        "packages/react/src/components/block-footer/index.ts",
+        "packages/react/src/components/block-footer/meta.json"
+      ]
+    },
+    {
+      "name": "block-hero",
+      "title": "Hero block",
+      "category": "blocks",
+      "description": "A page opener with eyebrow, title, description, actions and optional media.",
+      "status": "beta",
+      "uses": [
+        "container",
+        "heading",
+        "text"
+      ],
+      "css": [
+        "container.css",
+        "heading.css",
+        "text.css",
+        "block-hero.css"
+      ],
+      "a11y": [
+        "A section named by its title through aria-labelledby.",
+        "The title is a real heading; headingLevel sets the outline level (h1 by default).",
+        "Media is passed in: give images alt text."
+      ],
+      "keywords": [
+        "hero",
+        "landing",
+        "banner",
+        "header section"
+      ],
+      "kind": "components",
+      "import": "import {BlockHero} from '@monoline/react'",
+      "path": "packages/react/src/components/block-hero",
+      "files": [
+        "packages/react/src/components/block-hero/block-hero.demo.tsx",
+        "packages/react/src/components/block-hero/block-hero.test.tsx",
+        "packages/react/src/components/block-hero/block-hero.tsx",
+        "packages/react/src/components/block-hero/index.ts",
+        "packages/react/src/components/block-hero/meta.json"
+      ]
+    },
+    {
+      "name": "block-login",
+      "title": "Login block",
+      "category": "blocks",
+      "description": "Email and password sign-in form with validation messages.",
+      "status": "beta",
+      "uses": [
+        "form",
+        "field",
+        "input",
+        "password-input",
+        "button",
+        "heading"
+      ],
+      "css": [
+        "form.css",
+        "03-form-fields.css",
+        "11-field-states.css",
+        "02-buttons.css",
+        "13-loading.css",
+        "heading.css",
+        "text.css",
+        "block-login.css"
+      ],
+      "a11y": [
+        "A section named by its title; the form is named by the same heading.",
+        "Invalid submits show a role=alert summary whose links move focus to each field, and each field gets aria-invalid and an error message.",
+        "Email and password carry autocomplete hints for password managers."
+      ],
+      "keywords": [
+        "login",
+        "sign in",
+        "auth",
+        "email",
+        "password"
+      ],
+      "kind": "components",
+      "import": "import {BlockLogin} from '@monoline/react'",
+      "path": "packages/react/src/components/block-login",
+      "files": [
+        "packages/react/src/components/block-login/block-login.demo.tsx",
+        "packages/react/src/components/block-login/block-login.test.tsx",
+        "packages/react/src/components/block-login/block-login.tsx",
+        "packages/react/src/components/block-login/index.ts",
+        "packages/react/src/components/block-login/meta.json"
+      ]
+    },
+    {
+      "name": "block-pricing",
+      "title": "Pricing block",
+      "category": "blocks",
+      "description": "Plan cards with a monthly and yearly switch.",
+      "status": "beta",
+      "uses": [
+        "container",
+        "heading",
+        "text",
+        "button",
+        "badge",
+        "segmented-control"
+      ],
+      "css": [
+        "container.css",
+        "heading.css",
+        "text.css",
+        "02-buttons.css",
+        "05-marks.css",
+        "segmented-control.css",
+        "block-pricing.css"
+      ],
+      "a11y": [
+        "A section named by its title; plans are a list, each with a heading one level below the title.",
+        "The billing switch is a named radio group operable with arrow keys.",
+        "Prices are plain text next to their period, never colour alone; the popular plan carries a text badge."
+      ],
+      "keywords": [
+        "pricing",
+        "plans",
+        "tiers",
+        "billing",
+        "subscription"
+      ],
+      "kind": "components",
+      "import": "import {BlockPricing} from '@monoline/react'",
+      "path": "packages/react/src/components/block-pricing",
+      "files": [
+        "packages/react/src/components/block-pricing/block-pricing.demo.tsx",
+        "packages/react/src/components/block-pricing/block-pricing.test.tsx",
+        "packages/react/src/components/block-pricing/block-pricing.tsx",
+        "packages/react/src/components/block-pricing/index.ts",
+        "packages/react/src/components/block-pricing/meta.json"
+      ]
+    },
+    {
+      "name": "block-settings-form",
+      "title": "Settings form block",
+      "category": "blocks",
+      "description": "Settings sections of switches and selects, each in a fieldset.",
+      "status": "beta",
+      "uses": [
+        "form",
+        "fieldset",
+        "switch",
+        "native-select",
+        "field",
+        "button",
+        "heading"
+      ],
+      "css": [
+        "form.css",
+        "fieldset.css",
+        "checkbox.css",
+        "10-choices.css",
+        "03-form-fields.css",
+        "11-field-states.css",
+        "02-buttons.css",
+        "13-loading.css",
+        "heading.css",
+        "text.css",
+        "block-settings-form.css"
+      ],
+      "a11y": [
+        "Each section is a fieldset with a legend, so grouped controls are announced with it.",
+        "Switches have role=switch with visible labels; hints are linked with aria-describedby.",
+        "Selects are native and labelled."
+      ],
+      "keywords": [
+        "settings",
+        "preferences",
+        "account",
+        "toggles"
+      ],
+      "kind": "components",
+      "import": "import {BlockSettingsForm} from '@monoline/react'",
+      "path": "packages/react/src/components/block-settings-form",
+      "files": [
+        "packages/react/src/components/block-settings-form/block-settings-form.demo.tsx",
+        "packages/react/src/components/block-settings-form/block-settings-form.test.tsx",
+        "packages/react/src/components/block-settings-form/block-settings-form.tsx",
+        "packages/react/src/components/block-settings-form/index.ts",
+        "packages/react/src/components/block-settings-form/meta.json"
+      ]
+    },
+    {
+      "name": "block-signup",
+      "title": "Sign-up block",
+      "category": "blocks",
+      "description": "Name, email and password account form with validation messages.",
+      "status": "beta",
+      "uses": [
+        "form",
+        "field",
+        "input",
+        "password-input",
+        "button",
+        "heading"
+      ],
+      "css": [
+        "form.css",
+        "03-form-fields.css",
+        "11-field-states.css",
+        "02-buttons.css",
+        "13-loading.css",
+        "heading.css",
+        "text.css",
+        "block-signup.css"
+      ],
+      "a11y": [
+        "A section named by its title; the form is named by the same heading.",
+        "Invalid submits show a role=alert summary whose links move focus to each field, and each field gets aria-invalid and an error message.",
+        "The password hint states the minimum length; autocomplete hints are set."
+      ],
+      "keywords": [
+        "sign up",
+        "register",
+        "create account",
+        "auth"
+      ],
+      "kind": "components",
+      "import": "import {BlockSignup} from '@monoline/react'",
+      "path": "packages/react/src/components/block-signup",
+      "files": [
+        "packages/react/src/components/block-signup/block-signup.demo.tsx",
+        "packages/react/src/components/block-signup/block-signup.test.tsx",
+        "packages/react/src/components/block-signup/block-signup.tsx",
+        "packages/react/src/components/block-signup/index.ts",
+        "packages/react/src/components/block-signup/meta.json"
+      ]
+    },
+    {
+      "name": "block-testimonials",
+      "title": "Testimonials block",
+      "category": "blocks",
+      "description": "Quotes with their authors, as figures with blockquotes.",
+      "status": "beta",
+      "uses": [
+        "container",
+        "heading"
+      ],
+      "css": [
+        "container.css",
+        "heading.css",
+        "block-testimonials.css"
+      ],
+      "a11y": [
+        "Each quote is a figure with a blockquote and a figcaption.",
+        "Avatars are decorative and hidden from assistive technology."
+      ],
+      "keywords": [
+        "quotes",
+        "reviews",
+        "social proof",
+        "customers"
+      ],
+      "kind": "components",
+      "import": "import {BlockTestimonials} from '@monoline/react'",
+      "path": "packages/react/src/components/block-testimonials",
+      "files": [
+        "packages/react/src/components/block-testimonials/block-testimonials.demo.tsx",
+        "packages/react/src/components/block-testimonials/block-testimonials.test.tsx",
+        "packages/react/src/components/block-testimonials/block-testimonials.tsx",
+        "packages/react/src/components/block-testimonials/index.ts",
+        "packages/react/src/components/block-testimonials/meta.json"
+      ]
+    },
+    {
       "name": "border-beam",
       "title": "Border beam",
       "category": "effects",
@@ -347,6 +803,36 @@
         "packages/react/src/components/border-beam/border-beam.tsx",
         "packages/react/src/components/border-beam/index.ts",
         "packages/react/src/components/border-beam/meta.json"
+      ]
+    },
+    {
+      "name": "box",
+      "title": "Box",
+      "category": "layout",
+      "description": "A div with padding and a thin border mapped to the spacing tokens.",
+      "status": "stable",
+      "css": [
+        "box.css"
+      ],
+      "a11y": [
+        "A plain element; adds no roles. Use asChild to render a landmark such as section."
+      ],
+      "keywords": [
+        "div",
+        "padding",
+        "wrapper",
+        "inset",
+        "border"
+      ],
+      "kind": "components",
+      "import": "import {Box} from '@monoline/react'",
+      "path": "packages/react/src/components/box",
+      "files": [
+        "packages/react/src/components/box/box.demo.tsx",
+        "packages/react/src/components/box/box.test.tsx",
+        "packages/react/src/components/box/box.tsx",
+        "packages/react/src/components/box/index.ts",
+        "packages/react/src/components/box/meta.json"
       ]
     },
     {
@@ -1203,6 +1689,73 @@
         "packages/react/src/components/file-upload/file-upload.tsx",
         "packages/react/src/components/file-upload/index.ts",
         "packages/react/src/components/file-upload/meta.json"
+      ]
+    },
+    {
+      "name": "flex",
+      "title": "Flex",
+      "category": "layout",
+      "description": "A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case.",
+      "status": "stable",
+      "css": [
+        "flex.css"
+      ],
+      "a11y": [
+        "A plain element; adds no roles. Reversed directions change visual order only, so keep the source order meaningful."
+      ],
+      "keywords": [
+        "flexbox",
+        "row",
+        "column",
+        "align",
+        "justify",
+        "inline-flex"
+      ],
+      "kind": "components",
+      "import": "import {Flex} from '@monoline/react'",
+      "path": "packages/react/src/components/flex",
+      "files": [
+        "packages/react/src/components/flex/flex.demo.tsx",
+        "packages/react/src/components/flex/flex.test.tsx",
+        "packages/react/src/components/flex/flex.tsx",
+        "packages/react/src/components/flex/index.ts",
+        "packages/react/src/components/flex/meta.json"
+      ]
+    },
+    {
+      "name": "form",
+      "title": "Form",
+      "category": "forms",
+      "description": "A form wrapper with a submit helper, an error summary that links to invalid fields, and an actions footer.",
+      "status": "stable",
+      "uses": [
+        "field",
+        "button"
+      ],
+      "css": [
+        "form.css"
+      ],
+      "a11y": [
+        "A native form; give it an accessible name with aria-label or aria-labelledby when the page has several.",
+        "The error summary is a role=alert region at the top; each item is a link that moves focus to the invalid control.",
+        "Pass each message to its Field too, so the control carries aria-invalid and aria-describedby."
+      ],
+      "keywords": [
+        "submit",
+        "validation",
+        "errors",
+        "error summary",
+        "actions"
+      ],
+      "kind": "components",
+      "import": "import {Form} from '@monoline/react'",
+      "path": "packages/react/src/components/form",
+      "files": [
+        "packages/react/src/components/form/form.demo.tsx",
+        "packages/react/src/components/form/form.test.tsx",
+        "packages/react/src/components/form/form.tsx",
+        "packages/react/src/components/form/index.ts",
+        "packages/react/src/components/form/meta.json"
       ]
     },
     {

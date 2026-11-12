@@ -1,0 +1,88 @@
+{
+  "name": "block-login",
+  "title": "Login block",
+  "category": "blocks",
+  "description": "Email and password sign-in form with validation messages.",
+  "status": "beta",
+  "uses": [
+    "form",
+    "field",
+    "input",
+    "password-input",
+    "button",
+    "heading"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/form.css",
+      "content": "/* Form: vertical rhythm, error summary, actions footer. */\n.form { display: flex; flex-direction: column; gap: var(--s5); min-width: 0; }\n.form-errors { border: 1px solid var(--danger); padding: var(--s4); font-size: var(--text-sm); }\n.form-errors-title { font-weight: 500; color: var(--danger); margin-bottom: var(--s2); }\n.form-errors ul { margin: 0; padding-left: var(--s5); }\n.form-errors a { color: var(--foreground); text-decoration: underline; text-underline-offset: 3px; }\n.form-errors a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }\n.form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); padding-top: var(--s4); border-top: 1px solid var(--rule); }\n"
+    },
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { padding: 6px 10px; font-size: var(--text-sm); }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-right: var(--s9); }\n.input-end { position: absolute; right: var(--s3); top: 50%; transform: translateY(-50%); }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; left: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(16px); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-right: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-left: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/11-field-states.css",
+      "content": "/* ─── Field states ─── */\n.field-error { font-size: var(--text-xs); color: var(--danger); margin-top: var(--s1); }\n.field-ok { font-size: var(--text-xs); color: var(--ok); margin-top: var(--s1); }\n.input[data-valid=\"true\"] { border-color: var(--ok); }\n.input:disabled, .select:disabled, .textarea:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }\n.input[readonly] { background: var(--wash); border-color: var(--rule); }\n.input-group { display: flex; min-width: 0; }\n.input-group > .input { flex: 1; }\n.input-affix { display: inline-flex; align-items: center; padding: 0 var(--s3); border: 1px solid var(--foreground); color: var(--muted); font-size: var(--text-sm); white-space: nowrap; }\n.input-affix:first-child { border-right: 0; }\n.input-affix:last-child { border-left: 0; }\n.field-required::after { content: \" *\"; color: var(--danger); }\n.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s4); }\n"
+    },
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-left: 0; padding-right: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/13-loading.css",
+      "content": "/* ─── Loading: a spinner that steps, and a still skeleton ─── */\n.spinner { width: 16px; height: 16px; display: inline-block; border: 2px solid var(--rule); border-top-color: var(--foreground); border-radius: var(--round); animation: spin 0.8s steps(8) infinite; }\n@keyframes spin { to { transform: rotate(360deg); } }\n.skeleton { display: block; height: 1em; background: var(--wash-2); }\n.skeleton-block { height: var(--s8); }\n.skeleton-hatch { background: var(--hatch); box-shadow: inset 0 0 0 1px var(--rule); }\n"
+    },
+    {
+      "path": "packages/css/src/components/heading.css",
+      "content": ".heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading-md { font-size: var(--text-lg); }\n.heading-sm { font-size: var(--text-base); }\n"
+    },
+    {
+      "path": "packages/css/src/components/text.css",
+      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-ok { color: var(--ok); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/block-login.css",
+      "content": "/* Block: login. */\n.block-login { display: flex; flex-direction: column; gap: var(--s6); width: 100%; max-width: 26rem; margin-inline: auto; padding: var(--s7) var(--s5); }\n.block-login-head { display: flex; flex-direction: column; gap: var(--s2); }\n.block-login-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s3); font-size: var(--text-sm); }\n"
+    }
+  ],
+  "a11y": [
+    "A section named by its title; the form is named by the same heading.",
+    "Invalid submits show a role=alert summary whose links move focus to each field, and each field gets aria-invalid and an error message.",
+    "Email and password carry autocomplete hints for password managers."
+  ],
+  "keywords": [
+    "login",
+    "sign in",
+    "auth",
+    "email",
+    "password"
+  ],
+  "kind": "components",
+  "import": "import {BlockLogin} from '@monoline/react'",
+  "path": "packages/react/src/components/block-login",
+  "files": [
+    "packages/react/src/components/block-login/block-login.demo.tsx",
+    "packages/react/src/components/block-login/block-login.test.tsx",
+    "packages/react/src/components/block-login/block-login.tsx",
+    "packages/react/src/components/block-login/index.ts",
+    "packages/react/src/components/block-login/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/block-login/block-login.tsx",
+      "content": "'use client';\nimport {forwardRef, useId, useState, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Button} from '../button';\nimport {Field} from '../field';\nimport {Form, FormActions, type FormError} from '../form';\nimport {Heading} from '../heading';\nimport {Input} from '../input';\nimport {PasswordInput} from '../password-input';\nimport {Text} from '../text';\n\nexport interface LoginValues {\n  email: string;\n  password: string;\n}\n\nexport interface BlockLoginProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onSubmit'> {\n  title?: ReactNode;\n  description?: ReactNode;\n  submitLabel?: ReactNode;\n  /** Called with the values once they pass validation. */\n  onSubmit?: (values: LoginValues) => void;\n  /** Shows a spinner on the submit button while you sign in. */\n  loading?: boolean;\n  /** Links under the form: forgot password, create an account. */\n  footer?: ReactNode;\n  /** Replace the validation messages (translate them, or change the tone). */\n  messages?: Partial<{email: string; emailInvalid: string; password: string}>;\n  headingLevel?: 1 | 2 | 3;\n}\n\n/** Email and password with a submit button. Validation messages show in an error summary and under each field. */\nexport const BlockLogin = forwardRef<HTMLElement, BlockLoginProps>(function BlockLogin({title = 'Sign in', description, submitLabel = 'Sign in', onSubmit, loading, footer, messages, headingLevel = 1, className, ...rest}, ref) {\n  const id = useId();\n  const [errors, setErrors] = useState<FormError[]>([]);\n  const m = {email: 'Enter your email.', emailInvalid: 'Enter an email like name@example.com.', password: 'Enter your password.', ...messages};\n  const msg = (name: string) => errors.find((e) => e.name === name)?.message;\n  return (\n    <section ref={ref} className={cx('block-login', className)} aria-labelledby={id} {...rest}>\n      <div className=\"block-login-head\">\n        <Heading id={id} level={headingLevel} size=\"xl\">{title}</Heading>\n        {description && <Text tone=\"muted\">{description}</Text>}\n      </div>\n      <Form\n        aria-labelledby={id}\n        noValidate\n        preventDefault\n        errors={errors}\n        onSubmit={(e) => {\n          const data = new FormData(e.currentTarget);\n          const email = String(data.get('email') ?? '').trim();\n          const password = String(data.get('password') ?? '');\n          const next: FormError[] = [];\n          if (!email) next.push({name: 'email', message: m.email});\n          else if (!/^\\S+@\\S+\\.\\S+$/.test(email)) next.push({name: 'email', message: m.emailInvalid});\n          if (!password) next.push({name: 'password', message: m.password});\n          setErrors(next);\n          if (!next.length) onSubmit?.({email, password});\n        }}\n      >\n        <Field label=\"Email\" required error={msg('email')}><Input name=\"email\" type=\"email\" autoComplete=\"email\" /></Field>\n        <Field label=\"Password\" required error={msg('password')}><PasswordInput name=\"password\" autoComplete=\"current-password\" /></Field>\n        <FormActions><Button type=\"submit\" variant=\"solid\" loading={loading}>{submitLabel}</Button></FormActions>\n      </Form>\n      {footer && <div className=\"block-login-footer\">{footer}</div>}\n    </section>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/block-login/index.ts",
+      "content": "export {BlockLogin} from './block-login';\nexport type {BlockLoginProps, LoginValues} from './block-login';\n"
+    },
+    {
+      "path": "packages/react/src/components/block-login/meta.json",
+      "content": "{\"name\": \"block-login\", \"title\": \"Login block\", \"category\": \"blocks\", \"description\": \"Email and password sign-in form with validation messages.\", \"status\": \"beta\", \"uses\": [\"form\", \"field\", \"input\", \"password-input\", \"button\", \"heading\"], \"css\": [\"form.css\", \"03-form-fields.css\", \"11-field-states.css\", \"02-buttons.css\", \"13-loading.css\", \"heading.css\", \"text.css\", \"block-login.css\"], \"a11y\": [\"A section named by its title; the form is named by the same heading.\", \"Invalid submits show a role=alert summary whose links move focus to each field, and each field gets aria-invalid and an error message.\", \"Email and password carry autocomplete hints for password managers.\"], \"keywords\": [\"login\", \"sign in\", \"auth\", \"email\", \"password\"]}"
+    }
+  ]
+}

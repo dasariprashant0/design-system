@@ -1,0 +1,62 @@
+{
+  "name": "block-empty-page",
+  "title": "Empty page block",
+  "category": "blocks",
+  "description": "A full-page message for not found, nothing yet or no access.",
+  "status": "beta",
+  "uses": [
+    "heading",
+    "text"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/heading.css",
+      "content": ".heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading-md { font-size: var(--text-lg); }\n.heading-sm { font-size: var(--text-base); }\n"
+    },
+    {
+      "path": "packages/css/src/components/text.css",
+      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-ok { color: var(--ok); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/block-empty-page.css",
+      "content": "/* Block: empty page. */\n.block-empty-page { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--s4); min-height: 60vh; padding: var(--s8) var(--s5); text-align: center; }\n.block-empty-page-code { font-family: var(--font-display); font-weight: 700; font-size: var(--display-xl); line-height: 0.9; letter-spacing: -0.04em; color: var(--ink-4); }\n.block-empty-page-description { max-width: var(--measure); }\n.block-empty-page-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); margin-top: var(--s3); }\n"
+    }
+  ],
+  "a11y": [
+    "A section named by its title, with the title as the page heading.",
+    "The large code is decorative and hidden from assistive technology."
+  ],
+  "keywords": [
+    "404",
+    "not found",
+    "empty",
+    "error page"
+  ],
+  "kind": "components",
+  "import": "import {BlockEmptyPage} from '@monoline/react'",
+  "path": "packages/react/src/components/block-empty-page",
+  "files": [
+    "packages/react/src/components/block-empty-page/block-empty-page.demo.tsx",
+    "packages/react/src/components/block-empty-page/block-empty-page.test.tsx",
+    "packages/react/src/components/block-empty-page/block-empty-page.tsx",
+    "packages/react/src/components/block-empty-page/index.ts",
+    "packages/react/src/components/block-empty-page/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/block-empty-page/block-empty-page.tsx",
+      "content": "import {forwardRef, useId, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Heading} from '../heading';\nimport {Text} from '../text';\n\nexport interface BlockEmptyPageProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {\n  /** A short code such as \"404\" or \"Empty\". Decorative. */\n  code?: ReactNode;\n  title: ReactNode;\n  description?: ReactNode;\n  /** The way out: a solid Button or link, and maybe a second. */\n  actions?: ReactNode;\n  /** Outline level of the title. A full-page empty state is usually the page's h1. */\n  headingLevel?: 1 | 2 | 3;\n}\n\n/** A full-page message: not found, nothing here yet, access denied. For a list or table with no rows use `EmptyState`. */\nexport const BlockEmptyPage = forwardRef<HTMLElement, BlockEmptyPageProps>(function BlockEmptyPage({code, title, description, actions, headingLevel = 1, className, ...rest}, ref) {\n  const id = useId();\n  return (\n    <section ref={ref} className={cx('block-empty-page', className)} aria-labelledby={id} {...rest}>\n      {code && <p className=\"block-empty-page-code\" aria-hidden=\"true\">{code}</p>}\n      <Heading id={id} level={headingLevel} size=\"xl\">{title}</Heading>\n      {description && <Text tone=\"muted\" className=\"block-empty-page-description\">{description}</Text>}\n      {actions && <div className=\"block-empty-page-actions\">{actions}</div>}\n    </section>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/block-empty-page/index.ts",
+      "content": "export {BlockEmptyPage} from './block-empty-page';\nexport type {BlockEmptyPageProps} from './block-empty-page';\n"
+    },
+    {
+      "path": "packages/react/src/components/block-empty-page/meta.json",
+      "content": "{\"name\": \"block-empty-page\", \"title\": \"Empty page block\", \"category\": \"blocks\", \"description\": \"A full-page message for not found, nothing yet or no access.\", \"status\": \"beta\", \"uses\": [\"heading\", \"text\"], \"css\": [\"heading.css\", \"text.css\", \"block-empty-page.css\"], \"a11y\": [\"A section named by its title, with the title as the page heading.\", \"The large code is decorative and hidden from assistive technology.\"], \"keywords\": [\"404\", \"not found\", \"empty\", \"error page\"]}"
+    }
+  ]
+}
