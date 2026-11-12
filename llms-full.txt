@@ -1,8 +1,8 @@
 # Monoline
 
-> Open-source UI kit: a plain CSS core (@monoline/css) with accessible React components (@monoline/react). Three themes, four accents, no Tailwind, no runtime CSS-in-JS.
+> Open-source UI kit: a plain CSS core (@monoline/css) with accessible React components (@monoline/react). Three themes, nine accents, font, corner and density options, no Tailwind, no runtime CSS-in-JS.
 
-Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rules). Every component is a folder with source, test, demo and meta.json.
+Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rules). Every component is a folder with source, test, demo and meta.json. Install the packages, or copy one component with npx monoline add <name> (source in registry/<name>.json).
 
 ## Accordion (accordion)
 Stacked headings that each show or hide a section.
