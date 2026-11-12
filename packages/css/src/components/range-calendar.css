@@ -1,0 +1,6 @@
+/* Range calendar: reuses .calendar markup; the cells paint the band between start and end. */
+.range-cell[data-in-range] { background: var(--wash-2); }
+.range-cell[data-in-range][data-range-start] { border-start-start-radius: var(--radius); border-end-start-radius: var(--radius); }
+.range-cell[data-in-range][data-preview] .calendar-day:not([aria-pressed="true"]) { text-decoration: underline dotted; text-underline-offset: 3px; }
+.range-calendar .calendar-day[aria-pressed="true"] { background: var(--foreground); color: var(--background); }
+.range-calendar .calendar-day:hover:not(:disabled):not([aria-pressed="true"]) { background: var(--wash); }

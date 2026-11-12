@@ -1,0 +1,7 @@
+/* Mentions: a .textarea with a list dropping below it. */
+.mentions { position: relative; width: 100%; }
+.mentions-list { position: absolute; inset-inline-start: 0; inset-inline-end: 0; top: calc(100% + var(--s1)); z-index: var(--z-drawer); max-height: 14rem; overflow-y: auto; margin: 0; padding: var(--s1) 0; list-style: none; background: var(--background); border: 1px solid var(--foreground); }
+.mentions-option { padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }
+.mentions-option[data-active] { background: var(--foreground); color: var(--background); }
+.mentions-option[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.mentions-note { padding: var(--s3) var(--s4); font-size: var(--text-sm); color: var(--muted); }

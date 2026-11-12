@@ -1,0 +1,17 @@
+/* Tour: a spotlight cut out of a dim overlay, plus a card. Positions are set in px by the component. */
+.tour { position: fixed; inset: 0; z-index: var(--z-toast); pointer-events: none; }
+.tour-overlay { position: fixed; inset: 0; pointer-events: auto; }
+.tour-spotlight { position: fixed; box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--foreground) 55%, transparent); border: 1px solid var(--background); outline: 2px solid var(--accent); pointer-events: none; }
+.tour-overlay:only-child { background: color-mix(in srgb, var(--foreground) 55%, transparent); }
+.tour-spotlight + .tour-card { z-index: 1; }
+.tour-card { position: fixed; z-index: 1; display: grid; gap: var(--s2); width: min(22rem, calc(100vw - var(--s4) * 2)); padding: var(--s4); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); pointer-events: auto; }
+.tour-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tour-count { margin: 0; font-size: var(--text-xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.tour-title { margin: 0; font-size: var(--text-base); font-weight: 500; }
+.tour-content { font-size: var(--text-sm); color: var(--muted); }
+.tour-actions { display: flex; align-items: center; gap: var(--s2); margin-block-start: var(--s2); }
+.tour-spacer { flex: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .tour-spotlight { transition: top var(--fast) var(--ease), left var(--fast) var(--ease), width var(--fast) var(--ease), height var(--fast) var(--ease); }
+  .tour-card { transition: top var(--fast) var(--ease), left var(--fast) var(--ease); }
+}
