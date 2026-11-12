@@ -1,0 +1,1 @@
+{"name":"use-previous","title":"usePrevious","category":"hooks","description":"The value from the previous render, for comparing a change.","status":"stable","css":[],"a11y":["No DOM output."],"keywords":["previous","compare","diff","change"]}

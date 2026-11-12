@@ -1,0 +1,1 @@
+{"name":"use-interval","title":"useInterval","category":"hooks","description":"Calls a function on a timer, with a null delay to pause it. Cleared on unmount.","status":"stable","css":[],"a11y":["No DOM output. Clears its timer on unmount so nothing runs after the component is gone.","Pass null as the delay to pause."],"keywords":["timer","setInterval","poll","repeat","tick"]}
