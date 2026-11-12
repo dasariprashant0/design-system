@@ -7,10 +7,14 @@
   "repository": {"type": "git", "url": "git+https://github.com/dasariprashant0/design-system.git", "directory": "packages/css"},
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "size:css": "node scripts/size.mjs"
   },
   "exports": {
     ".": "./dist/monoline.css",
+    "./core.css": "./dist/core.css",
+    "./components/index.json": "./dist/components/index.json",
+    "./components/*.css": "./dist/components/*.css",
     "./monoline.css": "./dist/monoline.css",
     "./monoline.min.css": "./dist/monoline.min.css",
     "./monoline.js": "./dist/monoline.js",

@@ -17,7 +17,7 @@ npx monoline add button dialog     # copy source + CSS into your project
 - Prints the CSS imports to add and the npm packages to install (`radix-ui`; React 18+ is assumed).
 - Refuses to overwrite existing files unless you pass `--overwrite`.
 
-The CSS files assume the tokens are loaded: `npm i @monoline/css` and import `tokens.css`, `base.css` and `accents.css` once (`init` prints the lines).
+The CSS files assume the tokens are loaded: `npm i @monoline/css` and import `@monoline/css/core.css` once, before the component files (`init` prints the line). Each component's CSS is copied as one file, `<name>.css`, wrapped in `@layer monoline.components`.
 
 ## Options
 
