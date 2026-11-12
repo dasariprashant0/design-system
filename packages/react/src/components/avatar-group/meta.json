@@ -1,0 +1,1 @@
+{"name":"avatar-group","title":"Avatar group","category":"data-display","description":"Overlap several avatars and show how many more there are.","status":"stable","uses":["avatar"],"css":["19-avatar.css"],"a11y":["role=\"group\" with an accessible name; the overflow count is plain text."],"keywords":["stack","people","team","users"]}

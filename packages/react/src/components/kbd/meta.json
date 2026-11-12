@@ -1,0 +1,1 @@
+{"name":"kbd","title":"Kbd","category":"typography","description":"Show a keyboard key or shortcut.","status":"stable","css":["05-marks.css"],"a11y":["Native kbd element, announced as text."],"keywords":["keyboard","shortcut","key","hotkey"]}

@@ -1,0 +1,1 @@
+{"name":"container","title":"Container","category":"layout","description":"Centre content in a column with a sensible maximum width and side padding.","status":"stable","css":["container.css"],"a11y":["A plain div; adds no roles."],"keywords":["wrapper","max-width","page"]}

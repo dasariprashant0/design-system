@@ -1,0 +1,1 @@
+{"name":"button-group","title":"Button group","category":"buttons","description":"Join related buttons into one segmented bar.","status":"stable","uses":["button"],"css":["02-buttons.css","button-group.css"],"a11y":["role=\"group\" with a required accessible name."],"keywords":["join","segmented","toolbar"]}

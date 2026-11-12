@@ -1,0 +1,1 @@
+{"name":"aspect-ratio","title":"Aspect ratio","category":"layout","description":"Keep media or a placeholder at a fixed width-to-height ratio.","status":"stable","primitive":"radix-ui/AspectRatio","css":[],"a11y":["A plain div; the content keeps its own semantics and alt text."],"keywords":["16:9","ratio","image","video"]}

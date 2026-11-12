@@ -1,0 +1,1 @@
+{"name":"tag","title":"Tag","category":"data-display","description":"A short label, optionally removable.","status":"stable","css":["19-avatar.css"],"a11y":["The remove control is a real button named \"Remove <label>\"."],"keywords":["chip","pill","label","removable"]}
