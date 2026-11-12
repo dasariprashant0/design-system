@@ -70,8 +70,8 @@ Resolved in this order: `--registry <folder|url>`, env `MONOLINE_REGISTRY`, `./r
 | Tool | Arguments | Returns |
 |---|---|---|
 | `list_components` | `category?` | name, title, category, status, description for each entry, plus the categories |
-| `search_components` | `query`, `limit?` (default 10) | ranked matches with a score: name, then keywords, title, category, description |
-| `get_component` | `name`, `include_source?` | meta, import line, props summary, a11y notes, CSS file paths; with `include_source`, source files and CSS content |
+| `search_components` | `query`, `limit?` (default 10) | ranked matches with a score: name, then keywords, title, prop names, category, description; `matchedProps` lists props that matched |
+| `get_component` | `name`, `include_source?` | import line, props (name, type, default, description), usage example, a11y notes, CSS classes and data attributes, related components, CSS file paths; with `include_source`, source files and CSS content |
 | `get_install_command` | `names[]` | `npx monoline add …`, extra components copied, CSS files, npm packages |
 | `get_theming_guide` | none | data attributes, tokens and rules (text) |
 | `compose_page` | `description` | suggested components and blocks with imports, from a keyword mapping |
