@@ -1,0 +1,1 @@
+{"name":"use-mounted","title":"useMounted","category":"hooks","description":"True after the first client render. Use it to avoid server and client markup differences.","status":"stable","css":[],"a11y":["No DOM output."],"keywords":["hydration","ssr","client only"]}

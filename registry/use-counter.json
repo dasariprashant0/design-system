@@ -1,0 +1,44 @@
+{
+  "name": "use-counter",
+  "title": "useCounter",
+  "category": "hooks",
+  "description": "A number with increment, decrement, set and reset, bounded by optional min and max.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output."
+  ],
+  "keywords": [
+    "count",
+    "number",
+    "stepper",
+    "bounded"
+  ],
+  "kind": "hooks",
+  "import": "import {UseCounter} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-counter",
+  "files": [
+    "packages/react/src/hooks/use-counter/index.ts",
+    "packages/react/src/hooks/use-counter/meta.json",
+    "packages/react/src/hooks/use-counter/use-counter.demo.tsx",
+    "packages/react/src/hooks/use-counter/use-counter.test.tsx",
+    "packages/react/src/hooks/use-counter/use-counter.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-counter/index.ts",
+      "content": "export {useCounter} from './use-counter';\nexport type {UseCounterOptions} from './use-counter';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-counter/meta.json",
+      "content": "{\"name\":\"use-counter\",\"title\":\"useCounter\",\"category\":\"hooks\",\"description\":\"A number with increment, decrement, set and reset, bounded by optional min and max.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output.\"],\"keywords\":[\"count\",\"number\",\"stepper\",\"bounded\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-counter/use-counter.ts",
+      "content": "'use client';\nimport {useCallback, useState} from 'react';\n\nexport interface UseCounterOptions {\n  min?: number;\n  max?: number;\n}\n\nconst clamp = (n: number, min = -Infinity, max = Infinity) => Math.min(max, Math.max(min, n));\n\n/** A bounded counter. Every change is clamped to `min` and `max`. */\nexport function useCounter(initial = 0, {min, max}: UseCounterOptions = {}) {\n  const [count, setCount] = useState(() => clamp(initial, min, max));\n  const set = useCallback((n: number) => setCount(clamp(n, min, max)), [min, max]);\n  const increment = useCallback((by = 1) => setCount((c) => clamp(c + by, min, max)), [min, max]);\n  const decrement = useCallback((by = 1) => setCount((c) => clamp(c - by, min, max)), [min, max]);\n  const reset = useCallback(() => setCount(clamp(initial, min, max)), [initial, min, max]);\n  return {count, set, increment, decrement, reset};\n}\n"
+    }
+  ]
+}

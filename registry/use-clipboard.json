@@ -19,6 +19,7 @@
   "import": "import {UseClipboard} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-clipboard",
   "files": [
+    "packages/react/src/hooks/use-clipboard/.claude",
     "packages/react/src/hooks/use-clipboard/index.ts",
     "packages/react/src/hooks/use-clipboard/meta.json",
     "packages/react/src/hooks/use-clipboard/use-clipboard.demo.tsx",

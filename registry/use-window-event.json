@@ -1,0 +1,44 @@
+{
+  "name": "use-window-event",
+  "title": "useWindowEvent",
+  "category": "hooks",
+  "description": "Add a typed window event listener that is removed on unmount.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output."
+  ],
+  "keywords": [
+    "addEventListener",
+    "resize",
+    "keydown",
+    "scroll"
+  ],
+  "kind": "hooks",
+  "import": "import {UseWindowEvent} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-window-event",
+  "files": [
+    "packages/react/src/hooks/use-window-event/index.ts",
+    "packages/react/src/hooks/use-window-event/meta.json",
+    "packages/react/src/hooks/use-window-event/use-window-event.demo.tsx",
+    "packages/react/src/hooks/use-window-event/use-window-event.test.tsx",
+    "packages/react/src/hooks/use-window-event/use-window-event.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-window-event/index.ts",
+      "content": "export {useWindowEvent} from './use-window-event';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-window-event/meta.json",
+      "content": "{\"name\":\"use-window-event\",\"title\":\"useWindowEvent\",\"category\":\"hooks\",\"description\":\"Add a typed window event listener that is removed on unmount.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output.\"],\"keywords\":[\"addEventListener\",\"resize\",\"keydown\",\"scroll\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-window-event/use-window-event.ts",
+      "content": "'use client';\nimport {useEffect, useRef} from 'react';\n\n/** `useWindowEvent('resize', () => ...)`. The latest handler is used without re-subscribing. */\nexport function useWindowEvent<K extends keyof WindowEventMap>(type: K, listener: (event: WindowEventMap[K]) => void, options?: boolean | AddEventListenerOptions): void {\n  const fn = useRef(listener);\n  useEffect(() => { fn.current = listener; });\n  useEffect(() => {\n    const on = (e: WindowEventMap[K]) => fn.current(e);\n    window.addEventListener(type, on, options);\n    return () => window.removeEventListener(type, on, options);\n  }, [type, options]);\n}\n"
+    }
+  ]
+}

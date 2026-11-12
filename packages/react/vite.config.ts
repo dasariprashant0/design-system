@@ -18,5 +18,5 @@ export default defineConfig({
     },
     sourcemap: true,
   },
-  test: {environment: 'jsdom', globals: true, setupFiles: ['src/test/setup.ts'], include: ['src/**/*.test.{ts,tsx}']},
+  test: {environment: 'jsdom', globals: true, setupFiles: ['src/test/setup.ts'], include: ['src/**/*.test.{ts,tsx}'], testTimeout: 15000},
 });

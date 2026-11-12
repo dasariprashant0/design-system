@@ -1,0 +1,44 @@
+{
+  "name": "use-toggle",
+  "title": "useToggle",
+  "category": "hooks",
+  "description": "Cycle through a list of values, or flip a boolean.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output."
+  ],
+  "keywords": [
+    "boolean",
+    "cycle",
+    "switch",
+    "flip"
+  ],
+  "kind": "hooks",
+  "import": "import {UseToggle} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-toggle",
+  "files": [
+    "packages/react/src/hooks/use-toggle/index.ts",
+    "packages/react/src/hooks/use-toggle/meta.json",
+    "packages/react/src/hooks/use-toggle/use-toggle.demo.tsx",
+    "packages/react/src/hooks/use-toggle/use-toggle.test.tsx",
+    "packages/react/src/hooks/use-toggle/use-toggle.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-toggle/index.ts",
+      "content": "export {useToggle} from './use-toggle';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-toggle/meta.json",
+      "content": "{\"name\":\"use-toggle\",\"title\":\"useToggle\",\"category\":\"hooks\",\"description\":\"Cycle through a list of values, or flip a boolean.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output.\"],\"keywords\":[\"boolean\",\"cycle\",\"switch\",\"flip\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-toggle/use-toggle.ts",
+      "content": "'use client';\nimport {useCallback, useState} from 'react';\n\n/** `const [on, toggle] = useToggle()` flips a boolean. Pass options to cycle: `useToggle(['light', 'dark'])`; `toggle('dark')` sets one. */\nexport function useToggle<T = boolean>(options: readonly [T, ...T[]] = [false, true] as unknown as readonly [T, ...T[]]): [T, (value?: T) => void] {\n  const [index, setIndex] = useState(0);\n  const toggle = useCallback((value?: T) => {\n    setIndex((i) => {\n      if (value !== undefined) { const at = options.indexOf(value); return at === -1 ? i : at; }\n      return (i + 1) % options.length;\n    });\n    // options is expected to be a stable list\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [options.length]);\n  return [options[index] as T, toggle];\n}\n"
+    }
+  ]
+}

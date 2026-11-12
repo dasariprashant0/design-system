@@ -51,7 +51,7 @@ Priority = how many of the ten UI libraries ship it. Status is `done` once the f
 
 **Cross-cutting.** Docs site redesign with theme/accent/font/radius/density controls; `npx monoline add <component>` CLI that copies sources from `registry/`; per-component `meta.json`; hooks (use-disclosure, use-media-query, use-clipboard, use-debounce, use-hotkeys, use-click-outside, use-local-storage); visual regression and axe in CI.
 
-### Status (118 components and hooks, 153 demos, 666 tests)
+### Status (129 components and hooks, 153 demos, 666 tests)
 
 **Done.** Every component that appears in three or more of the ten surveyed libraries (the matrix reports 0 missing), plus the `monoline` CLI, 12 hooks, 13 effects, 11 page blocks, nine accents, font/corner/density options, the docs site with guides, the registry and `llms*` files, and a test that renders every demo with axe.
 
@@ -60,4 +60,4 @@ Priority = how many of the ten UI libraries ship it. Status is `done` once the f
 - Verify the CLI against the real GitHub registry URL once the repo is pushed; publish `@monoline/css`, `@monoline/react` and `monoline` to npm.
 - Phase 2: chart wrapper, rich text editor, virtualised data grid, react-hook-form adapters, i18n and RTL pass, a theme builder page in the docs.
 - Per-component props tables in the docs (generated from the TypeScript types).
-- Hooks coverage still below Mantine's (use-hover, use-long-press, use-intersection, use-scroll-spy, use-hash and others).
+- Hooks: 23 now; Mantine still has more (use-eye-dropper, use-fullscreen, use-idle, use-network, use-queue and others).

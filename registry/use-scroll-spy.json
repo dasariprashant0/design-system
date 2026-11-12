@@ -1,0 +1,44 @@
+{
+  "name": "use-scroll-spy",
+  "title": "useScrollSpy",
+  "category": "hooks",
+  "description": "Find which section is currently in view, for a table of contents or sticky nav.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. Highlight the active link and keep real links so keyboard and no-JS users can navigate."
+  ],
+  "keywords": [
+    "toc",
+    "table of contents",
+    "active heading",
+    "scrollspy"
+  ],
+  "kind": "hooks",
+  "import": "import {UseScrollSpy} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-scroll-spy",
+  "files": [
+    "packages/react/src/hooks/use-scroll-spy/index.ts",
+    "packages/react/src/hooks/use-scroll-spy/meta.json",
+    "packages/react/src/hooks/use-scroll-spy/use-scroll-spy.demo.tsx",
+    "packages/react/src/hooks/use-scroll-spy/use-scroll-spy.test.tsx",
+    "packages/react/src/hooks/use-scroll-spy/use-scroll-spy.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-scroll-spy/index.ts",
+      "content": "export {useScrollSpy} from './use-scroll-spy';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-scroll-spy/meta.json",
+      "content": "{\"name\":\"use-scroll-spy\",\"title\":\"useScrollSpy\",\"category\":\"hooks\",\"description\":\"Find which section is currently in view, for a table of contents or sticky nav.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. Highlight the active link and keep real links so keyboard and no-JS users can navigate.\"],\"keywords\":[\"toc\",\"table of contents\",\"active heading\",\"scrollspy\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-scroll-spy/use-scroll-spy.ts",
+      "content": "'use client';\nimport {useEffect, useState} from 'react';\n\n/** Pass the element ids in page order. Returns the id of the last one scrolled past `offset` pixels from the top. */\nexport function useScrollSpy(ids: readonly string[], offset = 80): string | null {\n  const [active, setActive] = useState<string | null>(null);\n  const key = ids.join('|');\n  useEffect(() => {\n    const list = key ? key.split('|') : [];\n    const update = () => {\n      let current: string | null = null;\n      for (const id of list) {\n        const el = document.getElementById(id);\n        if (el && el.getBoundingClientRect().top - offset <= 0) current = id;\n      }\n      setActive(current);\n    };\n    update();\n    window.addEventListener('scroll', update, {passive: true});\n    window.addEventListener('resize', update);\n    return () => { window.removeEventListener('scroll', update); window.removeEventListener('resize', update); };\n  }, [key, offset]);\n  return active;\n}\n"
+    }
+  ]
+}

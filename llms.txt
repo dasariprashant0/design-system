@@ -140,12 +140,23 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - useClickOutside (use-click-outside, stable): Calls a function when a pointer goes down outside an element, to close menus and popovers. Source: packages/react/src/hooks/use-click-outside/
 - useClipboard (use-clipboard, stable): Copy text with the Clipboard API, with a copied flag that resets after a delay and an error when it fails. Source: packages/react/src/hooks/use-clipboard/
 - useControllableState (use-controllable-state, stable): The value, defaultValue and onChange pattern for custom components that can be controlled or uncontrolled. Source: packages/react/src/hooks/use-controllable-state/
+- useCounter (use-counter, stable): A number with increment, decrement, set and reset, bounded by optional min and max. Source: packages/react/src/hooks/use-counter/
 - useDebounce (use-debounce, stable): Debounced value and debounced callback: wait for input to settle before acting. Source: packages/react/src/hooks/use-debounce/
 - useDisclosure (use-disclosure, stable): Open and closed state with open, close and toggle functions, and callbacks when it changes. Source: packages/react/src/hooks/use-disclosure/
+- useDocumentTitle (use-document-title, stable): Set document.title while a component is mounted, then restore it. Source: packages/react/src/hooks/use-document-title/
 - useFocusTrap (use-focus-trap, stable): Keeps Tab focus inside an element while it is active, and returns focus when it closes. Source: packages/react/src/hooks/use-focus-trap/
+- useHash (use-hash, stable): Read and set location.hash as state. Source: packages/react/src/hooks/use-hash/
 - useHotkeys (use-hotkeys, stable): Keyboard shortcuts such as mod+k or escape, ignored while typing in fields unless allowed. Source: packages/react/src/hooks/use-hotkeys/
+- useHover (use-hover, stable): Track whether the pointer is over an element. Source: packages/react/src/hooks/use-hover/
+- useIntersection (use-intersection, stable): Know whether an element is in view, with an IntersectionObserver. Source: packages/react/src/hooks/use-intersection/
 - useInterval (use-interval, stable): Calls a function on a timer, with a null delay to pause it. Cleared on unmount. Source: packages/react/src/hooks/use-interval/
 - useLocalStorage (use-local-storage, stable): A JSON value kept in localStorage, shaped like useState, that stays in sync across tabs. Source: packages/react/src/hooks/use-local-storage/
+- useLongPress (use-long-press, stable): Call a handler when an element is held down, cancelling if the pointer moves or lifts early. Source: packages/react/src/hooks/use-long-press/
 - useMediaQuery (use-media-query, stable): Whether a CSS media query matches, updated live, and safe to render on the server. Source: packages/react/src/hooks/use-media-query/
+- useMounted (use-mounted, stable): True after the first client render. Use it to avoid server and client markup differences. Source: packages/react/src/hooks/use-mounted/
 - usePrevious (use-previous, stable): The value from the previous render, for comparing a change. Source: packages/react/src/hooks/use-previous/
 - useReducedMotion (use-reduced-motion, stable): Whether the user has asked the system to reduce motion, for skipping or simplifying animation in code. Source: packages/react/src/hooks/use-reduced-motion/
+- useScrollSpy (use-scroll-spy, stable): Find which section is currently in view, for a table of contents or sticky nav. Source: packages/react/src/hooks/use-scroll-spy/
+- useTimeout (use-timeout, stable): Run a callback after a delay, with start and clear controls. Source: packages/react/src/hooks/use-timeout/
+- useToggle (use-toggle, stable): Cycle through a list of values, or flip a boolean. Source: packages/react/src/hooks/use-toggle/
+- useWindowEvent (use-window-event, stable): Add a typed window event listener that is removed on unmount. Source: packages/react/src/hooks/use-window-event/

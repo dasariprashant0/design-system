@@ -1,0 +1,44 @@
+{
+  "name": "use-hash",
+  "title": "useHash",
+  "category": "hooks",
+  "description": "Read and set location.hash as state.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output. Changing the hash adds a history entry, so Back works."
+  ],
+  "keywords": [
+    "location",
+    "anchor",
+    "router",
+    "fragment"
+  ],
+  "kind": "hooks",
+  "import": "import {UseHash} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-hash",
+  "files": [
+    "packages/react/src/hooks/use-hash/index.ts",
+    "packages/react/src/hooks/use-hash/meta.json",
+    "packages/react/src/hooks/use-hash/use-hash.demo.tsx",
+    "packages/react/src/hooks/use-hash/use-hash.test.tsx",
+    "packages/react/src/hooks/use-hash/use-hash.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-hash/index.ts",
+      "content": "export {useHash} from './use-hash';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-hash/meta.json",
+      "content": "{\"name\":\"use-hash\",\"title\":\"useHash\",\"category\":\"hooks\",\"description\":\"Read and set location.hash as state.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output. Changing the hash adds a history entry, so Back works.\"],\"keywords\":[\"location\",\"anchor\",\"router\",\"fragment\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-hash/use-hash.ts",
+      "content": "'use client';\nimport {useCallback, useSyncExternalStore} from 'react';\n\nconst subscribe = (cb: () => void) => { window.addEventListener('hashchange', cb); return () => window.removeEventListener('hashchange', cb); };\n\n/** `const [hash, setHash] = useHash()`. The value has no leading \"#\". Empty string on the server. */\nexport function useHash(): [string, (hash: string) => void] {\n  const hash = useSyncExternalStore(subscribe, () => window.location.hash.slice(1), () => '');\n  const set = useCallback((next: string) => { window.location.hash = next; }, []);\n  return [hash, set];\n}\n"
+    }
+  ]
+}

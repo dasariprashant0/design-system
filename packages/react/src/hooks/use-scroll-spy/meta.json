@@ -1,0 +1,1 @@
+{"name":"use-scroll-spy","title":"useScrollSpy","category":"hooks","description":"Find which section is currently in view, for a table of contents or sticky nav.","status":"stable","css":[],"a11y":["No DOM output. Highlight the active link and keep real links so keyboard and no-JS users can navigate."],"keywords":["toc","table of contents","active heading","scrollspy"]}

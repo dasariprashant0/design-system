@@ -6,7 +6,7 @@ Versions follow [semver](https://semver.org). Before 1.0, a minor version may ch
 
 Monoline is now a monorepo: `@monoline/css`, `@monoline/react`, the `monoline` CLI and a docs app.
 
-- **118 components and hooks** (was 28 on the first monorepo cut): forms (combobox, autocomplete, multi-select, tags-input, calendar, date-picker, time-picker, color-picker, OTP, number and password inputs, file-upload), overlays (alert-dialog, drawer, hover-card, context-menu, menubar, toast), data display (data-table, tree, timeline, carousel, table, stat), navigation (navigation-menu, stepper, toolbar), layout (stack, flex, box, grid, container), 13 effects, 11 page blocks and 12 hooks.
+- **129 components and hooks** (was 28 on the first monorepo cut): forms (combobox, autocomplete, multi-select, tags-input, calendar, date-picker, time-picker, color-picker, OTP, number and password inputs, file-upload), overlays (alert-dialog, drawer, hover-card, context-menu, menubar, toast), data display (data-table, tree, timeline, carousel, table, stat), navigation (navigation-menu, stepper, toolbar), layout (stack, flex, box, grid, container), 13 effects, 11 page blocks and 23 hooks.
 - **Look options.** Nine accents (added rose, teal, amber, slate), `data-font`, `data-radius` and `data-density` in `packages/css/src/options.css`. All accents pass the contrast checks in every theme.
 - **CLI.** `npx monoline add | list | info | init` copies components from `registry/`.
 - **AI-readable.** `meta.json` per component, generated `registry/`, `llms.txt`, `llms-full.txt`, `AGENTS.md`.

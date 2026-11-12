@@ -1,0 +1,1 @@
+{"name":"use-counter","title":"useCounter","category":"hooks","description":"A number with increment, decrement, set and reset, bounded by optional min and max.","status":"stable","css":[],"a11y":["No DOM output."],"keywords":["count","number","stepper","bounded"]}

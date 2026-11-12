@@ -1,0 +1,1 @@
+{"name":"use-document-title","title":"useDocumentTitle","category":"hooks","description":"Set document.title while a component is mounted, then restore it.","status":"stable","css":[],"a11y":["Sets the page title, which screen readers announce on navigation. Make each view title unique and meaningful."],"keywords":["title","head","tab"]}

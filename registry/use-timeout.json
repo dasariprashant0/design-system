@@ -1,0 +1,43 @@
+{
+  "name": "use-timeout",
+  "title": "useTimeout",
+  "category": "hooks",
+  "description": "Run a callback after a delay, with start and clear controls.",
+  "status": "stable",
+  "css": [],
+  "a11y": [
+    "No DOM output."
+  ],
+  "keywords": [
+    "setTimeout",
+    "delay",
+    "later"
+  ],
+  "kind": "hooks",
+  "import": "import {UseTimeout} from '@monoline/react'",
+  "path": "packages/react/src/hooks/use-timeout",
+  "files": [
+    "packages/react/src/hooks/use-timeout/index.ts",
+    "packages/react/src/hooks/use-timeout/meta.json",
+    "packages/react/src/hooks/use-timeout/use-timeout.demo.tsx",
+    "packages/react/src/hooks/use-timeout/use-timeout.test.tsx",
+    "packages/react/src/hooks/use-timeout/use-timeout.ts"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/hooks/use-timeout/index.ts",
+      "content": "export {useTimeout} from './use-timeout';\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-timeout/meta.json",
+      "content": "{\"name\":\"use-timeout\",\"title\":\"useTimeout\",\"category\":\"hooks\",\"description\":\"Run a callback after a delay, with start and clear controls.\",\"status\":\"stable\",\"css\":[],\"a11y\":[\"No DOM output.\"],\"keywords\":[\"setTimeout\",\"delay\",\"later\"]}\n"
+    },
+    {
+      "path": "packages/react/src/hooks/use-timeout/use-timeout.ts",
+      "content": "'use client';\nimport {useCallback, useEffect, useRef} from 'react';\n\n/** `const {start, clear} = useTimeout(fn, 500)`. Calling `start` again restarts it. Cleared on unmount. The latest `fn` always runs. */\nexport function useTimeout(callback: () => void, delay: number) {\n  const fn = useRef(callback);\n  const id = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);\n  useEffect(() => { fn.current = callback; });\n  const clear = useCallback(() => { clearTimeout(id.current); id.current = undefined; }, []);\n  const start = useCallback(() => { clear(); id.current = setTimeout(() => fn.current(), delay); }, [clear, delay]);\n  useEffect(() => clear, [clear]);\n  return {start, clear};\n}\n"
+    }
+  ]
+}
