@@ -1,0 +1,9 @@
+/* Time field: one .input box holding spin-button segments. */
+.time-field { display: inline-flex; align-items: center; width: auto; gap: 0; padding-block: var(--s2); }
+.time-field:focus-within { outline: 2px solid var(--accent); outline-offset: 1px; }
+.time-segment { min-width: 2ch; padding-inline: var(--s1); text-align: center; font-variant-numeric: tabular-nums; outline: none; }
+.time-segment:focus-visible { background: var(--foreground); color: var(--background); }
+.time-segment[data-empty] { color: var(--muted); }
+.time-segment:focus-visible[data-empty] { color: var(--background); }
+.time-field[data-disabled] { opacity: 0.5; cursor: not-allowed; }
+.time-sep { color: var(--muted); }
