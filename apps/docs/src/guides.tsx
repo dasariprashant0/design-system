@@ -1,6 +1,7 @@
 // Guide pages. Plain content, shown under "Guides" in the sidebar. Routes are `#guides/<slug>`.
 import type {ReactNode} from 'react';
 import {CodeBlock} from '@monoline/react';
+import {ThemeBuilder} from './theme-builder';
 
 export interface Guide {slug: string; title: string; summary: string; body: () => ReactNode}
 
@@ -142,5 +143,6 @@ export const guides: Guide[] = [
   {slug: 'getting-started', title: 'Getting started', summary: 'Install, import and render your first component.', body: gettingStarted},
   {slug: 'cli', title: 'CLI', summary: 'Copy components into your project with npx monoline.', body: cli},
   {slug: 'theming', title: 'Theming', summary: 'Themes, accents, fonts, corners, density and tokens.', body: theming},
+  {slug: 'theme-builder', title: 'Theme builder', summary: 'Try the options and custom colours, then copy the CSS.', body: () => <ThemeBuilder />},
   {slug: 'for-ai-tools', title: 'For AI tools', summary: 'llms.txt, the registry and meta.json.', body: forAi},
 ];

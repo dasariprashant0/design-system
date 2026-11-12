@@ -55,9 +55,8 @@ Priority = how many of the ten UI libraries ship it. Status is `done` once the f
 
 **Done.** Every component that appears in three or more of the ten surveyed libraries (the matrix reports 0 missing), plus the `monoline` CLI, 12 hooks, 13 effects, 11 page blocks, nine accents, font/corner/density options, the docs site with guides, the registry and `llms*` files, and a test that renders every demo with axe.
 
-**Open (next up).**
+**Open (next up). Done since: generated props tables and a theme builder in the docs.**
 - Pixel-diff visual regression in CI (needs a browser-automation dev dependency and a baseline).
 - Verify the CLI against the real GitHub registry URL once the repo is pushed; publish `@monoline/css`, `@monoline/react` and `monoline` to npm.
-- Phase 2: chart wrapper, rich text editor, virtualised data grid, react-hook-form adapters, i18n and RTL pass, a theme builder page in the docs.
-- Per-component props tables in the docs (generated from the TypeScript types).
+- Phase 2: chart wrapper, rich text editor, virtualised data grid, react-hook-form adapters, i18n and RTL pass.
 - Hooks: 23 now; Mantine still has more (use-eye-dropper, use-fullscreen, use-idle, use-network, use-queue and others).

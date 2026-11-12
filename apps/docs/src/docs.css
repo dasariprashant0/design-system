@@ -68,3 +68,9 @@ code { font-family: var(--font-body); background: var(--wash-2); padding: 0 var(
 .props-table td { vertical-align: top; }
 .props-type { white-space: normal; overflow-wrap: anywhere; font-size: var(--text-xs); }
 .props-table td:last-child { min-width: 14rem; }
+.builder-controls { display: grid; gap: var(--s4); }
+.builder-switch { display: flex; align-items: center; gap: var(--s3); font-size: var(--text-sm); }
+.builder-colours { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: var(--s4); margin-top: var(--s4); }
+.builder-ratio { grid-column: 1 / -1; font-size: var(--text-sm); }
+.builder-preview { padding: var(--s5); background: var(--background); color: var(--foreground); border: 1px solid var(--rule); font-family: var(--font-body); }
+.builder-row { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; }
