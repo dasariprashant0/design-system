@@ -3,7 +3,9 @@ import {Slot} from 'radix-ui';
 import {cx} from '../../utils/cx';
 
 export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
+  /** Type size: `xs`, `sm`, `md` (default) or `lg`. */
   size?: 'xs' | 'sm' | 'md' | 'lg';
+  /** Colour role: `default`, `muted`, `danger`, `ok` or `accent`. Never rely on colour alone to carry meaning. */
   tone?: 'default' | 'muted' | 'danger' | 'ok' | 'accent';
   /** One line with an ellipsis. */
   truncate?: boolean;

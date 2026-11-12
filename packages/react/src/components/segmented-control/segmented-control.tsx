@@ -10,9 +10,13 @@ export interface SegmentedOption {
 }
 
 export interface SegmentedControlProps extends Omit<ComponentPropsWithoutRef<typeof Radix.Root>, 'type' | 'value' | 'defaultValue' | 'onValueChange' | 'children' | 'dir'> {
+  /** The segments to show, each with a `value`, a `label` and an optional `disabled`. */
   options: SegmentedOption[];
+  /** The selected segment's `value` when controlled. Pair with `onValueChange`. */
   value?: string;
+  /** The segment selected at first when uncontrolled. Defaults to the first option. */
   defaultValue?: string;
+  /** Called with the new segment's `value` when the user picks a different one. */
   onValueChange?: (value: string) => void;
   /** Names the control, for example "View". */
   'aria-label': string;

@@ -5,15 +5,21 @@ import {cx} from '../../utils/cx';
 export interface OtpInputProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
   /** Names the group, for example "Verification code". */
   'aria-label': string;
+  /** Number of boxes, which is the length of the code. Default 6. */
   length?: number;
+  /** The code typed so far when controlled. Pair with `onValueChange`. */
   value?: string;
+  /** The code typed at first when uncontrolled. Default empty. */
   defaultValue?: string;
+  /** Called with the whole code (so far) every time a character is added or removed. */
   onValueChange?: (value: string) => void;
   /** Called once when every box is filled. */
   onComplete?: (value: string) => void;
   /** Allow letters as well as digits. */
   alphanumeric?: boolean;
+  /** Disables every box. */
   disabled?: boolean;
+  /** Marks the boxes as having an error: sets `aria-invalid` and shows the error border. */
   invalid?: boolean;
 }
 

@@ -4,6 +4,7 @@ import {cx} from '../../utils/cx';
 export interface MarqueeProps extends HTMLAttributes<HTMLDivElement> {
   /** Seconds for one full loop. */
   duration?: number;
+  /** Scroll to the right instead of the left. Default false. */
   reverse?: boolean;
   /** Stop when the pointer is over it or focus is inside. Default true. */
   pauseOnHover?: boolean;

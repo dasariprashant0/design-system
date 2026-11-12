@@ -10,13 +10,17 @@ export interface ComboboxOption {
 }
 
 export interface ComboboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'onChange' | 'role' | 'size'> {
+  /** The choices, each with a `value`, a `label` and an optional `disabled`. The user filters them by typing part of the label. */
   options: ComboboxOption[];
+  /** The selected option's `value` when controlled; `''` means none. Pair with `onValueChange`. */
   value?: string;
+  /** The initially selected option's `value` when uncontrolled. Default none. */
   defaultValue?: string;
   /** Called with the chosen option's value, or '' when cleared. */
   onValueChange?: (value: string) => void;
   /** Shown when nothing matches. */
   emptyText?: string;
+  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */
   invalid?: boolean;
 }
 

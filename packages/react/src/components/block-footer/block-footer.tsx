@@ -16,7 +16,9 @@ export interface FooterColumn {
 export interface BlockFooterProps extends HTMLAttributes<HTMLElement> {
   /** Your logo or name. */
   brand?: ReactNode;
+  /** Optional short sentence about the product, shown under the brand. */
   description?: ReactNode;
+  /** Groups of links; each column has a `title` and a list of `links` and becomes its own labelled `nav`. */
   columns: FooterColumn[];
   /** Small print: copyright, legal links. */
   legal?: ReactNode;

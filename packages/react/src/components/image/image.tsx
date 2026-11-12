@@ -7,6 +7,7 @@ export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   alt: string;
   /** Width / height, for example `16 / 9`. Reserves space so the page does not jump. */
   ratio?: number;
+  /** How the image fills its box when `ratio` crops it: `cover` (default) or `contain`. */
   fit?: 'cover' | 'contain';
 }
 

@@ -12,14 +12,19 @@ export interface TreeNode {
 }
 
 export interface TreeProps extends Omit<HTMLAttributes<HTMLUListElement>, 'defaultValue' | 'onChange'> {
+  /** The top-level nodes; each node has an `id`, a `label` and optional `children`. */
   items: TreeNode[];
   /** Selected node id. Controlled with `value` + `onValueChange`, or uncontrolled with `defaultValue`. */
   value?: string;
+  /** The id of the node selected at first when uncontrolled. Default none. */
   defaultValue?: string;
+  /** Called with the id of the node the user selects. */
   onValueChange?: (id: string) => void;
   /** Open branches. Controlled with `expanded` + `onExpandedChange`, or uncontrolled with `defaultExpanded`. */
   expanded?: string[];
+  /** Ids of the branches open at first when uncontrolled. Default none. */
   defaultExpanded?: string[];
+  /** Called with the full list of open branch ids when the user opens or closes a branch. */
   onExpandedChange?: (ids: string[]) => void;
   /** Required: names the tree. */
   'aria-label': string;

@@ -17,10 +17,13 @@ function normalise(raw: string): string | null {
 export interface ColorPickerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
   /** The colour as "#rrggbb". */
   value?: string;
+  /** The initial colour as "#rrggbb" when uncontrolled. */
   defaultValue?: string;
+  /** Called with the new colour as "#rrggbb" when the user picks a swatch or types a valid hex. */
   onValueChange?: (value: string) => void;
   /** Preset swatches, each a CSS hex colour. Set from this prop, never from the stylesheet. */
   colors?: string[];
+  /** Stops the user changing the colour. */
   disabled?: boolean;
   /** Accessible name for the group. */
   'aria-label'?: string;

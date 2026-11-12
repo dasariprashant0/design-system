@@ -7,6 +7,7 @@ export interface BreadcrumbItem {
   href?: string;
 }
 export interface BreadcrumbProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
+  /** The trail from the root to the current page; the last item is treated as the current page and is not a link. */
   items: BreadcrumbItem[];
   /** Name of the landmark. */
   'aria-label'?: string;

@@ -12,9 +12,13 @@ export interface Feature {
 }
 
 export interface BlockFeatureGridProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
+  /** Section heading shown above the grid. */
   title: ReactNode;
+  /** Optional muted line under the section heading. */
   description?: ReactNode;
+  /** The items to show, each with a `title`, `description` and optional `icon`. */
   features: Feature[];
+  /** Number of columns on wide screens: 2, 3 (default) or 4. Fewer columns are used on narrow screens. */
   columns?: 2 | 3 | 4;
   /** Outline level of the section title; each feature title is one level lower. */
   headingLevel?: 1 | 2 | 3 | 4 | 5;

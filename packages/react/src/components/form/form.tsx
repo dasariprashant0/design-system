@@ -9,6 +9,7 @@ export interface FormError {
 }
 
 export interface FormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
+  /** Called with the submit event. Combine with `preventDefault` when you handle the form in JS. */
   onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
   /** Call `event.preventDefault()` before `onSubmit`, for forms handled in JS. Off by default so native posts still work. */
   preventDefault?: boolean;

@@ -25,4 +25,5 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(function Carou
   );
 });
 
+/** One slide inside a `Carousel`. Wrap each slide's content in it. */
 export const CarouselItem = ({children}: {children: React.ReactNode}) => <>{children}</>;

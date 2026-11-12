@@ -23,7 +23,9 @@ export interface DataTableSort {
 }
 
 export interface DataTableProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+  /** The column definitions: each has an `id`, a `header`, and optionally an `accessor`, a `cell` renderer, `sortable` and `align`. */
   columns: DataTableColumn<T>[];
+  /** The rows to show; each row's `id` field (or `getRowId`) must be unique. */
   data: T[];
   /** Stable id for a row. Defaults to `row.id`, then the index. */
   getRowId?: (row: T, index: number) => string;
@@ -31,16 +33,23 @@ export interface DataTableProps<T> extends Omit<HTMLAttributes<HTMLDivElement>, 
   label: string;
   /** Sort state. Controlled with `sort` + `onSortChange`, or uncontrolled with `defaultSort`. `null` means unsorted. */
   sort?: DataTableSort | null;
+  /** The initial sort when uncontrolled, as `{id, direction}`. Default `null` (unsorted). */
   defaultSort?: DataTableSort | null;
+  /** Called with the new sort (`null` when sorting is cleared) when the user clicks a sortable header. */
   onSortChange?: (sort: DataTableSort | null) => void;
   /** Adds a checkbox column. Selected row ids: controlled with `selection` + `onSelectionChange`, or uncontrolled with `defaultSelection`. */
   selectable?: boolean;
+  /** Ids of the selected rows when controlled. Pair with `onSelectionChange` and `selectable`. */
   selection?: string[];
+  /** Ids of the rows selected at first when uncontrolled. Default none. */
   defaultSelection?: string[];
+  /** Called with the full list of selected row ids when the user checks or unchecks a row. */
   onSelectionChange?: (ids: string[]) => void;
   /** Rows per page. Omit to show every row. */
   pageSize?: number;
+  /** Heading shown when there are no rows. Default "No results". */
   emptyTitle?: ReactNode;
+  /** Optional sentence under the empty heading, for example how to add the first row. */
   emptyDescription?: ReactNode;
 }
 
@@ -129,4 +138,5 @@ export function DataTableInner<T>(
   );
 }
 
+/** A sortable, selectable, paginated table built from `columns` and `data`; see `DataTableInner` for behaviour. */
 export const DataTable = forwardRef(DataTableInner) as <T>(props: DataTableProps<T> & {ref?: React.Ref<HTMLDivElement>}) => ReturnType<typeof DataTableInner>;

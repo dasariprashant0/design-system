@@ -3,7 +3,9 @@ import {forwardRef, type HTMLAttributes} from 'react';
 export interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
   /** Current page, 1-based. */
   page: number;
+  /** Total number of pages. */
   pageCount: number;
+  /** Called with the new 1-based page number when the user picks a page or presses Prev or Next. */
   onPageChange: (page: number) => void;
   /** How many numbers to show on each side of the current page. */
   siblings?: number;

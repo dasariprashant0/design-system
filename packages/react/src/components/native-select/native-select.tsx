@@ -3,6 +3,7 @@ import {cx} from '../../utils/cx';
 import {useFieldControl} from '../field';
 
 export interface NativeSelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
+  /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */
   invalid?: boolean;
 }
 

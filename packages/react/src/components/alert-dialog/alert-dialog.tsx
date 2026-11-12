@@ -2,7 +2,9 @@ import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type HTMLAtt
 import {AlertDialog as Radix} from 'radix-ui';
 import {cx} from '../../utils/cx';
 
+/** The root of a confirmation dialog that must be answered. Holds the open state; put `AlertDialogTrigger` and `AlertDialogContent` inside. Unlike `Dialog` it cannot be dismissed by clicking outside. */
 export const AlertDialog = Radix.Root;
+/** The element (usually a `Button`) that opens the alert dialog; use `asChild` to render your own element. */
 export const AlertDialogTrigger = Radix.Trigger;
 
 /** The panel with its overlay. Always include a title and description. */
@@ -15,12 +17,16 @@ export const AlertDialogContent = forwardRef<ElementRef<typeof Radix.Content>, C
   );
 });
 
+/** Wrapper for the title and description at the top of the dialog. */
 export const AlertDialogHeader = ({className, ...rest}: HTMLAttributes<HTMLDivElement>) => <div className={cx('dialog-header', className)} {...rest} />;
+/** Wrapper for the action buttons at the bottom of the dialog (usually `AlertDialogCancel` then `AlertDialogAction`). */
 export const AlertDialogFooter = ({className, ...rest}: HTMLAttributes<HTMLDivElement>) => <div className={cx('dialog-footer', className)} {...rest} />;
 
+/** The dialog's accessible name, rendered as the heading. Required. */
 export const AlertDialogTitle = forwardRef<ElementRef<typeof Radix.Title>, ComponentPropsWithoutRef<typeof Radix.Title>>(function AlertDialogTitle({className, ...rest}, ref) {
   return <Radix.Title ref={ref} className={cx('dialog-title', className)} {...rest} />;
 });
+/** Explains what will happen if the user confirms; read out when the dialog opens. Required. */
 export const AlertDialogDescription = forwardRef<ElementRef<typeof Radix.Description>, ComponentPropsWithoutRef<typeof Radix.Description>>(function AlertDialogDescription({className, ...rest}, ref) {
   return <Radix.Description ref={ref} className={cx('dialog-description', className)} {...rest} />;
 });

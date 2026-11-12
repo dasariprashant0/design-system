@@ -5,10 +5,13 @@ import {useFieldControl} from '../field';
 import {Tag} from '../tag';
 
 export interface TagsInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'onChange' | 'size'> {
+  /** The current tags when controlled. Pair with `onValueChange`. */
   value?: string[];
+  /** The tags present at first when uncontrolled. Default empty. */
   defaultValue?: string[];
   /** Called with the full list of tags after one is added or removed. */
   onValueChange?: (value: string[]) => void;
+  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */
   invalid?: boolean;
 }
 

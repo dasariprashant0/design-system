@@ -7,6 +7,7 @@ export interface StepperStep {
 }
 
 export interface StepperProps extends HTMLAttributes<HTMLOListElement> {
+  /** The steps in order, each with a `title` and optional `description`. */
   steps: StepperStep[];
   /** Zero-based index of the current step. Earlier steps are done. */
   current: number;

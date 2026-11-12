@@ -24,14 +24,19 @@ export interface PricingTier {
 }
 
 export interface BlockPricingProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onSelect'> {
+  /** Section heading shown above the tiers. */
   title: ReactNode;
+  /** Optional muted line under the heading. */
   description?: ReactNode;
+  /** The plans to compare, each with a name, monthly and yearly price, features and a call to action. */
   tiers: PricingTier[];
   /** Start on yearly billing. */
   defaultInterval?: PricingInterval;
+  /** Overrides for the built-in English texts (Monthly, Yearly, Billing period, Popular, / month, / year); use it to translate. */
   labels?: Partial<{monthly: string; yearly: string; switcher: string; period: Record<PricingInterval, string>; highlight: string}>;
   /** Called when a tier's button (one without `href`) is pressed. */
   onSelect?: (tier: PricingTier, interval: PricingInterval) => void;
+  /** Outline level of the section title, 1 to 5. Default 2; each tier name is one level lower. */
   headingLevel?: 1 | 2 | 3 | 4 | 5;
 }
 

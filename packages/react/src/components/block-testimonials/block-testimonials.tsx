@@ -13,8 +13,11 @@ export interface Testimonial {
 }
 
 export interface BlockTestimonialsProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
+  /** Section heading shown above the quotes. */
   title: ReactNode;
+  /** The quotes to show, each with `quote`, `name` and optional `role` and `avatar`. */
   items: Testimonial[];
+  /** Outline level of the section title, 1 to 6. Default 2. */
   headingLevel?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
