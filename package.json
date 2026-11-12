@@ -1,51 +1,17 @@
 {
-  "name": "monoline-ui",
-  "version": "0.2.0",
-  "description": "Monoline: a small UI kit in monospace type, thin rules and square edges. Plain CSS with three themes and four accents, plus optional React pieces.",
-  "keywords": [
-    "ui-kit",
-    "css",
-    "design-system",
-    "monospace",
-    "react"
-  ],
+  "name": "monoline",
+  "private": true,
+  "version": "0.3.0",
+  "description": "Monoline: an open-source UI kit. Plain CSS core, accessible React components, docs, and an AI-readable registry.",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dasariprashant0/design-system.git"
-  },
   "type": "module",
+  "workspaces": ["packages/*", "apps/*"],
   "scripts": {
-    "build": "node scripts/build.mjs",
-    "check": "node scripts/check.mjs"
-  },
-  "exports": {
-    ".": "./css/monoline.css",
-    "./monoline.css": "./css/monoline.css",
-    "./tokens.css": "./css/tokens.css",
-    "./base.css": "./css/base.css",
-    "./components.css": "./css/components.css",
-    "./accents.css": "./css/accents.css",
-    "./react": "./react/index.tsx",
-    "./utilities.css": "./css/utilities.css",
-    "./monoline.min.css": "./css/monoline.min.css",
-    "./monoline.js": "./js/monoline.js",
-    "./tokens.json": "./tokens/tokens.json"
-  },
-  "files": [
-    "css",
-    "js",
-    "tokens",
-    "react",
-    "DESIGN.md",
-    "LICENSE"
-  ],
-  "peerDependencies": {
-    "react": ">=18"
-  },
-  "peerDependenciesMeta": {
-    "react": {
-      "optional": true
-    }
+    "dev": "npm run dev -w apps/docs",
+    "build": "npm run build -w @monoline/css && npm run build -w @monoline/react && npm run build -w apps/docs",
+    "test": "npm run test -w @monoline/react",
+    "typecheck": "npm run typecheck -w @monoline/react && npm run typecheck -w apps/docs",
+    "check": "npm run check -w @monoline/css && npm run typecheck && npm run test",
+    "registry": "npm run registry -w @monoline/react"
   }
 }

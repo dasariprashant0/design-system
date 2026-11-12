@@ -1,0 +1,15 @@
+# Monoline
+
+> Open-source UI kit: a plain CSS core (@monoline/css) with accessible React components (@monoline/react). Three themes, four accents, no Tailwind, no runtime CSS-in-JS.
+
+Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rules). Every component is a folder with source, test, demo and meta.json.
+
+## Button (button)
+Triggers an action. Native button with solid, line, ghost and danger variants.
+Import: import {Button} from '@monoline/react'
+Primitive: radix-ui/Slot | Status: stable
+A11y:
+- Native <button>: Enter and Space activate, Tab focuses.
+- loading sets aria-busy and blocks clicks while keeping the label.
+- asChild renders a link without losing link semantics.
+Files: packages/react/src/components/button/button.demo.tsx, packages/react/src/components/button/button.test.tsx, packages/react/src/components/button/button.tsx, packages/react/src/components/button/index.ts, packages/react/src/components/button/meta.json

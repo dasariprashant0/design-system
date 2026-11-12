@@ -1,6 +1,6 @@
 # Monoline design rules
 
-> Read this before building or changing any screen. The code is in `css/` and `react/`; see it all in the docs page (`index.html`, or https://dasariprashant0.github.io/design-system/).
+> Read this before building or changing any screen. The code is in `packages/css/src/` and `react/`; see it all in the docs page (`index.html`, or https://dasariprashant0.github.io/design-system/).
 
 **The look in one line:** paper and ink, monospace type, square edges, thin rules instead of boxes, and one loud accent.
 
@@ -60,7 +60,7 @@ export default defineConfig({plugins: [react()], resolve: {preserveSymlinks: tru
 [data-theme="midnight"]    { --accent: #5FD6B2; --accent-text: #5FD6B2; --accent-2: #FFC857; --on-accent: #06241C; }
 ```
 
-A new accent must pass: `--accent-text` on `--background` at least 4.5:1, `--accent` on `--background` at least 3:1, and `--on-accent` on `--accent` at least 4.5:1, in all three themes. To add it to the kit, put it in `css/accents.css` and the table above.
+A new accent must pass: `--accent-text` on `--background` at least 4.5:1, `--accent` on `--background` at least 3:1, and `--on-accent` on `--accent` at least 4.5:1, in all three themes. To add it to the kit, put it in `packages/css/src/accents.css` and the table above.
 
 ## 2. Principles
 
@@ -74,7 +74,7 @@ A new accent must pass: `--accent-text` on `--background` at least 4.5:1, `--acc
 
 ## 3. Tokens
 
-All in `css/tokens.css`. Three themes, set on `<html data-theme>` (the React `useTheme()` does it for you); the accent is `<html data-accent>`.
+All in `packages/css/src/tokens.css`. Three themes, set on `<html data-theme>` (the React `useTheme()` does it for you); the accent is `<html data-accent>`.
 
 | Group | Tokens | Use |
 |---|---|---|
@@ -183,7 +183,7 @@ Never use `--border` for a visible line: it is about 1.1:1 in dark themes. Use `
 - **Project-only layout** goes in the project's own CSS, using tokens.
 - **Second use:** when a pattern appears in a second project, move it here (CSS class first, then a React wrapper if it has behaviour) and add it to the gallery.
 - **Adding a token:** add it to all three themes if it's a colour, add it to §3, and show it in the gallery.
-- After any change, open the gallery in all three themes with each accent. Then run `npm run build` here to regenerate `css/monoline.css`.
+- After any change, open the gallery in all three themes with each accent. Then run `npm run build` here to regenerate `packages/css/src/monoline.css`.
 
 ## 12. Before you call a screen done
 

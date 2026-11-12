@@ -1,0 +1,15 @@
+{
+  "name": "button",
+  "title": "Button",
+  "category": "buttons",
+  "description": "Triggers an action. Native button with solid, line, ghost and danger variants.",
+  "status": "stable",
+  "primitive": "radix-ui/Slot",
+  "css": ["02-buttons.css", "13-loading.css"],
+  "a11y": [
+    "Native <button>: Enter and Space activate, Tab focuses.",
+    "loading sets aria-busy and blocks clicks while keeping the label.",
+    "asChild renders a link without losing link semantics."
+  ],
+  "keywords": ["action", "cta", "submit"]
+}

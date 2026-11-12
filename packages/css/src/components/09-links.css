@@ -1,0 +1,6 @@
+/* ─── Links, dividers, skip link ─── */
+.link { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+.link:hover { text-decoration-color: currentColor; }
+.divider { border: 0; border-top: 1px solid var(--rule); margin: var(--s5) 0; }
+.skip-link { position: absolute; left: var(--s4); top: -100px; z-index: var(--z-toast); padding: var(--s3) var(--s4); background: var(--foreground); color: var(--background); }
+.skip-link:focus { top: var(--s4); }

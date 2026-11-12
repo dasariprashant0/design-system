@@ -1,0 +1,4 @@
+/* ─── Toast region: stacked toasts made by Monoline.toast() ─── */
+.toast-region { position: fixed; left: 50%; bottom: var(--s5); transform: translateX(-50%); z-index: var(--z-toast); display: grid; gap: var(--s2); justify-items: center; width: max-content; max-width: 92vw; }
+.toast-region .toast { position: static; transform: none; animation: rise-in-r var(--base) var(--ease); }
+@keyframes rise-in-r { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }

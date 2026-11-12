@@ -1,0 +1,4 @@
+/* ─── Tooltip: shows on hover and keyboard focus; the trigger carries aria-describedby ─── */
+.tip-wrap { position: relative; display: inline-flex; }
+.tip { position: absolute; left: 50%; bottom: calc(100% + var(--s2)); transform: translateX(-50%); z-index: var(--z-drawer); padding: var(--s1) var(--s3); background: var(--surface); color: var(--surface-text); font-size: var(--text-xs); white-space: nowrap; pointer-events: none; visibility: hidden; opacity: 0; transition: opacity var(--fast); }
+.tip-wrap:hover .tip, .tip-wrap:focus-within .tip { visibility: visible; opacity: 1; }

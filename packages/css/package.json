@@ -1,0 +1,21 @@
+{
+  "name": "@monoline/css",
+  "version": "0.3.0",
+  "description": "Monoline core: plain CSS design tokens, themes, accents and components. No framework, no build step needed to use it.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {"type": "git", "url": "git+https://github.com/dasariprashant0/design-system.git", "directory": "packages/css"},
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "exports": {
+    ".": "./dist/monoline.css",
+    "./monoline.css": "./dist/monoline.css",
+    "./monoline.min.css": "./dist/monoline.min.css",
+    "./monoline.js": "./dist/monoline.js",
+    "./tokens.json": "./dist/tokens.json",
+    "./src/*": "./src/*"
+  },
+  "files": ["dist", "src", "js"]
+}

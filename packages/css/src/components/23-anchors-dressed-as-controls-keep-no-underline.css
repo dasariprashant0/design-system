@@ -1,0 +1,5 @@
+/* ─── Anchors dressed as controls keep no underline; a CSS-only drawer stays hidden until .open ─── */
+a.btn, a.nav-item, a.row, a.tab, a.menu-item { text-decoration: none; }
+a.btn-ghost { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+.drawer:not(.open) .panel { visibility: hidden; animation: none; }
+.drawer.open .panel { visibility: visible; }

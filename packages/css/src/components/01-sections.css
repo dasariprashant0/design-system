@@ -1,0 +1,11 @@
+/* ─── Sections ─── */
+.block { margin-top: var(--s9); }
+.block:first-child { margin-top: 0; }
+.section-title { margin-bottom: var(--s4); }
+.lede { max-width: var(--measure); margin-bottom: var(--s5); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); }
+.stack { display: grid; gap: var(--s4); }
+.row-gap { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); }
+.empty { margin-top: 14vh; display: grid; gap: var(--s5); justify-items: start; max-width: var(--measure); }
+.loading { margin-top: var(--s7); color: var(--muted); }
+.note { margin-top: var(--s4); color: var(--accent-text); }

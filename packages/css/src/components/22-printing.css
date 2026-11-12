@@ -1,0 +1,6 @@
+/* ─── Printing: ink on paper ─── */
+@media print {
+  .side, .toast, .toast-region, .drawer, .skip-link, body::after { display: none !important; }
+  .shell { display: block; height: auto; }
+  .main { overflow: visible; padding: 0; }
+}

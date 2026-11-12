@@ -1,0 +1,14 @@
+# Monoline
+
+> Open-source UI kit: a plain CSS core (@monoline/css) with accessible React components (@monoline/react). Three themes, four accents, no Tailwind, no runtime CSS-in-JS.
+
+Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rules). Every component is a folder with source, test, demo and meta.json.
+
+## Docs
+- [AGENTS.md](AGENTS.md): rules for AI agents and contributors
+- [DESIGN.md](DESIGN.md): design rules, tokens, copy
+- [registry/index.json](registry/index.json): machine-readable component list
+
+## Components
+### buttons
+- Button (button, stable): Triggers an action. Native button with solid, line, ghost and danger variants. Source: packages/react/src/components/button/

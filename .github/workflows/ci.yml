@@ -1,13 +1,17 @@
 name: ci
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: {node-version: 22}
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
       - run: npm run check
       - run: npm run build
-      - name: Built files are committed
-        run: git diff --exit-code css/monoline.css css/monoline.min.css tokens/tokens.json
+      - run: npm run registry
+      - name: Registry and llms files are up to date
+        run: git diff --exit-code registry llms.txt llms-full.txt
