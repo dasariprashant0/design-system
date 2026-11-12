@@ -3,10 +3,10 @@
 .choice input { appearance: none; flex: none; width: 18px; height: 18px; margin: 1px 0 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }
 .choice input[type="radio"] { border-radius: var(--round); }
 .choice input:checked { background: var(--foreground); }
-.choice input[type="checkbox"]:checked::after { content: ""; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px; border: solid var(--background); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.choice input[type="checkbox"]:checked::after { content: ""; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px; border: solid var(--background); border-width: 0 2px 2px 0; transform: rotate(45deg); } /* physical: tick geometry, drawn left to right */
 .choice input[type="radio"]:checked::after { content: ""; position: absolute; inset: 4px; border-radius: var(--round); background: var(--background); }
 .choice input[type="checkbox"]:indeterminate { background: var(--foreground); }
-.choice input[type="checkbox"]:indeterminate::after { content: ""; position: absolute; left: 3px; right: 3px; top: 7px; height: 2px; background: var(--background); }
+.choice input[type="checkbox"]:indeterminate::after { content: ""; position: absolute; inset-inline: 3px; top: 7px; height: 2px; background: var(--background); }
 .choice input:disabled { opacity: 0.5; cursor: not-allowed; }
 .choice:has(input:disabled) { color: var(--muted); cursor: not-allowed; }
 .choice-group { display: grid; gap: var(--s3); border: 0; padding: 0; margin: 0; min-width: 0; }

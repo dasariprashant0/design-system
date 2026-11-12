@@ -1,10 +1,10 @@
 /* Alert: a lasting message with a title. Same left-bar language as .banner. */
-.alert { display: grid; gap: var(--s1); padding: var(--s3) var(--s4); background: var(--wash); box-shadow: inset 3px 0 0 var(--foreground); font-size: var(--text-sm); }
-.alert-title { font-weight: 500; }
-.alert-description { color: var(--muted); }
-.alert[data-tone="success"] { box-shadow: inset 3px 0 0 var(--ok); }
-.alert[data-tone="warning"] { box-shadow: inset 3px 0 0 var(--warning); }
-.alert[data-tone="danger"] { box-shadow: inset 3px 0 0 var(--danger); }
+.alert { display: grid; gap: var(--s1); padding: var(--s3) var(--s4); background: var(--wash); box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--foreground); font-size: var(--text-sm); }
+.alert-title { overflow-wrap: anywhere; font-weight: 500; }
+.alert-description { overflow-wrap: anywhere; color: var(--muted); }
+.alert[data-tone="success"] { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--ok); }
+.alert[data-tone="warning"] { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--warning); }
+.alert[data-tone="danger"] { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--danger); }
 .alert[data-tone="success"] .alert-title { color: var(--ok); }
 .alert[data-tone="warning"] .alert-title { color: var(--warning); }
 .alert[data-tone="danger"] .alert-title { color: var(--danger); }

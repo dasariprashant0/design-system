@@ -1,3 +1,4 @@
 /* Scroll progress: --scroll-progress (0 to 1) scales the bar. No transition: it follows the scroll directly. */
-.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: var(--z-drawer); pointer-events: none; }
+.scroll-progress { position: fixed; top: 0; inset-inline-start: 0; inset-inline-end: 0; height: 2px; z-index: var(--z-drawer); pointer-events: none; }
 .scroll-progress-bar { height: 100%; background: var(--accent); transform: scaleX(var(--scroll-progress, 0)); transform-origin: left; }
+[dir="rtl"] .scroll-progress-bar { transform-origin: right; }

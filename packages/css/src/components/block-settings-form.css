@@ -2,4 +2,4 @@
 .block-settings { display: flex; flex-direction: column; gap: var(--s6); width: 100%; max-width: 40rem; padding: var(--s6) var(--s5); }
 .block-settings-head { display: flex; flex-direction: column; gap: var(--s2); }
 .block-settings-row { display: flex; flex-direction: column; gap: var(--s1); }
-.block-settings-row .field-hint { padding-left: var(--s7); }
+.block-settings-row .field-hint { padding-inline-start: var(--s7); }

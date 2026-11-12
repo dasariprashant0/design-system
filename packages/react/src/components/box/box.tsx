@@ -12,7 +12,7 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   /** Vertical padding (top and bottom) as a step 1 to 9 on the spacing scale; overrides `padding` on that axis. */
   paddingY?: Step;
   /** A thin rule on every side (`true`) or on one side. */
-  border?: boolean | 'top' | 'right' | 'bottom' | 'left';
+  border?: boolean | 'top' | 'right' | 'bottom' | 'left' | 'start' | 'end';
   /** Render the child (a `section`, `aside`, `li`) with the box styles. */
   asChild?: boolean;
 }

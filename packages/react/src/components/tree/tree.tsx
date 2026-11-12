@@ -1,6 +1,7 @@
 'use client';
 import {forwardRef, useRef, useState, type HTMLAttributes, type ReactNode} from 'react';
 import {cx} from '../../utils/cx';
+import {useIsRtl} from '../../utils/direction';
 
 export interface TreeNode {
   id: string;
@@ -42,6 +43,7 @@ export const Tree = forwardRef<HTMLUListElement, TreeProps>(function Tree({items
   const [focusId, setFocusId] = useState<string | undefined>();
   const els = useRef(new Map<string, HTMLLIElement>());
   const buffer = useRef({text: '', at: 0});
+  const isRtl = useIsRtl();
   const sel = value ?? innerVal;
   const open = expanded ?? innerExp;
 
@@ -70,7 +72,9 @@ export const Tree = forwardRef<HTMLUListElement, TreeProps>(function Tree({items
     const step = (dir: 1 | -1) => { for (let j = i + dir; j >= 0 && j < visible.length; j += dir) if (!visible[j]!.node.disabled) return visible[j]!.node.id; };
     const hasKids = !!cur.node.children?.length;
     let next: string | undefined;
-    switch (e.key) {
+    const rtl = isRtl(e.currentTarget);
+    const key = rtl && e.key === 'ArrowRight' ? 'ArrowLeft' : rtl && e.key === 'ArrowLeft' ? 'ArrowRight' : e.key; // ArrowLeft opens in rtl
+    switch (key) {
       case 'ArrowDown': next = step(1); break;
       case 'ArrowUp': next = step(-1); break;
       case 'Home': next = enabled[0]?.node.id; break;
