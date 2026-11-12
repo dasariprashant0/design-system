@@ -1,0 +1,14 @@
+/* Multi select: a bordered box holding tags and the text input; the list drops below. */
+.multi-select { position: relative; width: 100%; }
+.multi-select-box { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); min-height: var(--s7); padding: var(--s2) var(--s3); border: 1px solid var(--foreground); border-radius: var(--radius); }
+.multi-select-box:focus-within { outline: 2px solid var(--accent); }
+.multi-select[data-invalid] .multi-select-box { border-color: var(--danger); }
+.multi-select[data-disabled] .multi-select-box { opacity: 0.5; }
+.multi-select-input { flex: 1 1 8ch; min-width: 8ch; padding: var(--s1) 0; background: transparent; border: 0; color: var(--foreground); outline: 0; }
+.multi-select-input::placeholder { color: var(--muted); }
+.multi-select-list { position: absolute; left: 0; right: 0; top: calc(100% + var(--s1)); z-index: var(--z-drawer); max-height: 16rem; overflow-y: auto; margin: 0; padding: var(--s1) 0; list-style: none; background: var(--background); border: 1px solid var(--foreground); }
+.multi-select-option { padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }
+.multi-select-option[data-active] { background: var(--foreground); color: var(--background); }
+.multi-select-option[aria-selected="true"]::after { content: " ✓"; }
+.multi-select-option[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.multi-select-empty { padding: var(--s3) var(--s4); font-size: var(--text-sm); color: var(--muted); }
