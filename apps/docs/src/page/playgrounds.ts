@@ -41,6 +41,7 @@ const text = (v: Val, fallback: string) => (typeof v === 'string' && v ? v : fal
 /** Props added to an automatic playground for components that render a bare control and need an accessible name. */
 export const autoProps: Record<string, Values> = {
   autocomplete: {'aria-label': 'Fruit'},
+  mentions: {'aria-label': 'Message'},
   'number-input': {'aria-label': 'Quantity'},
   'rich-text-editor': {'aria-label': 'Notes'},
   'tags-input': {'aria-label': 'Tags'},
