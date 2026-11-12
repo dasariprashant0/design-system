@@ -1,0 +1,14 @@
+/* Block: pricing. */
+.block-pricing { padding-block: var(--s8); }
+.block-pricing-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s3); max-width: var(--measure); margin-bottom: var(--s7); }
+.block-pricing-head .segmented { margin-top: var(--s3); }
+.block-pricing-tiers { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s5); grid-template-columns: 1fr; }
+.block-tier { display: flex; flex-direction: column; gap: var(--s4); padding: var(--s5); border: 1px solid var(--rule); min-width: 0; }
+.block-tier[data-highlighted] { border-color: var(--foreground); }
+.block-tier-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }
+.block-tier-price { display: flex; align-items: baseline; gap: var(--s2); }
+.block-tier-amount { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }
+.block-tier-period { font-size: var(--text-sm); color: var(--muted); }
+.block-tier-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s2); flex: 1; font-size: var(--text-sm); }
+.block-tier-features li { padding-top: var(--s2); border-top: 1px solid var(--rule); }
+@media (min-width: 760px) { .block-pricing-tiers { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }
