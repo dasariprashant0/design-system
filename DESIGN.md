@@ -1,41 +1,49 @@
-# Design rules (@personal/ui)
+# Monoline design rules
 
-> The one design source for every personal app. Read this before building or changing any screen. The code is in `css/` and `react/`; see it all running with `npm --prefix gallery run dev` (http://localhost:5180).
+> Read this before building or changing any screen. The code is in `css/` and `react/`; see it all in the docs page (`index.html`, or https://dasariprashant0.github.io/design-system/).
 
-**The look in one line:** paper and ink, monospace type, square edges, thin rules instead of boxes, and one loud accent per app.
+**The look in one line:** paper and ink, monospace type, square edges, thin rules instead of boxes, and one loud accent.
 
-It comes from the portfolio site and was first built in loadout. Every app shares the base; each app picks only its accent.
+Everything is shared. A project picks only its theme and its accent.
 
-| App | Accent (warm / dark / midnight) | Brand file |
+| Accent | `data-accent` | Warm / dark / midnight |
 |---|---|---|
-| loadout | `#FF4500` / `#FF4500` / `#AAFF00` (the defaults) | none needed |
-| gloamlog | `#0E7A5F` / `#45C29C` / `#5FD6B2` | `frontend/src/brand.css` |
+| Orange (default) | `orange` | `#FF4500` / `#FF4500` / `#AAFF00` |
+| Green | `green` | `#0E7A5F` / `#45C29C` / `#5FD6B2` |
+| Blue | `blue` | `#2563EB` / `#5B9DFF` / `#6FB1FF` |
+| Violet | `violet` | `#7C3AED` / `#A78BFA` / `#B49CFF` |
 
 ---
 
-## 1. Use it in an app
+## 1. Use it in a project
 
-Stack: React + TypeScript + Vite, inside Wails for desktop apps.
+**Plain HTML, no build step:**
+
+```html
+<link rel="stylesheet" href="https://dasariprashant0.github.io/design-system/css/monoline.css">
+<html data-theme="warm" data-accent="green">
+```
+
+`data-theme` is `warm` (default), `dark` or `midnight`. `data-accent` is one of the table above; leave it off for orange. Pin the CDN URL to a commit if you need it frozen.
+
+**With npm** (React + TypeScript + Vite is the tested stack):
 
 ```bash
-npm install --save "@personal/ui@git+https://github.com/dasariprashant0/design-system.git#<commit>"
+npm install --save "monoline-ui@git+https://github.com/dasariprashant0/design-system.git#<commit>"
 ```
 
-Pin a full commit hash, so CI and clean checkouts build the same kit. To take a newer kit into an app, change the hash in its
-`package.json` and run `npm install`. While changing the kit itself, `npm install --save @personal/ui@file:<path to this repo>`
-links it live; switch back to the pinned hash before you commit the app.
+Pin a full commit hash, so CI and clean checkouts build the same kit. To take a newer kit, change the hash and run `npm install`. While changing the kit itself, `npm install --save monoline-ui@file:<path to this repo>` links it live; switch back to the pinned hash before you commit.
 
 ```ts
-// main.tsx: in this order, before the app's own CSS
-import '@personal/ui/tokens.css';
-import '@personal/ui/base.css';
-import '@personal/ui/components.css';
-import './brand.css';   // only if the app has its own accent
-import './app.css';     // app-only layouts; tokens only
+// main.tsx: before your own CSS
+import 'monoline-ui/monoline.css';   // tokens + base + components + accents in one file
+import './app.css';                  // your layouts; tokens only
 ```
 
+Or import `tokens.css`, `base.css`, `components.css` and `accents.css` separately, in that order. The React pieces are optional: `import {Button, Field, useTheme} from 'monoline-ui/react'`.
+
 ```ts
-// vite.config.ts: with a file: link the package is a symlink; keep it inside node_modules so it uses the app's React
+// vite.config.ts: with a file: link the package is a symlink; keep it inside node_modules so it uses your React
 export default defineConfig({plugins: [react()], resolve: {preserveSymlinks: true}});
 ```
 
@@ -44,7 +52,7 @@ export default defineConfig({plugins: [react()], resolve: {preserveSymlinks: tru
 "preserveSymlinks": true
 ```
 
-`brand.css` overrides only the accent group, per theme:
+**A custom accent.** Override only the accent group, per theme, after the kit:
 
 ```css
 :root, [data-theme="warm"] { --accent: #0E7A5F; --accent-text: #0B6A52; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
@@ -52,7 +60,7 @@ export default defineConfig({plugins: [react()], resolve: {preserveSymlinks: tru
 [data-theme="midnight"]    { --accent: #5FD6B2; --accent-text: #5FD6B2; --accent-2: #FFC857; --on-accent: #06241C; }
 ```
 
-A new accent must pass: `--accent-text` on `--background` at least 4.5:1, `--accent` on `--background` at least 3:1, and `--on-accent` on `--accent` at least 4.5:1, in all three themes. Add the app to the table above.
+A new accent must pass: `--accent-text` on `--background` at least 4.5:1, `--accent` on `--background` at least 3:1, and `--on-accent` on `--accent` at least 4.5:1, in all three themes. To add it to the kit, put it in `css/accents.css` and the table above.
 
 ## 2. Principles
 
@@ -66,20 +74,19 @@ A new accent must pass: `--accent-text` on `--background` at least 4.5:1, `--acc
 
 ## 3. Tokens
 
-All in `css/tokens.css`. Three themes, set on `<html data-theme>` by `useTheme()`.
+All in `css/tokens.css`. Three themes, set on `<html data-theme>` (the React `useTheme()` does it for you); the accent is `<html data-accent>`.
 
 | Group | Tokens | Use |
 |---|---|---|
 | Surface | `--background`, `--foreground`, `--muted`, `--surface`, `--surface-text` | Page, text, secondary text, the always-dark toast/code panel |
 | Lines | `--rule`, `--wash`, `--wash-2` | Dividers; hover and selected fills; code blocks |
-| Accent (per app) | `--accent`, `--accent-text`, `--accent-2`, `--on-accent` | Fills and marks; accent as text; a second mark; text on an accent fill |
+| Accent (per preset) | `--accent`, `--accent-text`, `--accent-2`, `--on-accent` | Fills and marks; accent as text; a second mark; text on an accent fill |
 | Status | `--danger`, `--warning`, `--ok` | Loss or failure; needs attention; done. Text-safe in each theme |
 | Ink | `--ink-1` … `--ink-5`, `--hatch` | Kinds in charts, legends, swatches |
 | Type | `--font-display`, `--font-body`, `--text-xs/sm/base/lg`, `--display-sm/md/xl` | See §4 |
 | Space | `--s1` 4 · `--s2` 8 · `--s3` 12 · `--s4` 16 · `--s5` 24 · `--s6` 32 · `--s7` 48 · `--s8` 64 · `--s9` 96 | Every margin, gap and padding |
 | Layout | `--side`, `--measure`, `--content`, `--window-pad` (= `--s6`) | Sidebar width, line length, widest column, a small window's inset |
 | Motion | `--ease`, `--fast` .12s, `--base` .2s, `--slow` .45s | See §8 |
-| Layout | `--side` 264px, `--measure` 64ch, `--content` 1080px | Sidebar, longest line, widest column |
 
 Never use `--border` for a visible line: it is about 1.1:1 in dark themes. Use `--rule`.
 
@@ -168,15 +175,15 @@ Never use `--border` for a visible line: it is about 1.1:1 in dark themes. Use `
 - Use `border-radius`, drop shadows, gradients, glassmorphism or blur.
 - Add icon fonts or icon libraries. Use words, `Kbd`, swatches and the `.dot`. Add an inline SVG only when a word won't do, drawn with `currentColor`.
 - Add a UI library (MUI, Chakra, Tailwind, shadcn). This kit is the UI library.
-- Put a second accent colour in an app, or use `--accent-2` for text.
+- Put a second accent colour in a project, or use `--accent-2` for text.
 - Center-align body text. Text is left-aligned; only the toast is centred.
 
 ## 11. Changing the system
 
-- **App-only layout** (gloamlog's calendar grid, loadout's token bar) goes in that app's `app.css`, using tokens.
-- **Second use:** when a pattern appears in a second app, move it here (CSS class first, then a React wrapper if it has behaviour) and add it to the gallery.
+- **Project-only layout** goes in the project's own CSS, using tokens.
+- **Second use:** when a pattern appears in a second project, move it here (CSS class first, then a React wrapper if it has behaviour) and add it to the gallery.
 - **Adding a token:** add it to all three themes if it's a colour, add it to §3, and show it in the gallery.
-- After any change, open the gallery in all three themes with both brands. Then rebuild each app (`npm run build` in its frontend).
+- After any change, open the gallery in all three themes with each accent. Then run `npm run build` here to regenerate `css/monoline.css`.
 
 ## 12. Before you call a screen done
 

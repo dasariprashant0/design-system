@@ -1,30 +1,29 @@
 // The gallery: every token and component, in every theme, with each app's
 // accent. Run `npm run dev` here and keep it open while you change ../css.
-import {StrictMode, useState} from 'react';
+import {StrictMode, useEffect, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import '../css/tokens.css';
 import '../css/base.css';
 import '../css/components.css';
+import '../css/accents.css';
 import {
     Badge, Banner, Brand, Button, Dialog, Display, Drawer, Empty, Facts, Field, Kbd, NavItem,
     Row, SectionTitle, Segmented, Setting, Shell, Switch, Tabs, ThemeSwitch, Toast, useTheme,
 } from '../react';
 
-// Each app owns a brand.css like this one; the gallery inlines two to compare.
-const BRANDS = {
-    loadout: '',
-    gloamlog: `
-      :root, [data-theme="warm"] { --accent: #0E7A5F; --accent-text: #0B6A52; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
-      [data-theme="dark"] { --accent: #45C29C; --accent-text: #45C29C; --accent-2: #E0A23A; --on-accent: #06241C; }
-      [data-theme="midnight"] { --accent: #5FD6B2; --accent-text: #5FD6B2; --accent-2: #FFC857; --on-accent: #06241C; }`,
-};
-type BrandName = keyof typeof BRANDS;
+const ACCENTS = ['orange', 'green', 'blue', 'violet'] as const;
+type Accent = typeof ACCENTS[number];
 
 const TOKENS = ['--background', '--foreground', '--muted', '--rule', '--wash-2', '--accent', '--accent-text', '--accent-2', '--danger', '--warning', '--ok', '--surface'];
 
+function useAccent(a: Accent) {
+    useEffect(() => { document.documentElement.dataset.accent = a; }, [a]);
+    return null;
+}
+
 function Gallery() {
     const [theme, setTheme] = useTheme();
-    const [brand, setBrand] = useState<BrandName>('loadout');
+    const [brand, setBrand] = useState<Accent>('orange');
     const [tab, setTab] = useState<'components' | 'tokens'>('components');
     const [view, setView] = useState<'day' | 'week' | 'month'>('day');
     const [on, setOn] = useState(true);
@@ -33,7 +32,7 @@ function Gallery() {
     const [toast, setToast] = useState('');
 
     const side = <>
-        <Brand name={brand}/>
+        <Brand name="Monoline"/>
         <p className="label side-label">Pages</p>
         <nav className="nav">
             <NavItem current meta="24">Components</NavItem>
@@ -41,18 +40,18 @@ function Gallery() {
             <NavItem>Rules</NavItem>
         </nav>
         <div className="side-foot">
-            <Segmented label="App" options={[['loadout', 'loadout'], ['gloamlog', 'gloamlog']]} value={brand} onChange={setBrand}/>
+            <Segmented label="Accent" options={ACCENTS.map((a) => [a, a] as [Accent, string])} value={brand} onChange={setBrand}/>
             <ThemeSwitch theme={theme} onChange={setTheme}/>
         </div>
     </>;
 
     return (
         <Shell side={side}>
-            <style>{BRANDS[brand]}</style>
+            {useAccent(brand)}
             <header className="head">
                 <div className="head-title">
-                    <p className="label">@personal/ui</p>
-                    <Display lines={['The kit', 'every app shares']}/>
+                    <p className="label">Monoline</p>
+                    <Display lines={['A small UI kit', 'for any project']}/>
                 </div>
                 <Button onClick={() => setToast('Saved. Every screen follows the tokens.')}>Show a toast</Button>
             </header>
@@ -66,7 +65,7 @@ function Gallery() {
                     </ul>
                     <SectionTitle>Heat</SectionTitle>
                     <div className="row-gap">{[0, 1, 2, 3, 4].map(n => <span key={n} className={`heat-${n}`} style={{width: 28, height: 28}}/>)}</div>
-                    <p className="small muted" style={{marginTop: 'var(--s3)'}}>Five steps of the accent for counts over time (gloamlog's 12-week grid).</p>
+                    <p className="small muted" style={{marginTop: 'var(--s3)'}}>Five steps of the accent for counts over time (a 12-week activity grid).</p>
                 </section>
             ) : (
                 <div style={{marginTop: 'var(--s7)'}}>

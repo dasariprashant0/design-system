@@ -1,0 +1,42 @@
+/* Monoline layout utilities: a few primitives so a page needs no custom CSS.
+   Spacing steps map to the --s tokens. Breakpoints (media queries cannot read
+   custom properties): sm 600px, md 900px, lg 1200px. */
+
+.container { width: 100%; max-width: var(--content); margin-inline: auto; padding-inline: var(--s5); }
+.container-narrow { max-width: var(--measure); }
+.section { padding-block: var(--s9); }
+.section-sm { padding-block: var(--s7); }
+
+/* Vertical rhythm: children spaced by one token. Default --s4. */
+.flow > * + * { margin-top: var(--flow, var(--s4)); }
+.flow-s2 { --flow: var(--s2); } .flow-s3 { --flow: var(--s3); } .flow-s5 { --flow: var(--s5); }
+.flow-s6 { --flow: var(--s6); } .flow-s7 { --flow: var(--s7); } .flow-s8 { --flow: var(--s8); }
+
+/* A row that wraps. */
+.cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap, var(--s3)); }
+.cluster-between { justify-content: space-between; }
+.cluster-end { justify-content: flex-end; }
+
+/* Equal columns that wrap on their own; no media queries needed. */
+.grid { display: grid; gap: var(--gap, var(--s5)); grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 240px), 100%), 1fr)); }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+.gap-s2 { --gap: var(--s2); } .gap-s3 { --gap: var(--s3); } .gap-s4 { --gap: var(--s4); }
+.gap-s5 { --gap: var(--s5); } .gap-s6 { --gap: var(--s6); } .gap-s7 { --gap: var(--s7); }
+
+/* Sidebar + content that stacks when narrow. */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--s7); }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: var(--s5); } }
+
+/* Small helpers. */
+.stretch { width: 100%; }
+.nowrap { white-space: nowrap; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mt-auto { margin-top: auto; }
+.text-right { text-align: right; }
+.hide-sm { } @media (max-width: 600px) { .hide-sm { display: none !important; } }
+.show-sm { display: none; } @media (max-width: 600px) { .show-sm { display: initial; } }

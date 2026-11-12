@@ -1,17 +1,51 @@
 {
-  "name": "@personal/ui",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Shared design system: tokens, base styles, components and React pieces for every personal app.",
+  "name": "monoline-ui",
+  "version": "0.2.0",
+  "description": "Monoline: a small UI kit in monospace type, thin rules and square edges. Plain CSS with three themes and four accents, plus optional React pieces.",
+  "keywords": [
+    "ui-kit",
+    "css",
+    "design-system",
+    "monospace",
+    "react"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dasariprashant0/design-system.git"
+  },
   "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs"
+  },
   "exports": {
+    ".": "./css/monoline.css",
+    "./monoline.css": "./css/monoline.css",
     "./tokens.css": "./css/tokens.css",
     "./base.css": "./css/base.css",
     "./components.css": "./css/components.css",
-    "./react": "./react/index.tsx"
+    "./accents.css": "./css/accents.css",
+    "./react": "./react/index.tsx",
+    "./utilities.css": "./css/utilities.css",
+    "./monoline.min.css": "./css/monoline.min.css",
+    "./monoline.js": "./js/monoline.js",
+    "./tokens.json": "./tokens/tokens.json"
   },
-  "files": ["css", "react", "DESIGN.md"],
+  "files": [
+    "css",
+    "js",
+    "tokens",
+    "react",
+    "DESIGN.md",
+    "LICENSE"
+  ],
   "peerDependencies": {
     "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   }
 }

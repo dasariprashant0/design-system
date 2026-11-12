@@ -1,0 +1,20 @@
+/* Monoline accent presets. Orange is the default and lives in tokens.css.
+   Set one on <html data-accent="green">. Each pair passes, in all three themes:
+   --accent-text on --background >= 4.5:1, --accent on --background >= 3:1,
+   --on-accent on --accent >= 4.5:1. Load this file after tokens.css. */
+
+[data-accent="orange"] { --accent: #FF4500; --accent-text: #D13900; --accent-2: #AAFF00; --on-accent: #16120E; }
+[data-accent="orange"][data-theme="dark"] { --accent: #FF4500; --accent-text: #FF4500; --accent-2: #AAFF00; --on-accent: #111110; }
+[data-accent="orange"][data-theme="midnight"] { --accent: #AAFF00; --accent-text: #AAFF00; --accent-2: #00E5FF; --on-accent: #060B1A; }
+
+[data-accent="green"] { --accent: #0E7A5F; --accent-text: #0B6A52; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
+[data-accent="green"][data-theme="dark"] { --accent: #45C29C; --accent-text: #45C29C; --accent-2: #E0A23A; --on-accent: #06241C; }
+[data-accent="green"][data-theme="midnight"] { --accent: #5FD6B2; --accent-text: #5FD6B2; --accent-2: #FFC857; --on-accent: #06241C; }
+
+[data-accent="blue"] { --accent: #2563EB; --accent-text: #1D4FD8; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
+[data-accent="blue"][data-theme="dark"] { --accent: #5B9DFF; --accent-text: #5B9DFF; --accent-2: #E0A23A; --on-accent: #07162E; }
+[data-accent="blue"][data-theme="midnight"] { --accent: #6FB1FF; --accent-text: #6FB1FF; --accent-2: #FFC857; --on-accent: #06142B; }
+
+[data-accent="violet"] { --accent: #7C3AED; --accent-text: #6D28D9; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
+[data-accent="violet"][data-theme="dark"] { --accent: #A78BFA; --accent-text: #A78BFA; --accent-2: #E0A23A; --on-accent: #150B33; }
+[data-accent="violet"][data-theme="midnight"] { --accent: #B49CFF; --accent-text: #B49CFF; --accent-2: #FFC857; --on-accent: #150B33; }

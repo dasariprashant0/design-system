@@ -1,4 +1,4 @@
-// @personal/ui React pieces. Each one is a thin wrapper over a class in
+// Monoline React pieces. Each one is a thin wrapper over a class in
 // css/components.css: screens compose these and never invent their own
 // colours, fonts or spacing. React is a peer dependency of the app.
 import {useEffect, useRef, useState, type ReactNode} from 'react';

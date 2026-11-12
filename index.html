@@ -1,5 +1,566 @@
 <!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
-<title>@personal/ui</title>
-<meta http-equiv="refresh" content="0; url=example/">
-<a href="example/">Open the example page</a>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monoline UI kit</title>
+<meta name="description" content="Monoline is a small, accessible UI kit in monospace type, thin rules and square edges. Plain CSS, three themes, four accents, optional JavaScript and React.">
+<link rel="stylesheet" href="css/monoline.css">
+<style>
+/* Docs page only. Tokens only. */
+html, body { height: auto; }
+.shell { height: auto; min-height: 100vh; }
+.side { position: sticky; top: 0; height: 100vh; align-self: start; }
+.main { overflow: visible; padding-top: var(--s6); }
+.main > section, .main > header { max-width: var(--content); }
+.nav-group { padding: var(--s4) var(--s2) var(--s1); }
+.example { padding: var(--s5) 0; border-top: 1px solid var(--rule); display: grid; gap: var(--s4); min-width: 0; }
+.example + details { border-top: 0; margin-bottom: var(--s5); }
+.example + details > summary { padding: var(--s2) 0; font-size: var(--text-xs); font-weight: 400; color: var(--muted); }
+.example + details pre { margin: 0 0 var(--s4); }
+.example + details code { font-family: var(--font-body); }
+.sw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0 var(--s6); }
+.sw-grid .row { padding: var(--s3) 0; }
+.sw-grid .swatch { width: 28px; height: 28px; margin-top: 0; box-shadow: inset 0 0 0 1px var(--rule); }
+.ink-strip { display: grid; grid-template-columns: repeat(6, 1fr); height: 48px; box-shadow: inset 0 0 0 1px var(--rule); }
+.space-row { display: flex; align-items: center; gap: var(--s4); padding: var(--s1) 0; font-size: var(--text-sm); }
+.space-row .bar { height: 8px; background: var(--foreground); flex: none; }
+.space-row code { color: var(--muted); width: 5ch; flex: none; }
+.heat { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: var(--s1); max-width: 520px; }
+.heat > span { aspect-ratio: 1; }
+.spec { display: grid; gap: var(--s5); }
+.demo-box { padding: var(--s4); box-shadow: inset 0 0 0 1px var(--rule); font-size: var(--text-sm); color: var(--muted); }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7); }
+.compare li { padding: var(--s2) 0; border-top: 1px solid var(--rule); font-size: var(--text-sm); }
+.install { display: grid; gap: var(--s2); position: relative; }
+.install .code-block { position: relative; padding-right: var(--s9); }
+.install .btn { position: absolute; top: var(--s2); right: var(--s2); }
+.block h3.label { margin: var(--s7) 0 var(--s3); }
+.block h3.label:first-of-type { margin-top: 0; }
+@media (max-width: 900px) { .side { position: static; height: auto; } .compare { grid-template-columns: 1fr; gap: var(--s5); } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="shell">
+  <aside class="side" aria-label="Documentation">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Monoline</div>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <p class="label nav-group">Start</p>
+      <a class="nav-item" href="#overview">Overview</a>
+      <a class="nav-item" href="#install">Install</a>
+      <a class="nav-item" href="#theming">Theming</a>
+      <p class="label nav-group">Foundations</p>
+      <a class="nav-item" href="#color">Color</a>
+      <a class="nav-item" href="#type">Type</a>
+      <a class="nav-item" href="#space">Space and motion</a>
+      <a class="nav-item" href="#layout">Layout</a>
+      <p class="label nav-group">Components</p>
+      <a class="nav-item" href="#buttons">Buttons</a>
+      <a class="nav-item" href="#fields">Fields</a>
+      <a class="nav-item" href="#choices">Choices</a>
+      <a class="nav-item" href="#data">Lists, tables, facts</a>
+      <a class="nav-item" href="#navigation">Navigation</a>
+      <a class="nav-item" href="#disclosure">Tabs, accordion, menus</a>
+      <a class="nav-item" href="#feedback">Feedback and marks</a>
+      <a class="nav-item" href="#overlays">Overlays</a>
+      <a class="nav-item" href="#loading">Loading and empty</a>
+      <a class="nav-item" href="#prose">Prose</a>
+      <p class="label nav-group">Guidelines</p>
+      <a class="nav-item" href="#a11y">Accessibility</a>
+      <a class="nav-item" href="#content">Content</a>
+      <a class="nav-item" href="#dont">Do and don't</a>
+      <a class="nav-item" href="#project">Project</a>
+    </nav>
+    <div class="side-foot">
+      <div class="stack" style="gap: var(--s2)">
+        <p class="label side-label">Accent</p>
+        <div class="themes" role="radiogroup" aria-label="Accent" style="grid-template-columns: repeat(4, 1fr)">
+          <button class="theme" role="radio" data-ml-accent="orange" aria-checked="true">orange</button>
+          <button class="theme" role="radio" data-ml-accent="green" aria-checked="false">green</button>
+          <button class="theme" role="radio" data-ml-accent="blue" aria-checked="false">blue</button>
+          <button class="theme" role="radio" data-ml-accent="violet" aria-checked="false">violet</button>
+        </div>
+      </div>
+      <div class="stack" style="gap: var(--s2)">
+        <p class="label side-label">Theme</p>
+        <div class="themes" role="radiogroup" aria-label="Theme">
+          <button class="theme" role="radio" data-ml-theme="warm" aria-checked="false">warm</button>
+          <button class="theme" role="radio" data-ml-theme="dark" aria-checked="false">dark</button>
+          <button class="theme" role="radio" data-ml-theme="midnight" aria-checked="false">midnight</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <header class="head" id="overview">
+      <div class="head-title">
+        <p class="label">UI kit · v0.2 · MIT</p>
+        <h1 class="display display-xl"><span class="reveal"><span>Monoline</span></span></h1>
+        <p class="lede muted" style="margin-bottom:0">A small, accessible UI kit in monospace type, thin rules and square edges. Plain CSS with three themes and four accents. JavaScript and React are optional. Everything on this page is the real kit: switch the theme and accent in the sidebar.</p>
+      </div>
+      <a class="btn btn-solid" href="https://github.com/dasariprashant0/design-system">View on GitHub</a>
+    </header>
+    <dl class="facts">
+      <div><dt class="label">Size</dt><dd>31 KB CSS, minified</dd></div>
+      <div><dt class="label">Dependencies</dt><dd>none</dd></div>
+      <div><dt class="label">Themes · accents</dt><dd>3 · 4, contrast-checked</dd></div>
+      <div><dt class="label">Components</dt><dd>40+, native elements first</dd></div>
+    </dl>
+
+    <section class="block" id="install">
+      <h2 class="display display-sm section-title">Install</h2>
+      <p class="lede">Pick the route that fits. All three give you the same classes.</p>
+      <h3 class="label">1. A link tag. No build step</h3>
+      <div class="install">
+        <pre class="code-block" id="i-cdn">&lt;link rel="stylesheet" href="https://dasariprashant0.github.io/design-system/css/monoline.css"&gt;
+&lt;script src="https://dasariprashant0.github.io/design-system/js/monoline.js" defer&gt;&lt;/script&gt;  &lt;!-- optional --&gt;</pre>
+        <button class="btn btn-line btn-sm" data-copy-target="#i-cdn" data-copy="x">Copy</button>
+      </div>
+      <p class="small muted" style="margin-top: var(--s2)">Use <code class="code">monoline.min.css</code> for production. For a frozen version, replace the host path with a commit: <code class="code">cdn.jsdelivr.net/gh/dasariprashant0/design-system@&lt;commit&gt;/css/monoline.min.css</code>.</p>
+      <h3 class="label">2. npm</h3>
+      <div class="install">
+        <pre class="code-block" id="i-npm">npm install "monoline-ui@git+https://github.com/dasariprashant0/design-system.git#&lt;commit&gt;"
+
+import 'monoline-ui/monoline.css';
+import 'monoline-ui/monoline.js';                    // optional behaviours
+import {Button, Field, useTheme} from 'monoline-ui/react'; // optional</pre>
+        <button class="btn btn-line btn-sm" data-copy-target="#i-npm" data-copy="x">Copy</button>
+      </div>
+      <h3 class="label">3. Design tokens for other tools</h3>
+      <p class="lede" style="margin-bottom:0"><code class="code">tokens/tokens.json</code> lists every colour, size and timing per theme and accent in the W3C design-tokens format. Feed it to Style Dictionary, Tokens Studio or a Figma variables import.</p>
+      <h3 class="label">Starter page</h3>
+      <div class="install">
+        <pre class="code-block" id="i-start">&lt;!doctype html&gt;
+&lt;html lang="en" data-theme="warm" data-accent="green"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;My app&lt;/title&gt;
+  &lt;link rel="stylesheet" href="https://dasariprashant0.github.io/design-system/css/monoline.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="container flow"&gt;
+    &lt;h1 class="display display-md"&gt;Hello&lt;/h1&gt;
+    &lt;button class="btn btn-solid"&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+        <button class="btn btn-line btn-sm" data-copy-target="#i-start" data-copy="x">Copy</button>
+      </div>
+    </section>
+
+    <section class="block" id="theming">
+      <h2 class="display display-sm section-title">Theming</h2>
+      <p class="lede">Two attributes on <code class="code">&lt;html&gt;</code> control everything. A colour is never written in a component; it always comes from a token, so a theme change needs no extra CSS.</p>
+      <div class="table-wrap"><table class="table">
+        <thead><tr><th>Attribute</th><th>Values</th><th>Default</th></tr></thead>
+        <tbody>
+          <tr><td><code class="code">data-theme</code></td><td>warm, dark, midnight</td><td>warm. <code class="code">monoline.js</code> picks dark when the system prefers it, and remembers a choice.</td></tr>
+          <tr><td><code class="code">data-accent</code></td><td>orange, green, blue, violet</td><td>orange</td></tr>
+        </tbody>
+      </table></div>
+      <h3 class="label">A custom accent</h3>
+      <p class="lede">Override four tokens per theme after the kit. It must pass three contrast rules, or text on and around it is hard to read: <code class="code">--accent-text</code> on <code class="code">--background</code> at least 4.5:1, <code class="code">--accent</code> on <code class="code">--background</code> at least 3:1, <code class="code">--on-accent</code> on <code class="code">--accent</code> at least 4.5:1.</p>
+      <pre class="code-block">:root, [data-theme="warm"] { --accent: #0E7A5F; --accent-text: #0B6A52; --accent-2: #E0A23A; --on-accent: #FFFFFF; }
+[data-theme="dark"]        { --accent: #45C29C; --accent-text: #45C29C; --accent-2: #E0A23A; --on-accent: #06241C; }
+[data-theme="midnight"]    { --accent: #5FD6B2; --accent-text: #5FD6B2; --accent-2: #FFC857; --on-accent: #06241C; }</pre>
+      <p class="small muted" style="margin-top: var(--s3)">The repo's <code class="code">npm run check</code> tests every built-in theme and accent against these rules.</p>
+    </section>
+
+    <section class="block" id="color">
+      <h2 class="display display-sm section-title">Color</h2>
+      <p class="lede">Values below are read from the current theme and accent. Use the sidebar to switch.</p>
+      <h3 class="label">Surface, status and accent</h3>
+      <ul class="list sw-grid" id="colors"></ul>
+      <h3 class="label">Ink density: ink-1 to ink-5, then hatch</h3>
+      <div class="ink-strip" aria-hidden="true"><span style="background: var(--ink-1)"></span><span style="background: var(--ink-2)"></span><span style="background: var(--ink-3)"></span><span style="background: var(--ink-4)"></span><span style="background: var(--ink-5)"></span><span style="background: var(--hatch)"></span></div>
+      <p class="small muted" style="margin-top: var(--s3)">Tell kinds apart in charts and legends by density, not by new hues.</p>
+      <h3 class="label">Heat: five steps of the accent</h3>
+      <div class="heat" id="heat" role="img" aria-label="Sample heat map"></div>
+      <h3 class="label">When to use which</h3>
+      <div class="table-wrap"><table class="table">
+        <thead><tr><th>Token</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><code class="code">--foreground</code>, <code class="code">--background</code></td><td>Text and page. Never swap them for one-off greys.</td></tr>
+          <tr><td><code class="code">--muted</code></td><td>Secondary text. Already 4.5:1; never go lighter.</td></tr>
+          <tr><td><code class="code">--rule</code></td><td>Every visible line. <code class="code">--border</code> is for hairlines that may disappear.</td></tr>
+          <tr><td><code class="code">--accent</code>, <code class="code">--on-accent</code></td><td>Fills and marks, and the text on them.</td></tr>
+          <tr><td><code class="code">--accent-text</code></td><td>The accent as text on the page background.</td></tr>
+          <tr><td><code class="code">--danger</code>, <code class="code">--warning</code>, <code class="code">--ok</code></td><td>Loss, attention, done. Always with a word or a shape too.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="block" id="type">
+      <h2 class="display display-sm section-title">Type</h2>
+      <p class="lede">Space Mono 700 for display, DM Mono for everything else. Both are bundled (SIL Open Font License) and load from the kit's own <code class="code">fonts/</code> folder, so there is no third-party request.</p>
+      <div class="spec">
+        <div><p class="label">display-xl · .display .display-xl</p><p class="display display-xl">24 days</p></div>
+        <div><p class="label">display-md · .display .display-md</p><p class="display display-md">Written today</p></div>
+        <div><p class="label">display-sm · .display .display-sm</p><p class="display display-sm">Section title</p></div>
+        <div><p class="label">text-lg 18px</p><p style="font-size: var(--text-lg)">A drawer intro sits here.</p></div>
+        <div><p class="label">text-base 15px, weight 400 and 500</p><p style="max-width: var(--measure)">Body copy reads at 15px with a 1.55 line height and tabular numbers, so 1,204 lines up with 8,816. <span style="font-weight:500">Emphasis uses weight 500.</span></p></div>
+        <div><p class="label">text-sm 13px · text-xs 11px</p><p class="small">Secondary lines and buttons.</p><p style="font-size: var(--text-xs)">Meta, badges and keyboard hints.</p></div>
+        <div><p class="label">.label</p><p class="label">Kicker above a title</p></div>
+      </div>
+      <p class="small muted" style="margin-top: var(--s4)">Display is for page titles, section titles, dialog titles and one big number. Never for body text or buttons. Keep lines at or under <code class="code">--measure</code> (64ch). Write markup in sentence case; CSS uppercases the display text.</p>
+    </section>
+
+    <section class="block" id="space">
+      <h2 class="display display-sm section-title">Space and motion</h2>
+      <h3 class="label">Space: 4px steps. Every margin, gap and padding</h3>
+      <div id="space-scale"></div>
+      <h3 class="label">Shape and depth</h3>
+      <p class="lede" style="margin-bottom:0">Radius is 0. There are no shadows except the toast, and no gradients except the hatch. Depth comes from rules and space. Use <code class="code">--round</code> only for a dot or radio.</p>
+      <h3 class="label">Motion</h3>
+      <div class="table-wrap"><table class="table">
+        <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><code class="code">--fast</code></td><td>0.12s</td><td>Hover and colour</td></tr>
+          <tr><td><code class="code">--base</code></td><td>0.2s</td><td>Overlays and toggles</td></tr>
+          <tr><td><code class="code">--slow</code></td><td>0.45s</td><td>A list arriving</td></tr>
+          <tr><td><code class="code">--ease</code></td><td>cubic-bezier(0.76, 0, 0.24, 1)</td><td>All easing</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted" style="margin-top: var(--s3)">One entrance per page (the display lines rise). Nothing loops except the spinner. Every animation stops under <code class="code">prefers-reduced-motion</code>.</p>
+    </section>
+
+    <section class="block" id="layout">
+      <h2 class="display display-sm section-title">Layout</h2>
+      <p class="lede">A handful of primitives cover most pages. Breakpoints are sm 600px, md 900px and lg 1200px. The app shell stacks below 900px.</p>
+      <div class="example">
+        <div class="container-narrow flow flow-s3" style="max-width:none">
+          <p class="label">.flow: children spaced by one token (.flow-s2 to .flow-s8)</p>
+          <div class="demo-box">One</div><div class="demo-box">Two</div><div class="demo-box">Three</div>
+        </div>
+      </div>
+      <div class="example">
+        <p class="label">.cluster: a row that wraps, .cluster-between pushes the ends apart</p>
+        <div class="cluster cluster-between"><span class="badge">Title</span><div class="cluster"><button class="btn btn-line btn-sm">Edit</button><button class="btn btn-line btn-sm">Share</button></div></div>
+      </div>
+      <div class="example">
+        <p class="label">.grid: equal columns that wrap by themselves; --min sets the narrowest column</p>
+        <div class="grid" style="--min: 140px"><div class="demo-box">A</div><div class="demo-box">B</div><div class="demo-box">C</div><div class="demo-box">D</div></div>
+      </div>
+      <div class="example">
+        <p class="label">.split: one third beside two thirds, stacks below 900px</p>
+        <div class="split"><div class="demo-box">Aside</div><div class="demo-box">Content</div></div>
+      </div>
+      <div class="example">
+        <p class="label">.container, .container-narrow, .section: page width and vertical bands</p>
+        <pre class="code-block">&lt;div class="container"&gt;…up to 1080px, 24px gutters…&lt;/div&gt;
+&lt;section class="section container container-narrow"&gt;…64ch reading column…&lt;/section&gt;</pre>
+      </div>
+      <h3 class="label" style="margin-top: var(--s5)">App shell</h3>
+      <p class="lede">For apps: <code class="code">.shell</code> holds a <code class="code">.side</code> (264px) and a <code class="code">.main</code> (padding 48px, max 1080px). A small window uses <code class="code">.window</code> with <code class="code">.window-head</code> and <code class="code">.window-body</code>. For marketing sites use <code class="code">.topbar</code> (see Navigation). This page is built on the shell.</p>
+    </section>
+
+    <section class="block" id="buttons">
+      <h2 class="display display-sm section-title">Buttons</h2>
+      <p class="lede">One solid button per view. Use real <code class="code">&lt;button&gt;</code> or <code class="code">&lt;a&gt;</code> elements.</p>
+      <div class="example"><div class="cluster">
+        <button class="btn btn-solid">Write today</button>
+        <button class="btn btn-line">Open folder</button>
+        <button class="btn btn-danger">Delete entry</button>
+        <button class="btn btn-ghost">Show all</button>
+        <button class="btn btn-line btn-sm">Small</button>
+        <button class="btn btn-line" disabled>Saving</button>
+        <a class="btn btn-line" href="#buttons">As a link</a>
+      </div></div>
+      <p class="small muted">Buttons are verbs: "Save", "Open folder", not "OK" or "Submit". Danger actions run, then offer Undo in a toast. Name icon-only buttons with <code class="code">aria-label</code>.</p>
+      <h3 class="label" style="margin-top: var(--s6)">Segmented, for two to four options</h3>
+      <div class="example"><div class="seg" role="group" aria-label="Range">
+        <span class="muted small">Range</span>
+        <button class="seg-opt" aria-pressed="false">7 days</button><button class="seg-opt" aria-pressed="true">30 days</button><button class="seg-opt" aria-pressed="false">Year</button>
+      </div></div>
+    </section>
+
+    <section class="block" id="fields">
+      <h2 class="display display-sm section-title">Fields</h2>
+      <p class="lede">Label above, hint or error below. The placeholder is never the label. Wrap each control in a <code class="code">.field</code> and a <code class="code">&lt;label&gt;</code>.</p>
+      <div class="example">
+        <div class="form-row">
+          <label class="field" for="e-name"><span class="label field-required">Name</span><input class="input" id="e-name" placeholder="Ada Lovelace"><span class="field-hint">As it appears on invoices.</span></label>
+          <label class="field" for="e-err"><span class="label">Days</span><input class="input" id="e-err" value="thirty" aria-invalid="true" aria-describedby="e-err-m"><span class="field-error" id="e-err-m">Enter a number, such as 30.</span></label>
+          <label class="field" for="e-ok"><span class="label">Handle</span><input class="input" id="e-ok" value="ada" data-valid="true" aria-describedby="e-ok-m"><span class="field-ok" id="e-ok-m">Available.</span></label>
+        </div>
+        <div class="form-row">
+          <label class="field" for="e-sel"><span class="label">Sync every</span><select class="select" id="e-sel"><option>5 minutes</option><option>15 minutes</option><option>Hour</option></select></label>
+          <label class="field" for="e-ro"><span class="label">Read only</span><input class="input" id="e-ro" value="v0.2.0" readonly></label>
+          <label class="field" for="e-dis"><span class="label">Disabled</span><input class="input" id="e-dis" value="Locked" disabled></label>
+        </div>
+        <label class="field" for="e-url"><span class="label">Website</span><span class="input-group"><span class="input-affix">https://</span><input class="input" id="e-url" value="monoline.dev"><span class="input-affix">.com</span></span></label>
+        <label class="field" for="e-ta"><span class="label">Notes</span><textarea class="textarea" id="e-ta" placeholder="What happened today?"></textarea></label>
+      </div>
+      <p class="small muted">Say what happened, then what to do: "Can't save. The folder is read-only. Pick another folder." Link the message with <code class="code">aria-describedby</code> and set <code class="code">aria-invalid</code>. Mark required fields with <code class="code">.field-required</code> and the <code class="code">required</code> attribute.</p>
+    </section>
+
+    <section class="block" id="choices">
+      <h2 class="display display-sm section-title">Choices</h2>
+      <div class="example">
+        <div class="grid" style="--min: 200px">
+          <fieldset class="choice-group"><legend class="label">Notify me about</legend>
+            <label class="choice"><input type="checkbox" checked> Replies</label>
+            <label class="choice"><input type="checkbox"> Mentions</label>
+            <label class="choice"><input type="checkbox" disabled> Billing (locked)</label>
+          </fieldset>
+          <fieldset class="choice-group"><legend class="label">Plan</legend>
+            <label class="choice"><input type="radio" name="plan" checked> Monthly</label>
+            <label class="choice"><input type="radio" name="plan"> Yearly</label>
+          </fieldset>
+          <div>
+            <div class="setting"><div><span style="font-weight:500">Launch at login</span><span class="row-meta">Opens in the tray.</span></div><label class="switch"><input type="checkbox" checked aria-label="Launch at login"></label></div>
+            <div class="setting"><div><span style="font-weight:500">Weekly digest</span><span class="row-meta">Sundays at 09:00.</span></div><label class="switch"><input type="checkbox" aria-label="Weekly digest"></label></div>
+          </div>
+        </div>
+      </div>
+      <p class="small muted">Use a switch for a setting that applies at once, a checkbox for a choice you submit, radios for one of a few, a select for five or more. Group related choices in a <code class="code">&lt;fieldset&gt;</code> with a <code class="code">&lt;legend&gt;</code>.</p>
+      <h3 class="label" style="margin-top: var(--s6)">Range and progress</h3>
+      <div class="example">
+        <label class="field" for="e-range"><span class="label">Volume</span><input class="range" id="e-range" type="range" min="0" max="100" value="60"></label>
+        <div class="field"><span class="label">Upload, 62%</span><progress class="progress" value="62" max="100" aria-label="Upload progress">62%</progress></div>
+        <div class="field"><span class="label">Waiting</span><progress class="progress" aria-label="Waiting"></progress></div>
+      </div>
+    </section>
+
+    <section class="block" id="data">
+      <h2 class="display display-sm section-title">Lists, tables, facts</h2>
+      <p class="lede">Rows split by rules, never boxed. Use a card only when the box itself means something.</p>
+      <div class="example">
+        <ul class="list">
+          <li><button class="row" data-drawer-open="drawer-demo"><span class="swatch" style="background: var(--ink-1)"></span><span class="row-body"><span class="row-title">Ship the pricing page rewrite</span><span class="row-meta">Today, 14:20 · 3 files</span></span><span class="row-end"><span class="badge badge-accent">now</span></span></button></li>
+          <li><button class="row" data-drawer-open="drawer-demo"><span class="swatch" style="background: var(--ink-3)"></span><span class="row-body"><span class="row-title">Fix alt text on case studies</span><span class="row-meta">Yesterday · 41 images</span></span><span class="row-end"><span class="badge">done</span></span></button></li>
+        </ul>
+      </div>
+      <div class="example">
+        <div class="table-wrap"><table class="table">
+          <caption>Usage this week</caption>
+          <thead><tr><th scope="col">Page</th><th scope="col">Status</th><th scope="col" class="num">Views</th></tr></thead>
+          <tbody>
+            <tr><th scope="row" style="font-weight:500;color:inherit;text-transform:none;letter-spacing:0;font-size:inherit">/pricing</th><td><span class="badge">live</span></td><td class="num">12,480</td></tr>
+            <tr><th scope="row" style="font-weight:500;color:inherit;text-transform:none;letter-spacing:0;font-size:inherit">/events</th><td><span class="badge badge-accent">new</span></td><td class="num">3,206</td></tr>
+            <tr><th scope="row" style="font-weight:500;color:inherit;text-transform:none;letter-spacing:0;font-size:inherit">/about</th><td><span class="badge">draft</span></td><td class="num">0</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="example">
+        <dl class="facts" style="margin-top:0"><div><dt class="label">Entries</dt><dd>1,204</dd></div><div><dt class="label">Streak</dt><dd>12 days</dd></div><div><dt class="label">Synced</dt><dd>14:20</dd></div><div><dt class="label">Folder</dt><dd>~/Notes</dd></div></dl>
+        <div class="grid" style="--min: 160px"><div class="stat"><span class="label">Streak</span><span class="stat-value">12 days</span><span class="stat-note">Best: 31 days</span></div><div class="stat"><span class="label">Entries</span><span class="stat-value">1,204</span><span class="stat-note">Estimated 8 hours</span></div></div>
+      </div>
+      <p class="small muted">Use <code class="code">.table</code> inside <code class="code">.table-wrap</code> so a wide table scrolls without moving the page. Keep a <code class="code">&lt;caption&gt;</code> and <code class="code">scope</code> on headers. Right-align numbers with <code class="code">.num</code>. Numbers are exact and labelled; say "estimated" when they are.</p>
+    </section>
+
+    <section class="block" id="navigation">
+      <h2 class="display display-sm section-title">Navigation</h2>
+      <div class="example">
+        <nav aria-label="Breadcrumb"><ol class="crumbs"><li><a class="link" href="#navigation">Home</a></li><li><a class="link" href="#navigation">Projects</a></li><li aria-current="page">Monoline</li></ol></nav>
+        <nav aria-label="Pagination"><div class="pager"><button disabled>Prev</button><a href="#navigation">1</a><a href="#navigation" aria-current="page">2</a><a href="#navigation">3</a><span class="muted">…</span><a href="#navigation">9</a><button>Next</button></div></nav>
+        <ol class="steps" aria-label="Progress"><li class="step" data-state="done">Account</li><li class="step" aria-current="step">Workspace</li><li class="step">Invite</li><li class="step">Done</li></ol>
+      </div>
+      <div class="example">
+        <div class="topbar" style="border:1px solid var(--rule)">
+          <span class="brand"><span class="brand-mark" aria-hidden="true"></span>Acme</span>
+          <nav class="topbar-nav" aria-label="Main"><a href="#navigation" aria-current="page">Product</a><a href="#navigation">Pricing</a><a href="#navigation">Docs</a></nav>
+          <a class="btn btn-solid btn-sm" href="#navigation">Sign up</a>
+        </div>
+      </div>
+      <p class="small muted">Mark the current item with <code class="code">aria-current</code>. Wrap navigation in <code class="code">&lt;nav&gt;</code> with a label. Add a <code class="code">.skip-link</code> as the first element on every page.</p>
+    </section>
+
+    <section class="block" id="disclosure">
+      <h2 class="display display-sm section-title">Tabs, accordion, menus</h2>
+      <div class="example" data-tabs>
+        <div class="tabs" role="tablist" aria-label="Project" style="margin-top:0">
+          <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">Overview</button>
+          <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false">Activity</button>
+          <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false">Settings</button>
+        </div>
+        <div class="tabpanel" role="tabpanel" id="p1" aria-labelledby="t1">Overview content. Arrow keys, Home and End move between tabs.</div>
+        <div class="tabpanel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>Activity content.</div>
+        <div class="tabpanel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>Settings content.</div>
+      </div>
+      <div class="example">
+        <details class="accordion" open><summary>What is Monoline?</summary><div class="accordion-body">A small CSS kit with three themes and four accents, built on native elements.</div></details>
+        <details class="accordion"><summary>Do I need JavaScript?</summary><div class="accordion-body">No. The accordion is a native details element. Tabs, dropdown dismissal and toasts use the optional monoline.js.</div></details>
+        <details class="accordion"><summary>Can I add my own accent?</summary><div class="accordion-body">Yes. Override four tokens per theme and check the contrast rules.</div></details>
+      </div>
+      <div class="example"><div class="cluster">
+        <details class="dropdown"><summary class="btn btn-line">Actions</summary>
+          <div class="menu" role="menu"><button class="menu-item" role="menuitem">Rename</button><button class="menu-item" role="menuitem">Duplicate <span class="muted">⌘D</span></button><hr class="menu-sep"><button class="menu-item danger" role="menuitem">Delete</button></div></details>
+        <span class="tip-wrap"><button class="btn btn-line" aria-describedby="tip-1">Hover or focus me</button><span class="tip" role="tooltip" id="tip-1">Saved to ~/Notes</span></span>
+      </div></div>
+      <p class="small muted">Tabs need <code class="code">data-tabs</code> and monoline.js. The dropdown closes on Escape and outside click with the same script. A tooltip repeats a label; never put essential information only in one.</p>
+    </section>
+
+    <section class="block" id="feedback">
+      <h2 class="display display-sm section-title">Feedback and marks</h2>
+      <p class="lede">A state that lasts is a banner at the top of the content. What just happened is a toast.</p>
+      <div class="example stack">
+        <div class="banner" role="status"><div><strong>Synced.</strong> 42 entries up to date as of 14:20.</div></div>
+        <div class="banner banner-accent" role="status"><div><strong class="accent">New.</strong> Claude logged 2 entries since you last looked.</div></div>
+        <div class="banner banner-warning" role="alert"><div><strong>Conflict.</strong> Two devices edited 12 March. Pick which copy to keep.</div><button class="btn btn-line btn-sm">Review</button></div>
+        <div class="banner banner-danger" role="alert"><div><strong>Can't save.</strong> The folder is read-only. Pick another folder.</div><button class="btn btn-danger btn-sm">Open settings</button></div>
+      </div>
+      <div class="example"><div class="cluster">
+        <span class="badge">draft</span><span class="badge badge-solid">12 days</span><span class="badge badge-accent">new</span>
+        <span class="tag">design <button aria-label="Remove design">×</button></span><span class="tag">docs <button aria-label="Remove docs">×</button></span>
+        <span class="check check-pass" aria-label="Pass">✓</span><span class="check check-fail" aria-label="Fail">×</span>
+        <span class="dot" role="img" aria-label="Live"></span><span class="small">Live</span>
+        <kbd class="kbd">⌘</kbd><kbd class="kbd">K</kbd>
+      </div></div>
+      <div class="example"><div class="cluster">
+        <span class="avatar" role="img" aria-label="Ada Lovelace">AL</span><span class="avatar avatar-line" role="img" aria-label="Grace Hopper">GH</span><span class="avatar avatar-lg" role="img" aria-label="Alan Turing">AT</span>
+        <span class="avatar-group"><span class="avatar" role="img" aria-label="Ada">A</span><span class="avatar avatar-line" role="img" aria-label="Grace">G</span><span class="avatar" role="img" aria-label="Alan">T</span></span>
+      </div></div>
+      <p class="small muted">Never rely on colour alone: a banner has a bold word, a check has a glyph. Use <code class="code">role="alert"</code> only for what needs attention at once.</p>
+    </section>
+
+    <section class="block" id="overlays">
+      <h2 class="display display-sm section-title">Overlays</h2>
+      <p class="lede">A drawer for the details of one thing, a dialog only for a question that blocks, a toast (with Undo) for everything else.</p>
+      <div class="example">
+        <div class="cluster">
+          <button class="btn btn-line" data-drawer-open="drawer-demo">Open drawer</button>
+          <button class="btn btn-line" data-dialog-open="dialog-demo">Open dialog</button>
+          <button class="btn btn-line" data-toast="Saved to ~/Notes.">Show toast</button>
+          <button class="btn btn-danger" data-toast="Entry deleted." data-toast-undo>Delete, with Undo</button>
+        </div>
+        <div class="drawer" id="drawer-demo" aria-hidden="true">
+          <div class="scrim"></div>
+          <aside class="panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+            <button class="close" data-drawer-close>Close</button>
+            <p class="label">Entry</p>
+            <h3 class="display display-sm panel-title" id="drawer-title">Ship the pricing page rewrite</h3>
+            <p style="max-width: var(--measure)">Rewrote the headline and the plan table, and moved the FAQ above the footer. Open: the annual toggle copy.</p>
+            <div class="panel-actions"><button class="btn btn-solid" data-drawer-close>Save</button><button class="btn btn-danger" data-drawer-close data-toast="Entry deleted." data-toast-undo>Delete</button></div>
+          </aside>
+        </div>
+        <dialog class="dialog" id="dialog-demo" aria-labelledby="dlg-title">
+          <p class="dialog-title" id="dlg-title">Overwrite the remote copy?</p>
+          <p class="small muted">The copy on this device is newer. Changes from 12 March on the other device will be lost, and this can't be undone.</p>
+          <div class="dialog-actions"><button class="btn btn-line" data-dialog-close>Keep both</button><button class="btn btn-solid" data-dialog-close>Overwrite</button></div>
+        </dialog>
+      </div>
+      <p class="small muted">The dialog is a native <code class="code">&lt;dialog&gt;</code>: focus is trapped and Escape closes it. The drawer closes on Escape, scrim click and Close, and returns focus. In JavaScript: <code class="code">Monoline.toast("Saved", {undo: fn})</code>.</p>
+    </section>
+
+    <section class="block" id="loading">
+      <h2 class="display display-sm section-title">Loading and empty</h2>
+      <div class="example">
+        <div class="cluster"><span class="spinner" role="status" aria-label="Loading"></span><span class="small muted">Syncing 42 entries</span></div>
+        <div class="stack"><span class="skeleton" style="width: 60%"></span><span class="skeleton" style="width: 90%"></span><span class="skeleton skeleton-hatch skeleton-block"></span></div>
+      </div>
+      <div class="example">
+        <div class="stack" style="justify-items:start"><p style="font-weight:500">No entries yet.</p><p class="muted small" style="max-width: var(--measure)">They appear here when you write a day or Claude logs work.</p><button class="btn btn-line">Write today</button></div>
+      </div>
+      <p class="small muted">An empty state says what goes here and offers the one action that fills it. Skeletons are still, not shimmering.</p>
+    </section>
+
+    <section class="block" id="prose">
+      <h2 class="display display-sm section-title">Prose</h2>
+      <p class="lede">Wrap long-form text (articles, docs, release notes) in <code class="code">.prose</code>.</p>
+      <div class="example"><div class="prose">
+        <h3>A heading inside prose</h3>
+        <p>Paragraphs read at the 64ch measure, with a quiet <a class="link" href="#prose">link</a> and <code>inline code</code>.</p>
+        <ul><li>Lists keep their markers.</li><li>Quotes get a single accent rule.</li></ul>
+        <blockquote>Paper and ink, and one loud accent.</blockquote>
+      </div></div>
+    </section>
+
+    <section class="block" id="a11y">
+      <h2 class="display display-sm section-title">Accessibility</h2>
+      <p class="lede">The kit targets WCAG 2.2 AA. What it guarantees, and what stays with you:</p>
+      <div class="table-wrap"><table class="table">
+        <thead><tr><th>Area</th><th>Kit does</th><th>You do</th></tr></thead>
+        <tbody>
+          <tr><td>Contrast</td><td>Every theme and accent passes 4.5:1 for text and 3:1 for fills, tested by <code class="code">npm run check</code>.</td><td>Re-run the check after adding an accent.</td></tr>
+          <tr><td>Focus</td><td>A 2px accent ring on <code class="code">:focus-visible</code>, drawn outside the control.</td><td>Leave 8px between focusable things. Never remove the ring.</td></tr>
+          <tr><td>Keyboard</td><td>Native elements everywhere. Tabs support arrow keys, Home and End. Escape closes overlays.</td><td>Tab through each screen before shipping.</td></tr>
+          <tr><td>Motion</td><td>All animation stops under <code class="code">prefers-reduced-motion</code>.</td><td>Don't add looping motion.</td></tr>
+          <tr><td>Colour</td><td>Status always pairs colour with a word or shape.</td><td>Keep it that way in your own components.</td></tr>
+          <tr><td>Semantics</td><td>Classes style native elements: button, label, fieldset, details, dialog, table.</td><td>Use the element, then the class. Name icon-only buttons. Label every field.</td></tr>
+          <tr><td>Touch</td><td>Buttons are at least 40px tall.</td><td>Keep small buttons (.btn-sm) off touch-first screens.</td></tr>
+          <tr><td>Zoom and reflow</td><td>Layouts wrap and stack at narrow widths.</td><td>Test at 200% zoom.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="block" id="content">
+      <h2 class="display display-sm section-title">Content</h2>
+      <div class="table-wrap"><table class="table">
+        <thead><tr><th>Where</th><th>Rule</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Buttons</td><td>A verb</td><td>Save, Open folder</td></tr>
+          <tr><td>Errors</td><td>What happened, then what to do</td><td>Can't save. The folder is read-only. Pick another folder.</td></tr>
+          <tr><td>Empty states</td><td>What goes here, plus one action</td><td>No entries yet. They appear here when you write a day.</td></tr>
+          <tr><td>Numbers</td><td>Exact and labelled</td><td>12 days, not "a dozen"</td></tr>
+          <tr><td>Tone</td><td>Plain, short sentences. No exclamation marks, no emoji, no "please", no "Oops".</td><td>Saved.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section class="block" id="dont">
+      <h2 class="display display-sm section-title">Do and don't</h2>
+      <div class="compare">
+        <div><p class="label">Do</p><ul><li>Use tokens and kit classes</li><li>Reach for the native element first</li><li>One solid button per view</li><li>Offer Undo instead of confirming</li><li>Check in all three themes at 900px</li></ul></div>
+        <div><p class="label">Don't</p><ul><li>Raw colours, font sizes or spacing in a screen</li><li>Border radius, shadows, gradients or blur</li><li>Icon fonts or a second UI library</li><li>A second accent in one project</li><li>Centred body text</li></ul></div>
+      </div>
+    </section>
+
+    <section class="block" id="project">
+      <h2 class="display display-sm section-title">Project</h2>
+      <p class="lede">Monoline is MIT licensed. The bundled fonts are under the SIL Open Font License.</p>
+      <div class="cluster">
+        <a class="btn btn-line" href="https://github.com/dasariprashant0/design-system">Source</a>
+        <a class="btn btn-line" href="https://github.com/dasariprashant0/design-system/blob/master/DESIGN.md">Design rules</a>
+        <a class="btn btn-line" href="https://github.com/dasariprashant0/design-system/blob/master/CHANGELOG.md">Changelog</a>
+        <a class="btn btn-line" href="https://github.com/dasariprashant0/design-system/blob/master/CONTRIBUTING.md">Contribute</a>
+        <a class="btn btn-line" href="tokens/tokens.json">tokens.json</a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+/* Docs helpers. Runs before monoline.js so code listings show clean markup. */
+(function () {
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  // Code listing under every example
+  $$('.example').forEach(function (ex) {
+    var src = ex.innerHTML.replace(/\n\s*\n/g, '\n').replace(/^\n+|\s+$/g, '');
+    var lines = src.split('\n'), ind = Math.min.apply(null, lines.filter(function (l) { return l.trim(); }).map(function (l) { return l.match(/^\s*/)[0].length; }));
+    src = lines.map(function (l) { return l.slice(ind); }).join('\n');
+    if (!/<(button|input|a|div|span|ol|ul|table|details|p|nav|dl|label|textarea|select)/.test(src) || ex.querySelector('pre')) return;
+    var d = document.createElement('details'); d.className = 'accordion';
+    d.innerHTML = '<summary>Code</summary><pre class="code-block"><code>' + esc(src) + '</code></pre>';
+    ex.parentNode.insertBefore(d, ex.nextSibling);
+  });
+  var COLORS = ['background','foreground','muted','rule','surface','accent','accent-text','accent-2','on-accent','danger','warning','ok'];
+  var SP = [['s1',4],['s2',8],['s3',12],['s4',16],['s5',24],['s6',32],['s7',48],['s8',64],['s9',96]];
+  function paint() {
+    var cs = getComputedStyle(document.documentElement);
+    document.getElementById('colors').innerHTML = COLORS.map(function (n) {
+      return '<li class="row"><span class="swatch" style="background:var(--' + n + ')"></span><span class="row-body"><span class="row-title">--' + n + '</span><span class="row-meta">' + cs.getPropertyValue('--' + n).trim() + '</span></span></li>';
+    }).join('');
+  }
+  document.getElementById('heat').innerHTML = '0120134201430012401230140213041020312403'.split('').map(function (n) { return '<span class="heat-' + n + '"></span>'; }).join('');
+  document.getElementById('space-scale').innerHTML = SP.map(function (s) { return '<div class="space-row"><code>--' + s[0] + '</code><span class="bar" style="width:var(--' + s[0] + ')"></span><span class="muted">' + s[1] + 'px</span></div>'; }).join('');
+  paint();
+  new MutationObserver(paint).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme', 'data-accent']});
+  // Segmented demo
+  $$('.seg').forEach(function (g) { $$('.seg-opt', g).forEach(function (b) { b.addEventListener('click', function () { $$('.seg-opt', g).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); }); });
+  // Current section in the nav
+  var links = $$('#nav a'), secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  function spy() {
+    var cur = 0; secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top < 140) cur = i; });
+    links.forEach(function (a, i) { a.setAttribute('aria-current', String(i === cur)); });
+  }
+  addEventListener('scroll', spy, {passive: true}); spy();
+})();
+</script>
+<script src="js/monoline.js" defer></script>
+</body>
+</html>
