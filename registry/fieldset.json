@@ -1,0 +1,49 @@
+{
+  "name": "fieldset",
+  "title": "Fieldset",
+  "category": "forms",
+  "description": "Group related controls under one legend.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/fieldset.css",
+      "content": ".fieldset { display: grid; gap: var(--s4); margin: 0; padding: var(--s4); border: 1px solid var(--rule); min-width: 0; }\n.fieldset-legend { padding: 0 var(--s2); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.fieldset:disabled { opacity: 0.6; }\n"
+    }
+  ],
+  "a11y": [
+    "Native fieldset and legend: screen readers announce the legend with each control.",
+    "disabled on the fieldset disables every control inside."
+  ],
+  "keywords": [
+    "group",
+    "legend",
+    "form section"
+  ],
+  "kind": "components",
+  "import": "import {Fieldset} from '@monoline/react'",
+  "path": "packages/react/src/components/fieldset",
+  "files": [
+    "packages/react/src/components/fieldset/fieldset.demo.tsx",
+    "packages/react/src/components/fieldset/fieldset.test.tsx",
+    "packages/react/src/components/fieldset/fieldset.tsx",
+    "packages/react/src/components/fieldset/index.ts",
+    "packages/react/src/components/fieldset/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/fieldset/fieldset.tsx",
+      "content": "import {forwardRef, type FieldsetHTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface FieldsetProps extends Omit<FieldsetHTMLAttributes<HTMLFieldSetElement>, 'title'> {\n  /** The group's name. Required so the fieldset always has an accessible name. */\n  legend: ReactNode;\n}\n\n/** A group of controls. Use it for radios, checkboxes or a block like \"Billing address\". */\nexport const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(function Fieldset({legend, className, children, ...rest}, ref) {\n  return (\n    <fieldset ref={ref} className={cx('fieldset', className)} {...rest}>\n      <legend className=\"fieldset-legend\">{legend}</legend>\n      {children}\n    </fieldset>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/fieldset/index.ts",
+      "content": "export {Fieldset} from './fieldset';\nexport type {FieldsetProps} from './fieldset';\n"
+    },
+    {
+      "path": "packages/react/src/components/fieldset/meta.json",
+      "content": "{\"name\":\"fieldset\",\"title\":\"Fieldset\",\"category\":\"forms\",\"description\":\"Group related controls under one legend.\",\"status\":\"stable\",\"css\":[\"fieldset.css\"],\"a11y\":[\"Native fieldset and legend: screen readers announce the legend with each control.\",\"disabled on the fieldset disables every control inside.\"],\"keywords\":[\"group\",\"legend\",\"form section\"]}\n"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "text",
+  "title": "Text",
+  "category": "typography",
+  "description": "Body text with a size and tone from the scale.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/text.css",
+      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-ok { color: var(--ok); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
+    }
+  ],
+  "a11y": [
+    "A plain p (or the child with asChild); tone is never the only signal, so pair danger text with words."
+  ],
+  "keywords": [
+    "paragraph",
+    "copy",
+    "body",
+    "muted"
+  ],
+  "kind": "components",
+  "import": "import {Text} from '@monoline/react'",
+  "path": "packages/react/src/components/text",
+  "files": [
+    "packages/react/src/components/text/index.ts",
+    "packages/react/src/components/text/meta.json",
+    "packages/react/src/components/text/text.demo.tsx",
+    "packages/react/src/components/text/text.test.tsx",
+    "packages/react/src/components/text/text.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/text/index.ts",
+      "content": "export {Text} from './text';\nexport type {TextProps} from './text';\n"
+    },
+    {
+      "path": "packages/react/src/components/text/meta.json",
+      "content": "{\"name\":\"text\",\"title\":\"Text\",\"category\":\"typography\",\"description\":\"Body text with a size and tone from the scale.\",\"status\":\"stable\",\"css\":[\"text.css\"],\"a11y\":[\"A plain p (or the child with asChild); tone is never the only signal, so pair danger text with words.\"],\"keywords\":[\"paragraph\",\"copy\",\"body\",\"muted\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/text/text.tsx",
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {Slot} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface TextProps extends HTMLAttributes<HTMLParagraphElement> {\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n  tone?: 'default' | 'muted' | 'danger' | 'ok' | 'accent';\n  /** One line with an ellipsis. */\n  truncate?: boolean;\n  /** Render the child (a span, label, li) with the text styles. */\n  asChild?: boolean;\n}\n\n/** A paragraph by default. */\nexport const Text = forwardRef<HTMLParagraphElement, TextProps>(function Text({size = 'md', tone = 'default', truncate, asChild, className, ...rest}, ref) {\n  const Comp = asChild ? Slot.Root : 'p';\n  return <Comp ref={ref} className={cx('text', `text-${size}`, tone !== 'default' && `text-${tone}`, truncate && 'text-truncate', className)} {...rest} />;\n});\n"
+    }
+  ]
+}

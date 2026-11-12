@@ -1,0 +1,6 @@
+.heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }
+.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }
+.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }
+.heading-lg { font-size: calc(var(--text-lg) * 1.35); }
+.heading-md { font-size: var(--text-lg); }
+.heading-sm { font-size: var(--text-base); }

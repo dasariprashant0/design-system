@@ -1,0 +1,50 @@
+{
+  "name": "toolbar",
+  "title": "Toolbar",
+  "category": "buttons",
+  "description": "A row of related controls that share one tab stop and arrow-key movement.",
+  "status": "stable",
+  "primitive": "radix-ui/Toolbar",
+  "css": [
+    {
+      "path": "packages/css/src/components/toolbar.css",
+      "content": ".toolbar { display: inline-flex; align-items: stretch; border: 1px solid var(--foreground); }\n.toolbar-item { padding: var(--s2) var(--s4); font-size: var(--text-sm); text-decoration: none; }\n.toolbar-item:hover:not(:disabled) { background: var(--wash-2); }\n.toolbar-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.toolbar-item[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.toolbar-sep { width: 1px; background: var(--rule); }\n"
+    }
+  ],
+  "a11y": [
+    "role=\"toolbar\" with a required name; one Tab stop, arrow keys move between controls.",
+    "Home and End jump to the first and last control."
+  ],
+  "keywords": [
+    "formatting bar",
+    "actions",
+    "editor"
+  ],
+  "kind": "components",
+  "import": "import {Toolbar} from '@monoline/react'",
+  "path": "packages/react/src/components/toolbar",
+  "files": [
+    "packages/react/src/components/toolbar/index.ts",
+    "packages/react/src/components/toolbar/meta.json",
+    "packages/react/src/components/toolbar/toolbar.demo.tsx",
+    "packages/react/src/components/toolbar/toolbar.test.tsx",
+    "packages/react/src/components/toolbar/toolbar.tsx"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/toolbar/index.ts",
+      "content": "export {Toolbar, ToolbarButton, ToolbarSeparator, ToolbarLink} from './toolbar';\n"
+    },
+    {
+      "path": "packages/react/src/components/toolbar/meta.json",
+      "content": "{\"name\":\"toolbar\",\"title\":\"Toolbar\",\"category\":\"buttons\",\"description\":\"A row of related controls that share one tab stop and arrow-key movement.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Toolbar\",\"css\":[\"toolbar.css\"],\"a11y\":[\"role=\\\"toolbar\\\" with a required name; one Tab stop, arrow keys move between controls.\",\"Home and End jump to the first and last control.\"],\"keywords\":[\"formatting bar\",\"actions\",\"editor\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/toolbar/toolbar.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Toolbar as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\ntype RootProps = Omit<ComponentPropsWithoutRef<typeof Radix.Root>, 'aria-label'> & {\n  /** Names the toolbar, for example \"Text formatting\". */\n  'aria-label': string;\n};\n\nexport const Toolbar = forwardRef<ElementRef<typeof Radix.Root>, RootProps>(function Toolbar({className, ...rest}, ref) {\n  return <Radix.Root ref={ref} className={cx('toolbar', className)} {...rest} />;\n});\nexport const ToolbarButton = forwardRef<ElementRef<typeof Radix.Button>, ComponentPropsWithoutRef<typeof Radix.Button>>(function ToolbarButton({className, ...rest}, ref) {\n  return <Radix.Button ref={ref} className={cx('toolbar-item', className)} {...rest} />;\n});\nexport const ToolbarLink = forwardRef<ElementRef<typeof Radix.Link>, ComponentPropsWithoutRef<typeof Radix.Link>>(function ToolbarLink({className, ...rest}, ref) {\n  return <Radix.Link ref={ref} className={cx('toolbar-item', className)} {...rest} />;\n});\nexport const ToolbarSeparator = forwardRef<ElementRef<typeof Radix.Separator>, ComponentPropsWithoutRef<typeof Radix.Separator>>(function ToolbarSeparator({className, ...rest}, ref) {\n  return <Radix.Separator ref={ref} className={cx('toolbar-sep', className)} {...rest} />;\n});\n"
+    }
+  ]
+}

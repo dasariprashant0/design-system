@@ -140,6 +140,24 @@ A11y:
 - A plain div; adds no roles.
 Files: packages/react/src/components/container/container.demo.tsx, packages/react/src/components/container/container.test.tsx, packages/react/src/components/container/container.tsx, packages/react/src/components/container/index.ts, packages/react/src/components/container/meta.json
 
+## Context menu (context-menu)
+A menu of actions opened by right click or long press on an area.
+Import: import {ContextMenu} from '@monoline/react'
+Primitive: radix-ui/ContextMenu | Status: stable
+A11y:
+- Opens with right click, long press or the context-menu key (Shift+F10).
+- Arrow keys move, Enter or Space selects, Escape closes and returns focus.
+- Every action must also exist elsewhere in the UI for people who cannot open it.
+Files: packages/react/src/components/context-menu/context-menu.demo.tsx, packages/react/src/components/context-menu/context-menu.test.tsx, packages/react/src/components/context-menu/context-menu.tsx, packages/react/src/components/context-menu/index.ts, packages/react/src/components/context-menu/meta.json
+
+## Description list (description-list)
+Label and value pairs, like the details of a record.
+Import: import {DescriptionList} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A native dl with dt and dd, so assistive tech pairs each label with its value.
+Files: packages/react/src/components/description-list/description-list.demo.tsx, packages/react/src/components/description-list/description-list.test.tsx, packages/react/src/components/description-list/description-list.tsx, packages/react/src/components/description-list/index.ts, packages/react/src/components/description-list/meta.json
+
 ## Dialog (dialog)
 A modal window for a question or short task that blocks the page.
 Import: import {Dialog} from '@monoline/react'
@@ -188,6 +206,41 @@ A11y:
 - required sets the native required attribute on the control.
 Files: packages/react/src/components/field/field.demo.tsx, packages/react/src/components/field/field.test.tsx, packages/react/src/components/field/field.tsx, packages/react/src/components/field/index.ts, packages/react/src/components/field/meta.json
 
+## Fieldset (fieldset)
+Group related controls under one legend.
+Import: import {Fieldset} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Native fieldset and legend: screen readers announce the legend with each control.
+- disabled on the fieldset disables every control inside.
+Files: packages/react/src/components/fieldset/fieldset.demo.tsx, packages/react/src/components/fieldset/fieldset.test.tsx, packages/react/src/components/fieldset/fieldset.tsx, packages/react/src/components/fieldset/index.ts, packages/react/src/components/fieldset/meta.json
+
+## Grid (grid)
+A responsive grid of equal columns with one gap.
+Import: import {Grid} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A plain div; source order is reading order.
+Files: packages/react/src/components/grid/grid.demo.tsx, packages/react/src/components/grid/grid.test.tsx, packages/react/src/components/grid/grid.tsx, packages/react/src/components/grid/index.ts, packages/react/src/components/grid/meta.json
+
+## Heading (heading)
+A heading whose level (for structure) is separate from its size (for looks).
+Import: import {Heading} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- Renders a real h1 to h6; choose the level for the outline, not the size.
+Files: packages/react/src/components/heading/heading.demo.tsx, packages/react/src/components/heading/heading.test.tsx, packages/react/src/components/heading/heading.tsx, packages/react/src/components/heading/index.ts, packages/react/src/components/heading/meta.json
+
+## Hover card (hover-card)
+Preview extra content when a link or element is hovered or focused.
+Import: import {HoverCard} from '@monoline/react'
+Primitive: radix-ui/HoverCard | Status: stable
+A11y:
+- Opens on pointer hover and on keyboard focus of the trigger.
+- Supplementary only: never put the sole path to information or actions in it.
+- Not shown on touch devices; the trigger must work on its own.
+Files: packages/react/src/components/hover-card/hover-card.demo.tsx, packages/react/src/components/hover-card/hover-card.test.tsx, packages/react/src/components/hover-card/hover-card.tsx, packages/react/src/components/hover-card/index.ts, packages/react/src/components/hover-card/meta.json
+
 ## Icon button (icon-button)
 A square button holding only an icon. The accessible name is required.
 Import: import {IconButton} from '@monoline/react'
@@ -196,6 +249,15 @@ A11y:
 - Native button; aria-label is required by the type.
 - Space and Enter activate it.
 Files: packages/react/src/components/icon-button/icon-button.demo.tsx, packages/react/src/components/icon-button/icon-button.test.tsx, packages/react/src/components/icon-button/icon-button.tsx, packages/react/src/components/icon-button/index.ts, packages/react/src/components/icon-button/meta.json
+
+## Image (image)
+An image with required alt text, a ratio, and a fallback when it fails to load.
+Import: import {Image} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- alt is required; use alt="" only for purely decorative images.
+- The fallback shows the alt text so the content is not lost when loading fails.
+Files: packages/react/src/components/image/image.demo.tsx, packages/react/src/components/image/image.test.tsx, packages/react/src/components/image/image.tsx, packages/react/src/components/image/index.ts, packages/react/src/components/image/meta.json
 
 ## Input (input)
 A single-line text field.
@@ -223,6 +285,15 @@ A11y:
 - required adds a visual marker; set required on the control for assistive tech.
 Files: packages/react/src/components/label/index.ts, packages/react/src/components/label/label.demo.tsx, packages/react/src/components/label/label.test.tsx, packages/react/src/components/label/label.tsx, packages/react/src/components/label/meta.json
 
+## Link (link)
+An underlined link. External links open safely and say so.
+Import: import {Link} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A real anchor with a visible underline; focus ring shared with other controls.
+- External links get rel="noopener noreferrer" and a hidden "(opens in a new tab)".
+Files: packages/react/src/components/link/index.ts, packages/react/src/components/link/link.demo.tsx, packages/react/src/components/link/link.test.tsx, packages/react/src/components/link/link.tsx, packages/react/src/components/link/meta.json
+
 ## Marquee (marquee)
 Scroll a row of items endlessly; pauses on hover and stops for reduced motion.
 Import: import {Marquee} from '@monoline/react'
@@ -231,6 +302,24 @@ A11y:
 - The duplicate copy is aria-hidden so screen readers read the items once.
 - Pauses on hover and focus; animation is off under prefers-reduced-motion.
 Files: packages/react/src/components/marquee/index.ts, packages/react/src/components/marquee/marquee.demo.tsx, packages/react/src/components/marquee/marquee.test.tsx, packages/react/src/components/marquee/marquee.tsx, packages/react/src/components/marquee/meta.json
+
+## Menubar (menubar)
+A horizontal bar of menus, like File, Edit and View in a desktop app.
+Import: import {Menubar} from '@monoline/react'
+Primitive: radix-ui/Menubar | Status: stable
+A11y:
+- role="menubar"; arrow keys move between menus and items, Enter or Space opens.
+- Escape closes the open menu and returns focus to its trigger.
+Files: packages/react/src/components/menubar/index.ts, packages/react/src/components/menubar/menubar.demo.tsx, packages/react/src/components/menubar/menubar.test.tsx, packages/react/src/components/menubar/menubar.tsx, packages/react/src/components/menubar/meta.json
+
+## Native select (native-select)
+The browser select, styled. Best on mobile and for long simple lists.
+Import: import {NativeSelect} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A real select element: native keyboard, typeahead and mobile pickers.
+- Inside a Field it is labelled and described automatically.
+Files: packages/react/src/components/native-select/index.ts, packages/react/src/components/native-select/meta.json, packages/react/src/components/native-select/native-select.demo.tsx, packages/react/src/components/native-select/native-select.test.tsx, packages/react/src/components/native-select/native-select.tsx
 
 ## Number input (number-input)
 A numeric field with decrease and increase buttons.
@@ -434,6 +523,14 @@ A11y:
 - The remove control is a real button named "Remove <label>".
 Files: packages/react/src/components/tag/index.ts, packages/react/src/components/tag/meta.json, packages/react/src/components/tag/tag.demo.tsx, packages/react/src/components/tag/tag.test.tsx, packages/react/src/components/tag/tag.tsx
 
+## Text (text)
+Body text with a size and tone from the scale.
+Import: import {Text} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A plain p (or the child with asChild); tone is never the only signal, so pair danger text with words.
+Files: packages/react/src/components/text/index.ts, packages/react/src/components/text/meta.json, packages/react/src/components/text/text.demo.tsx, packages/react/src/components/text/text.test.tsx, packages/react/src/components/text/text.tsx
+
 ## Textarea (textarea)
 A multi-line text field.
 Import: import {Textarea} from '@monoline/react'
@@ -450,6 +547,16 @@ Primitive: none | Status: stable
 A11y:
 - An ordered list of events; the time is a real time element when a datetime is given.
 Files: packages/react/src/components/timeline/index.ts, packages/react/src/components/timeline/meta.json, packages/react/src/components/timeline/timeline.demo.tsx, packages/react/src/components/timeline/timeline.test.tsx, packages/react/src/components/timeline/timeline.tsx
+
+## Toast (toast)
+A short message that appears briefly and does not block the page.
+Import: import {Toast} from '@monoline/react'
+Primitive: radix-ui/Toast | Status: stable
+A11y:
+- Announced politely by assistive tech without moving focus.
+- Pauses its timer on hover and focus; F8 jumps focus to the toast region.
+- Never the only place a critical result appears; keep an inline message too.
+Files: packages/react/src/components/toast/index.ts, packages/react/src/components/toast/meta.json, packages/react/src/components/toast/toast.demo.tsx, packages/react/src/components/toast/toast.test.tsx, packages/react/src/components/toast/toast.tsx
 
 ## Toggle (toggle)
 A button that stays pressed or not.
@@ -469,6 +576,15 @@ A11y:
 - Arrow keys move focus between items; Space and Enter toggle.
 - Give the group an aria-label.
 Files: packages/react/src/components/toggle-group/index.ts, packages/react/src/components/toggle-group/meta.json, packages/react/src/components/toggle-group/toggle-group.demo.tsx, packages/react/src/components/toggle-group/toggle-group.test.tsx, packages/react/src/components/toggle-group/toggle-group.tsx
+
+## Toolbar (toolbar)
+A row of related controls that share one tab stop and arrow-key movement.
+Import: import {Toolbar} from '@monoline/react'
+Primitive: radix-ui/Toolbar | Status: stable
+A11y:
+- role="toolbar" with a required name; one Tab stop, arrow keys move between controls.
+- Home and End jump to the first and last control.
+Files: packages/react/src/components/toolbar/index.ts, packages/react/src/components/toolbar/meta.json, packages/react/src/components/toolbar/toolbar.demo.tsx, packages/react/src/components/toolbar/toolbar.test.tsx, packages/react/src/components/toolbar/toolbar.tsx
 
 ## Tooltip (tooltip)
 Short hint text on hover and keyboard focus.

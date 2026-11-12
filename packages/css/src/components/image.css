@@ -1,0 +1,4 @@
+.image { display: block; max-width: 100%; height: auto; }
+.image-cover { object-fit: cover; width: 100%; }
+.image-contain { object-fit: contain; width: 100%; }
+.image-fallback { display: grid; place-items: center; padding: var(--s4); width: 100%; border: 1px dashed var(--rule); color: var(--muted); font-size: var(--text-sm); text-align: center; }

@@ -1,0 +1,51 @@
+{
+  "name": "image",
+  "title": "Image",
+  "category": "data-display",
+  "description": "An image with required alt text, a ratio, and a fallback when it fails to load.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/image.css",
+      "content": ".image { display: block; max-width: 100%; height: auto; }\n.image-cover { object-fit: cover; width: 100%; }\n.image-contain { object-fit: contain; width: 100%; }\n.image-fallback { display: grid; place-items: center; padding: var(--s4); width: 100%; border: 1px dashed var(--rule); color: var(--muted); font-size: var(--text-sm); text-align: center; }\n"
+    }
+  ],
+  "a11y": [
+    "alt is required; use alt=\"\" only for purely decorative images.",
+    "The fallback shows the alt text so the content is not lost when loading fails."
+  ],
+  "keywords": [
+    "img",
+    "picture",
+    "photo",
+    "media",
+    "lazy"
+  ],
+  "kind": "components",
+  "import": "import {Image} from '@monoline/react'",
+  "path": "packages/react/src/components/image",
+  "files": [
+    "packages/react/src/components/image/image.demo.tsx",
+    "packages/react/src/components/image/image.test.tsx",
+    "packages/react/src/components/image/image.tsx",
+    "packages/react/src/components/image/index.ts",
+    "packages/react/src/components/image/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/image/image.tsx",
+      "content": "'use client';\nimport {forwardRef, useState, type ImgHTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {\n  /** Required. Describe the image, or pass \"\" if it is decorative. */\n  alt: string;\n  /** Width / height, for example `16 / 9`. Reserves space so the page does not jump. */\n  ratio?: number;\n  fit?: 'cover' | 'contain';\n}\n\n/** Lazy-loaded by default. If the source fails, the alt text is shown in its place. */\nexport const Image = forwardRef<HTMLImageElement, ImageProps>(function Image({ratio, fit = 'cover', className, style, alt, onError, ...rest}, ref) {\n  const [failed, setFailed] = useState(false);\n  if (failed) {\n    return <div role=\"img\" aria-label={alt} className={cx('image image-fallback', className)} style={{aspectRatio: ratio, ...style}}>{alt}</div>;\n  }\n  return (\n    <img\n      ref={ref}\n      loading=\"lazy\"\n      decoding=\"async\"\n      alt={alt}\n      className={cx('image', `image-${fit}`, className)}\n      style={{aspectRatio: ratio, ...style}}\n      onError={(e) => { setFailed(true); onError?.(e); }}\n      {...rest}\n    />\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/image/index.ts",
+      "content": "export {Image} from './image';\nexport type {ImageProps} from './image';\n"
+    },
+    {
+      "path": "packages/react/src/components/image/meta.json",
+      "content": "{\"name\":\"image\",\"title\":\"Image\",\"category\":\"data-display\",\"description\":\"An image with required alt text, a ratio, and a fallback when it fails to load.\",\"status\":\"stable\",\"css\":[\"image.css\"],\"a11y\":[\"alt is required; use alt=\\\"\\\" only for purely decorative images.\",\"The fallback shows the alt text so the content is not lost when loading fails.\"],\"keywords\":[\"img\",\"picture\",\"photo\",\"media\",\"lazy\"]}\n"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "grid",
+  "title": "Grid",
+  "category": "layout",
+  "description": "A responsive grid of equal columns with one gap.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/grid.css",
+      "content": ".grid { display: grid; gap: var(--grid-gap, var(--s4)); }\n.grid-auto { grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min, 16rem), 100%), 1fr)); }\n.grid-fixed { grid-template-columns: repeat(var(--grid-cols, 2), minmax(0, 1fr)); }\n@media (max-width: 40rem) { .grid-fixed { grid-template-columns: minmax(0, 1fr); } }\n"
+    }
+  ],
+  "a11y": [
+    "A plain div; source order is reading order."
+  ],
+  "keywords": [
+    "columns",
+    "layout",
+    "cards",
+    "responsive"
+  ],
+  "kind": "components",
+  "import": "import {Grid} from '@monoline/react'",
+  "path": "packages/react/src/components/grid",
+  "files": [
+    "packages/react/src/components/grid/grid.demo.tsx",
+    "packages/react/src/components/grid/grid.test.tsx",
+    "packages/react/src/components/grid/grid.tsx",
+    "packages/react/src/components/grid/index.ts",
+    "packages/react/src/components/grid/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/grid/grid.tsx",
+      "content": "import {forwardRef, type CSSProperties, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface GridProps extends HTMLAttributes<HTMLDivElement> {\n  /** Fixed number of equal columns. Omit for an auto-fit grid. */\n  columns?: 1 | 2 | 3 | 4 | 5 | 6;\n  /** With auto-fit: the smallest a column may be, as a CSS length such as `16rem`. */\n  minColumn?: string;\n  /** Step on the spacing scale, 1 to 9. */\n  gap?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;\n}\n\n/** Equal columns that collapse on small screens when auto-fit. Fixed columns stack at 40rem. */\nexport const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid({columns, minColumn = '16rem', gap = 4, className, style, ...rest}, ref) {\n  return (\n    <div\n      ref={ref}\n      className={cx('grid', columns ? 'grid-fixed' : 'grid-auto', className)}\n      style={{'--grid-gap': `var(--s${gap})`, '--grid-cols': columns, '--grid-min': minColumn, ...style} as CSSProperties}\n      {...rest}\n    />\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/grid/index.ts",
+      "content": "export {Grid} from './grid';\nexport type {GridProps} from './grid';\n"
+    },
+    {
+      "path": "packages/react/src/components/grid/meta.json",
+      "content": "{\"name\":\"grid\",\"title\":\"Grid\",\"category\":\"layout\",\"description\":\"A responsive grid of equal columns with one gap.\",\"status\":\"stable\",\"css\":[\"grid.css\"],\"a11y\":[\"A plain div; source order is reading order.\"],\"keywords\":[\"columns\",\"layout\",\"cards\",\"responsive\"]}\n"
+    }
+  ]
+}

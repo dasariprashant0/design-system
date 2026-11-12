@@ -1,0 +1,1 @@
+{"name":"grid","title":"Grid","category":"layout","description":"A responsive grid of equal columns with one gap.","status":"stable","css":["grid.css"],"a11y":["A plain div; source order is reading order."],"keywords":["columns","layout","cards","responsive"]}

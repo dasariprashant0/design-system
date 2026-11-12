@@ -471,6 +471,68 @@
       ]
     },
     {
+      "name": "context-menu",
+      "title": "Context menu",
+      "category": "overlays",
+      "description": "A menu of actions opened by right click or long press on an area.",
+      "status": "stable",
+      "primitive": "radix-ui/ContextMenu",
+      "css": [
+        "popover.css",
+        "17-dropdown-menu.css"
+      ],
+      "a11y": [
+        "Opens with right click, long press or the context-menu key (Shift+F10).",
+        "Arrow keys move, Enter or Space selects, Escape closes and returns focus.",
+        "Every action must also exist elsewhere in the UI for people who cannot open it."
+      ],
+      "keywords": [
+        "right click",
+        "menu",
+        "actions"
+      ],
+      "kind": "components",
+      "import": "import {ContextMenu} from '@monoline/react'",
+      "path": "packages/react/src/components/context-menu",
+      "files": [
+        "packages/react/src/components/context-menu/context-menu.demo.tsx",
+        "packages/react/src/components/context-menu/context-menu.test.tsx",
+        "packages/react/src/components/context-menu/context-menu.tsx",
+        "packages/react/src/components/context-menu/index.ts",
+        "packages/react/src/components/context-menu/meta.json"
+      ]
+    },
+    {
+      "name": "description-list",
+      "title": "Description list",
+      "category": "data-display",
+      "description": "Label and value pairs, like the details of a record.",
+      "status": "stable",
+      "css": [
+        "description-list.css"
+      ],
+      "a11y": [
+        "A native dl with dt and dd, so assistive tech pairs each label with its value."
+      ],
+      "keywords": [
+        "key value",
+        "details",
+        "dl",
+        "properties",
+        "meta"
+      ],
+      "kind": "components",
+      "import": "import {DescriptionList} from '@monoline/react'",
+      "path": "packages/react/src/components/description-list",
+      "files": [
+        "packages/react/src/components/description-list/description-list.demo.tsx",
+        "packages/react/src/components/description-list/description-list.test.tsx",
+        "packages/react/src/components/description-list/description-list.tsx",
+        "packages/react/src/components/description-list/index.ts",
+        "packages/react/src/components/description-list/meta.json"
+      ]
+    },
+    {
       "name": "dialog",
       "title": "Dialog",
       "category": "overlays",
@@ -631,6 +693,125 @@
       ]
     },
     {
+      "name": "fieldset",
+      "title": "Fieldset",
+      "category": "forms",
+      "description": "Group related controls under one legend.",
+      "status": "stable",
+      "css": [
+        "fieldset.css"
+      ],
+      "a11y": [
+        "Native fieldset and legend: screen readers announce the legend with each control.",
+        "disabled on the fieldset disables every control inside."
+      ],
+      "keywords": [
+        "group",
+        "legend",
+        "form section"
+      ],
+      "kind": "components",
+      "import": "import {Fieldset} from '@monoline/react'",
+      "path": "packages/react/src/components/fieldset",
+      "files": [
+        "packages/react/src/components/fieldset/fieldset.demo.tsx",
+        "packages/react/src/components/fieldset/fieldset.test.tsx",
+        "packages/react/src/components/fieldset/fieldset.tsx",
+        "packages/react/src/components/fieldset/index.ts",
+        "packages/react/src/components/fieldset/meta.json"
+      ]
+    },
+    {
+      "name": "grid",
+      "title": "Grid",
+      "category": "layout",
+      "description": "A responsive grid of equal columns with one gap.",
+      "status": "stable",
+      "css": [
+        "grid.css"
+      ],
+      "a11y": [
+        "A plain div; source order is reading order."
+      ],
+      "keywords": [
+        "columns",
+        "layout",
+        "cards",
+        "responsive"
+      ],
+      "kind": "components",
+      "import": "import {Grid} from '@monoline/react'",
+      "path": "packages/react/src/components/grid",
+      "files": [
+        "packages/react/src/components/grid/grid.demo.tsx",
+        "packages/react/src/components/grid/grid.test.tsx",
+        "packages/react/src/components/grid/grid.tsx",
+        "packages/react/src/components/grid/index.ts",
+        "packages/react/src/components/grid/meta.json"
+      ]
+    },
+    {
+      "name": "heading",
+      "title": "Heading",
+      "category": "typography",
+      "description": "A heading whose level (for structure) is separate from its size (for looks).",
+      "status": "stable",
+      "css": [
+        "heading.css"
+      ],
+      "a11y": [
+        "Renders a real h1 to h6; choose the level for the outline, not the size."
+      ],
+      "keywords": [
+        "title",
+        "h1",
+        "display",
+        "header"
+      ],
+      "kind": "components",
+      "import": "import {Heading} from '@monoline/react'",
+      "path": "packages/react/src/components/heading",
+      "files": [
+        "packages/react/src/components/heading/heading.demo.tsx",
+        "packages/react/src/components/heading/heading.test.tsx",
+        "packages/react/src/components/heading/heading.tsx",
+        "packages/react/src/components/heading/index.ts",
+        "packages/react/src/components/heading/meta.json"
+      ]
+    },
+    {
+      "name": "hover-card",
+      "title": "Hover card",
+      "category": "overlays",
+      "description": "Preview extra content when a link or element is hovered or focused.",
+      "status": "stable",
+      "primitive": "radix-ui/HoverCard",
+      "css": [
+        "popover.css"
+      ],
+      "a11y": [
+        "Opens on pointer hover and on keyboard focus of the trigger.",
+        "Supplementary only: never put the sole path to information or actions in it.",
+        "Not shown on touch devices; the trigger must work on its own."
+      ],
+      "keywords": [
+        "preview",
+        "tooltip",
+        "peek",
+        "profile card"
+      ],
+      "kind": "components",
+      "import": "import {HoverCard} from '@monoline/react'",
+      "path": "packages/react/src/components/hover-card",
+      "files": [
+        "packages/react/src/components/hover-card/hover-card.demo.tsx",
+        "packages/react/src/components/hover-card/hover-card.test.tsx",
+        "packages/react/src/components/hover-card/hover-card.tsx",
+        "packages/react/src/components/hover-card/index.ts",
+        "packages/react/src/components/hover-card/meta.json"
+      ]
+    },
+    {
       "name": "icon-button",
       "title": "Icon button",
       "category": "buttons",
@@ -661,6 +842,37 @@
         "packages/react/src/components/icon-button/icon-button.tsx",
         "packages/react/src/components/icon-button/index.ts",
         "packages/react/src/components/icon-button/meta.json"
+      ]
+    },
+    {
+      "name": "image",
+      "title": "Image",
+      "category": "data-display",
+      "description": "An image with required alt text, a ratio, and a fallback when it fails to load.",
+      "status": "stable",
+      "css": [
+        "image.css"
+      ],
+      "a11y": [
+        "alt is required; use alt=\"\" only for purely decorative images.",
+        "The fallback shows the alt text so the content is not lost when loading fails."
+      ],
+      "keywords": [
+        "img",
+        "picture",
+        "photo",
+        "media",
+        "lazy"
+      ],
+      "kind": "components",
+      "import": "import {Image} from '@monoline/react'",
+      "path": "packages/react/src/components/image",
+      "files": [
+        "packages/react/src/components/image/image.demo.tsx",
+        "packages/react/src/components/image/image.test.tsx",
+        "packages/react/src/components/image/image.tsx",
+        "packages/react/src/components/image/index.ts",
+        "packages/react/src/components/image/meta.json"
       ]
     },
     {
@@ -755,6 +967,37 @@
       ]
     },
     {
+      "name": "link",
+      "title": "Link",
+      "category": "typography",
+      "description": "An underlined link. External links open safely and say so.",
+      "status": "stable",
+      "css": [
+        "09-links.css",
+        "link.css"
+      ],
+      "a11y": [
+        "A real anchor with a visible underline; focus ring shared with other controls.",
+        "External links get rel=\"noopener noreferrer\" and a hidden \"(opens in a new tab)\"."
+      ],
+      "keywords": [
+        "anchor",
+        "href",
+        "a",
+        "external"
+      ],
+      "kind": "components",
+      "import": "import {Link} from '@monoline/react'",
+      "path": "packages/react/src/components/link",
+      "files": [
+        "packages/react/src/components/link/index.ts",
+        "packages/react/src/components/link/link.demo.tsx",
+        "packages/react/src/components/link/link.test.tsx",
+        "packages/react/src/components/link/link.tsx",
+        "packages/react/src/components/link/meta.json"
+      ]
+    },
+    {
       "name": "marquee",
       "title": "Marquee",
       "category": "effects",
@@ -783,6 +1026,71 @@
         "packages/react/src/components/marquee/marquee.test.tsx",
         "packages/react/src/components/marquee/marquee.tsx",
         "packages/react/src/components/marquee/meta.json"
+      ]
+    },
+    {
+      "name": "menubar",
+      "title": "Menubar",
+      "category": "navigation",
+      "description": "A horizontal bar of menus, like File, Edit and View in a desktop app.",
+      "status": "stable",
+      "primitive": "radix-ui/Menubar",
+      "css": [
+        "popover.css",
+        "17-dropdown-menu.css",
+        "menubar.css"
+      ],
+      "a11y": [
+        "role=\"menubar\"; arrow keys move between menus and items, Enter or Space opens.",
+        "Escape closes the open menu and returns focus to its trigger."
+      ],
+      "keywords": [
+        "app menu",
+        "file edit view",
+        "toolbar menu"
+      ],
+      "kind": "components",
+      "import": "import {Menubar} from '@monoline/react'",
+      "path": "packages/react/src/components/menubar",
+      "files": [
+        "packages/react/src/components/menubar/index.ts",
+        "packages/react/src/components/menubar/menubar.demo.tsx",
+        "packages/react/src/components/menubar/menubar.test.tsx",
+        "packages/react/src/components/menubar/menubar.tsx",
+        "packages/react/src/components/menubar/meta.json"
+      ]
+    },
+    {
+      "name": "native-select",
+      "title": "Native select",
+      "category": "forms",
+      "description": "The browser select, styled. Best on mobile and for long simple lists.",
+      "status": "stable",
+      "uses": [
+        "field"
+      ],
+      "css": [
+        "03-form-fields.css"
+      ],
+      "a11y": [
+        "A real select element: native keyboard, typeahead and mobile pickers.",
+        "Inside a Field it is labelled and described automatically."
+      ],
+      "keywords": [
+        "dropdown",
+        "picker",
+        "choose",
+        "option"
+      ],
+      "kind": "components",
+      "import": "import {NativeSelect} from '@monoline/react'",
+      "path": "packages/react/src/components/native-select",
+      "files": [
+        "packages/react/src/components/native-select/index.ts",
+        "packages/react/src/components/native-select/meta.json",
+        "packages/react/src/components/native-select/native-select.demo.tsx",
+        "packages/react/src/components/native-select/native-select.test.tsx",
+        "packages/react/src/components/native-select/native-select.tsx"
       ]
     },
     {
@@ -1470,6 +1778,35 @@
       ]
     },
     {
+      "name": "text",
+      "title": "Text",
+      "category": "typography",
+      "description": "Body text with a size and tone from the scale.",
+      "status": "stable",
+      "css": [
+        "text.css"
+      ],
+      "a11y": [
+        "A plain p (or the child with asChild); tone is never the only signal, so pair danger text with words."
+      ],
+      "keywords": [
+        "paragraph",
+        "copy",
+        "body",
+        "muted"
+      ],
+      "kind": "components",
+      "import": "import {Text} from '@monoline/react'",
+      "path": "packages/react/src/components/text",
+      "files": [
+        "packages/react/src/components/text/index.ts",
+        "packages/react/src/components/text/meta.json",
+        "packages/react/src/components/text/text.demo.tsx",
+        "packages/react/src/components/text/text.test.tsx",
+        "packages/react/src/components/text/text.tsx"
+      ]
+    },
+    {
       "name": "textarea",
       "title": "Textarea",
       "category": "forms",
@@ -1532,6 +1869,38 @@
       ]
     },
     {
+      "name": "toast",
+      "title": "Toast",
+      "category": "feedback",
+      "description": "A short message that appears briefly and does not block the page.",
+      "status": "stable",
+      "primitive": "radix-ui/Toast",
+      "css": [
+        "toast.css"
+      ],
+      "a11y": [
+        "Announced politely by assistive tech without moving focus.",
+        "Pauses its timer on hover and focus; F8 jumps focus to the toast region.",
+        "Never the only place a critical result appears; keep an inline message too."
+      ],
+      "keywords": [
+        "snackbar",
+        "notification",
+        "message",
+        "sonner"
+      ],
+      "kind": "components",
+      "import": "import {Toast} from '@monoline/react'",
+      "path": "packages/react/src/components/toast",
+      "files": [
+        "packages/react/src/components/toast/index.ts",
+        "packages/react/src/components/toast/meta.json",
+        "packages/react/src/components/toast/toast.demo.tsx",
+        "packages/react/src/components/toast/toast.test.tsx",
+        "packages/react/src/components/toast/toast.tsx"
+      ]
+    },
+    {
       "name": "toggle",
       "title": "Toggle",
       "category": "buttons",
@@ -1590,6 +1959,36 @@
         "packages/react/src/components/toggle-group/toggle-group.demo.tsx",
         "packages/react/src/components/toggle-group/toggle-group.test.tsx",
         "packages/react/src/components/toggle-group/toggle-group.tsx"
+      ]
+    },
+    {
+      "name": "toolbar",
+      "title": "Toolbar",
+      "category": "buttons",
+      "description": "A row of related controls that share one tab stop and arrow-key movement.",
+      "status": "stable",
+      "primitive": "radix-ui/Toolbar",
+      "css": [
+        "toolbar.css"
+      ],
+      "a11y": [
+        "role=\"toolbar\" with a required name; one Tab stop, arrow keys move between controls.",
+        "Home and End jump to the first and last control."
+      ],
+      "keywords": [
+        "formatting bar",
+        "actions",
+        "editor"
+      ],
+      "kind": "components",
+      "import": "import {Toolbar} from '@monoline/react'",
+      "path": "packages/react/src/components/toolbar",
+      "files": [
+        "packages/react/src/components/toolbar/index.ts",
+        "packages/react/src/components/toolbar/meta.json",
+        "packages/react/src/components/toolbar/toolbar.demo.tsx",
+        "packages/react/src/components/toolbar/toolbar.test.tsx",
+        "packages/react/src/components/toolbar/toolbar.tsx"
       ]
     },
     {

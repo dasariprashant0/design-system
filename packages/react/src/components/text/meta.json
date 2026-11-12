@@ -1,0 +1,1 @@
+{"name":"text","title":"Text","category":"typography","description":"Body text with a size and tone from the scale.","status":"stable","css":["text.css"],"a11y":["A plain p (or the child with asChild); tone is never the only signal, so pair danger text with words."],"keywords":["paragraph","copy","body","muted"]}

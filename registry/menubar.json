@@ -1,0 +1,58 @@
+{
+  "name": "menubar",
+  "title": "Menubar",
+  "category": "navigation",
+  "description": "A horizontal bar of menus, like File, Edit and View in a desktop app.",
+  "status": "stable",
+  "primitive": "radix-ui/Menubar",
+  "css": [
+    {
+      "path": "packages/css/src/components/popover.css",
+      "content": "/* Popover, dropdown menu and select content on Radix: a bordered panel above the page. */\n.popover { z-index: var(--z-drawer); min-width: 200px; max-width: min(360px, 92vw); padding: var(--s4); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.popover:focus-visible { outline-offset: 2px; }\n.menu-content { z-index: var(--z-drawer); min-width: 200px; padding: var(--s1) 0; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.menu-content .menu-item { cursor: pointer; }\n.menu-content .menu-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.menu-content .menu-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.menu-content .menu-item[data-variant=\"danger\"][data-highlighted] { background: var(--danger); }\n.menu-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.menu-indicator { width: 14px; display: inline-flex; justify-content: center; }\n.menu-item-check { display: flex; align-items: center; gap: var(--s3); }\n"
+    },
+    {
+      "path": "packages/css/src/components/17-dropdown-menu.css",
+      "content": "/* ─── Dropdown menu: <details class=\"dropdown\">; monoline.js closes it on Escape and outside click ─── */\n.dropdown { position: relative; display: inline-block; }\n.dropdown > summary { list-style: none; cursor: pointer; }\n.dropdown > summary::-webkit-details-marker { display: none; }\n.menu { position: absolute; left: 0; top: calc(100% + var(--s2)); z-index: var(--z-drawer); min-width: 200px; background: var(--background); border: 1px solid var(--foreground); padding: var(--s1) 0; }\n.menu-end { left: auto; right: 0; }\n.menu-item { display: flex; justify-content: space-between; gap: var(--s5); width: 100%; padding: var(--s2) var(--s4); font-size: var(--text-sm); text-align: left; }\n.menu-item:hover, .menu-item:focus-visible { background: var(--foreground); color: var(--background); outline-offset: -2px; }\n.menu-item.danger:hover { background: var(--danger); color: var(--background); }\n.menu-sep { border: 0; border-top: 1px solid var(--rule); margin: var(--s1) 0; }\n"
+    },
+    {
+      "path": "packages/css/src/components/menubar.css",
+      "content": "/* Menubar: a thin bar of text triggers. The panels reuse .menu-content from popover.css. */\n.menubar { display: inline-flex; border: 1px solid var(--foreground); }\n.menubar-trigger { padding: var(--s2) var(--s4); font-size: var(--text-sm); }\n.menubar-trigger + .menubar-trigger { border-left: 1px solid var(--rule); }\n.menubar-trigger:hover, .menubar-trigger[data-state=\"open\"], .menubar-trigger[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.menubar-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n"
+    }
+  ],
+  "a11y": [
+    "role=\"menubar\"; arrow keys move between menus and items, Enter or Space opens.",
+    "Escape closes the open menu and returns focus to its trigger."
+  ],
+  "keywords": [
+    "app menu",
+    "file edit view",
+    "toolbar menu"
+  ],
+  "kind": "components",
+  "import": "import {Menubar} from '@monoline/react'",
+  "path": "packages/react/src/components/menubar",
+  "files": [
+    "packages/react/src/components/menubar/index.ts",
+    "packages/react/src/components/menubar/menubar.demo.tsx",
+    "packages/react/src/components/menubar/menubar.test.tsx",
+    "packages/react/src/components/menubar/menubar.tsx",
+    "packages/react/src/components/menubar/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/menubar/index.ts",
+      "content": "export {Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarLabel, MenubarSeparator} from './menubar';\nexport type {MenubarItemProps} from './menubar';\n"
+    },
+    {
+      "path": "packages/react/src/components/menubar/menubar.tsx",
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Menubar as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport const MenubarMenu = Radix.Menu;\n\nexport const Menubar = forwardRef<ElementRef<typeof Radix.Root>, ComponentPropsWithoutRef<typeof Radix.Root>>(function Menubar({className, ...rest}, ref) {\n  return <Radix.Root ref={ref} className={cx('menubar', className)} {...rest} />;\n});\nexport const MenubarTrigger = forwardRef<ElementRef<typeof Radix.Trigger>, ComponentPropsWithoutRef<typeof Radix.Trigger>>(function MenubarTrigger({className, ...rest}, ref) {\n  return <Radix.Trigger ref={ref} className={cx('menubar-trigger', className)} {...rest} />;\n});\nexport const MenubarContent = forwardRef<ElementRef<typeof Radix.Content>, ComponentPropsWithoutRef<typeof Radix.Content>>(function MenubarContent({className, align = 'start', sideOffset = 4, ...rest}, ref) {\n  return <Radix.Portal><Radix.Content ref={ref} align={align} sideOffset={sideOffset} className={cx('menu-content', className)} {...rest} /></Radix.Portal>;\n});\n\nexport const MenubarSeparator = forwardRef<ElementRef<typeof Radix.Separator>, ComponentPropsWithoutRef<typeof Radix.Separator>>(function MenubarSeparator({className, ...rest}, ref) {\n  return <Radix.Separator ref={ref} className={cx('menu-sep', className)} {...rest} />;\n});\nexport const MenubarLabel = forwardRef<ElementRef<typeof Radix.Label>, ComponentPropsWithoutRef<typeof Radix.Label>>(function MenubarLabel({className, ...rest}, ref) {\n  return <Radix.Label ref={ref} className={cx('menu-label', className)} {...rest} />;\n});\nexport interface MenubarItemProps extends ComponentPropsWithoutRef<typeof Radix.Item> {\n  /** `danger` highlights in the danger colour. */\n  tone?: 'default' | 'danger';\n}\nexport const MenubarItem = forwardRef<ElementRef<typeof Radix.Item>, MenubarItemProps>(function MenubarItem({className, tone = 'default', ...rest}, ref) {\n  return <Radix.Item ref={ref} data-variant={tone} className={cx('menu-item', className)} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/menubar/meta.json",
+      "content": "{\"name\":\"menubar\",\"title\":\"Menubar\",\"category\":\"navigation\",\"description\":\"A horizontal bar of menus, like File, Edit and View in a desktop app.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Menubar\",\"css\":[\"popover.css\",\"17-dropdown-menu.css\",\"menubar.css\"],\"a11y\":[\"role=\\\"menubar\\\"; arrow keys move between menus and items, Enter or Space opens.\",\"Escape closes the open menu and returns focus to its trigger.\"],\"keywords\":[\"app menu\",\"file edit view\",\"toolbar menu\"]}\n"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "description-list",
+  "title": "Description list",
+  "category": "data-display",
+  "description": "Label and value pairs, like the details of a record.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/description-list.css",
+      "content": ".dlist { display: grid; margin: 0; font-size: var(--text-sm); }\n.dlist-row { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr; gap: var(--s4); padding: var(--s3) 0; border-bottom: 1px solid var(--rule); }\n.dlist-row dt { color: var(--muted); }\n.dlist-row dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }\n.dlist-stacked .dlist-row { grid-template-columns: minmax(0, 1fr); gap: var(--s1); }\n"
+    }
+  ],
+  "a11y": [
+    "A native dl with dt and dd, so assistive tech pairs each label with its value."
+  ],
+  "keywords": [
+    "key value",
+    "details",
+    "dl",
+    "properties",
+    "meta"
+  ],
+  "kind": "components",
+  "import": "import {DescriptionList} from '@monoline/react'",
+  "path": "packages/react/src/components/description-list",
+  "files": [
+    "packages/react/src/components/description-list/description-list.demo.tsx",
+    "packages/react/src/components/description-list/description-list.test.tsx",
+    "packages/react/src/components/description-list/description-list.tsx",
+    "packages/react/src/components/description-list/index.ts",
+    "packages/react/src/components/description-list/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/description-list/description-list.tsx",
+      "content": "import {forwardRef, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface DescriptionItem {\n  term: ReactNode;\n  details: ReactNode;\n}\n\nexport interface DescriptionListProps extends Omit<HTMLAttributes<HTMLDListElement>, 'children'> {\n  items: DescriptionItem[];\n  /** `stacked` puts each term above its value; `inline` puts them side by side. */\n  layout?: 'inline' | 'stacked';\n}\n\nexport const DescriptionList = forwardRef<HTMLDListElement, DescriptionListProps>(function DescriptionList({items, layout = 'inline', className, ...rest}, ref) {\n  return (\n    <dl ref={ref} className={cx('dlist', layout === 'stacked' && 'dlist-stacked', className)} {...rest}>\n      {items.map((it, i) => (\n        <div key={i} className=\"dlist-row\"><dt>{it.term}</dt><dd>{it.details}</dd></div>\n      ))}\n    </dl>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/description-list/index.ts",
+      "content": "export {DescriptionList} from './description-list';\nexport type {DescriptionListProps, DescriptionItem} from './description-list';\n"
+    },
+    {
+      "path": "packages/react/src/components/description-list/meta.json",
+      "content": "{\"name\":\"description-list\",\"title\":\"Description list\",\"category\":\"data-display\",\"description\":\"Label and value pairs, like the details of a record.\",\"status\":\"stable\",\"css\":[\"description-list.css\"],\"a11y\":[\"A native dl with dt and dd, so assistive tech pairs each label with its value.\"],\"keywords\":[\"key value\",\"details\",\"dl\",\"properties\",\"meta\"]}\n"
+    }
+  ]
+}
