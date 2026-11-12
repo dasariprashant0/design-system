@@ -1,0 +1,1 @@
+{"name":"stepper","title":"Stepper","category":"navigation","description":"Show progress through a numbered sequence of steps.","status":"stable","css":["18-navigation.css"],"a11y":["An ordered list; the current step has aria-current=\"step\".","Completed steps are marked in text for assistive tech, not by colour alone."],"keywords":["steps","wizard","progress","checkout"]}

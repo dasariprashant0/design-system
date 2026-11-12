@@ -1,0 +1,9 @@
+/* Timeline: a left rule with a square marker per event. */
+.timeline { list-style: none; padding: 0; margin: 0; border-left: 1px solid var(--rule); margin-left: var(--s2); }
+.timeline-item { position: relative; padding: 0 0 var(--s5) var(--s5); display: grid; gap: var(--s1); }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item::before { content: ""; position: absolute; left: calc(-1 * var(--s1) - 0.5px); top: 0.4em; width: var(--s2); height: var(--s2); background: var(--foreground); }
+.timeline-item:first-child::before { background: var(--accent); }
+.timeline-title { font-weight: 500; }
+.timeline-time { font-size: var(--text-xs); color: var(--muted); }
+.timeline-body { font-size: var(--text-sm); color: var(--ink-2); }

@@ -1,0 +1,3 @@
+/* OTP input: square boxes reusing .input. */
+.otp { display: inline-flex; gap: var(--s2); }
+.otp-box { width: var(--s7); padding: var(--s3) 0; text-align: center; font-size: var(--text-lg); }
