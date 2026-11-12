@@ -1,6 +1,7 @@
 'use client';
-import {forwardRef, useCallback, useRef, type FormEvent, type FormHTMLAttributes, type HTMLAttributes, type ReactNode} from 'react';
+import {forwardRef, useCallback, useMemo, useRef, type FormEvent, type FormHTMLAttributes, type HTMLAttributes, type ReactNode} from 'react';
 import {cx} from '../../utils/cx';
+import {FormErrorsContext} from '../field/field';
 
 export interface FormError {
   /** The `name` of the invalid control. The summary link focuses it. */
@@ -13,7 +14,7 @@ export interface FormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, 'on
   onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
   /** Call `event.preventDefault()` before `onSubmit`, for forms handled in JS. Off by default so native posts still work. */
   preventDefault?: boolean;
-  /** Errors to list in a summary at the top of the form. Also pass each message to its `Field` as `error`. */
+  /** Errors to list in a summary at the top of the form. Give each `Field` the same `name` and it shows its own message, so you pass each error once. A Field's own `error` prop still wins. */
   errors?: FormError[];
   /** Heading of the summary. Default "Fix these to continue". */
   errorsTitle?: ReactNode;
@@ -22,6 +23,7 @@ export interface FormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, 'on
 /**
  * A `<form>` with an optional error summary and a submit helper.
  * The summary is a `role="alert"` region at the top; each item links to its control and moves focus there.
+ * Pass each error once, in `errors`; a `Field` with the matching `name` shows it inline.
  * Build the fields with `Field` and end the form with `FormActions`.
  */
 export const Form = forwardRef<HTMLFormElement, FormProps>(function Form({onSubmit, preventDefault, errors, errorsTitle = 'Fix these to continue', className, children, ...rest}, ref) {
@@ -31,6 +33,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(function Form({onSubm
     if (typeof ref === 'function') ref(el);
     else if (ref) ref.current = el;
   }, [ref]);
+  const byName = useMemo(() => Object.fromEntries((errors ?? []).map((e) => [e.name, e.message])), [errors]);
   const focusField = (name: string) => {
     const el = inner.current?.elements.namedItem(name);
     if (el instanceof HTMLElement) el.focus();
@@ -54,7 +57,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(function Form({onSubm
           </ul>
         </div>
       )}
-      {children}
+      <FormErrorsContext.Provider value={byName}>{children}</FormErrorsContext.Provider>
     </form>
   );
 });

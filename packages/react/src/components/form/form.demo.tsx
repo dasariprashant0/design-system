@@ -22,13 +22,13 @@ function Example() {
         setErrors(next);
       }}
     >
-      <Field label="Name" error={errors.find((e) => e.name === 'name')?.message}><Input name="name" /></Field>
-      <Field label="Email" error={errors.find((e) => e.name === 'email')?.message}><Input name="email" type="email" /></Field>
+      <Field label="Name" name="name"><Input name="name" /></Field>
+      <Field label="Email" name="email"><Input name="email" type="email" /></Field>
       <FormActions><Button type="submit" variant="solid">Send</Button><Button type="reset">Clear</Button></FormActions>
     </Form>
   );
 }
 
 export const demos: Demo[] = [
-  {title: 'With an error summary', description: 'Submit empty. The summary links to each invalid field.', render: () => <Example />},
+  {title: 'With an error summary', description: 'Submit empty. Each error is passed once, in errors; every Field reads its own message by name, and the summary links to each invalid field.', render: () => <Example />},
 ];
