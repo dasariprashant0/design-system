@@ -1,0 +1,9 @@
+/* Block: call to action. */
+.block-cta { padding-block: var(--s8); }
+.block-cta-box { display: flex; flex-direction: column; gap: var(--s5); padding: var(--s6); border: 1px solid var(--foreground); }
+.block-cta-copy { display: flex; flex-direction: column; gap: var(--s2); max-width: var(--measure); }
+.block-cta-actions { display: flex; flex-wrap: wrap; gap: var(--s3); }
+@media (min-width: 760px) {
+  .block-cta-box { flex-direction: row; align-items: center; justify-content: space-between; }
+  .block-cta-actions { flex-shrink: 0; }
+}

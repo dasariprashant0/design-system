@@ -1,0 +1,13 @@
+/* Block: hero. */
+.block-hero { padding-block: var(--s8); }
+.block-hero-inner { display: grid; gap: var(--s7); align-items: center; }
+.block-hero-copy { display: flex; flex-direction: column; gap: var(--s4); align-items: flex-start; min-width: 0; }
+.block-hero-eyebrow { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-text); }
+.block-hero-description { max-width: var(--measure); }
+.block-hero-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s3); }
+.block-hero-media { min-width: 0; }
+.block-hero[data-align="center"] .block-hero-copy { align-items: center; text-align: center; margin-inline: auto; }
+.block-hero[data-align="center"] .block-hero-actions { justify-content: center; }
+@media (min-width: 860px) {
+  .block-hero:not([data-align="center"]) .block-hero-inner:has(.block-hero-media) { grid-template-columns: 1.1fr 0.9fr; }
+}

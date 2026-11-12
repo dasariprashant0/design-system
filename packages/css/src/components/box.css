@@ -1,0 +1,8 @@
+/* Box: padding and a rule from tokens. */
+.box { padding: var(--box-py, 0) var(--box-px, 0); min-width: 0; }
+.box-border { border: 1px solid var(--rule); }
+.box[data-border] { border: 0 solid var(--rule); }
+.box[data-border="top"] { border-top-width: 1px; }
+.box[data-border="right"] { border-right-width: 1px; }
+.box[data-border="bottom"] { border-bottom-width: 1px; }
+.box[data-border="left"] { border-left-width: 1px; }
