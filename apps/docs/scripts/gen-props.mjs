@@ -7,10 +7,12 @@ import {readdirSync, writeFileSync, existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {join} from 'node:path';
 
-const root = fileURLToPath(new URL('../../../packages/react/src/components/', import.meta.url));
+const roots = ['components', 'hooks'].map((k) => fileURLToPath(new URL(`../../../packages/react/src/${k}/`, import.meta.url)));
 const out = fileURLToPath(new URL('../src/props.generated.json', import.meta.url));
-const names = readdirSync(root).filter((n) => existsSync(join(root, n, `${n}.tsx`)));
-const files = names.map((n) => join(root, n, `${n}.tsx`));
+// Components are <name>/<name>.tsx; hooks are <name>/<name>.ts(x) and also document their *Options / *Return types.
+const found = roots.flatMap((root, i) => readdirSync(root).flatMap((n) => ['tsx', 'ts'].map((ext) => join(root, n, `${n}.${ext}`)).filter(existsSync).slice(0, 1).map((file) => ({name: n, file, hook: i === 1}))));
+const names = found.map((f) => f.name);
+const files = found.map((f) => f.file);
 
 const program = ts.createProgram(files, {jsx: ts.JsxEmit.ReactJSX, target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, moduleResolution: ts.ModuleResolutionKind.Bundler, skipLibCheck: true, noEmit: true, strict: true});
 const checker = program.getTypeChecker();
@@ -37,7 +39,7 @@ for (const [i, file] of files.entries()) {
     const groups = [];
     ts.forEachChild(sf, (node) => {
       const exported = (ts.canHaveModifiers(node) ? ts.getModifiers(node) ?? [] : []).some((m) => m.kind === ts.SyntaxKind.ExportKeyword);
-      if (!exported || !(ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node)) || !/Props$/.test(node.name.text)) return;
+      if (!exported || !(ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node)) || !(found[i].hook ? /(Props|Options|Return)$/ : /Props$/).test(node.name.text)) return;
       const type = checker.getTypeAtLocation(node.name);
       const props = checker.getPropertiesOfType(type)
         .filter((s) => (s.declarations ?? []).some((d) => d.getSourceFile() === sf))
