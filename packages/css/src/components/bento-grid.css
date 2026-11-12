@@ -1,6 +1,6 @@
 /* Bento grid: 1 column, then 2, then 3. Spans are clamped to the column count at each step. */
 .bento-grid { display: grid; grid-template-columns: 1fr; grid-auto-rows: minmax(10rem, auto); gap: var(--s3); }
-.bento-card { min-width: 0; padding: var(--s5); border: 1px solid var(--rule); background: var(--surface); }
+.bento-card { min-width: 0; padding: var(--s5); border: 1px solid var(--rule); background: transparent; }
 @media (min-width: 40rem) {
   .bento-grid { grid-template-columns: repeat(2, 1fr); }
   .bento-col-2, .bento-col-3 { grid-column: span 2; }
