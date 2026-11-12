@@ -1,12 +1,13 @@
 // Docs site. Discovers every component from the react package (meta.json, *.demo.tsx and the raw demo source),
 // so a new component needs no change here. Preferences (theme, accent, font, radius, density) live on <html>
 // data attributes and in localStorage.
-import {StrictMode, useEffect, useMemo, useState} from 'react';
+import {StrictMode, useEffect, useMemo, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import '@css/monoline.css';
 import './docs.css';
 import {Badge, Button, CodeBlock, Collapsible, CollapsibleContent, CollapsibleTrigger, SegmentedControl, Kbd} from '@monoline/react';
 import type {ComponentMeta, Demo} from '@monoline/react';
+import {guides} from './guides';
 
 const metas = import.meta.glob<ComponentMeta>('../../../packages/react/src/{components,hooks}/*/meta.json', {eager: true, import: 'default'});
 const demoModules = import.meta.glob<{demos: Demo[]}>('../../../packages/react/src/{components,hooks}/*/*.demo.tsx', {eager: true});
@@ -16,6 +17,10 @@ const all = Object.values(metas).sort((a, b) => a.name.localeCompare(b.name));
 const byCategory = all.reduce<Record<string, ComponentMeta[]>>((acc, m) => ((acc[m.category] ??= []).push(m), acc), {});
 const order = ['layout', 'typography', 'buttons', 'forms', 'data-display', 'feedback', 'overlays', 'navigation', 'effects', 'blocks', 'hooks'];
 const categories = order.filter((c) => byCategory[c]);
+// Sidebar order, used for Previous / Next.
+const ordered = categories.flatMap((c) => byCategory[c]!);
+const isHook = (m: ComponentMeta) => m.category === 'hooks';
+const nice = (c: string) => c.replace('-', ' ');
 const demosFor = (name: string) => {
   const key = Object.keys(demoModules).find((k) => k.includes(`/${name}/`));
   return key ? {demos: demoModules[key]!.demos, source: demoSources[key] ?? ''} : {demos: [], source: ''};
@@ -73,15 +78,22 @@ function Home() {
     <>
       <p className="label">Open source UI kit</p>
       <h1 className="display display-md hero-title">Monoline</h1>
-      <p className="lede">Thin rules, one accent and plain CSS. {all.length} accessible React components on Radix, nine accents, three themes. Switch font, corners and density in the panel above.</p>
+      <p className="lede">Thin rules, one accent and plain CSS. {all.length} accessible React components on Radix, {ACCENTS.length} accents, three themes. Switch font, corners and density in the panel above.</p>
       <div className="hero-actions">
         <Button variant="solid" asChild><a href={`#${all[0]?.name ?? ''}`}>Browse components</a></Button>
+        <Button asChild><a href="#guides/getting-started">Getting started</a></Button>
         <Button asChild><a href="https://github.com/dasariprashant0/design-system">GitHub</a></Button>
       </div>
       <section className="block">
         <h2 className="label">Install</h2>
         <CodeBlock title="bash" code={'npm install @monoline/react @monoline/css'} />
         <CodeBlock title="app.tsx" code={"import '@monoline/css';\nimport {Button} from '@monoline/react';\n\nexport const App = () => <Button variant=\"solid\">Save</Button>;"} />
+      </section>
+      <section className="block">
+        <h2 className="label">Guides</h2>
+        <div className="cat-grid">
+          {guides.map((g) => <a key={g.slug} className="cat guide-card" href={`#guides/${g.slug}`}><span className="cat-title">{g.title}</span><span className="muted small">{g.summary}</span></a>)}
+        </div>
       </section>
       <section className="block">
         <h2 className="label">Components by category</h2>
@@ -108,13 +120,18 @@ function Home() {
 
 function ComponentPage({meta}: {meta: ComponentMeta}) {
   const {demos, source} = demosFor(meta.name);
-  const Name = meta.name.split('-').map((p) => p[0]!.toUpperCase() + p.slice(1)).join('');
+  const hook = isHook(meta);
+  // Hooks are named by their title (useClipboard); components are PascalCase of the folder name.
+  const Name = hook ? meta.title : meta.name.split('-').map((p) => p[0]!.toUpperCase() + p.slice(1)).join('');
+  const i = ordered.findIndex((m) => m.name === meta.name);
+  const prev = ordered[i - 1], next = ordered[i + 1];
   return (
     <>
-      <p className="label">{meta.category.replace('-', ' ')}</p>
+      <p className="label">{hook ? 'hook' : nice(meta.category)}</p>
       <h1 className="display display-md">{meta.title}</h1>
       <p className="lede">{meta.description}</p>
       <CodeBlock title="import" code={`import {${Name}} from '@monoline/react';`} />
+      {hook && <p className="muted small">A hook renders nothing itself. The examples below wrap it in a small component.</p>}
       {demos.map((d) => (
         <section key={d.title} className="block">
           <h2 className="label">{d.title}</h2>
@@ -127,20 +144,55 @@ function ComponentPage({meta}: {meta: ComponentMeta}) {
         <CollapsibleContent><CodeBlock title={`${meta.name}.demo.tsx`} code={source} /></CollapsibleContent>
       </Collapsible>
       <section className="block">
-        <h2 className="label">Accessibility</h2>
+        <h2 className="label">{hook ? 'Behaviour' : 'Accessibility'}</h2>
         <ul className="why">{meta.a11y.map((a) => <li key={a}>{a}</li>)}</ul>
       </section>
       <section className="block meta">
         <h2 className="label">Details</h2>
         <dl className="kv">
-          <dt>Built on</dt><dd>{meta.primitive ?? 'native elements'}</dd>
-          <dt>Stylesheets</dt><dd>{meta.css.length ? meta.css.join(', ') : 'none'}</dd>
+          {hook ? null : <><dt>Built on</dt><dd>{meta.primitive ?? 'native elements'}</dd>
+          <dt>Stylesheets</dt><dd>{meta.css.length ? meta.css.join(', ') : 'none'}</dd></>}
           <dt>Status</dt><dd>{meta.status}</dd>
           {meta.keywords?.length ? <><dt>Also called</dt><dd>{meta.keywords.join(', ')}</dd></> : null}
         </dl>
-        <p className="muted small">Copy into your project: <code>npx monoline add {meta.name}</code> (CLI in progress; the source lives in <code>registry/{meta.name}.json</code>).</p>
+        <p className="muted small">Copy into your project: <code>npx monoline add {meta.name}</code> (see the <a href="#guides/cli">CLI guide</a>; the source lives in <code>registry/{meta.name}.json</code>).</p>
       </section>
+      <nav className="pager" aria-label="Previous and next">
+        {prev ? <a className="pager-link" href={`#${prev.name}`} rel="prev"><span className="label">Previous</span>{prev.title}</a> : <span />}
+        {next ? <a className="pager-link pager-next" href={`#${next.name}`} rel="next"><span className="label">Next</span>{next.title}</a> : <span />}
+      </nav>
     </>
+  );
+}
+
+function GuidePage({guide}: {guide: (typeof guides)[number]}) {
+  return (
+    <>
+      <p className="label">guide</p>
+      <h1 className="display display-md">{guide.title}</h1>
+      <p className="lede">{guide.summary}</p>
+      {guide.body()}
+    </>
+  );
+}
+
+function CustomisePanel({prefs, set}: {prefs: Prefs; set: (k: keyof Prefs, v: string) => void}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const down = (e: PointerEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
+    const key = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpen(false); ref.current?.querySelector('button')?.focus(); } };
+    document.addEventListener('pointerdown', down); document.addEventListener('keydown', key);
+    return () => { document.removeEventListener('pointerdown', down); document.removeEventListener('keydown', key); };
+  }, [open]);
+  return (
+    <div ref={ref} className="docs-custom">
+      <Collapsible open={open} onOpenChange={setOpen}>
+        <CollapsibleTrigger asChild><Button size="sm">Customise</Button></CollapsibleTrigger>
+        <CollapsibleContent className="docs-custom-panel"><Customize prefs={prefs} set={set} /></CollapsibleContent>
+      </Collapsible>
+    </div>
   );
 }
 
@@ -150,6 +202,7 @@ function App() {
   const [q, setQ] = useState('');
   const [nav, setNav] = useState(false);
   const meta = all.find((m) => m.name === hash);
+  const guide = guides.find((g) => `guides/${g.slug}` === hash);
   const matches = useMemo(() => {
     const s = q.trim().toLowerCase();
     return s ? all.filter((m) => [m.name, m.title, m.description, ...(m.keywords ?? [])].join(' ').toLowerCase().includes(s)) : all;
@@ -164,10 +217,7 @@ function App() {
       <header className="docs-bar">
         <button type="button" className="docs-menu btn btn-line btn-sm" aria-expanded={nav} aria-controls="docs-side" onClick={() => setNav((n) => !n)}>Menu</button>
         <a className="brand" href="#"><span className="brand-mark" />Monoline <Badge>{all.length}</Badge></a>
-        <Collapsible className="docs-custom">
-          <CollapsibleTrigger asChild><Button size="sm">Customise</Button></CollapsibleTrigger>
-          <CollapsibleContent className="docs-custom-panel"><Customize prefs={prefs} set={set} /></CollapsibleContent>
-        </Collapsible>
+        <CustomisePanel prefs={prefs} set={set} />
       </header>
       <aside className="docs-side" id="docs-side" aria-label="Components">
         <div className="docs-search">
@@ -175,11 +225,15 @@ function App() {
           <Kbd>/</Kbd>
         </div>
         <nav>
+          <div className="nav-group">
+            <p className="label">Guides <span className="count">{guides.length}</span></p>
+            {guides.map((g) => <a key={g.slug} className="nav-item" href={`#guides/${g.slug}`} aria-current={guide === g ? 'page' : undefined}>{g.title}</a>)}
+          </div>
           {categories.map((c) => {
             const items = matches.filter((m) => m.category === c);
             return items.length ? (
               <div key={c} className="nav-group">
-                <p className="label">{c.replace('-', ' ')}</p>
+                <p className="label">{nice(c)} <span className="count">{q.trim() ? `${items.length}/${byCategory[c]!.length}` : items.length}</span></p>
                 {items.map((m) => <a key={m.name} className="nav-item" href={`#${m.name}`} aria-current={m.name === hash ? 'page' : undefined}>{m.title}</a>)}
               </div>
             ) : null;
@@ -188,7 +242,7 @@ function App() {
         </nav>
       </aside>
       <main className="docs-main" id="main">
-        {meta ? <ComponentPage meta={meta} /> : <Home />}
+        {guide ? <GuidePage guide={guide} /> : meta ? <ComponentPage key={meta.name} meta={meta} /> : <Home />}
       </main>
     </div>
   );

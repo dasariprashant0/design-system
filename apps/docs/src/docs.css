@@ -52,3 +52,16 @@ code { font-family: var(--font-body); background: var(--wash-2); padding: 0 var(
 }
 .docs-main .block > .btn { justify-self: start; }
 .docs-main .code-block { max-width: 100%; }
+
+/* Guides, counts, pager */
+.prose { max-width: var(--measure); font-size: var(--text-sm); color: var(--ink-2); }
+.docs-main .kv { max-width: calc(var(--measure) + 24ch); }
+.docs-main .kv dd { min-width: 0; overflow-wrap: anywhere; }
+.count { color: var(--muted); font-weight: 400; margin-left: var(--s1); }
+.guide-card { text-decoration: none; color: inherit; }
+.guide-card:hover { border-color: var(--foreground); }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s7); }
+.pager-link { display: grid; gap: var(--s1); padding: var(--s4); border: 1px solid var(--rule); text-decoration: none; color: var(--foreground); min-width: 0; overflow-wrap: anywhere; }
+.pager-link:hover { border-color: var(--foreground); }
+.pager-next { text-align: right; grid-column: 2; }
+@media (max-width: 880px) { .kv { grid-template-columns: minmax(0, 1fr); gap: var(--s1); } .kv dd { margin-bottom: var(--s3); } }
