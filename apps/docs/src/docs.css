@@ -1,0 +1,54 @@
+/* Docs site layout only. Components come from @monoline/css; this file adds the page frame. */
+html, body, #root { height: auto; min-height: 100%; }
+.docs { display: grid; grid-template-columns: var(--side) minmax(0, 1fr); grid-template-rows: auto 1fr; min-height: 100vh; }
+.docs-bar { grid-column: 1 / -1; position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s5); background: var(--background); border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+.docs-bar .brand { display: inline-flex; align-items: center; gap: var(--s3); font-family: var(--font-display); font-weight: 700; text-decoration: none; margin-right: auto; }
+.brand-mark { width: 14px; height: 14px; background: var(--accent); display: inline-block; }
+.docs-menu { display: none; }
+.docs-custom { position: relative; }
+.docs-custom-panel { position: absolute; right: 0; top: calc(100% + var(--s2)); z-index: 40; width: min(420px, calc(100vw - var(--s5) * 2)); padding: var(--s4); background: var(--background); border: 1px solid var(--foreground); }
+.docs-custom-panel[data-state="closed"] { display: none; }
+.custom { display: grid; gap: var(--s4); }
+.custom-row { display: grid; gap: var(--s2); }
+.swatches { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.swatch { width: var(--s6); height: var(--s6); border: 1px solid var(--rule); }
+.swatch[aria-checked="true"] { outline: 2px solid var(--foreground); outline-offset: 2px; }
+
+.docs-side { position: sticky; top: 56px; align-self: start; height: calc(100vh - 56px); overflow-y: auto; padding: var(--s5); border-right: 1px solid var(--rule); }
+.docs-search { display: flex; align-items: center; gap: var(--s2); margin-bottom: var(--s5); }
+.nav-group { margin-bottom: var(--s5); }
+.nav-group .label { margin-bottom: var(--s2); }
+.nav-item { display: block; padding: var(--s1) 0; font-size: var(--text-sm); color: var(--muted); text-decoration: none; }
+.nav-item:hover { color: var(--foreground); }
+.nav-item[aria-current="page"] { color: var(--foreground); font-weight: 500; box-shadow: inset 2px 0 0 var(--accent); padding-left: var(--s3); }
+
+.docs-main { min-width: 0; padding: var(--s7) var(--s6) var(--s9); max-width: calc(var(--content) + var(--s6) * 2); }
+.docs-main > * + * { margin-top: var(--s4); }
+.docs-main .block { margin-top: var(--s6); display: grid; gap: var(--s3); }
+.hero-title { margin-top: var(--s2); }
+.lede { max-width: var(--measure); color: var(--ink-2); font-size: var(--text-lg); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
+.stage { padding: var(--s6) var(--s5); border: 1px solid var(--rule); background-image: radial-gradient(var(--ink-5) 1px, transparent 1px); background-size: var(--s5) var(--s5); overflow-x: auto; }
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--s4); }
+.cat { border: 1px solid var(--rule); padding: var(--s4); display: grid; gap: var(--s3); align-content: start; }
+.cat-title { font-size: var(--text-sm); text-transform: capitalize; display: flex; justify-content: space-between; align-items: center; }
+.cat-list { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); font-size: var(--text-sm); }
+.cat-list a { color: var(--muted); text-decoration: none; }
+.cat-list a:hover { color: var(--accent-text); text-decoration: underline; }
+.why { display: grid; gap: var(--s2); font-size: var(--text-sm); max-width: var(--measure); }
+.why li::before { content: "— "; color: var(--accent-text); }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: var(--s2) var(--s5); font-size: var(--text-sm); }
+.kv dt { color: var(--muted); }
+code { font-family: var(--font-body); background: var(--wash-2); padding: 0 var(--s1); }
+.code-block code { background: none; padding: 0; }
+
+@media (max-width: 880px) {
+  .docs { grid-template-columns: minmax(0, 1fr); }
+  .docs-menu { display: inline-flex; }
+  .docs-side { position: fixed; inset: 56px 0 0 0; z-index: 25; height: auto; background: var(--background); border-right: 0; transform: translateX(-100%); visibility: hidden; transition: transform var(--base) var(--ease), visibility 0s var(--base); }
+  .docs[data-nav] .docs-side { transform: none; visibility: visible; transition: transform var(--base) var(--ease); }
+  .docs-main { padding: var(--s6) var(--s4) var(--s8); }
+  .docs-bar { padding: var(--s3) var(--s4); gap: var(--s3); }
+}
+.docs-main .block > .btn { justify-self: start; }
+.docs-main .code-block { max-width: 100%; }

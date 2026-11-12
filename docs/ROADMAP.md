@@ -41,7 +41,7 @@ Status key: `done` · `in progress` · `open`. Update this table in the PR that 
 Priority = how many of the ten UI libraries ship it. Status is `done` once the folder exists in `packages/react/src/components/`; the matrix regenerates from that (`node docs/research/build-matrix.mjs`).
 
 **Phase 1: close the gap on common components (in 3+ libraries).**
-- P1a, small and native-first: stack, container, aspect-ratio, icon-button, button-group, kbd, tag, avatar-group, empty-state, stat, collapsible, scroll-area, table, stepper, timeline, code-block, password-input, number-input, rating, otp-input, segmented-control, alert-dialog, drawer. (First batch built in this pass.)
+- P1a, small and native-first: stack, container, aspect-ratio, icon-button, button-group, kbd, tag, avatar-group, empty-state, stat, collapsible, scroll-area, table, stepper, timeline, code-block, password-input, number-input, rating, otp-input, segmented-control, alert-dialog, drawer. (All built in this pass except for the ones listed as P1b/P1c: stack, container, aspect-ratio, icon-button, button-group, kbd, tag, avatar-group, empty-state, stat, collapsible, scroll-area, table, stepper, timeline, code-block, password-input, number-input, rating, otp-input, segmented-control, alert-dialog, drawer, marquee are `done`.)
 - P1b, accessibility-critical, needs Radix or careful ARIA, heavy model: combobox, autocomplete, multi-select, calendar, date-picker, time-picker, command, context-menu, hover-card, menubar, navigation-menu, toast, toolbar, tree, carousel, file-upload, native-select, fieldset, form helpers, data-table.
 - P1c, layout primitives: box, flex, grid, text, heading, link, description-list, image, navbar, sidebar, app-shell.
 
