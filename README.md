@@ -1,62 +1,75 @@
 # Monoline
 
-A small UI kit in monospace type, thin rules and square edges. Plain CSS with three themes (warm, dark, midnight) and four accents (orange, green, blue, violet), 40+ components, layout utilities, optional JavaScript behaviours and React wrappers, and design tokens as JSON. Contrast is tested in CI. No build step is needed to use it.
+An open-source UI kit with a plain CSS core and accessible React components. Thin rules, one accent, monospace by default, and every part of the look can be changed: nine accents, three themes, three font families, three corner styles and three densities.
 
-**Docs and live examples:** https://dasariprashant0.github.io/design-system/
+- **118 components and hooks**: buttons, forms (combobox, calendar, date picker, OTP, file upload), overlays (dialog, drawer, menus, toast), data display (data table, tree, timeline), navigation, effects and page blocks.
+- **Accessible by default**: built on Radix or native elements, with keyboard and axe tests for every component.
+- **Plain CSS tokens**: no Tailwind, no runtime CSS-in-JS. Restyle by changing variables.
+- **Two ways to use it**: install the packages, or copy a component into your project with the CLI.
+- **AI-readable**: every component has a `meta.json`; `llms.txt`, `llms-full.txt` and `registry/` list and describe them all. See [AGENTS.md](AGENTS.md).
 
-## Use it in 30 seconds
-
-```html
-<link rel="stylesheet" href="https://dasariprashant0.github.io/design-system/css/monoline.css">
-
-<html data-theme="warm" data-accent="green">
-  <button class="btn btn-solid">Save</button>
-  <button class="btn btn-line">Cancel</button>
-</html>
-```
-
-`data-theme` is `warm`, `dark` or `midnight`. `data-accent` is `orange` (default), `green`, `blue` or `violet`.
-
-With npm (from git until it is published):
+## Use it
 
 ```bash
-npm install "monoline-ui@git+https://github.com/dasariprashant0/design-system.git#<commit>"
+npm install @monoline/react @monoline/css
 ```
 
-```ts
-import 'monoline-ui/monoline.css';           // everything in one file
-// or: tokens.css, base.css, components.css, accents.css, in that order
-import {Button, Field, useTheme} from 'monoline-ui/react'; // optional
+```tsx
+import '@monoline/css';
+import {Button} from '@monoline/react';
+
+export const App = () => <Button variant="solid">Save</Button>;
 ```
 
-Pin a full commit hash so every build gets the same kit.
+Set the look on `<html>`:
 
-## Rules and files
+```html
+<html data-theme="dark" data-accent="teal" data-font="sans" data-radius="soft" data-density="compact">
+```
 
-- **Rules:** [DESIGN.md](DESIGN.md). Read it before building a screen.
-- **Docs page:** [index.html](index.html), also the live site above. Open it straight from disk.
-- **Live gallery:** `npm --prefix gallery install && npm --prefix gallery run dev`, then open http://localhost:5180.
+| Attribute | Values |
+|---|---|
+| `data-theme` | `warm` (default), `dark`, `midnight` |
+| `data-accent` | `orange` (default), `green`, `blue`, `violet`, `rose`, `teal`, `amber`, `slate` |
+| `data-font` | `mono` (default), `sans`, `serif` |
+| `data-radius` | `square` (default), `soft`, `round` |
+| `data-density` | `compact`, `comfortable` (default), `spacious` |
+
+Every accent passes the contrast rules in every theme; `npm run check` enforces it.
+
+## Copy components instead (shadcn style)
+
+```bash
+npx monoline init
+npx monoline add combobox date-picker data-table
+```
+
+The CLI copies the source and CSS into your project and lists any dependencies. See [packages/cli/README.md](packages/cli/README.md).
+
+## Repository
 
 | Path | What |
 |---|---|
-| `css/tokens.css` | Every colour, size, space and timing; three themes |
-| `css/base.css` | Fonts (DM Mono, Space Mono, OFL), reset, type roles |
-| `css/components.css` | Shell, buttons, fields, lists, banners, drawer, dialog, toast |
-| `css/utilities.css` | Layout helpers: container, flow, cluster, grid, split |
-| `css/accents.css` | The four accent presets, checked for contrast in every theme |
-| `css/monoline.css`, `.min.css` | All of the above as one file, for a CDN link. Generated: `npm run build` |
-| `js/monoline.js` | Optional behaviours: tabs, dropdown, drawer, dialog, toast, theme saving |
-| `tokens/tokens.json` | Every token in the W3C design-tokens format. Generated |
-| `scripts/` | `build` and `check` (contrast and no-raw-colour tests, run in CI) |
-| `react/index.tsx` | Thin React wrappers over those classes, plus `useTheme` |
-| `index.html` | The docs site |
-| `gallery/` | A React page showing every component |
-| `skill/` | A Claude skill that makes a coding agent follow DESIGN.md |
+| `packages/css` | `@monoline/css`: tokens, themes, accents, options, one stylesheet per component |
+| `packages/react` | `@monoline/react`: one folder per component or hook (source, test, demo, `meta.json`) |
+| `packages/cli` | the `monoline` CLI |
+| `apps/docs` | the documentation site; discovers components automatically |
+| `registry/`, `llms.txt`, `llms-full.txt` | generated machine-readable list and source |
+| `docs/research` | the library comparison this kit is based on, and the roadmap in `docs/ROADMAP.md` |
+| `DESIGN.md` | the look, tokens and rules |
+
+```bash
+npm install
+npm run dev        # docs site on http://localhost:5180
+npm run check      # contrast + raw-colour lint, typecheck, tests
+npm run build      # css, react and docs
+npm run registry   # regenerate registry/ and llms files
+```
 
 ## Contributing
 
-Change `css/` and `react/`, keep DESIGN.md in step, run `npm run build`, and commit the generated `css/monoline.css`. See [CONTRIBUTING.md](CONTRIBUTING.md) and [CHANGELOG.md](CHANGELOG.md).
+Read [AGENTS.md](AGENTS.md) (conventions and the component recipe, for people and AI tools) and [CONTRIBUTING.md](CONTRIBUTING.md). New components need a test with an axe check, a demo and a `meta.json`.
 
 ## License
 
-MIT. The bundled fonts are under the SIL Open Font License; see `css/fonts/OFL.txt`.
+MIT. Fonts (DM Mono, Space Mono) are under the SIL Open Font License; see `packages/css/src/fonts/OFL.txt`.
