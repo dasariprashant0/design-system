@@ -2,7 +2,6 @@
    Spacing steps map to the --s tokens. Breakpoints (media queries cannot read
    custom properties): sm 600px, md 900px, lg 1200px. */
 
-.container { width: 100%; max-width: var(--content); margin-inline: auto; padding-inline: var(--s5); }
 .container-narrow { max-width: var(--measure); }
 .section { padding-block: var(--s9); }
 .section-sm { padding-block: var(--s7); }
@@ -18,7 +17,7 @@
 .cluster-end { justify-content: flex-end; }
 
 /* Equal columns that wrap on their own; no media queries needed. */
-.grid { display: grid; gap: var(--gap, var(--s5)); grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 240px), 100%), 1fr)); }
+/* .grid itself lives in components/grid.css: one definition serves both the bare utility and the Grid component. */
 .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }

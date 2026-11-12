@@ -4,6 +4,7 @@ import {readdirSync} from 'node:fs';
 import {read, parseTokens, contrast} from './lib.mjs';
 import './check-logical.mjs';
 import './check-layers.mjs';
+import {findDuplicates} from './check-duplicates.mjs';
 import './size.mjs';
 
 const {themes, accents} = parseTokens();
@@ -71,6 +72,9 @@ for (const [file, sel, on] of [['segmented-control.css', '.segment', 'data-state
   const h = read('src/components/heading.css');
   for (const s of ['md', 'sm']) if (!h.includes(`.heading.heading-${s} {`)) fails.push(`heading.css: write .heading.heading-${s} (two classes) so typography.css cannot override the documented size`);
 }
+
+// One source of truth per selector: the same selector defined in two stylesheets with different values means the later one wins silently.
+for (const c of findDuplicates().conflicts) fails.push(`${c.sel} is defined in ${c.files.join(' and ')} with different ${c.props.map((p) => p.prop).join(', ')}; keep one (run node packages/css/scripts/check-duplicates.mjs)`);
 
 if (fails.length) { console.error(fails.map((f) => 'FAIL ' + f).join('\n')); process.exit(1); }
 console.log(`ok: ${n} contrast checks across ${Object.keys(themes).length} themes and ${Object.keys(accents).length + 1} accents; no raw colours in components.`);

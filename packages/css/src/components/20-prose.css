@@ -10,4 +10,3 @@
 .prose pre { padding: var(--s4); background: var(--wash); box-shadow: inset 0 0 0 1px var(--rule); overflow-x: auto; font-size: var(--text-sm); }
 .prose pre code { padding: 0; background: none; }
 .prose hr { border: 0; border-top: 1px solid var(--rule); margin: var(--s6) 0; }
-.code-block { overflow-x: auto; }
