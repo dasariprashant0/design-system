@@ -17,7 +17,8 @@
 .rte-content blockquote { padding-inline-start: var(--s4); border-inline-start: 2px solid var(--foreground); color: var(--ink-2); }
 .rte-content a { color: var(--accent-text); text-decoration: underline; }
 .rte[data-disabled] { opacity: 0.6; }
-.rte[data-readonly] .rte-content, .rte[data-disabled] .rte-content { background: var(--wash); }
+.rte[data-readonly] { border-style: dashed; }
+.rte[data-disabled] .rte-content { background: var(--wash); }
 .rte-link { display: flex; flex-direction: column; gap: var(--s3); }
 .rte-link-label { font-size: var(--text-sm); }
 .rte-link-error { margin: 0; font-size: var(--text-sm); color: var(--danger); }
