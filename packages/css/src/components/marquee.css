@@ -4,4 +4,4 @@
 .marquee-reverse .marquee-track { animation-direction: reverse; }
 .marquee-pause:hover .marquee-track, .marquee-pause:focus-within .marquee-track { animation-play-state: paused; }
 @keyframes marquee-run { from { transform: translateX(0); } to { transform: translateX(-100%); } }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } .marquee { overflow-x: auto; } }
+@media (prefers-reduced-motion: reduce) { .marquee { flex-wrap: wrap; } .marquee-track { animation: none; flex-wrap: wrap; } .marquee-track[aria-hidden="true"] { display: none; } }

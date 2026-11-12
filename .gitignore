@@ -5,3 +5,5 @@ dist/
 coverage/
 packages/react/src/index.ts
 apps/docs/src/props.generated.json
+audit/
+audit-all-accents.txt

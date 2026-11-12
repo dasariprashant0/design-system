@@ -39,7 +39,7 @@ html, body, #root { height: auto; min-height: 100%; }
 .why li::before { content: "— "; color: var(--accent-text); }
 .kv { display: grid; grid-template-columns: max-content 1fr; gap: var(--s2) var(--s5); font-size: var(--text-sm); }
 .kv dt { color: var(--muted); }
-code { font-family: var(--font-body); background: var(--wash-2); padding: 0 var(--s1); }
+code { font-family: var(--font-body); background: var(--wash-2); color: var(--foreground); padding: 0 var(--s1); }
 .code-block code { background: none; padding: 0; }
 
 @media (max-width: 880px) {

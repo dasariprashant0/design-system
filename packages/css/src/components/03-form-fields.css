@@ -10,7 +10,7 @@
 /* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */
 .input-wrap { position: relative; min-width: 0; }
 .input-wrap > .input { padding-right: var(--s9); }
-.input-end { position: absolute; right: var(--s3); top: 50%; transform: translateY(-50%); }
+.input-end { position: absolute; right: var(--s3); top: 50%; transform: translateY(-50%); min-height: var(--s6); min-width: var(--s6); display: inline-grid; place-items: center; }
 /* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its
    neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */
 .input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }
