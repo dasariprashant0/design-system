@@ -1,0 +1,51 @@
+{
+  "name": "carousel",
+  "title": "Carousel",
+  "category": "data-display",
+  "description": "A row of slides you scroll or step through with buttons.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/carousel.css",
+      "content": ".carousel { display: grid; gap: var(--s3); }\n.carousel-track { display: flex; gap: var(--s3); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }\n.carousel-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }\n.carousel-slide { flex: 0 0 min(80%, 20rem); scroll-snap-align: start; }\n.carousel-controls { display: flex; gap: var(--s2); justify-content: flex-end; }\n@media (prefers-reduced-motion: reduce) { .carousel-track { scroll-behavior: auto; } }\n"
+    }
+  ],
+  "a11y": [
+    "A named region with aria-roledescription=\"carousel\"; each slide is a group named \"N of M\".",
+    "Previous and Next are real buttons; the track is also scrollable by keyboard and touch.",
+    "No auto-play, so nothing moves without the user."
+  ],
+  "keywords": [
+    "slider",
+    "slideshow",
+    "gallery",
+    "swipe"
+  ],
+  "kind": "components",
+  "import": "import {Carousel} from '@monoline/react'",
+  "path": "packages/react/src/components/carousel",
+  "files": [
+    "packages/react/src/components/carousel/carousel.demo.tsx",
+    "packages/react/src/components/carousel/carousel.test.tsx",
+    "packages/react/src/components/carousel/carousel.tsx",
+    "packages/react/src/components/carousel/index.ts",
+    "packages/react/src/components/carousel/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/carousel/carousel.tsx",
+      "content": "'use client';\nimport {Children, forwardRef, useRef, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface CarouselProps extends HTMLAttributes<HTMLDivElement> {\n  /** Names the carousel, for example \"Featured projects\". */\n  'aria-label': string;\n}\n\n/** Wrap each slide in a CarouselItem. Native scroll-snap does the movement. */\nexport const Carousel = forwardRef<HTMLDivElement, CarouselProps>(function Carousel({className, children, ...rest}, ref) {\n  const track = useRef<HTMLDivElement>(null);\n  const items = Children.toArray(children);\n  const step = (dir: 1 | -1) => { const el = track.current; if (el) el.scrollBy?.({left: dir * el.clientWidth * 0.9, behavior: 'smooth'}); };\n  return (\n    <div ref={ref} role=\"region\" aria-roledescription=\"carousel\" className={cx('carousel', className)} {...rest}>\n      <div ref={track} className=\"carousel-track\" tabIndex={0} aria-label={`${rest['aria-label']} slides`}>\n        {items.map((c, i) => <div key={i} role=\"group\" aria-roledescription=\"slide\" aria-label={`${i + 1} of ${items.length}`} className=\"carousel-slide\">{c}</div>)}\n      </div>\n      <div className=\"carousel-controls\">\n        <button type=\"button\" className=\"btn btn-line btn-sm\" onClick={() => step(-1)}>Previous<span className=\"sr-only\"> slide</span></button>\n        <button type=\"button\" className=\"btn btn-line btn-sm\" onClick={() => step(1)}>Next<span className=\"sr-only\"> slide</span></button>\n      </div>\n    </div>\n  );\n});\n\nexport const CarouselItem = ({children}: {children: React.ReactNode}) => <>{children}</>;\n"
+    },
+    {
+      "path": "packages/react/src/components/carousel/index.ts",
+      "content": "export {Carousel, CarouselItem} from './carousel';\nexport type {CarouselProps} from './carousel';\n"
+    },
+    {
+      "path": "packages/react/src/components/carousel/meta.json",
+      "content": "{\"name\":\"carousel\",\"title\":\"Carousel\",\"category\":\"data-display\",\"description\":\"A row of slides you scroll or step through with buttons.\",\"status\":\"stable\",\"css\":[\"carousel.css\"],\"a11y\":[\"A named region with aria-roledescription=\\\"carousel\\\"; each slide is a group named \\\"N of M\\\".\",\"Previous and Next are real buttons; the track is also scrollable by keyboard and touch.\",\"No auto-play, so nothing moves without the user.\"],\"keywords\":[\"slider\",\"slideshow\",\"gallery\",\"swipe\"]}\n"
+    }
+  ]
+}

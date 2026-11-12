@@ -95,6 +95,16 @@ A11y:
 - role="group" with a required accessible name.
 Files: packages/react/src/components/button-group/button-group.demo.tsx, packages/react/src/components/button-group/button-group.test.tsx, packages/react/src/components/button-group/button-group.tsx, packages/react/src/components/button-group/index.ts, packages/react/src/components/button-group/meta.json
 
+## Calendar (calendar)
+A month grid for picking one date.
+Import: import {Calendar} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- role="grid" with column headers; one day is in the tab order (roving tabindex).
+- Arrow keys move by day and week, Home/End to the start and end of the week, PageUp/PageDown by month.
+- Each day button has a full date name; the selected day has aria-pressed and today has aria-current="date".
+Files: packages/react/src/components/calendar/calendar.demo.tsx, packages/react/src/components/calendar/calendar.test.tsx, packages/react/src/components/calendar/calendar.tsx, packages/react/src/components/calendar/index.ts, packages/react/src/components/calendar/meta.json
+
 ## Card (card)
 A bordered group for one thing you can pick up or open.
 Import: import {Card} from '@monoline/react'
@@ -103,6 +113,16 @@ A11y:
 - Plain divs and a heading; no roles added.
 - With asChild on a link or button the whole card is one keyboard-focusable control.
 Files: packages/react/src/components/card/card.demo.tsx, packages/react/src/components/card/card.test.tsx, packages/react/src/components/card/card.tsx, packages/react/src/components/card/index.ts, packages/react/src/components/card/meta.json
+
+## Carousel (carousel)
+A row of slides you scroll or step through with buttons.
+Import: import {Carousel} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A named region with aria-roledescription="carousel"; each slide is a group named "N of M".
+- Previous and Next are real buttons; the track is also scrollable by keyboard and touch.
+- No auto-play, so nothing moves without the user.
+Files: packages/react/src/components/carousel/carousel.demo.tsx, packages/react/src/components/carousel/carousel.test.tsx, packages/react/src/components/carousel/carousel.tsx, packages/react/src/components/carousel/index.ts, packages/react/src/components/carousel/meta.json
 
 ## Checkbox (checkbox)
 A box to turn one choice on or off, with an indeterminate state.
@@ -132,6 +152,16 @@ A11y:
 - Space and Enter toggle it.
 Files: packages/react/src/components/collapsible/collapsible.demo.tsx, packages/react/src/components/collapsible/collapsible.test.tsx, packages/react/src/components/collapsible/collapsible.tsx, packages/react/src/components/collapsible/index.ts, packages/react/src/components/collapsible/meta.json
 
+## Combobox (combobox)
+Type to filter a list and pick one option.
+Import: import {Combobox} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- ARIA 1.2 combobox: the input has role="combobox" with aria-expanded, aria-controls and aria-activedescendant.
+- ArrowDown/ArrowUp move through options, Enter picks, Escape closes (and clears the typed text on a second press), Tab leaves.
+- Options are in a listbox with aria-selected; an empty result is announced as text.
+Files: packages/react/src/components/combobox/combobox.demo.tsx, packages/react/src/components/combobox/combobox.test.tsx, packages/react/src/components/combobox/combobox.tsx, packages/react/src/components/combobox/index.ts, packages/react/src/components/combobox/meta.json
+
 ## Container (container)
 Centre content in a column with a sensible maximum width and side padding.
 Import: import {Container} from '@monoline/react'
@@ -149,6 +179,16 @@ A11y:
 - Arrow keys move, Enter or Space selects, Escape closes and returns focus.
 - Every action must also exist elsewhere in the UI for people who cannot open it.
 Files: packages/react/src/components/context-menu/context-menu.demo.tsx, packages/react/src/components/context-menu/context-menu.test.tsx, packages/react/src/components/context-menu/context-menu.tsx, packages/react/src/components/context-menu/index.ts, packages/react/src/components/context-menu/meta.json
+
+## Date picker (date-picker)
+A button that opens a calendar and shows the chosen date.
+Import: import {DatePicker} from '@monoline/react'
+Primitive: radix-ui/Popover | Status: stable
+A11y:
+- The trigger is a button naming the field and the current value; it opens a dialog with the calendar.
+- Choosing a date closes the dialog and returns focus to the trigger; Escape closes without changing.
+- All calendar keyboard behaviour applies inside.
+Files: packages/react/src/components/date-picker/date-picker.demo.tsx, packages/react/src/components/date-picker/date-picker.test.tsx, packages/react/src/components/date-picker/date-picker.tsx, packages/react/src/components/date-picker/index.ts, packages/react/src/components/date-picker/meta.json
 
 ## Description list (description-list)
 Label and value pairs, like the details of a record.
@@ -214,6 +254,16 @@ A11y:
 - Native fieldset and legend: screen readers announce the legend with each control.
 - disabled on the fieldset disables every control inside.
 Files: packages/react/src/components/fieldset/fieldset.demo.tsx, packages/react/src/components/fieldset/fieldset.test.tsx, packages/react/src/components/fieldset/fieldset.tsx, packages/react/src/components/fieldset/index.ts, packages/react/src/components/fieldset/meta.json
+
+## File upload (file-upload)
+Choose files by browsing or dropping them, and see what is selected.
+Import: import {FileUpload} from '@monoline/react'
+Primitive: none | Status: stable
+A11y:
+- A native file input stays focusable and operable by keyboard; the drop zone is a label for it.
+- Selected files are listed as text with a Remove button each; changes are announced via a polite status.
+- Dragging is an extra, never the only way.
+Files: packages/react/src/components/file-upload/file-upload.demo.tsx, packages/react/src/components/file-upload/file-upload.test.tsx, packages/react/src/components/file-upload/file-upload.tsx, packages/react/src/components/file-upload/index.ts, packages/react/src/components/file-upload/meta.json
 
 ## Grid (grid)
 A responsive grid of equal columns with one gap.
@@ -320,6 +370,16 @@ A11y:
 - A real select element: native keyboard, typeahead and mobile pickers.
 - Inside a Field it is labelled and described automatically.
 Files: packages/react/src/components/native-select/index.ts, packages/react/src/components/native-select/meta.json, packages/react/src/components/native-select/native-select.demo.tsx, packages/react/src/components/native-select/native-select.test.tsx, packages/react/src/components/native-select/native-select.tsx
+
+## Navigation menu (navigation-menu)
+Site navigation with links and menus that open panels of links.
+Import: import {NavigationMenu} from '@monoline/react'
+Primitive: radix-ui/NavigationMenu | Status: stable
+A11y:
+- A nav landmark with a list of links and menu buttons.
+- Arrow keys move between top-level items; Enter/Space/ArrowDown opens a panel; Escape closes it.
+- The current page link has aria-current="page".
+Files: packages/react/src/components/navigation-menu/index.ts, packages/react/src/components/navigation-menu/meta.json, packages/react/src/components/navigation-menu/navigation-menu.demo.tsx, packages/react/src/components/navigation-menu/navigation-menu.test.tsx, packages/react/src/components/navigation-menu/navigation-menu.tsx
 
 ## Number input (number-input)
 A numeric field with decrease and increase buttons.

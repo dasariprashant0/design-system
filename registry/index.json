@@ -313,6 +313,37 @@
       ]
     },
     {
+      "name": "calendar",
+      "title": "Calendar",
+      "category": "forms",
+      "description": "A month grid for picking one date.",
+      "status": "stable",
+      "css": [
+        "calendar.css"
+      ],
+      "a11y": [
+        "role=\"grid\" with column headers; one day is in the tab order (roving tabindex).",
+        "Arrow keys move by day and week, Home/End to the start and end of the week, PageUp/PageDown by month.",
+        "Each day button has a full date name; the selected day has aria-pressed and today has aria-current=\"date\"."
+      ],
+      "keywords": [
+        "date",
+        "month",
+        "datepicker",
+        "schedule"
+      ],
+      "kind": "components",
+      "import": "import {Calendar} from '@monoline/react'",
+      "path": "packages/react/src/components/calendar",
+      "files": [
+        "packages/react/src/components/calendar/calendar.demo.tsx",
+        "packages/react/src/components/calendar/calendar.test.tsx",
+        "packages/react/src/components/calendar/calendar.tsx",
+        "packages/react/src/components/calendar/index.ts",
+        "packages/react/src/components/calendar/meta.json"
+      ]
+    },
+    {
       "name": "card",
       "title": "Card",
       "category": "data-display",
@@ -341,6 +372,37 @@
         "packages/react/src/components/card/card.tsx",
         "packages/react/src/components/card/index.ts",
         "packages/react/src/components/card/meta.json"
+      ]
+    },
+    {
+      "name": "carousel",
+      "title": "Carousel",
+      "category": "data-display",
+      "description": "A row of slides you scroll or step through with buttons.",
+      "status": "stable",
+      "css": [
+        "carousel.css"
+      ],
+      "a11y": [
+        "A named region with aria-roledescription=\"carousel\"; each slide is a group named \"N of M\".",
+        "Previous and Next are real buttons; the track is also scrollable by keyboard and touch.",
+        "No auto-play, so nothing moves without the user."
+      ],
+      "keywords": [
+        "slider",
+        "slideshow",
+        "gallery",
+        "swipe"
+      ],
+      "kind": "components",
+      "import": "import {Carousel} from '@monoline/react'",
+      "path": "packages/react/src/components/carousel",
+      "files": [
+        "packages/react/src/components/carousel/carousel.demo.tsx",
+        "packages/react/src/components/carousel/carousel.test.tsx",
+        "packages/react/src/components/carousel/carousel.tsx",
+        "packages/react/src/components/carousel/index.ts",
+        "packages/react/src/components/carousel/meta.json"
       ]
     },
     {
@@ -443,6 +505,42 @@
       ]
     },
     {
+      "name": "combobox",
+      "title": "Combobox",
+      "category": "forms",
+      "description": "Type to filter a list and pick one option.",
+      "status": "stable",
+      "uses": [
+        "field"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "combobox.css"
+      ],
+      "a11y": [
+        "ARIA 1.2 combobox: the input has role=\"combobox\" with aria-expanded, aria-controls and aria-activedescendant.",
+        "ArrowDown/ArrowUp move through options, Enter picks, Escape closes (and clears the typed text on a second press), Tab leaves.",
+        "Options are in a listbox with aria-selected; an empty result is announced as text."
+      ],
+      "keywords": [
+        "autocomplete",
+        "typeahead",
+        "search select",
+        "filter",
+        "searchable select"
+      ],
+      "kind": "components",
+      "import": "import {Combobox} from '@monoline/react'",
+      "path": "packages/react/src/components/combobox",
+      "files": [
+        "packages/react/src/components/combobox/combobox.demo.tsx",
+        "packages/react/src/components/combobox/combobox.test.tsx",
+        "packages/react/src/components/combobox/combobox.tsx",
+        "packages/react/src/components/combobox/index.ts",
+        "packages/react/src/components/combobox/meta.json"
+      ]
+    },
+    {
       "name": "container",
       "title": "Container",
       "category": "layout",
@@ -500,6 +598,46 @@
         "packages/react/src/components/context-menu/context-menu.tsx",
         "packages/react/src/components/context-menu/index.ts",
         "packages/react/src/components/context-menu/meta.json"
+      ]
+    },
+    {
+      "name": "date-picker",
+      "title": "Date picker",
+      "category": "forms",
+      "description": "A button that opens a calendar and shows the chosen date.",
+      "status": "stable",
+      "primitive": "radix-ui/Popover",
+      "uses": [
+        "calendar",
+        "popover",
+        "field"
+      ],
+      "css": [
+        "03-form-fields.css",
+        "popover.css",
+        "calendar.css",
+        "date-picker.css"
+      ],
+      "a11y": [
+        "The trigger is a button naming the field and the current value; it opens a dialog with the calendar.",
+        "Choosing a date closes the dialog and returns focus to the trigger; Escape closes without changing.",
+        "All calendar keyboard behaviour applies inside."
+      ],
+      "keywords": [
+        "datepicker",
+        "date input",
+        "calendar popup",
+        "choose date"
+      ],
+      "kind": "components",
+      "import": "import {DatePicker} from '@monoline/react'",
+      "path": "packages/react/src/components/date-picker",
+      "files": [
+        "packages/react/src/components/date-picker/date-picker.demo.tsx",
+        "packages/react/src/components/date-picker/date-picker.test.tsx",
+        "packages/react/src/components/date-picker/date-picker.tsx",
+        "packages/react/src/components/date-picker/index.ts",
+        "packages/react/src/components/date-picker/meta.json"
       ]
     },
     {
@@ -719,6 +857,39 @@
         "packages/react/src/components/fieldset/fieldset.tsx",
         "packages/react/src/components/fieldset/index.ts",
         "packages/react/src/components/fieldset/meta.json"
+      ]
+    },
+    {
+      "name": "file-upload",
+      "title": "File upload",
+      "category": "forms",
+      "description": "Choose files by browsing or dropping them, and see what is selected.",
+      "status": "stable",
+      "css": [
+        "file-upload.css",
+        "02-buttons.css"
+      ],
+      "a11y": [
+        "A native file input stays focusable and operable by keyboard; the drop zone is a label for it.",
+        "Selected files are listed as text with a Remove button each; changes are announced via a polite status.",
+        "Dragging is an extra, never the only way."
+      ],
+      "keywords": [
+        "upload",
+        "dropzone",
+        "attach",
+        "input file",
+        "drag and drop"
+      ],
+      "kind": "components",
+      "import": "import {FileUpload} from '@monoline/react'",
+      "path": "packages/react/src/components/file-upload",
+      "files": [
+        "packages/react/src/components/file-upload/file-upload.demo.tsx",
+        "packages/react/src/components/file-upload/file-upload.test.tsx",
+        "packages/react/src/components/file-upload/file-upload.tsx",
+        "packages/react/src/components/file-upload/index.ts",
+        "packages/react/src/components/file-upload/meta.json"
       ]
     },
     {
@@ -1091,6 +1262,38 @@
         "packages/react/src/components/native-select/native-select.demo.tsx",
         "packages/react/src/components/native-select/native-select.test.tsx",
         "packages/react/src/components/native-select/native-select.tsx"
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "title": "Navigation menu",
+      "category": "navigation",
+      "description": "Site navigation with links and menus that open panels of links.",
+      "status": "stable",
+      "primitive": "radix-ui/NavigationMenu",
+      "css": [
+        "navigation-menu.css"
+      ],
+      "a11y": [
+        "A nav landmark with a list of links and menu buttons.",
+        "Arrow keys move between top-level items; Enter/Space/ArrowDown opens a panel; Escape closes it.",
+        "The current page link has aria-current=\"page\"."
+      ],
+      "keywords": [
+        "navbar",
+        "header nav",
+        "mega menu",
+        "site menu"
+      ],
+      "kind": "components",
+      "import": "import {NavigationMenu} from '@monoline/react'",
+      "path": "packages/react/src/components/navigation-menu",
+      "files": [
+        "packages/react/src/components/navigation-menu/index.ts",
+        "packages/react/src/components/navigation-menu/meta.json",
+        "packages/react/src/components/navigation-menu/navigation-menu.demo.tsx",
+        "packages/react/src/components/navigation-menu/navigation-menu.test.tsx",
+        "packages/react/src/components/navigation-menu/navigation-menu.tsx"
       ]
     },
     {

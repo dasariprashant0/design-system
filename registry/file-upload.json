@@ -1,0 +1,56 @@
+{
+  "name": "file-upload",
+  "title": "File upload",
+  "category": "forms",
+  "description": "Choose files by browsing or dropping them, and see what is selected.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/file-upload.css",
+      "content": ".upload { display: grid; gap: var(--s3); }\n.upload-zone { display: grid; place-items: center; padding: var(--s6) var(--s5); border: 1px dashed var(--foreground); text-align: center; font-size: var(--text-sm); cursor: pointer; }\n.upload-zone:hover, .upload-zone[data-over] { background: var(--wash-2); }\n.upload-zone:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }\n.upload-list { display: grid; gap: var(--s1); font-size: var(--text-sm); }\n.upload-list li { display: flex; align-items: center; gap: var(--s3); padding: var(--s2) 0; border-bottom: 1px solid var(--rule); }\n.upload-name { margin-right: auto; overflow-wrap: anywhere; }\n.upload-remove { text-decoration: underline; text-underline-offset: 3px; color: var(--muted); }\n.upload-remove:hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-left: 0; padding-right: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+    }
+  ],
+  "a11y": [
+    "A native file input stays focusable and operable by keyboard; the drop zone is a label for it.",
+    "Selected files are listed as text with a Remove button each; changes are announced via a polite status.",
+    "Dragging is an extra, never the only way."
+  ],
+  "keywords": [
+    "upload",
+    "dropzone",
+    "attach",
+    "input file",
+    "drag and drop"
+  ],
+  "kind": "components",
+  "import": "import {FileUpload} from '@monoline/react'",
+  "path": "packages/react/src/components/file-upload",
+  "files": [
+    "packages/react/src/components/file-upload/file-upload.demo.tsx",
+    "packages/react/src/components/file-upload/file-upload.test.tsx",
+    "packages/react/src/components/file-upload/file-upload.tsx",
+    "packages/react/src/components/file-upload/index.ts",
+    "packages/react/src/components/file-upload/meta.json"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/file-upload/file-upload.tsx",
+      "content": "'use client';\nimport {forwardRef, useId, useState, type DragEvent, type InputHTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface FileUploadProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'value' | 'defaultValue' | 'onChange' | 'children'> {\n  /** The visible prompt, for example \"Drop files here or choose\". */\n  label?: ReactNode;\n  /** Called with the full current list whenever it changes. */\n  onFilesChange?: (files: File[]) => void;\n}\n\nconst size = (n: number) => (n < 1024 ? `${n} B` : n < 1048576 ? `${(n / 1024).toFixed(1)} KB` : `${(n / 1048576).toFixed(1)} MB`);\n\n/** Controls are native: the input is visually hidden but focusable. Use `accept` and `multiple` as on any file input. */\nexport const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(function FileUpload({label = 'Drop files here or choose', onFilesChange, multiple, className, ...rest}, ref) {\n  const id = useId();\n  const [files, setFiles] = useState<File[]>([]);\n  const [over, setOver] = useState(false);\n  const [note, setNote] = useState('');\n  const set = (next: File[], msg: string) => { setFiles(next); setNote(msg); onFilesChange?.(next); };\n  const add = (list: FileList | null) => {\n    if (!list?.length) return;\n    const incoming = Array.from(list);\n    set(multiple ? [...files, ...incoming] : incoming.slice(0, 1), `${incoming.length} file${incoming.length > 1 ? 's' : ''} added`);\n  };\n  const drop = (e: DragEvent) => { e.preventDefault(); setOver(false); add(e.dataTransfer.files); };\n  return (\n    <div className={cx('upload', className)}>\n      <label\n        htmlFor={id}\n        className=\"upload-zone\"\n        data-over={over || undefined}\n        onDragOver={(e) => { e.preventDefault(); setOver(true); }}\n        onDragLeave={() => setOver(false)}\n        onDrop={drop}\n      >\n        <input ref={ref} id={id} type=\"file\" className=\"sr-only\" multiple={multiple} onChange={(e) => { add(e.target.files); e.target.value = ''; }} {...rest} />\n        <span>{label}</span>\n      </label>\n      {files.length > 0 && (\n        <ul className=\"upload-list\" aria-label=\"Selected files\">\n          {files.map((f, i) => (\n            <li key={f.name + i}>\n              <span className=\"upload-name\">{f.name}</span><span className=\"muted small\">{size(f.size)}</span>\n              <button type=\"button\" className=\"upload-remove\" onClick={() => set(files.filter((_, j) => j !== i), `${f.name} removed`)}>Remove<span className=\"sr-only\"> {f.name}</span></button>\n            </li>\n          ))}\n        </ul>\n      )}\n      <span className=\"sr-only\" role=\"status\">{note}</span>\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/file-upload/index.ts",
+      "content": "export {FileUpload} from './file-upload';\nexport type {FileUploadProps} from './file-upload';\n"
+    },
+    {
+      "path": "packages/react/src/components/file-upload/meta.json",
+      "content": "{\"name\":\"file-upload\",\"title\":\"File upload\",\"category\":\"forms\",\"description\":\"Choose files by browsing or dropping them, and see what is selected.\",\"status\":\"stable\",\"css\":[\"file-upload.css\",\"02-buttons.css\"],\"a11y\":[\"A native file input stays focusable and operable by keyboard; the drop zone is a label for it.\",\"Selected files are listed as text with a Remove button each; changes are announced via a polite status.\",\"Dragging is an extra, never the only way.\"],\"keywords\":[\"upload\",\"dropzone\",\"attach\",\"input file\",\"drag and drop\"]}\n"
+    }
+  ]
+}
