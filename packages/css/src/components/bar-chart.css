@@ -1,0 +1,2 @@
+/* Bar chart. Shared base: chart.css. */
+.chart-bar { transition: stroke-width var(--fast) var(--ease); }

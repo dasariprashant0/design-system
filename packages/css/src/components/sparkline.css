@@ -1,0 +1,7 @@
+/* Sparkline: a tiny inline trend. Sits in a line of text or a table cell. */
+.sparkline { position: relative; display: inline-block; vertical-align: middle; line-height: 0; }
+.sparkline svg { display: block; overflow: visible; }
+.sparkline-line { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.sparkline-area { fill: var(--accent); fill-opacity: 0.2; stroke: none; }
+.sparkline-dot { fill: var(--accent); }
+.sparkline-empty { font-size: var(--text-xs); line-height: normal; color: var(--muted); }
