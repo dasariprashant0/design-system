@@ -4,7 +4,7 @@
   "version": "0.3.0",
   "type": "module",
   "scripts": {
-    "gen": "node scripts/gen-props.mjs && node scripts/gen-demos.mjs && node scripts/gen-styling.mjs && node scripts/gen-markdown.mjs",
+    "gen": "node scripts/gen-props.mjs && node scripts/gen-demos.mjs && node scripts/gen-styling.mjs && node scripts/gen-markdown.mjs && node scripts/gen-size.mjs",
     "predev": "npm run gen",
     "dev": "vite",
     "prebuild": "npm run gen",

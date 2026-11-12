@@ -8,6 +8,7 @@ import {
 } from '@monoline/react';
 import type {ComponentMeta, Demo} from '@monoline/react';
 import {keyboardRows} from '../../scripts/lib/a11y.mjs';
+import {Playground} from './playground';
 import './page.css';
 
 type PropRow = {name: string; type: string; optional: boolean; default: string | null; description: string};
@@ -212,6 +213,8 @@ export function ComponentDoc({meta, linkTo = (n) => `#${n}`}: ComponentDocProps)
       <Installation meta={meta} extra={extra} />
 
       <Section id="usage" title="Usage"><CodeBlock title="example.tsx" language="tsx" code={usage} /></Section>
+
+      {!hook && <Playground name={meta.name} importName={extra.importName} groups={groups} />}
 
       {demos.length > 0 && (
         <Section id="examples" title="Examples">
