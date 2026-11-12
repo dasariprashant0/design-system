@@ -1,0 +1,6 @@
+/* Overflow list: one clipped row. Items that do not fit stay in flow for measuring but are hidden and out of the tab order. */
+.overflow-list { display: flex; align-items: center; gap: var(--s2); min-width: 0; overflow: hidden; position: relative; }
+.overflow-list-items { display: flex; flex-wrap: nowrap; gap: var(--s2); margin: 0; padding: 0; list-style: none; min-width: 0; }
+.overflow-list-item { flex: none; white-space: nowrap; }
+.overflow-list-item[data-hidden] { visibility: hidden; position: absolute; pointer-events: none; }
+.overflow-list-more { flex: none; }

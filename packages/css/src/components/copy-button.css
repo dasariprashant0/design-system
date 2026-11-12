@@ -1,0 +1,3 @@
+/* Copy button: a normal .btn; data-copied marks the moment after a successful copy. */
+.btn[data-copied] { color: var(--ok); }
+.btn[data-copied]:hover:not(:disabled) { color: var(--background); }
