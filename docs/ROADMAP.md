@@ -50,3 +50,8 @@ Priority = how many of the ten UI libraries ship it. Status is `done` once the f
 **Phase 3: effects (original code, reduced-motion safe).** marquee, number-ticker, typewriter, text-reveal, dot-pattern, grid-pattern, border-beam, shimmer, animated-list, bento-grid, scroll-progress, confetti. Not copying Magic UI or Aceternity code; Aceternity's licence forbids redistribution.
 
 **Cross-cutting.** Docs site redesign with theme/accent/font/radius/density controls; `npx monoline add <component>` CLI that copies sources from `registry/`; per-component `meta.json`; hooks (use-disclosure, use-media-query, use-clipboard, use-debounce, use-hotkeys, use-click-outside, use-local-storage); visual regression and axe in CI.
+
+### Status after the second pass (71 components)
+
+Done in P1b/P1c: combobox, calendar, date-picker, context-menu, hover-card, menubar, navigation-menu, toast, toolbar, native-select, fieldset, carousel, file-upload, text, heading, link, grid, description-list, image.
+Still open from the matrix (3+ libraries): autocomplete (free-text variant of combobox), form helpers, box, flex (Stack covers most of flex), tree. Also open: multi-select, tags-input, time-picker, command palette, data-table, color-picker, hooks, the `npx monoline add` CLI, effects other than marquee, blocks, visual regression CI.
