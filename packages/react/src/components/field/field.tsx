@@ -14,15 +14,21 @@ const FieldContext = createContext<FieldContextValue | null>(null);
  * Props a form control should spread to join its surrounding Field: id, aria-describedby, aria-invalid, required.
  * Outside a Field it returns an empty object, so controls work alone too.
  */
-export function useFieldControl(): {id?: string; 'aria-describedby'?: string; 'aria-invalid'?: true; required?: true} {
+export function useFieldControl(): {id?: string; 'aria-describedby'?: string; 'aria-invalid'?: true; 'data-invalid'?: ''; required?: true} {
   const ctx = useContext(FieldContext);
   if (!ctx) return {};
   return {
     id: ctx.id,
     'aria-describedby': ctx.describedBy,
     'aria-invalid': ctx.invalid ? true : undefined,
+    'data-invalid': ctx.invalid ? '' : undefined,
     required: ctx.required ? true : undefined,
   };
+}
+
+/** Attributes for a control marked invalid with its own `invalid` prop: `aria-invalid` for assistive tech, `data-invalid` for styling. */
+export function invalidAttrs(invalid?: boolean): {'aria-invalid'?: true; 'data-invalid'?: ''} {
+  return invalid ? {'aria-invalid': true, 'data-invalid': ''} : {};
 }
 
 export interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {

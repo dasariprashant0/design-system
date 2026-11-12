@@ -1,4 +1,4 @@
 .text { max-width: var(--measure); }
 .text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }
-.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-ok { color: var(--ok); } .text-accent { color: var(--accent-text); }
+.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-success, .text-ok { color: var(--ok); } .text-warning { color: var(--warning); } .text-accent { color: var(--accent-text); }
 .text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }

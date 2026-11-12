@@ -5,3 +5,5 @@
 .tags-input[data-disabled] { opacity: 0.5; }
 .tags-input-field { flex: 1 1 8ch; min-width: 8ch; padding: var(--s1) 0; background: transparent; border: 0; color: var(--foreground); outline: 0; }
 .tags-input-field::placeholder { color: var(--muted); }
+.tags-input[data-size="sm"] { min-height: var(--control-sm); }
+.tags-input[data-size="lg"] { min-height: var(--control-lg); }

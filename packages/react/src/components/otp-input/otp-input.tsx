@@ -71,7 +71,7 @@ export const OtpInput = forwardRef<HTMLDivElement, OtpInputProps>(function OtpIn
           maxLength={1}
           value={current[i] ?? ''}
           disabled={disabled}
-          aria-invalid={invalid || undefined}
+          {...(invalid ? {'aria-invalid': true as const, 'data-invalid': ''} : {})}
           aria-label={`Digit ${i + 1} of ${length}`}
           onChange={() => {}}
           onKeyDown={onKey(i)}

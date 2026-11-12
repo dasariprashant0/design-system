@@ -1,15 +1,17 @@
 'use client';
 import {forwardRef, useImperativeHandle, useRef, type InputHTMLAttributes} from 'react';
 import {cx} from '../../utils/cx';
-import {useFieldControl} from '../field';
+import {invalidAttrs, useFieldControl} from '../field';
 
 export interface NumberInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
+  /** `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size. */
+  size?: 'sm' | 'md' | 'lg';
   /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */
   invalid?: boolean;
 }
 
 /** Native number input with step buttons. Use `min`, `max`, `step` like on any input. Works controlled or not. */
-export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(function NumberInput({invalid, className, disabled, readOnly, ...rest}, ref) {
+export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(function NumberInput({size = 'md', invalid, className, disabled, readOnly, ...rest}, ref) {
   const f = useFieldControl();
   const inner = useRef<HTMLInputElement>(null);
   useImperativeHandle(ref, () => inner.current!);
@@ -24,7 +26,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(functi
   return (
     <div className="number-input">
       <button type="button" className="number-step" aria-label="Decrease" tabIndex={-1} disabled={off} onClick={() => bump(-1)}>−</button>
-      <input ref={inner} type="number" className={cx('input number-field', className)} disabled={disabled} readOnly={readOnly} {...f} {...(invalid ? {'aria-invalid': true as const} : {})} {...rest} />
+      <input ref={inner} type="number" className={cx('input number-field', size !== 'md' && `input-${size}`, className)} disabled={disabled} readOnly={readOnly} data-disabled={disabled ? '' : undefined} {...f} {...invalidAttrs(invalid)} {...rest} />
       <button type="button" className="number-step" aria-label="Increase" tabIndex={-1} disabled={off} onClick={() => bump(1)}>+</button>
     </div>
   );
