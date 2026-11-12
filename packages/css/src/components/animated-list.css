@@ -1,0 +1,5 @@
+/* Animated list: opacity-only entrance staggered by (index * step); items hold their space so nothing shifts. */
+.animated-list { list-style: none; margin: 0; padding: 0; }
+.animated-list-item { animation: animated-list-in var(--slow) var(--ease) both; animation-delay: calc(var(--i) * var(--animated-list-step, 300ms)); }
+@keyframes animated-list-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .animated-list-item { animation: none; } }

@@ -1,0 +1,2 @@
+/* Confetti: a window-sized canvas above everything that never takes the pointer. */
+.confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: var(--z-toast); }

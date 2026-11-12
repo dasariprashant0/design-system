@@ -1,0 +1,1 @@
+{"name":"dot-pattern","title":"Dot pattern","category":"effects","description":"A decorative dot grid background drawn in SVG with currentColor.","status":"stable","css":["dot-pattern.css"],"a11y":["Decorative: aria-hidden and not focusable, so it adds nothing to the reading order.","Static; no motion."],"keywords":["background","dots","grid","texture","decoration"]}

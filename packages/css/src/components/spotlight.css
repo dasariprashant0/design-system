@@ -1,0 +1,8 @@
+/* Spotlight: a radial glow under the content, centred on the pointer. Only for hover-capable pointers. */
+.spotlight { position: relative; }
+.spotlight > * { position: relative; }
+@media (hover: hover) {
+  .spotlight::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity var(--slow) var(--ease); background: radial-gradient(var(--spotlight-size, 240px) circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%); }
+  .spotlight:hover::before { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .spotlight::before { transition: none; } }

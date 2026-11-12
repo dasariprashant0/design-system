@@ -1,0 +1,4 @@
+/* Text reveal: each word fades in after (index * step). Opacity only, so nothing reflows. */
+.text-reveal-word { display: inline-block; animation: text-reveal-in var(--slow) var(--ease) both; animation-delay: calc(var(--i) * var(--text-reveal-step, 80ms)); }
+@keyframes text-reveal-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .text-reveal-word { animation: none; } }
