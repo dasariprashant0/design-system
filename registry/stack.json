@@ -31,6 +31,79 @@
     "packages/react/src/components/stack/stack.test.tsx",
     "packages/react/src/components/stack/stack.tsx"
   ],
+  "related": [
+    "aspect-ratio",
+    "box",
+    "container"
+  ],
+  "props": [
+    {
+      "name": "StackProps",
+      "props": [
+        {
+          "name": "direction",
+          "type": "\"row\" | \"column\"",
+          "optional": true,
+          "default": "'column'",
+          "description": "`column` (default) stacks children vertically; `row` lays them out horizontally."
+        },
+        {
+          "name": "gap",
+          "type": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9",
+          "optional": true,
+          "default": "3",
+          "description": "Step on the spacing scale: 1 = --s1 (4px) up to 9."
+        },
+        {
+          "name": "align",
+          "type": "\"center\" | \"start\" | \"end\" | \"stretch\"",
+          "optional": true,
+          "default": null,
+          "description": "Cross-axis alignment (`align-items`): `start`, `center`, `end` or `stretch`."
+        },
+        {
+          "name": "justify",
+          "type": "\"center\" | \"start\" | \"end\" | \"between\"",
+          "optional": true,
+          "default": null,
+          "description": "Main-axis distribution (`justify-content`): `start`, `center`, `end` or `between`."
+        },
+        {
+          "name": "wrap",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Lets children wrap onto new lines. Useful with `direction=\"row\"`. Default false."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Badge, Stack} from '@monoline/react';\n\n<Stack gap={2}><Badge>one</Badge><Badge>two</Badge><Badge>three</Badge></Stack>",
+  "dataAttributes": [
+    {
+      "name": "data-align",
+      "values": [
+        "start",
+        "center",
+        "end",
+        "stretch"
+      ]
+    },
+    {
+      "name": "data-justify",
+      "values": [
+        "start",
+        "center",
+        "end",
+        "between"
+      ]
+    }
+  ],
+  "classes": [
+    "stack",
+    "stack-row",
+    "stack-wrap"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

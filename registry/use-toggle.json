@@ -15,7 +15,7 @@
     "flip"
   ],
   "kind": "hooks",
-  "import": "import {UseToggle} from '@monoline/react'",
+  "import": "import {useToggle} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-toggle",
   "files": [
     "packages/react/src/hooks/use-toggle/index.ts",
@@ -24,6 +24,15 @@
     "packages/react/src/hooks/use-toggle/use-toggle.test.tsx",
     "packages/react/src/hooks/use-toggle/use-toggle.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {Button, useToggle} from '@monoline/react';\n\nconst themes = ['warm', 'dark', 'midnight'] as const;\n\nfunction Demo() {\n  const [theme, next] = useToggle<string>(themes as unknown as readonly [string, ...string[]]);\n  return <Button onClick={() => next()}>Theme: {theme}</Button>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

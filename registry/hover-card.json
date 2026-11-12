@@ -32,6 +32,37 @@
     "packages/react/src/components/hover-card/index.ts",
     "packages/react/src/components/hover-card/meta.json"
   ],
+  "related": [
+    "alert-dialog",
+    "command",
+    "context-menu"
+  ],
+  "props": [],
+  "usage": "import {HoverCard, HoverCardContent, HoverCardTrigger} from '@monoline/react';\n\n<HoverCard><HoverCardTrigger asChild><a href=\"#ada\">@ada</a></HoverCardTrigger><HoverCardContent><strong>Ada Lovelace</strong><p className=\"muted small\">Wrote the first published program.</p></HoverCardContent></HoverCard>",
+  "dataAttributes": [
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    }
+  ],
+  "classes": [
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

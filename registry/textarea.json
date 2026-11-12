@@ -36,6 +36,54 @@
     "packages/react/src/components/textarea/textarea.test.tsx",
     "packages/react/src/components/textarea/textarea.tsx"
   ],
+  "related": [
+    "field"
+  ],
+  "props": [
+    {
+      "name": "TextareaProps",
+      "props": [
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Textarea} from '@monoline/react';\n\n<div style={{maxWidth: 420}}><Textarea aria-label=\"Notes\" placeholder=\"What happened today?\" /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-valid",
+      "values": [
+        "true"
+      ]
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "field-error",
+    "field-ok",
+    "input-group",
+    "input-affix",
+    "field-required",
+    "form-row"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

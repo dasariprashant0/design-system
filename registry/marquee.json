@@ -31,6 +31,47 @@
     "packages/react/src/components/marquee/marquee.tsx",
     "packages/react/src/components/marquee/meta.json"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "MarqueeProps",
+      "props": [
+        {
+          "name": "duration",
+          "type": "number",
+          "optional": true,
+          "default": "30",
+          "description": "Seconds for one full loop."
+        },
+        {
+          "name": "reverse",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Scroll to the right instead of the left. Default false."
+        },
+        {
+          "name": "pauseOnHover",
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Stop when the pointer is over it or focus is inside. Default true."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Marquee} from '@monoline/react';\n\n<Marquee duration={20}>{['Acme', 'Globex', 'Initech', 'Umbrella', 'Hooli'].map((n) => <span key={n} style={{padding: '0 var(--s5)', fontFamily: 'var(--font-display)'}}>{n}</span>)}</Marquee>",
+  "dataAttributes": [],
+  "classes": [
+    "marquee",
+    "marquee-track",
+    "marquee-reverse",
+    "marquee-pause"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

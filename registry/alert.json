@@ -30,6 +30,55 @@
     "packages/react/src/components/alert/index.ts",
     "packages/react/src/components/alert/meta.json"
   ],
+  "related": [
+    "empty-state",
+    "progress",
+    "skeleton"
+  ],
+  "props": [
+    {
+      "name": "AlertProps",
+      "props": [
+        {
+          "name": "tone",
+          "type": "\"info\" | \"success\" | \"warning\" | \"danger\"",
+          "optional": true,
+          "default": "'info'",
+          "description": "Meaning of the message: `info` (default), `success`, `warning` or `danger`. `warning` and `danger` are announced at once to screen readers."
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The headline of the message. Required: the words carry the meaning, the colour is only extra."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional longer explanation shown under the title."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Alert} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}><Alert title=\"Synced.\">42 entries up to date as of 14:20.</Alert><Alert tone=\"success\" title=\"Saved.\">Your changes are live.</Alert><Alert tone=\"warning\" title=\"Conflict.\">Two devices edited 12 March. Pick which copy to keep.</Alert><Alert tone=\"danger\" title=\"Can't save.\">The folder is read-only. Pick another folder.</Alert></div>",
+  "dataAttributes": [
+    {
+      "name": "data-tone",
+      "values": [
+        "success",
+        "warning",
+        "danger"
+      ]
+    }
+  ],
+  "classes": [
+    "alert",
+    "alert-title",
+    "alert-description"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

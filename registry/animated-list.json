@@ -32,6 +32,31 @@
     "packages/react/src/components/animated-list/index.ts",
     "packages/react/src/components/animated-list/meta.json"
   ],
+  "related": [
+    "bento-grid",
+    "border-beam",
+    "confetti"
+  ],
+  "props": [
+    {
+      "name": "AnimatedListProps",
+      "props": [
+        {
+          "name": "interval",
+          "type": "number",
+          "optional": true,
+          "default": "300",
+          "description": "Milliseconds between one item entering and the next. Default 300."
+        }
+      ]
+    }
+  ],
+  "usage": "import {AnimatedList} from '@monoline/react';\n\nconst row = (t: string, d: string) => (\n  <div style={{display: 'grid', gap: 'var(--s1)', padding: 'var(--s3) var(--s4)', border: '1px solid var(--rule)'}}>\n    <strong>{t}</strong><span style={{color: 'var(--muted)', fontSize: 'var(--text-sm)'}}>{d}</span>\n  </div>\n);\n\n<AnimatedList style={{display: 'grid', gap: 'var(--s2)', maxWidth: '24rem'}}>\n  {row('Build passed', 'main, 2 minutes ago')}\n  {row('Review requested', 'Docs update, 5 minutes ago')}\n  {row('Deploy finished', 'Production, 9 minutes ago')}\n</AnimatedList>",
+  "dataAttributes": [],
+  "classes": [
+    "animated-list",
+    "animated-list-item"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

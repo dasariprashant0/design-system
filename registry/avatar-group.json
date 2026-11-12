@@ -32,6 +32,42 @@
     "packages/react/src/components/avatar-group/index.ts",
     "packages/react/src/components/avatar-group/meta.json"
   ],
+  "related": [
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "AvatarGroupProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Names the group, for example \"Project members\"."
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "optional": true,
+          "default": "4",
+          "description": "Show at most this many avatars, then \"+N\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Avatar, AvatarGroup} from '@monoline/react';\n\n<AvatarGroup aria-label=\"Project members\" max={3}>{['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Linus Torvalds'].map((n) => <Avatar key={n} name={n} />)}</AvatarGroup>",
+  "dataAttributes": [],
+  "classes": [
+    "avatar",
+    "avatar-lg",
+    "avatar-line",
+    "avatar-group",
+    "tag",
+    "stat",
+    "stat-value",
+    "stat-note"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

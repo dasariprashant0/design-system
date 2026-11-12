@@ -17,7 +17,7 @@
     "tick"
   ],
   "kind": "hooks",
-  "import": "import {UseInterval} from '@monoline/react'",
+  "import": "import {useInterval} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-interval",
   "files": [
     "packages/react/src/hooks/use-interval/index.ts",
@@ -26,6 +26,15 @@
     "packages/react/src/hooks/use-interval/use-interval.test.tsx",
     "packages/react/src/hooks/use-interval/use-interval.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useState} from 'react';\nimport {Button, useInterval} from '@monoline/react';\n\nfunction IntervalDemo() {\n  const [running, setRunning] = useState(true);\n  const [seconds, setSeconds] = useState(0);\n  useInterval(() => setSeconds((s) => s + 1), running ? 1000 : null);\n  return (\n    <div>\n      <p>Elapsed: {seconds} s</p>\n      <Button variant=\"line\" onClick={() => setRunning((r) => !r)}>{running ? 'Pause' : 'Resume'}</Button>\n    </div>\n  );\n}\n\n<IntervalDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -30,6 +30,58 @@
     "packages/react/src/components/typewriter/typewriter.test.tsx",
     "packages/react/src/components/typewriter/typewriter.tsx"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "TypewriterProps",
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "The string to type. Screen readers get all of it at once."
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "optional": true,
+          "default": "40",
+          "description": "Milliseconds per character. Default 40."
+        },
+        {
+          "name": "delay",
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "Milliseconds to wait before the first character. Default 0."
+        },
+        {
+          "name": "cursor",
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Show a blinking caret. Default true."
+        },
+        {
+          "name": "onComplete",
+          "type": "(() => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called once the last character is shown (also straight away for reduced motion)."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Typewriter} from '@monoline/react';\n\n<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}><Typewriter text=\"Small parts, drawn with thin lines.\" /></p>",
+  "dataAttributes": [],
+  "classes": [
+    "typewriter-caret"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

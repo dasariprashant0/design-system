@@ -40,6 +40,88 @@
     "packages/react/src/components/color-picker/index.ts",
     "packages/react/src/components/color-picker/meta.json"
   ],
+  "related": [
+    "input"
+  ],
+  "props": [
+    {
+      "name": "ColorPickerProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The colour as \"#rrggbb\"."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": "'#000000'",
+          "description": "The initial colour as \"#rrggbb\" when uncontrolled."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new colour as \"#rrggbb\" when the user picks a swatch or types a valid hex."
+        },
+        {
+          "name": "colors",
+          "type": "string[]",
+          "optional": true,
+          "default": "PRESETS",
+          "description": "Preset swatches, each a CSS hex colour. Set from this prop, never from the stylesheet."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Stops the user changing the colour."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Accessible name for the group."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {ColorPicker} from '@monoline/react';\n\nfunction Controlled() {\n  const [c, setC] = useState('#0090ff');\n  return <div style={{maxWidth: '280px'}}><ColorPicker aria-label=\"Brand colour\" value={c} onValueChange={setC} /><p>Chosen: {c}</p></div>;\n}\n\n<Controlled />",
+  "dataAttributes": [
+    {
+      "name": "data-disabled",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "color-picker",
+    "color-picker-swatches",
+    "color-picker-swatch",
+    "color-picker-row",
+    "color-picker-native",
+    "color-picker-hex",
+    "color-picker-error"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

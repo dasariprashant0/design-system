@@ -42,6 +42,59 @@
     "packages/react/src/components/block-testimonials/index.ts",
     "packages/react/src/components/block-testimonials/meta.json"
   ],
+  "related": [
+    "container",
+    "heading"
+  ],
+  "props": [
+    {
+      "name": "BlockTestimonialsProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "Section heading shown above the quotes."
+        },
+        {
+          "name": "items",
+          "type": "Testimonial[]",
+          "optional": false,
+          "default": null,
+          "description": "The quotes to show, each with `quote`, `name` and optional `role` and `avatar`."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3 | 4 | 5 | 6",
+          "optional": true,
+          "default": "2",
+          "description": "Outline level of the section title, 1 to 6. Default 2."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockTestimonials} from '@monoline/react';\n\n<BlockTestimonials\n  title=\"What people say\"\n  items={[\n    {quote: 'It stayed out of the way and the pages got simpler.', name: 'Ada Example', role: 'Engineer, Example Co'},\n    {quote: 'Keyboard support worked on day one.', name: 'Sam Sample', role: 'Designer, Sample Studio'},\n    {quote: 'We deleted a lot of CSS.', name: 'Robin Placeholder', role: 'Founder, Placeholder'},\n  ]}\n/>",
+  "dataAttributes": [],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full",
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "block-testimonials",
+    "block-testimonials-title",
+    "block-testimonials-grid",
+    "block-testimonial",
+    "block-testimonial-avatar",
+    "block-testimonial-name",
+    "block-testimonial-role"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -49,6 +49,119 @@
     "packages/react/src/components/date-picker/index.ts",
     "packages/react/src/components/date-picker/meta.json"
   ],
+  "related": [
+    "calendar",
+    "popover",
+    "field"
+  ],
+  "props": [
+    {
+      "name": "DatePickerProps",
+      "props": [
+        {
+          "name": "placeholder",
+          "type": "string",
+          "optional": true,
+          "default": "'Pick a date'",
+          "description": "Text shown on the button while no date is chosen. Default \"Pick a date\"."
+        },
+        {
+          "name": "format",
+          "type": "Intl.DateTimeFormatOptions",
+          "optional": true,
+          "default": "{dateStyle: 'medium'}",
+          "description": "Intl options for the text on the button. Default: medium date."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Stops the user opening the calendar."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Extra class name for the trigger button."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Names the control when it is not inside a Field."
+        }
+      ]
+    }
+  ],
+  "usage": "import {DatePicker, Field} from '@monoline/react';\n\n<div style={{maxWidth: '260px', minHeight: '360px'}}><Field label=\"Due date\"><DatePicker weekStartsOn={1} /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    },
+    {
+      "name": "data-outside",
+      "values": []
+    },
+    {
+      "name": "data-today",
+      "values": []
+    },
+    {
+      "name": "data-empty",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check",
+    "calendar",
+    "calendar-head",
+    "calendar-title",
+    "calendar-nav",
+    "calendar-grid",
+    "calendar-day",
+    "date-trigger",
+    "date-popover"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

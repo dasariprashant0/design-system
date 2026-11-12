@@ -51,6 +51,82 @@
     "packages/react/src/components/block-cta/index.ts",
     "packages/react/src/components/block-cta/meta.json"
   ],
+  "related": [
+    "container",
+    "heading",
+    "text",
+    "button"
+  ],
+  "props": [
+    {
+      "name": "BlockCtaProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The one-sentence call to action, rendered as the section heading."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional muted supporting line under the title."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The next step: a solid Button and maybe a line one."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3 | 4 | 5",
+          "optional": true,
+          "default": "2",
+          "description": "Outline level of the title, 1 to 5. Default 2."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockCta, Button} from '@monoline/react';\n\n<BlockCta title=\"Start building today\" description=\"Install the package and copy your first component.\" actions={<><Button variant=\"solid\">Get started</Button><Button>Read the docs</Button></>} />",
+  "dataAttributes": [],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full",
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "text",
+    "text-xs",
+    "text-sm",
+    "text-md",
+    "text-lg",
+    "text-muted",
+    "text-danger",
+    "text-ok",
+    "text-accent",
+    "text-truncate",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block",
+    "block-cta",
+    "block-cta-box",
+    "block-cta-copy",
+    "block-cta-actions"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -35,6 +35,89 @@
     "packages/react/src/components/code-block/index.ts",
     "packages/react/src/components/code-block/meta.json"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "CodeBlockProps",
+      "props": [
+        {
+          "name": "code",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "The text to show and to copy. Rendered as text with coloured spans, never as HTML."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "A file name (`button.tsx`) or label (`bash`) shown in the header. Also names the region and picks the language."
+        },
+        {
+          "name": "language",
+          "type": "Language",
+          "optional": true,
+          "default": null,
+          "description": "Syntax colouring: `tsx`, `ts`, `jsx`, `js`, `css`, `html`, `bash`, `json` or `text`. Default: guessed from `title`, else `text`."
+        },
+        {
+          "name": "lineNumbers",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Number each line. Use for longer listings, not one-line commands."
+        },
+        {
+          "name": "hideCopy",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Hide the copy button."
+        }
+      ]
+    }
+  ],
+  "usage": "import {CodeBlock} from '@monoline/react';\n\nconst tsx = `import {Button} from '@monoline/react';\n\nexport function Save() {\n  // One solid button per view.\n  return <Button variant=\"solid\" onClick={() => save(42)}>Save</Button>;\n}`;\n\n<CodeBlock title=\"save.tsx\" code={tsx} />",
+  "dataAttributes": [
+    {
+      "name": "data-copied",
+      "values": []
+    },
+    {
+      "name": "data-headless",
+      "values": []
+    },
+    {
+      "name": "data-lines",
+      "values": []
+    }
+  ],
+  "classes": [
+    "code-block",
+    "code-head",
+    "code-title",
+    "code-copy",
+    "code-line",
+    "tok-keyword",
+    "tok-string",
+    "tok-number",
+    "tok-comment",
+    "tok-tag",
+    "tok-attr",
+    "tok-fn",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

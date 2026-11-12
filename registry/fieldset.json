@@ -29,6 +29,31 @@
     "packages/react/src/components/fieldset/index.ts",
     "packages/react/src/components/fieldset/meta.json"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "FieldsetProps",
+      "props": [
+        {
+          "name": "legend",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The group's name. Required so the fieldset always has an accessible name."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Field, Fieldset, Input} from '@monoline/react';\n\n<div style={{maxWidth: '360px'}}><Fieldset legend=\"Contact\"><Field label=\"Name\"><Input /></Field><Field label=\"Email\"><Input type=\"email\" /></Field></Fieldset></div>",
+  "dataAttributes": [],
+  "classes": [
+    "fieldset",
+    "fieldset-legend"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

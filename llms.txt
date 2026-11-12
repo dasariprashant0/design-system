@@ -7,7 +7,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 ## Docs
 - [AGENTS.md](AGENTS.md): rules for AI agents and contributors
 - [DESIGN.md](DESIGN.md): design rules, tokens, copy
-- [registry/index.json](registry/index.json): machine-readable component list
+- [registry/index.json](registry/index.json): machine-readable component list, with props names and related components
 
 ## Components
 ### layout

@@ -36,6 +36,55 @@
     "packages/react/src/components/drawer/index.ts",
     "packages/react/src/components/drawer/meta.json"
   ],
+  "related": [
+    "alert-dialog",
+    "command",
+    "context-menu"
+  ],
+  "props": [
+    {
+      "name": "DrawerContentProps",
+      "props": [
+        {
+          "name": "side",
+          "type": "\"start\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"end\"",
+          "optional": true,
+          "default": "'right'",
+          "description": "The edge it slides from. `start` and `end` follow the reading direction; `left` and `right` are fixed."
+        },
+        {
+          "name": "showClose",
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Shows a \"Close\" text button. Escape and the overlay always close it."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)'}}>\n  {(['right', 'left'] as const).map((side) => (\n    <Drawer key={side}>\n      <DrawerTrigger asChild><Button>Open {side}</Button></DrawerTrigger>\n      <DrawerContent side={side}><DrawerHeader><DrawerTitle>Filters</DrawerTitle><DrawerDescription>Narrow the list by status or owner.</DrawerDescription></DrawerHeader></DrawerContent>\n    </Drawer>\n  ))}\n</div>",
+  "dataAttributes": [
+    {
+      "name": "data-side",
+      "values": [
+        "right",
+        "end",
+        "left",
+        "start",
+        "top",
+        "bottom"
+      ]
+    }
+  ],
+  "classes": [
+    "dialog-overlay",
+    "dialog-content",
+    "dialog-header",
+    "dialog-footer",
+    "dialog-description",
+    "dialog-close",
+    "drawer-content"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -34,6 +34,64 @@
     "packages/react/src/components/segmented-control/segmented-control.test.tsx",
     "packages/react/src/components/segmented-control/segmented-control.tsx"
   ],
+  "related": [
+    "toggle-group"
+  ],
+  "props": [
+    {
+      "name": "SegmentedControlProps",
+      "props": [
+        {
+          "name": "options",
+          "type": "SegmentedOption[]",
+          "optional": false,
+          "default": null,
+          "description": "The segments to show, each with a `value`, a `label` and an optional `disabled`."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The selected segment's `value` when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The segment selected at first when uncontrolled. Defaults to the first option."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new segment's `value` when the user picks a different one."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Names the control, for example \"View\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {SegmentedControl} from '@monoline/react';\n\n<SegmentedControl aria-label=\"Chart range\" options={[{value: 'day', label: 'Day'}, {value: 'week', label: 'Week'}, {value: 'month', label: 'Month'}]} defaultValue=\"week\" />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "on"
+      ]
+    }
+  ],
+  "classes": [
+    "segmented",
+    "segment"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

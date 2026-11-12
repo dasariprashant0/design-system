@@ -43,6 +43,26 @@
     "packages/react/src/components/shimmer-button/shimmer-button.test.tsx",
     "packages/react/src/components/shimmer-button/shimmer-button.tsx"
   ],
+  "related": [
+    "button"
+  ],
+  "props": [],
+  "usage": "import {ShimmerButton} from '@monoline/react';\n\n<ShimmerButton>Start free trial</ShimmerButton>",
+  "dataAttributes": [],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block",
+    "spinner",
+    "skeleton",
+    "skeleton-block",
+    "skeleton-hatch",
+    "shimmer-button"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -35,6 +35,30 @@
     "packages/react/src/components/accordion/index.ts",
     "packages/react/src/components/accordion/meta.json"
   ],
+  "related": [
+    "area-chart",
+    "avatar",
+    "avatar-group"
+  ],
+  "props": [],
+  "usage": "import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@monoline/react';\n\n<Accordion type=\"single\" collapsible defaultValue=\"a\">\n  <AccordionItem value=\"a\"><AccordionTrigger>What is Monoline?</AccordionTrigger><AccordionContent>A small UI kit: plain CSS plus accessible React components.</AccordionContent></AccordionItem>\n  <AccordionItem value=\"b\"><AccordionTrigger>Do I need React?</AccordionTrigger><AccordionContent>No. The CSS works on its own.</AccordionContent></AccordionItem>\n</Accordion>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "open"
+      ]
+    }
+  ],
+  "classes": [
+    "acc-item",
+    "acc-header",
+    "acc-trigger",
+    "acc-content",
+    "acc-body",
+    "accordion",
+    "accordion-body"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -29,6 +29,44 @@
     "packages/react/src/components/tag/tag.test.tsx",
     "packages/react/src/components/tag/tag.tsx"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "TagProps",
+      "props": [
+        {
+          "name": "onRemove",
+          "type": "(() => void)",
+          "optional": true,
+          "default": null,
+          "description": "Shows a remove button and calls this when it is pressed."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Text used in the remove button's name: \"Remove <label>\". Defaults to the child text."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Tag} from '@monoline/react';\n\n<Tag>design</Tag>",
+  "dataAttributes": [],
+  "classes": [
+    "avatar",
+    "avatar-lg",
+    "avatar-line",
+    "avatar-group",
+    "tag",
+    "stat",
+    "stat-value",
+    "stat-note"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

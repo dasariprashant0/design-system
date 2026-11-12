@@ -30,6 +30,33 @@
     "packages/react/src/components/toggle/toggle.test.tsx",
     "packages/react/src/components/toggle/toggle.tsx"
   ],
+  "related": [
+    "button",
+    "button-group",
+    "icon-button"
+  ],
+  "props": [],
+  "usage": "import {Toggle} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)'}}><Toggle>Bold</Toggle><Toggle defaultPressed>Italic</Toggle><Toggle disabled>Locked</Toggle></div>",
+  "dataAttributes": [
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-state",
+      "values": [
+        "on"
+      ]
+    }
+  ],
+  "classes": [
+    "slider",
+    "slider-track",
+    "slider-range",
+    "slider-thumb",
+    "toggle",
+    "toggle-group"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

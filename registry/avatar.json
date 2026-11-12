@@ -30,6 +30,58 @@
     "packages/react/src/components/avatar/index.ts",
     "packages/react/src/components/avatar/meta.json"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar-group"
+  ],
+  "props": [
+    {
+      "name": "AvatarProps",
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Image URL. If it fails or is missing, the initials show."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "The person's name. Used as the image alt text and to make initials; required so it always has a name."
+        },
+        {
+          "name": "size",
+          "type": "\"md\" | \"lg\"",
+          "optional": true,
+          "default": "'md'",
+          "description": "`md` (default) or `lg`."
+        },
+        {
+          "name": "variant",
+          "type": "\"line\" | \"solid\"",
+          "optional": true,
+          "default": "'solid'",
+          "description": "`solid` (default) fills the circle; `line` draws only an outline."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Avatar} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Avatar name=\"Ada Lovelace\" /><Avatar name=\"Grace Hopper\" variant=\"line\" /><Avatar name=\"Alan Turing\" size=\"lg\" /></div>",
+  "dataAttributes": [],
+  "classes": [
+    "avatar",
+    "avatar-lg",
+    "avatar-line",
+    "avatar-group",
+    "tag",
+    "stat",
+    "stat-value",
+    "stat-note"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

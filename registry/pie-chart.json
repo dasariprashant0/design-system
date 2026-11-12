@@ -41,6 +41,98 @@
     "packages/react/src/components/pie-chart/pie-chart.test.tsx",
     "packages/react/src/components/pie-chart/pie-chart.tsx"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "PieChartProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Accessible name and table caption. Required."
+        },
+        {
+          "name": "data",
+          "type": "ChartDatum[]",
+          "optional": false,
+          "default": null,
+          "description": "Slices: `[{label: 'Search', value: 40}]`. Negative values count as 0."
+        },
+        {
+          "name": "innerRadius",
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "Hole size as a fraction of the radius, from 0 (pie) to just under 1. 0.6 makes a donut. Default 0."
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "optional": true,
+          "default": "240",
+          "description": "Chart height in px. Default 240."
+        },
+        {
+          "name": "valueFormat",
+          "type": "((value: number) => string)",
+          "optional": true,
+          "default": null,
+          "description": "Format a value for the legend, tooltip and table."
+        }
+      ]
+    }
+  ],
+  "usage": "import {PieChart} from '@monoline/react';\n\nconst sources = [{label: 'Search', value: 46}, {label: 'Direct', value: 28}, {label: 'Email', value: 14}, {label: 'Referral', value: 8}, {label: 'Social', value: 4}];\n\n<PieChart title=\"Traffic by source\" data={sources} />",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    },
+    {
+      "name": "data-align",
+      "values": [
+        "start",
+        "end"
+      ]
+    }
+  ],
+  "classes": [
+    "chart",
+    "chart-plot",
+    "chart-svg",
+    "chart-hits",
+    "chart-s0",
+    "chart-s1",
+    "chart-s2",
+    "chart-s3",
+    "chart-s4",
+    "chart-tick",
+    "chart-value",
+    "chart-rule",
+    "chart-zero",
+    "chart-outline",
+    "chart-pat",
+    "chart-pat-dot",
+    "chart-line",
+    "chart-area",
+    "chart-hit",
+    "chart-tip",
+    "chart-tip-title",
+    "chart-tip-row",
+    "chart-tip-value",
+    "chart-legend",
+    "chart-legend-detail",
+    "chart-swatch",
+    "chart-empty",
+    "chart-marks",
+    "chart-slice"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -35,6 +35,61 @@
     "packages/react/src/components/button/index.ts",
     "packages/react/src/components/button/meta.json"
   ],
+  "related": [
+    "button-group",
+    "icon-button",
+    "segmented-control"
+  ],
+  "props": [
+    {
+      "name": "ButtonProps",
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"danger\" | \"line\" | \"solid\" | \"ghost\"",
+          "optional": true,
+          "default": "'line'",
+          "description": "`solid` is the one main action per view. `line` for the rest, `ghost` for inline links, `danger` for destructive."
+        },
+        {
+          "name": "size",
+          "type": "\"md\" | \"sm\"",
+          "optional": true,
+          "default": "'md'",
+          "description": "`md` (default) or `sm` for dense toolbars and table rows."
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Shows a spinner, sets `aria-busy` and ignores clicks. The label stays so the width does not jump."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Render the child element (a link, a router link) with the button styles instead of a `<button>`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', flexWrap: 'wrap'}}>\n  <Button variant=\"solid\">Write today</Button>\n  <Button variant=\"line\">Open folder</Button>\n  <Button variant=\"ghost\">Show all</Button>\n  <Button variant=\"danger\">Delete entry</Button>\n</div>",
+  "dataAttributes": [],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block",
+    "spinner",
+    "skeleton",
+    "skeleton-block",
+    "skeleton-hatch"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

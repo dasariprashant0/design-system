@@ -48,6 +48,105 @@
     "packages/react/src/components/block-hero/index.ts",
     "packages/react/src/components/block-hero/meta.json"
   ],
+  "related": [
+    "container",
+    "heading",
+    "text"
+  ],
+  "props": [
+    {
+      "name": "BlockHeroProps",
+      "props": [
+        {
+          "name": "eyebrow",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional small line above the title, for example a category or announcement."
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The main headline of the page."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional muted supporting text under the title."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Buttons or links. Make one of them the solid Button."
+        },
+        {
+          "name": "media",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "An image, screenshot or illustration shown beside (wide) or below (narrow) the copy."
+        },
+        {
+          "name": "align",
+          "type": "\"center\" | \"start\"",
+          "optional": true,
+          "default": "'start'",
+          "description": "`start` (default) left-aligns the copy; `center` centres it."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3",
+          "optional": true,
+          "default": "1",
+          "description": "Outline level of the title. A hero is usually the page's h1."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockHero, Button} from '@monoline/react';\n\n<BlockHero\n  eyebrow=\"Version 1.0\"\n  title=\"Interfaces with fewer parts\"\n  description=\"A small kit of plain components. Copy the ones you need.\"\n  actions={<><Button variant=\"solid\">Get started</Button><Button>Read the docs</Button></>}\n  media={<div style={{border: '1px solid var(--rule)', aspectRatio: '4 / 3', display: 'grid', placeItems: 'center'}}>Preview</div>}\n/>",
+  "dataAttributes": [
+    {
+      "name": "data-align",
+      "values": [
+        "center"
+      ]
+    }
+  ],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full",
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "text",
+    "text-xs",
+    "text-sm",
+    "text-md",
+    "text-lg",
+    "text-muted",
+    "text-danger",
+    "text-ok",
+    "text-accent",
+    "text-truncate",
+    "block-hero",
+    "block-hero-inner",
+    "block-hero-copy",
+    "block-hero-eyebrow",
+    "block-hero-description",
+    "block-hero-actions",
+    "block-hero-media"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

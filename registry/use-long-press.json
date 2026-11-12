@@ -15,7 +15,7 @@
     "context"
   ],
   "kind": "hooks",
-  "import": "import {UseLongPress} from '@monoline/react'",
+  "import": "import {useLongPress} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-long-press",
   "files": [
     "packages/react/src/hooks/use-long-press/index.ts",
@@ -24,6 +24,35 @@
     "packages/react/src/hooks/use-long-press/use-long-press.test.tsx",
     "packages/react/src/hooks/use-long-press/use-long-press.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [
+    {
+      "name": "UseLongPressOptions",
+      "props": [
+        {
+          "name": "delay",
+          "type": "number",
+          "optional": true,
+          "default": "500",
+          "description": "Hold time in milliseconds. Default 500."
+        },
+        {
+          "name": "tolerance",
+          "type": "number",
+          "optional": true,
+          "default": "10",
+          "description": "Movement in pixels that cancels the press. Default 10."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {Button, useLongPress} from '@monoline/react';\n\nfunction Demo() {\n  const [n, setN] = useState(0);\n  const press = useLongPress(() => setN((v) => v + 1), {delay: 600});\n  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Button {...press} onClick={() => setN((v) => v + 1)}>Hold or click</Button><output aria-live=\"polite\">{n} presses</output></div>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

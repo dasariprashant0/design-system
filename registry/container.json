@@ -28,6 +28,40 @@
     "packages/react/src/components/container/index.ts",
     "packages/react/src/components/container/meta.json"
   ],
+  "related": [
+    "aspect-ratio",
+    "box",
+    "direction-provider"
+  ],
+  "props": [
+    {
+      "name": "ContainerProps",
+      "props": [
+        {
+          "name": "size",
+          "type": "\"text\" | \"page\" | \"full\"",
+          "optional": true,
+          "default": "'page'",
+          "description": "`text` is a reading column, `page` the widest main column, `full` no limit."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Render the child (a `main`, `section`) with the container styles."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Container} from '@monoline/react';\n\n<Container size=\"text\"><p>A column about 64 characters wide, centred, with side padding.</p></Container>",
+  "dataAttributes": [],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

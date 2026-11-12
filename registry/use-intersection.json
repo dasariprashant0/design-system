@@ -15,7 +15,7 @@
     "scroll"
   ],
   "kind": "hooks",
-  "import": "import {UseIntersection} from '@monoline/react'",
+  "import": "import {useIntersection} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-intersection",
   "files": [
     "packages/react/src/hooks/use-intersection/index.ts",
@@ -24,6 +24,28 @@
     "packages/react/src/hooks/use-intersection/use-intersection.test.tsx",
     "packages/react/src/hooks/use-intersection/use-intersection.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [
+    {
+      "name": "UseIntersectionOptions",
+      "props": [
+        {
+          "name": "once",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Stop observing after the first time it is visible."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useIntersection} from '@monoline/react';\n\nfunction Demo() {\n  const [ref, entry] = useIntersection<HTMLDivElement>({threshold: 0.5});\n  return (\n    <div style={{height: '120px', overflowY: 'auto', border: '1px solid var(--rule)'}} tabIndex={0} aria-label=\"Scrollable area\">\n      <div style={{height: '160px', padding: 'var(--s3)'}}>Scroll down</div>\n      <div ref={ref} style={{padding: 'var(--s4)', background: entry?.isIntersecting ? 'var(--wash-2)' : 'transparent'}}>{entry?.isIntersecting ? 'In view' : 'Out of view'}</div>\n      <div style={{height: '120px'}} />\n    </div>\n  );\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

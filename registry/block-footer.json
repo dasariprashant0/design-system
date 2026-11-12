@@ -42,6 +42,69 @@
     "packages/react/src/components/block-footer/index.ts",
     "packages/react/src/components/block-footer/meta.json"
   ],
+  "related": [
+    "container",
+    "link"
+  ],
+  "props": [
+    {
+      "name": "BlockFooterProps",
+      "props": [
+        {
+          "name": "brand",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Your logo or name."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional short sentence about the product, shown under the brand."
+        },
+        {
+          "name": "columns",
+          "type": "FooterColumn[]",
+          "optional": false,
+          "default": null,
+          "description": "Groups of links; each column has a `title` and a list of `links` and becomes its own labelled `nav`."
+        },
+        {
+          "name": "legal",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Small print: copyright, legal links."
+        },
+        {
+          "name": "headingLevel",
+          "type": "2 | 3 | 4 | 5 | 6",
+          "optional": true,
+          "default": "2",
+          "description": "Outline level of the column titles."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockFooter} from '@monoline/react';\n\n<BlockFooter\n  brand=\"Your brand\"\n  description=\"Short line about what you make.\"\n  columns={[\n    {title: 'Product', links: [{label: 'Components', href: '#'}, {label: 'Blocks', href: '#'}, {label: 'Changelog', href: '#'}]},\n    {title: 'Resources', links: [{label: 'Docs', href: '#'}, {label: 'Source', href: '#'}]},\n    {title: 'Company', links: [{label: 'About', href: '#'}, {label: 'Contact', href: '#'}]},\n  ]}\n  legal=\"© 2026 Your brand. All rights reserved.\"\n/>",
+  "dataAttributes": [],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full",
+    "link",
+    "block-footer",
+    "block-footer-top",
+    "block-footer-brand",
+    "block-footer-name",
+    "block-footer-columns",
+    "block-footer-heading",
+    "block-footer-col",
+    "block-footer-legal"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

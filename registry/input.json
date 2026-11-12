@@ -36,6 +36,61 @@
     "packages/react/src/components/input/input.tsx",
     "packages/react/src/components/input/meta.json"
   ],
+  "related": [
+    "field"
+  ],
+  "props": [
+    {
+      "name": "InputProps",
+      "props": [
+        {
+          "name": "size",
+          "type": "\"md\" | \"sm\"",
+          "optional": true,
+          "default": "'md'",
+          "description": "`md` (default) or `sm` for dense layouts."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Input} from '@monoline/react';\n\n<div style={{maxWidth: 320}}><Input aria-label=\"Name\" placeholder=\"Ada Lovelace\" /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-valid",
+      "values": [
+        "true"
+      ]
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "field-error",
+    "field-ok",
+    "input-group",
+    "input-affix",
+    "field-required",
+    "form-row"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

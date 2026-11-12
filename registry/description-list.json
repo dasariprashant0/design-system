@@ -30,6 +30,39 @@
     "packages/react/src/components/description-list/index.ts",
     "packages/react/src/components/description-list/meta.json"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "DescriptionListProps",
+      "props": [
+        {
+          "name": "items",
+          "type": "DescriptionItem[]",
+          "optional": false,
+          "default": null,
+          "description": "The term and details pairs to show, in order."
+        },
+        {
+          "name": "layout",
+          "type": "\"inline\" | \"stacked\"",
+          "optional": true,
+          "default": "'inline'",
+          "description": "`stacked` puts each term above its value; `inline` puts them side by side."
+        }
+      ]
+    }
+  ],
+  "usage": "import {DescriptionList} from '@monoline/react';\n\n<DescriptionList items={[{term: 'Plan', details: 'Pro'}, {term: 'Seats', details: '12'}, {term: 'Renews', details: '1 March 2027'}]} />",
+  "dataAttributes": [],
+  "classes": [
+    "dlist",
+    "dlist-row",
+    "dlist-stacked"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

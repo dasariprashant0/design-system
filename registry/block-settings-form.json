@@ -80,6 +80,167 @@
     "packages/react/src/components/block-settings-form/index.ts",
     "packages/react/src/components/block-settings-form/meta.json"
   ],
+  "related": [
+    "form",
+    "fieldset",
+    "switch",
+    "native-select",
+    "field",
+    "button",
+    "heading"
+  ],
+  "props": [
+    {
+      "name": "BlockSettingsFormProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "Heading of the settings page."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional muted line under the heading."
+        },
+        {
+          "name": "sections",
+          "type": "SettingsSection[]",
+          "optional": false,
+          "default": null,
+          "description": "The groups of settings; each has a `legend`, optional `description` and a list of switch or select `items`."
+        },
+        {
+          "name": "saveLabel",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Save changes'",
+          "description": "Text of the submit button. Default \"Save changes\"."
+        },
+        {
+          "name": "resetLabel",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Reset'",
+          "description": "Text of the button that restores the initial values. Default \"Reset\"."
+        },
+        {
+          "name": "onSubmit",
+          "type": "((values: Record<string, string | boolean>) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with every control's value: switches are `true` or `false`, selects their value."
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Shows a spinner on the save button while you save."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3",
+          "optional": true,
+          "default": "1",
+          "description": "Outline level of the title, 1 to 3. Default 1."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockSettingsForm} from '@monoline/react';\n\n<BlockSettingsForm\n  title=\"Settings\"\n  description=\"Changes apply to your account.\"\n  sections={[\n    {legend: 'Notifications', description: 'Choose what we email you.', items: [\n      {kind: 'switch', name: 'product', label: 'Product updates', hint: 'About once a month.', defaultChecked: true},\n      {kind: 'switch', name: 'digest', label: 'Weekly digest'},\n    ]},\n    {legend: 'Display', items: [\n      {kind: 'select', name: 'theme', label: 'Theme', options: [{value: 'warm', label: 'Warm'}, {value: 'dark', label: 'Dark'}, {value: 'midnight', label: 'Midnight'}], defaultValue: 'warm'},\n      {kind: 'select', name: 'density', label: 'Density', hint: 'Compact fits more rows.', options: [{value: 'comfortable', label: 'Comfortable'}, {value: 'compact', label: 'Compact'}]},\n    ]},\n  ]}\n/>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "checked",
+        "indeterminate"
+      ]
+    },
+    {
+      "name": "data-orientation",
+      "values": [
+        "horizontal"
+      ]
+    },
+    {
+      "name": "data-valid",
+      "values": [
+        "true"
+      ]
+    }
+  ],
+  "classes": [
+    "form",
+    "form-errors",
+    "form-errors-title",
+    "form-actions",
+    "fieldset",
+    "fieldset-legend",
+    "checkbox",
+    "radio",
+    "sw",
+    "checkbox-mark",
+    "radio-dot",
+    "radio-group",
+    "sw-thumb",
+    "choice",
+    "choice-group",
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "field-error",
+    "field-ok",
+    "input-group",
+    "input-affix",
+    "field-required",
+    "form-row",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block",
+    "spinner",
+    "skeleton",
+    "skeleton-block",
+    "skeleton-hatch",
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "text",
+    "text-xs",
+    "text-sm",
+    "text-md",
+    "text-lg",
+    "text-muted",
+    "text-danger",
+    "text-ok",
+    "text-accent",
+    "text-truncate",
+    "block-settings",
+    "block-settings-head",
+    "block-settings-row"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -15,7 +15,7 @@
     "scrollspy"
   ],
   "kind": "hooks",
-  "import": "import {UseScrollSpy} from '@monoline/react'",
+  "import": "import {useScrollSpy} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-scroll-spy",
   "files": [
     "packages/react/src/hooks/use-scroll-spy/index.ts",
@@ -24,6 +24,15 @@
     "packages/react/src/hooks/use-scroll-spy/use-scroll-spy.test.tsx",
     "packages/react/src/hooks/use-scroll-spy/use-scroll-spy.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useScrollSpy} from '@monoline/react';\n\nfunction Demo() {\n  const active = useScrollSpy(['intro', 'usage'], 0);\n  return <p>Active section: <output>{active ?? 'none yet'}</output>. Add elements with these ids to your page and scroll.</p>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

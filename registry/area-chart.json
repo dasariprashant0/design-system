@@ -44,6 +44,78 @@
     "packages/react/src/components/area-chart/index.ts",
     "packages/react/src/components/area-chart/meta.json"
   ],
+  "related": [
+    "accordion",
+    "avatar",
+    "avatar-group"
+  ],
+  "props": [
+    {
+      "name": "AreaChartProps",
+      "props": [
+        {
+          "name": "stacked",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Stack series on top of each other so the top edge is the running total."
+        },
+        {
+          "name": "showPoints",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Mark each data point. A single point is always marked."
+        }
+      ]
+    }
+  ],
+  "usage": "import {AreaChart} from '@monoline/react';\n\nconst months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];\n\n<AreaChart title=\"Active users\" labels={months} series={[{name: 'Users', values: [120, 180, 150, 240, 310, 290]}]} />",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    },
+    {
+      "name": "data-align",
+      "values": [
+        "start",
+        "end"
+      ]
+    }
+  ],
+  "classes": [
+    "chart",
+    "chart-plot",
+    "chart-svg",
+    "chart-hits",
+    "chart-s0",
+    "chart-s1",
+    "chart-s2",
+    "chart-s3",
+    "chart-s4",
+    "chart-tick",
+    "chart-value",
+    "chart-rule",
+    "chart-zero",
+    "chart-outline",
+    "chart-pat",
+    "chart-pat-dot",
+    "chart-line",
+    "chart-area",
+    "chart-hit",
+    "chart-tip",
+    "chart-tip-title",
+    "chart-tip-row",
+    "chart-tip-value",
+    "chart-legend",
+    "chart-legend-detail",
+    "chart-swatch",
+    "chart-empty",
+    "chart-marks",
+    "chart-point",
+    "chart-guide"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

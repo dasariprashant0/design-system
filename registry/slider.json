@@ -35,6 +35,69 @@
     "packages/react/src/components/slider/slider.test.tsx",
     "packages/react/src/components/slider/slider.tsx"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "SliderProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "number | [number, number]",
+          "optional": true,
+          "default": null,
+          "description": "A number for one thumb, or [low, high] for a range."
+        },
+        {
+          "name": "defaultValue",
+          "type": "number | [number, number]",
+          "optional": true,
+          "default": null,
+          "description": "The starting value when uncontrolled: a number for one thumb or `[low, high]` for a range. Default 0."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: number[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with an array holding the value of each thumb while the user drags or uses the keyboard."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Accessible name for each thumb. One string for a single thumb, or [low, high] labels for a range."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Slider} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s5)', maxWidth: 420}}><Slider aria-label=\"Volume\" defaultValue={60} /><Slider aria-label=\"Price\" defaultValue={[20, 70]} /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-state",
+      "values": [
+        "on"
+      ]
+    }
+  ],
+  "classes": [
+    "slider",
+    "slider-track",
+    "slider-range",
+    "slider-thumb",
+    "toggle",
+    "toggle-group",
+    "range",
+    "progress"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

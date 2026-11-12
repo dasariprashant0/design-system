@@ -31,6 +31,103 @@
     "packages/react/src/components/flex/index.ts",
     "packages/react/src/components/flex/meta.json"
   ],
+  "related": [
+    "aspect-ratio",
+    "box",
+    "container"
+  ],
+  "props": [
+    {
+      "name": "FlexProps",
+      "props": [
+        {
+          "name": "direction",
+          "type": "\"row\" | \"column\" | \"row-reverse\" | \"column-reverse\"",
+          "optional": true,
+          "default": "'row'",
+          "description": "Main axis: `row` (default), `column`, `row-reverse` or `column-reverse`."
+        },
+        {
+          "name": "wrap",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Lets children wrap onto new lines instead of shrinking. Default false."
+        },
+        {
+          "name": "align",
+          "type": "\"center\" | \"start\" | \"end\" | \"stretch\" | \"baseline\"",
+          "optional": true,
+          "default": null,
+          "description": "Cross-axis alignment (`align-items`): `start`, `center`, `end`, `stretch` or `baseline`."
+        },
+        {
+          "name": "justify",
+          "type": "\"center\" | \"start\" | \"end\" | \"between\" | \"around\"",
+          "optional": true,
+          "default": null,
+          "description": "Main-axis distribution (`justify-content`): `start`, `center`, `end`, `between` or `around`."
+        },
+        {
+          "name": "gap",
+          "type": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9",
+          "optional": true,
+          "default": null,
+          "description": "Step on the spacing scale: 1 = --s1 up to 9."
+        },
+        {
+          "name": "inline",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "`inline-flex` instead of `flex`."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Render the child element (a `ul`, `nav`, `section`) with the flex styles instead of a `div`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Badge, Flex} from '@monoline/react';\n\n<Flex justify=\"between\" align=\"center\" gap={3}><Badge>left</Badge><Badge>right</Badge></Flex>",
+  "dataAttributes": [
+    {
+      "name": "data-direction",
+      "values": [
+        "column",
+        "row-reverse",
+        "column-reverse"
+      ]
+    },
+    {
+      "name": "data-align",
+      "values": [
+        "start",
+        "center",
+        "end",
+        "stretch",
+        "baseline"
+      ]
+    },
+    {
+      "name": "data-justify",
+      "values": [
+        "start",
+        "center",
+        "end",
+        "between",
+        "around"
+      ]
+    }
+  ],
+  "classes": [
+    "flex",
+    "flex-inline",
+    "flex-wrap"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

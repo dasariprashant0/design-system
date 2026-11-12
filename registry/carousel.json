@@ -31,6 +31,33 @@
     "packages/react/src/components/carousel/index.ts",
     "packages/react/src/components/carousel/meta.json"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "CarouselProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Names the carousel, for example \"Featured projects\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Carousel} from '@monoline/react';\n\n<Carousel aria-label=\"Featured\">{['Alpha', 'Beta', 'Gamma', 'Delta'].map((n) => <div key={n} style={{display: 'grid', placeItems: 'center', height: '140px', border: '1px solid var(--rule)'}}>{n}</div>)}</Carousel>",
+  "dataAttributes": [],
+  "classes": [
+    "carousel",
+    "carousel-track",
+    "carousel-slide",
+    "carousel-controls"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

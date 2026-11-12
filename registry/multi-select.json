@@ -45,6 +45,104 @@
     "packages/react/src/components/multi-select/multi-select.test.tsx",
     "packages/react/src/components/multi-select/multi-select.tsx"
   ],
+  "related": [
+    "field",
+    "tag"
+  ],
+  "props": [
+    {
+      "name": "MultiSelectProps",
+      "props": [
+        {
+          "name": "options",
+          "type": "MultiSelectOption[]",
+          "optional": false,
+          "default": null,
+          "description": "The choices, each with a `value`, a `label` and an optional `disabled`. The user filters them by typing part of the label."
+        },
+        {
+          "name": "value",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "The chosen option values when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string[]",
+          "optional": true,
+          "default": "[]",
+          "description": "The initially chosen option values when uncontrolled. Default empty."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the full list of chosen values."
+        },
+        {
+          "name": "emptyText",
+          "type": "string",
+          "optional": true,
+          "default": "'No matches'",
+          "description": "Shown when nothing matches."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Field, MultiSelect} from '@monoline/react';\n\nconst options = ['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Katherine Johnson', 'Linus Torvalds'].map((n) => ({value: n.toLowerCase().replace(/\\W+/g, '-'), label: n}));\n\n<div style={{maxWidth: '360px', minHeight: '280px'}}><Field label=\"People\"><MultiSelect options={options} placeholder=\"Type a name\" defaultValue={['ada-lovelace']} /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-invalid",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-active",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "avatar",
+    "avatar-lg",
+    "avatar-line",
+    "avatar-group",
+    "tag",
+    "stat",
+    "stat-value",
+    "stat-note",
+    "multi-select",
+    "multi-select-box",
+    "multi-select-input",
+    "multi-select-list",
+    "multi-select-option",
+    "multi-select-empty"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

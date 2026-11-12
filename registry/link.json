@@ -34,6 +34,39 @@
     "packages/react/src/components/link/link.tsx",
     "packages/react/src/components/link/meta.json"
   ],
+  "related": [
+    "heading",
+    "kbd",
+    "text"
+  ],
+  "props": [
+    {
+      "name": "LinkProps",
+      "props": [
+        {
+          "name": "external",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Opens in a new tab with `rel=\"noopener noreferrer\"` and announces that."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Use the child (a router link) instead of an anchor."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Link} from '@monoline/react';\n\n<p>Read the <Link href=\"#button\">button docs</Link> or visit <Link href=\"https://github.com\" external>GitHub</Link>.</p>",
+  "dataAttributes": [],
+  "classes": [
+    "link",
+    "divider",
+    "skip-link"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

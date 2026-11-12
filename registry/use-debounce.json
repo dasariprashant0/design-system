@@ -17,7 +17,7 @@
     "settle"
   ],
   "kind": "hooks",
-  "import": "import {UseDebounce} from '@monoline/react'",
+  "import": "import {useDebounce} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-debounce",
   "files": [
     "packages/react/src/hooks/use-debounce/index.ts",
@@ -26,6 +26,35 @@
     "packages/react/src/hooks/use-debounce/use-debounce.test.tsx",
     "packages/react/src/hooks/use-debounce/use-debounce.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [
+    {
+      "name": "UseDebouncedCallbackReturn",
+      "props": [
+        {
+          "name": "call",
+          "type": "(...args: A) => void",
+          "optional": false,
+          "default": null,
+          "description": "Schedules `fn` to run `delay` ms after the last call."
+        },
+        {
+          "name": "cancel",
+          "type": "() => void",
+          "optional": false,
+          "default": null,
+          "description": "Drops the pending call, if any."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {useDebounce} from '@monoline/react';\n\nfunction SearchDemo() {\n  const [query, setQuery] = useState('');\n  const settled = useDebounce(query, 400);\n  return (\n    <div>\n      <label>\n        Search\n        <input value={query} onChange={(e) => setQuery(e.target.value)} />\n      </label>\n      <p>Searching for: {settled || '…'}</p>\n    </div>\n  );\n}\n\n<SearchDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

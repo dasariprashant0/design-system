@@ -58,6 +58,126 @@
     "packages/react/src/components/block-dashboard-shell/index.ts",
     "packages/react/src/components/block-dashboard-shell/meta.json"
   ],
+  "related": [
+    "container",
+    "stack",
+    "drawer",
+    "button"
+  ],
+  "props": [
+    {
+      "name": "BlockDashboardShellProps",
+      "props": [
+        {
+          "name": "brand",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Your logo or name, shown above the navigation."
+        },
+        {
+          "name": "nav",
+          "type": "ShellNavItem[]",
+          "optional": false,
+          "default": null,
+          "description": "The navigation links shown in the sidebar and in the small-screen drawer."
+        },
+        {
+          "name": "navLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Main'",
+          "description": "Names the navigation landmark. Default \"Main\"."
+        },
+        {
+          "name": "topbar",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Right side of the top bar: search, account menu."
+        },
+        {
+          "name": "menuLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Menu'",
+          "description": "Text of the button that opens the navigation drawer on small screens. Default \"Menu\"."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The page: put its h1 inside."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Badge, BlockDashboardShell, Heading, Text} from '@monoline/react';\n\n<BlockDashboardShell\n  brand=\"Your app\"\n  nav={[{label: 'Overview', href: '#', current: true}, {label: 'Reports', href: '#'}, {label: 'Customers', href: '#'}, {label: 'Settings', href: '#'}]}\n  topbar={<Badge>Ada Example</Badge>}\n>\n  <Heading level={1} size=\"xl\">Overview</Heading>\n  <Text tone=\"muted\">Your content goes here.</Text>\n</BlockDashboardShell>",
+  "dataAttributes": [
+    {
+      "name": "data-align",
+      "values": [
+        "start",
+        "center",
+        "end",
+        "stretch"
+      ]
+    },
+    {
+      "name": "data-justify",
+      "values": [
+        "start",
+        "center",
+        "end",
+        "between"
+      ]
+    },
+    {
+      "name": "data-side",
+      "values": [
+        "right",
+        "end",
+        "left",
+        "start",
+        "top",
+        "bottom"
+      ]
+    }
+  ],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full",
+    "stack",
+    "stack-row",
+    "stack-wrap",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block",
+    "dialog-overlay",
+    "dialog-content",
+    "dialog-header",
+    "dialog-footer",
+    "dialog-description",
+    "dialog-close",
+    "drawer-content",
+    "block-shell",
+    "block-shell-side",
+    "block-shell-brand",
+    "block-shell-nav",
+    "block-shell-link",
+    "block-shell-body",
+    "block-shell-top",
+    "block-shell-top-end",
+    "block-shell-content",
+    "block-shell-menu"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

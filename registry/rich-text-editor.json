@@ -64,6 +64,164 @@
     "packages/react/src/components/rich-text-editor/rich-text-editor.tsx",
     "packages/react/src/components/rich-text-editor/sanitize.ts"
   ],
+  "related": [
+    "toolbar",
+    "popover",
+    "button",
+    "input"
+  ],
+  "props": [
+    {
+      "name": "RichTextEditorProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "aria-labelledby",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Controlled content as an HTML string. It is sanitized with `sanitizeHtml` before it is shown."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Initial HTML when uncontrolled. Sanitized with `sanitizeHtml` before it is shown."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((html: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with sanitized HTML after every edit."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Shown while the editor is empty (a data attribute and CSS, not a text node)."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Disables editing and the toolbar."
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Shows the content without letting anyone change it; the toolbar is disabled."
+        },
+        {
+          "name": "toolbarLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Text formatting'",
+          "description": "Names the formatting toolbar."
+        }
+      ]
+    }
+  ],
+  "usage": "import {RichTextEditor} from '@monoline/react';\n\n<RichTextEditor aria-label=\"Notes\" placeholder=\"Write something…\" />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "on"
+      ]
+    },
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    },
+    {
+      "name": "data-valid",
+      "values": [
+        "true"
+      ]
+    },
+    {
+      "name": "data-empty",
+      "values": []
+    },
+    {
+      "name": "data-readonly",
+      "values": []
+    }
+  ],
+  "classes": [
+    "toolbar",
+    "toolbar-item",
+    "toolbar-sep",
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block",
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "field-error",
+    "field-ok",
+    "input-group",
+    "input-affix",
+    "field-required",
+    "form-row",
+    "rte",
+    "rte-toolbar",
+    "rte-content",
+    "rte-link",
+    "rte-link-label",
+    "rte-link-error",
+    "rte-link-actions"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

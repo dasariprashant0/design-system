@@ -30,6 +30,26 @@
     "packages/react/src/components/toolbar/toolbar.test.tsx",
     "packages/react/src/components/toolbar/toolbar.tsx"
   ],
+  "related": [
+    "button",
+    "button-group",
+    "icon-button"
+  ],
+  "props": [],
+  "usage": "import {Toolbar, ToolbarButton, ToolbarSeparator} from '@monoline/react';\n\n<Toolbar aria-label=\"Text formatting\"><ToolbarButton>Bold</ToolbarButton><ToolbarButton>Italic</ToolbarButton><ToolbarButton>Underline</ToolbarButton><ToolbarSeparator /><ToolbarButton>Link</ToolbarButton></Toolbar>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "on"
+      ]
+    }
+  ],
+  "classes": [
+    "toolbar",
+    "toolbar-item",
+    "toolbar-sep"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

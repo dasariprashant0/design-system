@@ -14,7 +14,7 @@
     "tab"
   ],
   "kind": "hooks",
-  "import": "import {UseDocumentTitle} from '@monoline/react'",
+  "import": "import {useDocumentTitle} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-document-title",
   "files": [
     "packages/react/src/hooks/use-document-title/index.ts",
@@ -23,6 +23,15 @@
     "packages/react/src/hooks/use-document-title/use-document-title.test.tsx",
     "packages/react/src/hooks/use-document-title/use-document-title.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useState} from 'react';\nimport {Button, useDocumentTitle} from '@monoline/react';\n\nfunction Demo() {\n  const [n, setN] = useState(0);\n  useDocumentTitle(n ? `(${n}) Monoline docs` : 'Monoline docs');\n  return <Button onClick={() => setN(n + 1)}>Change the tab title ({n})</Button>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

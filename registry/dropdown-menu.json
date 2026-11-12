@@ -36,6 +36,55 @@
     "packages/react/src/components/dropdown-menu/index.ts",
     "packages/react/src/components/dropdown-menu/meta.json"
   ],
+  "related": [
+    "alert-dialog",
+    "command",
+    "context-menu"
+  ],
+  "props": [
+    {
+      "name": "DropdownMenuItemProps",
+      "props": [
+        {
+          "name": "tone",
+          "type": "\"danger\" | \"default\"",
+          "optional": true,
+          "default": "'default'",
+          "description": "`danger` highlights in the danger colour."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger} from '@monoline/react';\n\n<DropdownMenu>\n  <DropdownMenuTrigger asChild><Button>Actions</Button></DropdownMenuTrigger>\n  <DropdownMenuContent>\n    <DropdownMenuLabel>Entry</DropdownMenuLabel>\n    <DropdownMenuItem>Rename</DropdownMenuItem>\n    <DropdownMenuItem>Duplicate</DropdownMenuItem>\n    <DropdownMenuSeparator />\n    <DropdownMenuItem tone=\"danger\">Delete</DropdownMenuItem>\n  </DropdownMenuContent>\n</DropdownMenu>",
+  "dataAttributes": [
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    }
+  ],
+  "classes": [
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check",
+    "dropdown",
+    "menu",
+    "menu-end",
+    "danger",
+    "menu-sep"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -42,6 +42,76 @@
     "packages/react/src/components/block-empty-page/index.ts",
     "packages/react/src/components/block-empty-page/meta.json"
   ],
+  "related": [
+    "heading",
+    "text"
+  ],
+  "props": [
+    {
+      "name": "BlockEmptyPageProps",
+      "props": [
+        {
+          "name": "code",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "A short code such as \"404\" or \"Empty\". Decorative."
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The message headline, for example \"Page not found\"."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional muted sentence explaining what happened or what to do next."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "The way out: a solid Button or link, and maybe a second."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3",
+          "optional": true,
+          "default": "1",
+          "description": "Outline level of the title. A full-page empty state is usually the page's h1."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockEmptyPage, Button} from '@monoline/react';\n\n<BlockEmptyPage code=\"404\" title=\"Page not found\" description=\"The address may be wrong, or the page moved.\" actions={<><Button variant=\"solid\">Go home</Button><Button>Contact support</Button></>} />",
+  "dataAttributes": [],
+  "classes": [
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "text",
+    "text-xs",
+    "text-sm",
+    "text-md",
+    "text-lg",
+    "text-muted",
+    "text-danger",
+    "text-ok",
+    "text-accent",
+    "text-truncate",
+    "block-empty-page",
+    "block-empty-page-code",
+    "block-empty-page-description",
+    "block-empty-page-actions"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

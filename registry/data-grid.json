@@ -43,6 +43,178 @@
     "packages/react/src/components/data-grid/index.ts",
     "packages/react/src/components/data-grid/meta.json"
   ],
+  "related": [
+    "empty-state"
+  ],
+  "props": [
+    {
+      "name": "DataGridProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "aria-labelledby",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "columns",
+          "type": "DataGridColumn<T>[]",
+          "optional": false,
+          "default": null,
+          "description": "The column definitions: id, header, how to read each cell, width and sortability."
+        },
+        {
+          "name": "rows",
+          "type": "T[]",
+          "optional": false,
+          "default": null,
+          "description": "All the rows. Only the visible ones are rendered, so tens of thousands are fine."
+        },
+        {
+          "name": "getRowId",
+          "type": "((row: T, index: number) => string)",
+          "optional": true,
+          "default": null,
+          "description": "Stable id per row, used for selection. Default: the row's position in `rows`."
+        },
+        {
+          "name": "rowHeight",
+          "type": "number",
+          "optional": true,
+          "default": "36",
+          "description": "Row height in px. Every row has the same height; that is what makes virtualising cheap. Default 36."
+        },
+        {
+          "name": "height",
+          "type": "string | number",
+          "optional": true,
+          "default": "400",
+          "description": "Height of the scrolling grid, header included. Default 400."
+        },
+        {
+          "name": "overscan",
+          "type": "number",
+          "optional": true,
+          "default": "5",
+          "description": "Extra rows rendered above and below the visible ones. Default 5."
+        },
+        {
+          "name": "selectionMode",
+          "type": "\"none\" | \"multiple\" | \"single\"",
+          "optional": true,
+          "default": "'none'",
+          "description": "Whether rows can be selected: `none` (default), `single` or `multiple`."
+        },
+        {
+          "name": "selectedIds",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "Controlled selected row ids. Pair with `onSelectedIdsChange`."
+        },
+        {
+          "name": "defaultSelectedIds",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "Initially selected row ids when uncontrolled."
+        },
+        {
+          "name": "onSelectedIdsChange",
+          "type": "((ids: string[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new list of selected row ids."
+        },
+        {
+          "name": "sort",
+          "type": "DataGridSort | null",
+          "optional": true,
+          "default": null,
+          "description": "Controlled sort; `null` is unsorted."
+        },
+        {
+          "name": "defaultSort",
+          "type": "DataGridSort | null",
+          "optional": true,
+          "default": "null",
+          "description": "Initial sort when uncontrolled; `null` is unsorted."
+        },
+        {
+          "name": "onSortChange",
+          "type": "((sort: DataGridSort | null) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new sort, or `null` when sorting is cleared."
+        },
+        {
+          "name": "manualSort",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Do not sort in the grid: `rows` arrive already ordered (server-side sorting)."
+        },
+        {
+          "name": "emptyState",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Shown when `rows` is empty."
+        }
+      ]
+    }
+  ],
+  "usage": "import {DataGrid, type DataGridColumn} from '@monoline/react';\n\ninterface Order { id: string; customer: string; city: string; items: number; total: number }\n\nconst cities = ['Pune', 'Berlin', 'Lagos', 'Lima', 'Oslo', 'Hanoi', 'Cairo', 'Quito'];\n\nconst make = (count: number): Order[] => Array.from({length: count}, (_, i) => ({\n  id: `ORD-${i + 1}`, customer: `Customer ${(i * 7919) % 10007}`, city: cities[i % cities.length]!, items: (i * 13) % 9 + 1, total: ((i * 2654435761) % 100000) / 100,\n}));\n\nconst columns: DataGridColumn<Order>[] = [\n  {id: 'id', header: 'Order', field: 'id', width: 120, sortable: true},\n  {id: 'customer', header: 'Customer', field: 'customer', sortable: true},\n  {id: 'city', header: 'City', field: 'city', sortable: true},\n  {id: 'items', header: 'Items', field: 'items', width: 90, sortable: true, align: 'end'},\n  {id: 'total', header: 'Total', cell: (r) => r.total.toFixed(2), sortValue: (r) => r.total, width: 110, sortable: true, align: 'end'},\n];\n\nconst big = make(100000);\n\n<DataGrid aria-label=\"Orders, 100,000 rows\" columns={columns} rows={big} height={320} getRowId={(r) => r.id} />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "selected"
+      ]
+    },
+    {
+      "name": "data-align",
+      "values": [
+        "end"
+      ]
+    },
+    {
+      "name": "data-sortable",
+      "values": []
+    },
+    {
+      "name": "data-direction",
+      "values": [
+        "desc"
+      ]
+    }
+  ],
+  "classes": [
+    "empty",
+    "empty-icon",
+    "empty-title",
+    "empty-description",
+    "empty-actions",
+    "data-grid",
+    "data-grid-head",
+    "data-grid-body",
+    "data-grid-row",
+    "data-grid-body-row",
+    "data-grid-cell",
+    "data-grid-text",
+    "data-grid-th",
+    "data-grid-sort",
+    "data-grid-empty-row",
+    "data-grid-empty"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

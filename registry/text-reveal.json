@@ -31,6 +31,37 @@
     "packages/react/src/components/text-reveal/text-reveal.test.tsx",
     "packages/react/src/components/text-reveal/text-reveal.tsx"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "TextRevealProps",
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "The sentence to reveal, word by word."
+        },
+        {
+          "name": "stagger",
+          "type": "number",
+          "optional": true,
+          "default": "80",
+          "description": "Milliseconds between words. Default 80."
+        }
+      ]
+    }
+  ],
+  "usage": "import {TextReveal} from '@monoline/react';\n\n<TextReveal text=\"Every word arrives in turn, so the eye can follow the sentence.\" style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}} />",
+  "dataAttributes": [],
+  "classes": [
+    "text-reveal-word"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

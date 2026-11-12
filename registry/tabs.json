@@ -35,6 +35,43 @@
     "packages/react/src/components/tabs/tabs.test.tsx",
     "packages/react/src/components/tabs/tabs.tsx"
   ],
+  "related": [
+    "breadcrumb",
+    "menubar",
+    "navigation-menu"
+  ],
+  "props": [],
+  "usage": "import {Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';\n\n<Tabs defaultValue=\"overview\"><TabsList aria-label=\"Project\"><TabsTrigger value=\"overview\">Overview</TabsTrigger><TabsTrigger value=\"activity\">Activity</TabsTrigger><TabsTrigger value=\"settings\">Settings</TabsTrigger></TabsList><TabsContent value=\"overview\">Overview content.</TabsContent><TabsContent value=\"activity\">Activity content.</TabsContent><TabsContent value=\"settings\">Settings content.</TabsContent></Tabs>",
+  "dataAttributes": [
+    {
+      "name": "data-orientation",
+      "values": [
+        "vertical"
+      ]
+    },
+    {
+      "name": "data-state",
+      "values": [
+        "active",
+        "done"
+      ]
+    }
+  ],
+  "classes": [
+    "tabs-root",
+    "tabs-list",
+    "tabs-trigger",
+    "tabs-content",
+    "crumbs",
+    "pager",
+    "steps",
+    "step",
+    "topbar",
+    "brand",
+    "topbar-nav",
+    "tab",
+    "tabpanel"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

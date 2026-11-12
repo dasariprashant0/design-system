@@ -14,7 +14,7 @@
     "later"
   ],
   "kind": "hooks",
-  "import": "import {UseTimeout} from '@monoline/react'",
+  "import": "import {useTimeout} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-timeout",
   "files": [
     "packages/react/src/hooks/use-timeout/index.ts",
@@ -23,6 +23,15 @@
     "packages/react/src/hooks/use-timeout/use-timeout.test.tsx",
     "packages/react/src/hooks/use-timeout/use-timeout.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useState} from 'react';\nimport {Button, useTimeout} from '@monoline/react';\n\nfunction Demo() {\n  const [msg, setMsg] = useState('Idle');\n  const {start, clear} = useTimeout(() => setMsg('Done after one second'), 1000);\n  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Button onClick={() => { setMsg('Waiting'); start(); }}>Start</Button><Button variant=\"ghost\" onClick={() => { clear(); setMsg('Cancelled'); }}>Cancel</Button><output aria-live=\"polite\">{msg}</output></div>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

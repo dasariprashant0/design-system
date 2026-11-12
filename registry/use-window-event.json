@@ -15,7 +15,7 @@
     "scroll"
   ],
   "kind": "hooks",
-  "import": "import {UseWindowEvent} from '@monoline/react'",
+  "import": "import {useWindowEvent} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-window-event",
   "files": [
     "packages/react/src/hooks/use-window-event/index.ts",
@@ -24,6 +24,15 @@
     "packages/react/src/hooks/use-window-event/use-window-event.test.tsx",
     "packages/react/src/hooks/use-window-event/use-window-event.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useState} from 'react';\nimport {useWindowEvent} from '@monoline/react';\n\nfunction Demo() {\n  const [key, setKey] = useState('none');\n  useWindowEvent('keydown', (e) => setKey(e.key));\n  return <p>Last key pressed: <kbd className=\"kbd\">{key}</kbd></p>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },
