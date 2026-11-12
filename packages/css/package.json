@@ -4,7 +4,11 @@
   "description": "Monoline core: plain CSS design tokens, themes, accents and components. No framework, no build step needed to use it.",
   "license": "MIT",
   "type": "module",
+  "keywords": ["css", "design-system", "tokens", "themes", "ui", "monospace"],
+  "homepage": "https://dasariprashant0.github.io/design-system/",
+  "bugs": {"url": "https://github.com/dasariprashant0/design-system/issues"},
   "repository": {"type": "git", "url": "git+https://github.com/dasariprashant0/design-system.git", "directory": "packages/css"},
+  "publishConfig": {"access": "public"},
   "scripts": {
     "build": "node scripts/build.mjs",
     "check": "node scripts/check.mjs"

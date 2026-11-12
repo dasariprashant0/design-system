@@ -1,0 +1,70 @@
+name: release
+# Publishes every package under packages/ to npm with provenance, then creates the GitHub release.
+# Run it from the Actions tab (Run workflow) with the version the packages already carry, e.g. 0.3.0.
+# The version must be committed first: `node scripts/release.mjs version ...`, commit, merge to master.
+# Needs the NPM_TOKEN secret (an npm automation token with publish rights to the @monoline scope).
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish, x.y.z. Must match the version in every packages/*/package.json."
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write # create the GitHub release and its tag
+      id-token: write # npm provenance statement
+    env:
+      VERSION: ${{ inputs.version }}
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - name: Validate the version input
+        run: |
+          if ! echo "$VERSION" | grep -Eq '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'; then
+            echo "version must be x.y.z, got: $VERSION" >&2
+            exit 1
+          fi
+      - run: npm ci
+      - name: Check (lint, typecheck, tests)
+        run: npm run check
+      - name: Build
+        run: npm run build
+      - name: Size budget
+        run: npm run size
+      - name: CLI and release tooling tests
+        run: |
+          npm run test:cli
+          npm run test:release
+      - name: Release check (packages, exports, tarball contents)
+        run: node scripts/release.mjs check --expect "$VERSION"
+      - name: Publish dry run
+        run: node scripts/release.mjs publish --dry-run
+      - name: Publish to npm with provenance
+        run: node scripts/release.mjs publish --yes --provenance
+      - name: Release notes from CHANGELOG.md
+        run: node scripts/release.mjs notes "$VERSION" > "$RUNNER_TEMP/notes.md"
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v$VERSION" \
+            --target "$GITHUB_SHA" \
+            --title "Monoline v$VERSION" \
+            --notes-file "$RUNNER_TEMP/notes.md"
