@@ -1715,6 +1715,7 @@
       "import": "import {Flex} from '@monoline/react'",
       "path": "packages/react/src/components/flex",
       "files": [
+        "packages/react/src/components/flex/.claude",
         "packages/react/src/components/flex/flex.demo.tsx",
         "packages/react/src/components/flex/flex.test.tsx",
         "packages/react/src/components/flex/flex.tsx",

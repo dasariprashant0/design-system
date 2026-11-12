@@ -471,7 +471,7 @@ Import: import {Flex} from '@monoline/react'
 Primitive: none | Status: stable
 A11y:
 - A plain element; adds no roles. Reversed directions change visual order only, so keep the source order meaningful.
-Files: packages/react/src/components/flex/flex.demo.tsx, packages/react/src/components/flex/flex.test.tsx, packages/react/src/components/flex/flex.tsx, packages/react/src/components/flex/index.ts, packages/react/src/components/flex/meta.json
+Files: packages/react/src/components/flex/.claude, packages/react/src/components/flex/flex.demo.tsx, packages/react/src/components/flex/flex.test.tsx, packages/react/src/components/flex/flex.tsx, packages/react/src/components/flex/index.ts, packages/react/src/components/flex/meta.json
 
 ## Form (form)
 A form wrapper with a submit helper, an error summary that links to invalid fields, and an actions footer.
