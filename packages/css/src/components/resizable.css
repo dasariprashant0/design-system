@@ -1,0 +1,12 @@
+/* Resizable: flex panels sized in percent by the component; the handle is a thin rule with a larger hit area. */
+.resizable { display: flex; width: 100%; min-width: 0; min-height: 0; }
+.resizable[data-direction="vertical"] { flex-direction: column; }
+.resizable-panel { min-width: 0; min-height: 0; overflow: auto; }
+.resizable-handle { position: relative; flex: none; background: var(--rule); touch-action: none; outline: none; }
+.resizable[data-direction="horizontal"] > .resizable-handle { inline-size: 1px; cursor: col-resize; }
+.resizable[data-direction="vertical"] > .resizable-handle { block-size: 1px; cursor: row-resize; }
+.resizable-handle::before { content: ""; position: absolute; }
+.resizable[data-direction="horizontal"] > .resizable-handle::before { inset-block: 0; inset-inline: calc(var(--s3) * -1); }
+.resizable[data-direction="vertical"] > .resizable-handle::before { inset-inline: 0; inset-block: calc(var(--s3) * -1); }
+.resizable-handle:hover, .resizable-handle[data-dragging] { background: var(--foreground); }
+.resizable-handle:focus-visible { background: var(--accent); outline: 2px solid var(--accent); outline-offset: 1px; }
