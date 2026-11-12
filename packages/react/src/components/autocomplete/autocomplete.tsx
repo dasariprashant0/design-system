@@ -1,7 +1,7 @@
 'use client';
 import {forwardRef, useId, useState, type InputHTMLAttributes} from 'react';
 import {cx} from '../../utils/cx';
-import {useFieldControl} from '../field';
+import {invalidAttrs, useFieldControl} from '../field';
 
 export interface AutocompleteProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'onChange' | 'role' | 'size'> {
   /** Suggestions shown while typing; matched by substring, case-insensitive. */
@@ -12,6 +12,8 @@ export interface AutocompleteProps extends Omit<InputHTMLAttributes<HTMLInputEle
   defaultValue?: string;
   /** Called with the text on every change, and with the suggestion when one is picked. */
   onValueChange?: (value: string) => void;
+  /** `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size. */
+  size?: 'sm' | 'md' | 'lg';
   /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */
   invalid?: boolean;
 }
@@ -22,7 +24,7 @@ export interface AutocompleteProps extends Omit<InputHTMLAttributes<HTMLInputEle
  * ArrowDown, so Enter keeps your own text. The list only opens once there is something to
  * match, and has no empty state.
  */
-export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(function Autocomplete({suggestions, value, defaultValue = '', onValueChange, invalid, className, onBlur, onKeyDown, ...rest}, ref) {
+export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(function Autocomplete({suggestions, value, defaultValue = '', onValueChange, size = 'md', invalid, disabled, className, onBlur, onKeyDown, ...rest}, ref) {
   const f = useFieldControl();
   const listId = useId();
   const [inner, setInner] = useState(defaultValue);
@@ -44,13 +46,15 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(func
         type="text"
         role="combobox"
         autoComplete="off"
-        className="input"
+        className={cx('input', size !== 'md' && `input-${size}`)}
+        disabled={disabled}
+        data-disabled={disabled ? '' : undefined}
         aria-expanded={isOpen}
         aria-controls={listId}
         aria-autocomplete="list"
         aria-activedescendant={isOpen && active >= 0 ? optId(active) : undefined}
         {...f}
-        {...(invalid ? {'aria-invalid': true as const} : {})}
+        {...invalidAttrs(invalid)}
         value={text}
         onChange={(e) => { set(e.target.value); setActive(-1); setOpen(true); }}
         onBlur={(e) => { onBlur?.(e); setOpen(false); setActive(-1); }}

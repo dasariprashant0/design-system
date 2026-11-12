@@ -1,12 +1,14 @@
 /* ─── Form fields ─── */
 .field { display: grid; gap: var(--s2); min-width: 0; }
 .field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }
+.input, .select { min-height: var(--control-md); }
 .input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }
 .input::placeholder, .textarea::placeholder { color: var(--muted); }
 .input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }
 .input[aria-invalid="true"] { border-color: var(--danger); }
 .textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
-.input-sm { padding: 6px 10px; font-size: var(--text-sm); }
+.input-sm { min-height: var(--control-sm); padding: 6px 10px; font-size: var(--text-sm); }
+.input-lg { min-height: var(--control-lg); padding: 14px 18px; }
 /* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */
 .input-wrap { position: relative; min-width: 0; }
 .input-wrap > .input { padding-inline-end: var(--s9); }

@@ -106,6 +106,8 @@
   /* Space: 4px steps. */
   --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 24px;
   --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+  /* One height per size for every single-line control, so Button, Input, Select and friends line up in a form row. */
+  --control-sm: calc(var(--s6) + var(--s1)); --control-md: var(--s7); --control-lg: calc(var(--s7) + var(--s2));
 
   /* Shape: square. One radius for the rare round thing (a ring, a dot). */
   --radius: 0;

@@ -1,4 +1,6 @@
 import type {Demo} from '../../demo';
+import {Input} from '../input';
+import {NativeSelect} from '../native-select';
 import {Button} from './button';
 
 export const demos: Demo[] = [
@@ -21,6 +23,21 @@ export const demos: Demo[] = [
         <Button size="sm">Small</Button>
         <Button disabled>Disabled</Button>
         <Button loading>Saving</Button>
+      </div>
+    ),
+  },
+  {
+    title: 'Sizes and form rows',
+    description: 'Button, Input and NativeSelect share one height at each size (`sm`, `md`, `lg`), so they line up in a row.',
+    render: () => (
+      <div style={{display: 'grid', gap: 'var(--s4)'}}>
+        {(['sm', 'md', 'lg'] as const).map((size) => (
+          <div key={size} style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}>
+            <Input aria-label={`Name, ${size}`} size={size} placeholder={size} />
+            <NativeSelect aria-label={`Kind, ${size}`} size={size}><option>Entry</option><option>Note</option></NativeSelect>
+            <Button size={size} variant="solid">Add</Button>
+          </div>
+        ))}
       </div>
     ),
   },

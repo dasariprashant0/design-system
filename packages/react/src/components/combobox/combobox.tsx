@@ -1,7 +1,7 @@
 'use client';
 import {forwardRef, useId, useRef, useState, type InputHTMLAttributes} from 'react';
 import {cx} from '../../utils/cx';
-import {useFieldControl} from '../field';
+import {invalidAttrs, useFieldControl} from '../field';
 
 export interface ComboboxOption {
   value: string;
@@ -20,12 +20,14 @@ export interface ComboboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
   onValueChange?: (value: string) => void;
   /** Shown when nothing matches. */
   emptyText?: string;
+  /** `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size. */
+  size?: 'sm' | 'md' | 'lg';
   /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */
   invalid?: boolean;
 }
 
 /** A searchable single select. Controlled with `value` + `onValueChange`, or uncontrolled with `defaultValue`. */
-export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Combobox({options, value, defaultValue = '', onValueChange, emptyText = 'No matches', invalid, className, onBlur, onKeyDown, ...rest}, ref) {
+export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Combobox({options, value, defaultValue = '', onValueChange, emptyText = 'No matches', size = 'md', invalid, disabled, className, onBlur, onKeyDown, ...rest}, ref) {
   const f = useFieldControl();
   const listId = useId();
   const [inner, setInner] = useState(defaultValue);
@@ -69,13 +71,16 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Com
         type="text"
         role="combobox"
         autoComplete="off"
-        className="input"
+        className={cx('input', size !== 'md' && `input-${size}`)}
+        disabled={disabled}
+        data-disabled={disabled ? '' : undefined}
         aria-expanded={open}
+        data-state={open ? 'open' : 'closed'}
         aria-controls={listId}
         aria-autocomplete="list"
         aria-activedescendant={open && shown[active] ? optId(active) : undefined}
         {...f}
-        {...(invalid ? {'aria-invalid': true as const} : {})}
+        {...invalidAttrs(invalid)}
         value={text ?? selected?.label ?? ''}
         onChange={(e) => { setText(e.target.value); setActive(0); setOpen(true); if (!e.target.value && value === undefined) { setInner(''); onValueChange?.(''); } }}
         onFocus={() => setOpen(true)}

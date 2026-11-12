@@ -1,7 +1,7 @@
 import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type ReactNode} from 'react';
 import {Checkbox as RadixCheckbox} from 'radix-ui';
 import {cx} from '../../utils/cx';
-import {useFieldControl} from '../field';
+import {invalidAttrs, useFieldControl} from '../field';
 
 export interface CheckboxProps extends Omit<ComponentPropsWithoutRef<typeof RadixCheckbox.Root>, 'children'> {
   /** Visible label. Without it, give the checkbox an `aria-label`. */
@@ -20,7 +20,7 @@ const Dash = () => <svg className="checkbox-mark" viewBox="0 0 10 10" fill="none
 export const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, CheckboxProps>(function Checkbox({label, invalid, className, id, ...rest}, ref) {
   const f = useFieldControl();
   const box = (
-    <RadixCheckbox.Root ref={ref} id={id ?? f.id} className={cx('checkbox', className)} aria-invalid={invalid || f['aria-invalid']} aria-describedby={f['aria-describedby']} {...rest}>
+    <RadixCheckbox.Root ref={ref} id={id ?? f.id} className={cx('checkbox', className)} {...invalidAttrs(invalid || Boolean(f['aria-invalid']))} aria-describedby={f['aria-describedby']} {...rest}>
       <RadixCheckbox.Indicator>{rest.checked === 'indeterminate' ? <Dash /> : <Check />}</RadixCheckbox.Indicator>
     </RadixCheckbox.Root>
   );

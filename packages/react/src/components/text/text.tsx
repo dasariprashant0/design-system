@@ -5,8 +5,12 @@ import {cx} from '../../utils/cx';
 export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
   /** Type size: `xs`, `sm`, `md` (default) or `lg`. */
   size?: 'xs' | 'sm' | 'md' | 'lg';
-  /** Colour role: `default`, `muted`, `danger`, `ok` or `accent`. Never rely on colour alone to carry meaning. */
-  tone?: 'default' | 'muted' | 'danger' | 'ok' | 'accent';
+  /**
+   * Colour role: `default`, `muted`, `success`, `warning`, `danger` or `accent`, the same names as Alert. Never rely on colour alone to carry meaning.
+   * `ok` still works.
+   * @deprecated use `success` instead of `ok`.
+   */
+  tone?: 'default' | 'muted' | 'success' | 'warning' | 'danger' | 'accent' | 'ok';
   /** One line with an ellipsis. */
   truncate?: boolean;
   /** Render the child (a span, label, li) with the text styles. */
