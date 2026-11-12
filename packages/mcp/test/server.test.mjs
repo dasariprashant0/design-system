@@ -78,16 +78,55 @@ test('get_component returns meta, props summary and a11y; source only on request
   assert.equal(c.install, 'npx monoline add button');
   assert.deepEqual(c.css, ['packages/css/src/components/button.css']);
   assert.deepEqual(c.a11y, ['Button is keyboard operable.']);
-  assert.deepEqual(c.props[0], {interface: 'ButtonProps', props: [
-    {name: 'variant', required: false, type: "'solid' | 'line'", doc: 'The look.'},
-    {name: 'label', required: true, type: 'string'},
-  ]});
+  assert.equal(c.props[0].name, 'ButtonProps');
+  assert.deepEqual(c.props[0].props.slice(0, 2), [
+    {name: 'variant', type: "'solid' | 'line'", optional: true, default: "'solid'", description: 'The look.'},
+    {name: 'label', type: 'string', optional: false, default: null, description: ''},
+  ]);
+  assert.equal(c.usage, "import {Button} from '@monoline/react'\n\n<Button variant=\"solid\">Save</Button>");
+  assert.deepEqual(c.classes, ['btn', 'btn-solid', 'btn-line', 'spinner']);
+  assert.deepEqual(c.dataAttributes, [{name: 'data-state', values: ['open', 'closed']}]);
+  assert.deepEqual(c.related, ['icon-button']);
   assert.equal(c.source, undefined);
   assert.equal(c.cssContent, undefined);
   const full = await s.data('get_component', {name: 'button', include_source: true});
   assert.equal(full.source.length, 1); // meta.json is dropped
   assert.match(full.source[0].content, /interface ButtonProps/);
   assert.match(full.cssContent[0].content, /var\(--foreground\)/);
+}));
+
+test('get_component reads props from the registry and falls back to source for old registries', async () => {
+  const legacy = makeRegistry(FIXTURE.map((c) => ({...c, props: undefined, usage: undefined, classes: undefined})));
+  const s = start(['--registry', legacy]);
+  try {
+    const c = await s.data('get_component', {name: 'button'});
+    assert.deepEqual(c.props, [{name: 'ButtonProps', props: [
+      {name: 'variant', type: "'solid' | 'line'", optional: true, default: null, description: 'The look.'},
+      {name: 'label', type: 'string', optional: false, default: null, description: ''},
+    ]}]);
+    assert.equal(c.usage, null);
+    assert.deepEqual(c.classes, []);
+    assert.deepEqual(c.related, ['icon-button']); // related is not derived from source, so it still comes through
+  } finally { await s.close(); }
+});
+
+test('get_component exposes a fixture with no props as an empty list, not a missing field', () => withServer(async (s) => {
+  const c = await s.data('get_component', {name: 'use-toggle'});
+  assert.deepEqual(c.props, []);
+}));
+
+test('search_components matches prop names and reports which props matched', () => withServer(async (s) => {
+  const r = await s.data('search_components', {query: 'asChild'});
+  assert.equal(r.results[0].name, 'button');
+  assert.deepEqual(r.results[0].matchedProps, ['asChild']);
+  const cal = await s.data('search_components', {query: 'selected'});
+  assert.equal(cal.results[0].name, 'calendar');
+  assert.deepEqual(cal.results[0].matchedProps, ['selected']);
+  // A name match still beats a prop match.
+  const named = await s.data('search_components', {query: 'button loading'});
+  assert.equal(named.results[0].name, 'button');
+  const none = await s.data('search_components', {query: 'nothingcalledthis'});
+  assert.equal(none.count, 0);
 }));
 
 test('get_component errors: unknown, traversal, missing name', () => withServer(async (s) => {

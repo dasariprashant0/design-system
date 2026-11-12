@@ -2,7 +2,10 @@
 
 const words = (s) => String(s).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
 
-/** Rank components for a query. Name beats title beats keywords beats category beats description. */
+/**
+ * Rank components for a query. Name beats title beats keywords beats prop names beats category beats description.
+ * Prop names come from the registry's `propNames` (exact word match, e.g. "asChild", "selected").
+ */
 export function rank(components, query) {
   const q = words(query);
   const phrase = q.join('-');
@@ -10,6 +13,7 @@ export function rank(components, query) {
   for (const c of components) {
     const name = c.name.toLowerCase(), title = (c.title ?? '').toLowerCase(), desc = (c.description ?? '').toLowerCase();
     const kws = (c.keywords ?? []).map((k) => k.toLowerCase());
+    const props = (c.propNames ?? []).map((p) => p.toLowerCase());
     let score = name === phrase ? 100 : 0;
     for (const t of q) {
       if (name === t) score += 50;
@@ -19,12 +23,25 @@ export function rank(components, query) {
       if (title.includes(t)) score += 15;
       if (kws.includes(t)) score += 25;
       else if (kws.some((k) => k.includes(t))) score += 10;
+      if (props.includes(t)) score += 12;
       if ((c.category ?? '').includes(t)) score += 5;
       if (desc.includes(t)) score += 3;
     }
-    if (score > 0) out.push({c, score});
+    if (score > 0) out.push({c, score, matchedProps: (c.propNames ?? []).filter((p) => q.includes(p.toLowerCase()))});
   }
   return out.sort((a, b) => b.score - a.score || a.c.name.localeCompare(b.c.name));
+}
+
+/**
+ * Props in the registry's shape: [{name, props: [{name, type, optional, default, description}]}].
+ * Registries built before props were in the registry only have source: those are read with propsSummary.
+ */
+export function propGroupsOf(c) {
+  if (Array.isArray(c.props)) return c.props;
+  return propsSummary(c.source ?? []).map((g) => ({
+    name: g.interface,
+    props: g.props.map((p) => ({name: p.name, type: p.type, optional: !p.required, default: null, description: p.doc ?? ''})),
+  }));
 }
 
 /** Pull `export interface FooProps { ... }` members out of component source: name, type, optional, doc. */
