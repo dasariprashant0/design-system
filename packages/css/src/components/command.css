@@ -1,0 +1,12 @@
+/* Command palette: the overlay is .dialog-overlay (dialog.css); the panel is its own. */
+.command { position: fixed; z-index: var(--z-drawer); top: 15vh; left: 50%; transform: translateX(-50%); width: min(560px, 92vw); max-height: 70vh; display: flex; flex-direction: column; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); }
+.command:focus { outline: none; }
+.command-input { width: 100%; padding: var(--s4) var(--s5); font: inherit; font-size: var(--text-base); color: inherit; background: transparent; border: 0; border-bottom: 1px solid var(--rule); border-radius: 0; }
+.command-input:focus-visible { outline-offset: -2px; }
+.command-list { overflow-y: auto; padding: var(--s2) 0; }
+.command-heading { padding: var(--s2) var(--s5); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.command-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s5); font-size: var(--text-sm); cursor: pointer; }
+.command-item[data-active] { background: var(--foreground); color: var(--background); }
+.command-item[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.command-hint { font: inherit; font-size: var(--text-xs); opacity: 0.7; }
+.command-empty { padding: var(--s5); font-size: var(--text-sm); color: var(--muted); text-align: center; }
