@@ -1,0 +1,11 @@
+/* Toast on Radix. A dark surface panel (like code), bottom right, stacked. */
+.toast-viewport { position: fixed; right: var(--s5); bottom: var(--s5); z-index: var(--z-toast); display: grid; gap: var(--s2); width: min(360px, calc(100vw - var(--s5) * 2)); margin: 0; padding: 0; list-style: none; outline: none; }
+.toast-item { display: grid; grid-template-columns: 1fr auto; gap: var(--s1) var(--s4); align-items: start; padding: var(--s4); background: var(--surface); color: var(--surface-text); border: 1px solid var(--rule); font-size: var(--text-sm); }
+.toast-item[data-state="open"] { animation: rise-in-r var(--base) var(--ease); }
+.toast-item[data-state="closed"] { animation: toast-out var(--fast) var(--ease) forwards; }
+.toast-title { font-weight: 500; grid-column: 1; }
+.toast-description { grid-column: 1; opacity: 0.8; }
+.toast-action, .toast-close { grid-column: 2; font-size: var(--text-xs); text-decoration: underline; text-underline-offset: 3px; color: var(--surface-text); }
+.toast-action { grid-row: 1; } .toast-close { grid-row: 2; opacity: 0.7; }
+.toast-action:hover, .toast-close:hover { opacity: 1; }
+@keyframes toast-out { to { opacity: 0; transform: translateY(8px); } }

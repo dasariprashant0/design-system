@@ -1,0 +1,1 @@
+{"name":"fieldset","title":"Fieldset","category":"forms","description":"Group related controls under one legend.","status":"stable","css":["fieldset.css"],"a11y":["Native fieldset and legend: screen readers announce the legend with each control.","disabled on the fieldset disables every control inside."],"keywords":["group","legend","form section"]}
