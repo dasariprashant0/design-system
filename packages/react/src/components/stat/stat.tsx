@@ -14,7 +14,7 @@ export const Stat = forwardRef<HTMLDListElement, StatProps>(function Stat({label
     <dl ref={ref} className={cx('stat', className)} {...rest}>
       <dt className="label">{label}</dt>
       <dd className="stat-value">{value}</dd>
-      {note && <dd className="stat-note">{note}</dd>}
+      {note != null && note !== false && <dd className="stat-note">{note}</dd>}
     </dl>
   );
 });

@@ -21,19 +21,21 @@ export interface TypewriterProps extends HTMLAttributes<HTMLSpanElement> {
  * The typed characters are `aria-hidden`; an `sr-only` copy holds the whole text.
  */
 export const Typewriter = forwardRef<HTMLSpanElement, TypewriterProps>(function Typewriter({text, speed = 40, delay = 0, cursor = true, onComplete, className, ...rest}, ref) {
-  const [count, setCount] = useState(text.length);
+  const chars = Array.from(text); // by code point, so an emoji is never cut in half
+  const [count, setCount] = useState(chars.length);
   const reduced = usePrefersReducedMotion();
   const done = useRef(onComplete);
   done.current = onComplete;
 
   useEffect(() => {
-    if (reduced) { setCount(text.length); done.current?.(); return; }
+    const len = Array.from(text).length;
+    if (reduced) { setCount(len); done.current?.(); return; }
     let timer: ReturnType<typeof setTimeout>;
     let n = 0;
     const tick = () => {
       n += 1;
       setCount(n);
-      if (n < text.length) timer = setTimeout(tick, speed); else done.current?.();
+      if (n < len) timer = setTimeout(tick, speed); else done.current?.();
     };
     setCount(0);
     timer = setTimeout(tick, delay || speed);
@@ -43,7 +45,7 @@ export const Typewriter = forwardRef<HTMLSpanElement, TypewriterProps>(function 
   return (
     <span ref={ref} className={cx('typewriter', className)} {...rest}>
       <span className="sr-only">{text}</span>
-      <span aria-hidden="true">{text.slice(0, count)}{cursor && <span className="typewriter-caret" />}</span>
+      <span aria-hidden="true">{chars.slice(0, count).join('')}{cursor && <span className="typewriter-caret" />}</span>
     </span>
   );
 });
