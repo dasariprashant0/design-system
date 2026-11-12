@@ -21,6 +21,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          DOCS_BASE: /design-system/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/docs/dist

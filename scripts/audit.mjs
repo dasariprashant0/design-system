@@ -54,12 +54,15 @@ const candidates = [process.env.CHROME, '/Applications/Google Chrome.app/Content
 const chromePath = candidates.find((p) => existsSync(p));
 if (!chromePath) { console.error('Chrome not found. Set CHROME=/path/to/chrome.'); server.close(); process.exit(2); }
 const profile = mkdtempSync(join(tmpdir(), 'monoline-audit-'));
-const chrome = spawn(chromePath, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', '--hide-scrollbars', '--force-device-scale-factor=1', '--font-render-hinting=none', '--remote-debugging-port=0', `--user-data-dir=${profile}`, '--no-sandbox', 'about:blank'], {stdio: 'ignore'});
+const chrome = spawn(chromePath, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', '--hide-scrollbars', '--force-device-scale-factor=1', '--font-render-hinting=none', '--remote-debugging-port=0', `--user-data-dir=${profile}`, '--no-sandbox', '--disable-dev-shm-usage', '--disable-extensions', 'about:blank'], {stdio: ['ignore', 'ignore', 'pipe']});
+let chromeLog = '';
+chrome.stderr.on('data', (d) => { chromeLog += d; });
+chrome.on('exit', (code) => { if (!existsSync(join(profile, 'DevToolsActivePort'))) console.error(`Chrome exited early (code ${code}).\n${chromeLog.slice(-1500)}`); });
 const cleanup = () => { try { chrome.kill(); } catch {} try { server.close(); } catch {} try { rmSync(profile, {recursive: true, force: true}); } catch {} };
 process.on('exit', cleanup);
 const portFile = join(profile, 'DevToolsActivePort');
-for (let i = 0; i < 100 && !existsSync(portFile); i++) await new Promise((r) => setTimeout(r, 100));
-if (!existsSync(portFile)) { console.error('Chrome did not start.'); cleanup(); process.exit(2); }
+for (let i = 0; i < 300 && !existsSync(portFile); i++) await new Promise((r) => setTimeout(r, 100));
+if (!existsSync(portFile)) { console.error(`Chrome did not start.\n${chromeLog.slice(-1500)}`); cleanup(); process.exit(2); }
 const [port, wsPath] = readFileSync(portFile, 'utf8').trim().split('\n');
 
 // --- minimal CDP client
