@@ -22,7 +22,6 @@
   "import": "import {DirectionProvider} from '@monoline/react'",
   "path": "packages/react/src/components/direction-provider",
   "files": [
-    "packages/react/src/components/direction-provider/.claude",
     "packages/react/src/components/direction-provider/direction-provider.demo.tsx",
     "packages/react/src/components/direction-provider/direction-provider.tsx",
     "packages/react/src/components/direction-provider/index.ts",

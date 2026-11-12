@@ -356,7 +356,6 @@
       "import": "import {BarChart} from '@monoline/react'",
       "path": "packages/react/src/components/bar-chart",
       "files": [
-        "packages/react/src/components/bar-chart/.claude",
         "packages/react/src/components/bar-chart/bar-chart.demo.tsx",
         "packages/react/src/components/bar-chart/bar-chart.test.tsx",
         "packages/react/src/components/bar-chart/bar-chart.tsx",
@@ -1611,7 +1610,6 @@
       "import": "import {DirectionProvider} from '@monoline/react'",
       "path": "packages/react/src/components/direction-provider",
       "files": [
-        "packages/react/src/components/direction-provider/.claude",
         "packages/react/src/components/direction-provider/direction-provider.demo.tsx",
         "packages/react/src/components/direction-provider/direction-provider.tsx",
         "packages/react/src/components/direction-provider/index.ts",
@@ -1864,7 +1862,6 @@
       "import": "import {Flex} from '@monoline/react'",
       "path": "packages/react/src/components/flex",
       "files": [
-        "packages/react/src/components/flex/.claude",
         "packages/react/src/components/flex/flex.demo.tsx",
         "packages/react/src/components/flex/flex.test.tsx",
         "packages/react/src/components/flex/flex.tsx",
@@ -3855,7 +3852,6 @@
       "import": "import {UseClipboard} from '@monoline/react'",
       "path": "packages/react/src/hooks/use-clipboard",
       "files": [
-        "packages/react/src/hooks/use-clipboard/.claude",
         "packages/react/src/hooks/use-clipboard/index.ts",
         "packages/react/src/hooks/use-clipboard/meta.json",
         "packages/react/src/hooks/use-clipboard/use-clipboard.demo.tsx",

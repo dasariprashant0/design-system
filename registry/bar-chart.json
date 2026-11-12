@@ -36,7 +36,6 @@
   "import": "import {BarChart} from '@monoline/react'",
   "path": "packages/react/src/components/bar-chart",
   "files": [
-    "packages/react/src/components/bar-chart/.claude",
     "packages/react/src/components/bar-chart/bar-chart.demo.tsx",
     "packages/react/src/components/bar-chart/bar-chart.test.tsx",
     "packages/react/src/components/bar-chart/bar-chart.tsx",

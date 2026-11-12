@@ -17,7 +17,7 @@ const index = [];
 for (const u of units()) {
   const meta = readMeta(u);
   const files = readdirSync(u.dir).filter((f) => /\.(tsx?|json)$/.test(f) && !/\.(test|demo)\./.test(f)).sort();
-  const all = readdirSync(u.dir).sort();
+  const all = readdirSync(u.dir).filter((f) => !f.startsWith('.')).sort(); // dotfiles (.claude, .DS_Store) are local tool state, never part of a component
   const entry = {
     ...meta,
     kind: u.kind,
