@@ -3,5 +3,5 @@
 .marquee-track { display: flex; flex: none; min-width: 100%; align-items: center; justify-content: space-around; animation: marquee-run var(--marquee-duration, 30s) linear infinite; }
 .marquee-reverse .marquee-track { animation-direction: reverse; }
 .marquee-pause:hover .marquee-track, .marquee-pause:focus-within .marquee-track { animation-play-state: paused; }
-@keyframes marquee-run { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+@keyframes marquee-run { from { transform: translateX(0); } to { transform: translateX(calc(-100% * var(--dir, 1))); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } .marquee { overflow-x: auto; } }

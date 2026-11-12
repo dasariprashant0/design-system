@@ -7,8 +7,8 @@ export const DrawerTrigger = Radix.Trigger;
 export const DrawerClose = Radix.Close;
 
 export interface DrawerContentProps extends ComponentPropsWithoutRef<typeof Radix.Content> {
-  /** The edge it slides from. */
-  side?: 'right' | 'left' | 'top' | 'bottom';
+  /** The edge it slides from. `start` and `end` follow the reading direction; `left` and `right` are fixed. */
+  side?: 'right' | 'left' | 'top' | 'bottom' | 'start' | 'end';
   /** Shows a "Close" text button. Escape and the overlay always close it. */
   showClose?: boolean;
 }

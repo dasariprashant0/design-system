@@ -1,6 +1,7 @@
 'use client';
 import {forwardRef, useRef, useState, type HTMLAttributes, type KeyboardEvent} from 'react';
 import {cx} from '../../utils/cx';
+import {useIsRtl} from '../../utils/direction';
 
 export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue' | 'onChange'> {
   value?: Date | null;
@@ -25,6 +26,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
   const selected = value === undefined ? inner : value;
   const [focus, setFocus] = useState<Date>(() => day(selected ?? new Date()));
   const grid = useRef<HTMLTableElement>(null);
+  const isRtl = useIsRtl();
   const today = day(new Date());
   const first = new Date(focus.getFullYear(), focus.getMonth(), 1);
   const offset = (first.getDay() - weekStartsOn + 7) % 7;
@@ -38,8 +40,9 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
   const go = (d: Date) => { setFocus(d); requestAnimationFrame(() => grid.current?.querySelector<HTMLButtonElement>('button[tabindex="0"]')?.focus()); };
 
   const keydown = (e: KeyboardEvent<HTMLTableElement>) => {
+    const h = isRtl(e.currentTarget) ? -1 : 1; // ArrowRight is the previous day in rtl
     const k: Record<string, Date> = {
-      ArrowLeft: add(focus, -1), ArrowRight: add(focus, 1), ArrowUp: add(focus, -7), ArrowDown: add(focus, 7),
+      ArrowLeft: add(focus, -h), ArrowRight: add(focus, h), ArrowUp: add(focus, -7), ArrowDown: add(focus, 7),
       Home: add(focus, -((focus.getDay() - weekStartsOn + 7) % 7)), End: add(focus, 6 - ((focus.getDay() - weekStartsOn + 7) % 7)),
       PageUp: addMonths(focus, -1), PageDown: addMonths(focus, 1),
     };

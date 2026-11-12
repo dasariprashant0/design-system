@@ -1,4 +1,4 @@
 /* Typewriter: the caret is a thin rule that blinks; it stops for reduced motion. */
-.typewriter-caret { display: inline-block; width: 1px; height: 1em; margin-left: 2px; vertical-align: text-bottom; background: currentColor; animation: typewriter-blink 1s steps(1) infinite; }
+.typewriter-caret { display: inline-block; width: 1px; height: 1em; margin-inline-start: 2px; vertical-align: text-bottom; background: currentColor; animation: typewriter-blink 1s steps(1) infinite; }
 @keyframes typewriter-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .typewriter-caret { animation: none; } }

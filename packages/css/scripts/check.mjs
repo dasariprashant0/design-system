@@ -2,6 +2,7 @@
 // Run: npm run check (in packages/css). CI runs it on every push.
 import {readdirSync} from 'node:fs';
 import {read, parseTokens, contrast} from './lib.mjs';
+import './check-logical.mjs';
 
 const {themes, accents} = parseTokens();
 const fails = [];

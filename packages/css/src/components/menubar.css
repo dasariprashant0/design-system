@@ -1,6 +1,6 @@
 /* Menubar: a thin bar of text triggers. The panels reuse .menu-content from popover.css. */
 .menubar { display: inline-flex; border: 1px solid var(--foreground); }
 .menubar-trigger { padding: var(--s2) var(--s4); font-size: var(--text-sm); }
-.menubar-trigger + .menubar-trigger { border-left: 1px solid var(--rule); }
+.menubar-trigger + .menubar-trigger { border-inline-start: 1px solid var(--rule); }
 .menubar-trigger:hover, .menubar-trigger[data-state="open"], .menubar-trigger[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }
 .menubar-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }

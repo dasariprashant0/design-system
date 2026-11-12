@@ -4,7 +4,7 @@
 .data-table-sort { width: 0.9em; height: 0.9em; opacity: 0.4; }
 .data-table-sort[data-direction] { opacity: 1; color: var(--foreground); }
 .data-table-sort[data-direction="desc"] { transform: rotate(180deg); }
-.data-table .data-table-check { width: 1%; padding-right: var(--s3); }
+.data-table .data-table-check { width: 1%; padding-inline-end: var(--s3); }
 .data-table .table tbody tr[data-state="selected"] { background: var(--wash); }
 .data-table-footer { display: flex; justify-content: flex-end; padding-top: var(--s4); }
 .data-table .table .empty { border: 0; }

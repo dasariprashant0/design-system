@@ -1,9 +1,9 @@
 /* ─── Lists: rows split by rules, never boxed ─── */
 .list > li + li { border-top: 1px solid var(--rule); }
-.row { display: flex; align-items: flex-start; gap: var(--s4); padding: var(--s4) 0; width: 100%; text-align: left; }
+.row { display: flex; align-items: flex-start; gap: var(--s4); padding: var(--s4) 0; width: 100%; text-align: start; }
 .row-body { display: flex; flex-direction: column; gap: var(--s1); min-width: 0; flex: 1; }
 .row-title { font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
-.row-meta { font-size: var(--text-sm); color: var(--muted); }
+.row-meta { overflow-wrap: anywhere; font-size: var(--text-sm); color: var(--muted); }
 .row-end { white-space: nowrap; align-self: center; }
 button.row:hover .row-title, a.row:hover .row-title { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
 

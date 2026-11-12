@@ -1,7 +1,7 @@
 /* Segmented control: joined toggles, one always on. */
 .segmented { display: inline-flex; border: 1px solid var(--foreground); }
 .segment { padding: var(--s2) var(--s4); font-size: var(--text-sm); color: var(--muted); background: transparent; }
-.segment + .segment { border-left: 1px solid var(--rule); }
+.segment + .segment { border-inline-start: 1px solid var(--rule); }
 .segment:hover:not(:disabled) { color: var(--foreground); }
 .segment[data-state="on"] { background: var(--foreground); color: var(--background); }
 .segment:disabled { opacity: 0.5; cursor: not-allowed; }

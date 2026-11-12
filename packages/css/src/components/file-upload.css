@@ -4,6 +4,6 @@
 .upload-zone:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
 .upload-list { display: grid; gap: var(--s1); font-size: var(--text-sm); }
 .upload-list li { display: flex; align-items: center; gap: var(--s3); padding: var(--s2) 0; border-bottom: 1px solid var(--rule); }
-.upload-name { margin-right: auto; overflow-wrap: anywhere; }
+.upload-name { margin-inline-end: auto; overflow-wrap: anywhere; }
 .upload-remove { text-decoration: underline; text-underline-offset: 3px; color: var(--muted); }
 .upload-remove:hover { color: var(--foreground); }

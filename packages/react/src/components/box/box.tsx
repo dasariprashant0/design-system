@@ -10,7 +10,7 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   paddingX?: Step;
   paddingY?: Step;
   /** A thin rule on every side (`true`) or on one side. */
-  border?: boolean | 'top' | 'right' | 'bottom' | 'left';
+  border?: boolean | 'top' | 'right' | 'bottom' | 'left' | 'start' | 'end';
   /** Render the child (a `section`, `aside`, `li`) with the box styles. */
   asChild?: boolean;
 }

@@ -1,7 +1,7 @@
 /* ─── Narrow windows ─── */
 @media (max-width: 900px) {
   .shell { grid-template-columns: 1fr; height: auto; }
-  .side { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .side { border-inline-end: 0; border-bottom: 1px solid var(--rule); }
   .main { padding: var(--s5) var(--s4) var(--s8); overflow: visible; }
   .two { grid-template-columns: 1fr; }
   .facts { grid-template-columns: 1fr 1fr; }
