@@ -8,5 +8,5 @@
   "bin": {"monoline": "./bin/monoline.mjs"},
   "files": ["bin", "src"],
   "engines": {"node": ">=20"},
-  "scripts": {"test": "node --test test/"}
+  "scripts": {"test": "node --test"}
 }
