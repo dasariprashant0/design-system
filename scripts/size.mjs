@@ -14,6 +14,9 @@ const dist = join(root, 'packages/react/dist/index.js');
 if (!existsSync(dist)) { console.error('Build first: npm run build -w @monoline/react'); process.exit(2); }
 
 const KB = 1024;
+const asJson = process.argv.includes('--json'); // machine-readable output for the docs Compare page
+const report = {js: [], css: null};
+const say = (...a) => { if (!asJson) console.log(...a); };
 const cases = [
   ['Button', "import {Button} from '@monoline/react'; console.log(Button)", 2.5],
   ['Button + Badge + Card + Input', "import {Button, Badge, Card, Input} from '@monoline/react'; console.log(Button, Badge, Card, Input)", 3.5],
@@ -26,19 +29,22 @@ const cases = [
   ['Everything', "import * as m from '@monoline/react'; console.log(m)", 125],
 ];
 let failed = 0;
-console.log('JS (gzip, minified, react external)');
+say('JS (gzip, minified, react external)');
 for (const [name, code, budget] of cases) {
   const r = await build({stdin: {contents: code, resolveDir: root, loader: 'js'}, bundle: true, minify: true, format: 'esm', write: false, treeShaking: true, external: ['react', 'react-dom', 'react/jsx-runtime'], alias: {'@monoline/react': dist}, logLevel: 'silent'});
   const kb = gzipSync(r.outputFiles[0].contents).length / KB;
   const ok = kb <= budget;
   if (!ok) failed++;
-  console.log(`${ok ? 'ok  ' : 'FAIL'} ${name.padEnd(32)} ${kb.toFixed(1).padStart(6)} KB   budget ${budget} KB`);
+  report.js.push({name, kb: +kb.toFixed(2), budget});
+  say(`${ok ? 'ok  ' : 'FAIL'} ${name.padEnd(32)} ${kb.toFixed(1).padStart(6)} KB   budget ${budget} KB`);
 }
 const css = join(root, 'packages/css/dist/monoline.min.css');
 if (existsSync(css)) {
   const kb = gzipSync(readFileSync(css)).length / KB;
   const budget = 20; const ok = kb <= budget; if (!ok) failed++;
-  console.log('CSS');
-  console.log(`${ok ? 'ok  ' : 'FAIL'} ${'All components, 3 themes, 9 accents'.padEnd(32)} ${kb.toFixed(1).padStart(6)} KB   budget ${budget} KB`);
+  report.css = {name: 'All components, 3 themes, 9 accents', kb: +kb.toFixed(2), budget};
+  say('CSS');
+  say(`${ok ? 'ok  ' : 'FAIL'} ${'All components, 3 themes, 9 accents'.padEnd(32)} ${kb.toFixed(1).padStart(6)} KB   budget ${budget} KB`);
 }
+if (asJson) console.log(JSON.stringify(report));
 process.exit(failed ? 1 : 0);

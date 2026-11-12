@@ -1,13 +1,22 @@
 // Look preferences (theme, accent, font, corners, density, direction): data attributes on <html>, saved in localStorage.
-import {useEffect, useRef, useState} from 'react';
+import {createContext, useContext, useEffect, useRef, useState} from 'react';
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, SegmentedControl} from '@monoline/react';
 
 const ACCENTS = ['orange', 'rose', 'amber', 'green', 'teal', 'blue', 'violet', 'slate'] as const;
 const SWATCH: Record<string, string> = {orange: '#FF4500', rose: '#E11D48', amber: '#D97706', green: '#0E7A5F', teal: '#0F766E', blue: '#2563EB', violet: '#7C3AED', slate: '#334155'};
-const DEFAULTS = {theme: 'system', accent: 'orange', font: 'mono', radius: 'square', density: 'comfortable', dir: 'ltr'};
+const DEFAULTS = {theme: 'system', accent: 'orange', font: 'mono', radius: 'square', density: 'comfortable', dir: 'ltr', tokens: ''};
 export type Prefs = typeof DEFAULTS;
 type Set = (k: keyof Prefs, v: string) => void;
-export const ACCENT_COUNT = ACCENTS.length;
+/** Named accents plus the default setting (no `data-accent`), the way `npm run check` counts them. */
+export const ACCENT_COUNT = ACCENTS.length + 1;
+export const ACCENT_NAMED = ACCENTS.length;
+
+/** The current prefs and their setter, for pages that apply a look (the Themes page). */
+export const PrefsContext = createContext<readonly [Prefs, Set] | null>(null);
+export const usePrefsContext = () => useContext(PrefsContext)!;
+
+/** `tokens` holds token overrides as `--name:value;--other:value` (a preset's own tweaks). */
+export const parseTokens = (s: string): Array<[string, string]> => s.split(';').map((x) => x.split(/:(.*)/s).slice(0, 2).map((y) => y.trim()) as [string, string]).filter(([k, v]) => k.startsWith('--') && v);
 
 export function usePrefs() {
   const [prefs, setPrefs] = useState<Prefs>(() => {
@@ -20,6 +29,9 @@ export function usePrefs() {
       root.dataset.theme = prefs.theme === 'system' ? (mq.matches ? 'dark' : 'warm') : prefs.theme;
       root.dataset.accent = prefs.accent; root.dataset.font = prefs.font; root.dataset.radius = prefs.radius; root.dataset.density = prefs.density;
       root.dir = prefs.dir;
+      const want = new Map(parseTokens(prefs.tokens));
+      for (const k of [...root.style]) if (k.startsWith('--') && !want.has(k)) root.style.removeProperty(k);
+      want.forEach((v, k) => root.style.setProperty(k, v));
     };
     apply();
     mq.addEventListener('change', apply);
