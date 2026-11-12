@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Monoline</title>
+  <!-- GitHub Pages serves this file for any unknown path. Remember where the visitor was going and
+       hand off to the single-page app, which restores the URL (see the script in index.html).
+       The build writes the site base (for example /design-system/) into the two placeholders below. -->
+  <script>
+    try { sessionStorage.setItem('monoline-redirect', location.href); } catch (e) {}
+    location.replace('__BASE__');
+  </script>
+</head>
+<body>
+  <p>Redirecting to <a href="__BASE__">Monoline</a>.</p>
+</body>
+</html>
