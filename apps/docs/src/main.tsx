@@ -1,5 +1,5 @@
 // Docs site. Discovers every component from the react package (meta.json, *.demo.tsx and the raw demo source),
-// so a new component needs no change here. Preferences (theme, accent, font, radius, density) live on <html>
+// so a new component needs no change here. Preferences (theme, accent, font, radius, density, direction) live on <html>
 // data attributes and in localStorage.
 import {StrictMode, useEffect, useMemo, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
@@ -33,7 +33,7 @@ const demosFor = (name: string) => {
 
 const ACCENTS = ['orange', 'rose', 'amber', 'green', 'teal', 'blue', 'violet', 'slate'] as const;
 const SWATCH: Record<string, string> = {orange: '#FF4500', rose: '#E11D48', amber: '#D97706', green: '#0E7A5F', teal: '#0F766E', blue: '#2563EB', violet: '#7C3AED', slate: '#334155'};
-const DEFAULTS = {theme: 'system', accent: 'orange', font: 'mono', radius: 'square', density: 'comfortable'};
+const DEFAULTS = {theme: 'system', accent: 'orange', font: 'mono', radius: 'square', density: 'comfortable', dir: 'ltr'};
 type Prefs = typeof DEFAULTS;
 
 function usePrefs() {
@@ -46,6 +46,7 @@ function usePrefs() {
     const apply = () => {
       root.dataset.theme = prefs.theme === 'system' ? (mq.matches ? 'dark' : 'warm') : prefs.theme;
       root.dataset.accent = prefs.accent; root.dataset.font = prefs.font; root.dataset.radius = prefs.radius; root.dataset.density = prefs.density;
+      root.dir = prefs.dir;
     };
     apply();
     mq.addEventListener('change', apply);
@@ -74,6 +75,7 @@ function Customize({prefs, set}: {prefs: Prefs; set: (k: keyof Prefs, v: string)
       <div className="custom-row"><span className="label">Font</span><SegmentedControl aria-label="Font" value={prefs.font} onValueChange={(v) => set('font', v)} options={opt(['mono', 'sans', 'serif'])} /></div>
       <div className="custom-row"><span className="label">Corners</span><SegmentedControl aria-label="Corners" value={prefs.radius} onValueChange={(v) => set('radius', v)} options={opt(['square', 'soft', 'round'])} /></div>
       <div className="custom-row"><span className="label">Density</span><SegmentedControl aria-label="Density" value={prefs.density} onValueChange={(v) => set('density', v)} options={opt(['compact', 'comfortable', 'spacious'])} /></div>
+      <div className="custom-row"><span className="label">Direction</span><SegmentedControl aria-label="Direction" value={prefs.dir} onValueChange={(v) => set('dir', v)} options={[{value: 'ltr', label: 'LTR'}, {value: 'rtl', label: 'RTL'}]} /></div>
     </div>
   );
 }
@@ -87,6 +89,7 @@ function Home() {
       <div className="hero-actions">
         <Button variant="solid" asChild><a href={`#${all[0]?.name ?? ''}`}>Browse components</a></Button>
         <Button asChild><a href="#guides/getting-started">Getting started</a></Button>
+        <Button asChild><a href="#guides/forms">Forms guide</a></Button>
         <Button asChild><a href="https://github.com/dasariprashant0/design-system">GitHub</a></Button>
       </div>
       <section className="block">
