@@ -37,6 +37,116 @@
     "packages/react/src/components/mentions/mentions.tsx",
     "packages/react/src/components/mentions/meta.json"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "MentionsProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The text when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": "''",
+          "description": "The initial text when uncontrolled. Default empty."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the full text after every edit and after a mention is inserted."
+        },
+        {
+          "name": "options",
+          "type": "MentionOption[]",
+          "optional": true,
+          "default": "[]",
+          "description": "The choices, filtered by what is typed after the trigger. Use `onSearch` instead to load them."
+        },
+        {
+          "name": "onSearch",
+          "type": "((query: string, trigger: string) => MentionOption[] | Promise<MentionOption[]>)",
+          "optional": true,
+          "default": null,
+          "description": "Loads choices for the typed query, for example from a server. Return the options or a promise of them. Late answers for an older query are ignored. Replaces `options` filtering when given."
+        },
+        {
+          "name": "triggers",
+          "type": "string[]",
+          "optional": true,
+          "default": "['@']",
+          "description": "Characters that open the list when typed at the start of a word. Default `[\"@\"]`."
+        },
+        {
+          "name": "onMentionSelect",
+          "type": "((option: MentionOption, trigger: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the option and the trigger when the user inserts a mention."
+        },
+        {
+          "name": "loadingText",
+          "type": "string",
+          "optional": true,
+          "default": "'Loading'",
+          "description": "Text shown while `onSearch` is loading. Default \"Loading\"."
+        },
+        {
+          "name": "emptyText",
+          "type": "string",
+          "optional": true,
+          "default": "'No matches'",
+          "description": "Text shown when nothing matches. Default \"No matches\"."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Field, Mentions, type MentionOption} from '@monoline/react';\n\nconst people: MentionOption[] = [\n  {value: 'ada', label: 'Ada Lovelace'},\n  {value: 'grace', label: 'Grace Hopper'},\n  {value: 'alan', label: 'Alan Turing'},\n  {value: 'linus', label: 'Linus Torvalds', disabled: true},\n];\n\n<div style={{maxWidth: '360px', minHeight: '220px'}}><Field label=\"Comment\"><Mentions options={people} rows={3} /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-lg",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "mentions",
+    "mentions-list",
+    "mentions-option",
+    "mentions-note"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

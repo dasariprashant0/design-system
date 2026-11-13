@@ -42,6 +42,13 @@
       "name": "SelectTriggerProps",
       "props": [
         {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "optional": true,
+          "default": "'md'",
+          "description": "`md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size."
+        },
+        {
           "name": "invalid",
           "type": "boolean",
           "optional": true,
@@ -64,6 +71,10 @@
     {
       "name": "data-disabled",
       "values": []
+    },
+    {
+      "name": "data-invalid",
+      "values": []
     }
   ],
   "classes": [
@@ -71,7 +82,9 @@
     "select-content",
     "select-viewport",
     "select-item",
-    "select-label"
+    "select-label",
+    "input-sm",
+    "input-lg"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

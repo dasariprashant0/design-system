@@ -60,6 +60,7 @@
   "dataAttributes": [],
   "classes": [
     "avatar",
+    "avatar-sm",
     "avatar-lg",
     "avatar-line",
     "avatar-group",

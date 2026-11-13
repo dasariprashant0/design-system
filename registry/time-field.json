@@ -38,6 +38,112 @@
     "packages/react/src/components/time-field/time-field.test.tsx",
     "packages/react/src/components/time-field/time-field.tsx"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "TimeFieldProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The time as 24-hour `\"HH:mm\"` when controlled; `\"\"` means none. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The initial time as `\"HH:mm\"` when uncontrolled. Default none."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with `\"HH:mm\"` once hour and minute are both set, or `\"\"` when either is cleared."
+        },
+        {
+          "name": "hourCycle",
+          "type": "12 | 24",
+          "optional": true,
+          "default": "12",
+          "description": "Show hours 1-12 with an AM/PM segment (`12`) or 0-23 (`24`). Default 12."
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "optional": true,
+          "default": "1",
+          "description": "Minutes the arrow keys move by. Default 1."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Stops all input."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Form field name; a hidden input submits the 24-hour `\"HH:mm\"` value."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Names the group when it is not inside a Field. Default \"Time\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Field, TimeField} from '@monoline/react';\n\n<Field label=\"Start time\"><TimeField defaultValue=\"09:30\" /></Field>",
+  "dataAttributes": [
+    {
+      "name": "data-empty",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-lg",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "time-field",
+    "time-segment",
+    "time-sep"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

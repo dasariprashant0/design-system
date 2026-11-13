@@ -47,6 +47,13 @@
       "name": "NumberInputProps",
       "props": [
         {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "optional": true,
+          "default": "'md'",
+          "description": "`md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size."
+        },
+        {
           "name": "invalid",
           "type": "boolean",
           "optional": true,
@@ -65,6 +72,7 @@
     "select",
     "textarea",
     "input-sm",
+    "input-lg",
     "input-wrap",
     "input-end",
     "input-bare",

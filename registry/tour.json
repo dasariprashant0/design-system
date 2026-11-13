@@ -40,6 +40,109 @@
     "packages/react/src/components/tour/tour.test.tsx",
     "packages/react/src/components/tour/tour.tsx"
   ],
+  "related": [
+    "alert-dialog",
+    "command",
+    "context-menu"
+  ],
+  "props": [
+    {
+      "name": "TourProps",
+      "props": [
+        {
+          "name": "steps",
+          "type": "TourStep[]",
+          "optional": false,
+          "default": null,
+          "description": "The steps, in order."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Whether the tour is showing, when controlled. Pair with `onOpenChange`."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Whether the tour starts open when uncontrolled. Default false."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with false when the tour ends: Skip, Escape or Done."
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "The current step index when controlled. Pair with `onStepChange`."
+        },
+        {
+          "name": "defaultStep",
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "The step to start on when uncontrolled. Default 0."
+        },
+        {
+          "name": "onStepChange",
+          "type": "((step: number) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new index when the user moves between steps."
+        },
+        {
+          "name": "onFinish",
+          "type": "(() => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called when the user finishes the last step (not when they skip or press Escape)."
+        },
+        {
+          "name": "spotlightPadding",
+          "type": "number",
+          "optional": true,
+          "default": "6",
+          "description": "Extra space in px around the highlighted element. Default 6."
+        },
+        {
+          "name": "labels",
+          "type": "TourLabels",
+          "optional": true,
+          "default": null,
+          "description": "Replaces the button text."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {Tour} from '@monoline/react';\n\nfunction Basic() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>\n        <button type=\"button\" className=\"btn btn-solid\" onClick={() => setOpen(true)}>Start tour</button>\n        <button type=\"button\" className=\"btn\" id=\"tour-demo-a\">Create</button>\n        <button type=\"button\" className=\"btn\" id=\"tour-demo-b\">Share</button>\n      </div>\n      <Tour\n        open={open}\n        onOpenChange={setOpen}\n        steps={[\n          {target: '#tour-demo-a', title: 'Create', content: 'Start a new project from here.'},\n          {target: '#tour-demo-b', title: 'Share', content: 'Invite people by email.', placement: 'end'},\n          {title: 'That is all', content: 'You can restart the tour at any time.'},\n        ]}\n      />\n    </div>\n  );\n}\n\n<Basic />",
+  "dataAttributes": [],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "tour",
+    "tour-overlay",
+    "tour-spotlight",
+    "tour-card",
+    "tour-count",
+    "tour-title",
+    "tour-content",
+    "tour-actions",
+    "tour-spacer"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

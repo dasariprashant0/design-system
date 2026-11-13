@@ -32,6 +32,48 @@
     "packages/react/src/components/rolling-number/rolling-number.test.tsx",
     "packages/react/src/components/rolling-number/rolling-number.tsx"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "RollingNumberProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "The number to show. When it changes, each digit rolls to its new value."
+        },
+        {
+          "name": "locale",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "BCP 47 locale for the digits and separators, such as \"de-DE\". Default the browser's locale."
+        },
+        {
+          "name": "format",
+          "type": "Intl.NumberFormatOptions",
+          "optional": true,
+          "default": null,
+          "description": "`Intl.NumberFormat` options, for example `{style: 'currency', currency: 'USD'}`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {Button, RollingNumber} from '@monoline/react';\n\nfunction Counter() {\n  const [n, setN] = useState(1204);\n  return (\n    <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>\n      <strong style={{fontSize: 'var(--display-sm)'}}><RollingNumber value={n} format={{style: 'currency', currency: 'USD', maximumFractionDigits: 0}} /></strong>\n      <Button size=\"sm\" onClick={() => setN((v) => v + 137)}>Add 137</Button>\n      <Button size=\"sm\" onClick={() => setN((v) => Math.max(0, v - 999))}>Subtract 999</Button>\n    </div>\n  );\n}\n\n<Counter />",
+  "dataAttributes": [],
+  "classes": [
+    "rolling-number",
+    "rolling-number-visual",
+    "rolling-number-digit",
+    "rolling-number-strip",
+    "rolling-number-char"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

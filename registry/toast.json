@@ -35,7 +35,7 @@
   "related": [
     "alert",
     "empty-state",
-    "progress"
+    "notification-center"
   ],
   "props": [],
   "usage": "import {useState} from 'react';\nimport {Button, Toast, ToastAction, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport} from '@monoline/react';\n\nfunction Example() {\n  const [open, setOpen] = useState(false);\n  return (\n    <ToastProvider duration={5000}>\n      <Button onClick={() => setOpen(true)}>Save draft</Button>\n      <Toast open={open} onOpenChange={setOpen}>\n        <ToastTitle>Draft saved</ToastTitle>\n        <ToastDescription>Stored on this device.</ToastDescription>\n        <ToastAction altText=\"Undo the save\">Undo</ToastAction>\n        <ToastClose />\n      </Toast>\n      <ToastViewport label=\"Notifications\" />\n    </ToastProvider>\n  );\n}\n\n<Example />",

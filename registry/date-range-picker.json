@@ -25,7 +25,7 @@
     },
     {
       "path": "packages/css/src/components/date-picker.css",
-      "content": ".date-trigger { text-align: start; }\n.date-trigger[data-empty] { color: var(--muted); }\n.date-popover { padding: 0; max-width: none; border: 0; }\n.date-popover .calendar { border: 1px solid var(--foreground); }\n"
+      "content": ".date-trigger { text-align: start; }\n.date-trigger[data-empty] { color: var(--muted); }\n/* Two classes: popover.css comes later in the bundle and its single-class rule used to win, leaving a double border. The popover draws the one border. */\n.popover.date-popover { padding: 0; max-width: none; }\n.popover.date-popover .calendar { border: 0; }\n"
     },
     {
       "path": "packages/css/src/components/range-calendar.css",
@@ -58,6 +58,138 @@
     "packages/react/src/components/date-range-picker/date-range-picker.tsx",
     "packages/react/src/components/date-range-picker/index.ts",
     "packages/react/src/components/date-range-picker/meta.json"
+  ],
+  "related": [
+    "range-calendar",
+    "popover",
+    "field"
+  ],
+  "props": [
+    {
+      "name": "DateRangePickerProps",
+      "props": [
+        {
+          "name": "placeholder",
+          "type": "string",
+          "optional": true,
+          "default": "'Pick dates'",
+          "description": "Text shown on the button while no range is chosen. Default \"Pick dates\"."
+        },
+        {
+          "name": "format",
+          "type": "Intl.DateTimeFormatOptions",
+          "optional": true,
+          "default": "{dateStyle: 'medium'}",
+          "description": "Intl options for the dates on the button. Default: medium date."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Stops the user opening the calendar."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Extra class name for the trigger button."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Names the control when it is not inside a Field."
+        }
+      ]
+    }
+  ],
+  "usage": "import {DateRangePicker, Field} from '@monoline/react';\n\n<div style={{maxWidth: '320px', minHeight: '440px'}}><Field label=\"Stay\"><DateRangePicker weekStartsOn={1} /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    },
+    {
+      "name": "data-outside",
+      "values": []
+    },
+    {
+      "name": "data-today",
+      "values": []
+    },
+    {
+      "name": "data-empty",
+      "values": []
+    },
+    {
+      "name": "data-in-range",
+      "values": []
+    },
+    {
+      "name": "data-range-start",
+      "values": []
+    },
+    {
+      "name": "data-preview",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-lg",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check",
+    "calendar",
+    "calendar-head",
+    "calendar-title",
+    "calendar-nav",
+    "calendar-grid",
+    "calendar-day",
+    "date-trigger",
+    "date-popover",
+    "range-cell",
+    "range-calendar",
+    "date-range-popover",
+    "date-range-fields",
+    "date-range-field",
+    "date-range-error"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

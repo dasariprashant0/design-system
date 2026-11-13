@@ -32,7 +32,7 @@ Source: registry/accordion.json
 
 ## Alert (alert)
 A message that stays on screen, with a title and a tone.
-Status: stable | Category: feedback | Related: empty-state, progress, skeleton
+Status: stable | Category: feedback | Related: empty-state, notification-center, progress
 Import: import {Alert} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -81,7 +81,7 @@ A11y:
 - Escape cancels; focus is trapped; the page behind is inert.
 - Clicking the overlay does not close it.
 
-CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block
+CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block
 Source: registry/alert-dialog.json
 
 ## Animated list (animated-list)
@@ -175,6 +175,7 @@ Props (name: type = default, ? means optional):
 - value?: string — The text in the field.
 - defaultValue?: string = '' — Initial text when the field is uncontrolled. Default empty.
 - onValueChange?: ((value: string) => void) — Called with the text on every change, and with the suggestion when one is picked.
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size.
 - invalid?: boolean — Marks the field as having an error: sets `aria-invalid` and shows the error border.
 
 Usage:
@@ -191,7 +192,7 @@ A11y:
 - ArrowDown/ArrowUp move through suggestions, Enter picks the active one (or keeps typed text), Escape closes.
 - The field value is always the typed or picked text; nothing is forced to match a suggestion.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, autocomplete, autocomplete-list, autocomplete-option
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, autocomplete, autocomplete-list, autocomplete-option
 Data attributes: data-active
 Source: registry/autocomplete.json
 
@@ -203,7 +204,7 @@ Import: import {Avatar} from '@monoline/react'
 Props (name: type = default, ? means optional):
 - src?: string — Image URL. If it fails or is missing, the initials show.
 - name: string — The person's name. Used as the image alt text and to make initials; required so it always has a name.
-- size?: "md" | "lg" = 'md' — `md` (default) or `lg`.
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense rows or `lg`.
 - variant?: "line" | "solid" = 'solid' — `solid` (default) fills the circle; `line` draws only an outline.
 
 Usage:
@@ -217,7 +218,7 @@ A11y:
 - name is required: it is the image alt text and the fallback's accessible name.
 - The fallback shows while the image loads or if it fails.
 
-CSS classes: avatar, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note
+CSS classes: avatar, avatar-sm, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note
 Source: registry/avatar.json
 
 ## Avatar group (avatar-group)
@@ -239,7 +240,7 @@ import {Avatar, AvatarGroup} from '@monoline/react';
 A11y:
 - role="group" with an accessible name; the overflow count is plain text.
 
-CSS classes: avatar, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note
+CSS classes: avatar, avatar-sm, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note
 Source: registry/avatar-group.json
 
 ## Badge (badge)
@@ -353,7 +354,7 @@ import {BlockCta, Button} from '@monoline/react';
 A11y:
 - A section named by its title; actions are ordinary buttons or links.
 
-CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-ok, text-accent, text-truncate, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, block-cta, block-cta-box, block-cta-copy, block-cta-actions
+CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, block-cta, block-cta-box, block-cta-copy, block-cta-actions
 Source: registry/block-cta.json
 
 ## Dashboard shell block (block-dashboard-shell)
@@ -363,6 +364,7 @@ Import: import {BlockDashboardShell} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
 - brand?: ReactNode — Your logo or name, shown above the navigation.
+- renderLink?: RenderLink — Renders each navigation link, so a client router can handle the click. Default a plain `<a href>`.
 - nav: ShellNavItem[] — The navigation links shown in the sidebar and in the small-screen drawer.
 - navLabel?: string = 'Main' — Names the navigation landmark. Default "Main".
 - topbar?: ReactNode — Right side of the top bar: search, account menu.
@@ -387,8 +389,9 @@ A11y:
 - The sidebar and the drawer hold the same navigation landmark, named by navLabel; the current page has aria-current="page".
 - Below 800px the sidebar is hidden and a Menu button opens a left drawer: focus is trapped, Escape closes it and focus returns to the button.
 - Choosing a link closes the drawer. The content is a main landmark; put one h1 in it.
+- With renderLink the links are rendered by your router link; the block still sets the class and aria-current="page" on it.
 
-CSS classes: container, container-text, container-page, container-full, stack, stack-row, stack-wrap, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, drawer-content, block-shell, block-shell-side, block-shell-brand, block-shell-nav, block-shell-link, block-shell-body, block-shell-top, block-shell-top-end, block-shell-content, block-shell-menu
+CSS classes: container, container-text, container-page, container-full, stack, stack-row, stack-wrap, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, drawer-content, block-shell, block-shell-side, block-shell-brand, block-shell-nav, block-shell-link, block-shell-body, block-shell-top, block-shell-top-end, block-shell-content, block-shell-menu
 Data attributes: data-align: start | center | end | stretch; data-justify: start | center | end | between; data-side: right | end | left | start | top | bottom
 Source: registry/block-dashboard-shell.json
 
@@ -415,7 +418,7 @@ A11y:
 - A section named by its title, with the title as the page heading.
 - The large code is decorative and hidden from assistive technology.
 
-CSS classes: heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-ok, text-accent, text-truncate, block-empty-page, block-empty-page-code, block-empty-page-description, block-empty-page-actions
+CSS classes: heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-empty-page, block-empty-page-code, block-empty-page-description, block-empty-page-actions
 Source: registry/block-empty-page.json
 
 ## Feature grid block (block-feature-grid)
@@ -452,7 +455,7 @@ A11y:
 - A section named by its title; features are a list of items.
 - Feature titles are headings one level below the section title, so the outline stays in order.
 
-CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-ok, text-accent, text-truncate, block-features, block-features-head, block-features-grid, block-feature, block-feature-icon
+CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-features, block-features-head, block-features-grid, block-feature, block-feature-icon
 Data attributes: data-columns: 3 | 4
 Source: registry/block-feature-grid.json
 
@@ -465,6 +468,7 @@ Props (name: type = default, ? means optional):
 - brand?: ReactNode — Your logo or name.
 - description?: ReactNode — Optional short sentence about the product, shown under the brand.
 - columns: FooterColumn[] — Groups of links; each column has a `title` and a list of `links` and becomes its own labelled `nav`.
+- renderLink?: RenderLink — Renders each link, so a client router can handle the click. Default a plain `<a href>`.
 - legal?: ReactNode — Small print: copyright, legal links.
 - headingLevel?: 2 | 3 | 4 | 5 | 6 = 2 — Outline level of the column titles.
 
@@ -523,7 +527,7 @@ A11y:
 - The title is a real heading; headingLevel sets the outline level (h1 by default).
 - Media is passed in: give images alt text.
 
-CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-ok, text-accent, text-truncate, block-hero, block-hero-inner, block-hero-copy, block-hero-eyebrow, block-hero-description, block-hero-actions, block-hero-media
+CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-hero, block-hero-inner, block-hero-copy, block-hero-eyebrow, block-hero-description, block-hero-actions, block-hero-media
 Data attributes: data-align: center
 Source: registry/block-hero.json
 
@@ -554,7 +558,7 @@ A11y:
 - Invalid submits show a role=alert summary whose links move focus to each field, and each field gets aria-invalid and an error message.
 - Email and password carry autocomplete hints for password managers.
 
-CSS classes: form, form-errors, form-errors-title, form-actions, field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-ok, text-accent, text-truncate, block-login, block-login-head, block-login-footer
+CSS classes: form, form-errors, form-errors-title, form-actions, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-login, block-login-head, block-login-footer
 Data attributes: data-valid: true
 Source: registry/block-login.json
 
@@ -569,6 +573,7 @@ Props (name: type = default, ? means optional):
 - tiers: PricingTier[] — The plans to compare, each with a name, monthly and yearly price, features and a call to action.
 - defaultInterval?: PricingInterval = 'monthly' — Start on yearly billing.
 - labels?: Partial<{ monthly: string; yearly: string; switcher: string; period: Record<PricingInterval, string>; highlight: string; }> — Overrides for the built-in English texts (Monthly, Yearly, Billing period, Popular, / month, / year); use it to translate.
+- renderLink?: RenderLink — Renders a tier's link (the ones with `href`), so a client router can handle the click. Default a plain `<a href>`.
 - onSelect?: ((tier: PricingTier, interval: PricingInterval) => void) — Called when a tier's button (one without `href`) is pressed.
 - headingLevel?: 1 | 2 | 3 | 4 | 5 = 2 — Outline level of the section title, 1 to 5. Default 2; each tier name is one level lower.
 
@@ -592,7 +597,7 @@ A11y:
 - The billing switch is a named radio group operable with arrow keys.
 - Prices are plain text next to their period, never colour alone; the popular plan carries a text badge.
 
-CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-ok, text-accent, text-truncate, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, swatch, check, check-pass, check-fail, badge, badge-solid, badge-accent, kbd, key-hints, dot, heat-0, heat-1, heat-2, heat-3, heat-4, segmented, segment, block-pricing, block-pricing-head, block-pricing-tiers, block-tier, block-tier-head, block-tier-price, block-tier-amount, block-tier-period, block-tier-features
+CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, swatch, check, check-pass, check-fail, badge, badge-solid, badge-accent, kbd, key-hints, dot, heat-0, heat-1, heat-2, heat-3, heat-4, segmented, segment, block-pricing, block-pricing-head, block-pricing-tiers, block-tier, block-tier-head, block-tier-price, block-tier-amount, block-tier-period, block-tier-features
 Data attributes: data-state: on; data-highlighted
 Source: registry/block-pricing.json
 
@@ -636,7 +641,7 @@ A11y:
 - Switches have role=switch with visible labels; hints are linked with aria-describedby.
 - Selects are native and labelled.
 
-CSS classes: form, form-errors, form-errors-title, form-actions, fieldset, fieldset-legend, checkbox, radio, sw, checkbox-mark, radio-dot, radio-group, sw-thumb, choice, choice-group, field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-ok, text-accent, text-truncate, block-settings, block-settings-head, block-settings-row
+CSS classes: form, form-errors, form-errors-title, form-actions, fieldset, fieldset-legend, checkbox, radio, sw, checkbox-mark, radio-dot, radio-group, sw-thumb, choice, choice-group, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-settings, block-settings-head, block-settings-row
 Data attributes: data-state: checked | indeterminate; data-orientation: horizontal; data-valid: true
 Source: registry/block-settings-form.json
 
@@ -668,7 +673,7 @@ A11y:
 - Invalid submits show a role=alert summary whose links move focus to each field, and each field gets aria-invalid and an error message.
 - The password hint states the minimum length; autocomplete hints are set.
 
-CSS classes: form, form-errors, form-errors-title, form-actions, field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-ok, text-accent, text-truncate, block-signup, block-signup-head, block-signup-footer
+CSS classes: form, form-errors, form-errors-title, form-actions, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-signup, block-signup-head, block-signup-footer
 Data attributes: data-valid: true
 Source: registry/block-signup.json
 
@@ -777,12 +782,12 @@ Source: registry/breadcrumb.json
 
 ## Button (button)
 Triggers an action. Native button with solid, line, ghost and danger variants.
-Status: stable | Category: buttons | Primitive: radix-ui/Slot | Related: button-group, icon-button, segmented-control
+Status: stable | Category: buttons | Primitive: radix-ui/Slot | Related: button-group, copy-button, icon-button
 Import: import {Button} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
 - variant?: "danger" | "line" | "solid" | "ghost" = 'line' — `solid` is the one main action per view. `line` for the rest, `ghost` for inline links, `danger` for destructive.
-- size?: "md" | "sm" = 'md' — `md` (default) or `sm` for dense toolbars and table rows.
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense toolbars and table rows, or `lg` for prominent calls to action. Same heights as Input and Select.
 - loading?: boolean = false — Shows a spinner, sets `aria-busy` and ignores clicks. The label stays so the width does not jump.
 - asChild?: boolean = false — Render the child element (a link, a router link) with the button styles instead of a `<button>`.
 
@@ -803,7 +808,7 @@ A11y:
 - loading sets aria-busy and blocks clicks while keeping the label.
 - asChild renders a link without losing link semantics.
 
-CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch
 Source: registry/button.json
 
 ## Button group (button-group)
@@ -824,7 +829,7 @@ import {Button, ButtonGroup} from '@monoline/react';
 A11y:
 - role="group" with a required accessible name.
 
-CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, btn-group
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, btn-group
 Source: registry/button-group.json
 
 ## Calendar (calendar)
@@ -835,7 +840,8 @@ Import: import {Calendar} from '@monoline/react'
 Props (name: type = default, ? means optional):
 - value?: Date | null — The selected date when controlled; `null` means none. Pair with `onValueChange`.
 - defaultValue?: Date | null = null — The initially selected date when uncontrolled. Default none.
-- onValueChange?: ((date: Date) => void) — Called with the date the user picks.
+- onValueChange?: ((date: Date | null) => void) — Called with the date the user picks, or `null` when the user presses "Clear date" (only with `clearable`).
+- clearable?: boolean = false — Adds a "Clear date" button under the grid that resets the value to `null`. Default false.
 - weekStartsOn?: 0 | 1 = 0 — First day of the week: 0 = Sunday, 1 = Monday.
 - min?: Date — Earliest selectable date; earlier days are disabled.
 - max?: Date — Latest selectable date; later days are disabled.
@@ -858,6 +864,7 @@ A11y:
 - role="grid" with column headers; one day is in the tab order (roving tabindex).
 - Arrow keys move by day and week, Home/End to the start and end of the week, PageUp/PageDown by month.
 - Each day button has a full date name; the selected day has aria-pressed and today has aria-current="date".
+- With `clearable`, a "Clear date" button resets the value; it is disabled while no date is chosen.
 
 CSS classes: calendar, calendar-head, calendar-title, calendar-nav, calendar-grid, calendar-day
 Data attributes: data-outside; data-today
@@ -883,7 +890,7 @@ A11y:
 - Plain divs and a heading; no roles added.
 - With asChild on a link or button the whole card is one keyboard-focusable control.
 
-CSS classes: card, card-hover, banner, banner-accent, banner-warning, banner-danger, code-block, card-header, card-title, card-description, card-content, card-footer
+CSS classes: card, card-hover, banner, banner-accent, banner-warning, banner-danger, card-header, card-title, card-description, card-content, card-footer
 Source: registry/card.json
 
 ## Carousel (carousel)
@@ -964,7 +971,7 @@ A11y:
 - The code is a pre/code element; the region has an accessible name.
 - The copy button is announced as "Copy code" and confirms with a polite live message.
 
-CSS classes: code-block, code-head, code-title, code-copy, code-line, tok-keyword, tok-string, tok-number, tok-comment, tok-tag, tok-attr, tok-fn, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block
+CSS classes: code-block, code-head, code-title, code-copy, code-line, tok-keyword, tok-string, tok-number, tok-comment, tok-tag, tok-attr, tok-fn, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block
 Data attributes: data-copied; data-headless; data-lines
 Source: registry/code-block.json
 
@@ -1020,7 +1027,7 @@ A11y:
 - The native colour input and the hex text field each have their own name.
 - The hex field sets aria-invalid and points to an error message with aria-describedby until the value is valid; colour is never the only signal because the hex text is always shown.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, color-picker, color-picker-swatches, color-picker-swatch, color-picker-row, color-picker-native, color-picker-hex, color-picker-error
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, color-picker, color-picker-swatches, color-picker-swatch, color-picker-row, color-picker-native, color-picker-hex, color-picker-error
 Data attributes: data-disabled
 Source: registry/color-picker.json
 
@@ -1035,6 +1042,7 @@ Props (name: type = default, ? means optional):
 - defaultValue?: string = '' — The initially selected option's `value` when uncontrolled. Default none.
 - onValueChange?: ((value: string) => void) — Called with the chosen option's value, or '' when cleared.
 - emptyText?: string = 'No matches' — Shown when nothing matches.
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size.
 - invalid?: boolean — Marks the field as having an error: sets `aria-invalid` and shows the error border.
 
 Usage:
@@ -1051,7 +1059,7 @@ A11y:
 - ArrowDown/ArrowUp move through options, Enter picks, Escape closes (and clears the typed text on a second press), Tab leaves.
 - Options are in a listbox with aria-selected; an empty result is announced as text.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, combobox, combobox-list, combobox-option, combobox-empty
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, combobox, combobox-list, combobox-option, combobox-empty
 Data attributes: data-active
 Source: registry/combobox.json
 
@@ -1094,7 +1102,7 @@ A11y:
 - ArrowUp and ArrowDown move (skipping disabled items), Home and End jump, Enter runs the item, Escape closes.
 - The shortcut prop toggles the palette from anywhere (mod is Cmd on Mac, Ctrl elsewhere); result count is announced through a status region.
 
-CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, command, command-input, command-list, command-heading, command-item, command-hint, command-empty
+CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, command, command-input, command-list, command-heading, command-item, command-hint, command-empty
 Data attributes: data-active
 Source: registry/command.json
 
@@ -1185,13 +1193,37 @@ Source: registry/context-menu.json
 
 ## Copy button (copy-button)
 A button that copies a value to the clipboard, shows 'Copied' for a moment and announces it.
+Status: stable | Category: buttons | Related: button, icon-button, use-clipboard
 Import: import {CopyButton} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- value: string — The text written to the clipboard when the button is pressed.
+- children?: ReactNode — Visible text. Leave it out for an icon-only button that is named by `label`.
+- label?: string = 'Copy' — The accessible name of the icon-only button (the text button is named by its children). Default "Copy".
+- copiedLabel?: string = 'Copied' — What is shown (text button) and announced to screen readers after a successful copy. Default "Copied".
+- failedLabel?: string = 'Copy failed' — What is announced when the browser refuses to copy. Default "Copy failed".
+- timeout?: number — How long the copied state lasts, in milliseconds. Default 2000.
+- onCopied?: ((value: string) => void) — Called with the copied text after a successful copy.
+
+Usage:
+```tsx
+import {CopyButton} from '@monoline/react';
+
+<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}>
+  <code>npm i @monoline/react</code>
+  <CopyButton value="npm i @monoline/react" label="Copy install command" size="sm" />
+  <CopyButton value="npm i @monoline/react" variant="solid">Copy command</CopyButton>
+</div>
+```
+
 A11y:
 - Native button; the icon-only form is named by the label prop (default 'Copy').
 - The result is announced in a polite role=status region: 'Copied' or 'Copy failed'.
 - The text button changes its visible text to the copied label and resets itself.
-Files: packages/react/src/components/copy-button/copy-button.demo.tsx, packages/react/src/components/copy-button/copy-button.test.tsx, packages/react/src/components/copy-button/copy-button.tsx, packages/react/src/components/copy-button/index.ts, packages/react/src/components/copy-button/meta.json
+
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, btn-icon
+Data attributes: data-copied
+Source: registry/copy-button.json
 
 ## Data grid (data-grid)
 A virtualised, keyboard-navigable grid for very large data sets, with sortable columns and row selection.
@@ -1313,6 +1345,7 @@ Props (name: type = default, ? means optional):
 - placeholder?: string = 'Pick a date' — Text shown on the button while no date is chosen. Default "Pick a date".
 - format?: Intl.DateTimeFormatOptions = {dateStyle: 'medium'} — Intl options for the text on the button. Default: medium date.
 - disabled?: boolean — Stops the user opening the calendar.
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size.
 - invalid?: boolean — Marks the field as having an error: sets `aria-invalid` and shows the error border.
 - className?: string — Extra class name for the trigger button.
 - aria-label?: string — Names the control when it is not inside a Field.
@@ -1328,21 +1361,41 @@ A11y:
 - The trigger is a button naming the field and the current value; it opens a dialog with the calendar.
 - Choosing a date closes the dialog and returns focus to the trigger; Escape closes without changing.
 - All calendar keyboard behaviour applies inside.
+- With `clearable`, a "Clear date" button in the popover removes the date, closes it and returns focus to the trigger.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, popover, menu-content, menu-item, menu-label, menu-indicator, menu-item-check, calendar, calendar-head, calendar-title, calendar-nav, calendar-grid, calendar-day, date-trigger, date-popover
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, popover, menu-content, menu-item, menu-label, menu-indicator, menu-item-check, calendar, calendar-head, calendar-title, calendar-nav, calendar-grid, calendar-day, date-trigger, date-popover
 Data attributes: data-highlighted; data-disabled; data-variant: danger; data-outside; data-today; data-empty
 Source: registry/date-picker.json
 
 ## Date range picker (date-range-picker)
 A button that opens a range calendar and two typed date fields.
+Status: stable | Category: forms | Primitive: radix-ui/Popover | Related: range-calendar, popover, field
 Import: import {DateRangePicker} from '@monoline/react'
-Primitive: radix-ui/Popover | Status: stable
+
+Props (name: type = default, ? means optional):
+- placeholder?: string = 'Pick dates' — Text shown on the button while no range is chosen. Default "Pick dates".
+- format?: Intl.DateTimeFormatOptions = {dateStyle: 'medium'} — Intl options for the dates on the button. Default: medium date.
+- disabled?: boolean — Stops the user opening the calendar.
+- invalid?: boolean — Marks the field as having an error: sets `aria-invalid` and shows the error border.
+- className?: string — Extra class name for the trigger button.
+- aria-label?: string — Names the control when it is not inside a Field.
+
+Usage:
+```tsx
+import {DateRangePicker, Field} from '@monoline/react';
+
+<div style={{maxWidth: '320px', minHeight: '440px'}}><Field label="Stay"><DateRangePicker weekStartsOn={1} /></Field></div>
+```
+
 A11y:
 - The trigger is a button naming the field and the current range; it opens a dialog with two text fields and the calendar.
 - Typed fields are labelled Start and End, accept YYYY-MM-DD, apply on Enter or blur and mark aria-invalid with an alert message when the text is not a pickable date.
 - Choosing the end date closes the dialog and returns focus to the trigger; Escape closes without changing.
 - All range-calendar keyboard behaviour applies inside.
-Files: packages/react/src/components/date-range-picker/date-range-picker.demo.tsx, packages/react/src/components/date-range-picker/date-range-picker.test.tsx, packages/react/src/components/date-range-picker/date-range-picker.tsx, packages/react/src/components/date-range-picker/index.ts, packages/react/src/components/date-range-picker/meta.json
+
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, popover, menu-content, menu-item, menu-label, menu-indicator, menu-item-check, calendar, calendar-head, calendar-title, calendar-nav, calendar-grid, calendar-day, date-trigger, date-popover, range-cell, range-calendar, date-range-popover, date-range-fields, date-range-field, date-range-error
+Data attributes: data-highlighted; data-disabled; data-variant: danger; data-outside; data-today; data-empty; data-in-range; data-range-start; data-preview
+Source: registry/date-range-picker.json
 
 ## Description list (description-list)
 Label and value pairs, like the details of a record.
@@ -1392,7 +1445,7 @@ A11y:
 - Focus moves into the dialog, is trapped there, and returns to the trigger on close.
 - Escape and the Close button close it; the page behind is inert.
 
-CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close
+CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title
 Source: registry/dialog.json
 
 ## Direction provider (direction-provider)
@@ -1471,7 +1524,7 @@ A11y:
 - Focus is trapped while open and returns to the trigger on close.
 - Escape and the overlay close it.
 
-CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, drawer-content
+CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, drawer-content
 Data attributes: data-side: right | end | left | start | top | bottom
 Source: registry/drawer.json
 
@@ -1510,7 +1563,7 @@ Source: registry/dropdown-menu.json
 
 ## Empty state (empty-state)
 Say that there is nothing here yet and offer the next step.
-Status: stable | Category: feedback | Related: alert, progress, skeleton
+Status: stable | Category: feedback | Related: alert, notification-center, progress
 Import: import {EmptyState} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -1540,7 +1593,8 @@ Import: import {Field} from '@monoline/react'
 Props (name: type = default, ? means optional):
 - label: ReactNode — The visible label of the control. Required so every control has a name.
 - hint?: ReactNode — Help text shown under the control.
-- error?: ReactNode — Error message. Its presence marks the control invalid and it is announced politely.
+- error?: ReactNode — Error message. Its presence marks the control invalid and it is announced politely. Inside a `Form` with `errors`, leave it out and set `name` instead.
+- name?: string — The `name` of the control. Inside a `Form` that has `errors`, the Field shows the message for this name, so you pass each error once.
 - required?: boolean = false — Marks the control as required: adds a required marker to the label and sets `required` on the control. Default false.
 - children: ReactNode — The control: Input, Textarea, Select trigger, etc.
 
@@ -1555,8 +1609,9 @@ A11y:
 - The label is bound to the control by id, so it has an accessible name.
 - Hint and error are linked with aria-describedby; an error sets aria-invalid and is announced via role=alert.
 - required sets the native required attribute on the control.
+- Inside a Form with errors, a Field with a matching name shows that error once; the form summary announces it, so the inline text is not a second alert.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row
 Data attributes: data-valid: true
 Source: registry/field.json
 
@@ -1603,7 +1658,7 @@ A11y:
 - Selected files are listed as text with a Remove button each; changes are announced via a polite status.
 - Dragging is an extra, never the only way.
 
-CSS classes: upload, upload-zone, upload-list, upload-name, upload-remove, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block
+CSS classes: upload, upload-zone, upload-list, upload-name, upload-remove, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block
 Data attributes: data-over
 Source: registry/file-upload.json
 
@@ -1643,7 +1698,7 @@ Import: import {Form} from '@monoline/react'
 Props (name: type = default, ? means optional):
 - onSubmit?: ((event: FormEvent<HTMLFormElement>) => void) — Called with the submit event. Combine with `preventDefault` when you handle the form in JS.
 - preventDefault?: boolean — Call `event.preventDefault()` before `onSubmit`, for forms handled in JS. Off by default so native posts still work.
-- errors?: FormError[] — Errors to list in a summary at the top of the form. Also pass each message to its `Field` as `error`.
+- errors?: FormError[] — Errors to list in a summary at the top of the form. Give each `Field` the same `name` and it shows its own message, so you pass each error once. A Field's own `error` prop still wins.
 - errorsTitle?: ReactNode = 'Fix these to continue' — Heading of the summary. Default "Fix these to continue".
 
 Usage:
@@ -1667,8 +1722,8 @@ function Example() {
         setErrors(next);
       }}
     >
-      <Field label="Name" error={errors.find((e) => e.name === 'name')?.message}><Input name="name" /></Field>
-      <Field label="Email" error={errors.find((e) => e.name === 'email')?.message}><Input name="email" type="email" /></Field>
+      <Field label="Name" name="name"><Input name="name" /></Field>
+      <Field label="Email" name="email"><Input name="email" type="email" /></Field>
       <FormActions><Button type="submit" variant="solid">Send</Button><Button type="reset">Clear</Button></FormActions>
     </Form>
   );
@@ -1680,7 +1735,7 @@ function Example() {
 A11y:
 - A native form; give it an accessible name with aria-label or aria-labelledby when the page has several.
 - The error summary is a role=alert region at the top; each item is a link that moves focus to the invalid control.
-- Pass each message to its Field too, so the control carries aria-invalid and aria-describedby.
+- Pass each error once, in the Form's errors; a Field with the same name shows it inline and sets aria-invalid and aria-describedby on its control. The summary announces it, so the inline text is not announced twice.
 
 CSS classes: form, form-errors, form-errors-title, form-actions
 Source: registry/form.json
@@ -1705,7 +1760,7 @@ import {Card, Grid} from '@monoline/react';
 A11y:
 - A plain div; source order is reading order.
 
-CSS classes: grid, grid-auto, grid-fixed
+CSS classes: grid, grid-fixed
 Source: registry/grid.json
 
 ## Grid pattern (grid-pattern)
@@ -1741,7 +1796,7 @@ Import: import {Heading} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
 - level?: 1 | 2 | 3 | 4 | 5 | 6 = 2 — Document outline level, 1 to 6.
-- size?: "md" | "lg" | "sm" | "display" | "xl" — Look. Defaults follow the level. `display` uses the display font.
+- size?: "sm" | "md" | "lg" | "display" | "xl" — Look. Defaults follow the level. `display` uses the display font.
 
 Usage:
 ```tsx
@@ -1801,7 +1856,7 @@ A11y:
 - Native button; aria-label is required by the type.
 - Space and Enter activate it.
 
-CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, btn-icon
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, btn-icon
 Source: registry/icon-button.json
 
 ## Image (image)
@@ -1832,14 +1887,33 @@ Source: registry/image.json
 
 ## Image gallery (image-gallery)
 A thumbnail grid that opens a lightbox with previous and next.
+Status: stable | Category: data-display | Related: button, dialog
 Import: import {ImageGallery} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- images: GalleryImage[] — The images, in order. Each needs `alt` text.
+- columns?: number = 3 — Number of columns in the thumbnail grid. Default 3.
+- onIndexChange?: ((index: number) => void) — Called with the index of the image shown whenever the lightbox opens or moves.
+
+Usage:
+```tsx
+import {ImageGallery, type GalleryImage} from '@monoline/react';
+
+const tile = (n: number, fill: string) => `data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="${fill}"/><text x="200" y="165" font-family="monospace" font-size="64" text-anchor="middle" fill="#fff">${n}</text></svg>`)}`;
+
+const images: GalleryImage[] = ['#6b4f3a', '#3a5a6b', '#4f6b3a', '#6b3a5a', '#5a3a6b', '#3a6b5a'].map((c, i) => ({src: tile(i + 1, c), alt: `Sample picture ${i + 1}, a flat colour with its number`, caption: `Picture ${i + 1}`}));
+
+<div style={{maxWidth: '480px'}}><ImageGallery images={images} /></div>
+```
+
 A11y:
 - Each thumbnail is a button named by the image's required alt text, with aria-haspopup=dialog.
 - The lightbox is a modal dialog titled 'Image 2 of 5'; focus moves in, is trapped, and returns to the thumbnail on close.
 - ArrowLeft and ArrowRight (swapped in RTL) and the Previous and Next buttons move through the images and wrap; a horizontal swipe does the same; Escape closes.
 - A polite status message announces the new image's alt text and position. Neighbouring images are preloaded.
-Files: packages/react/src/components/image-gallery/image-gallery.demo.tsx, packages/react/src/components/image-gallery/image-gallery.test.tsx, packages/react/src/components/image-gallery/image-gallery.tsx, packages/react/src/components/image-gallery/index.ts, packages/react/src/components/image-gallery/meta.json
+
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, image-gallery, image-gallery-thumb, image-gallery-lightbox, image-gallery-title, image-gallery-figure, image-gallery-nav
+Source: registry/image-gallery.json
 
 ## Input (input)
 A single-line text field.
@@ -1847,7 +1921,7 @@ Status: stable | Category: forms | Related: field
 Import: import {Input} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
-- size?: "md" | "sm" = 'md' — `md` (default) or `sm` for dense layouts.
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button and the other form controls at each size.
 - invalid?: boolean — Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`.
 
 Usage:
@@ -1861,7 +1935,7 @@ A11y:
 - Native <input>: all keyboard and autofill behaviour is the browser's.
 - Inside a Field it is labelled and described automatically; invalid sets aria-invalid.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row
 Data attributes: data-valid: true
 Source: registry/input.json
 
@@ -1904,7 +1978,7 @@ A11y:
 - A real <label>: clicking it focuses the control it names.
 - required adds a visual marker; set required on the control for assistive tech.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt
 Source: registry/label.json
 
 ## Line chart (line-chart)
@@ -1983,14 +2057,44 @@ Source: registry/marquee.json
 
 ## Mentions (mentions)
 A textarea that suggests people when you type @.
+Status: stable | Category: forms | Related: autocomplete, calendar, checkbox
 Import: import {Mentions} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- value?: string — The text when controlled. Pair with `onValueChange`.
+- defaultValue?: string = '' — The initial text when uncontrolled. Default empty.
+- onValueChange?: ((value: string) => void) — Called with the full text after every edit and after a mention is inserted.
+- options?: MentionOption[] = [] — The choices, filtered by what is typed after the trigger. Use `onSearch` instead to load them.
+- onSearch?: ((query: string, trigger: string) => MentionOption[] | Promise<MentionOption[]>) — Loads choices for the typed query, for example from a server. Return the options or a promise of them. Late answers for an older query are ignored. Replaces `options` filtering when given.
+- triggers?: string[] = ['@'] — Characters that open the list when typed at the start of a word. Default `["@"]`.
+- onMentionSelect?: ((option: MentionOption, trigger: string) => void) — Called with the option and the trigger when the user inserts a mention.
+- loadingText?: string = 'Loading' — Text shown while `onSearch` is loading. Default "Loading".
+- emptyText?: string = 'No matches' — Text shown when nothing matches. Default "No matches".
+- invalid?: boolean — Marks the field as having an error: sets `aria-invalid` and shows the error border.
+
+Usage:
+```tsx
+import {Field, Mentions, type MentionOption} from '@monoline/react';
+
+const people: MentionOption[] = [
+  {value: 'ada', label: 'Ada Lovelace'},
+  {value: 'grace', label: 'Grace Hopper'},
+  {value: 'alan', label: 'Alan Turing'},
+  {value: 'linus', label: 'Linus Torvalds', disabled: true},
+];
+
+<div style={{maxWidth: '360px', minHeight: '220px'}}><Field label="Comment"><Mentions options={people} rows={3} /></Field></div>
+```
+
 A11y:
 - The textarea keeps its native textbox role (ARIA does not allow combobox on a textarea) and adds aria-haspopup="listbox", aria-autocomplete="list", aria-controls while the list is open and aria-activedescendant for the highlighted option; the list is a listbox of options.
 - ArrowDown/ArrowUp move the highlight, Enter or Tab insert the mention, Escape closes the list without inserting; focus never leaves the textarea.
 - A polite status region announces how many suggestions there are, and when they are loading or empty.
 - Async loading ignores answers for outdated queries so the list never shows stale results.
-Files: packages/react/src/components/mentions/index.ts, packages/react/src/components/mentions/mentions.demo.tsx, packages/react/src/components/mentions/mentions.test.tsx, packages/react/src/components/mentions/mentions.tsx, packages/react/src/components/mentions/meta.json
+
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, mentions, mentions-list, mentions-option, mentions-note
+Data attributes: data-active
+Source: registry/mentions.json
 
 ## Menubar (menubar)
 A horizontal bar of menus, like File, Edit and View in a desktop app.
@@ -2029,6 +2133,7 @@ Props (name: type = default, ? means optional):
 - defaultValue?: string[] = [] — The initially chosen option values when uncontrolled. Default empty.
 - onValueChange?: ((value: string[]) => void) — Called with the full list of chosen values.
 - emptyText?: string = 'No matches' — Shown when nothing matches.
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size.
 - invalid?: boolean — Marks the field as having an error: sets `aria-invalid` and shows the error border.
 
 Usage:
@@ -2045,8 +2150,8 @@ A11y:
 - ArrowDown/ArrowUp move, Enter toggles the active option, Escape closes, Tab leaves.
 - Backspace in an empty field removes the last tag; each tag has a button named "Remove <label>".
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, avatar, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note, multi-select, multi-select-box, multi-select-input, multi-select-list, multi-select-option, multi-select-empty
-Data attributes: data-invalid; data-disabled; data-active
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, avatar, avatar-sm, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note, multi-select, multi-select-box, multi-select-input, multi-select-list, multi-select-option, multi-select-empty
+Data attributes: data-invalid; data-disabled; data-active; data-size: sm | lg
 Source: registry/multi-select.json
 
 ## Native select (native-select)
@@ -2055,6 +2160,7 @@ Status: stable | Category: forms | Related: field
 Import: import {NativeSelect} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button and the other form controls at each size.
 - invalid?: boolean — Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`.
 
 Usage:
@@ -2068,7 +2174,7 @@ A11y:
 - A real select element: native keyboard, typeahead and mobile pickers.
 - Inside a Field it is labelled and described automatically.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt
 Source: registry/native-select.json
 
 ## Navigation menu (navigation-menu)
@@ -2107,14 +2213,54 @@ Source: registry/navigation-menu.json
 
 ## Notification center (notification-center)
 A bell button with an unread count that opens a list of notifications, with mark read, clear and an empty state.
+Status: stable | Category: feedback | Related: button, icon-button, popover
 Import: import {NotificationCenter} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- notifications: NotificationItem[] — The notifications, newest first. You own this list: update it in the callbacks below.
+- onMarkRead?: ((id: string) => void) — Called with the id when the user marks one notification as read. Hides that item's "Mark read" button once `read` is true.
+- onMarkAllRead?: (() => void) — Called when the user chooses "Mark all read". The button is disabled when nothing is unread.
+- onClear?: (() => void) — Called when the user chooses "Clear all". The button is disabled when the list is empty.
+- label?: string = 'Notifications' — Name of the bell button and the panel. Default "Notifications".
+- emptyText?: string = "You're all caught up." — Shown when there are no notifications. Default "You're all caught up."
+
+Usage:
+```tsx
+import {useState} from 'react';
+import {NotificationCenter, type NotificationItem} from '@monoline/react';
+
+const start: NotificationItem[] = [
+  {id: '1', title: 'Deploy finished', description: 'Production, 41 seconds.', time: '2 min ago'},
+  {id: '2', title: 'Ada commented on your pull request', time: '1 hour ago'},
+  {id: '3', title: 'Invoice paid', time: 'Yesterday', read: true},
+];
+
+function Demo1() {
+  const [list, setList] = useState(start);
+  return (
+    <div style={{display: 'flex', justifyContent: 'flex-end', minHeight: '280px'}}>
+      <NotificationCenter
+        notifications={list}
+        onMarkRead={(id) => setList((l) => l.map((n) => (n.id === id ? {...n, read: true} : n)))}
+        onMarkAllRead={() => setList((l) => l.map((n) => ({...n, read: true})))}
+        onClear={() => setList([])}
+      />
+    </div>
+  );
+}
+
+<Demo1 />
+```
+
 A11y:
 - The bell is a button named 'Notifications, 3 unread'; the visible count badge is aria-hidden so the number is announced once.
 - The panel is a labelled dialog: Escape or an outside click closes it and focus returns to the bell.
 - Unread items are bold, start with a visually hidden 'Unread:' and have a 'Mark read' button named after the item; unread is never shown by colour alone.
 - 'Mark all read' and 'Clear all' are disabled when they have nothing to do; an empty list shows plain text.
-Files: packages/react/src/components/notification-center/index.ts, packages/react/src/components/notification-center/meta.json, packages/react/src/components/notification-center/notification-center.demo.tsx, packages/react/src/components/notification-center/notification-center.test.tsx, packages/react/src/components/notification-center/notification-center.tsx
+
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, swatch, check, check-pass, check-fail, badge, badge-solid, badge-accent, kbd, key-hints, dot, heat-0, heat-1, heat-2, heat-3, heat-4, btn-icon, popover, menu-content, menu-item, menu-label, menu-indicator, menu-item-check, notification-center, notification-center-badge, notification-center-panel, notification-center-head, notification-center-actions, notification-center-list, notification-center-item, notification-center-text, notification-center-title, notification-center-desc, notification-center-time, notification-center-empty
+Data attributes: data-highlighted; data-disabled; data-variant: danger; data-unread
+Source: registry/notification-center.json
 
 ## Number input (number-input)
 A numeric field with decrease and increase buttons.
@@ -2122,6 +2268,7 @@ Status: stable | Category: forms | Related: input, field
 Import: import {NumberInput} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size.
 - invalid?: boolean — Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`.
 
 Usage:
@@ -2135,7 +2282,7 @@ A11y:
 - Native input type="number"; ArrowUp/ArrowDown change the value.
 - The step buttons are named "Decrease" and "Increase" and are skipped by Tab.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, number-input, number-field, number-step
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, number-input, number-field, number-step
 Source: registry/number-input.json
 
 ## Number ticker (number-ticker)
@@ -2233,13 +2380,32 @@ Source: registry/otp-input.json
 
 ## Overflow list (overflow-list)
 A row of items that shows as many as fit and puts the rest in a '+N' menu.
+Status: stable | Category: layout | Related: button, dropdown-menu
 Import: import {OverflowList} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- items: OverflowItem[] — The items in order. As many as fit are shown; the rest move into a "+N" menu.
+- moreLabel?: ((hidden: number) => string) = (n) => `${n} more ${n === 1 ? 'item' : 'items'}` — Accessible name of the "+N" button, given the number of hidden items. Default "N more items".
+
+Usage:
+```tsx
+import {OverflowList, Tag} from '@monoline/react';
+
+const names = ['Design', 'Engineering', 'Marketing', 'Support', 'Finance', 'Legal', 'People', 'Research'];
+
+<div style={{maxWidth: '320px', resize: 'horizontal', overflow: 'auto', paddingBlock: 'var(--s2)'}}>
+  <OverflowList items={names.map((n) => ({id: n, label: <Tag>{n}</Tag>}))} />
+</div>
+```
+
 A11y:
 - Items that do not fit are visibility:hidden, so they are neither focusable nor read out; the same items are reachable in the menu.
 - The '+N' button is named '3 more items' (customisable with moreLabel) and opens a menu: Enter, Space or ArrowDown opens, arrows move, Escape closes and returns focus to the button.
 - Layout is recalculated by a ResizeObserver when the container or the items change.
-Files: packages/react/src/components/overflow-list/index.ts, packages/react/src/components/overflow-list/meta.json, packages/react/src/components/overflow-list/overflow-list.demo.tsx, packages/react/src/components/overflow-list/overflow-list.test.tsx, packages/react/src/components/overflow-list/overflow-list.tsx
+
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, dropdown, menu, menu-end, menu-item, danger, menu-sep, overflow-list, overflow-list-items, overflow-list-item, overflow-list-more
+Data attributes: data-hidden
+Source: registry/overflow-list.json
 
 ## Pagination (pagination)
 Move between pages of results.
@@ -2247,9 +2413,10 @@ Status: stable | Category: navigation | Related: breadcrumb, menubar, navigation
 Import: import {Pagination} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
-- page: number — Current page, 1-based.
+- page?: number — Current page, 1-based, when controlled. Pair with `onPageChange`.
+- defaultPage?: number = 1 — The starting page when uncontrolled. Default 1.
 - pageCount: number — Total number of pages.
-- onPageChange: (page: number) => void — Called with the new 1-based page number when the user picks a page or presses Prev or Next.
+- onPageChange?: ((page: number) => void) — Called with the new 1-based page number when the user picks a page or presses Prev or Next.
 - siblings?: number = 1 — How many numbers to show on each side of the current page.
 
 Usage:
@@ -2292,7 +2459,7 @@ A11y:
 - The toggle is a button with aria-pressed named "Show password".
 - The field keeps autocomplete hints so password managers work.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt
 Source: registry/password-input.json
 
 ## Pie chart (pie-chart)
@@ -2352,7 +2519,7 @@ Source: registry/popover.json
 
 ## Progress (progress)
 How far along a task is, or that it is still working.
-Status: stable | Category: feedback | Primitive: radix-ui/Progress | Related: alert, empty-state, skeleton
+Status: stable | Category: feedback | Primitive: radix-ui/Progress | Related: alert, empty-state, notification-center
 Import: import {Progress} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -2400,8 +2567,26 @@ Source: registry/radio-group.json
 
 ## Range calendar (range-calendar)
 A month grid for picking a start and an end date.
+Status: stable | Category: forms | Related: autocomplete, calendar, checkbox
 Import: import {RangeCalendar} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- value?: DateRange — The selected range when controlled. Pair with `onValueChange`.
+- defaultValue?: DateRange = EMPTY — The initially selected range when uncontrolled. Default empty.
+- onValueChange?: ((range: DateRange) => void) — Called after every pick. The first pick gives `{start, end: null}`; the second completes the range.
+- weekStartsOn?: 0 | 1 = 0 — First day of the week: 0 = Sunday, 1 = Monday. Default 0.
+- min?: Date — Earliest selectable date; earlier days are disabled.
+- max?: Date — Latest selectable date; later days are disabled.
+- isDateDisabled?: ((date: Date) => boolean) — Return true for a day that cannot be picked, such as a holiday.
+- locale?: string — BCP 47 locale for month and day names.
+
+Usage:
+```tsx
+import {RangeCalendar} from '@monoline/react';
+
+<RangeCalendar weekStartsOn={1} />
+```
+
 A11y:
 - role="grid" with column headers; one day is in the tab order (roving tabindex).
 - Enter or Space on a day sets the start, then the end; Escape while picking clears the start.
@@ -2409,7 +2594,10 @@ A11y:
 - The days between start and focus are previewed while picking, by hover and by keyboard.
 - Each day button has a full date name; start and end have aria-pressed; a status region announces the chosen range.
 - Disabled days (min, max, isDateDisabled) are real disabled buttons.
-Files: packages/react/src/components/range-calendar/index.ts, packages/react/src/components/range-calendar/meta.json, packages/react/src/components/range-calendar/range-calendar.demo.tsx, packages/react/src/components/range-calendar/range-calendar.test.tsx, packages/react/src/components/range-calendar/range-calendar.tsx
+
+CSS classes: calendar, calendar-head, calendar-title, calendar-nav, calendar-grid, calendar-day, range-cell, range-calendar
+Data attributes: data-outside; data-today; data-in-range; data-range-start; data-preview
+Source: registry/range-calendar.json
 
 ## Rating (rating)
 Pick or show a score from 1 to a maximum, as stars.
@@ -2442,14 +2630,44 @@ Source: registry/rating.json
 
 ## Resizable (resizable)
 Panels separated by handles you drag or move with the keyboard.
-Import: import {Resizable} from '@monoline/react'
-Primitive: none | Status: stable
+Status: stable | Category: layout | Related: aspect-ratio, box, container
+Import: import {ResizablePanelGroup} from '@monoline/react'
+
+Props (name: type = default, ? means optional):
+ResizablePanelGroupProps:
+- direction?: "vertical" | "horizontal" = 'horizontal' — `horizontal` puts panels side by side; `vertical` stacks them. Default `horizontal`.
+- step?: number = 5 — Percent a panel grows or shrinks per arrow-key press (PageUp/PageDown use double). Default 5.
+- onLayoutChange?: ((sizes: number[]) => void) — Called with every panel's size in percent (they add up to 100) after each resize.
+- children: ReactNode — `ResizablePanel` and `ResizableHandle` elements, alternating, as direct children: panel, handle, panel...
+ResizablePanelProps:
+- defaultSize?: number — Starting size in percent. Panels without one share what is left equally.
+- minSize?: number — Smallest size in percent. Default 10.
+- maxSize?: number — Largest size in percent. Default 100.
+ResizableHandleProps:
+- aria-label?: string — Names the handle for screen readers. Default "Resize panels".
+
+Usage:
+```tsx
+import {ResizableHandle, ResizablePanel, ResizablePanelGroup} from '@monoline/react';
+
+const box = {padding: 'var(--s4)', fontSize: 'var(--text-sm)'};
+
+<ResizablePanelGroup style={{height: '200px', border: '1px solid var(--rule)'}}>
+  <ResizablePanel defaultSize={30} minSize={15}><div style={box}>Sidebar</div></ResizablePanel>
+  <ResizableHandle aria-label="Resize sidebar" />
+  <ResizablePanel defaultSize={70}><div style={box}>Content</div></ResizablePanel>
+</ResizablePanelGroup>
+```
+
 A11y:
 - Each handle is a focusable role="separator" with aria-orientation, aria-valuenow, aria-valuemin, aria-valuemax and aria-controls pointing at the panel it resizes.
 - Arrow keys resize by the step (horizontal groups use Left/Right, vertical groups Up/Down; mirrored in right-to-left); PageUp/PageDown resize by double; Home and End jump to the limits.
 - minSize and maxSize are enforced for both keyboard and pointer, and are reflected in aria-valuemin and aria-valuemax.
 - Handles are at least 24 CSS px to grab and show the focus ring.
-Files: packages/react/src/components/resizable/index.ts, packages/react/src/components/resizable/meta.json, packages/react/src/components/resizable/resizable.demo.tsx, packages/react/src/components/resizable/resizable.test.tsx, packages/react/src/components/resizable/resizable.tsx
+
+CSS classes: resizable, resizable-panel, resizable-handle
+Data attributes: data-direction: vertical | horizontal; data-dragging
+Source: registry/resizable.json
 
 ## Rich text editor (rich-text-editor)
 A dependency-free rich text editor with a formatting toolbar and sanitized HTML in and out.
@@ -2481,19 +2699,46 @@ A11y:
 - The link prompt is a labelled popover; an invalid address is announced as an alert and links are limited to http, https and mailto.
 - Pasted content is sanitized to a small tag allowlist; disabled and read-only set aria-disabled and aria-readonly and turn the toolbar off.
 
-CSS classes: toolbar, toolbar-item, toolbar-sep, popover, menu-content, menu-item, menu-label, menu-indicator, menu-item-check, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, rte, rte-toolbar, rte-content, rte-link, rte-link-label, rte-link-error, rte-link-actions
+CSS classes: toolbar, toolbar-item, toolbar-sep, popover, menu-content, menu-item, menu-label, menu-indicator, menu-item-check, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, rte, rte-toolbar, rte-content, rte-link, rte-link-label, rte-link-error, rte-link-actions
 Data attributes: data-state: on; data-highlighted; data-disabled; data-variant: danger; data-valid: true; data-empty; data-readonly
 Source: registry/rich-text-editor.json
 
 ## Rolling number (rolling-number)
 A number whose digits roll to the new value when it changes. Screen readers read the final value.
+Status: stable | Category: effects | Related: animated-list, bento-grid, border-beam
 Import: import {RollingNumber} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- value: number — The number to show. When it changes, each digit rolls to its new value.
+- locale?: string — BCP 47 locale for the digits and separators, such as "de-DE". Default the browser's locale.
+- format?: Intl.NumberFormatOptions — `Intl.NumberFormat` options, for example `{style: 'currency', currency: 'USD'}`.
+
+Usage:
+```tsx
+import {useState} from 'react';
+import {Button, RollingNumber} from '@monoline/react';
+
+function Counter() {
+  const [n, setN] = useState(1204);
+  return (
+    <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>
+      <strong style={{fontSize: 'var(--display-sm)'}}><RollingNumber value={n} format={{style: 'currency', currency: 'USD', maximumFractionDigits: 0}} /></strong>
+      <Button size="sm" onClick={() => setN((v) => v + 137)}>Add 137</Button>
+      <Button size="sm" onClick={() => setN((v) => Math.max(0, v - 999))}>Subtract 999</Button>
+    </div>
+  );
+}
+
+<Counter />
+```
+
 A11y:
 - The animated digits are aria-hidden; the formatted final value is plain text for screen readers.
 - With prefers-reduced-motion the digits change without rolling.
 - Not interactive: no focus stops.
-Files: packages/react/src/components/rolling-number/index.ts, packages/react/src/components/rolling-number/meta.json, packages/react/src/components/rolling-number/rolling-number.demo.tsx, packages/react/src/components/rolling-number/rolling-number.test.tsx, packages/react/src/components/rolling-number/rolling-number.tsx
+
+CSS classes: rolling-number, rolling-number-visual, rolling-number-digit, rolling-number-strip, rolling-number-char
+Source: registry/rolling-number.json
 
 ## Scroll area (scroll-area)
 A scrollable region with thin, themed scrollbars.
@@ -2575,6 +2820,7 @@ Status: stable | Category: forms | Primitive: radix-ui/Select | Related: field
 Import: import {Select} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size.
 - invalid?: boolean — Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`.
 
 Usage:
@@ -2589,8 +2835,8 @@ A11y:
 - Arrow keys, Home, End and type-ahead move; Enter selects; Escape closes.
 - Inside a Field it is labelled by the Field's label.
 
-CSS classes: select-trigger, select-content, select-viewport, select-item, select-label
-Data attributes: data-placeholder; data-highlighted; data-disabled
+CSS classes: select-trigger, select-content, select-viewport, select-item, select-label, input-sm, input-lg
+Data attributes: data-placeholder; data-highlighted; data-disabled; data-invalid
 Source: registry/select.json
 
 ## Separator (separator)
@@ -2633,12 +2879,12 @@ A11y:
 - Native <button>: Enter and Space activate, Tab focuses; behaviour comes from Button.
 - The sweep is a pseudo-element, never read aloud, and is off under prefers-reduced-motion.
 
-CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, shimmer-button
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, shimmer-button
 Source: registry/shimmer-button.json
 
 ## Skeleton (skeleton)
 A still placeholder shaped like the content that is loading.
-Status: stable | Category: feedback | Related: alert, empty-state, progress
+Status: stable | Category: feedback | Related: alert, empty-state, notification-center
 Import: import {Skeleton} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -2687,14 +2933,34 @@ Source: registry/slider.json
 
 ## Sortable list (sortable-list)
 A list the user reorders by dragging a handle or with the keyboard, with live announcements.
+Status: stable | Category: data-display | Related: accordion, area-chart, avatar
 Import: import {SortableList} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- aria-label: string — Required: names the list.
+- value?: SortableItem[] — The items in their current order when controlled. Pair with `onValueChange`.
+- defaultValue?: SortableItem[] = [] — The items in their starting order when uncontrolled.
+- onValueChange?: ((items: SortableItem[]) => void) — Called with the new order when the user drops an item in a new place. Not called for a cancelled move or a drop where it started.
+- orientation?: "vertical" | "horizontal" = 'vertical' — `vertical` (default) moves with ArrowUp and ArrowDown; `horizontal` lays the items in a row and moves with ArrowLeft and ArrowRight.
+
+Usage:
+```tsx
+import {SortableList, type SortableItem} from '@monoline/react';
+
+const items: SortableItem[] = ['Write the brief', 'Draft the spec', 'Review with design', 'Build', 'Ship'].map((t) => ({id: t, label: t}));
+
+<div style={{maxWidth: '360px'}}><SortableList aria-label="Tasks" defaultValue={items} /></div>
+```
+
 A11y:
 - Each row has a handle button named 'Reorder <item>' with aria-pressed while picked up and a description of the keys.
 - Space or Enter picks an item up; the arrow keys (or Home and End) move it; Space or Enter drops it; Escape cancels and restores the order; Tab cancels.
 - A polite live region announces: picked up, moved to position N of M, dropped, cancelled.
 - Pointer drag uses the same handle; reordering never depends on dragging alone.
-Files: packages/react/src/components/sortable-list/index.ts, packages/react/src/components/sortable-list/meta.json, packages/react/src/components/sortable-list/sortable-list.demo.tsx, packages/react/src/components/sortable-list/sortable-list.test.tsx, packages/react/src/components/sortable-list/sortable-list.tsx
+
+CSS classes: sortable-list, sortable-list-horizontal, sortable-list-item, sortable-list-handle, sortable-list-label
+Data attributes: data-dragging
+Source: registry/sortable-list.json
 
 ## Sparkline (sparkline)
 A tiny inline trend line for a table cell or a sentence.
@@ -2727,7 +2993,7 @@ Source: registry/sparkline.json
 
 ## Spinner (spinner)
 A small indicator that something is loading.
-Status: stable | Category: feedback | Related: alert, empty-state, progress
+Status: stable | Category: feedback | Related: alert, empty-state, notification-center
 Import: import {Spinner} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -2819,7 +3085,7 @@ import {Stat} from '@monoline/react';
 A11y:
 - A description list (dl) pairs the label with its value.
 
-CSS classes: avatar, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note
+CSS classes: avatar, avatar-sm, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note
 Source: registry/stat.json
 
 ## Stepper (stepper)
@@ -2943,7 +3209,7 @@ import {Tag} from '@monoline/react';
 A11y:
 - The remove control is a real button named "Remove <label>".
 
-CSS classes: avatar, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note
+CSS classes: avatar, avatar-sm, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note
 Source: registry/tag.json
 
 ## Tags input (tags-input)
@@ -2955,6 +3221,7 @@ Props (name: type = default, ? means optional):
 - value?: string[] — The current tags when controlled. Pair with `onValueChange`.
 - defaultValue?: string[] = [] — The tags present at first when uncontrolled. Default empty.
 - onValueChange?: ((value: string[]) => void) — Called with the full list of tags after one is added or removed.
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size.
 - invalid?: boolean — Marks the field as having an error: sets `aria-invalid` and shows the error border.
 
 Usage:
@@ -2969,8 +3236,8 @@ A11y:
 - Backspace in an empty field removes the last tag.
 - Each tag has a button named "Remove <tag>"; the field takes its name from a label or aria-label.
 
-CSS classes: avatar, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note, tags-input, tags-input-field
-Data attributes: data-invalid; data-disabled
+CSS classes: avatar, avatar-sm, avatar-lg, avatar-line, avatar-group, tag, stat, stat-value, stat-note, tags-input, tags-input-field
+Data attributes: data-invalid; data-disabled; data-size: sm | lg
 Source: registry/tags-input.json
 
 ## Text (text)
@@ -2979,8 +3246,8 @@ Status: stable | Category: typography | Related: heading, kbd, link
 Import: import {Text} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
-- size?: "md" | "lg" | "sm" | "xs" = 'md' — Type size: `xs`, `sm`, `md` (default) or `lg`.
-- tone?: "danger" | "accent" | "default" | "muted" | "ok" = 'default' — Colour role: `default`, `muted`, `danger`, `ok` or `accent`. Never rely on colour alone to carry meaning.
+- size?: "sm" | "md" | "lg" | "xs" = 'md' — Type size: `xs`, `sm`, `md` (default) or `lg`.
+- tone?: "success" | "warning" | "danger" | "accent" | "default" | "muted" | "ok" = 'default' — Colour role: `default`, `muted`, `success`, `warning`, `danger` or `accent`, the same names as Alert. Never rely on colour alone to carry meaning. `ok` still works.
 - truncate?: boolean — One line with an ellipsis.
 - asChild?: boolean — Render the child (a span, label, li) with the text styles.
 
@@ -2994,7 +3261,7 @@ import {Text} from '@monoline/react';
 A11y:
 - A plain p (or the child with asChild); tone is never the only signal, so pair danger text with words.
 
-CSS classes: text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-ok, text-accent, text-truncate
+CSS classes: text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate
 Source: registry/text.json
 
 ## Text reveal (text-reveal)
@@ -3039,20 +3306,84 @@ A11y:
 - Native <textarea>.
 - Inside a Field it is labelled and described automatically; invalid sets aria-invalid.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row
 Data attributes: data-valid: true
 Source: registry/textarea.json
 
+## Theme provider (theme-provider)
+Set and save the theme, accent, font, corners, density and direction from React with useTheme(), and avoid the first-paint flash with themeScript().
+Status: stable | Category: layout | Related: direction-provider, native-select
+Import: import {ThemeProvider} from '@monoline/react'
+
+Props (name: type = default, ? means optional):
+- storageKey?: string = 'monoline' — Prefix of the localStorage keys, e.g. `monoline` stores `monoline-theme`. Default "monoline". Match it in `themeScript`.
+- children?: ReactNode — The app.
+- theme?: Theme
+- accent?: Accent
+- font?: Font
+- radius?: Radius
+- density?: Density
+- dir?: Dir
+
+Usage:
+```tsx
+import {Button, ThemeProvider, ThemeSwitcher, useTheme} from '@monoline/react';
+
+function Controls() {
+  const {theme, resolvedTheme, accent, density, setTheme, setDensity} = useTheme();
+  return (
+    <div style={{display: 'grid', gap: 12}}>
+      <ThemeSwitcher />
+      <p>Theme: {theme}{theme === 'system' ? ` (${resolvedTheme})` : ''}. Accent: {accent}. Density: {density}.</p>
+      <div style={{display: 'flex', gap: 8}}>
+        <Button onClick={() => setTheme(resolvedTheme === 'dark' ? 'warm' : 'dark')}>Toggle dark</Button>
+        <Button onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}>Toggle compact</Button>
+      </div>
+    </div>
+  );
+}
+
+<ThemeProvider storageKey="monoline-demo"><Controls /></ThemeProvider>
+```
+
+A11y:
+- The theme follows the system colour scheme until the user chooses one.
+- ThemeSwitcher is a labelled group of native selects, fully keyboard operable.
+- Changing direction also sets dir on the page so arrow keys follow the reading direction.
+Source: registry/theme-provider.json
+
 ## Time field (time-field)
 Hour, minute and AM/PM segments you step with arrow keys or type into.
+Status: stable | Category: forms | Related: autocomplete, calendar, checkbox
 Import: import {TimeField} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- value?: string — The time as 24-hour `"HH:mm"` when controlled; `""` means none. Pair with `onValueChange`.
+- defaultValue?: string — The initial time as `"HH:mm"` when uncontrolled. Default none.
+- onValueChange?: ((value: string) => void) — Called with `"HH:mm"` once hour and minute are both set, or `""` when either is cleared.
+- hourCycle?: 12 | 24 = 12 — Show hours 1-12 with an AM/PM segment (`12`) or 0-23 (`24`). Default 12.
+- step?: number = 1 — Minutes the arrow keys move by. Default 1.
+- disabled?: boolean — Stops all input.
+- invalid?: boolean — Marks the field as having an error: sets `aria-invalid` and shows the error border.
+- name?: string — Form field name; a hidden input submits the 24-hour `"HH:mm"` value.
+- aria-label?: string — Names the group when it is not inside a Field. Default "Time".
+
+Usage:
+```tsx
+import {Field, TimeField} from '@monoline/react';
+
+<Field label="Start time"><TimeField defaultValue="09:30" /></Field>
+```
+
 A11y:
 - A named group of spin buttons (Hour, Minute, AM or PM), each with aria-valuenow, aria-valuemin, aria-valuemax and aria-valuetext.
 - ArrowUp/ArrowDown step a segment (minutes by the step prop), PageUp/PageDown step further, Home/End jump to the limits, Backspace clears.
 - Typing digits fills a segment and moves to the next; A and P set AM and PM.
 - ArrowLeft/ArrowRight move between segments and are mirrored in right-to-left.
-Files: packages/react/src/components/time-field/index.ts, packages/react/src/components/time-field/meta.json, packages/react/src/components/time-field/time-field.demo.tsx, packages/react/src/components/time-field/time-field.test.tsx, packages/react/src/components/time-field/time-field.tsx
+
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, time-field, time-segment, time-sep
+Data attributes: data-empty; data-disabled
+Source: registry/time-field.json
 
 ## Time picker (time-picker)
 Pick a time of day with hour, minute and AM/PM segments, using the browser's own control.
@@ -3063,6 +3394,7 @@ Props (name: type = default, ? means optional):
 - value?: string — 24-hour "HH:mm" (or "HH:mm:ss" when `step` is under 60), or '' for no time.
 - defaultValue?: string = '' — The initial time as 24-hour "HH:mm" when uncontrolled. Default empty.
 - onValueChange?: ((value: string) => void) — Called with the new time as 24-hour "HH:mm" (or '' when cleared).
+- size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size.
 - invalid?: boolean — Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`.
 
 Usage:
@@ -3077,7 +3409,7 @@ A11y:
 - ArrowUp/ArrowDown change a segment, ArrowLeft/ArrowRight or Tab move between segments, typing digits fills one.
 - The control takes its name from a label or aria-label; min, max and step are passed through.
 
-CSS classes: field, field-hint, input, select, textarea, input-sm, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, time-picker
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, time-picker
 Source: registry/time-picker.json
 
 ## Timeline (timeline)
@@ -3105,7 +3437,7 @@ Source: registry/timeline.json
 
 ## Toast (toast)
 A short message that appears briefly and does not block the page.
-Status: stable | Category: feedback | Primitive: radix-ui/Toast | Related: alert, empty-state, progress
+Status: stable | Category: feedback | Primitive: radix-ui/Toast | Related: alert, empty-state, notification-center
 Import: import {Toast} from '@monoline/react'
 
 Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
@@ -3143,9 +3475,52 @@ CSS classes: toast-viewport, toast-item, toast-title, toast-description, toast-a
 Data attributes: data-state: open | closed
 Source: registry/toast.json
 
+## Toaster (toaster)
+Show a toast from anywhere with toast('Saved'). Mount one Toaster; call toast.success, toast.error or toast.promise from handlers.
+Status: stable | Category: feedback | Related: toast
+Import: import {Toaster} from '@monoline/react'
+
+Props (name: type = default, ? means optional):
+- limit?: number = 3 — Most toasts shown at once. Older ones wait out of sight and return when there is room. Default 3.
+- position?: "center" | "start" | "end" = 'end' — Where the stack sits. `end` is the bottom corner at the end of the reading direction. Default "end".
+- label?: string = 'Notifications' — Names the region for screen readers. Default "Notifications".
+- dismissLabel?: string = 'Dismiss' — Text of each close button. Default "Dismiss".
+
+Usage:
+```tsx
+import {Button, Toaster, toast} from '@monoline/react';
+
+function Example() {
+  return (
+    <div style={{display: 'flex', gap: 8, flexWrap: 'wrap'}}>
+      <Button onClick={() => toast('Draft saved')}>Default</Button>
+      <Button onClick={() => toast.success('Profile updated', {description: 'Changes are live.'})}>Success</Button>
+      <Button onClick={() => toast.error('Could not save', {description: 'Check your connection.', action: {label: 'Retry', onClick: () => toast.info('Retrying')}})}>Error with retry</Button>
+      <Button onClick={() => toast.warning('Storage almost full')}>Warning</Button>
+      <Button onClick={() => toast.promise(new Promise((r) => setTimeout(r, 1500)), {loading: 'Uploading', success: 'Uploaded', error: 'Upload failed'})}>Promise</Button>
+      <Button variant="ghost" onClick={() => toast.dismiss()}>Dismiss all</Button>
+      <Toaster />
+    </div>
+  );
+}
+
+<Example />
+```
+
+A11y:
+- Info and success toasts are announced politely; errors are announced assertively.
+- F8 moves focus to the notification region; hovering or focusing a toast pauses its timer.
+- Each toast has a Dismiss button and an optional action button; Escape closes the focused toast.
+- A stack limit keeps at most three visible by default (older ones wait); motion is removed with prefers-reduced-motion.
+- Never the only place a critical result appears; keep an inline message too.
+
+CSS classes: toast-viewport, toast-item, toast-title, toast-description, toast-action, toast-close, toaster-viewport, toaster-item
+Data attributes: data-state: open | closed; data-position: start | center; data-kind: success | warning | error | loading; data-swipe: move | cancel
+Source: registry/toaster.json
+
 ## Toggle (toggle)
 A button that stays pressed or not.
-Status: stable | Category: buttons | Primitive: radix-ui/Toggle | Related: button, button-group, icon-button
+Status: stable | Category: buttons | Primitive: radix-ui/Toggle | Related: button, button-group, copy-button
 Import: import {Toggle} from '@monoline/react'
 
 Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
@@ -3167,7 +3542,7 @@ Source: registry/toggle.json
 
 ## Toggle group (toggle-group)
 A row of toggles where one or several can be on.
-Status: stable | Category: buttons | Primitive: radix-ui/ToggleGroup | Related: button, button-group, icon-button
+Status: stable | Category: buttons | Primitive: radix-ui/ToggleGroup | Related: button, button-group, copy-button
 Import: import {ToggleGroup} from '@monoline/react'
 
 Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
@@ -3190,7 +3565,7 @@ Source: registry/toggle-group.json
 
 ## Toolbar (toolbar)
 A row of related controls that share one tab stop and arrow-key movement.
-Status: stable | Category: buttons | Primitive: radix-ui/Toolbar | Related: button, button-group, icon-button
+Status: stable | Category: buttons | Primitive: radix-ui/Toolbar | Related: button, button-group, copy-button
 Import: import {Toolbar} from '@monoline/react'
 
 Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
@@ -3241,15 +3616,60 @@ Source: registry/tooltip.json
 
 ## Tour (tour)
 A guided walkthrough: a spotlight on one element at a time with a card and Next, Back and Skip.
+Status: stable | Category: overlays | Related: alert-dialog, command, context-menu
 Import: import {Tour} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- steps: TourStep[] — The steps, in order.
+- open?: boolean — Whether the tour is showing, when controlled. Pair with `onOpenChange`.
+- defaultOpen?: boolean = false — Whether the tour starts open when uncontrolled. Default false.
+- onOpenChange?: ((open: boolean) => void) — Called with false when the tour ends: Skip, Escape or Done.
+- step?: number — The current step index when controlled. Pair with `onStepChange`.
+- defaultStep?: number = 0 — The step to start on when uncontrolled. Default 0.
+- onStepChange?: ((step: number) => void) — Called with the new index when the user moves between steps.
+- onFinish?: (() => void) — Called when the user finishes the last step (not when they skip or press Escape).
+- spotlightPadding?: number = 6 — Extra space in px around the highlighted element. Default 6.
+- labels?: TourLabels — Replaces the button text.
+
+Usage:
+```tsx
+import {useState} from 'react';
+import {Tour} from '@monoline/react';
+
+function Basic() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div>
+      <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>
+        <button type="button" className="btn btn-solid" onClick={() => setOpen(true)}>Start tour</button>
+        <button type="button" className="btn" id="tour-demo-a">Create</button>
+        <button type="button" className="btn" id="tour-demo-b">Share</button>
+      </div>
+      <Tour
+        open={open}
+        onOpenChange={setOpen}
+        steps={[
+          {target: '#tour-demo-a', title: 'Create', content: 'Start a new project from here.'},
+          {target: '#tour-demo-b', title: 'Share', content: 'Invite people by email.', placement: 'end'},
+          {title: 'That is all', content: 'You can restart the tour at any time.'},
+        ]}
+      />
+    </div>
+  );
+}
+
+<Basic />
+```
+
 A11y:
 - The step card is a dialog named by its title and described by its text; it takes focus on every step.
 - Tab stays inside the card; Escape ends the tour and focus returns to where it was.
 - ArrowRight and ArrowLeft move between steps when the card has focus (mirrored in right-to-left).
 - Each step is announced politely as "Step n of m"; the highlighted element scrolls into view.
 - The overlay and spotlight are hidden from assistive technology; animation stops under prefers-reduced-motion.
-Files: packages/react/src/components/tour/index.ts, packages/react/src/components/tour/meta.json, packages/react/src/components/tour/tour.demo.tsx, packages/react/src/components/tour/tour.test.tsx, packages/react/src/components/tour/tour.tsx
+
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, tour, tour-overlay, tour-spotlight, tour-card, tour-count, tour-title, tour-content, tour-actions, tour-spacer
+Source: registry/tour.json
 
 ## Tree (tree)
 A nested list of items that open and close, with one selected item.
@@ -3294,15 +3714,44 @@ Source: registry/tree.json
 
 ## Tree select (tree-select)
 A select whose options are a nested tree, with search and single or multiple selection.
+Status: stable | Category: forms | Related: tree, combobox, input
 Import: import {TreeSelect} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- items: TreeNode[] — The tree: top-level nodes, each with an `id`, a `label` and optional `children`. Same shape as `Tree`.
+- value?: string[] — Selected node ids when controlled. Always an array, also in single mode (zero or one id). Pair with `onValueChange`.
+- defaultValue?: string[] = [] — Ids selected at first when uncontrolled. Default none.
+- onValueChange?: ((ids: string[]) => void) — Called with the full list of selected ids after each change.
+- multiple?: boolean = false — Allows several selections: choosing a node toggles it and the list stays open. Default false (choosing closes the list).
+- emptyText?: string = 'No matches' — Shown when the search matches nothing. Default "No matches".
+- invalid?: boolean — Marks the field as having an error: sets `aria-invalid` and shows the error border.
+
+Usage:
+```tsx
+import {Field, TreeSelect, type TreeNode} from '@monoline/react';
+
+const items: TreeNode[] = [
+  {id: 'eng', label: 'Engineering', children: [
+    {id: 'web', label: 'Web'},
+    {id: 'platform', label: 'Platform', children: [{id: 'infra', label: 'Infrastructure'}, {id: 'data', label: 'Data'}]},
+  ]},
+  {id: 'design', label: 'Design', children: [{id: 'brand', label: 'Brand'}, {id: 'product', label: 'Product design'}]},
+  {id: 'ops', label: 'Operations'},
+];
+
+<div style={{maxWidth: '320px', minHeight: '300px'}}><Field label="Team"><TreeSelect items={items} placeholder="Choose a team" /></Field></div>
+```
+
 A11y:
 - An input with role=combobox, aria-haspopup=tree and aria-activedescendant; focus never leaves the input.
 - The popup is role=tree: each treeitem has aria-level, aria-setsize, aria-posinset, aria-selected and (for branches) aria-expanded; aria-multiselectable in multiple mode.
 - ArrowDown/ArrowUp open the list and move; ArrowRight opens a branch then enters it; ArrowLeft closes it then goes to the parent (swapped in RTL); Enter selects or toggles; Escape closes.
 - Typing filters the tree to matching nodes and their parents, opened automatically; an empty result shows text.
 - Selection is shown in the input as text ('A, B' or '3 selected') and a check mark, not colour.
-Files: packages/react/src/components/tree-select/index.ts, packages/react/src/components/tree-select/meta.json, packages/react/src/components/tree-select/tree-select.demo.tsx, packages/react/src/components/tree-select/tree-select.test.tsx, packages/react/src/components/tree-select/tree-select.tsx
+
+CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, tree-select, tree-select-list, tree-select-item, tree-select-twisty, tree-select-empty
+Data attributes: data-active
+Source: registry/tree-select.json
 
 ## Typewriter (typewriter)
 Type a string one character at a time. Static for reduced motion.
@@ -3332,13 +3781,31 @@ Source: registry/typewriter.json
 
 ## Virtual list (virtual-list)
 A windowed list for thousands of rows: only the rows in view are in the page.
+Status: stable | Category: data-display | Related: accordion, area-chart, avatar
 Import: import {VirtualList} from '@monoline/react'
-Primitive: none | Status: stable
+
+Props (name: type = default, ? means optional):
+- aria-label: string — Required: names the list for screen readers.
+- count: number — How many rows the whole list has, rendered or not.
+- itemHeight: number — Height of every row in pixels. All rows share it.
+- height: number — Height of the scrolling window in pixels.
+- overscan?: number = 4 — Extra rows rendered above and below the visible ones, so fast scrolling shows no blanks. Default 4.
+- renderItem: (index: number) => ReactNode — Returns the content of row `index`. Only called for rows in or near the window.
+
+Usage:
+```tsx
+import {VirtualList} from '@monoline/react';
+
+<VirtualList aria-label="Ten thousand rows" count={10000} itemHeight={32} height={192} renderItem={(i) => <span className="virtual-list-cell">Row {i + 1}</span>} />
+```
+
 A11y:
 - role=list with listitem rows; every row carries aria-posinset and aria-setsize so the position in the full list is announced.
 - Roving tabindex: one row is in the tab order. ArrowUp/ArrowDown, PageUp/PageDown, Home and End move focus and scroll the row into view.
 - The list needs an aria-label.
-Files: packages/react/src/components/virtual-list/index.ts, packages/react/src/components/virtual-list/meta.json, packages/react/src/components/virtual-list/virtual-list.demo.tsx, packages/react/src/components/virtual-list/virtual-list.test.tsx, packages/react/src/components/virtual-list/virtual-list.tsx
+
+CSS classes: virtual-list, virtual-list-body, virtual-list-row
+Source: registry/virtual-list.json
 
 ## useClickOutside (use-click-outside)
 Calls a function when a pointer goes down outside an element, to close menus and popovers.

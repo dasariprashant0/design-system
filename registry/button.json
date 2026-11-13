@@ -37,8 +37,8 @@
   ],
   "related": [
     "button-group",
-    "icon-button",
-    "segmented-control"
+    "copy-button",
+    "icon-button"
   ],
   "props": [
     {
@@ -53,10 +53,10 @@
         },
         {
           "name": "size",
-          "type": "\"md\" | \"sm\"",
+          "type": "\"sm\" | \"md\" | \"lg\"",
           "optional": true,
           "default": "'md'",
-          "description": "`md` (default) or `sm` for dense toolbars and table rows."
+          "description": "`md` (default), `sm` for dense toolbars and table rows, or `lg` for prominent calls to action. Same heights as Input and Select."
         },
         {
           "name": "loading",
@@ -84,6 +84,7 @@
     "btn-danger",
     "btn-ghost",
     "btn-sm",
+    "btn-lg",
     "btn-block",
     "spinner",
     "skeleton",

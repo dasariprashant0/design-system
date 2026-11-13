@@ -25,7 +25,7 @@
     "layout"
   ],
   "kind": "components",
-  "import": "import {Resizable} from '@monoline/react'",
+  "import": "import {ResizablePanelGroup} from '@monoline/react'",
   "path": "packages/react/src/components/resizable",
   "files": [
     "packages/react/src/components/resizable/index.ts",
@@ -33,6 +33,103 @@
     "packages/react/src/components/resizable/resizable.demo.tsx",
     "packages/react/src/components/resizable/resizable.test.tsx",
     "packages/react/src/components/resizable/resizable.tsx"
+  ],
+  "related": [
+    "aspect-ratio",
+    "box",
+    "container"
+  ],
+  "props": [
+    {
+      "name": "ResizablePanelGroupProps",
+      "props": [
+        {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\"",
+          "optional": true,
+          "default": "'horizontal'",
+          "description": "`horizontal` puts panels side by side; `vertical` stacks them. Default `horizontal`."
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "optional": true,
+          "default": "5",
+          "description": "Percent a panel grows or shrinks per arrow-key press (PageUp/PageDown use double). Default 5."
+        },
+        {
+          "name": "onLayoutChange",
+          "type": "((sizes: number[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with every panel's size in percent (they add up to 100) after each resize."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "`ResizablePanel` and `ResizableHandle` elements, alternating, as direct children: panel, handle, panel..."
+        }
+      ]
+    },
+    {
+      "name": "ResizablePanelProps",
+      "props": [
+        {
+          "name": "defaultSize",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Starting size in percent. Panels without one share what is left equally."
+        },
+        {
+          "name": "minSize",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Smallest size in percent. Default 10."
+        },
+        {
+          "name": "maxSize",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Largest size in percent. Default 100."
+        }
+      ]
+    },
+    {
+      "name": "ResizableHandleProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Names the handle for screen readers. Default \"Resize panels\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {ResizableHandle, ResizablePanel, ResizablePanelGroup} from '@monoline/react';\n\nconst box = {padding: 'var(--s4)', fontSize: 'var(--text-sm)'};\n\n<ResizablePanelGroup style={{height: '200px', border: '1px solid var(--rule)'}}>\n  <ResizablePanel defaultSize={30} minSize={15}><div style={box}>Sidebar</div></ResizablePanel>\n  <ResizableHandle aria-label=\"Resize sidebar\" />\n  <ResizablePanel defaultSize={70}><div style={box}>Content</div></ResizablePanel>\n</ResizablePanelGroup>",
+  "dataAttributes": [
+    {
+      "name": "data-direction",
+      "values": [
+        "vertical",
+        "horizontal"
+      ]
+    },
+    {
+      "name": "data-dragging",
+      "values": []
+    }
+  ],
+  "classes": [
+    "resizable",
+    "resizable-panel",
+    "resizable-handle"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

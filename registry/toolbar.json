@@ -33,7 +33,7 @@
   "related": [
     "button",
     "button-group",
-    "icon-button"
+    "copy-button"
   ],
   "props": [],
   "usage": "import {Toolbar, ToolbarButton, ToolbarSeparator} from '@monoline/react';\n\n<Toolbar aria-label=\"Text formatting\"><ToolbarButton>Bold</ToolbarButton><ToolbarButton>Italic</ToolbarButton><ToolbarButton>Underline</ToolbarButton><ToolbarSeparator /><ToolbarButton>Link</ToolbarButton></Toolbar>",

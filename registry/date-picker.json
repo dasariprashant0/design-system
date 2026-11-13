@@ -25,13 +25,14 @@
     },
     {
       "path": "packages/css/src/components/date-picker.css",
-      "content": ".date-trigger { text-align: start; }\n.date-trigger[data-empty] { color: var(--muted); }\n.date-popover { padding: 0; max-width: none; border: 0; }\n.date-popover .calendar { border: 1px solid var(--foreground); }\n"
+      "content": ".date-trigger { text-align: start; }\n.date-trigger[data-empty] { color: var(--muted); }\n/* Two classes: popover.css comes later in the bundle and its single-class rule used to win, leaving a double border. The popover draws the one border. */\n.popover.date-popover { padding: 0; max-width: none; }\n.popover.date-popover .calendar { border: 0; }\n"
     }
   ],
   "a11y": [
     "The trigger is a button naming the field and the current value; it opens a dialog with the calendar.",
     "Choosing a date closes the dialog and returns focus to the trigger; Escape closes without changing.",
-    "All calendar keyboard behaviour applies inside."
+    "All calendar keyboard behaviour applies inside.",
+    "With `clearable`, a \"Clear date\" button in the popover removes the date, closes it and returns focus to the trigger."
   ],
   "keywords": [
     "datepicker",
@@ -78,6 +79,13 @@
           "optional": true,
           "default": null,
           "description": "Stops the user opening the calendar."
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "optional": true,
+          "default": "'md'",
+          "description": "`md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size."
         },
         {
           "name": "invalid",
@@ -139,6 +147,7 @@
     "select",
     "textarea",
     "input-sm",
+    "input-lg",
     "input-wrap",
     "input-end",
     "input-bare",
@@ -168,7 +177,7 @@
   "source": [
     {
       "path": "packages/react/src/components/date-picker/date-picker.tsx",
-      "content": "'use client';\nimport {forwardRef, useState} from 'react';\nimport {Popover as Radix} from 'radix-ui';\nimport {Calendar, type CalendarProps} from '../calendar';\nimport {cx} from '../../utils/cx';\nimport {invalidAttrs, useFieldControl} from '../field';\n\nexport interface DatePickerProps extends Omit<CalendarProps, 'className' | 'aria-label'> {\n  /** Text shown on the button while no date is chosen. Default \"Pick a date\". */\n  placeholder?: string;\n  /** Intl options for the text on the button. Default: medium date. */\n  format?: Intl.DateTimeFormatOptions;\n  /** Stops the user opening the calendar. */\n  disabled?: boolean;\n  /** `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */\n  invalid?: boolean;\n  /** Extra class name for the trigger button. */\n  className?: string;\n  /** Names the control when it is not inside a Field. */\n  'aria-label'?: string;\n}\n\n/** Pick a date from a popover calendar. Same `value` / `defaultValue` / `onValueChange` as Calendar. */\nexport const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(function DatePicker({value, defaultValue = null, onValueChange, placeholder = 'Pick a date', format = {dateStyle: 'medium'}, locale, size = 'md', disabled, invalid, className, 'aria-label': label, ...cal}, ref) {\n  const f = useFieldControl();\n  const [inner, setInner] = useState<Date | null>(defaultValue);\n  const [open, setOpen] = useState(false);\n  const current = value === undefined ? inner : value;\n  const text = current ? new Intl.DateTimeFormat(locale, format).format(current) : '';\n  return (\n    <Radix.Root open={open} onOpenChange={setOpen}>\n      <Radix.Trigger asChild>\n        <button ref={ref} type=\"button\" disabled={disabled} className={cx('input date-trigger', size !== 'md' && `input-${size}`, className)} {...f} aria-label={label} {...invalidAttrs(invalid)} data-disabled={disabled ? '' : undefined} data-empty={!current || undefined}>\n          {text || placeholder}\n        </button>\n      </Radix.Trigger>\n      <Radix.Portal>\n        <Radix.Content className=\"popover date-popover\" sideOffset={6} align=\"start\" aria-label=\"Choose a date\">\n          <Calendar value={current} locale={locale} {...cal} onValueChange={(d) => { if (value === undefined) setInner(d); onValueChange?.(d); setOpen(false); }} />\n        </Radix.Content>\n      </Radix.Portal>\n    </Radix.Root>\n  );\n});\n"
+      "content": "'use client';\nimport {forwardRef, useState} from 'react';\nimport {Popover as Radix} from 'radix-ui';\nimport {Calendar, type CalendarProps} from '../calendar';\nimport {cx} from '../../utils/cx';\nimport {invalidAttrs, useFieldControl} from '../field';\n\nexport interface DatePickerProps extends Omit<CalendarProps, 'className' | 'aria-label'> {\n  /** Text shown on the button while no date is chosen. Default \"Pick a date\". */\n  placeholder?: string;\n  /** Intl options for the text on the button. Default: medium date. */\n  format?: Intl.DateTimeFormatOptions;\n  /** Stops the user opening the calendar. */\n  disabled?: boolean;\n  /** `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */\n  invalid?: boolean;\n  /** Extra class name for the trigger button. */\n  className?: string;\n  /** Names the control when it is not inside a Field. */\n  'aria-label'?: string;\n}\n\n/**\n * Pick a date from a popover calendar. Same `value` / `defaultValue` / `onValueChange` as Calendar.\n * Add `clearable` to put a \"Clear date\" button in the popover; it calls `onValueChange(null)` and closes.\n * @example <DatePicker clearable value={date} onValueChange={setDate} aria-label=\"Due\" />\n */\n\nexport const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(function DatePicker({value, defaultValue = null, onValueChange, placeholder = 'Pick a date', format = {dateStyle: 'medium'}, locale, size = 'md', disabled, invalid, className, 'aria-label': label, ...cal}, ref) {\n  const f = useFieldControl();\n  const [inner, setInner] = useState<Date | null>(defaultValue);\n  const [open, setOpen] = useState(false);\n  const current = value === undefined ? inner : value;\n  const text = current ? new Intl.DateTimeFormat(locale, format).format(current) : '';\n  return (\n    <Radix.Root open={open} onOpenChange={setOpen}>\n      <Radix.Trigger asChild>\n        <button ref={ref} type=\"button\" disabled={disabled} className={cx('input date-trigger', size !== 'md' && `input-${size}`, className)} {...f} aria-label={label} {...invalidAttrs(invalid)} data-disabled={disabled ? '' : undefined} data-empty={!current || undefined}>\n          {text || placeholder}\n        </button>\n      </Radix.Trigger>\n      <Radix.Portal>\n        <Radix.Content className=\"popover date-popover\" sideOffset={6} align=\"start\" aria-label=\"Choose a date\">\n          <Calendar value={current} locale={locale} {...cal} onValueChange={(d) => { if (value === undefined) setInner(d); onValueChange?.(d); setOpen(false); }} />\n        </Radix.Content>\n      </Radix.Portal>\n    </Radix.Root>\n  );\n});\n"
     },
     {
       "path": "packages/react/src/components/date-picker/index.ts",
@@ -176,7 +185,7 @@
     },
     {
       "path": "packages/react/src/components/date-picker/meta.json",
-      "content": "{\"name\":\"date-picker\",\"title\":\"Date picker\",\"category\":\"forms\",\"description\":\"A button that opens a calendar and shows the chosen date.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Popover\",\"uses\":[\"calendar\",\"popover\",\"field\"],\"css\":[\"03-form-fields.css\",\"popover.css\",\"calendar.css\",\"date-picker.css\"],\"a11y\":[\"The trigger is a button naming the field and the current value; it opens a dialog with the calendar.\",\"Choosing a date closes the dialog and returns focus to the trigger; Escape closes without changing.\",\"All calendar keyboard behaviour applies inside.\"],\"keywords\":[\"datepicker\",\"date input\",\"calendar popup\",\"choose date\"]}\n"
+      "content": "{\"name\":\"date-picker\",\"title\":\"Date picker\",\"category\":\"forms\",\"description\":\"A button that opens a calendar and shows the chosen date.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Popover\",\"uses\":[\"calendar\",\"popover\",\"field\"],\"css\":[\"03-form-fields.css\",\"popover.css\",\"calendar.css\",\"date-picker.css\"],\"a11y\":[\"The trigger is a button naming the field and the current value; it opens a dialog with the calendar.\",\"Choosing a date closes the dialog and returns focus to the trigger; Escape closes without changing.\",\"All calendar keyboard behaviour applies inside.\",\"With `clearable`, a \\\"Clear date\\\" button in the popover removes the date, closes it and returns focus to the trigger.\"],\"keywords\":[\"datepicker\",\"date input\",\"calendar popup\",\"choose date\"]}\n"
     }
   ]
 }

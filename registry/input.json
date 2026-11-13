@@ -45,10 +45,10 @@
       "props": [
         {
           "name": "size",
-          "type": "\"md\" | \"sm\"",
+          "type": "\"sm\" | \"md\" | \"lg\"",
           "optional": true,
           "default": "'md'",
-          "description": "`md` (default) or `sm` for dense layouts."
+          "description": "`md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button and the other form controls at each size."
         },
         {
           "name": "invalid",
@@ -76,6 +76,7 @@
     "select",
     "textarea",
     "input-sm",
+    "input-lg",
     "input-wrap",
     "input-end",
     "input-bare",

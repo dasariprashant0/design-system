@@ -45,6 +45,96 @@
     "packages/react/src/components/tree-select/tree-select.test.tsx",
     "packages/react/src/components/tree-select/tree-select.tsx"
   ],
+  "related": [
+    "tree",
+    "combobox",
+    "input"
+  ],
+  "props": [
+    {
+      "name": "TreeSelectProps",
+      "props": [
+        {
+          "name": "items",
+          "type": "TreeNode[]",
+          "optional": false,
+          "default": null,
+          "description": "The tree: top-level nodes, each with an `id`, a `label` and optional `children`. Same shape as `Tree`."
+        },
+        {
+          "name": "value",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "Selected node ids when controlled. Always an array, also in single mode (zero or one id). Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string[]",
+          "optional": true,
+          "default": "[]",
+          "description": "Ids selected at first when uncontrolled. Default none."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((ids: string[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the full list of selected ids after each change."
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Allows several selections: choosing a node toggles it and the list stays open. Default false (choosing closes the list)."
+        },
+        {
+          "name": "emptyText",
+          "type": "string",
+          "optional": true,
+          "default": "'No matches'",
+          "description": "Shown when the search matches nothing. Default \"No matches\"."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Field, TreeSelect, type TreeNode} from '@monoline/react';\n\nconst items: TreeNode[] = [\n  {id: 'eng', label: 'Engineering', children: [\n    {id: 'web', label: 'Web'},\n    {id: 'platform', label: 'Platform', children: [{id: 'infra', label: 'Infrastructure'}, {id: 'data', label: 'Data'}]},\n  ]},\n  {id: 'design', label: 'Design', children: [{id: 'brand', label: 'Brand'}, {id: 'product', label: 'Product design'}]},\n  {id: 'ops', label: 'Operations'},\n];\n\n<div style={{maxWidth: '320px', minHeight: '300px'}}><Field label=\"Team\"><TreeSelect items={items} placeholder=\"Choose a team\" /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-lg",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "tree-select",
+    "tree-select-list",
+    "tree-select-item",
+    "tree-select-twisty",
+    "tree-select-empty"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

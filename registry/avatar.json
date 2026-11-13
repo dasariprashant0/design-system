@@ -55,10 +55,10 @@
         },
         {
           "name": "size",
-          "type": "\"md\" | \"lg\"",
+          "type": "\"sm\" | \"md\" | \"lg\"",
           "optional": true,
           "default": "'md'",
-          "description": "`md` (default) or `lg`."
+          "description": "`md` (default), `sm` for dense rows or `lg`."
         },
         {
           "name": "variant",
@@ -74,6 +74,7 @@
   "dataAttributes": [],
   "classes": [
     "avatar",
+    "avatar-sm",
     "avatar-lg",
     "avatar-line",
     "avatar-group",

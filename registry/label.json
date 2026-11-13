@@ -57,6 +57,7 @@
     "select",
     "textarea",
     "input-sm",
+    "input-lg",
     "input-wrap",
     "input-end",
     "input-bare",

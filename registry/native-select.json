@@ -41,6 +41,13 @@
       "name": "NativeSelectProps",
       "props": [
         {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "optional": true,
+          "default": "'md'",
+          "description": "`md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button and the other form controls at each size."
+        },
+        {
           "name": "invalid",
           "type": "boolean",
           "optional": true,
@@ -59,6 +66,7 @@
     "select",
     "textarea",
     "input-sm",
+    "input-lg",
     "input-wrap",
     "input-end",
     "input-bare",

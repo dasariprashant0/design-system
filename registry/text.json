@@ -40,17 +40,17 @@
       "props": [
         {
           "name": "size",
-          "type": "\"md\" | \"lg\" | \"sm\" | \"xs\"",
+          "type": "\"sm\" | \"md\" | \"lg\" | \"xs\"",
           "optional": true,
           "default": "'md'",
           "description": "Type size: `xs`, `sm`, `md` (default) or `lg`."
         },
         {
           "name": "tone",
-          "type": "\"danger\" | \"accent\" | \"default\" | \"muted\" | \"ok\"",
+          "type": "\"success\" | \"warning\" | \"danger\" | \"accent\" | \"default\" | \"muted\" | \"ok\"",
           "optional": true,
           "default": "'default'",
-          "description": "Colour role: `default`, `muted`, `danger`, `ok` or `accent`. Never rely on colour alone to carry meaning."
+          "description": "Colour role: `default`, `muted`, `success`, `warning`, `danger` or `accent`, the same names as Alert. Never rely on colour alone to carry meaning.\n`ok` still works."
         },
         {
           "name": "truncate",
@@ -79,7 +79,9 @@
     "text-lg",
     "text-muted",
     "text-danger",
+    "text-success",
     "text-ok",
+    "text-warning",
     "text-accent",
     "text-truncate"
   ],

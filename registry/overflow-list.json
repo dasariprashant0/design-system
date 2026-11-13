@@ -46,6 +46,58 @@
     "packages/react/src/components/overflow-list/overflow-list.test.tsx",
     "packages/react/src/components/overflow-list/overflow-list.tsx"
   ],
+  "related": [
+    "button",
+    "dropdown-menu"
+  ],
+  "props": [
+    {
+      "name": "OverflowListProps",
+      "props": [
+        {
+          "name": "items",
+          "type": "OverflowItem[]",
+          "optional": false,
+          "default": null,
+          "description": "The items in order. As many as fit are shown; the rest move into a \"+N\" menu."
+        },
+        {
+          "name": "moreLabel",
+          "type": "((hidden: number) => string)",
+          "optional": true,
+          "default": "(n) => `${n} more ${n === 1 ? 'item' : 'items'}`",
+          "description": "Accessible name of the \"+N\" button, given the number of hidden items. Default \"N more items\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {OverflowList, Tag} from '@monoline/react';\n\nconst names = ['Design', 'Engineering', 'Marketing', 'Support', 'Finance', 'Legal', 'People', 'Research'];\n\n<div style={{maxWidth: '320px', resize: 'horizontal', overflow: 'auto', paddingBlock: 'var(--s2)'}}>\n  <OverflowList items={names.map((n) => ({id: n, label: <Tag>{n}</Tag>}))} />\n</div>",
+  "dataAttributes": [
+    {
+      "name": "data-hidden",
+      "values": []
+    }
+  ],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "dropdown",
+    "menu",
+    "menu-end",
+    "menu-item",
+    "danger",
+    "menu-sep",
+    "overflow-list",
+    "overflow-list-items",
+    "overflow-list-item",
+    "overflow-list-more"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -22,6 +22,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Scroll area (scroll-area, stable): A scrollable region with thin, themed scrollbars. Source: packages/react/src/components/scroll-area/
 - Separator (separator, stable): A thin rule between groups. Source: packages/react/src/components/separator/
 - Stack (stack, stable): Lay children out in a column or row with one gap from the spacing scale. Source: packages/react/src/components/stack/
+- Theme provider (theme-provider, stable): Set and save the theme, accent, font, corners, density and direction from React with useTheme(), and avoid the first-paint flash with themeScript(). Source: packages/react/src/components/theme-provider/
 
 ### typography
 - Heading (heading, stable): A heading whose level (for structure) is separate from its size (for looks). Source: packages/react/src/components/heading/
@@ -107,6 +108,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Skeleton (skeleton, stable): A still placeholder shaped like the content that is loading. Source: packages/react/src/components/skeleton/
 - Spinner (spinner, stable): A small indicator that something is loading. Source: packages/react/src/components/spinner/
 - Toast (toast, stable): A short message that appears briefly and does not block the page. Source: packages/react/src/components/toast/
+- Toaster (toaster, stable): Show a toast from anywhere with toast('Saved'). Mount one Toaster; call toast.success, toast.error or toast.promise from handlers. Source: packages/react/src/components/toaster/
 
 ### overlays
 - Alert dialog (alert-dialog, stable): A modal that interrupts to confirm a destructive or irreversible action. Source: packages/react/src/components/alert-dialog/

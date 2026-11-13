@@ -20,7 +20,7 @@
     },
     {
       "path": "packages/css/src/components/icon-button.css",
-      "content": "/* Icon button: a square .btn. */\n.btn-icon { padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn-icon.btn-sm { padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
+      "content": "/* Icon button: a square .btn. */\n.btn.btn-icon { height: auto; padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn.btn-icon.btn-sm { height: auto; padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
     },
     {
       "path": "packages/css/src/components/popover.css",
@@ -54,6 +54,125 @@
     "packages/react/src/components/notification-center/notification-center.demo.tsx",
     "packages/react/src/components/notification-center/notification-center.test.tsx",
     "packages/react/src/components/notification-center/notification-center.tsx"
+  ],
+  "related": [
+    "button",
+    "icon-button",
+    "popover"
+  ],
+  "props": [
+    {
+      "name": "NotificationCenterProps",
+      "props": [
+        {
+          "name": "notifications",
+          "type": "NotificationItem[]",
+          "optional": false,
+          "default": null,
+          "description": "The notifications, newest first. You own this list: update it in the callbacks below."
+        },
+        {
+          "name": "onMarkRead",
+          "type": "((id: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the id when the user marks one notification as read. Hides that item's \"Mark read\" button once `read` is true."
+        },
+        {
+          "name": "onMarkAllRead",
+          "type": "(() => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called when the user chooses \"Mark all read\". The button is disabled when nothing is unread."
+        },
+        {
+          "name": "onClear",
+          "type": "(() => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called when the user chooses \"Clear all\". The button is disabled when the list is empty."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "optional": true,
+          "default": "'Notifications'",
+          "description": "Name of the bell button and the panel. Default \"Notifications\"."
+        },
+        {
+          "name": "emptyText",
+          "type": "string",
+          "optional": true,
+          "default": "\"You're all caught up.\"",
+          "description": "Shown when there are no notifications. Default \"You're all caught up.\""
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {NotificationCenter, type NotificationItem} from '@monoline/react';\n\nconst start: NotificationItem[] = [\n  {id: '1', title: 'Deploy finished', description: 'Production, 41 seconds.', time: '2 min ago'},\n  {id: '2', title: 'Ada commented on your pull request', time: '1 hour ago'},\n  {id: '3', title: 'Invoice paid', time: 'Yesterday', read: true},\n];\n\nfunction Demo1() {\n  const [list, setList] = useState(start);\n  return (\n    <div style={{display: 'flex', justifyContent: 'flex-end', minHeight: '280px'}}>\n      <NotificationCenter\n        notifications={list}\n        onMarkRead={(id) => setList((l) => l.map((n) => (n.id === id ? {...n, read: true} : n)))}\n        onMarkAllRead={() => setList((l) => l.map((n) => ({...n, read: true})))}\n        onClear={() => setList([])}\n      />\n    </div>\n  );\n}\n\n<Demo1 />",
+  "dataAttributes": [
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    },
+    {
+      "name": "data-unread",
+      "values": []
+    }
+  ],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "swatch",
+    "check",
+    "check-pass",
+    "check-fail",
+    "badge",
+    "badge-solid",
+    "badge-accent",
+    "kbd",
+    "key-hints",
+    "dot",
+    "heat-0",
+    "heat-1",
+    "heat-2",
+    "heat-3",
+    "heat-4",
+    "btn-icon",
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check",
+    "notification-center",
+    "notification-center-badge",
+    "notification-center-panel",
+    "notification-center-head",
+    "notification-center-actions",
+    "notification-center-list",
+    "notification-center-item",
+    "notification-center-text",
+    "notification-center-title",
+    "notification-center-desc",
+    "notification-center-time",
+    "notification-center-empty"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

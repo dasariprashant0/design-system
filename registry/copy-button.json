@@ -16,7 +16,7 @@
     },
     {
       "path": "packages/css/src/components/icon-button.css",
-      "content": "/* Icon button: a square .btn. */\n.btn-icon { padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn-icon.btn-sm { padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
+      "content": "/* Icon button: a square .btn. */\n.btn.btn-icon { height: auto; padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn.btn-icon.btn-sm { height: auto; padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
     },
     {
       "path": "packages/css/src/components/copy-button.css",
@@ -44,6 +44,85 @@
     "packages/react/src/components/copy-button/copy-button.tsx",
     "packages/react/src/components/copy-button/index.ts",
     "packages/react/src/components/copy-button/meta.json"
+  ],
+  "related": [
+    "button",
+    "icon-button",
+    "use-clipboard"
+  ],
+  "props": [
+    {
+      "name": "CopyButtonProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "The text written to the clipboard when the button is pressed."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Visible text. Leave it out for an icon-only button that is named by `label`."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "optional": true,
+          "default": "'Copy'",
+          "description": "The accessible name of the icon-only button (the text button is named by its children). Default \"Copy\"."
+        },
+        {
+          "name": "copiedLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Copied'",
+          "description": "What is shown (text button) and announced to screen readers after a successful copy. Default \"Copied\"."
+        },
+        {
+          "name": "failedLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Copy failed'",
+          "description": "What is announced when the browser refuses to copy. Default \"Copy failed\"."
+        },
+        {
+          "name": "timeout",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "How long the copied state lasts, in milliseconds. Default 2000."
+        },
+        {
+          "name": "onCopied",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the copied text after a successful copy."
+        }
+      ]
+    }
+  ],
+  "usage": "import {CopyButton} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}>\n  <code>npm i @monoline/react</code>\n  <CopyButton value=\"npm i @monoline/react\" label=\"Copy install command\" size=\"sm\" />\n  <CopyButton value=\"npm i @monoline/react\" variant=\"solid\">Copy command</CopyButton>\n</div>",
+  "dataAttributes": [
+    {
+      "name": "data-copied",
+      "values": []
+    }
+  ],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "btn-icon"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

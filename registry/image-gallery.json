@@ -15,7 +15,7 @@
     },
     {
       "path": "packages/css/src/components/dialog.css",
-      "content": "/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }\n"
+      "content": "/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }\n.dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: -0.02em; margin-bottom: var(--s3); } /* sentence case: uppercase is only for .display */\n"
     },
     {
       "path": "packages/css/src/components/image-gallery.css",
@@ -46,6 +46,63 @@
     "packages/react/src/components/image-gallery/image-gallery.tsx",
     "packages/react/src/components/image-gallery/index.ts",
     "packages/react/src/components/image-gallery/meta.json"
+  ],
+  "related": [
+    "button",
+    "dialog"
+  ],
+  "props": [
+    {
+      "name": "ImageGalleryProps",
+      "props": [
+        {
+          "name": "images",
+          "type": "GalleryImage[]",
+          "optional": false,
+          "default": null,
+          "description": "The images, in order. Each needs `alt` text."
+        },
+        {
+          "name": "columns",
+          "type": "number",
+          "optional": true,
+          "default": "3",
+          "description": "Number of columns in the thumbnail grid. Default 3."
+        },
+        {
+          "name": "onIndexChange",
+          "type": "((index: number) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the index of the image shown whenever the lightbox opens or moves."
+        }
+      ]
+    }
+  ],
+  "usage": "import {ImageGallery, type GalleryImage} from '@monoline/react';\n\nconst tile = (n: number, fill: string) => `data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><rect width=\"400\" height=\"300\" fill=\"${fill}\"/><text x=\"200\" y=\"165\" font-family=\"monospace\" font-size=\"64\" text-anchor=\"middle\" fill=\"#fff\">${n}</text></svg>`)}`;\n\nconst images: GalleryImage[] = ['#6b4f3a', '#3a5a6b', '#4f6b3a', '#6b3a5a', '#5a3a6b', '#3a6b5a'].map((c, i) => ({src: tile(i + 1, c), alt: `Sample picture ${i + 1}, a flat colour with its number`, caption: `Picture ${i + 1}`}));\n\n<div style={{maxWidth: '480px'}}><ImageGallery images={images} /></div>",
+  "dataAttributes": [],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "dialog-overlay",
+    "dialog-content",
+    "dialog-header",
+    "dialog-footer",
+    "dialog-description",
+    "dialog-close",
+    "dialog-title",
+    "image-gallery",
+    "image-gallery-thumb",
+    "image-gallery-lightbox",
+    "image-gallery-title",
+    "image-gallery-figure",
+    "image-gallery-nav"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

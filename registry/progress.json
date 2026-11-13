@@ -34,7 +34,7 @@
   "related": [
     "alert",
     "empty-state",
-    "skeleton"
+    "notification-center"
   ],
   "props": [
     {

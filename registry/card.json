@@ -8,7 +8,7 @@
   "css": [
     {
       "path": "packages/css/src/components/06-boxes.css",
-      "content": "/* ─── Boxes ─── */\n.card { padding: var(--s5); box-shadow: inset 0 0 0 1px var(--rule); }\n.card-hover:hover { box-shadow: inset 0 0 0 1px var(--foreground); }\n.banner { display: flex; align-items: flex-start; gap: var(--s4); padding: var(--s3) var(--s4); box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--foreground); background: var(--wash); font-size: var(--text-sm); }\n.banner > :first-child { flex: 1; min-width: 0; overflow-wrap: anywhere; }\n.banner-accent { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--accent); }\n.banner-warning { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--warning); }\n.banner-danger { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--danger); }\n.banner-warning strong { color: var(--warning); }\n.banner-danger strong { color: var(--danger); }\n.code-block { padding: var(--s4); background: var(--wash); box-shadow: inset 0 0 0 1px var(--rule); font-size: var(--text-sm); line-height: 1.6; white-space: pre-wrap; word-break: break-word; }\n"
+      "content": "/* ─── Boxes ─── */\n.card { padding: var(--s5); box-shadow: inset 0 0 0 1px var(--rule); }\n.card-hover:hover { box-shadow: inset 0 0 0 1px var(--foreground); }\n.banner { display: flex; align-items: flex-start; gap: var(--s4); padding: var(--s3) var(--s4); box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--foreground); background: var(--wash); font-size: var(--text-sm); }\n.banner > :first-child { flex: 1; min-width: 0; overflow-wrap: anywhere; }\n.banner-accent { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--accent); }\n.banner-warning { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--warning); }\n.banner-danger { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--danger); }\n.banner-warning strong { color: var(--warning); }\n.banner-danger strong { color: var(--danger); }\n"
     },
     {
       "path": "packages/css/src/components/card.css",
@@ -69,7 +69,6 @@
     "banner-accent",
     "banner-warning",
     "banner-danger",
-    "code-block",
     "card-header",
     "card-title",
     "card-description",

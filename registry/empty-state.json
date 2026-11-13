@@ -31,8 +31,8 @@
   ],
   "related": [
     "alert",
-    "progress",
-    "skeleton"
+    "notification-center",
+    "progress"
   ],
   "props": [
     {

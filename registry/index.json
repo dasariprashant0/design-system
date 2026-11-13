@@ -71,8 +71,8 @@
       ],
       "related": [
         "empty-state",
-        "progress",
-        "skeleton"
+        "notification-center",
+        "progress"
       ],
       "propNames": [
         "tone",
@@ -284,6 +284,7 @@
         "value",
         "defaultValue",
         "onValueChange",
+        "size",
         "invalid"
       ]
     },
@@ -576,14 +577,19 @@
       "a11y": [
         "The sidebar and the drawer hold the same navigation landmark, named by navLabel; the current page has aria-current=\"page\".",
         "Below 800px the sidebar is hidden and a Menu button opens a left drawer: focus is trapped, Escape closes it and focus returns to the button.",
-        "Choosing a link closes the drawer. The content is a main landmark; put one h1 in it."
+        "Choosing a link closes the drawer. The content is a main landmark; put one h1 in it.",
+        "With renderLink the links are rendered by your router link; the block still sets the class and aria-current=\"page\" on it."
       ],
       "keywords": [
         "dashboard",
         "app shell",
         "sidebar",
         "layout",
-        "admin"
+        "admin",
+        "router",
+        "next link",
+        "react router",
+        "renderLink"
       ],
       "kind": "components",
       "import": "import {BlockDashboardShell} from '@monoline/react'",
@@ -603,6 +609,7 @@
       ],
       "propNames": [
         "brand",
+        "renderLink",
         "nav",
         "navLabel",
         "topbar",
@@ -750,6 +757,7 @@
         "brand",
         "description",
         "columns",
+        "renderLink",
         "legal",
         "headingLevel"
       ]
@@ -931,6 +939,7 @@
         "tiers",
         "defaultInterval",
         "labels",
+        "renderLink",
         "onSelect",
         "headingLevel"
       ]
@@ -1267,8 +1276,8 @@
       ],
       "related": [
         "button-group",
-        "icon-button",
-        "segmented-control"
+        "copy-button",
+        "icon-button"
       ],
       "propNames": [
         "variant",
@@ -1327,7 +1336,8 @@
       "a11y": [
         "role=\"grid\" with column headers; one day is in the tab order (roving tabindex).",
         "Arrow keys move by day and week, Home/End to the start and end of the week, PageUp/PageDown by month.",
-        "Each day button has a full date name; the selected day has aria-pressed and today has aria-current=\"date\"."
+        "Each day button has a full date name; the selected day has aria-pressed and today has aria-current=\"date\".",
+        "With `clearable`, a \"Clear date\" button resets the value; it is disabled while no date is chosen."
       ],
       "keywords": [
         "date",
@@ -1354,6 +1364,7 @@
         "value",
         "defaultValue",
         "onValueChange",
+        "clearable",
         "weekStartsOn",
         "min",
         "max",
@@ -1655,6 +1666,7 @@
         "defaultValue",
         "onValueChange",
         "emptyText",
+        "size",
         "invalid"
       ]
     },
@@ -1868,6 +1880,20 @@
         "packages/react/src/components/copy-button/copy-button.tsx",
         "packages/react/src/components/copy-button/index.ts",
         "packages/react/src/components/copy-button/meta.json"
+      ],
+      "related": [
+        "button",
+        "icon-button",
+        "use-clipboard"
+      ],
+      "propNames": [
+        "value",
+        "children",
+        "label",
+        "copiedLabel",
+        "failedLabel",
+        "timeout",
+        "onCopied"
       ]
     },
     {
@@ -2019,7 +2045,8 @@
       "a11y": [
         "The trigger is a button naming the field and the current value; it opens a dialog with the calendar.",
         "Choosing a date closes the dialog and returns focus to the trigger; Escape closes without changing.",
-        "All calendar keyboard behaviour applies inside."
+        "All calendar keyboard behaviour applies inside.",
+        "With `clearable`, a \"Clear date\" button in the popover removes the date, closes it and returns focus to the trigger."
       ],
       "keywords": [
         "datepicker",
@@ -2046,6 +2073,7 @@
         "placeholder",
         "format",
         "disabled",
+        "size",
         "invalid",
         "className",
         "aria-label"
@@ -2093,6 +2121,19 @@
         "packages/react/src/components/date-range-picker/date-range-picker.tsx",
         "packages/react/src/components/date-range-picker/index.ts",
         "packages/react/src/components/date-range-picker/meta.json"
+      ],
+      "related": [
+        "range-calendar",
+        "popover",
+        "field"
+      ],
+      "propNames": [
+        "placeholder",
+        "format",
+        "disabled",
+        "invalid",
+        "className",
+        "aria-label"
       ]
     },
     {
@@ -2366,8 +2407,8 @@
       ],
       "related": [
         "alert",
-        "progress",
-        "skeleton"
+        "notification-center",
+        "progress"
       ],
       "propNames": [
         "title",
@@ -2392,7 +2433,8 @@
       "a11y": [
         "The label is bound to the control by id, so it has an accessible name.",
         "Hint and error are linked with aria-describedby; an error sets aria-invalid and is announced via role=alert.",
-        "required sets the native required attribute on the control."
+        "required sets the native required attribute on the control.",
+        "Inside a Form with errors, a Field with a matching name shows that error once; the form summary announces it, so the inline text is not a second alert."
       ],
       "keywords": [
         "form",
@@ -2416,6 +2458,7 @@
         "label",
         "hint",
         "error",
+        "name",
         "required",
         "children"
       ]
@@ -2560,7 +2603,7 @@
       "a11y": [
         "A native form; give it an accessible name with aria-label or aria-labelledby when the page has several.",
         "The error summary is a role=alert region at the top; each item is a link that moves focus to the invalid control.",
-        "Pass each message to its Field too, so the control carries aria-invalid and aria-describedby."
+        "Pass each error once, in the Form's errors; a Field with the same name shows it inline and sets aria-invalid and aria-describedby on its control. The summary announces it, so the inline text is not announced twice."
       ],
       "keywords": [
         "submit",
@@ -2865,6 +2908,15 @@
         "packages/react/src/components/image-gallery/image-gallery.tsx",
         "packages/react/src/components/image-gallery/index.ts",
         "packages/react/src/components/image-gallery/meta.json"
+      ],
+      "related": [
+        "button",
+        "dialog"
+      ],
+      "propNames": [
+        "images",
+        "columns",
+        "onIndexChange"
       ]
     },
     {
@@ -3138,6 +3190,23 @@
         "packages/react/src/components/mentions/mentions.test.tsx",
         "packages/react/src/components/mentions/mentions.tsx",
         "packages/react/src/components/mentions/meta.json"
+      ],
+      "related": [
+        "autocomplete",
+        "calendar",
+        "checkbox"
+      ],
+      "propNames": [
+        "value",
+        "defaultValue",
+        "onValueChange",
+        "options",
+        "onSearch",
+        "triggers",
+        "onMentionSelect",
+        "loadingText",
+        "emptyText",
+        "invalid"
       ]
     },
     {
@@ -3228,6 +3297,7 @@
         "defaultValue",
         "onValueChange",
         "emptyText",
+        "size",
         "invalid"
       ]
     },
@@ -3267,6 +3337,7 @@
         "field"
       ],
       "propNames": [
+        "size",
         "invalid"
       ]
     },
@@ -3349,6 +3420,19 @@
         "packages/react/src/components/notification-center/notification-center.demo.tsx",
         "packages/react/src/components/notification-center/notification-center.test.tsx",
         "packages/react/src/components/notification-center/notification-center.tsx"
+      ],
+      "related": [
+        "button",
+        "icon-button",
+        "popover"
+      ],
+      "propNames": [
+        "notifications",
+        "onMarkRead",
+        "onMarkAllRead",
+        "onClear",
+        "label",
+        "emptyText"
       ]
     },
     {
@@ -3390,6 +3474,7 @@
         "field"
       ],
       "propNames": [
+        "size",
         "invalid"
       ]
     },
@@ -3567,6 +3652,14 @@
         "packages/react/src/components/overflow-list/overflow-list.demo.tsx",
         "packages/react/src/components/overflow-list/overflow-list.test.tsx",
         "packages/react/src/components/overflow-list/overflow-list.tsx"
+      ],
+      "related": [
+        "button",
+        "dropdown-menu"
+      ],
+      "propNames": [
+        "items",
+        "moreLabel"
       ]
     },
     {
@@ -3605,6 +3698,7 @@
       ],
       "propNames": [
         "page",
+        "defaultPage",
         "pageCount",
         "onPageChange",
         "siblings"
@@ -3766,7 +3860,7 @@
       "related": [
         "alert",
         "empty-state",
-        "skeleton"
+        "notification-center"
       ],
       "propNames": [
         "aria-label"
@@ -3845,6 +3939,21 @@
         "packages/react/src/components/range-calendar/range-calendar.demo.tsx",
         "packages/react/src/components/range-calendar/range-calendar.test.tsx",
         "packages/react/src/components/range-calendar/range-calendar.tsx"
+      ],
+      "related": [
+        "autocomplete",
+        "calendar",
+        "checkbox"
+      ],
+      "propNames": [
+        "value",
+        "defaultValue",
+        "onValueChange",
+        "weekStartsOn",
+        "min",
+        "max",
+        "isDateDisabled",
+        "locale"
       ]
     },
     {
@@ -3915,7 +4024,7 @@
         "layout"
       ],
       "kind": "components",
-      "import": "import {Resizable} from '@monoline/react'",
+      "import": "import {ResizablePanelGroup} from '@monoline/react'",
       "path": "packages/react/src/components/resizable",
       "files": [
         "packages/react/src/components/resizable/index.ts",
@@ -3923,6 +4032,21 @@
         "packages/react/src/components/resizable/resizable.demo.tsx",
         "packages/react/src/components/resizable/resizable.test.tsx",
         "packages/react/src/components/resizable/resizable.tsx"
+      ],
+      "related": [
+        "aspect-ratio",
+        "box",
+        "container"
+      ],
+      "propNames": [
+        "direction",
+        "step",
+        "onLayoutChange",
+        "children",
+        "defaultSize",
+        "minSize",
+        "maxSize",
+        "aria-label"
       ]
     },
     {
@@ -4021,6 +4145,16 @@
         "packages/react/src/components/rolling-number/rolling-number.demo.tsx",
         "packages/react/src/components/rolling-number/rolling-number.test.tsx",
         "packages/react/src/components/rolling-number/rolling-number.tsx"
+      ],
+      "related": [
+        "animated-list",
+        "bento-grid",
+        "border-beam"
+      ],
+      "propNames": [
+        "value",
+        "locale",
+        "format"
       ]
     },
     {
@@ -4182,6 +4316,7 @@
         "field"
       ],
       "propNames": [
+        "size",
         "invalid"
       ]
     },
@@ -4293,7 +4428,7 @@
       "related": [
         "alert",
         "empty-state",
-        "progress"
+        "notification-center"
       ],
       "propNames": [
         "variant"
@@ -4374,6 +4509,18 @@
         "packages/react/src/components/sortable-list/sortable-list.demo.tsx",
         "packages/react/src/components/sortable-list/sortable-list.test.tsx",
         "packages/react/src/components/sortable-list/sortable-list.tsx"
+      ],
+      "related": [
+        "accordion",
+        "area-chart",
+        "avatar"
+      ],
+      "propNames": [
+        "aria-label",
+        "value",
+        "defaultValue",
+        "onValueChange",
+        "orientation"
       ]
     },
     {
@@ -4454,7 +4601,7 @@
       "related": [
         "alert",
         "empty-state",
-        "progress"
+        "notification-center"
       ],
       "propNames": [
         "label"
@@ -4821,6 +4968,7 @@
         "value",
         "defaultValue",
         "onValueChange",
+        "size",
         "invalid"
       ]
     },
@@ -4944,6 +5092,58 @@
       ]
     },
     {
+      "name": "theme-provider",
+      "title": "Theme provider",
+      "category": "layout",
+      "description": "Set and save the theme, accent, font, corners, density and direction from React with useTheme(), and avoid the first-paint flash with themeScript().",
+      "status": "stable",
+      "uses": [
+        "direction-provider",
+        "native-select"
+      ],
+      "css": [],
+      "a11y": [
+        "The theme follows the system colour scheme until the user chooses one.",
+        "ThemeSwitcher is a labelled group of native selects, fully keyboard operable.",
+        "Changing direction also sets dir on the page so arrow keys follow the reading direction."
+      ],
+      "keywords": [
+        "theme",
+        "dark mode",
+        "accent",
+        "useTheme",
+        "localStorage",
+        "ssr",
+        "no flash",
+        "density"
+      ],
+      "kind": "components",
+      "import": "import {ThemeProvider} from '@monoline/react'",
+      "path": "packages/react/src/components/theme-provider",
+      "files": [
+        "packages/react/src/components/theme-provider/index.ts",
+        "packages/react/src/components/theme-provider/meta.json",
+        "packages/react/src/components/theme-provider/theme-provider.demo.tsx",
+        "packages/react/src/components/theme-provider/theme-provider.test.tsx",
+        "packages/react/src/components/theme-provider/theme-provider.tsx",
+        "packages/react/src/components/theme-provider/theme-switcher.tsx"
+      ],
+      "related": [
+        "direction-provider",
+        "native-select"
+      ],
+      "propNames": [
+        "storageKey",
+        "children",
+        "theme",
+        "accent",
+        "font",
+        "radius",
+        "density",
+        "dir"
+      ]
+    },
+    {
       "name": "time-field",
       "title": "Time field",
       "category": "forms",
@@ -4976,6 +5176,22 @@
         "packages/react/src/components/time-field/time-field.demo.tsx",
         "packages/react/src/components/time-field/time-field.test.tsx",
         "packages/react/src/components/time-field/time-field.tsx"
+      ],
+      "related": [
+        "autocomplete",
+        "calendar",
+        "checkbox"
+      ],
+      "propNames": [
+        "value",
+        "defaultValue",
+        "onValueChange",
+        "hourCycle",
+        "step",
+        "disabled",
+        "invalid",
+        "name",
+        "aria-label"
       ]
     },
     {
@@ -5023,6 +5239,7 @@
         "value",
         "defaultValue",
         "onValueChange",
+        "size",
         "invalid"
       ]
     },
@@ -5099,9 +5316,58 @@
       "related": [
         "alert",
         "empty-state",
-        "progress"
+        "notification-center"
       ],
       "propNames": []
+    },
+    {
+      "name": "toaster",
+      "title": "Toaster",
+      "category": "feedback",
+      "description": "Show a toast from anywhere with toast('Saved'). Mount one Toaster; call toast.success, toast.error or toast.promise from handlers.",
+      "status": "stable",
+      "uses": [
+        "toast"
+      ],
+      "css": [
+        "toast.css",
+        "toaster.css"
+      ],
+      "a11y": [
+        "Info and success toasts are announced politely; errors are announced assertively.",
+        "F8 moves focus to the notification region; hovering or focusing a toast pauses its timer.",
+        "Each toast has a Dismiss button and an optional action button; Escape closes the focused toast.",
+        "A stack limit keeps at most three visible by default (older ones wait); motion is removed with prefers-reduced-motion.",
+        "Never the only place a critical result appears; keep an inline message too."
+      ],
+      "keywords": [
+        "toast",
+        "sonner",
+        "snackbar",
+        "notification",
+        "imperative",
+        "promise",
+        "useToast"
+      ],
+      "kind": "components",
+      "import": "import {Toaster} from '@monoline/react'",
+      "path": "packages/react/src/components/toaster",
+      "files": [
+        "packages/react/src/components/toaster/index.ts",
+        "packages/react/src/components/toaster/meta.json",
+        "packages/react/src/components/toaster/toaster.demo.tsx",
+        "packages/react/src/components/toaster/toaster.test.tsx",
+        "packages/react/src/components/toaster/toaster.tsx"
+      ],
+      "related": [
+        "toast"
+      ],
+      "propNames": [
+        "limit",
+        "position",
+        "label",
+        "dismissLabel"
+      ]
     },
     {
       "name": "toggle",
@@ -5135,7 +5401,7 @@
       "related": [
         "button",
         "button-group",
-        "icon-button"
+        "copy-button"
       ],
       "propNames": []
     },
@@ -5172,7 +5438,7 @@
       "related": [
         "button",
         "button-group",
-        "icon-button"
+        "copy-button"
       ],
       "propNames": []
     },
@@ -5208,7 +5474,7 @@
       "related": [
         "button",
         "button-group",
-        "icon-button"
+        "copy-button"
       ],
       "propNames": []
     },
@@ -5292,6 +5558,23 @@
         "packages/react/src/components/tour/tour.demo.tsx",
         "packages/react/src/components/tour/tour.test.tsx",
         "packages/react/src/components/tour/tour.tsx"
+      ],
+      "related": [
+        "alert-dialog",
+        "command",
+        "context-menu"
+      ],
+      "propNames": [
+        "steps",
+        "open",
+        "defaultOpen",
+        "onOpenChange",
+        "step",
+        "defaultStep",
+        "onStepChange",
+        "onFinish",
+        "spotlightPadding",
+        "labels"
       ]
     },
     {
@@ -5383,6 +5666,20 @@
         "packages/react/src/components/tree-select/tree-select.demo.tsx",
         "packages/react/src/components/tree-select/tree-select.test.tsx",
         "packages/react/src/components/tree-select/tree-select.tsx"
+      ],
+      "related": [
+        "tree",
+        "combobox",
+        "input"
+      ],
+      "propNames": [
+        "items",
+        "value",
+        "defaultValue",
+        "onValueChange",
+        "multiple",
+        "emptyText",
+        "invalid"
       ]
     },
     {
@@ -5458,6 +5755,19 @@
         "packages/react/src/components/virtual-list/virtual-list.demo.tsx",
         "packages/react/src/components/virtual-list/virtual-list.test.tsx",
         "packages/react/src/components/virtual-list/virtual-list.tsx"
+      ],
+      "related": [
+        "accordion",
+        "area-chart",
+        "avatar"
+      ],
+      "propNames": [
+        "aria-label",
+        "count",
+        "itemHeight",
+        "height",
+        "overscan",
+        "renderItem"
       ]
     },
     {

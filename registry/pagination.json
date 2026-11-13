@@ -42,9 +42,16 @@
         {
           "name": "page",
           "type": "number",
-          "optional": false,
+          "optional": true,
           "default": null,
-          "description": "Current page, 1-based."
+          "description": "Current page, 1-based, when controlled. Pair with `onPageChange`."
+        },
+        {
+          "name": "defaultPage",
+          "type": "number",
+          "optional": true,
+          "default": "1",
+          "description": "The starting page when uncontrolled. Default 1."
         },
         {
           "name": "pageCount",
@@ -55,8 +62,8 @@
         },
         {
           "name": "onPageChange",
-          "type": "(page: number) => void",
-          "optional": false,
+          "type": "((page: number) => void)",
+          "optional": true,
           "default": null,
           "description": "Called with the new 1-based page number when the user picks a page or presses Prev or Next."
         },

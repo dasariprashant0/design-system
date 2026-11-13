@@ -33,7 +33,7 @@
   "related": [
     "button",
     "button-group",
-    "icon-button"
+    "copy-button"
   ],
   "props": [],
   "usage": "import {Toggle} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)'}}><Toggle>Bold</Toggle><Toggle defaultPressed>Italic</Toggle><Toggle disabled>Locked</Toggle></div>",

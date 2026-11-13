@@ -14,7 +14,7 @@
     },
     {
       "path": "packages/css/src/components/icon-button.css",
-      "content": "/* Icon button: a square .btn. */\n.btn-icon { padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn-icon.btn-sm { padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
+      "content": "/* Icon button: a square .btn. */\n.btn.btn-icon { height: auto; padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn.btn-icon.btn-sm { height: auto; padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
     }
   ],
   "a11y": [
@@ -69,6 +69,7 @@
     "btn-danger",
     "btn-ghost",
     "btn-sm",
+    "btn-lg",
     "btn-block",
     "btn-icon"
   ],

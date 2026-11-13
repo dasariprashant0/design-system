@@ -39,6 +39,107 @@
     "packages/react/src/components/range-calendar/range-calendar.test.tsx",
     "packages/react/src/components/range-calendar/range-calendar.tsx"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "RangeCalendarProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "DateRange",
+          "optional": true,
+          "default": null,
+          "description": "The selected range when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "DateRange",
+          "optional": true,
+          "default": "EMPTY",
+          "description": "The initially selected range when uncontrolled. Default empty."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((range: DateRange) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called after every pick. The first pick gives `{start, end: null}`; the second completes the range."
+        },
+        {
+          "name": "weekStartsOn",
+          "type": "0 | 1",
+          "optional": true,
+          "default": "0",
+          "description": "First day of the week: 0 = Sunday, 1 = Monday. Default 0."
+        },
+        {
+          "name": "min",
+          "type": "Date",
+          "optional": true,
+          "default": null,
+          "description": "Earliest selectable date; earlier days are disabled."
+        },
+        {
+          "name": "max",
+          "type": "Date",
+          "optional": true,
+          "default": null,
+          "description": "Latest selectable date; later days are disabled."
+        },
+        {
+          "name": "isDateDisabled",
+          "type": "((date: Date) => boolean)",
+          "optional": true,
+          "default": null,
+          "description": "Return true for a day that cannot be picked, such as a holiday."
+        },
+        {
+          "name": "locale",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "BCP 47 locale for month and day names."
+        }
+      ]
+    }
+  ],
+  "usage": "import {RangeCalendar} from '@monoline/react';\n\n<RangeCalendar weekStartsOn={1} />",
+  "dataAttributes": [
+    {
+      "name": "data-outside",
+      "values": []
+    },
+    {
+      "name": "data-today",
+      "values": []
+    },
+    {
+      "name": "data-in-range",
+      "values": []
+    },
+    {
+      "name": "data-range-start",
+      "values": []
+    },
+    {
+      "name": "data-preview",
+      "values": []
+    }
+  ],
+  "classes": [
+    "calendar",
+    "calendar-head",
+    "calendar-title",
+    "calendar-nav",
+    "calendar-grid",
+    "calendar-day",
+    "range-cell",
+    "range-calendar"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -33,6 +33,67 @@
     "packages/react/src/components/virtual-list/virtual-list.test.tsx",
     "packages/react/src/components/virtual-list/virtual-list.tsx"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "VirtualListProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Required: names the list for screen readers."
+        },
+        {
+          "name": "count",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "How many rows the whole list has, rendered or not."
+        },
+        {
+          "name": "itemHeight",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "Height of every row in pixels. All rows share it."
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "Height of the scrolling window in pixels."
+        },
+        {
+          "name": "overscan",
+          "type": "number",
+          "optional": true,
+          "default": "4",
+          "description": "Extra rows rendered above and below the visible ones, so fast scrolling shows no blanks. Default 4."
+        },
+        {
+          "name": "renderItem",
+          "type": "(index: number) => ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "Returns the content of row `index`. Only called for rows in or near the window."
+        }
+      ]
+    }
+  ],
+  "usage": "import {VirtualList} from '@monoline/react';\n\n<VirtualList aria-label=\"Ten thousand rows\" count={10000} itemHeight={32} height={192} renderItem={(i) => <span className=\"virtual-list-cell\">Row {i + 1}</span>} />",
+  "dataAttributes": [],
+  "classes": [
+    "virtual-list",
+    "virtual-list-body",
+    "virtual-list-row"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

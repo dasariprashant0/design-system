@@ -34,6 +34,67 @@
     "packages/react/src/components/sortable-list/sortable-list.test.tsx",
     "packages/react/src/components/sortable-list/sortable-list.tsx"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "SortableListProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Required: names the list."
+        },
+        {
+          "name": "value",
+          "type": "SortableItem[]",
+          "optional": true,
+          "default": null,
+          "description": "The items in their current order when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "SortableItem[]",
+          "optional": true,
+          "default": "[]",
+          "description": "The items in their starting order when uncontrolled."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((items: SortableItem[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new order when the user drops an item in a new place. Not called for a cancelled move or a drop where it started."
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\"",
+          "optional": true,
+          "default": "'vertical'",
+          "description": "`vertical` (default) moves with ArrowUp and ArrowDown; `horizontal` lays the items in a row and moves with ArrowLeft and ArrowRight."
+        }
+      ]
+    }
+  ],
+  "usage": "import {SortableList, type SortableItem} from '@monoline/react';\n\nconst items: SortableItem[] = ['Write the brief', 'Draft the spec', 'Review with design', 'Build', 'Ship'].map((t) => ({id: t, label: t}));\n\n<div style={{maxWidth: '360px'}}><SortableList aria-label=\"Tasks\" defaultValue={items} /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-dragging",
+      "values": []
+    }
+  ],
+  "classes": [
+    "sortable-list",
+    "sortable-list-horizontal",
+    "sortable-list-item",
+    "sortable-list-handle",
+    "sortable-list-label"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

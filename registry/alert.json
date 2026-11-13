@@ -32,8 +32,8 @@
   ],
   "related": [
     "empty-state",
-    "progress",
-    "skeleton"
+    "notification-center",
+    "progress"
   ],
   "props": [
     {

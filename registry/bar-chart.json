@@ -11,7 +11,7 @@
     },
     {
       "path": "packages/css/src/components/bar-chart.css",
-      "content": "/* Bar chart. Shared base: chart.css. */\n.chart-bar { transition: stroke-width var(--fast) var(--ease); }\n"
+      "content": "/* Bar chart. Shared base: chart.css. */\n.chart-bar { fill-opacity: 0.45; transition: stroke-width var(--fast) var(--ease), fill-opacity var(--fast) var(--ease); } /* light fill, 1px outline: a solid accent block is heavy beside thin rules */\n.chart-bar[data-active] { fill-opacity: 0.75; }\n"
     }
   ],
   "a11y": [

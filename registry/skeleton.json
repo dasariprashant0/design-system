@@ -32,7 +32,7 @@
   "related": [
     "alert",
     "empty-state",
-    "progress"
+    "notification-center"
   ],
   "props": [
     {
