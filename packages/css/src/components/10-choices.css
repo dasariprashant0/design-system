@@ -1,5 +1,5 @@
 /* ─── Choices: checkbox and radio, native inputs redrawn ─── */
-.choice { display: inline-flex; align-items: flex-start; gap: var(--s3); cursor: pointer; line-height: 1.4; }
+.choice { min-block-size: 24px; /* WCAG 2.5.8 target size; found by e2e */ display: inline-flex; align-items: flex-start; gap: var(--s3); cursor: pointer; line-height: 1.4; }
 .choice input { appearance: none; flex: none; width: 18px; height: 18px; margin: 1px 0 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }
 .choice input[type="radio"] { border-radius: var(--round); }
 .choice input:checked { background: var(--foreground); }

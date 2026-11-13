@@ -18,6 +18,7 @@
     "registry": "npm run registry -w @monoline/react",
     "cli": "node packages/cli/bin/monoline.mjs",
     "test:cli": "npm test -w monoline",
-    "size": "node scripts/size.mjs"
+    "size": "node scripts/size.mjs",
+    "e2e": "node scripts/e2e/run.mjs"
   }
 }
