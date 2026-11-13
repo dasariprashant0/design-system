@@ -29,6 +29,42 @@
     "packages/react/src/components/heading/index.ts",
     "packages/react/src/components/heading/meta.json"
   ],
+  "related": [
+    "kbd",
+    "link",
+    "text"
+  ],
+  "props": [
+    {
+      "name": "HeadingProps",
+      "props": [
+        {
+          "name": "level",
+          "type": "1 | 2 | 3 | 4 | 5 | 6",
+          "optional": true,
+          "default": "2",
+          "description": "Document outline level, 1 to 6."
+        },
+        {
+          "name": "size",
+          "type": "\"md\" | \"lg\" | \"sm\" | \"display\" | \"xl\"",
+          "optional": true,
+          "default": null,
+          "description": "Look. Defaults follow the level. `display` uses the display font."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Heading} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}><Heading level={1}>Display</Heading><Heading level={2}>Section</Heading><Heading level={3}>Subsection</Heading><Heading level={2} size=\"sm\">An h2 that looks small</Heading></div>",
+  "dataAttributes": [],
+  "classes": [
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

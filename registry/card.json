@@ -34,6 +34,48 @@
     "packages/react/src/components/card/index.ts",
     "packages/react/src/components/card/meta.json"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "CardProps",
+      "props": [
+        {
+          "name": "interactive",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Adds a hover outline. Use with `asChild` on a link or button so the whole card is one control."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Render the child element (a link, an `article`) with the card styles instead of a `div`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@monoline/react';\n\n<div style={{maxWidth: 360}}><Card><CardHeader><CardTitle>Ship the pricing page</CardTitle><CardDescription>Today, 14:20 · 3 files</CardDescription></CardHeader><CardContent><p>Rewrote the headline and the plan table.</p></CardContent><CardFooter><Button variant=\"solid\" size=\"sm\">Open</Button><Button size=\"sm\">Share</Button></CardFooter></Card></div>",
+  "dataAttributes": [],
+  "classes": [
+    "card",
+    "card-hover",
+    "banner",
+    "banner-accent",
+    "banner-warning",
+    "banner-danger",
+    "code-block",
+    "card-header",
+    "card-title",
+    "card-description",
+    "card-content",
+    "card-footer"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -32,6 +32,17 @@
     "packages/react/src/components/collapsible/index.ts",
     "packages/react/src/components/collapsible/meta.json"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [],
+  "usage": "import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from '@monoline/react';\n\n<Collapsible><CollapsibleTrigger asChild><Button size=\"sm\">Show details</Button></CollapsibleTrigger><CollapsibleContent><p>Extra detail appears here when the trigger is pressed.</p></CollapsibleContent></Collapsible>",
+  "dataAttributes": [],
+  "classes": [
+    "collapsible-content"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -16,7 +16,7 @@
     "state"
   ],
   "kind": "hooks",
-  "import": "import {UseControllableState} from '@monoline/react'",
+  "import": "import {useControllableState} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-controllable-state",
   "files": [
     "packages/react/src/hooks/use-controllable-state/index.ts",
@@ -25,6 +25,42 @@
     "packages/react/src/hooks/use-controllable-state/use-controllable-state.test.tsx",
     "packages/react/src/hooks/use-controllable-state/use-controllable-state.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-counter"
+  ],
+  "props": [
+    {
+      "name": "UseControllableStateOptions",
+      "props": [
+        {
+          "name": "value",
+          "type": "T",
+          "optional": true,
+          "default": null,
+          "description": "When defined, the hook is controlled and `value` wins."
+        },
+        {
+          "name": "defaultValue",
+          "type": "T",
+          "optional": false,
+          "default": null,
+          "description": "Starting value when uncontrolled."
+        },
+        {
+          "name": "onChange",
+          "type": "((value: T) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new value when it differs from the current one."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, useControllableState} from '@monoline/react';\n\ninterface CounterProps {\n  value?: number;\n  defaultValue?: number;\n  onValueChange?: (value: number) => void;\n}\n\nfunction Counter({value, defaultValue = 0, onValueChange}: CounterProps) {\n  const [count, setCount] = useControllableState({value, defaultValue, onChange: onValueChange});\n  return (\n    <div>\n      <Button variant=\"line\" aria-label=\"Decrease\" onClick={() => setCount(count - 1)}>−</Button>{' '}\n      <output>{count}</output>{' '}\n      <Button variant=\"line\" aria-label=\"Increase\" onClick={() => setCount(count + 1)}>+</Button>\n    </div>\n  );\n}\n\n<Counter defaultValue={2} />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

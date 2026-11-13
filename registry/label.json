@@ -29,6 +29,43 @@
     "packages/react/src/components/label/label.tsx",
     "packages/react/src/components/label/meta.json"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "LabelProps",
+      "props": [
+        {
+          "name": "required",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Adds a required marker. Pair with `required` on the control."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Label} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s2)', maxWidth: 320}}><Label htmlFor=\"demo-label\" required>Email</Label><input id=\"demo-label\" className=\"input\" placeholder=\"you@example.com\" /></div>",
+  "dataAttributes": [],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

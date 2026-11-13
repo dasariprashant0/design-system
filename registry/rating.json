@@ -30,6 +30,78 @@
     "packages/react/src/components/rating/rating.test.tsx",
     "packages/react/src/components/rating/rating.tsx"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "RatingProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Names the control, for example \"Rate this article\"."
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "The current score (0 to `max`) when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "The initial score when uncontrolled. Default 0."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: number) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new score (1 to `max`) when the user picks a star."
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "optional": true,
+          "default": "5",
+          "description": "Number of stars. Default 5."
+        },
+        {
+          "name": "readOnly",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Shows the score without letting anyone change it."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Name of the underlying radio inputs, so the score submits with a native form. A unique name is generated if omitted."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Rating} from '@monoline/react';\n\n<Rating aria-label=\"Rate this page\" defaultValue={3} />",
+  "dataAttributes": [
+    {
+      "name": "data-on",
+      "values": []
+    }
+  ],
+  "classes": [
+    "rating",
+    "rating-star"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

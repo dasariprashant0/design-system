@@ -30,6 +30,25 @@
     "packages/react/src/components/separator/separator.test.tsx",
     "packages/react/src/components/separator/separator.tsx"
   ],
+  "related": [
+    "aspect-ratio",
+    "box",
+    "container"
+  ],
+  "props": [],
+  "usage": "import {Separator} from '@monoline/react';\n\n<div><p>Above</p><Separator /><p>Below</p><div style={{display: 'flex', alignItems: 'center', height: 24}}><span>One</span><Separator orientation=\"vertical\" /><span>Two</span></div></div>",
+  "dataAttributes": [
+    {
+      "name": "data-orientation",
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    }
+  ],
+  "classes": [
+    "separator"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

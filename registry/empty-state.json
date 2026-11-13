@@ -29,6 +29,55 @@
     "packages/react/src/components/empty-state/index.ts",
     "packages/react/src/components/empty-state/meta.json"
   ],
+  "related": [
+    "alert",
+    "progress",
+    "skeleton"
+  ],
+  "props": [
+    {
+      "name": "EmptyStateProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "Short headline saying what is missing, for example \"No projects yet\"."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional sentence explaining why it is empty or what to do next."
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional inline SVG, `aria-hidden`."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "The next step: a Button or link."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, EmptyState} from '@monoline/react';\n\n<EmptyState title=\"No projects yet\" description=\"Projects you create show up here.\"><Button variant=\"solid\">New project</Button></EmptyState>",
+  "dataAttributes": [],
+  "classes": [
+    "empty",
+    "empty-icon",
+    "empty-title",
+    "empty-description",
+    "empty-actions"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

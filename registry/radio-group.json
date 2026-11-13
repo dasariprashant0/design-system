@@ -34,6 +34,52 @@
     "packages/react/src/components/radio-group/radio-group.test.tsx",
     "packages/react/src/components/radio-group/radio-group.tsx"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "RadioGroupItemProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Visible label shown next to the radio. Without it, give the item an `aria-label`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {RadioGroup, RadioGroupItem} from '@monoline/react';\n\n<RadioGroup aria-label=\"Plan\" defaultValue=\"monthly\"><RadioGroupItem value=\"monthly\" label=\"Monthly\" /><RadioGroupItem value=\"yearly\" label=\"Yearly\" /></RadioGroup>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "checked",
+        "indeterminate"
+      ]
+    },
+    {
+      "name": "data-orientation",
+      "values": [
+        "horizontal"
+      ]
+    }
+  ],
+  "classes": [
+    "checkbox",
+    "radio",
+    "sw",
+    "checkbox-mark",
+    "radio-dot",
+    "radio-group",
+    "sw-thumb",
+    "choice",
+    "choice-group"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

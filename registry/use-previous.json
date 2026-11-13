@@ -15,7 +15,7 @@
     "change"
   ],
   "kind": "hooks",
-  "import": "import {UsePrevious} from '@monoline/react'",
+  "import": "import {usePrevious} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-previous",
   "files": [
     "packages/react/src/hooks/use-previous/index.ts",
@@ -24,6 +24,15 @@
     "packages/react/src/hooks/use-previous/use-previous.test.tsx",
     "packages/react/src/hooks/use-previous/use-previous.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useState} from 'react';\nimport {Button, usePrevious} from '@monoline/react';\n\nfunction PreviousDemo() {\n  const [value, setValue] = useState(0);\n  const previous = usePrevious(value);\n  return (\n    <div>\n      <Button variant=\"line\" onClick={() => setValue((v) => v + 1)}>Increase</Button>\n      <p>Now {value}, before {previous ?? 'nothing'}.</p>\n    </div>\n  );\n}\n\n<PreviousDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

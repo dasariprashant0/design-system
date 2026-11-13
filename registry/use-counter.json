@@ -15,7 +15,7 @@
     "bounded"
   ],
   "kind": "hooks",
-  "import": "import {UseCounter} from '@monoline/react'",
+  "import": "import {useCounter} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-counter",
   "files": [
     "packages/react/src/hooks/use-counter/index.ts",
@@ -24,6 +24,35 @@
     "packages/react/src/hooks/use-counter/use-counter.test.tsx",
     "packages/react/src/hooks/use-counter/use-counter.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [
+    {
+      "name": "UseCounterOptions",
+      "props": [
+        {
+          "name": "min",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": ""
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, useCounter} from '@monoline/react';\n\nfunction Demo() {\n  const {count, increment, decrement, reset} = useCounter(1, {min: 0, max: 5});\n  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Button onClick={() => decrement()} disabled={count === 0}>Less</Button><output aria-live=\"polite\">{count}</output><Button onClick={() => increment()} disabled={count === 5}>More</Button><Button variant=\"ghost\" onClick={reset}>Reset</Button></div>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

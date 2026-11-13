@@ -41,6 +41,68 @@
     "packages/react/src/components/tags-input/tags-input.test.tsx",
     "packages/react/src/components/tags-input/tags-input.tsx"
   ],
+  "related": [
+    "field",
+    "tag"
+  ],
+  "props": [
+    {
+      "name": "TagsInputProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "The current tags when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string[]",
+          "optional": true,
+          "default": "[]",
+          "description": "The tags present at first when uncontrolled. Default empty."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the full list of tags after one is added or removed."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Field, TagsInput} from '@monoline/react';\n\n<div style={{maxWidth: '360px'}}><Field label=\"Keywords\"><TagsInput placeholder=\"Add a keyword\" defaultValue={['design', 'css']} /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-invalid",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    }
+  ],
+  "classes": [
+    "avatar",
+    "avatar-lg",
+    "avatar-line",
+    "avatar-group",
+    "tag",
+    "stat",
+    "stat-value",
+    "stat-note",
+    "tags-input",
+    "tags-input-field"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

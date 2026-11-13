@@ -30,6 +30,44 @@
     "packages/react/src/components/badge/index.ts",
     "packages/react/src/components/badge/meta.json"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "BadgeProps",
+      "props": [
+        {
+          "name": "variant",
+          "type": "\"solid\" | \"outline\" | \"accent\"",
+          "optional": true,
+          "default": "'outline'",
+          "description": "`accent` only for \"new\" or \"now\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Badge} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', flexWrap: 'wrap'}}><Badge>draft</Badge><Badge variant=\"solid\">12 days</Badge><Badge variant=\"accent\">new</Badge></div>",
+  "dataAttributes": [],
+  "classes": [
+    "swatch",
+    "check",
+    "check-pass",
+    "check-fail",
+    "badge",
+    "badge-solid",
+    "badge-accent",
+    "kbd",
+    "key-hints",
+    "dot",
+    "heat-0",
+    "heat-1",
+    "heat-2",
+    "heat-3",
+    "heat-4"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -67,6 +67,149 @@
     "packages/react/src/components/block-signup/index.ts",
     "packages/react/src/components/block-signup/meta.json"
   ],
+  "related": [
+    "form",
+    "field",
+    "input",
+    "password-input",
+    "button",
+    "heading"
+  ],
+  "props": [
+    {
+      "name": "BlockSignupProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Create your account'",
+          "description": "Heading of the form. Default \"Create your account\"."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional muted line under the heading."
+        },
+        {
+          "name": "submitLabel",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Create account'",
+          "description": "Text of the submit button. Default \"Create account\"."
+        },
+        {
+          "name": "onSubmit",
+          "type": "((values: SignupValues) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the values once they pass validation."
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Shows a spinner on the submit button while you sign in."
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Links under the form: forgot password, create an account."
+        },
+        {
+          "name": "messages",
+          "type": "Partial<{ name: string; email: string; emailInvalid: string; password: string; passwordShort: string; }>",
+          "optional": true,
+          "default": null,
+          "description": "Replace the validation messages (translate them, or change the tone)."
+        },
+        {
+          "name": "passwordMin",
+          "type": "number",
+          "optional": true,
+          "default": "8",
+          "description": "Shortest password accepted. Default 8."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3",
+          "optional": true,
+          "default": "1",
+          "description": "Outline level of the title, 1 to 3. Default 1 because a signup page is usually the page's h1."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockSignup, Link} from '@monoline/react';\n\n<BlockSignup description=\"It takes a minute.\" footer={<span>Already have an account? <Link href=\"#\">Sign in</Link></span>} />",
+  "dataAttributes": [
+    {
+      "name": "data-valid",
+      "values": [
+        "true"
+      ]
+    }
+  ],
+  "classes": [
+    "form",
+    "form-errors",
+    "form-errors-title",
+    "form-actions",
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "field-error",
+    "field-ok",
+    "input-group",
+    "input-affix",
+    "field-required",
+    "form-row",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block",
+    "spinner",
+    "skeleton",
+    "skeleton-block",
+    "skeleton-hatch",
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "text",
+    "text-xs",
+    "text-sm",
+    "text-md",
+    "text-lg",
+    "text-muted",
+    "text-danger",
+    "text-ok",
+    "text-accent",
+    "text-truncate",
+    "block-signup",
+    "block-signup-head",
+    "block-signup-footer"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

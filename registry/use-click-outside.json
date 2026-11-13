@@ -17,7 +17,7 @@
     "pointer"
   ],
   "kind": "hooks",
-  "import": "import {UseClickOutside} from '@monoline/react'",
+  "import": "import {useClickOutside} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-click-outside",
   "files": [
     "packages/react/src/hooks/use-click-outside/index.ts",
@@ -26,6 +26,15 @@
     "packages/react/src/hooks/use-click-outside/use-click-outside.test.tsx",
     "packages/react/src/hooks/use-click-outside/use-click-outside.ts"
   ],
+  "related": [
+    "use-clipboard",
+    "use-controllable-state",
+    "use-counter"
+  ],
+  "props": [],
+  "usage": "import {useState} from 'react';\nimport {Button, useClickOutside} from '@monoline/react';\n\nfunction PopoverDemo() {\n  const [open, setOpen] = useState(false);\n  const ref = useClickOutside<HTMLDivElement>(() => setOpen(false), open);\n  return (\n    <div>\n      <Button variant=\"line\" aria-expanded={open} onClick={() => setOpen((o) => !o)}>Open panel</Button>\n      {open && (\n        <div ref={ref} role=\"group\" aria-label=\"Panel\">\n          <p>Click anywhere outside this panel to close it.</p>\n        </div>\n      )}\n    </div>\n  );\n}\n\n<PopoverDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

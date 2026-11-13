@@ -36,6 +36,42 @@
     "packages/react/src/components/icon-button/index.ts",
     "packages/react/src/components/icon-button/meta.json"
   ],
+  "related": [
+    "button"
+  ],
+  "props": [
+    {
+      "name": "IconButtonProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Required: what the button does, because there is no visible text."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "An inline SVG with `currentColor` and `aria-hidden`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {IconButton} from '@monoline/react';\n\nconst Plus = () => <svg aria-hidden=\"true\" viewBox=\"0 0 12 12\" width=\"12\" height=\"12\"><path d=\"M6 1v10M1 6h10\" stroke=\"currentColor\" fill=\"none\" /></svg>;\n\n<div style={{display: 'flex', gap: 'var(--s3)'}}><IconButton aria-label=\"Add\"><Plus /></IconButton><IconButton variant=\"solid\" aria-label=\"Add item\"><Plus /></IconButton><IconButton variant=\"ghost\" size=\"sm\" aria-label=\"Add row\"><Plus /></IconButton></div>",
+  "dataAttributes": [],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block",
+    "btn-icon"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

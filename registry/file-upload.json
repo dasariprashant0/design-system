@@ -36,6 +36,53 @@
     "packages/react/src/components/file-upload/index.ts",
     "packages/react/src/components/file-upload/meta.json"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "FileUploadProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Drop files here or choose'",
+          "description": "The visible prompt, for example \"Drop files here or choose\"."
+        },
+        {
+          "name": "onFilesChange",
+          "type": "((files: File[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the full current list whenever it changes."
+        }
+      ]
+    }
+  ],
+  "usage": "import {FileUpload} from '@monoline/react';\n\n<div style={{maxWidth: '420px'}}><FileUpload multiple accept=\"image/*,.pdf\" label=\"Drop files here or choose\" /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-over",
+      "values": []
+    }
+  ],
+  "classes": [
+    "upload",
+    "upload-zone",
+    "upload-list",
+    "upload-name",
+    "upload-remove",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

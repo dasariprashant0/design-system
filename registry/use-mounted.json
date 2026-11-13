@@ -14,7 +14,7 @@
     "client only"
   ],
   "kind": "hooks",
-  "import": "import {UseMounted} from '@monoline/react'",
+  "import": "import {useMounted} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-mounted",
   "files": [
     "packages/react/src/hooks/use-mounted/index.ts",
@@ -23,6 +23,15 @@
     "packages/react/src/hooks/use-mounted/use-mounted.test.tsx",
     "packages/react/src/hooks/use-mounted/use-mounted.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useMounted} from '@monoline/react';\n\nfunction Demo() {\n  const mounted = useMounted();\n  return <p>{mounted ? 'Rendered in the browser.' : 'Server render.'}</p>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -37,6 +37,29 @@
     "packages/react/src/components/alert-dialog/index.ts",
     "packages/react/src/components/alert-dialog/meta.json"
   ],
+  "related": [
+    "command",
+    "context-menu",
+    "dialog"
+  ],
+  "props": [],
+  "usage": "import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, Button} from '@monoline/react';\n\n<AlertDialog>\n  <AlertDialogTrigger asChild><Button variant=\"danger\">Delete project</Button></AlertDialogTrigger>\n  <AlertDialogContent>\n    <AlertDialogHeader><AlertDialogTitle>Delete this project?</AlertDialogTitle><AlertDialogDescription>All files and history are removed. This cannot be undone.</AlertDialogDescription></AlertDialogHeader>\n    <AlertDialogFooter><AlertDialogCancel>Keep it</AlertDialogCancel><AlertDialogAction>Delete project</AlertDialogAction></AlertDialogFooter>\n  </AlertDialogContent>\n</AlertDialog>",
+  "dataAttributes": [],
+  "classes": [
+    "dialog-overlay",
+    "dialog-content",
+    "dialog-header",
+    "dialog-footer",
+    "dialog-description",
+    "dialog-close",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

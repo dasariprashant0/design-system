@@ -33,6 +33,76 @@
     "packages/react/src/components/sparkline/sparkline.test.tsx",
     "packages/react/src/components/sparkline/sparkline.tsx"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "SparklineProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Accessible name. Required."
+        },
+        {
+          "name": "data",
+          "type": "number[]",
+          "optional": false,
+          "default": null,
+          "description": "Values in order. Non-finite values count as 0."
+        },
+        {
+          "name": "labels",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "Names for the values, used in the screen reader table. Default: 1, 2, 3..."
+        },
+        {
+          "name": "area",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Fill under the line."
+        },
+        {
+          "name": "width",
+          "type": "number",
+          "optional": true,
+          "default": "96",
+          "description": "Width in px. Default 96."
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "optional": true,
+          "default": "24",
+          "description": "Height in px. Default 24."
+        },
+        {
+          "name": "valueFormat",
+          "type": "((value: number) => string)",
+          "optional": true,
+          "default": null,
+          "description": "Format a value for the screen reader table."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Sparkline} from '@monoline/react';\n\n<p>Signups <Sparkline title=\"Signups, last 10 days\" data={[3, 5, 4, 8, 6, 9, 12, 10, 14, 13]} /> up 18% this week.</p>",
+  "dataAttributes": [],
+  "classes": [
+    "sparkline",
+    "sparkline-line",
+    "sparkline-area",
+    "sparkline-dot",
+    "sparkline-empty"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

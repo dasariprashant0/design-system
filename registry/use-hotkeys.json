@@ -17,7 +17,7 @@
     "cmd+k"
   ],
   "kind": "hooks",
-  "import": "import {UseHotkeys} from '@monoline/react'",
+  "import": "import {useHotkeys} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-hotkeys",
   "files": [
     "packages/react/src/hooks/use-hotkeys/index.ts",
@@ -26,6 +26,42 @@
     "packages/react/src/hooks/use-hotkeys/use-hotkeys.test.tsx",
     "packages/react/src/hooks/use-hotkeys/use-hotkeys.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [
+    {
+      "name": "UseHotkeysOptions",
+      "props": [
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Set false to turn every binding off. Default true."
+        },
+        {
+          "name": "allowInInputs",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Also fire while focus is in a text field, select or contenteditable. Default false."
+        },
+        {
+          "name": "preventDefault",
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Call `preventDefault` on a matched key. Default true."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {useHotkeys} from '@monoline/react';\n\nfunction HotkeysDemo() {\n  const [last, setLast] = useState('none yet');\n  useHotkeys({\n    'mod+k': () => setLast('mod+k'),\n    'shift+h': () => setLast('shift+h'),\n    escape: () => setLast('escape'),\n  });\n  return (\n    <div>\n      <p>Press Mod+K (Cmd on macOS, Ctrl elsewhere), Shift+H or Escape.</p>\n      <p>Last shortcut: {last}</p>\n    </div>\n  );\n}\n\n<HotkeysDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

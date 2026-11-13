@@ -14,7 +14,7 @@
     "mouseover"
   ],
   "kind": "hooks",
-  "import": "import {UseHover} from '@monoline/react'",
+  "import": "import {useHover} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-hover",
   "files": [
     "packages/react/src/hooks/use-hover/index.ts",
@@ -23,6 +23,15 @@
     "packages/react/src/hooks/use-hover/use-hover.test.tsx",
     "packages/react/src/hooks/use-hover/use-hover.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useHover} from '@monoline/react';\n\nfunction Demo() {\n  const [ref, hovered] = useHover<HTMLDivElement>();\n  return <div ref={ref} style={{padding: 'var(--s5)', border: '1px solid var(--rule)', background: hovered ? 'var(--wash-2)' : 'transparent'}}>{hovered ? 'Pointer is over this box' : 'Move the pointer here'}</div>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

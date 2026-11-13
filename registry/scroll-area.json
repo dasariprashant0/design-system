@@ -30,6 +30,48 @@
     "packages/react/src/components/scroll-area/scroll-area.test.tsx",
     "packages/react/src/components/scroll-area/scroll-area.tsx"
   ],
+  "related": [
+    "aspect-ratio",
+    "box",
+    "container"
+  ],
+  "props": [
+    {
+      "name": "ScrollAreaProps",
+      "props": [
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\" | \"both\"",
+          "optional": true,
+          "default": "'vertical'",
+          "description": "Which scrollbars to render."
+        },
+        {
+          "name": "viewportProps",
+          "type": "Omit<Radix.ScrollAreaViewportProps & RefAttributes<HTMLDivElement>, \"ref\">",
+          "optional": true,
+          "default": null,
+          "description": "Passed to the focusable viewport, e.g. a name for the region."
+        }
+      ]
+    }
+  ],
+  "usage": "import {ScrollArea} from '@monoline/react';\n\n<ScrollArea style={{height: '160px', width: '320px', border: '1px solid var(--rule)'}} viewportProps={{'aria-label': 'Release notes'}}><div style={{padding: 'var(--s3)'}}>{Array.from({length: 20}, (_, i) => <p key={i}>Release note {i + 1}</p>)}</div></ScrollArea>",
+  "dataAttributes": [
+    {
+      "name": "data-orientation",
+      "values": [
+        "vertical",
+        "horizontal"
+      ]
+    }
+  ],
+  "classes": [
+    "scroll-area",
+    "scroll-viewport",
+    "scroll-bar",
+    "scroll-thumb"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

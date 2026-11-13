@@ -27,6 +27,35 @@
     "packages/react/src/components/direction-provider/index.ts",
     "packages/react/src/components/direction-provider/meta.json"
   ],
+  "related": [
+    "aspect-ratio",
+    "box",
+    "container"
+  ],
+  "props": [
+    {
+      "name": "DirectionProviderProps",
+      "props": [
+        {
+          "name": "dir",
+          "type": "\"ltr\" | \"rtl\"",
+          "optional": false,
+          "default": null,
+          "description": "Reading direction for everything below: `ltr` or `rtl`."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "The part of the app that should use this direction."
+        }
+      ]
+    }
+  ],
+  "usage": "import {DirectionProvider, Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';\n\n<div dir=\"rtl\"><DirectionProvider dir=\"rtl\"><Tabs defaultValue=\"a\"><TabsList aria-label=\"Sections\"><TabsTrigger value=\"a\">الأول</TabsTrigger><TabsTrigger value=\"b\">الثاني</TabsTrigger></TabsList><TabsContent value=\"a\">محتوى</TabsContent><TabsContent value=\"b\">محتوى آخر</TabsContent></Tabs></DirectionProvider></div>",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

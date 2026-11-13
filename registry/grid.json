@@ -29,6 +29,46 @@
     "packages/react/src/components/grid/index.ts",
     "packages/react/src/components/grid/meta.json"
   ],
+  "related": [
+    "aspect-ratio",
+    "box",
+    "container"
+  ],
+  "props": [
+    {
+      "name": "GridProps",
+      "props": [
+        {
+          "name": "columns",
+          "type": "1 | 2 | 3 | 4 | 5 | 6",
+          "optional": true,
+          "default": null,
+          "description": "Fixed number of equal columns. Omit for an auto-fit grid."
+        },
+        {
+          "name": "minColumn",
+          "type": "string",
+          "optional": true,
+          "default": "'16rem'",
+          "description": "With auto-fit: the smallest a column may be, as a CSS length such as `16rem`."
+        },
+        {
+          "name": "gap",
+          "type": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9",
+          "optional": true,
+          "default": "4",
+          "description": "Step on the spacing scale, 1 to 9."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Card, Grid} from '@monoline/react';\n\n<Grid columns={3}>{['One', 'Two', 'Three'].map((n) => <Card key={n}>{n}</Card>)}</Grid>",
+  "dataAttributes": [],
+  "classes": [
+    "grid",
+    "grid-auto",
+    "grid-fixed"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

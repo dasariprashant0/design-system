@@ -30,6 +30,37 @@
     "packages/react/src/components/popover/popover.test.tsx",
     "packages/react/src/components/popover/popover.tsx"
   ],
+  "related": [
+    "alert-dialog",
+    "command",
+    "context-menu"
+  ],
+  "props": [],
+  "usage": "import {Button, Popover, PopoverContent, PopoverTrigger} from '@monoline/react';\n\n<Popover><PopoverTrigger asChild><Button>Details</Button></PopoverTrigger><PopoverContent aria-label=\"Entry details\"><p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p></PopoverContent></Popover>",
+  "dataAttributes": [
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    }
+  ],
+  "classes": [
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

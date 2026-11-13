@@ -29,6 +29,51 @@
     "packages/react/src/components/stat/stat.test.tsx",
     "packages/react/src/components/stat/stat.tsx"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "StatProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "What the number measures, for example \"Active users\"."
+        },
+        {
+          "name": "value",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The metric itself, shown large. Include the unit or currency in the text."
+        },
+        {
+          "name": "note",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "A short note: a change, a period, a unit."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Stat} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s7)', flexWrap: 'wrap'}}><Stat label=\"Revenue\" value=\"$12k\" note=\"+4% this week\" /><Stat label=\"Users\" value=\"1,204\" note=\"all time\" /></div>",
+  "dataAttributes": [],
+  "classes": [
+    "avatar",
+    "avatar-lg",
+    "avatar-line",
+    "avatar-group",
+    "tag",
+    "stat",
+    "stat-value",
+    "stat-note"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

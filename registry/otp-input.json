@@ -32,6 +32,87 @@
     "packages/react/src/components/otp-input/otp-input.test.tsx",
     "packages/react/src/components/otp-input/otp-input.tsx"
   ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "OtpInputProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Names the group, for example \"Verification code\"."
+        },
+        {
+          "name": "length",
+          "type": "number",
+          "optional": true,
+          "default": "6",
+          "description": "Number of boxes, which is the length of the code. Default 6."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The code typed so far when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": "''",
+          "description": "The code typed at first when uncontrolled. Default empty."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the whole code (so far) every time a character is added or removed."
+        },
+        {
+          "name": "onComplete",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called once when every box is filled."
+        },
+        {
+          "name": "alphanumeric",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Allow letters as well as digits."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Disables every box."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the boxes as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {OtpInput} from '@monoline/react';\n\nfunction Demo() {\n  const [done, setDone] = useState('');\n  return <div style={{display: 'grid', gap: 'var(--s3)'}}><OtpInput aria-label=\"Verification code\" onComplete={setDone} /><p className=\"muted small\" role=\"status\">{done ? `Entered ${done}` : 'Enter 6 digits'}</p></div>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [
+    "otp",
+    "otp-box"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

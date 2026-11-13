@@ -15,7 +15,7 @@
     "prefers-reduced-motion"
   ],
   "kind": "hooks",
-  "import": "import {UseReducedMotion} from '@monoline/react'",
+  "import": "import {useReducedMotion} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-reduced-motion",
   "files": [
     "packages/react/src/hooks/use-reduced-motion/index.ts",
@@ -24,6 +24,15 @@
     "packages/react/src/hooks/use-reduced-motion/use-reduced-motion.test.tsx",
     "packages/react/src/hooks/use-reduced-motion/use-reduced-motion.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useReducedMotion} from '@monoline/react';\n\nfunction MotionDemo() {\n  const reduce = useReducedMotion();\n  return <p>{reduce ? 'You asked for less motion: transitions are skipped.' : 'Motion is allowed.'}</p>;\n}\n\n<MotionDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

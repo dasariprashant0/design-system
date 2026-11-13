@@ -16,7 +16,7 @@
     "writeText"
   ],
   "kind": "hooks",
-  "import": "import {UseClipboard} from '@monoline/react'",
+  "import": "import {useClipboard} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-clipboard",
   "files": [
     "packages/react/src/hooks/use-clipboard/index.ts",
@@ -25,6 +25,54 @@
     "packages/react/src/hooks/use-clipboard/use-clipboard.test.tsx",
     "packages/react/src/hooks/use-clipboard/use-clipboard.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-controllable-state",
+    "use-counter"
+  ],
+  "props": [
+    {
+      "name": "UseClipboardOptions",
+      "props": [
+        {
+          "name": "timeout",
+          "type": "number",
+          "optional": true,
+          "default": "2000",
+          "description": "How long `copied` stays true, in milliseconds. Default 2000."
+        }
+      ]
+    },
+    {
+      "name": "UseClipboardReturn",
+      "props": [
+        {
+          "name": "copied",
+          "type": "boolean",
+          "optional": false,
+          "default": null,
+          "description": "True for `timeout` ms after a successful copy."
+        },
+        {
+          "name": "error",
+          "type": "Error | null",
+          "optional": false,
+          "default": null,
+          "description": "The last failure, cleared by the next copy."
+        },
+        {
+          "name": "copy",
+          "type": "(value: string) => Promise<boolean>",
+          "optional": false,
+          "default": null,
+          "description": "Copies text. Resolves `true` on success, `false` on failure (never throws)."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, useClipboard} from '@monoline/react';\n\nfunction ClipboardDemo() {\n  const {copied, error, copy} = useClipboard();\n  return (\n    <div>\n      <Button variant=\"line\" onClick={() => copy('npm install @monoline/react')}>\n        {copied ? 'Copied' : 'Copy install command'}\n      </Button>\n      {error && <p role=\"status\">Copy failed. Select the text and copy it yourself.</p>}\n    </div>\n  );\n}\n\n<ClipboardDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

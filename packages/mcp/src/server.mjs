@@ -1,7 +1,7 @@
 // Monoline MCP server core: JSON-RPC 2.0 by hand. No I/O here except through the registry.
 import {readFileSync} from 'node:fs';
 import {createRegistry} from './registry.mjs';
-import {compose, installInfo, propsSummary, rank} from './tools.mjs';
+import {compose, installInfo, propGroupsOf, rank} from './tools.mjs';
 
 const THEMING = readFileSync(new URL('./theming.md', import.meta.url), 'utf8');
 const SUPPORTED = ['2025-06-18', '2025-03-26', '2024-11-05'];
@@ -18,9 +18,9 @@ const obj = (d) => ({type: 'object', properties: d.properties ?? {}, required: d
 const TOOLS = [
   {name: 'list_components', description: 'List every Monoline component, hook and block, optionally for one category.',
     inputSchema: obj({properties: {category: {type: 'string', description: 'e.g. forms, overlays, blocks, hooks'}}})},
-  {name: 'search_components', description: 'Search components by name, title, description and keywords. Results are ranked.',
+  {name: 'search_components', description: 'Search components by name, title, description, keywords and prop names. Results are ranked; matchedProps lists the props that matched.',
     inputSchema: obj({properties: {query: {type: 'string'}, limit: {type: 'integer', minimum: 1, maximum: 50, description: 'default 10'}}, required: ['query']})},
-  {name: 'get_component', description: 'Get one component: meta, import line, props summary, accessibility notes, CSS files. Set include_source for the full source and CSS.',
+  {name: 'get_component', description: 'Get one component: import line, props (name, type, default, description), usage example, a11y notes, CSS classes and data attributes, related components. Set include_source for the full source and CSS.',
     inputSchema: obj({properties: {name: {type: 'string'}, include_source: {type: 'boolean', description: 'include full source files and CSS content'}}, required: ['name']})},
   {name: 'get_install_command', description: 'The `npx monoline add` command for components, plus the npm packages they need.',
     inputSchema: obj({properties: {names: {type: 'array', items: {type: 'string'}, minItems: 1}}, required: ['names']})},
@@ -67,14 +67,15 @@ export function createServer({registry, location, fetch} = {}) {
       if (typeof query !== 'string' || !query.trim()) throw new Error('query is required');
       const {components} = await reg.index();
       const hits = rank(components, query).slice(0, Math.min(Math.max(1, limit | 0), 50));
-      return json({query, count: hits.length, results: hits.map(({c, score}) => ({name: c.name, title: c.title, category: c.category, description: c.description, score}))});
+      return json({query, count: hits.length, results: hits.map(({c, score, matchedProps}) => ({name: c.name, title: c.title, category: c.category, description: c.description, score, ...(matchedProps.length && {matchedProps})}))});
     },
     async get_component({name, include_source = false} = {}) {
       const c = await entry(name);
       const out = {
         name: c.name, title: c.title, kind: c.kind, category: c.category, status: c.status, description: c.description,
         primitive: c.primitive ?? null, uses: c.uses ?? [], keywords: c.keywords ?? [],
-        import: c.import, props: propsSummary(c.source ?? []), a11y: c.a11y ?? [],
+        import: c.import, props: propGroupsOf(c), usage: c.usage ?? null, a11y: c.a11y ?? [],
+        classes: c.classes ?? [], dataAttributes: c.dataAttributes ?? [], related: c.related ?? [],
         dependencies: c.dependencies ?? {}, css: (c.css ?? []).map((f) => f.path),
         install: `npx monoline add ${c.name}`,
       };

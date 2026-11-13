@@ -31,6 +31,35 @@
     "packages/react/src/components/dialog/index.ts",
     "packages/react/src/components/dialog/meta.json"
   ],
+  "related": [
+    "alert-dialog",
+    "command",
+    "context-menu"
+  ],
+  "props": [
+    {
+      "name": "DialogContentProps",
+      "props": [
+        {
+          "name": "showClose",
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Shows a \"Close\" text button in the corner. Escape and the overlay always close it."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from '@monoline/react';\n\n<Dialog>\n  <DialogTrigger asChild><Button>Overwrite copy</Button></DialogTrigger>\n  <DialogContent>\n    <DialogHeader><DialogTitle>Overwrite the remote copy?</DialogTitle><DialogDescription>The copy on this device is newer. Changes from 12 March on the other device will be lost.</DialogDescription></DialogHeader>\n    <DialogFooter><DialogClose asChild><Button>Keep both</Button></DialogClose><DialogClose asChild><Button variant=\"solid\">Overwrite</Button></DialogClose></DialogFooter>\n  </DialogContent>\n</Dialog>",
+  "dataAttributes": [],
+  "classes": [
+    "dialog-overlay",
+    "dialog-content",
+    "dialog-header",
+    "dialog-footer",
+    "dialog-description",
+    "dialog-close"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -39,6 +39,77 @@
     "packages/react/src/components/autocomplete/index.ts",
     "packages/react/src/components/autocomplete/meta.json"
   ],
+  "related": [
+    "field"
+  ],
+  "props": [
+    {
+      "name": "AutocompleteProps",
+      "props": [
+        {
+          "name": "suggestions",
+          "type": "string[]",
+          "optional": false,
+          "default": null,
+          "description": "Suggestions shown while typing; matched by substring, case-insensitive."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The text in the field."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": "''",
+          "description": "Initial text when the field is uncontrolled. Default empty."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the text on every change, and with the suggestion when one is picked."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Autocomplete, Field} from '@monoline/react';\n\nconst cities = ['Amsterdam', 'Berlin', 'Bangalore', 'Boston', 'Lisbon', 'London', 'Lagos'];\n\n<div style={{maxWidth: '320px', minHeight: '220px'}}><Field label=\"City\"><Autocomplete suggestions={cities} placeholder=\"Start typing\" /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "autocomplete",
+    "autocomplete-list",
+    "autocomplete-option"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

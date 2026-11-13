@@ -30,6 +30,66 @@
     "packages/react/src/components/pagination/pagination.test.tsx",
     "packages/react/src/components/pagination/pagination.tsx"
   ],
+  "related": [
+    "breadcrumb",
+    "menubar",
+    "navigation-menu"
+  ],
+  "props": [
+    {
+      "name": "PaginationProps",
+      "props": [
+        {
+          "name": "page",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "Current page, 1-based."
+        },
+        {
+          "name": "pageCount",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "Total number of pages."
+        },
+        {
+          "name": "onPageChange",
+          "type": "(page: number) => void",
+          "optional": false,
+          "default": null,
+          "description": "Called with the new 1-based page number when the user picks a page or presses Prev or Next."
+        },
+        {
+          "name": "siblings",
+          "type": "number",
+          "optional": true,
+          "default": "1",
+          "description": "How many numbers to show on each side of the current page."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {Pagination} from '@monoline/react';\n\nfunction Demo1() {\n  const [page, setPage] = useState(5);\n  return <Pagination page={page} pageCount={20} onPageChange={setPage} />;\n}\n\n<Demo1 />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "done"
+      ]
+    }
+  ],
+  "classes": [
+    "crumbs",
+    "pager",
+    "steps",
+    "step",
+    "topbar",
+    "brand",
+    "topbar-nav",
+    "tab",
+    "tabpanel"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

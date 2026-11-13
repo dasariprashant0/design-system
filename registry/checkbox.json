@@ -38,6 +38,57 @@
     "packages/react/src/components/checkbox/index.ts",
     "packages/react/src/components/checkbox/meta.json"
   ],
+  "related": [
+    "field"
+  ],
+  "props": [
+    {
+      "name": "CheckboxProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Visible label. Without it, give the checkbox an `aria-label`."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the checkbox as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Checkbox} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}><Checkbox label=\"Replies\" defaultChecked /><Checkbox label=\"Mentions\" /><Checkbox label=\"Billing (locked)\" disabled /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "checked",
+        "indeterminate"
+      ]
+    },
+    {
+      "name": "data-orientation",
+      "values": [
+        "horizontal"
+      ]
+    }
+  ],
+  "classes": [
+    "checkbox",
+    "radio",
+    "sw",
+    "checkbox-mark",
+    "radio-dot",
+    "radio-group",
+    "sw-thumb",
+    "choice",
+    "choice-group"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -30,6 +30,44 @@
     "packages/react/src/components/table/table.test.tsx",
     "packages/react/src/components/table/table.tsx"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "TableProps",
+      "props": [
+        {
+          "name": "wrapperLabel",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Names the scrollable wrapper. Give it when the table can overflow."
+        }
+      ]
+    },
+    {
+      "name": "TableCellProps",
+      "props": [
+        {
+          "name": "numeric",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Right-aligns numbers."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from '@monoline/react';\n\n<Table wrapperLabel=\"Team\">\n  <TableCaption>Team members</TableCaption>\n  <TableHeader><TableRow><TableHead>Name</TableHead><TableHead>Role</TableHead><TableHead numeric>Projects</TableHead></TableRow></TableHeader>\n  <TableBody>\n    <TableRow><TableCell>Ada Lovelace</TableCell><TableCell>Engineer</TableCell><TableCell numeric>4</TableCell></TableRow>\n    <TableRow><TableCell>Grace Hopper</TableCell><TableCell>Admiral</TableCell><TableCell numeric>9</TableCell></TableRow>\n  </TableBody>\n</Table>",
+  "dataAttributes": [],
+  "classes": [
+    "table-wrap",
+    "table",
+    "num"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

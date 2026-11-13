@@ -16,7 +16,7 @@
     "matchMedia"
   ],
   "kind": "hooks",
-  "import": "import {UseMediaQuery} from '@monoline/react'",
+  "import": "import {useMediaQuery} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-media-query",
   "files": [
     "packages/react/src/hooks/use-media-query/index.ts",
@@ -25,6 +25,15 @@
     "packages/react/src/hooks/use-media-query/use-media-query.test.tsx",
     "packages/react/src/hooks/use-media-query/use-media-query.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useMediaQuery} from '@monoline/react';\n\nfunction WidthDemo() {\n  const wide = useMediaQuery('(min-width: 40rem)');\n  return <p>{wide ? 'Viewport is 40rem or wider.' : 'Viewport is narrower than 40rem.'}</p>;\n}\n\n<WidthDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

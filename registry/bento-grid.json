@@ -32,6 +32,41 @@
     "packages/react/src/components/bento-grid/index.ts",
     "packages/react/src/components/bento-grid/meta.json"
   ],
+  "related": [
+    "animated-list",
+    "border-beam",
+    "confetti"
+  ],
+  "props": [
+    {
+      "name": "BentoCardProps",
+      "props": [
+        {
+          "name": "colSpan",
+          "type": "1 | 2 | 3",
+          "optional": true,
+          "default": "1",
+          "description": "Columns to span once the grid has room for them. Default 1."
+        },
+        {
+          "name": "rowSpan",
+          "type": "1 | 2",
+          "optional": true,
+          "default": "1",
+          "description": "Rows to span. Default 1."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BentoCard, BentoGrid} from '@monoline/react';\n\nconst tile = (title: string, text: string) => (<><h3 style={{margin: 0, fontWeight: 500}}>{title}</h3><p style={{margin: 'var(--s2) 0 0', color: 'var(--muted)'}}>{text}</p></>);\n\n<BentoGrid>\n  <BentoCard colSpan={2} rowSpan={2}>{tile('Tokens first', 'Every colour, space and rule comes from one small set of tokens.')}</BentoCard>\n  <BentoCard>{tile('Three themes', 'Warm, dark and midnight.')}</BentoCard>\n  <BentoCard>{tile('Four accents', 'One accent at a time.')}</BentoCard>\n  <BentoCard colSpan={3}>{tile('Plain CSS core', 'Use the stylesheets alone, or the React layer on top.')}</BentoCard>\n</BentoGrid>",
+  "dataAttributes": [],
+  "classes": [
+    "bento-grid",
+    "bento-card",
+    "bento-col-2",
+    "bento-col-3",
+    "bento-row-2"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -33,6 +33,30 @@
     "packages/react/src/components/spotlight/spotlight.test.tsx",
     "packages/react/src/components/spotlight/spotlight.tsx"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "SpotlightProps",
+      "props": [
+        {
+          "name": "size",
+          "type": "number",
+          "optional": true,
+          "default": "240",
+          "description": "Radius of the glow in px. Default 240."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Spotlight} from '@monoline/react';\n\n<Spotlight style={{padding: 'var(--s7)', border: '1px solid var(--rule)', maxWidth: '28rem'}}>\n  <h3 style={{margin: 0, fontWeight: 500}}>Hover here</h3>\n  <p style={{margin: 'var(--s2) 0 0', color: 'var(--muted)'}}>A soft light follows the pointer. Keyboard and touch see a plain surface.</p>\n</Spotlight>",
+  "dataAttributes": [],
+  "classes": [
+    "spotlight"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

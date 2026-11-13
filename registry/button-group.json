@@ -35,6 +35,35 @@
     "packages/react/src/components/button-group/index.ts",
     "packages/react/src/components/button-group/meta.json"
   ],
+  "related": [
+    "button"
+  ],
+  "props": [
+    {
+      "name": "ButtonGroupProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Names the group for assistive tech, for example \"Text alignment\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, ButtonGroup} from '@monoline/react';\n\n<ButtonGroup aria-label=\"View\"><Button>Day</Button><Button>Week</Button><Button>Month</Button></ButtonGroup>",
+  "dataAttributes": [],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-block",
+    "btn-group"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

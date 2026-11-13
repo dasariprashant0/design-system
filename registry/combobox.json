@@ -39,6 +39,85 @@
     "packages/react/src/components/combobox/index.ts",
     "packages/react/src/components/combobox/meta.json"
   ],
+  "related": [
+    "field"
+  ],
+  "props": [
+    {
+      "name": "ComboboxProps",
+      "props": [
+        {
+          "name": "options",
+          "type": "ComboboxOption[]",
+          "optional": false,
+          "default": null,
+          "description": "The choices, each with a `value`, a `label` and an optional `disabled`. The user filters them by typing part of the label."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The selected option's `value` when controlled; `''` means none. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": "''",
+          "description": "The initially selected option's `value` when uncontrolled. Default none."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the chosen option's value, or '' when cleared."
+        },
+        {
+          "name": "emptyText",
+          "type": "string",
+          "optional": true,
+          "default": "'No matches'",
+          "description": "Shown when nothing matches."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Combobox, Field} from '@monoline/react';\n\nconst options = ['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Katherine Johnson', 'Linus Torvalds'].map((n) => ({value: n.toLowerCase().replace(/\\W+/g, '-'), label: n}));\n\n<div style={{maxWidth: '320px', minHeight: '260px'}}><Field label=\"Person\"><Combobox options={options} placeholder=\"Type a name\" /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "combobox",
+    "combobox-list",
+    "combobox-option",
+    "combobox-empty"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -15,7 +15,7 @@
     "fragment"
   ],
   "kind": "hooks",
-  "import": "import {UseHash} from '@monoline/react'",
+  "import": "import {useHash} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-hash",
   "files": [
     "packages/react/src/hooks/use-hash/index.ts",
@@ -24,6 +24,15 @@
     "packages/react/src/hooks/use-hash/use-hash.test.tsx",
     "packages/react/src/hooks/use-hash/use-hash.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {Button, useHash} from '@monoline/react';\n\nfunction Demo() {\n  const [hash, setHash] = useHash();\n  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><output>#{hash || '(empty)'}</output><Button size=\"sm\" onClick={() => setHash('use-hash')}>Set #use-hash</Button></div>;\n}\n\n<Demo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },
