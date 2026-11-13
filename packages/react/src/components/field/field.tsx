@@ -10,6 +10,9 @@ interface FieldContextValue {
 }
 const FieldContext = createContext<FieldContextValue | null>(null);
 
+/** Errors by control name, provided by `Form` so a `Field` with a matching `name` can read its message. Internal. */
+export const FormErrorsContext = createContext<Record<string, ReactNode> | null>(null);
+
 /**
  * Props a form control should spread to join its surrounding Field: id, aria-describedby, aria-invalid, required.
  * Outside a Field it returns an empty object, so controls work alone too.
@@ -36,8 +39,10 @@ export interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childr
   label: ReactNode;
   /** Help text shown under the control. */
   hint?: ReactNode;
-  /** Error message. Its presence marks the control invalid and it is announced politely. */
+  /** Error message. Its presence marks the control invalid and it is announced politely. Inside a `Form` with `errors`, leave it out and set `name` instead. */
   error?: ReactNode;
+  /** The `name` of the control. Inside a `Form` that has `errors`, the Field shows the message for this name, so you pass each error once. */
+  name?: string;
   /** Marks the control as required: adds a required marker to the label and sets `required` on the control. Default false. */
   required?: boolean;
   /** The control: Input, Textarea, Select trigger, etc. */
@@ -47,10 +52,16 @@ export interface FieldProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childr
 /**
  * Wires a label, a control, a hint and an error together with the right ids and ARIA, so you never do it by hand.
  * A Field has no outer spacing: put several in a `Form` (or a `Stack`) to get the gap between them.
+ * Inside a `Form` with an `errors` list, give the Field the control's `name` and it picks up its own message, so each error is passed once;
+ * the form's summary announces it, so the inline text is not announced a second time.
  * @example <Field label="Email" hint="We never share it." error={err}><Input type="email" /></Field>
+ * @example <Form errors={errors}><Field label="Email" name="email"><Input name="email" /></Field></Form>
  */
-export const Field = forwardRef<HTMLDivElement, FieldProps>(function Field({label, hint, error, required = false, className, children, ...rest}, ref) {
+export const Field = forwardRef<HTMLDivElement, FieldProps>(function Field({label, hint, error: errorProp, name, required = false, className, children, ...rest}, ref) {
   const base = useId();
+  const formErrors = useContext(FormErrorsContext);
+  const fromForm = errorProp === undefined && name !== undefined ? formErrors?.[name] : undefined;
+  const error = errorProp ?? fromForm;
   const hintId = hint ? `${base}-hint` : undefined;
   const errorId = error ? `${base}-error` : undefined;
   const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
@@ -60,7 +71,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(function Field({labe
         <Label htmlFor={`${base}-control`} required={required}>{label}</Label>
         {children}
         {hint && <span id={hintId} className="field-hint">{hint}</span>}
-        {error && <span id={errorId} className="field-error" role="alert">{error}</span>}
+        {error && <span id={errorId} className="field-error" role={fromForm ? undefined : 'alert'}>{error}</span>}
       </div>
     </FieldContext.Provider>
   );

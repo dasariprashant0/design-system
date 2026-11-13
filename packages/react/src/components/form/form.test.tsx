@@ -50,4 +50,30 @@ describe('Form', () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
+  it('passes an error once: Fields read their message from the Form by name', async () => {
+    render(
+      <Form aria-label="f" errors={[{name: 'email', message: 'Enter your email.'}]}>
+        <Field label="Name" name="name"><Input name="name" /></Field>
+        <Field label="Email" name="email"><Input name="email" /></Field>
+      </Form>,
+    );
+    const email = screen.getByLabelText('Email');
+    expect(email).toHaveAttribute('aria-invalid', 'true');
+    expect(email).toHaveAccessibleDescription('Enter your email.');
+    expect(screen.getByLabelText('Name')).not.toHaveAttribute('aria-invalid');
+    // One copy in the summary link, one inline; only the summary is an alert.
+    expect(screen.getAllByText('Enter your email.')).toHaveLength(2);
+    expect(screen.getAllByRole('alert')).toHaveLength(1);
+    await userEvent.click(screen.getByRole('link', {name: 'Enter your email.'}));
+    expect(email).toHaveFocus();
+  });
+  it('lets a Field error prop override the form error and has no axe violations', async () => {
+    const {container} = render(
+      <Form aria-label="f" errors={[{name: 'email', message: 'From form.'}]}>
+        <Field label="Email" name="email" error="Own error."><Input name="email" /></Field>
+      </Form>,
+    );
+    expect(screen.getByLabelText('Email')).toHaveAccessibleDescription('Own error.');
+    expect(await axe(container)).toHaveNoViolations();
+  });
 });
