@@ -8,4 +8,3 @@
 .banner-danger { box-shadow: inset calc(3px * var(--dir, 1)) 0 0 var(--danger); }
 .banner-warning strong { color: var(--warning); }
 .banner-danger strong { color: var(--danger); }
-.code-block { padding: var(--s4); background: var(--wash); box-shadow: inset 0 0 0 1px var(--rule); font-size: var(--text-sm); line-height: 1.6; white-space: pre-wrap; word-break: break-word; }

@@ -2,7 +2,6 @@
    Spacing steps map to the --s tokens. Breakpoints (media queries cannot read
    custom properties): sm 600px, md 900px, lg 1200px. */
 
-.container { width: 100%; max-width: var(--content); margin-inline: auto; padding-inline: var(--s5); }
 .container-narrow { max-width: var(--measure); }
 .section { padding-block: var(--s9); }
 .section-sm { padding-block: var(--s7); }
@@ -18,7 +17,7 @@
 .cluster-end { justify-content: flex-end; }
 
 /* Equal columns that wrap on their own; no media queries needed. */
-.grid { display: grid; gap: var(--gap, var(--s5)); grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 240px), 100%), 1fr)); }
+/* .grid itself lives in components/grid.css: one definition serves both the bare utility and the Grid component. */
 .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -42,3 +41,11 @@
 .text-right { text-align: right; } /* physical: explicit right alignment, use .text-end to follow direction */
 .hide-sm { } @media (max-width: 600px) { .hide-sm { display: none !important; } }
 .show-sm { display: none; } @media (max-width: 600px) { .show-sm { display: initial; } }
+
+/* Default rhythm: bare Field, Heading, Text, Alert, Stack and Button siblings directly inside .prose, a Card or a Dialog
+   get one step of space between them (--flow, default --s4; a Heading gets 1.5 steps) so they never touch. Written with
+   :where() so it has no specificity: any rule of your own overrides it, and Stack/Flex gaps are not affected. Buttons
+   side by side stay on one line. Needs no wrapper; Form and Stack already space their children. */
+:where(.prose, .card, .dialog-content) > :where(.field, .heading, .text, .alert, .empty, .stack, .code-block, .table-wrap, form) + :where(.field, .heading, .text, .alert, .empty, .stack, .code-block, .table-wrap, form, .btn),
+:where(.prose, .card, .dialog-content) > :where(.btn) + :where(.field, .heading, .text, .alert, .empty, .stack, .code-block, .table-wrap, form) { margin-top: var(--flow, var(--s4)); }
+:where(.prose, .card, .dialog-content) > :where(.field, .heading, .text, .alert, .btn) + :where(.heading) { margin-top: calc(var(--flow, var(--s4)) * 1.5); }

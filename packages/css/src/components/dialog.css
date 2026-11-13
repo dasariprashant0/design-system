@@ -8,3 +8,4 @@
 .dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
 @keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }
+.dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: -0.02em; margin-bottom: var(--s3); } /* sentence case: uppercase is only for .display */
