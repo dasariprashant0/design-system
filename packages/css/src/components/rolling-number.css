@@ -1,0 +1,7 @@
+/* Rolling number: each digit is a window one line tall over a strip of 0 to 9 that slides by --digit lines. */
+.rolling-number { display: inline-block; position: relative; font-variant-numeric: tabular-nums; line-height: 1; }
+.rolling-number-visual { display: inline-flex; }
+.rolling-number-digit { display: inline-block; height: 1em; overflow: hidden; }
+.rolling-number-strip { display: flex; flex-direction: column; transform: translateY(calc(var(--digit) * -1em)); transition: transform var(--slow) var(--ease); }
+.rolling-number-strip > span, .rolling-number-char { display: block; height: 1em; }
+@media (prefers-reduced-motion: reduce) { .rolling-number-strip { transition: none; } }

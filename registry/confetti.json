@@ -34,6 +34,49 @@
     "packages/react/src/components/confetti/index.ts",
     "packages/react/src/components/confetti/meta.json"
   ],
+  "related": [
+    "button"
+  ],
+  "props": [
+    {
+      "name": "ConfettiProps",
+      "props": [
+        {
+          "name": "burst",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Fires a burst each time this number changes (not on mount). Or call `ref.current.fire()`."
+        },
+        {
+          "name": "count",
+          "type": "number",
+          "optional": true,
+          "default": "60",
+          "description": "Pieces per burst. Default 60."
+        },
+        {
+          "name": "origin",
+          "type": "{ x: number; y: number; }",
+          "optional": true,
+          "default": "{x: 0.5, y: 0.5}",
+          "description": "Where the burst starts, as 0 to 1 of the window. Default the centre."
+        },
+        {
+          "name": "colors",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "Fill colours. Default: the accent, foreground and muted tokens."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useRef} from 'react';\nimport {Button, Confetti, type ConfettiHandle} from '@monoline/react';\n\nfunction Fire() {\n  const ref = useRef<ConfettiHandle>(null);\n  return (\n    <>\n      <Confetti ref={ref} />\n      <Button variant=\"line\" onClick={() => ref.current?.fire()}>Celebrate</Button>\n    </>\n  );\n}\n\n<Fire />",
+  "dataAttributes": [],
+  "classes": [
+    "confetti"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

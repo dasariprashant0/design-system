@@ -13,7 +13,9 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run test:cli
+      - run: npm run test:mcp
       - run: npm run build
+      - run: npm run size
       - run: npm run registry
       - name: Registry and llms files are up to date
         run: git diff --exit-code registry llms.txt llms-full.txt

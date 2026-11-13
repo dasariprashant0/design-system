@@ -67,7 +67,7 @@ export async function run(argv, {out = console.log, err = console.error} = {}) {
       const body = JSON.stringify({components: compDir, styles: styleDir}, null, 2) + '\n';
       if (o['dry-run']) out(`would write monoline.json\n${body}`);
       else writeFileSync(cfgFile, body), out('wrote monoline.json');
-      out(`\nInstall the tokens, then import them once in your app entry:\n  npm i @monoline/css\n  import '@monoline/css/src/tokens.css';\n  import '@monoline/css/src/base.css';\n  import '@monoline/css/src/accents.css';\n(or the whole kit: import '@monoline/css';)\nEach added component prints its own CSS import.`);
+      out(`\nInstall the tokens, then import them once in your app entry:\n  npm i @monoline/css\n  import '@monoline/css/core.css';   // tokens, base, utilities, accents, options; import it before the component CSS\n(or the whole kit: import '@monoline/css';)\nEach added component prints its own CSS import.`);
       return 0;
     }
     if (cmd === 'list') {
@@ -78,7 +78,7 @@ export async function run(argv, {out = console.log, err = console.error} = {}) {
     if (cmd === 'info') {
       if (!names[0]) throw new Error('usage: monoline info <name>');
       const c = await load(registry, names[0]);
-      out(`${c.title} (${c.name}) [${c.category}, ${c.status}]\n${c.description}\nimport: ${c.import}\nprimitive: ${c.primitive ?? 'none'}\ncss: ${c.css.map((f) => basename(f.path)).join(', ')}\na11y:\n${c.a11y.map((a) => `  - ${a}`).join('\n')}`);
+      out(`${c.title} (${c.name}) [${c.category}, ${c.status}]\n${c.description}\nimport: ${c.import}\nprimitive: ${c.primitive ?? 'none'}\ncss: ${c.css.map((f) => basename(f.path)).join(', ')} (copied as one ${c.name}.css)\na11y:\n${c.a11y.map((a) => `  - ${a}`).join('\n')}`);
       return 0;
     }
     if (cmd !== 'add') throw new Error(`unknown command "${cmd}"\n\n${HELP}`);
@@ -106,7 +106,8 @@ export async function run(argv, {out = console.log, err = console.error} = {}) {
         if (s.content.includes('/utils/cx')) needsCx = true;
         files.push({path: join(compDir, c.name, basename(s.path)), content: fixImports(s.content)});
       }
-      for (const s of c.css) files.push({path: join(styleDir, basename(s.path)), content: s.content});
+      // One file per component: the CSS it lists, in the components layer (core.css declares the layer order).
+      if (c.css.length) files.push({path: join(styleDir, `${c.name}.css`), content: `@layer monoline.components {\n${c.css.map((s) => s.content.trim()).join('\n\n')}\n}\n`});
     }
     if (needsCx) files.push({path: join(compDir, 'utils', 'cx.ts'), content: CX});
     const seen = new Set();

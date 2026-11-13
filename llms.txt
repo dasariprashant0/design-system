@@ -7,7 +7,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 ## Docs
 - [AGENTS.md](AGENTS.md): rules for AI agents and contributors
 - [DESIGN.md](DESIGN.md): design rules, tokens, copy
-- [registry/index.json](registry/index.json): machine-readable component list
+- [registry/index.json](registry/index.json): machine-readable component list, with props names and related components
 
 ## Components
 ### layout
@@ -17,9 +17,12 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Direction provider (direction-provider, stable): Sets the reading direction (ltr or rtl) once for every Radix-based component below it. Source: packages/react/src/components/direction-provider/
 - Flex (flex, stable): A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case. Source: packages/react/src/components/flex/
 - Grid (grid, stable): A responsive grid of equal columns with one gap. Source: packages/react/src/components/grid/
+- Overflow list (overflow-list, stable): A row of items that shows as many as fit and puts the rest in a '+N' menu. Source: packages/react/src/components/overflow-list/
+- Resizable (resizable, stable): Panels separated by handles you drag or move with the keyboard. Source: packages/react/src/components/resizable/
 - Scroll area (scroll-area, stable): A scrollable region with thin, themed scrollbars. Source: packages/react/src/components/scroll-area/
 - Separator (separator, stable): A thin rule between groups. Source: packages/react/src/components/separator/
 - Stack (stack, stable): Lay children out in a column or row with one gap from the spacing scale. Source: packages/react/src/components/stack/
+- Theme provider (theme-provider, stable): Set and save the theme, accent, font, corners, density and direction from React with useTheme(), and avoid the first-paint flash with themeScript(). Source: packages/react/src/components/theme-provider/
 
 ### typography
 - Heading (heading, stable): A heading whose level (for structure) is separate from its size (for looks). Source: packages/react/src/components/heading/
@@ -30,6 +33,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 ### buttons
 - Button (button, stable): Triggers an action. Native button with solid, line, ghost and danger variants. Source: packages/react/src/components/button/
 - Button group (button-group, stable): Join related buttons into one segmented bar. Source: packages/react/src/components/button-group/
+- Copy button (copy-button, stable): A button that copies a value to the clipboard, shows 'Copied' for a moment and announces it. Source: packages/react/src/components/copy-button/
 - Icon button (icon-button, stable): A square button holding only an icon. The accessible name is required. Source: packages/react/src/components/icon-button/
 - Segmented control (segmented-control, stable): Pick exactly one option from a short row, shown as joined segments. Source: packages/react/src/components/segmented-control/
 - Toggle (toggle, stable): A button that stays pressed or not. Source: packages/react/src/components/toggle/
@@ -43,18 +47,21 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Color picker (color-picker, stable): Choose a colour from preset swatches, the native colour control, or a hex value. Source: packages/react/src/components/color-picker/
 - Combobox (combobox, stable): Type to filter a list and pick one option. Source: packages/react/src/components/combobox/
 - Date picker (date-picker, stable): A button that opens a calendar and shows the chosen date. Source: packages/react/src/components/date-picker/
+- Date range picker (date-range-picker, stable): A button that opens a range calendar and two typed date fields. Source: packages/react/src/components/date-range-picker/
 - Field (field, stable): Connects a label, a control, a hint and an error with the right ids and ARIA. Source: packages/react/src/components/field/
 - Fieldset (fieldset, stable): Group related controls under one legend. Source: packages/react/src/components/fieldset/
 - File upload (file-upload, stable): Choose files by browsing or dropping them, and see what is selected. Source: packages/react/src/components/file-upload/
 - Form (form, stable): A form wrapper with a submit helper, an error summary that links to invalid fields, and an actions footer. Source: packages/react/src/components/form/
 - Input (input, stable): A single-line text field. Source: packages/react/src/components/input/
 - Label (label, stable): The visible name of a form control. Source: packages/react/src/components/label/
+- Mentions (mentions, stable): A textarea that suggests people when you type @. Source: packages/react/src/components/mentions/
 - Multi select (multi-select, stable): Type to filter a list and pick several options, shown as removable tags. Source: packages/react/src/components/multi-select/
 - Native select (native-select, stable): The browser select, styled. Best on mobile and for long simple lists. Source: packages/react/src/components/native-select/
 - Number input (number-input, stable): A numeric field with decrease and increase buttons. Source: packages/react/src/components/number-input/
 - OTP input (otp-input, stable): Enter a one-time code, one digit per box, with paste support. Source: packages/react/src/components/otp-input/
 - Password input (password-input, stable): A password field with a show/hide toggle. Source: packages/react/src/components/password-input/
 - Radio group (radio-group, stable): Pick exactly one option from a short list. Source: packages/react/src/components/radio-group/
+- Range calendar (range-calendar, stable): A month grid for picking a start and an end date. Source: packages/react/src/components/range-calendar/
 - Rating (rating, stable): Pick or show a score from 1 to a maximum, as stars. Source: packages/react/src/components/rating/
 - Rich text editor (rich-text-editor, beta): A dependency-free rich text editor with a formatting toolbar and sanitized HTML in and out. Source: packages/react/src/components/rich-text-editor/
 - Select (select, stable): Pick one value from a list of five or more options. Source: packages/react/src/components/select/
@@ -62,7 +69,9 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Switch (switch, stable): An on/off setting that takes effect immediately. Source: packages/react/src/components/switch/
 - Tags input (tags-input, stable): Type text and press Enter or comma to add it as a removable tag. Source: packages/react/src/components/tags-input/
 - Textarea (textarea, stable): A multi-line text field. Source: packages/react/src/components/textarea/
+- Time field (time-field, stable): Hour, minute and AM/PM segments you step with arrow keys or type into. Source: packages/react/src/components/time-field/
 - Time picker (time-picker, stable): Pick a time of day with hour, minute and AM/PM segments, using the browser's own control. Source: packages/react/src/components/time-picker/
+- Tree select (tree-select, stable): A select whose options are a nested tree, with search and single or multiple selection. Source: packages/react/src/components/tree-select/
 
 ### data-display
 - Accordion (accordion, stable): Stacked headings that each show or hide a section. Source: packages/react/src/components/accordion/
@@ -79,22 +88,27 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Data table (data-table, stable): A table with sortable columns, row selection and pagination. Source: packages/react/src/components/data-table/
 - Description list (description-list, stable): Label and value pairs, like the details of a record. Source: packages/react/src/components/description-list/
 - Image (image, stable): An image with required alt text, a ratio, and a fallback when it fails to load. Source: packages/react/src/components/image/
+- Image gallery (image-gallery, stable): A thumbnail grid that opens a lightbox with previous and next. Source: packages/react/src/components/image-gallery/
 - Line chart (line-chart, stable): Show how one or more values change across an ordered axis, with straight or stepped lines. Source: packages/react/src/components/line-chart/
 - Pie chart (pie-chart, stable): Parts of a whole as a pie, or a donut with innerRadius. Source: packages/react/src/components/pie-chart/
+- Sortable list (sortable-list, stable): A list the user reorders by dragging a handle or with the keyboard, with live announcements. Source: packages/react/src/components/sortable-list/
 - Sparkline (sparkline, stable): A tiny inline trend line for a table cell or a sentence. Source: packages/react/src/components/sparkline/
 - Stat (stat, stable): One number with its label and a note. Source: packages/react/src/components/stat/
 - Table (table, stable): Rows and columns of data with a header, in a horizontally scrolling wrapper. Source: packages/react/src/components/table/
 - Tag (tag, stable): A short label, optionally removable. Source: packages/react/src/components/tag/
 - Timeline (timeline, stable): A vertical list of events with times, joined by a rule. Source: packages/react/src/components/timeline/
 - Tree (tree, stable): A nested list of items that open and close, with one selected item. Source: packages/react/src/components/tree/
+- Virtual list (virtual-list, stable): A windowed list for thousands of rows: only the rows in view are in the page. Source: packages/react/src/components/virtual-list/
 
 ### feedback
 - Alert (alert, stable): A message that stays on screen, with a title and a tone. Source: packages/react/src/components/alert/
 - Empty state (empty-state, stable): Say that there is nothing here yet and offer the next step. Source: packages/react/src/components/empty-state/
+- Notification center (notification-center, stable): A bell button with an unread count that opens a list of notifications, with mark read, clear and an empty state. Source: packages/react/src/components/notification-center/
 - Progress (progress, stable): How far along a task is, or that it is still working. Source: packages/react/src/components/progress/
 - Skeleton (skeleton, stable): A still placeholder shaped like the content that is loading. Source: packages/react/src/components/skeleton/
 - Spinner (spinner, stable): A small indicator that something is loading. Source: packages/react/src/components/spinner/
 - Toast (toast, stable): A short message that appears briefly and does not block the page. Source: packages/react/src/components/toast/
+- Toaster (toaster, stable): Show a toast from anywhere with toast('Saved'). Mount one Toaster; call toast.success, toast.error or toast.promise from handlers. Source: packages/react/src/components/toaster/
 
 ### overlays
 - Alert dialog (alert-dialog, stable): A modal that interrupts to confirm a destructive or irreversible action. Source: packages/react/src/components/alert-dialog/
@@ -106,6 +120,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Hover card (hover-card, stable): Preview extra content when a link or element is hovered or focused. Source: packages/react/src/components/hover-card/
 - Popover (popover, stable): A floating panel of content or controls anchored to a button. Source: packages/react/src/components/popover/
 - Tooltip (tooltip, stable): Short hint text on hover and keyboard focus. Source: packages/react/src/components/tooltip/
+- Tour (tour, stable): A guided walkthrough: a spotlight on one element at a time with a card and Next, Back and Skip. Source: packages/react/src/components/tour/
 
 ### navigation
 - Breadcrumb (breadcrumb, stable): The path to the current page. Source: packages/react/src/components/breadcrumb/
@@ -125,6 +140,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Marquee (marquee, stable): Scroll a row of items endlessly; pauses on hover and stops for reduced motion. Source: packages/react/src/components/marquee/
 - Number ticker (number-ticker, stable): Count up to a number when it scrolls into view. Shows the final value at once for reduced motion. Source: packages/react/src/components/number-ticker/
 - Orbiting circles (orbiting-circles, stable): Small items circling a centre. Decorative. Source: packages/react/src/components/orbiting-circles/
+- Rolling number (rolling-number, stable): A number whose digits roll to the new value when it changes. Screen readers read the final value. Source: packages/react/src/components/rolling-number/
 - Scroll progress (scroll-progress, stable): A thin bar fixed to the top of the window that fills as the page scrolls. Source: packages/react/src/components/scroll-progress/
 - Shimmer button (shimmer-button, stable): The Button with a light sweep across it. Still a native button. Source: packages/react/src/components/shimmer-button/
 - Spotlight (spotlight, stable): A surface with a soft highlight that follows the pointer. Source: packages/react/src/components/spotlight/

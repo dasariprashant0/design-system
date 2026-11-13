@@ -66,4 +66,11 @@ describe('BlockFooter', () => {
     const {container} = render(<BlockFooter brand="Brand" columns={columns} legal="© 2026" />);
     expect(await axe(container)).toHaveNoViolations();
   });
+  it('renders links through renderLink', () => {
+    render(<BlockFooter columns={columns} renderLink={({href, children, ...p}) => <a {...p} href={`/app${href}`} data-router>{children}</a>} />);
+    const link = screen.getByRole('link', {name: 'About'});
+    expect(link).toHaveAttribute('href', '/app/about');
+    expect(link).toHaveAttribute('data-router');
+    expect(link).toHaveClass('link');
+  });
 });

@@ -1,12 +1,15 @@
-import {forwardRef, type HTMLAttributes} from 'react';
+'use client';
+import {forwardRef, useState, type HTMLAttributes} from 'react';
 
 export interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
-  /** Current page, 1-based. */
-  page: number;
+  /** Current page, 1-based, when controlled. Pair with `onPageChange`. */
+  page?: number;
+  /** The starting page when uncontrolled. Default 1. */
+  defaultPage?: number;
   /** Total number of pages. */
   pageCount: number;
   /** Called with the new 1-based page number when the user picks a page or presses Prev or Next. */
-  onPageChange: (page: number) => void;
+  onPageChange?: (page: number) => void;
   /** How many numbers to show on each side of the current page. */
   siblings?: number;
 }
@@ -24,8 +27,14 @@ export function pageWindow(page: number, count: number, siblings = 1): Array<num
 }
 
 /** Previous, numbered pages and next, as buttons. The current page has aria-current. */
-export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagination({page, pageCount, onPageChange, siblings = 1, ...rest}, ref) {
-  const go = (p: number) => onPageChange(Math.min(pageCount, Math.max(1, p)));
+export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagination({page: pageProp, defaultPage = 1, pageCount, onPageChange, siblings = 1, ...rest}, ref) {
+  const [inner, setInner] = useState(defaultPage);
+  const page = pageProp ?? inner;
+  const go = (p: number) => {
+    const next = Math.min(pageCount, Math.max(1, p));
+    if (pageProp === undefined) setInner(next);
+    onPageChange?.(next);
+  };
   return (
     <nav ref={ref} aria-label="Pagination" {...rest}>
       <div className="pager">

@@ -41,6 +41,71 @@
     "packages/react/src/components/line-chart/line-chart.tsx",
     "packages/react/src/components/line-chart/meta.json"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "LineChartProps",
+      "props": [
+        {
+          "name": "showPoints",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Mark each data point. A single point is always marked."
+        }
+      ]
+    }
+  ],
+  "usage": "import {LineChart} from '@monoline/react';\n\n<LineChart title=\"Response time\" showPoints data={[{label: 'Mon', value: 120}, {label: 'Tue', value: 98}, {label: 'Wed', value: 143}, {label: 'Thu', value: 110}, {label: 'Fri', value: 87}]} />",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    },
+    {
+      "name": "data-align",
+      "values": [
+        "start",
+        "end"
+      ]
+    }
+  ],
+  "classes": [
+    "chart",
+    "chart-plot",
+    "chart-svg",
+    "chart-hits",
+    "chart-s0",
+    "chart-s1",
+    "chart-s2",
+    "chart-s3",
+    "chart-s4",
+    "chart-tick",
+    "chart-value",
+    "chart-rule",
+    "chart-zero",
+    "chart-outline",
+    "chart-pat",
+    "chart-pat-dot",
+    "chart-line",
+    "chart-area",
+    "chart-hit",
+    "chart-tip",
+    "chart-tip-title",
+    "chart-tip-row",
+    "chart-tip-value",
+    "chart-legend",
+    "chart-legend-detail",
+    "chart-swatch",
+    "chart-empty",
+    "chart-marks",
+    "chart-point",
+    "chart-guide"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

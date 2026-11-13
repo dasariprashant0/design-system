@@ -1,5 +1,5 @@
 /* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }
+.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }
 .btn:active:not(:disabled) { transform: scale(0.98); }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .btn-solid { background: var(--foreground); color: var(--background); }
@@ -8,7 +8,9 @@
 .btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }
 .btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }
 .btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }
-.btn-ghost { padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
+.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
 .btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }
-.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }
+.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }
+.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }
+.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }
 .btn-block { width: 100%; }

@@ -1,7 +1,11 @@
 // The docs frame: skip link, top bar, sidebar, main column, "On this page" rail, search palette.
 // Routing, titles, scroll and focus are handled here; page bodies come from ../page and ../guides.
-import {useEffect, useRef, useState} from 'react';
-import {Button} from '@monoline/react';
+import {useEffect, useRef, useState, type ReactNode} from 'react';
+import {Button, DirectionProvider} from '@monoline/react';
+import {Blocks} from '../site/Blocks';
+import {Compare} from '../site/Compare';
+import {Changelog, Roadmap} from '../site/Doc';
+import {Themes} from '../site/Themes';
 import {ComponentDoc} from '../page/component-doc';
 import {Home} from './Home';
 import {Nav} from './Nav';
@@ -10,7 +14,7 @@ import {Search} from './Search';
 import {Toc} from './Toc';
 import {Topbar} from './Topbar';
 import {useHeadings} from './headings';
-import {usePrefs} from './prefs';
+import {PrefsContext, usePrefs} from './prefs';
 import {components, guides, hooks, type Entry} from './registry';
 import {href, resolve, useNavCount, usePathname} from './router';
 
@@ -24,7 +28,20 @@ function setMeta(title: string, description: string) {
   m.content = description;
 }
 
+const SITE_BODIES: Record<string, () => ReactNode> = {blocks: Blocks, themes: Themes, compare: Compare, changelog: Changelog, roadmap: Roadmap};
+
 function Page({entry}: {entry: Entry}) {
+  if (entry.kind === 'site') {
+    const Body = SITE_BODIES[entry.name]!;
+    return (
+      <>
+        <p className="label">explore</p>
+        <h1 className="display display-md">{entry.title}</h1>
+        <p className="lede">{entry.description}</p>
+        <Body />
+      </>
+    );
+  }
   if (entry.kind === 'guide') {
     const guide = guides.find((g) => g.slug === entry.name)!;
     return (
@@ -80,6 +97,9 @@ export function App() {
   }, [path, navs]);
 
   return (
+    // Radix reads its direction from a provider, not from <html dir>: without this the RTL preference flips the CSS but not the arrow keys.
+    <DirectionProvider dir={prefs.dir === 'rtl' ? 'rtl' : 'ltr'}>
+    <PrefsContext.Provider value={[prefs, set] as const}>
     <div className="docs" data-home={route.kind === 'home' || undefined} data-rail={headings.length > 1 || undefined}>
       <a className="skip-link" href="#main" onClick={(e) => { e.preventDefault(); const m = main.current; if (m) { m.tabIndex = -1; m.focus(); } }}>Skip to main content</a>
       <Topbar path={path} route={route} prefs={prefs} set={set} onSearch={() => setSearch(true)} />
@@ -97,5 +117,7 @@ export function App() {
       {headings.length > 1 && route.kind !== 'home' && <Toc headings={headings} />}
       <Search open={search} onOpenChange={setSearch} />
     </div>
+    </PrefsContext.Provider>
+    </DirectionProvider>
   );
 }

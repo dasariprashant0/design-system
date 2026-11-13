@@ -15,19 +15,19 @@
   "css": [
     {
       "path": "packages/css/src/components/container.css",
-      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; margin-inline: auto; padding-inline: var(--s5); }\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
+      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; max-width: var(--content); margin-inline: auto; padding-inline: var(--s5); } /* bare .container; the size classes below override max-width */\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
     },
     {
       "path": "packages/css/src/components/heading.css",
-      "content": ".heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading-md { font-size: var(--text-lg); }\n.heading-sm { font-size: var(--text-base); }\n"
+      "content": ".heading { font-weight: 500; line-height: 1.2; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.75rem); letter-spacing: -0.03em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading.heading-md { font-size: var(--text-lg); } /* two classes: typography.css (later in the bundle) also defines .heading-md and .heading-sm with other sizes */\n.heading.heading-sm { font-size: var(--text-base); }\n/* One casing rule: uppercase and the huge size live on .display / .display-* (the page title) only. Heading size=\"display\" is the h1 of app content: 28px to 44px, sentence case. */\n"
     },
     {
       "path": "packages/css/src/components/text.css",
-      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-ok { color: var(--ok); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
+      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-success, .text-ok { color: var(--ok); } .text-warning { color: var(--warning); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
     },
     {
       "path": "packages/css/src/components/02-buttons.css",
-      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
     },
     {
       "path": "packages/css/src/components/05-marks.css",
@@ -35,11 +35,11 @@
     },
     {
       "path": "packages/css/src/components/segmented-control.css",
-      "content": "/* Segmented control: joined toggles, one always on. */\n.segmented { display: inline-flex; border: 1px solid var(--foreground); }\n.segment { padding: var(--s2) var(--s4); font-size: var(--text-sm); color: var(--muted); background: transparent; }\n.segment + .segment { border-inline-start: 1px solid var(--rule); }\n.segment:hover:not(:disabled) { color: var(--foreground); }\n.segment[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.segment:disabled { opacity: 0.5; cursor: not-allowed; }\n.segment:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n"
+      "content": "/* Segmented control: joined toggles, one always on. */\n.segmented { display: inline-flex; border: 1px solid var(--foreground); }\n.segment { padding: var(--s2) var(--s4); font-size: var(--text-sm); color: var(--muted); background: transparent; }\n.segment + .segment { border-inline-start: 1px solid var(--rule); }\n.segment:not([data-state=\"on\"]):hover:not(:disabled) { color: var(--foreground); }\n.segment[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.segment:disabled { opacity: 0.5; cursor: not-allowed; }\n.segment:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n"
     },
     {
       "path": "packages/css/src/components/block-pricing.css",
-      "content": "/* Block: pricing. */\n.block-pricing { padding-block: var(--s8); }\n.block-pricing-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s3); max-width: var(--measure); margin-bottom: var(--s7); }\n.block-pricing-head .segmented { margin-top: var(--s3); }\n.block-pricing-tiers { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s5); grid-template-columns: 1fr; }\n.block-tier { display: flex; flex-direction: column; gap: var(--s4); padding: var(--s5); border: 1px solid var(--rule); min-width: 0; }\n.block-tier[data-highlighted] { border-color: var(--foreground); }\n.block-tier-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }\n.block-tier-price { display: flex; align-items: baseline; gap: var(--s2); }\n.block-tier-amount { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.block-tier-period { font-size: var(--text-sm); color: var(--muted); }\n.block-tier-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s2); flex: 1; font-size: var(--text-sm); }\n.block-tier-features li { padding-top: var(--s2); border-top: 1px solid var(--rule); }\n@media (min-width: 760px) { .block-pricing-tiers { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }\n"
+      "content": "/* Block: pricing. */\n.block-pricing { padding-block: var(--s8); }\n.block-pricing-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s3); max-width: var(--measure); margin-bottom: var(--s7); }\n.block-pricing-head .segmented { margin-top: var(--s3); }\n.block-pricing-tiers { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s5); grid-template-columns: 1fr; }\n.block-tier { display: flex; flex-direction: column; gap: var(--s4); padding: var(--s5); border: 1px solid var(--rule); min-width: 0; }\n.block-tier[data-highlighted] { border-color: var(--foreground); }\n.block-tier-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }\n.block-tier-price { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--s2); }\n.block-tier-amount { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; white-space: nowrap; }\n.block-tier-period { font-size: var(--text-sm); color: var(--muted); }\n.block-tier-features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s2); flex: 1; font-size: var(--text-sm); }\n.block-tier-features li { padding-top: var(--s2); border-top: 1px solid var(--rule); }\n@media (min-width: 760px) { .block-pricing-tiers { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }\n"
     }
   ],
   "a11y": [
@@ -64,13 +64,155 @@
     "packages/react/src/components/block-pricing/index.ts",
     "packages/react/src/components/block-pricing/meta.json"
   ],
+  "related": [
+    "container",
+    "heading",
+    "text",
+    "button",
+    "badge",
+    "segmented-control"
+  ],
+  "props": [
+    {
+      "name": "BlockPricingProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "Section heading shown above the tiers."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional muted line under the heading."
+        },
+        {
+          "name": "tiers",
+          "type": "PricingTier[]",
+          "optional": false,
+          "default": null,
+          "description": "The plans to compare, each with a name, monthly and yearly price, features and a call to action."
+        },
+        {
+          "name": "defaultInterval",
+          "type": "PricingInterval",
+          "optional": true,
+          "default": "'monthly'",
+          "description": "Start on yearly billing."
+        },
+        {
+          "name": "labels",
+          "type": "Partial<{ monthly: string; yearly: string; switcher: string; period: Record<PricingInterval, string>; highlight: string; }>",
+          "optional": true,
+          "default": null,
+          "description": "Overrides for the built-in English texts (Monthly, Yearly, Billing period, Popular, / month, / year); use it to translate."
+        },
+        {
+          "name": "renderLink",
+          "type": "RenderLink",
+          "optional": true,
+          "default": null,
+          "description": "Renders a tier's link (the ones with `href`), so a client router can handle the click. Default a plain `<a href>`."
+        },
+        {
+          "name": "onSelect",
+          "type": "((tier: PricingTier, interval: PricingInterval) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called when a tier's button (one without `href`) is pressed."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3 | 4 | 5",
+          "optional": true,
+          "default": "2",
+          "description": "Outline level of the section title, 1 to 5. Default 2; each tier name is one level lower."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockPricing} from '@monoline/react';\n\n<BlockPricing\n  title=\"Simple pricing\"\n  description=\"Switch to yearly for two months free.\"\n  tiers={[\n    {name: 'Free', description: 'For trying it out.', price: {monthly: '$0', yearly: '$0'}, features: ['One project', 'Community support'], ctaLabel: 'Start free', href: '#'},\n    {name: 'Team', description: 'For small teams.', price: {monthly: '$12', yearly: '$120'}, features: ['Unlimited projects', 'Email support', 'Shared themes'], ctaLabel: 'Choose Team', highlighted: true},\n    {name: 'Scale', description: 'For larger groups.', price: {monthly: '$48', yearly: '$480'}, features: ['Everything in Team', 'Single sign-on', 'Priority support'], ctaLabel: 'Talk to us', href: '#'},\n  ]}\n/>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "on"
+      ]
+    },
+    {
+      "name": "data-highlighted",
+      "values": []
+    }
+  ],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full",
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "text",
+    "text-xs",
+    "text-sm",
+    "text-md",
+    "text-lg",
+    "text-muted",
+    "text-danger",
+    "text-success",
+    "text-ok",
+    "text-warning",
+    "text-accent",
+    "text-truncate",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "swatch",
+    "check",
+    "check-pass",
+    "check-fail",
+    "badge",
+    "badge-solid",
+    "badge-accent",
+    "kbd",
+    "key-hints",
+    "dot",
+    "heat-0",
+    "heat-1",
+    "heat-2",
+    "heat-3",
+    "heat-4",
+    "segmented",
+    "segment",
+    "block-pricing",
+    "block-pricing-head",
+    "block-pricing-tiers",
+    "block-tier",
+    "block-tier-head",
+    "block-tier-price",
+    "block-tier-amount",
+    "block-tier-period",
+    "block-tier-features"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },
   "source": [
     {
       "path": "packages/react/src/components/block-pricing/block-pricing.tsx",
-      "content": "'use client';\nimport {forwardRef, useId, useState, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Badge} from '../badge';\nimport {Button} from '../button';\nimport {Container} from '../container';\nimport {Heading} from '../heading';\nimport {SegmentedControl} from '../segmented-control';\nimport {Text} from '../text';\n\nexport type PricingInterval = 'monthly' | 'yearly';\n\nexport interface PricingTier {\n  name: ReactNode;\n  description?: ReactNode;\n  /** Shown as written, so include the currency: \"$12\", \"Free\", \"Talk to us\". */\n  price: {monthly: ReactNode; yearly: ReactNode};\n  features: ReactNode[];\n  ctaLabel: ReactNode;\n  /** Makes the call to action a link. Without it, it is a button; handle it with `onSelect`. */\n  href?: string;\n  /** Marks the tier to pick. Adds a badge with `highlightLabel`. */\n  highlighted?: boolean;\n}\n\nexport interface BlockPricingProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onSelect'> {\n  /** Section heading shown above the tiers. */\n  title: ReactNode;\n  /** Optional muted line under the heading. */\n  description?: ReactNode;\n  /** The plans to compare, each with a name, monthly and yearly price, features and a call to action. */\n  tiers: PricingTier[];\n  /** Start on yearly billing. */\n  defaultInterval?: PricingInterval;\n  /** Overrides for the built-in English texts (Monthly, Yearly, Billing period, Popular, / month, / year); use it to translate. */\n  labels?: Partial<{monthly: string; yearly: string; switcher: string; period: Record<PricingInterval, string>; highlight: string}>;\n  /** Called when a tier's button (one without `href`) is pressed. */\n  onSelect?: (tier: PricingTier, interval: PricingInterval) => void;\n  /** Outline level of the section title, 1 to 5. Default 2; each tier name is one level lower. */\n  headingLevel?: 1 | 2 | 3 | 4 | 5;\n}\n\n/** Plan cards with a monthly or yearly switch. Prices are copy you pass in; the block does no maths. */\nexport const BlockPricing = forwardRef<HTMLElement, BlockPricingProps>(function BlockPricing({title, description, tiers, defaultInterval = 'monthly', labels, onSelect, headingLevel = 2, className, ...rest}, ref) {\n  const id = useId();\n  const [interval, setInterval] = useState<PricingInterval>(defaultInterval);\n  const l = {monthly: 'Monthly', yearly: 'Yearly', switcher: 'Billing period', highlight: 'Popular', period: {monthly: '/ month', yearly: '/ year'}, ...labels};\n  const sub = Math.min(headingLevel + 1, 6) as 2 | 3 | 4 | 5 | 6;\n  return (\n    <section ref={ref} className={cx('block-pricing', className)} aria-labelledby={id} {...rest}>\n      <Container>\n        <div className=\"block-pricing-head\">\n          <Heading id={id} level={headingLevel}>{title}</Heading>\n          {description && <Text tone=\"muted\">{description}</Text>}\n          <SegmentedControl\n            aria-label={l.switcher}\n            value={interval}\n            onValueChange={(v) => setInterval(v as PricingInterval)}\n            options={[{value: 'monthly', label: l.monthly}, {value: 'yearly', label: l.yearly}]}\n          />\n        </div>\n        <ul className=\"block-pricing-tiers\" role=\"list\">\n          {tiers.map((tier, i) => (\n            <li key={i} className=\"block-tier\" data-highlighted={tier.highlighted || undefined}>\n              <div className=\"block-tier-head\">\n                <Heading level={sub} size=\"md\">{tier.name}</Heading>\n                {tier.highlighted && <Badge variant=\"accent\">{l.highlight}</Badge>}\n              </div>\n              {tier.description && <Text size=\"sm\" tone=\"muted\">{tier.description}</Text>}\n              <p className=\"block-tier-price\">\n                <span className=\"block-tier-amount\">{tier.price[interval]}</span>\n                <span className=\"block-tier-period\">{l.period[interval]}</span>\n              </p>\n              <ul className=\"block-tier-features\" role=\"list\">\n                {tier.features.map((f, j) => <li key={j}>{f}</li>)}\n              </ul>\n              {tier.href\n                ? <Button asChild variant={tier.highlighted ? 'solid' : 'line'}><a href={tier.href}>{tier.ctaLabel}</a></Button>\n                : <Button variant={tier.highlighted ? 'solid' : 'line'} onClick={() => onSelect?.(tier, interval)}>{tier.ctaLabel}</Button>}\n            </li>\n          ))}\n        </ul>\n      </Container>\n    </section>\n  );\n});\n"
+      "content": "'use client';\nimport {forwardRef, useId, useState, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Badge} from '../badge';\nimport {Button} from '../button';\nimport {Container} from '../container';\nimport {Heading} from '../heading';\nimport {SegmentedControl} from '../segmented-control';\nimport type {RenderLink} from '../link';\nimport {Text} from '../text';\n\nexport type PricingInterval = 'monthly' | 'yearly';\n\nexport interface PricingTier {\n  name: ReactNode;\n  description?: ReactNode;\n  /** Shown as written, so include the currency: \"$12\", \"Free\", \"Talk to us\". */\n  price: {monthly: ReactNode; yearly: ReactNode};\n  features: ReactNode[];\n  ctaLabel: ReactNode;\n  /** Makes the call to action a link. Without it, it is a button; handle it with `onSelect`. */\n  href?: string;\n  /** Marks the tier to pick. Adds a badge with `highlightLabel`. */\n  highlighted?: boolean;\n}\n\nexport interface BlockPricingProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onSelect'> {\n  /** Section heading shown above the tiers. */\n  title: ReactNode;\n  /** Optional muted line under the heading. */\n  description?: ReactNode;\n  /** The plans to compare, each with a name, monthly and yearly price, features and a call to action. */\n  tiers: PricingTier[];\n  /** Start on yearly billing. */\n  defaultInterval?: PricingInterval;\n  /** Overrides for the built-in English texts (Monthly, Yearly, Billing period, Popular, / month, / year); use it to translate. */\n  labels?: Partial<{monthly: string; yearly: string; switcher: string; period: Record<PricingInterval, string>; highlight: string}>;\n  /** Renders a tier's link (the ones with `href`), so a client router can handle the click. Default a plain `<a href>`. */\n  renderLink?: RenderLink;\n  /** Called when a tier's button (one without `href`) is pressed. */\n  onSelect?: (tier: PricingTier, interval: PricingInterval) => void;\n  /** Outline level of the section title, 1 to 5. Default 2; each tier name is one level lower. */\n  headingLevel?: 1 | 2 | 3 | 4 | 5;\n}\n\n/** Plan cards with a monthly or yearly switch. Prices are copy you pass in; the block does no maths. */\nexport const BlockPricing = forwardRef<HTMLElement, BlockPricingProps>(function BlockPricing({title, description, tiers, defaultInterval = 'monthly', labels, renderLink, onSelect, headingLevel = 2, className, ...rest}, ref) {\n  const id = useId();\n  const [interval, setInterval] = useState<PricingInterval>(defaultInterval);\n  const l = {monthly: 'Monthly', yearly: 'Yearly', switcher: 'Billing period', highlight: 'Popular', period: {monthly: '/ month', yearly: '/ year'}, ...labels};\n  const sub = Math.min(headingLevel + 1, 6) as 2 | 3 | 4 | 5 | 6;\n  return (\n    <section ref={ref} className={cx('block-pricing', className)} aria-labelledby={id} {...rest}>\n      <Container>\n        <div className=\"block-pricing-head\">\n          <Heading id={id} level={headingLevel}>{title}</Heading>\n          {description && <Text tone=\"muted\">{description}</Text>}\n          <SegmentedControl\n            aria-label={l.switcher}\n            value={interval}\n            onValueChange={(v) => setInterval(v as PricingInterval)}\n            options={[{value: 'monthly', label: l.monthly}, {value: 'yearly', label: l.yearly}]}\n          />\n        </div>\n        <ul className=\"block-pricing-tiers\" role=\"list\">\n          {tiers.map((tier, i) => (\n            <li key={i} className=\"block-tier\" data-highlighted={tier.highlighted || undefined}>\n              <div className=\"block-tier-head\">\n                <Heading level={sub} size=\"md\">{tier.name}</Heading>\n                {tier.highlighted && <Badge variant=\"accent\">{l.highlight}</Badge>}\n              </div>\n              {tier.description && <Text size=\"sm\" tone=\"muted\">{tier.description}</Text>}\n              <p className=\"block-tier-price\">\n                <span className=\"block-tier-amount\">{tier.price[interval]}</span>\n                <span className=\"block-tier-period\">{l.period[interval]}</span>\n              </p>\n              <ul className=\"block-tier-features\" role=\"list\">\n                {tier.features.map((f, j) => <li key={j}>{f}</li>)}\n              </ul>\n              {tier.href\n                ? <Button asChild variant={tier.highlighted ? 'solid' : 'line'}>{renderLink ? renderLink({href: tier.href, children: tier.ctaLabel}) : <a href={tier.href}>{tier.ctaLabel}</a>}</Button>\n                : <Button variant={tier.highlighted ? 'solid' : 'line'} onClick={() => onSelect?.(tier, interval)}>{tier.ctaLabel}</Button>}\n            </li>\n          ))}\n        </ul>\n      </Container>\n    </section>\n  );\n});\n"
     },
     {
       "path": "packages/react/src/components/block-pricing/index.ts",

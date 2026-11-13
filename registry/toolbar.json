@@ -8,7 +8,7 @@
   "css": [
     {
       "path": "packages/css/src/components/toolbar.css",
-      "content": ".toolbar { display: inline-flex; align-items: stretch; border: 1px solid var(--foreground); }\n.toolbar-item { padding: var(--s2) var(--s4); font-size: var(--text-sm); text-decoration: none; }\n.toolbar-item:hover:not(:disabled) { background: var(--wash-2); }\n.toolbar-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.toolbar-item[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.toolbar-sep { width: 1px; background: var(--rule); }\n"
+      "content": ".toolbar { display: inline-flex; align-items: stretch; border: 1px solid var(--foreground); }\n.toolbar-item { padding: var(--s2) var(--s4); font-size: var(--text-sm); text-decoration: none; }\n.toolbar-item:not([data-state=\"on\"]):not([aria-pressed=\"true\"]):hover:not(:disabled) { background: var(--wash-2); }\n.toolbar-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.toolbar-item[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.toolbar-sep { width: 1px; background: var(--rule); }\n"
     }
   ],
   "a11y": [
@@ -29,6 +29,26 @@
     "packages/react/src/components/toolbar/toolbar.demo.tsx",
     "packages/react/src/components/toolbar/toolbar.test.tsx",
     "packages/react/src/components/toolbar/toolbar.tsx"
+  ],
+  "related": [
+    "button",
+    "button-group",
+    "copy-button"
+  ],
+  "props": [],
+  "usage": "import {Toolbar, ToolbarButton, ToolbarSeparator} from '@monoline/react';\n\n<Toolbar aria-label=\"Text formatting\"><ToolbarButton>Bold</ToolbarButton><ToolbarButton>Italic</ToolbarButton><ToolbarButton>Underline</ToolbarButton><ToolbarSeparator /><ToolbarButton>Link</ToolbarButton></Toolbar>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "on"
+      ]
+    }
+  ],
+  "classes": [
+    "toolbar",
+    "toolbar-item",
+    "toolbar-sep"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

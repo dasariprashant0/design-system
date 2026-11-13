@@ -1,2 +1,3 @@
 /* Bar chart. Shared base: chart.css. */
-.chart-bar { transition: stroke-width var(--fast) var(--ease); }
+.chart-bar { fill-opacity: 0.45; transition: stroke-width var(--fast) var(--ease), fill-opacity var(--fast) var(--ease); } /* light fill, 1px outline: a solid accent block is heavy beside thin rules */
+.chart-bar[data-active] { fill-opacity: 0.75; }

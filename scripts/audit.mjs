@@ -12,12 +12,10 @@
 // Checks per page, theme, accent and viewport: axe-core violations (WCAG 2 A/AA and 2.1/2.2 AA tags, colour
 // contrast included), horizontal overflow, console errors, uncaught exceptions and failed requests.
 // Chrome: set CHROME=/path/to/chrome, otherwise common macOS/Linux locations are tried.
-import {spawn} from 'node:child_process';
-import {createServer} from 'node:http';
-import {existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync, readdirSync, rmSync} from 'node:fs';
-import {tmpdir} from 'node:os';
-import {extname, join, normalize} from 'node:path';
+import {existsSync, mkdirSync, readFileSync, writeFileSync, rmSync} from 'node:fs';
+import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {launchChrome, serveDist} from './lib/cdp.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const args = process.argv.slice(2);
@@ -35,54 +33,13 @@ const VISUAL = flag('visual');
 const baselineDir = join(root, 'audit', 'baseline');
 const actualDir = join(root, 'audit', 'actual');
 
-// --- static server for apps/docs/dist
-const mime = {'.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.png': 'image/png'};
-const server = createServer((req, res) => {
-  const path = normalize(decodeURIComponent((req.url ?? '/').split('?')[0])).replace(/^(\.\.[/\\])+/, '');
-  const file = join(dist, path === '/' || path === '.' ? 'index.html' : path);
-  // Single-page app: any path without a file extension falls back to index.html, like the 404.html trick on Pages.
-  const target = existsSync(file) && extname(file) ? file : (extname(file) ? null : join(dist, 'index.html'));
-  if (!target || !target.startsWith(dist) || !existsSync(target)) { res.writeHead(404); res.end('not found'); return; }
-  res.writeHead(200, {'content-type': mime[extname(target)] ?? 'application/octet-stream'});
-  res.end(readFileSync(target));
-});
-await new Promise((r) => server.listen(0, '127.0.0.1', r));
-const base = `http://127.0.0.1:${server.address().port}/`;
-
-// --- launch Chrome
-const candidates = [process.env.CHROME, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser'].filter(Boolean);
-const chromePath = candidates.find((p) => existsSync(p));
-if (!chromePath) { console.error('Chrome not found. Set CHROME=/path/to/chrome.'); server.close(); process.exit(2); }
-const profile = mkdtempSync(join(tmpdir(), 'monoline-audit-'));
-const chrome = spawn(chromePath, ['--headless=new', '--disable-gpu', '--no-first-run', '--no-default-browser-check', '--hide-scrollbars', '--force-device-scale-factor=1', '--font-render-hinting=none', '--remote-debugging-port=0', `--user-data-dir=${profile}`, '--no-sandbox', '--disable-dev-shm-usage', '--disable-extensions', 'about:blank'], {stdio: ['ignore', 'ignore', 'pipe']});
-let chromeLog = '';
-chrome.stderr.on('data', (d) => { chromeLog += d; });
-chrome.on('exit', (code) => { if (!existsSync(join(profile, 'DevToolsActivePort'))) console.error(`Chrome exited early (code ${code}).\n${chromeLog.slice(-1500)}`); });
-const cleanup = () => { try { chrome.kill(); } catch {} try { server.close(); } catch {} try { rmSync(profile, {recursive: true, force: true}); } catch {} };
+// --- static server for apps/docs/dist, Chrome and a CDP client (shared with scripts/e2e)
+const {server, base} = await serveDist(dist);
+let browser;
+try { browser = await launchChrome({label: 'monoline-audit'}); } catch (e) { console.error(e.message); server.close(); process.exit(2); }
+const {cdp, evaluate, listeners, sessionId} = browser;
+const cleanup = () => { browser.close(); try { server.close(); } catch {} };
 process.on('exit', cleanup);
-const portFile = join(profile, 'DevToolsActivePort');
-for (let i = 0; i < 300 && !existsSync(portFile); i++) await new Promise((r) => setTimeout(r, 100));
-if (!existsSync(portFile)) { console.error(`Chrome did not start.\n${chromeLog.slice(-1500)}`); cleanup(); process.exit(2); }
-const [port, wsPath] = readFileSync(portFile, 'utf8').trim().split('\n');
-
-// --- minimal CDP client
-const ws = new WebSocket(`ws://127.0.0.1:${port}${wsPath}`);
-await new Promise((r, j) => { ws.onopen = r; ws.onerror = j; });
-let id = 0; const waiting = new Map(); const listeners = [];
-ws.onmessage = (m) => {
-  const msg = JSON.parse(m.data);
-  if (msg.id && waiting.has(msg.id)) { const {res, rej} = waiting.get(msg.id); waiting.delete(msg.id); msg.error ? rej(new Error(msg.error.message)) : res(msg.result); }
-  else listeners.forEach((l) => l(msg));
-};
-const send = (method, params = {}, sessionId) => new Promise((res, rej) => { const i = ++id; waiting.set(i, {res, rej}); ws.send(JSON.stringify({id: i, method, params, sessionId})); });
-const {targetId} = await send('Target.createTarget', {url: 'about:blank'});
-const {sessionId} = await send('Target.attachToTarget', {targetId, flatten: true});
-const cdp = (m, p) => send(m, p, sessionId);
-const evaluate = async (expression) => {
-  const r = await cdp('Runtime.evaluate', {expression, awaitPromise: true, returnByValue: true});
-  if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description ?? r.exceptionDetails.text);
-  return r.result.value;
-};
 
 const problems = []; // {page, state, kind, detail}
 let currentState = '', currentPage = '';

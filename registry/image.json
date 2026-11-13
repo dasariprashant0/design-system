@@ -31,6 +31,47 @@
     "packages/react/src/components/image/index.ts",
     "packages/react/src/components/image/meta.json"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "ImageProps",
+      "props": [
+        {
+          "name": "alt",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Required. Describe the image, or pass \"\" if it is decorative."
+        },
+        {
+          "name": "ratio",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Width / height, for example `16 / 9`. Reserves space so the page does not jump."
+        },
+        {
+          "name": "fit",
+          "type": "\"cover\" | \"contain\"",
+          "optional": true,
+          "default": "'cover'",
+          "description": "How the image fills its box when `ratio` crops it: `cover` (default) or `contain`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Image} from '@monoline/react';\n\nconst svg = (c: string) => 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"320\" height=\"180\"><rect width=\"320\" height=\"180\" fill=\"${c}\"/></svg>`);\n\n<div style={{maxWidth: '320px'}}><Image src={svg('#999')} alt=\"A grey placeholder\" ratio={16 / 9} /></div>",
+  "dataAttributes": [],
+  "classes": [
+    "image",
+    "image-cover",
+    "image-contain",
+    "image-fallback"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

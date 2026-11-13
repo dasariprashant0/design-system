@@ -18,7 +18,7 @@
     "state"
   ],
   "kind": "hooks",
-  "import": "import {UseDisclosure} from '@monoline/react'",
+  "import": "import {useDisclosure} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-disclosure",
   "files": [
     "packages/react/src/hooks/use-disclosure/index.ts",
@@ -27,6 +27,75 @@
     "packages/react/src/hooks/use-disclosure/use-disclosure.test.tsx",
     "packages/react/src/hooks/use-disclosure/use-disclosure.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [
+    {
+      "name": "UseDisclosureOptions",
+      "props": [
+        {
+          "name": "initialOpen",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Open on first render. Default `false`."
+        },
+        {
+          "name": "onOpen",
+          "type": "(() => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called when the state changes from closed to open. Not called on mount."
+        },
+        {
+          "name": "onClose",
+          "type": "(() => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called when the state changes from open to closed. Not called on mount."
+        }
+      ]
+    },
+    {
+      "name": "UseDisclosureReturn",
+      "props": [
+        {
+          "name": "isOpen",
+          "type": "boolean",
+          "optional": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "open",
+          "type": "() => void",
+          "optional": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "close",
+          "type": "() => void",
+          "optional": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "toggle",
+          "type": "() => void",
+          "optional": false,
+          "default": null,
+          "description": ""
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, useDisclosure} from '@monoline/react';\n\nfunction DisclosureDemo() {\n  const {isOpen, toggle} = useDisclosure();\n  return (\n    <div>\n      <Button variant=\"line\" aria-expanded={isOpen} onClick={toggle}>{isOpen ? 'Hide details' : 'Show details'}</Button>\n      {isOpen && <p>Details appear here.</p>}\n    </div>\n  );\n}\n\n<DisclosureDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

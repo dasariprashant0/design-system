@@ -33,6 +33,55 @@
     "packages/react/src/components/breadcrumb/index.ts",
     "packages/react/src/components/breadcrumb/meta.json"
   ],
+  "related": [
+    "menubar",
+    "navigation-menu",
+    "pagination"
+  ],
+  "props": [
+    {
+      "name": "BreadcrumbProps",
+      "props": [
+        {
+          "name": "items",
+          "type": "BreadcrumbItem[]",
+          "optional": false,
+          "default": null,
+          "description": "The trail from the root to the current page; the last item is treated as the current page and is not a link."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Name of the landmark."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Breadcrumb} from '@monoline/react';\n\n<Breadcrumb items={[{label: 'Home', href: '#'}, {label: 'Projects', href: '#'}, {label: 'Monoline'}]} />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "done"
+      ]
+    }
+  ],
+  "classes": [
+    "crumbs",
+    "pager",
+    "steps",
+    "step",
+    "topbar",
+    "brand",
+    "topbar-nav",
+    "tab",
+    "tabpanel",
+    "link",
+    "divider",
+    "skip-link"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

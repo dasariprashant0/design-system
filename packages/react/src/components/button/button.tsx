@@ -5,8 +5,8 @@ import {cx} from '../../utils/cx';
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** `solid` is the one main action per view. `line` for the rest, `ghost` for inline links, `danger` for destructive. */
   variant?: 'solid' | 'line' | 'ghost' | 'danger';
-  /** `md` (default) or `sm` for dense toolbars and table rows. */
-  size?: 'sm' | 'md';
+  /** `md` (default), `sm` for dense toolbars and table rows, or `lg` for prominent calls to action. Same heights as Input and Select. */
+  size?: 'sm' | 'md' | 'lg';
   /** Shows a spinner, sets `aria-busy` and ignores clicks. The label stays so the width does not jump. */
   loading?: boolean;
   /** Render the child element (a link, a router link) with the button styles instead of a `<button>`. */
@@ -26,11 +26,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     <Comp
       ref={ref}
       type={asChild ? undefined : (type ?? 'button')}
-      className={cx('btn', `btn-${variant}`, size === 'sm' && 'btn-sm', className)}
+      className={cx('btn', `btn-${variant}`, size !== 'md' && `btn-${size}`, className)}
       disabled={disabled}
       aria-busy={loading || undefined}
       aria-disabled={loading || undefined}
       data-loading={loading || undefined}
+      data-disabled={disabled ? '' : undefined}
       onClick={loading ? (e: React.MouseEvent) => e.preventDefault() : onClick}
       {...rest}
     >

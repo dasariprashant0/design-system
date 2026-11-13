@@ -1,0 +1,14 @@
+/* Notification center: bell + badge, and a panel with a header, a list and an empty line. */
+.notification-center { position: relative; display: inline-flex; }
+.notification-center-badge { position: absolute; inset-block-start: calc(var(--s1) * -1); inset-inline-end: calc(var(--s1) * -1); min-width: 1.5em; justify-content: center; padding-block: 0; padding-inline: var(--s1); pointer-events: none; }
+.notification-center-panel { width: min(380px, 92vw); max-width: none; padding: 0; }
+.notification-center-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); padding: var(--s3) var(--s4); border-block-end: 1px solid var(--rule); }
+.notification-center-actions { display: flex; gap: var(--s3); }
+.notification-center-list { list-style: none; margin: 0; padding: 0; max-height: 20rem; overflow-y: auto; }
+.notification-center-item { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s3); padding: var(--s3) var(--s4); border-block-end: 1px solid var(--rule); font-size: var(--text-sm); }
+.notification-center-item:last-child { border-block-end: 0; }
+.notification-center-item[data-unread] { border-inline-start: 3px solid var(--accent); }
+.notification-center-text { display: flex; flex-direction: column; gap: var(--s1); min-width: 0; }
+.notification-center-item[data-unread] .notification-center-title { font-weight: 700; }
+.notification-center-desc, .notification-center-time { font-size: var(--text-xs); color: var(--muted); }
+.notification-center-empty { margin: 0; padding: var(--s5) var(--s4); text-align: center; font-size: var(--text-sm); color: var(--muted); }

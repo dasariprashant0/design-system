@@ -1,0 +1,155 @@
+{
+  "name": "tree-select",
+  "title": "Tree select",
+  "category": "forms",
+  "description": "A select whose options are a nested tree, with search and single or multiple selection.",
+  "status": "stable",
+  "uses": [
+    "tree",
+    "combobox",
+    "input"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select { height: var(--control-md); padding-block: 0; }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }\n.input-lg { height: var(--control-lg); padding: 0 18px; }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-inline-end: var(--s9); }\n.input-end { position: absolute; inset-inline-end: var(--s3); top: 50%; transform: translateY(-50%); min-height: var(--s6); min-width: var(--s6); display: inline-grid; place-items: center; }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; inset-inline-start: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(calc(16px * var(--dir, 1))); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-inline-end: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-inline-start: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/tree-select.css",
+      "content": "/* Tree select: the input is the normal .input; the tree drops below it like the combobox list. */\n.tree-select { position: relative; width: 100%; }\n.tree-select-list { position: absolute; inset-inline-start: 0; inset-inline-end: 0; top: calc(100% + var(--s1)); z-index: var(--z-drawer); max-height: 16rem; overflow-y: auto; margin: 0; padding: var(--s1) 0; list-style: none; background: var(--background); border: 1px solid var(--foreground); }\n.tree-select-item { display: flex; align-items: center; gap: var(--s2); min-height: 24px; padding-block: var(--s2); padding-inline-end: var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.tree-select-item[data-active] { background: var(--foreground); color: var(--background); }\n.tree-select-item[aria-selected=\"true\"]::after { content: \"✓\"; margin-inline-start: auto; }\n.tree-select-item[aria-disabled=\"true\"] { opacity: 0.5; cursor: not-allowed; }\n.tree-select-twisty { width: 1.5ch; flex: none; text-align: center; color: var(--muted); }\n.tree-select-item[data-active] .tree-select-twisty { color: inherit; }\n.tree-select-empty { padding: var(--s3) var(--s4); font-size: var(--text-sm); color: var(--muted); }\n"
+    }
+  ],
+  "a11y": [
+    "An input with role=combobox, aria-haspopup=tree and aria-activedescendant; focus never leaves the input.",
+    "The popup is role=tree: each treeitem has aria-level, aria-setsize, aria-posinset, aria-selected and (for branches) aria-expanded; aria-multiselectable in multiple mode.",
+    "ArrowDown/ArrowUp open the list and move; ArrowRight opens a branch then enters it; ArrowLeft closes it then goes to the parent (swapped in RTL); Enter selects or toggles; Escape closes.",
+    "Typing filters the tree to matching nodes and their parents, opened automatically; an empty result shows text.",
+    "Selection is shown in the input as text ('A, B' or '3 selected') and a check mark, not colour."
+  ],
+  "keywords": [
+    "cascader",
+    "hierarchy",
+    "category picker",
+    "folder picker",
+    "nested select",
+    "treeselect",
+    "multi select"
+  ],
+  "kind": "components",
+  "import": "import {TreeSelect} from '@monoline/react'",
+  "path": "packages/react/src/components/tree-select",
+  "files": [
+    "packages/react/src/components/tree-select/index.ts",
+    "packages/react/src/components/tree-select/meta.json",
+    "packages/react/src/components/tree-select/tree-select.demo.tsx",
+    "packages/react/src/components/tree-select/tree-select.test.tsx",
+    "packages/react/src/components/tree-select/tree-select.tsx"
+  ],
+  "related": [
+    "tree",
+    "combobox",
+    "input"
+  ],
+  "props": [
+    {
+      "name": "TreeSelectProps",
+      "props": [
+        {
+          "name": "items",
+          "type": "TreeNode[]",
+          "optional": false,
+          "default": null,
+          "description": "The tree: top-level nodes, each with an `id`, a `label` and optional `children`. Same shape as `Tree`."
+        },
+        {
+          "name": "value",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "Selected node ids when controlled. Always an array, also in single mode (zero or one id). Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string[]",
+          "optional": true,
+          "default": "[]",
+          "description": "Ids selected at first when uncontrolled. Default none."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((ids: string[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the full list of selected ids after each change."
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Allows several selections: choosing a node toggles it and the list stays open. Default false (choosing closes the list)."
+        },
+        {
+          "name": "emptyText",
+          "type": "string",
+          "optional": true,
+          "default": "'No matches'",
+          "description": "Shown when the search matches nothing. Default \"No matches\"."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Field, TreeSelect, type TreeNode} from '@monoline/react';\n\nconst items: TreeNode[] = [\n  {id: 'eng', label: 'Engineering', children: [\n    {id: 'web', label: 'Web'},\n    {id: 'platform', label: 'Platform', children: [{id: 'infra', label: 'Infrastructure'}, {id: 'data', label: 'Data'}]},\n  ]},\n  {id: 'design', label: 'Design', children: [{id: 'brand', label: 'Brand'}, {id: 'product', label: 'Product design'}]},\n  {id: 'ops', label: 'Operations'},\n];\n\n<div style={{maxWidth: '320px', minHeight: '300px'}}><Field label=\"Team\"><TreeSelect items={items} placeholder=\"Choose a team\" /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-lg",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "tree-select",
+    "tree-select-list",
+    "tree-select-item",
+    "tree-select-twisty",
+    "tree-select-empty"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/tree-select/index.ts",
+      "content": "export {TreeSelect} from './tree-select';\nexport type {TreeSelectProps} from './tree-select';\n"
+    },
+    {
+      "path": "packages/react/src/components/tree-select/meta.json",
+      "content": "{\"name\":\"tree-select\",\"title\":\"Tree select\",\"category\":\"forms\",\"description\":\"A select whose options are a nested tree, with search and single or multiple selection.\",\"status\":\"stable\",\"uses\":[\"tree\",\"combobox\",\"input\"],\"css\":[\"03-form-fields.css\",\"tree-select.css\"],\"a11y\":[\"An input with role=combobox, aria-haspopup=tree and aria-activedescendant; focus never leaves the input.\",\"The popup is role=tree: each treeitem has aria-level, aria-setsize, aria-posinset, aria-selected and (for branches) aria-expanded; aria-multiselectable in multiple mode.\",\"ArrowDown/ArrowUp open the list and move; ArrowRight opens a branch then enters it; ArrowLeft closes it then goes to the parent (swapped in RTL); Enter selects or toggles; Escape closes.\",\"Typing filters the tree to matching nodes and their parents, opened automatically; an empty result shows text.\",\"Selection is shown in the input as text ('A, B' or '3 selected') and a check mark, not colour.\"],\"keywords\":[\"cascader\",\"hierarchy\",\"category picker\",\"folder picker\",\"nested select\",\"treeselect\",\"multi select\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/tree-select/tree-select.tsx",
+      "content": "'use client';\nimport {forwardRef, useId, useState, type InputHTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {useControllableState} from '../../hooks/use-controllable-state';\nimport {useIsRtl} from '../../utils/direction';\nimport {useFieldControl} from '../field';\nimport type {TreeNode} from '../tree';\n\nexport interface TreeSelectProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'defaultValue' | 'onChange' | 'role' | 'size' | 'type'> {\n  /** The tree: top-level nodes, each with an `id`, a `label` and optional `children`. Same shape as `Tree`. */\n  items: TreeNode[];\n  /** Selected node ids when controlled. Always an array, also in single mode (zero or one id). Pair with `onValueChange`. */\n  value?: string[];\n  /** Ids selected at first when uncontrolled. Default none. */\n  defaultValue?: string[];\n  /** Called with the full list of selected ids after each change. */\n  onValueChange?: (ids: string[]) => void;\n  /** Allows several selections: choosing a node toggles it and the list stays open. Default false (choosing closes the list). */\n  multiple?: boolean;\n  /** Shown when the search matches nothing. Default \"No matches\". */\n  emptyText?: string;\n  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */\n  invalid?: boolean;\n}\n\ninterface Row {node: TreeNode; level: number; parent?: string; kids: boolean; open: boolean; pos: number; size: number}\n\nconst textOf = (n: TreeNode) => n.text ?? (typeof n.label === 'string' ? n.label : n.id);\n\n/**\n * A select whose options are a tree, with search. Focus stays in the input (a combobox with a tree popup):\n * ArrowUp/Down move, ArrowRight opens a branch then enters it, ArrowLeft closes it then goes to the parent, Enter selects, Escape closes.\n * Typing filters the tree to matching nodes and their parents. Use `multiple` to pick several nodes.\n * @example <TreeSelect aria-label=\"Folder\" items={folders} onValueChange={(ids) => setFolder(ids[0])} />\n */\nexport const TreeSelect = forwardRef<HTMLInputElement, TreeSelectProps>(function TreeSelect({items, value, defaultValue = [], onValueChange, multiple = false, emptyText = 'No matches', invalid, className, onBlur, onKeyDown, ...rest}, ref) {\n  const f = useFieldControl();\n  const listId = useId();\n  const isRtl = useIsRtl();\n  const [selected, setSelected] = useControllableState<string[]>({value, defaultValue, onChange: onValueChange});\n  const [text, setText] = useState<string | null>(null); // null = show the selection\n  const [open, setOpen] = useState(false);\n  const [activeId, setActiveId] = useState<string | undefined>();\n  const [expanded, setExpanded] = useState<string[]>([]);\n\n  const q = (text ?? '').trim().toLowerCase();\n  const matches = (n: TreeNode): boolean => textOf(n).toLowerCase().includes(q) || !!n.children?.some(matches);\n  const rows: Row[] = [];\n  const walk = (nodes: TreeNode[], level: number, parent?: string) => {\n    const list = q ? nodes.filter(matches) : nodes;\n    list.forEach((node, i) => {\n      const kids = !!(q ? node.children?.some(matches) : node.children?.length);\n      const isOpen = kids && (!!q || expanded.includes(node.id));\n      rows.push({node, level, parent, kids, open: isOpen, pos: i + 1, size: list.length});\n      if (isOpen) walk(node.children!, level + 1, node.id);\n    });\n  };\n  walk(items, 1);\n\n  const all: TreeNode[] = [];\n  const collect = (nodes: TreeNode[]) => nodes.forEach((n) => { all.push(n); if (n.children) collect(n.children); });\n  collect(items);\n  const names = selected.map((id) => all.find((n) => n.id === id)).filter((n): n is TreeNode => !!n).map(textOf);\n  const summary = names.length > 2 ? `${names.length} selected` : names.join(', ');\n\n  const index = rows.findIndex((r) => r.node.id === activeId);\n  const cur = index >= 0 ? index : rows.findIndex((r) => !r.node.disabled);\n  const rowId = (i: number) => `${listId}-${i}`;\n\n  const pick = (node: TreeNode) => {\n    if (node.disabled) return;\n    if (multiple) setSelected(selected.includes(node.id) ? selected.filter((x) => x !== node.id) : [...selected, node.id]);\n    else { setSelected([node.id]); setText(null); setOpen(false); }\n  };\n  const toggle = (id: string) => setExpanded((e) => (e.includes(id) ? e.filter((x) => x !== id) : [...e, id]));\n  const step = (dir: 1 | -1) => { for (let j = cur + dir; j >= 0 && j < rows.length; j += dir) if (!rows[j]!.node.disabled) { setActiveId(rows[j]!.node.id); return; } };\n\n  const keydown = (e: React.KeyboardEvent<HTMLInputElement>) => {\n    onKeyDown?.(e);\n    if (e.defaultPrevented) return;\n    const row = rows[cur];\n    const rtl = isRtl(e.currentTarget);\n    const key = rtl && e.key === 'ArrowRight' ? 'ArrowLeft' : rtl && e.key === 'ArrowLeft' ? 'ArrowRight' : e.key;\n    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (!open) setOpen(true); else step(e.key === 'ArrowDown' ? 1 : -1); }\n    else if (e.key === 'Enter' && open && row) { e.preventDefault(); pick(row.node); }\n    else if (e.key === 'Escape') { if (open) { e.preventDefault(); setOpen(false); } else if (text !== null) setText(null); }\n    else if (open && !q && row && key === 'ArrowRight') {\n      e.preventDefault();\n      if (row.kids && !row.open) toggle(row.node.id);\n      else if (row.kids) { const child = rows[cur + 1]; if (child && !child.node.disabled) setActiveId(child.node.id); }\n    } else if (open && !q && row && key === 'ArrowLeft') {\n      e.preventDefault();\n      if (row.open) toggle(row.node.id); else if (row.parent) setActiveId(row.parent);\n    }\n  };\n\n  return (\n    <div className={cx('tree-select', className)}>\n      <input\n        ref={ref}\n        type=\"text\"\n        role=\"combobox\"\n        autoComplete=\"off\"\n        className=\"input\"\n        aria-haspopup=\"tree\"\n        aria-expanded={open}\n        aria-controls={listId}\n        aria-autocomplete=\"list\"\n        aria-activedescendant={open && cur >= 0 ? rowId(cur) : undefined}\n        {...f}\n        {...(invalid ? {'aria-invalid': true as const} : {})}\n        value={text ?? summary}\n        onChange={(e) => { setText(e.target.value); setOpen(true); setActiveId(undefined); }}\n        onFocus={() => setOpen(true)}\n        onClick={() => setOpen(true)}\n        onBlur={(e) => { onBlur?.(e); setOpen(false); setText(null); }}\n        onKeyDown={keydown}\n        {...rest}\n      />\n      {open && (\n        <ul id={listId} role=\"tree\" className=\"tree-select-list\" aria-label={rest['aria-label']} aria-multiselectable={multiple || undefined}>\n          {rows.length === 0 && <li className=\"tree-select-empty\" role=\"presentation\">{emptyText}</li>}\n          {rows.map((r, i) => (\n            <li\n              key={r.node.id}\n              id={rowId(i)}\n              role=\"treeitem\"\n              aria-level={r.level}\n              aria-setsize={r.size}\n              aria-posinset={r.pos}\n              aria-expanded={r.kids ? r.open : undefined}\n              aria-selected={selected.includes(r.node.id)}\n              aria-disabled={r.node.disabled || undefined}\n              data-active={i === cur || undefined}\n              className=\"tree-select-item\"\n              style={{paddingInlineStart: `calc(var(--s3) * ${r.level - 1} + var(--s3))`}}\n              onMouseDown={(e) => e.preventDefault()}\n              onMouseEnter={() => setActiveId(r.node.id)}\n              onClick={() => pick(r.node)}\n            >\n              <span\n                className=\"tree-select-twisty\"\n                aria-hidden=\"true\"\n                onClick={(e) => { if (r.kids && !q) { e.stopPropagation(); toggle(r.node.id); } }}\n              >{r.kids ? (r.open ? '−' : '+') : ''}</span>\n              {r.node.label}\n            </li>\n          ))}\n        </ul>\n      )}\n    </div>\n  );\n});\n"
+    }
+  ]
+}

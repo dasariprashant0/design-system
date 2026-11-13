@@ -11,7 +11,7 @@
     },
     {
       "path": "packages/css/src/components/bar-chart.css",
-      "content": "/* Bar chart. Shared base: chart.css. */\n.chart-bar { transition: stroke-width var(--fast) var(--ease); }\n"
+      "content": "/* Bar chart. Shared base: chart.css. */\n.chart-bar { fill-opacity: 0.45; transition: stroke-width var(--fast) var(--ease), fill-opacity var(--fast) var(--ease); } /* light fill, 1px outline: a solid accent block is heavy beside thin rules */\n.chart-bar[data-active] { fill-opacity: 0.75; }\n"
     }
   ],
   "a11y": [
@@ -41,6 +41,133 @@
     "packages/react/src/components/bar-chart/bar-chart.tsx",
     "packages/react/src/components/bar-chart/index.ts",
     "packages/react/src/components/bar-chart/meta.json"
+  ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "BarChartProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Accessible name and table caption. Required."
+        },
+        {
+          "name": "data",
+          "type": "ChartDatum[]",
+          "optional": true,
+          "default": null,
+          "description": "One series: `[{label: 'Mon', value: 3}]`."
+        },
+        {
+          "name": "series",
+          "type": "ChartSeries[]",
+          "optional": true,
+          "default": null,
+          "description": "Several series: `[{name: 'Visits', values: [3, 5]}]`, with `labels` for the categories."
+        },
+        {
+          "name": "labels",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "Category labels for the x axis (or y axis when horizontal), one per value in `series`."
+        },
+        {
+          "name": "seriesName",
+          "type": "string",
+          "optional": true,
+          "default": "'Value'",
+          "description": "Name of the single series when `data` is used. Default \"Value\"."
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\"",
+          "optional": true,
+          "default": "'vertical'",
+          "description": "`vertical` draws columns, `horizontal` draws rows (better for long labels). Default `vertical`."
+        },
+        {
+          "name": "stacked",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Stack series on top of each other instead of side by side."
+        },
+        {
+          "name": "showValues",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Print each value at the end of its bar (the total for stacked bars)."
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Chart height in px. Horizontal charts size themselves to the number of rows when omitted. Default 280."
+        },
+        {
+          "name": "valueFormat",
+          "type": "((value: number) => string)",
+          "optional": true,
+          "default": null,
+          "description": "Format a value for labels, tooltips and the table."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BarChart} from '@monoline/react';\n\nconst week = [{label: 'Mon', value: 12}, {label: 'Tue', value: 19}, {label: 'Wed', value: 9}, {label: 'Thu', value: 24}, {label: 'Fri', value: 17}, {label: 'Sat', value: 6}, {label: 'Sun', value: 4}];\n\n<BarChart title=\"Signups per weekday\" data={week} showValues />",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    },
+    {
+      "name": "data-align",
+      "values": [
+        "start",
+        "end"
+      ]
+    }
+  ],
+  "classes": [
+    "chart",
+    "chart-plot",
+    "chart-svg",
+    "chart-hits",
+    "chart-s0",
+    "chart-s1",
+    "chart-s2",
+    "chart-s3",
+    "chart-s4",
+    "chart-tick",
+    "chart-value",
+    "chart-rule",
+    "chart-zero",
+    "chart-outline",
+    "chart-pat",
+    "chart-pat-dot",
+    "chart-line",
+    "chart-area",
+    "chart-hit",
+    "chart-tip",
+    "chart-tip-title",
+    "chart-tip-row",
+    "chart-tip-value",
+    "chart-legend",
+    "chart-legend-detail",
+    "chart-swatch",
+    "chart-empty",
+    "chart-marks",
+    "chart-bar"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

@@ -15,7 +15,7 @@
     },
     {
       "path": "packages/css/src/components/10-choices.css",
-      "content": "/* ─── Choices: checkbox and radio, native inputs redrawn ─── */\n.choice { display: inline-flex; align-items: flex-start; gap: var(--s3); cursor: pointer; line-height: 1.4; }\n.choice input { appearance: none; flex: none; width: 18px; height: 18px; margin: 1px 0 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }\n.choice input[type=\"radio\"] { border-radius: var(--round); }\n.choice input:checked { background: var(--foreground); }\n.choice input[type=\"checkbox\"]:checked::after { content: \"\"; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px; border: solid var(--background); border-width: 0 2px 2px 0; transform: rotate(45deg); } /* physical: tick geometry, drawn left to right */\n.choice input[type=\"radio\"]:checked::after { content: \"\"; position: absolute; inset: 4px; border-radius: var(--round); background: var(--background); }\n.choice input[type=\"checkbox\"]:indeterminate { background: var(--foreground); }\n.choice input[type=\"checkbox\"]:indeterminate::after { content: \"\"; position: absolute; inset-inline: 3px; top: 7px; height: 2px; background: var(--background); }\n.choice input:disabled { opacity: 0.5; cursor: not-allowed; }\n.choice:has(input:disabled) { color: var(--muted); cursor: not-allowed; }\n.choice-group { display: grid; gap: var(--s3); border: 0; padding: 0; margin: 0; min-width: 0; }\n.choice-group > legend { padding: 0; margin-bottom: var(--s3); }\n"
+      "content": "/* ─── Choices: checkbox and radio, native inputs redrawn ─── */\n.choice { min-block-size: 24px; /* WCAG 2.5.8 target size; found by e2e */ display: inline-flex; align-items: flex-start; gap: var(--s3); cursor: pointer; line-height: 1.4; }\n.choice input { appearance: none; flex: none; width: 18px; height: 18px; margin: 1px 0 0; border: 1px solid var(--foreground); background: transparent; position: relative; cursor: pointer; transition: background var(--fast); }\n.choice input[type=\"radio\"] { border-radius: var(--round); }\n.choice input:checked { background: var(--foreground); }\n.choice input[type=\"checkbox\"]:checked::after { content: \"\"; position: absolute; left: 5px; top: 1px; width: 5px; height: 10px; border: solid var(--background); border-width: 0 2px 2px 0; transform: rotate(45deg); } /* physical: tick geometry, drawn left to right */\n.choice input[type=\"radio\"]:checked::after { content: \"\"; position: absolute; inset: 4px; border-radius: var(--round); background: var(--background); }\n.choice input[type=\"checkbox\"]:indeterminate { background: var(--foreground); }\n.choice input[type=\"checkbox\"]:indeterminate::after { content: \"\"; position: absolute; inset-inline: 3px; top: 7px; height: 2px; background: var(--background); }\n.choice input:disabled { opacity: 0.5; cursor: not-allowed; }\n.choice:has(input:disabled) { color: var(--muted); cursor: not-allowed; }\n.choice-group { display: grid; gap: var(--s3); border: 0; padding: 0; margin: 0; min-width: 0; }\n.choice-group > legend { padding: 0; margin-bottom: var(--s3); }\n"
     }
   ],
   "a11y": [
@@ -38,13 +38,64 @@
     "packages/react/src/components/checkbox/index.ts",
     "packages/react/src/components/checkbox/meta.json"
   ],
+  "related": [
+    "field"
+  ],
+  "props": [
+    {
+      "name": "CheckboxProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Visible label. Without it, give the checkbox an `aria-label`."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the checkbox as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Checkbox} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}><Checkbox label=\"Replies\" defaultChecked /><Checkbox label=\"Mentions\" /><Checkbox label=\"Billing (locked)\" disabled /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "checked",
+        "indeterminate"
+      ]
+    },
+    {
+      "name": "data-orientation",
+      "values": [
+        "horizontal"
+      ]
+    }
+  ],
+  "classes": [
+    "checkbox",
+    "radio",
+    "sw",
+    "checkbox-mark",
+    "radio-dot",
+    "radio-group",
+    "sw-thumb",
+    "choice",
+    "choice-group"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },
   "source": [
     {
       "path": "packages/react/src/components/checkbox/checkbox.tsx",
-      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type ReactNode} from 'react';\nimport {Checkbox as RadixCheckbox} from 'radix-ui';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\nexport interface CheckboxProps extends Omit<ComponentPropsWithoutRef<typeof RadixCheckbox.Root>, 'children'> {\n  /** Visible label. Without it, give the checkbox an `aria-label`. */\n  label?: ReactNode;\n  /** Marks the checkbox as having an error: sets `aria-invalid` and shows the error border. */\n  invalid?: boolean;\n}\n\nconst Check = () => <svg className=\"checkbox-mark\" viewBox=\"0 0 10 10\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" aria-hidden=\"true\"><path d=\"M1.5 5.5l2.5 2.5 4.5-5.5\" /></svg>;\nconst Dash = () => <svg className=\"checkbox-mark\" viewBox=\"0 0 10 10\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" aria-hidden=\"true\"><path d=\"M2 5h6\" /></svg>;\n\n/**\n * Checkbox with indeterminate support. `checked` is `boolean | 'indeterminate'`.\n * @example <Checkbox label=\"Replies\" defaultChecked onCheckedChange={setOn} />\n */\nexport const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, CheckboxProps>(function Checkbox({label, invalid, className, id, ...rest}, ref) {\n  const f = useFieldControl();\n  const box = (\n    <RadixCheckbox.Root ref={ref} id={id ?? f.id} className={cx('checkbox', className)} aria-invalid={invalid || f['aria-invalid']} aria-describedby={f['aria-describedby']} {...rest}>\n      <RadixCheckbox.Indicator>{rest.checked === 'indeterminate' ? <Dash /> : <Check />}</RadixCheckbox.Indicator>\n    </RadixCheckbox.Root>\n  );\n  return label ? <label className=\"choice\">{box}<span>{label}</span></label> : box;\n});\n"
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type ReactNode} from 'react';\nimport {Checkbox as RadixCheckbox} from 'radix-ui';\nimport {cx} from '../../utils/cx';\nimport {invalidAttrs, useFieldControl} from '../field';\n\nexport interface CheckboxProps extends Omit<ComponentPropsWithoutRef<typeof RadixCheckbox.Root>, 'children'> {\n  /** Visible label. Without it, give the checkbox an `aria-label`. */\n  label?: ReactNode;\n  /** Marks the checkbox as having an error: sets `aria-invalid` and shows the error border. */\n  invalid?: boolean;\n}\n\nconst Check = () => <svg className=\"checkbox-mark\" viewBox=\"0 0 10 10\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" aria-hidden=\"true\"><path d=\"M1.5 5.5l2.5 2.5 4.5-5.5\" /></svg>;\nconst Dash = () => <svg className=\"checkbox-mark\" viewBox=\"0 0 10 10\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" aria-hidden=\"true\"><path d=\"M2 5h6\" /></svg>;\n\n/**\n * Checkbox with indeterminate support. `checked` is `boolean | 'indeterminate'`.\n * @example <Checkbox label=\"Replies\" defaultChecked onCheckedChange={setOn} />\n */\nexport const Checkbox = forwardRef<ElementRef<typeof RadixCheckbox.Root>, CheckboxProps>(function Checkbox({label, invalid, className, id, ...rest}, ref) {\n  const f = useFieldControl();\n  const box = (\n    <RadixCheckbox.Root ref={ref} id={id ?? f.id} className={cx('checkbox', className)} {...invalidAttrs(invalid || Boolean(f['aria-invalid']))} aria-describedby={f['aria-describedby']} {...rest}>\n      <RadixCheckbox.Indicator>{rest.checked === 'indeterminate' ? <Dash /> : <Check />}</RadixCheckbox.Indicator>\n    </RadixCheckbox.Root>\n  );\n  return label ? <label className=\"choice\">{box}<span>{label}</span></label> : box;\n});\n"
     },
     {
       "path": "packages/react/src/components/checkbox/index.ts",

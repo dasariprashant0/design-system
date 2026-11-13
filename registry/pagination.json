@@ -30,6 +30,73 @@
     "packages/react/src/components/pagination/pagination.test.tsx",
     "packages/react/src/components/pagination/pagination.tsx"
   ],
+  "related": [
+    "breadcrumb",
+    "menubar",
+    "navigation-menu"
+  ],
+  "props": [
+    {
+      "name": "PaginationProps",
+      "props": [
+        {
+          "name": "page",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Current page, 1-based, when controlled. Pair with `onPageChange`."
+        },
+        {
+          "name": "defaultPage",
+          "type": "number",
+          "optional": true,
+          "default": "1",
+          "description": "The starting page when uncontrolled. Default 1."
+        },
+        {
+          "name": "pageCount",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "Total number of pages."
+        },
+        {
+          "name": "onPageChange",
+          "type": "((page: number) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new 1-based page number when the user picks a page or presses Prev or Next."
+        },
+        {
+          "name": "siblings",
+          "type": "number",
+          "optional": true,
+          "default": "1",
+          "description": "How many numbers to show on each side of the current page."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {Pagination} from '@monoline/react';\n\nfunction Demo1() {\n  const [page, setPage] = useState(5);\n  return <Pagination page={page} pageCount={20} onPageChange={setPage} />;\n}\n\n<Demo1 />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "done"
+      ]
+    }
+  ],
+  "classes": [
+    "crumbs",
+    "pager",
+    "steps",
+    "step",
+    "topbar",
+    "brand",
+    "topbar-nav",
+    "tab",
+    "tabpanel"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },
@@ -44,7 +111,7 @@
     },
     {
       "path": "packages/react/src/components/pagination/pagination.tsx",
-      "content": "import {forwardRef, type HTMLAttributes} from 'react';\n\nexport interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {\n  /** Current page, 1-based. */\n  page: number;\n  /** Total number of pages. */\n  pageCount: number;\n  /** Called with the new 1-based page number when the user picks a page or presses Prev or Next. */\n  onPageChange: (page: number) => void;\n  /** How many numbers to show on each side of the current page. */\n  siblings?: number;\n}\n\n/** Page numbers with the first and last always visible and \"…\" for gaps. Pure function exported for testing. */\nexport function pageWindow(page: number, count: number, siblings = 1): Array<number | 'gap'> {\n  const out: Array<number | 'gap'> = [];\n  const left = Math.max(2, page - siblings), right = Math.min(count - 1, page + siblings);\n  out.push(1);\n  if (left > 2) out.push('gap');\n  for (let p = left; p <= right; p++) out.push(p);\n  if (right < count - 1) out.push('gap');\n  if (count > 1) out.push(count);\n  return out;\n}\n\n/** Previous, numbered pages and next, as buttons. The current page has aria-current. */\nexport const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagination({page, pageCount, onPageChange, siblings = 1, ...rest}, ref) {\n  const go = (p: number) => onPageChange(Math.min(pageCount, Math.max(1, p)));\n  return (\n    <nav ref={ref} aria-label=\"Pagination\" {...rest}>\n      <div className=\"pager\">\n        <button type=\"button\" disabled={page <= 1} onClick={() => go(page - 1)}>Prev</button>\n        {pageWindow(page, pageCount, siblings).map((p, i) =>\n          p === 'gap' ? <span key={`g${i}`} className=\"muted\" aria-hidden=\"true\">…</span> : (\n            <button key={p} type=\"button\" aria-current={p === page ? 'page' : undefined} aria-label={`Page ${p}`} onClick={() => go(p)}>{p}</button>\n          ))}\n        <button type=\"button\" disabled={page >= pageCount} onClick={() => go(page + 1)}>Next</button>\n      </div>\n    </nav>\n  );\n});\n"
+      "content": "'use client';\nimport {forwardRef, useState, type HTMLAttributes} from 'react';\n\nexport interface PaginationProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {\n  /** Current page, 1-based, when controlled. Pair with `onPageChange`. */\n  page?: number;\n  /** The starting page when uncontrolled. Default 1. */\n  defaultPage?: number;\n  /** Total number of pages. */\n  pageCount: number;\n  /** Called with the new 1-based page number when the user picks a page or presses Prev or Next. */\n  onPageChange?: (page: number) => void;\n  /** How many numbers to show on each side of the current page. */\n  siblings?: number;\n}\n\n/** Page numbers with the first and last always visible and \"…\" for gaps. Pure function exported for testing. */\nexport function pageWindow(page: number, count: number, siblings = 1): Array<number | 'gap'> {\n  const out: Array<number | 'gap'> = [];\n  const left = Math.max(2, page - siblings), right = Math.min(count - 1, page + siblings);\n  out.push(1);\n  if (left > 2) out.push('gap');\n  for (let p = left; p <= right; p++) out.push(p);\n  if (right < count - 1) out.push('gap');\n  if (count > 1) out.push(count);\n  return out;\n}\n\n/** Previous, numbered pages and next, as buttons. The current page has aria-current. */\nexport const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagination({page: pageProp, defaultPage = 1, pageCount, onPageChange, siblings = 1, ...rest}, ref) {\n  const [inner, setInner] = useState(defaultPage);\n  const page = pageProp ?? inner;\n  const go = (p: number) => {\n    const next = Math.min(pageCount, Math.max(1, p));\n    if (pageProp === undefined) setInner(next);\n    onPageChange?.(next);\n  };\n  return (\n    <nav ref={ref} aria-label=\"Pagination\" {...rest}>\n      <div className=\"pager\">\n        <button type=\"button\" disabled={page <= 1} onClick={() => go(page - 1)}>Prev</button>\n        {pageWindow(page, pageCount, siblings).map((p, i) =>\n          p === 'gap' ? <span key={`g${i}`} className=\"muted\" aria-hidden=\"true\">…</span> : (\n            <button key={p} type=\"button\" aria-current={p === page ? 'page' : undefined} aria-label={`Page ${p}`} onClick={() => go(p)}>{p}</button>\n          ))}\n        <button type=\"button\" disabled={page >= pageCount} onClick={() => go(page + 1)}>Next</button>\n      </div>\n    </nav>\n  );\n});\n"
     }
   ]
 }

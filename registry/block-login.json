@@ -15,11 +15,11 @@
   "css": [
     {
       "path": "packages/css/src/components/form.css",
-      "content": "/* Form: vertical rhythm, error summary, actions footer. */\n.form { display: flex; flex-direction: column; gap: var(--s5); min-width: 0; }\n.form-errors { border: 1px solid var(--danger); padding: var(--s4); font-size: var(--text-sm); }\n.form-errors-title { font-weight: 500; color: var(--danger); margin-bottom: var(--s2); }\n.form-errors ul { margin: 0; padding-inline-start: var(--s5); }\n.form-errors a { color: var(--foreground); text-decoration: underline; text-underline-offset: 3px; }\n.form-errors a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }\n.form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); padding-top: var(--s4); border-top: 1px solid var(--rule); }\n"
+      "content": "/* Form: vertical rhythm, error summary, actions footer. */\n.form { display: flex; flex-direction: column; gap: var(--s5); min-width: 0; }\n.form-errors { border: 1px solid var(--danger); padding: var(--s4); font-size: var(--text-sm); }\n.form-errors-title { font-weight: 500; color: var(--danger); margin-bottom: var(--s2); }\n.form-errors ul { margin: 0; padding-inline-start: var(--s5); }\n.form-errors a { color: var(--foreground); text-decoration: underline; text-underline-offset: 3px; display: inline-block; padding-block: var(--s1); /* 24px minimum target (WCAG 2.5.8) */ }\n.form-errors a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }\n.form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); padding-top: var(--s4); border-top: 1px solid var(--rule); }\n"
     },
     {
       "path": "packages/css/src/components/03-form-fields.css",
-      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { padding: 6px 10px; font-size: var(--text-sm); }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-inline-end: var(--s9); }\n.input-end { position: absolute; inset-inline-end: var(--s3); top: 50%; transform: translateY(-50%); min-height: var(--s6); min-width: var(--s6); display: inline-grid; place-items: center; }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; inset-inline-start: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(calc(16px * var(--dir, 1))); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-inline-end: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-inline-start: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select { height: var(--control-md); padding-block: 0; }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }\n.input-lg { height: var(--control-lg); padding: 0 18px; }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-inline-end: var(--s9); }\n.input-end { position: absolute; inset-inline-end: var(--s3); top: 50%; transform: translateY(-50%); min-height: var(--s6); min-width: var(--s6); display: inline-grid; place-items: center; }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; inset-inline-start: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(calc(16px * var(--dir, 1))); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-inline-end: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-inline-start: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
     },
     {
       "path": "packages/css/src/components/11-field-states.css",
@@ -27,7 +27,7 @@
     },
     {
       "path": "packages/css/src/components/02-buttons.css",
-      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
     },
     {
       "path": "packages/css/src/components/13-loading.css",
@@ -35,11 +35,11 @@
     },
     {
       "path": "packages/css/src/components/heading.css",
-      "content": ".heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading-md { font-size: var(--text-lg); }\n.heading-sm { font-size: var(--text-base); }\n"
+      "content": ".heading { font-weight: 500; line-height: 1.2; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.75rem); letter-spacing: -0.03em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading.heading-md { font-size: var(--text-lg); } /* two classes: typography.css (later in the bundle) also defines .heading-md and .heading-sm with other sizes */\n.heading.heading-sm { font-size: var(--text-base); }\n/* One casing rule: uppercase and the huge size live on .display / .display-* (the page title) only. Heading size=\"display\" is the h1 of app content: 28px to 44px, sentence case. */\n"
     },
     {
       "path": "packages/css/src/components/text.css",
-      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-ok { color: var(--ok); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
+      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-success, .text-ok { color: var(--ok); } .text-warning { color: var(--warning); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
     },
     {
       "path": "packages/css/src/components/block-login.css",
@@ -67,6 +67,146 @@
     "packages/react/src/components/block-login/block-login.tsx",
     "packages/react/src/components/block-login/index.ts",
     "packages/react/src/components/block-login/meta.json"
+  ],
+  "related": [
+    "form",
+    "field",
+    "input",
+    "password-input",
+    "button",
+    "heading"
+  ],
+  "props": [
+    {
+      "name": "BlockLoginProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Sign in'",
+          "description": "Heading of the form. Default \"Sign in\"."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional muted line under the heading."
+        },
+        {
+          "name": "submitLabel",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Sign in'",
+          "description": "Text of the submit button. Default \"Sign in\"."
+        },
+        {
+          "name": "onSubmit",
+          "type": "((values: LoginValues) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the values once they pass validation."
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Shows a spinner on the submit button while you sign in."
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Links under the form: forgot password, create an account."
+        },
+        {
+          "name": "messages",
+          "type": "Partial<{ email: string; emailInvalid: string; password: string; }>",
+          "optional": true,
+          "default": null,
+          "description": "Replace the validation messages (translate them, or change the tone)."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3",
+          "optional": true,
+          "default": "1",
+          "description": "Outline level of the title, 1 to 3. Default 1 because a login page is usually the page's h1."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockLogin, Link} from '@monoline/react';\n\n<BlockLogin description=\"Use the email you signed up with.\" footer={<><Link href=\"#\">Forgot your password?</Link><Link href=\"#\">Create an account</Link></>} />",
+  "dataAttributes": [
+    {
+      "name": "data-valid",
+      "values": [
+        "true"
+      ]
+    }
+  ],
+  "classes": [
+    "form",
+    "form-errors",
+    "form-errors-title",
+    "form-actions",
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-lg",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "field-error",
+    "field-ok",
+    "input-group",
+    "input-affix",
+    "field-required",
+    "form-row",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "spinner",
+    "skeleton",
+    "skeleton-block",
+    "skeleton-hatch",
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "text",
+    "text-xs",
+    "text-sm",
+    "text-md",
+    "text-lg",
+    "text-muted",
+    "text-danger",
+    "text-success",
+    "text-ok",
+    "text-warning",
+    "text-accent",
+    "text-truncate",
+    "block-login",
+    "block-login-head",
+    "block-login-footer"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

@@ -1,0 +1,114 @@
+{
+  "name": "virtual-list",
+  "title": "Virtual list",
+  "category": "data-display",
+  "description": "A windowed list for thousands of rows: only the rows in view are in the page.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/virtual-list.css",
+      "content": "/* Virtual list: a fixed-height scroller over a tall body; rows are placed by their inline `top`. */\n.virtual-list { overflow-y: auto; position: relative; border: 1px solid var(--rule); font-size: var(--text-sm); }\n.virtual-list-body { position: relative; }\n.virtual-list-row { position: absolute; inset-inline-start: 0; inset-inline-end: 0; display: flex; align-items: center; padding-inline: var(--s3); border-block-end: 1px solid var(--rule); box-sizing: border-box; }\n.virtual-list-row:hover { background: var(--wash); }\n.virtual-list-row:focus-visible { outline: 2px solid var(--ring, var(--accent)); outline-offset: -2px; }\n"
+    }
+  ],
+  "a11y": [
+    "role=list with listitem rows; every row carries aria-posinset and aria-setsize so the position in the full list is announced.",
+    "Roving tabindex: one row is in the tab order. ArrowUp/ArrowDown, PageUp/PageDown, Home and End move focus and scroll the row into view.",
+    "The list needs an aria-label."
+  ],
+  "keywords": [
+    "windowing",
+    "virtualized",
+    "infinite",
+    "large list",
+    "scroll",
+    "performance"
+  ],
+  "kind": "components",
+  "import": "import {VirtualList} from '@monoline/react'",
+  "path": "packages/react/src/components/virtual-list",
+  "files": [
+    "packages/react/src/components/virtual-list/index.ts",
+    "packages/react/src/components/virtual-list/meta.json",
+    "packages/react/src/components/virtual-list/virtual-list.demo.tsx",
+    "packages/react/src/components/virtual-list/virtual-list.test.tsx",
+    "packages/react/src/components/virtual-list/virtual-list.tsx"
+  ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "VirtualListProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Required: names the list for screen readers."
+        },
+        {
+          "name": "count",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "How many rows the whole list has, rendered or not."
+        },
+        {
+          "name": "itemHeight",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "Height of every row in pixels. All rows share it."
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "Height of the scrolling window in pixels."
+        },
+        {
+          "name": "overscan",
+          "type": "number",
+          "optional": true,
+          "default": "4",
+          "description": "Extra rows rendered above and below the visible ones, so fast scrolling shows no blanks. Default 4."
+        },
+        {
+          "name": "renderItem",
+          "type": "(index: number) => ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "Returns the content of row `index`. Only called for rows in or near the window."
+        }
+      ]
+    }
+  ],
+  "usage": "import {VirtualList} from '@monoline/react';\n\n<VirtualList aria-label=\"Ten thousand rows\" count={10000} itemHeight={32} height={192} renderItem={(i) => <span className=\"virtual-list-cell\">Row {i + 1}</span>} />",
+  "dataAttributes": [],
+  "classes": [
+    "virtual-list",
+    "virtual-list-body",
+    "virtual-list-row"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/virtual-list/index.ts",
+      "content": "export {VirtualList} from './virtual-list';\nexport type {VirtualListProps} from './virtual-list';\n"
+    },
+    {
+      "path": "packages/react/src/components/virtual-list/meta.json",
+      "content": "{\"name\":\"virtual-list\",\"title\":\"Virtual list\",\"category\":\"data-display\",\"description\":\"A windowed list for thousands of rows: only the rows in view are in the page.\",\"status\":\"stable\",\"css\":[\"virtual-list.css\"],\"a11y\":[\"role=list with listitem rows; every row carries aria-posinset and aria-setsize so the position in the full list is announced.\",\"Roving tabindex: one row is in the tab order. ArrowUp/ArrowDown, PageUp/PageDown, Home and End move focus and scroll the row into view.\",\"The list needs an aria-label.\"],\"keywords\":[\"windowing\",\"virtualized\",\"infinite\",\"large list\",\"scroll\",\"performance\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/virtual-list/virtual-list.tsx",
+      "content": "'use client';\nimport {forwardRef, useEffect, useRef, useState, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface VirtualListProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {\n  /** Required: names the list for screen readers. */\n  'aria-label': string;\n  /** How many rows the whole list has, rendered or not. */\n  count: number;\n  /** Height of every row in pixels. All rows share it. */\n  itemHeight: number;\n  /** Height of the scrolling window in pixels. */\n  height: number;\n  /** Extra rows rendered above and below the visible ones, so fast scrolling shows no blanks. Default 4. */\n  overscan?: number;\n  /** Returns the content of row `index`. Only called for rows in or near the window. */\n  renderItem: (index: number) => ReactNode;\n}\n\n/**\n * A windowed list for large arrays: only the visible rows (plus `overscan`) exist in the page.\n * Every row has `aria-posinset` and `aria-setsize`, so assistive tech still reports \"7 of 10,000\".\n * One row is in the tab order; ArrowUp/Down, PageUp/Down, Home and End move between rows.\n * @example <VirtualList aria-label=\"Users\" count={10000} itemHeight={32} height={320} renderItem={(i) => users[i].name} />\n */\nexport const VirtualList = forwardRef<HTMLDivElement, VirtualListProps>(function VirtualList({count, itemHeight, height, overscan = 4, renderItem, className, style, onScroll, onKeyDown, ...rest}, ref) {\n  const [top, setTop] = useState(0);\n  const [active, setActive] = useState(0);\n  const root = useRef<HTMLDivElement | null>(null);\n  const pending = useRef(false);\n  const cur = Math.min(active, Math.max(0, count - 1));\n\n  const first = Math.max(0, Math.floor(top / itemHeight) - overscan);\n  const last = Math.min(count - 1, Math.ceil((top + height) / itemHeight) + overscan);\n  const rows: number[] = [];\n  for (let i = first; i <= last; i++) rows.push(i);\n  const stop = cur >= first && cur <= last ? cur : first; // scrolled away: the first rendered row takes the tab stop\n\n  useEffect(() => {\n    if (!pending.current) return;\n    pending.current = false;\n    root.current?.querySelector<HTMLElement>(`[data-index=\"${cur}\"]`)?.focus();\n  });\n\n  const go = (i: number) => {\n    const next = Math.max(0, Math.min(count - 1, i));\n    const el = root.current;\n    let t = top;\n    if (next * itemHeight < t) t = next * itemHeight;\n    else if ((next + 1) * itemHeight > t + height) t = (next + 1) * itemHeight - height;\n    if (el) el.scrollTop = t;\n    pending.current = true;\n    setTop(t);\n    setActive(next);\n  };\n\n  const keydown = (e: React.KeyboardEvent<HTMLDivElement>) => {\n    onKeyDown?.(e);\n    const t = e.target as HTMLElement;\n    if (e.defaultPrevented || t.dataset.index === undefined) return;\n    const at = Number(t.dataset.index);\n    const page = Math.max(1, Math.floor(height / itemHeight) - 1);\n    const to = {ArrowDown: at + 1, ArrowUp: at - 1, PageDown: at + page, PageUp: at - page, Home: 0, End: count - 1}[e.key];\n    if (to === undefined) return;\n    e.preventDefault();\n    go(to);\n  };\n\n  return (\n    <div\n      ref={(el) => { root.current = el; if (typeof ref === 'function') ref(el); else if (ref) ref.current = el; }}\n      role=\"list\"\n      className={cx('virtual-list', className)}\n      style={{height, ...style}}\n      onScroll={(e) => { onScroll?.(e); setTop(e.currentTarget.scrollTop); }}\n      onKeyDown={keydown}\n      {...rest}\n    >\n      <div role=\"presentation\" className=\"virtual-list-body\" style={{height: count * itemHeight}}>\n        {rows.map((i) => (\n          <div\n            key={i}\n            role=\"listitem\"\n            className=\"virtual-list-row\"\n            data-index={i}\n            aria-posinset={i + 1}\n            aria-setsize={count}\n            tabIndex={i === stop ? 0 : -1}\n            style={{top: i * itemHeight, height: itemHeight}}\n            onFocus={(e) => { if (e.target === e.currentTarget) setActive(i); }}\n          >{renderItem(i)}</div>\n        ))}\n      </div>\n    </div>\n  );\n});\n"
+    }
+  ]
+}

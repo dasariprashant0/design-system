@@ -30,6 +30,71 @@
     "packages/react/src/components/box/index.ts",
     "packages/react/src/components/box/meta.json"
   ],
+  "related": [
+    "aspect-ratio",
+    "container",
+    "direction-provider"
+  ],
+  "props": [
+    {
+      "name": "BoxProps",
+      "props": [
+        {
+          "name": "padding",
+          "type": "Step",
+          "optional": true,
+          "default": null,
+          "description": "Padding on all sides: a step on the spacing scale (1 = --s1 up to 9)."
+        },
+        {
+          "name": "paddingX",
+          "type": "Step",
+          "optional": true,
+          "default": null,
+          "description": "Horizontal padding (left and right) as a step 1 to 9 on the spacing scale; overrides `padding` on that axis."
+        },
+        {
+          "name": "paddingY",
+          "type": "Step",
+          "optional": true,
+          "default": null,
+          "description": "Vertical padding (top and bottom) as a step 1 to 9 on the spacing scale; overrides `padding` on that axis."
+        },
+        {
+          "name": "border",
+          "type": "boolean | \"start\" | \"top\" | \"right\" | \"bottom\" | \"left\" | \"end\"",
+          "optional": true,
+          "default": null,
+          "description": "A thin rule on every side (`true`) or on one side."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Render the child (a `section`, `aside`, `li`) with the box styles."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Box} from '@monoline/react';\n\n<Box padding={5} border>A bordered box with step 5 padding.</Box>",
+  "dataAttributes": [
+    {
+      "name": "data-border",
+      "values": [
+        "top",
+        "right",
+        "end",
+        "bottom",
+        "left",
+        "start"
+      ]
+    }
+  ],
+  "classes": [
+    "box",
+    "box-border"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

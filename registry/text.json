@@ -7,7 +7,7 @@
   "css": [
     {
       "path": "packages/css/src/components/text.css",
-      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-ok { color: var(--ok); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
+      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-success, .text-ok { color: var(--ok); } .text-warning { color: var(--warning); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
     }
   ],
   "a11y": [
@@ -29,6 +29,62 @@
     "packages/react/src/components/text/text.test.tsx",
     "packages/react/src/components/text/text.tsx"
   ],
+  "related": [
+    "heading",
+    "kbd",
+    "link"
+  ],
+  "props": [
+    {
+      "name": "TextProps",
+      "props": [
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\" | \"xs\"",
+          "optional": true,
+          "default": "'md'",
+          "description": "Type size: `xs`, `sm`, `md` (default) or `lg`."
+        },
+        {
+          "name": "tone",
+          "type": "\"success\" | \"warning\" | \"danger\" | \"accent\" | \"default\" | \"muted\" | \"ok\"",
+          "optional": true,
+          "default": "'default'",
+          "description": "Colour role: `default`, `muted`, `success`, `warning`, `danger` or `accent`, the same names as Alert. Never rely on colour alone to carry meaning.\n`ok` still works."
+        },
+        {
+          "name": "truncate",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "One line with an ellipsis."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Render the child (a span, label, li) with the text styles."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Text} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s2)'}}><Text size=\"lg\">Large</Text><Text>Medium</Text><Text size=\"sm\" tone=\"muted\">Small and muted</Text><Text size=\"xs\" tone=\"danger\">Extra small, danger</Text></div>",
+  "dataAttributes": [],
+  "classes": [
+    "text",
+    "text-xs",
+    "text-sm",
+    "text-md",
+    "text-lg",
+    "text-muted",
+    "text-danger",
+    "text-success",
+    "text-ok",
+    "text-warning",
+    "text-accent",
+    "text-truncate"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },
@@ -43,7 +99,7 @@
     },
     {
       "path": "packages/react/src/components/text/text.tsx",
-      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {Slot} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface TextProps extends HTMLAttributes<HTMLParagraphElement> {\n  /** Type size: `xs`, `sm`, `md` (default) or `lg`. */\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n  /** Colour role: `default`, `muted`, `danger`, `ok` or `accent`. Never rely on colour alone to carry meaning. */\n  tone?: 'default' | 'muted' | 'danger' | 'ok' | 'accent';\n  /** One line with an ellipsis. */\n  truncate?: boolean;\n  /** Render the child (a span, label, li) with the text styles. */\n  asChild?: boolean;\n}\n\n/** A paragraph by default. */\nexport const Text = forwardRef<HTMLParagraphElement, TextProps>(function Text({size = 'md', tone = 'default', truncate, asChild, className, ...rest}, ref) {\n  const Comp = asChild ? Slot.Root : 'p';\n  return <Comp ref={ref} className={cx('text', `text-${size}`, tone !== 'default' && `text-${tone}`, truncate && 'text-truncate', className)} {...rest} />;\n});\n"
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {Slot} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface TextProps extends HTMLAttributes<HTMLParagraphElement> {\n  /** Type size: `xs`, `sm`, `md` (default) or `lg`. */\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n  /**\n   * Colour role: `default`, `muted`, `success`, `warning`, `danger` or `accent`, the same names as Alert. Never rely on colour alone to carry meaning.\n   * `ok` still works.\n   * @deprecated use `success` instead of `ok`.\n   */\n  tone?: 'default' | 'muted' | 'success' | 'warning' | 'danger' | 'accent' | 'ok';\n  /** One line with an ellipsis. */\n  truncate?: boolean;\n  /** Render the child (a span, label, li) with the text styles. */\n  asChild?: boolean;\n}\n\n/** A paragraph by default. */\nexport const Text = forwardRef<HTMLParagraphElement, TextProps>(function Text({size = 'md', tone = 'default', truncate, asChild, className, ...rest}, ref) {\n  const Comp = asChild ? Slot.Root : 'p';\n  return <Comp ref={ref} className={cx('text', `text-${size}`, tone !== 'default' && `text-${tone}`, truncate && 'text-truncate', className)} {...rest} />;\n});\n"
     }
   ]
 }

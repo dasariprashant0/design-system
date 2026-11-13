@@ -12,3 +12,5 @@
 .multi-select-option[aria-selected="true"]::after { content: " ✓"; }
 .multi-select-option[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
 .multi-select-empty { padding: var(--s3) var(--s4); font-size: var(--text-sm); color: var(--muted); }
+.multi-select[data-size="sm"] .multi-select-box { min-height: var(--control-sm); }
+.multi-select[data-size="lg"] .multi-select-box { min-height: var(--control-lg); }

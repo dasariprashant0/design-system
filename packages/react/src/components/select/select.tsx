@@ -1,7 +1,7 @@
 import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';
 import {Select as RadixSelect} from 'radix-ui';
 import {cx} from '../../utils/cx';
-import {useFieldControl} from '../field';
+import {invalidAttrs, useFieldControl} from '../field';
 
 /** The root of a custom single-choice dropdown. Use `value` and `onValueChange` (or `defaultValue`); put a `SelectTrigger` and `SelectContent` inside. For a plain list prefer `NativeSelect`. */
 export const Select = RadixSelect.Root;
@@ -11,14 +11,16 @@ export const SelectGroup = RadixSelect.Group;
 export const SelectValue = RadixSelect.Value;
 
 export interface SelectTriggerProps extends ComponentPropsWithoutRef<typeof RadixSelect.Trigger> {
+  /** `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size. */
+  size?: 'sm' | 'md' | 'lg';
   /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */
   invalid?: boolean;
 }
 /** The button that shows the chosen value. Inside a Field it is labelled and described automatically. */
-export const SelectTrigger = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectTriggerProps>(function SelectTrigger({className, invalid, children, id, ...rest}, ref) {
+export const SelectTrigger = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectTriggerProps>(function SelectTrigger({className, size = 'md', invalid, children, id, ...rest}, ref) {
   const f = useFieldControl();
   return (
-    <RadixSelect.Trigger ref={ref} id={id ?? f.id} aria-describedby={f['aria-describedby']} aria-invalid={invalid || f['aria-invalid']} className={cx('select-trigger', className)} {...rest}>
+    <RadixSelect.Trigger ref={ref} id={id ?? f.id} aria-describedby={f['aria-describedby']} {...invalidAttrs(invalid || Boolean(f['aria-invalid']))} className={cx('select-trigger', size !== 'md' && `input-${size}`, className)} {...rest}>
       {children}
     </RadixSelect.Trigger>
   );

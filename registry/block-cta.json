@@ -13,19 +13,19 @@
   "css": [
     {
       "path": "packages/css/src/components/container.css",
-      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; margin-inline: auto; padding-inline: var(--s5); }\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
+      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; max-width: var(--content); margin-inline: auto; padding-inline: var(--s5); } /* bare .container; the size classes below override max-width */\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
     },
     {
       "path": "packages/css/src/components/heading.css",
-      "content": ".heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading-md { font-size: var(--text-lg); }\n.heading-sm { font-size: var(--text-base); }\n"
+      "content": ".heading { font-weight: 500; line-height: 1.2; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.75rem); letter-spacing: -0.03em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading.heading-md { font-size: var(--text-lg); } /* two classes: typography.css (later in the bundle) also defines .heading-md and .heading-sm with other sizes */\n.heading.heading-sm { font-size: var(--text-base); }\n/* One casing rule: uppercase and the huge size live on .display / .display-* (the page title) only. Heading size=\"display\" is the h1 of app content: 28px to 44px, sentence case. */\n"
     },
     {
       "path": "packages/css/src/components/text.css",
-      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-ok { color: var(--ok); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
+      "content": ".text { max-width: var(--measure); }\n.text-xs { font-size: var(--text-xs); } .text-sm { font-size: var(--text-sm); } .text-md { font-size: var(--text-base); } .text-lg { font-size: var(--text-lg); }\n.text-muted { color: var(--muted); } .text-danger { color: var(--danger); } .text-success, .text-ok { color: var(--ok); } .text-warning { color: var(--warning); } .text-accent { color: var(--accent-text); }\n.text-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }\n"
     },
     {
       "path": "packages/css/src/components/02-buttons.css",
-      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
     },
     {
       "path": "packages/css/src/components/block-cta.css",
@@ -50,6 +50,85 @@
     "packages/react/src/components/block-cta/block-cta.tsx",
     "packages/react/src/components/block-cta/index.ts",
     "packages/react/src/components/block-cta/meta.json"
+  ],
+  "related": [
+    "container",
+    "heading",
+    "text",
+    "button"
+  ],
+  "props": [
+    {
+      "name": "BlockCtaProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The one-sentence call to action, rendered as the section heading."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional muted supporting line under the title."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The next step: a solid Button and maybe a line one."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3 | 4 | 5",
+          "optional": true,
+          "default": "2",
+          "description": "Outline level of the title, 1 to 5. Default 2."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockCta, Button} from '@monoline/react';\n\n<BlockCta title=\"Start building today\" description=\"Install the package and copy your first component.\" actions={<><Button variant=\"solid\">Get started</Button><Button>Read the docs</Button></>} />",
+  "dataAttributes": [],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full",
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "text",
+    "text-xs",
+    "text-sm",
+    "text-md",
+    "text-lg",
+    "text-muted",
+    "text-danger",
+    "text-success",
+    "text-ok",
+    "text-warning",
+    "text-accent",
+    "text-truncate",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "block-cta",
+    "block-cta-box",
+    "block-cta-copy",
+    "block-cta-actions"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

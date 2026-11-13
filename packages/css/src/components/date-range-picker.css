@@ -1,0 +1,7 @@
+.date-range-popover { display: grid; gap: var(--s3); padding: var(--s3); border: 1px solid var(--foreground); max-width: none; }
+.date-range-popover .calendar { border: 0; padding: 0; }
+.date-range-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+.date-range-field { display: grid; gap: var(--s1); font-size: var(--text-xs); color: var(--muted); }
+.date-range-field .input { color: var(--foreground); font-size: var(--text-sm); }
+.date-range-error { margin: 0; min-height: 0; font-size: var(--text-xs); color: var(--danger); }
+.date-range-error:empty { display: none; }

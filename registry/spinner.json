@@ -29,6 +29,33 @@
     "packages/react/src/components/spinner/spinner.test.tsx",
     "packages/react/src/components/spinner/spinner.tsx"
   ],
+  "related": [
+    "alert",
+    "empty-state",
+    "notification-center"
+  ],
+  "props": [
+    {
+      "name": "SpinnerProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "optional": true,
+          "default": "'Loading'",
+          "description": "What is loading, read by screen readers."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Spinner} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Spinner /><span className=\"muted small\">Syncing 42 entries</span></div>",
+  "dataAttributes": [],
+  "classes": [
+    "spinner",
+    "skeleton",
+    "skeleton-block",
+    "skeleton-hatch"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

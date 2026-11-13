@@ -31,6 +31,72 @@
     "packages/react/src/components/tooltip/tooltip.test.tsx",
     "packages/react/src/components/tooltip/tooltip.tsx"
   ],
+  "related": [
+    "alert-dialog",
+    "command",
+    "context-menu"
+  ],
+  "props": [
+    {
+      "name": "TooltipProps",
+      "props": [
+        {
+          "name": "content",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The text shown. Keep it short; it repeats or extends a label and must never hold essential information alone."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The trigger element. It receives aria-describedby when open."
+        },
+        {
+          "name": "side",
+          "type": "\"top\" | \"right\" | \"bottom\" | \"left\"",
+          "optional": true,
+          "default": "'top'",
+          "description": "Which side of the trigger the tooltip appears on: `top` (default), `right`, `bottom` or `left`."
+        },
+        {
+          "name": "delayDuration",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Milliseconds to wait before showing on hover. Defaults to the `TooltipProvider` value."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Whether the tooltip is open when controlled. Pair with `onOpenChange`."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Whether the tooltip starts open when uncontrolled. Default false."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new open state when the tooltip shows or hides."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, Tooltip, TooltipProvider} from '@monoline/react';\n\n<TooltipProvider><div style={{display: 'flex', gap: 'var(--s3)'}}><Tooltip content=\"Saved to ~/Notes\"><Button>Save</Button></Tooltip><Tooltip content=\"Below\" side=\"bottom\"><Button>Bottom</Button></Tooltip></div></TooltipProvider>",
+  "dataAttributes": [],
+  "classes": [
+    "tooltip"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -5,15 +5,24 @@
   "description": "Monoline: an open-source UI kit. Plain CSS core, accessible React components, docs, and an AI-readable registry.",
   "license": "MIT",
   "type": "module",
-  "workspaces": ["packages/*", "apps/*"],
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "dev": "npm run dev -w apps/docs",
     "build": "npm run build -w @monoline/css && npm run build -w @monoline/react && npm run build -w apps/docs",
     "test": "npm run test -w @monoline/react",
     "typecheck": "npm run typecheck -w @monoline/react && npm run typecheck -w apps/docs",
-    "check": "npm run check -w @monoline/css && npm run check:docs -w @monoline/react && npm run typecheck && npm run test",
+    "check": "npm run check -w @monoline/css && npm run check:docs -w @monoline/react && npm run check:registry && npm run typecheck && npm run test",
+    "check:registry": "node --test packages/react/scripts/check-registry.test.mjs",
     "registry": "npm run registry -w @monoline/react",
+    "test:mcp": "npm test -w @monoline/mcp",
     "cli": "node packages/cli/bin/monoline.mjs",
-    "test:cli": "npm test -w monoline"
+    "test:cli": "npm test -w monoline",
+    "test:release": "node --test scripts/release.test.mjs",
+    "size": "node scripts/size.mjs",
+    "test:css-browser": "node scripts/css-computed.mjs",
+    "e2e": "node scripts/e2e/run.mjs"
   }
 }

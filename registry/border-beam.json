@@ -31,6 +31,31 @@
     "packages/react/src/components/border-beam/index.ts",
     "packages/react/src/components/border-beam/meta.json"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "confetti"
+  ],
+  "props": [
+    {
+      "name": "BorderBeamProps",
+      "props": [
+        {
+          "name": "duration",
+          "type": "number",
+          "optional": true,
+          "default": "6",
+          "description": "Seconds for the light to travel once around. Default 6."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BorderBeam} from '@monoline/react';\n\n<BorderBeam style={{padding: 'var(--s6)', maxWidth: '24rem'}}><p style={{margin: 0}}>A light travels the edge of this box.</p></BorderBeam>",
+  "dataAttributes": [],
+  "classes": [
+    "border-beam",
+    "border-beam-light"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -6,7 +6,7 @@
 .cdoc-links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s5); font-size: var(--text-sm); }
 .cdoc-status { min-width: 8ch; color: var(--muted); font-size: var(--text-sm); }
 
-.cdoc-section { display: grid; gap: var(--s4); min-width: 0; scroll-margin-top: var(--s8); }
+.cdoc-section { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s4); min-width: 0; scroll-margin-top: var(--s8); }
 .cdoc-h2 { font-size: var(--text-lg); font-weight: 500; padding-bottom: var(--s2); border-bottom: 1px solid var(--rule); scroll-margin-top: var(--s8); }
 .cdoc-h3 { font-size: var(--text-base); font-weight: 500; scroll-margin-top: var(--s8); }
 .cdoc-muted { color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }
@@ -35,3 +35,11 @@
 .cdoc-kv dt { color: var(--muted); }
 .cdoc-kv dd { min-width: 0; overflow-wrap: anywhere; }
 @media (max-width: 600px) { .cdoc-kv { grid-template-columns: minmax(0, 1fr); gap: var(--s1); } .cdoc-kv dd { margin-bottom: var(--s3); } .cdoc-stage { padding: var(--s5) var(--s3); } }
+
+/* Playground: stage, then controls, then the code. */
+.pg { display: grid; gap: var(--s4); min-width: 0; }
+.pg-stage { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--s4); min-height: calc(var(--s9) * 2); }
+.pg-controls { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: var(--s4); align-items: end; padding: var(--s4); border: 1px solid var(--rule); }
+.pg-control { display: grid; gap: var(--s1); min-width: 0; }
+.pg-label { font-size: var(--text-sm); color: var(--muted); }
+.pg-code { min-width: 0; }

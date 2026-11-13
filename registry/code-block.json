@@ -7,11 +7,11 @@
   "css": [
     {
       "path": "packages/css/src/components/code-block.css",
-      "content": "/* Code block: dark panel (always dark, like toasts), thin rule, square corners. The copy button is an icon button\n   inside the panel: in the header row when there is a title, otherwise floating in the top corner. */\n.code-block { position: relative; background: var(--surface); color: var(--surface-text); border: 1px solid var(--rule); font-size: var(--text-sm); }\n.code-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: var(--s7); padding-block: var(--s1); padding-inline: var(--s4) var(--s2); border-bottom: 1px solid var(--rule); }\n.code-title { font-size: var(--text-xs); letter-spacing: 0.04em; color: var(--surface-text); opacity: 0.75; overflow-wrap: anywhere; }\n.code-copy { display: inline-grid; place-items: center; flex: none; width: var(--s6); height: var(--s6); color: var(--surface-text); opacity: 0.8; border: 1px solid transparent; }\n.code-copy:hover { opacity: 1; border-color: var(--rule); background: var(--wash); }\n.code-copy[data-copied] { color: var(--code-string); opacity: 1; }\n.code-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; opacity: 1; }\n.code-block[data-headless] .code-copy { position: absolute; inset-block-start: var(--s2); inset-inline-end: var(--s2); z-index: 1; }\n.code-block[data-headless] pre { padding-inline-end: var(--s8); }\n.code-block pre { margin: 0; padding: var(--s4); overflow-x: auto; line-height: 1.6; tab-size: 2; }\n.code-block pre:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.code-block code { font-family: var(--font-body); white-space: pre; display: block; width: max-content; min-width: 100%; }\n.code-block pre[data-lines] { counter-reset: line; }\n.code-block pre[data-lines] .code-line::before { counter-increment: line; content: counter(line); display: inline-block; width: 2.5ch; margin-inline-end: var(--s4); text-align: end; color: var(--code-comment); opacity: 0.7; user-select: none; }\n.tok-keyword { color: var(--code-keyword); }\n.tok-string { color: var(--code-string); }\n.tok-number { color: var(--code-number); }\n.tok-comment { color: var(--code-comment); font-style: italic; }\n.tok-tag { color: var(--code-tag); }\n.tok-attr { color: var(--code-attr); }\n.tok-fn { color: var(--code-fn); }\n"
+      "content": "/* Code block: dark panel (always dark, like toasts), thin rule, square corners. The copy button is an icon button\n   inside the panel: in the header row when there is a title, otherwise floating in the top corner. */\n.code-block { min-width: 0; max-width: 100%; position: relative; background: var(--surface); color: var(--surface-text); border: 1px solid var(--rule); font-size: var(--text-sm); }\n/* A bare <pre class=\"code-block\"> (no wrapper, no copy button) still works: it is its own scroller and padding. */\npre.code-block { margin: 0; padding: var(--s4); overflow-x: auto; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }\n.code-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: var(--s7); padding-block: var(--s1); padding-inline: var(--s4) var(--s2); border-bottom: 1px solid var(--rule); }\n.code-title { font-size: var(--text-xs); letter-spacing: 0.04em; color: var(--surface-text); opacity: 0.75; overflow-wrap: anywhere; }\n.code-copy { display: inline-grid; place-items: center; flex: none; width: var(--s6); height: var(--s6); color: var(--surface-text); opacity: 0.8; border: 1px solid transparent; }\n.code-copy:hover { opacity: 1; border-color: var(--rule); background: var(--wash); }\n.code-copy[data-copied] { color: var(--code-string); opacity: 1; }\n.code-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; opacity: 1; }\n.code-block[data-headless] .code-copy { position: absolute; inset-block-start: var(--s2); inset-inline-end: var(--s2); z-index: 1; }\n.code-block[data-headless] pre { padding-inline-end: var(--s8); }\n.code-block pre { margin: 0; padding: var(--s4); overflow-x: auto; line-height: 1.6; tab-size: 2; }\n.code-block pre:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.code-block code { font-family: var(--font-body); white-space: pre; display: block; width: max-content; min-width: 100%; }\n.code-block pre[data-lines] { counter-reset: line; }\n.code-block pre[data-lines] .code-line::before { counter-increment: line; content: counter(line); display: inline-block; width: 2.5ch; margin-inline-end: var(--s4); text-align: end; color: var(--code-comment); opacity: 0.7; user-select: none; }\n.tok-keyword { color: var(--code-keyword); }\n.tok-string { color: var(--code-string); }\n.tok-number { color: var(--code-number); }\n.tok-comment { color: var(--code-comment); font-style: italic; }\n.tok-tag { color: var(--code-tag); }\n.tok-attr { color: var(--code-attr); }\n.tok-fn { color: var(--code-fn); }\n"
     },
     {
       "path": "packages/css/src/components/02-buttons.css",
-      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
     }
   ],
   "a11y": [
@@ -34,6 +34,90 @@
     "packages/react/src/components/code-block/code-block.tsx",
     "packages/react/src/components/code-block/index.ts",
     "packages/react/src/components/code-block/meta.json"
+  ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "CodeBlockProps",
+      "props": [
+        {
+          "name": "code",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "The text to show and to copy. Rendered as text with coloured spans, never as HTML."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "A file name (`button.tsx`) or label (`bash`) shown in the header. Also names the region and picks the language."
+        },
+        {
+          "name": "language",
+          "type": "Language",
+          "optional": true,
+          "default": null,
+          "description": "Syntax colouring: `tsx`, `ts`, `jsx`, `js`, `css`, `html`, `bash`, `json` or `text`. Default: guessed from `title`, else `text`."
+        },
+        {
+          "name": "lineNumbers",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Number each line. Use for longer listings, not one-line commands."
+        },
+        {
+          "name": "hideCopy",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Hide the copy button."
+        }
+      ]
+    }
+  ],
+  "usage": "import {CodeBlock} from '@monoline/react';\n\nconst tsx = `import {Button} from '@monoline/react';\n\nexport function Save() {\n  // One solid button per view.\n  return <Button variant=\"solid\" onClick={() => save(42)}>Save</Button>;\n}`;\n\n<CodeBlock title=\"save.tsx\" code={tsx} />",
+  "dataAttributes": [
+    {
+      "name": "data-copied",
+      "values": []
+    },
+    {
+      "name": "data-headless",
+      "values": []
+    },
+    {
+      "name": "data-lines",
+      "values": []
+    }
+  ],
+  "classes": [
+    "code-block",
+    "code-head",
+    "code-title",
+    "code-copy",
+    "code-line",
+    "tok-keyword",
+    "tok-string",
+    "tok-number",
+    "tok-comment",
+    "tok-tag",
+    "tok-attr",
+    "tok-fn",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

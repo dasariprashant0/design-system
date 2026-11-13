@@ -56,6 +56,172 @@
     "packages/react/src/components/data-table/index.ts",
     "packages/react/src/components/data-table/meta.json"
   ],
+  "related": [
+    "table",
+    "checkbox",
+    "pagination",
+    "empty-state"
+  ],
+  "props": [
+    {
+      "name": "DataTableProps",
+      "props": [
+        {
+          "name": "columns",
+          "type": "DataTableColumn<T>[]",
+          "optional": false,
+          "default": null,
+          "description": "The column definitions: each has an `id`, a `header`, and optionally an `accessor`, a `cell` renderer, `sortable` and `align`."
+        },
+        {
+          "name": "data",
+          "type": "T[]",
+          "optional": false,
+          "default": null,
+          "description": "The rows to show; each row's `id` field (or `getRowId`) must be unique."
+        },
+        {
+          "name": "getRowId",
+          "type": "((row: T, index: number) => string)",
+          "optional": true,
+          "default": null,
+          "description": "Stable id for a row. Defaults to `row.id`, then the index."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Names the table for assistive tech."
+        },
+        {
+          "name": "sort",
+          "type": "DataTableSort | null",
+          "optional": true,
+          "default": null,
+          "description": "Sort state. Controlled with `sort` + `onSortChange`, or uncontrolled with `defaultSort`. `null` means unsorted."
+        },
+        {
+          "name": "defaultSort",
+          "type": "DataTableSort | null",
+          "optional": true,
+          "default": "null",
+          "description": "The initial sort when uncontrolled, as `{id, direction}`. Default `null` (unsorted)."
+        },
+        {
+          "name": "onSortChange",
+          "type": "((sort: DataTableSort | null) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new sort (`null` when sorting is cleared) when the user clicks a sortable header."
+        },
+        {
+          "name": "selectable",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Adds a checkbox column. Selected row ids: controlled with `selection` + `onSelectionChange`, or uncontrolled with `defaultSelection`."
+        },
+        {
+          "name": "selection",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "Ids of the selected rows when controlled. Pair with `onSelectionChange` and `selectable`."
+        },
+        {
+          "name": "defaultSelection",
+          "type": "string[]",
+          "optional": true,
+          "default": "[]",
+          "description": "Ids of the rows selected at first when uncontrolled. Default none."
+        },
+        {
+          "name": "onSelectionChange",
+          "type": "((ids: string[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the full list of selected row ids when the user checks or unchecks a row."
+        },
+        {
+          "name": "pageSize",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Rows per page. Omit to show every row."
+        },
+        {
+          "name": "emptyTitle",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'No results'",
+          "description": "Heading shown when there are no rows. Default \"No results\"."
+        },
+        {
+          "name": "emptyDescription",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Optional sentence under the empty heading, for example how to add the first row."
+        }
+      ]
+    }
+  ],
+  "usage": "import {DataTable, type DataTableColumn} from '@monoline/react';\n\ninterface Person {id: string; name: string; role: string; projects: number}\n\nconst people: Person[] = [\n  ['Ada Lovelace', 'Engineer', 4], ['Grace Hopper', 'Admiral', 9], ['Alan Turing', 'Researcher', 6], ['Katherine Johnson', 'Mathematician', 7],\n  ['Linus Torvalds', 'Maintainer', 12], ['Margaret Hamilton', 'Director', 5], ['Dennis Ritchie', 'Engineer', 3], ['Barbara Liskov', 'Professor', 8],\n].map(([name, role, projects], i) => ({id: String(i), name: name as string, role: role as string, projects: projects as number}));\n\nconst columns: DataTableColumn<Person>[] = [\n  {id: 'name', header: 'Name', sortable: true},\n  {id: 'role', header: 'Role', sortable: true},\n  {id: 'projects', header: 'Projects', sortable: true, align: 'end'},\n];\n\n<DataTable label=\"Team\" columns={columns} data={people} defaultSort={{id: 'name', direction: 'asc'}} />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "checked",
+        "indeterminate",
+        "done",
+        "selected"
+      ]
+    },
+    {
+      "name": "data-orientation",
+      "values": [
+        "horizontal"
+      ]
+    },
+    {
+      "name": "data-direction",
+      "values": [
+        "desc"
+      ]
+    }
+  ],
+  "classes": [
+    "table-wrap",
+    "table",
+    "num",
+    "checkbox",
+    "radio",
+    "sw",
+    "checkbox-mark",
+    "radio-dot",
+    "radio-group",
+    "sw-thumb",
+    "crumbs",
+    "pager",
+    "steps",
+    "step",
+    "topbar",
+    "brand",
+    "topbar-nav",
+    "tab",
+    "tabpanel",
+    "empty",
+    "empty-icon",
+    "empty-title",
+    "empty-description",
+    "empty-actions",
+    "data-table-sort-btn",
+    "data-table-sort",
+    "data-table",
+    "data-table-check",
+    "data-table-footer"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

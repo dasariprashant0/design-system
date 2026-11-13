@@ -32,6 +32,62 @@
     "packages/react/src/components/orbiting-circles/orbiting-circles.test.tsx",
     "packages/react/src/components/orbiting-circles/orbiting-circles.tsx"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "OrbitingCirclesProps",
+      "props": [
+        {
+          "name": "radius",
+          "type": "number",
+          "optional": true,
+          "default": "96",
+          "description": "Orbit radius in px. Default 96."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "optional": true,
+          "default": "20",
+          "description": "Seconds for one full turn. Default 20."
+        },
+        {
+          "name": "reverse",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Turn the other way."
+        },
+        {
+          "name": "ring",
+          "type": "boolean",
+          "optional": true,
+          "default": "true",
+          "description": "Draw the orbit as a thin ring. Default true."
+        },
+        {
+          "name": "center",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Fixed content in the centre."
+        }
+      ]
+    }
+  ],
+  "usage": "import {OrbitingCircles} from '@monoline/react';\n\nconst dot = (t: string) => <span style={{display: 'grid', placeItems: 'center', width: 'var(--s7)', height: 'var(--s7)', border: '1px solid var(--foreground)', background: 'var(--background)', fontSize: 'var(--text-xs)'}}>{t}</span>;\n\n<div style={{display: 'grid', placeItems: 'center'}}>\n  <OrbitingCircles radius={96} center={dot('M')}>{dot('A')}{dot('B')}{dot('C')}</OrbitingCircles>\n</div>",
+  "dataAttributes": [],
+  "classes": [
+    "orbit",
+    "orbit-ring",
+    "orbit-center",
+    "orbit-item",
+    "orbit-reverse"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

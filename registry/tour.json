@@ -1,0 +1,163 @@
+{
+  "name": "tour",
+  "title": "Tour",
+  "category": "overlays",
+  "description": "A guided walkthrough: a spotlight on one element at a time with a card and Next, Back and Skip.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/tour.css",
+      "content": "/* Tour: a spotlight cut out of a dim overlay, plus a card. Positions are set in px by the component. */\n.tour { position: fixed; inset: 0; z-index: var(--z-toast); pointer-events: none; }\n.tour-overlay { position: fixed; inset: 0; pointer-events: auto; }\n.tour-spotlight { position: fixed; box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--foreground) 55%, transparent); border: 1px solid var(--background); outline: 2px solid var(--accent); pointer-events: none; }\n.tour-overlay:only-child { background: color-mix(in srgb, var(--foreground) 55%, transparent); }\n.tour-spotlight + .tour-card { z-index: 1; }\n.tour-card { position: fixed; z-index: 1; display: grid; gap: var(--s2); width: min(22rem, calc(100vw - var(--s4) * 2)); padding: var(--s4); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); pointer-events: auto; }\n.tour-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }\n.tour-count { margin: 0; font-size: var(--text-xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }\n.tour-title { margin: 0; font-size: var(--text-base); font-weight: 500; }\n.tour-content { font-size: var(--text-sm); color: var(--muted); }\n.tour-actions { display: flex; align-items: center; gap: var(--s2); margin-block-start: var(--s2); }\n.tour-spacer { flex: 1; }\n@media (prefers-reduced-motion: no-preference) {\n  .tour-spotlight { transition: top var(--fast) var(--ease), left var(--fast) var(--ease), width var(--fast) var(--ease), height var(--fast) var(--ease); }\n  .tour-card { transition: top var(--fast) var(--ease), left var(--fast) var(--ease); }\n}\n"
+    }
+  ],
+  "a11y": [
+    "The step card is a dialog named by its title and described by its text; it takes focus on every step.",
+    "Tab stays inside the card; Escape ends the tour and focus returns to where it was.",
+    "ArrowRight and ArrowLeft move between steps when the card has focus (mirrored in right-to-left).",
+    "Each step is announced politely as \"Step n of m\"; the highlighted element scrolls into view.",
+    "The overlay and spotlight are hidden from assistive technology; animation stops under prefers-reduced-motion."
+  ],
+  "keywords": [
+    "onboarding",
+    "walkthrough",
+    "product tour",
+    "coachmark",
+    "spotlight",
+    "intro",
+    "guide"
+  ],
+  "kind": "components",
+  "import": "import {Tour} from '@monoline/react'",
+  "path": "packages/react/src/components/tour",
+  "files": [
+    "packages/react/src/components/tour/index.ts",
+    "packages/react/src/components/tour/meta.json",
+    "packages/react/src/components/tour/tour.demo.tsx",
+    "packages/react/src/components/tour/tour.test.tsx",
+    "packages/react/src/components/tour/tour.tsx"
+  ],
+  "related": [
+    "alert-dialog",
+    "command",
+    "context-menu"
+  ],
+  "props": [
+    {
+      "name": "TourProps",
+      "props": [
+        {
+          "name": "steps",
+          "type": "TourStep[]",
+          "optional": false,
+          "default": null,
+          "description": "The steps, in order."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Whether the tour is showing, when controlled. Pair with `onOpenChange`."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Whether the tour starts open when uncontrolled. Default false."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with false when the tour ends: Skip, Escape or Done."
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "The current step index when controlled. Pair with `onStepChange`."
+        },
+        {
+          "name": "defaultStep",
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "The step to start on when uncontrolled. Default 0."
+        },
+        {
+          "name": "onStepChange",
+          "type": "((step: number) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new index when the user moves between steps."
+        },
+        {
+          "name": "onFinish",
+          "type": "(() => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called when the user finishes the last step (not when they skip or press Escape)."
+        },
+        {
+          "name": "spotlightPadding",
+          "type": "number",
+          "optional": true,
+          "default": "6",
+          "description": "Extra space in px around the highlighted element. Default 6."
+        },
+        {
+          "name": "labels",
+          "type": "TourLabels",
+          "optional": true,
+          "default": null,
+          "description": "Replaces the button text."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {Tour} from '@monoline/react';\n\nfunction Basic() {\n  const [open, setOpen] = useState(false);\n  return (\n    <div>\n      <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>\n        <button type=\"button\" className=\"btn btn-solid\" onClick={() => setOpen(true)}>Start tour</button>\n        <button type=\"button\" className=\"btn\" id=\"tour-demo-a\">Create</button>\n        <button type=\"button\" className=\"btn\" id=\"tour-demo-b\">Share</button>\n      </div>\n      <Tour\n        open={open}\n        onOpenChange={setOpen}\n        steps={[\n          {target: '#tour-demo-a', title: 'Create', content: 'Start a new project from here.'},\n          {target: '#tour-demo-b', title: 'Share', content: 'Invite people by email.', placement: 'end'},\n          {title: 'That is all', content: 'You can restart the tour at any time.'},\n        ]}\n      />\n    </div>\n  );\n}\n\n<Basic />",
+  "dataAttributes": [],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "tour",
+    "tour-overlay",
+    "tour-spotlight",
+    "tour-card",
+    "tour-count",
+    "tour-title",
+    "tour-content",
+    "tour-actions",
+    "tour-spacer"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/tour/index.ts",
+      "content": "export {Tour} from './tour';\nexport type {TourProps, TourStep, TourLabels} from './tour';\n"
+    },
+    {
+      "path": "packages/react/src/components/tour/meta.json",
+      "content": "{\"name\":\"tour\",\"title\":\"Tour\",\"category\":\"overlays\",\"description\":\"A guided walkthrough: a spotlight on one element at a time with a card and Next, Back and Skip.\",\"status\":\"stable\",\"css\":[\"02-buttons.css\",\"tour.css\"],\"a11y\":[\"The step card is a dialog named by its title and described by its text; it takes focus on every step.\",\"Tab stays inside the card; Escape ends the tour and focus returns to where it was.\",\"ArrowRight and ArrowLeft move between steps when the card has focus (mirrored in right-to-left).\",\"Each step is announced politely as \\\"Step n of m\\\"; the highlighted element scrolls into view.\",\"The overlay and spotlight are hidden from assistive technology; animation stops under prefers-reduced-motion.\"],\"keywords\":[\"onboarding\",\"walkthrough\",\"product tour\",\"coachmark\",\"spotlight\",\"intro\",\"guide\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/tour/tour.tsx",
+      "content": "'use client';\nimport {useCallback, useEffect, useId, useLayoutEffect, useRef, useState, type HTMLAttributes, type KeyboardEvent, type ReactNode} from 'react';\nimport {createPortal} from 'react-dom';\nimport {cx} from '../../utils/cx';\nimport {useIsRtl} from '../../utils/direction';\n\n/** One stop in a tour. */\nexport interface TourStep {\n  /** The element to highlight: a CSS selector, an element, or a function returning one. Leave out to show a centred card with no highlight. */\n  target?: string | HTMLElement | (() => HTMLElement | null);\n  /** Heading of the step card. Also names the dialog. */\n  title: ReactNode;\n  /** Body text of the step card. */\n  content?: ReactNode;\n  /** Preferred side of the target for the card: `top`, `bottom`, `start` or `end`. The card flips if there is no room. Default `bottom`. */\n  placement?: 'top' | 'bottom' | 'start' | 'end';\n}\n\n/** Button and announcement text, for translation. */\nexport interface TourLabels {\n  /** Text of the next button. Default \"Next\". */\n  next?: string;\n  /** Text of the back button. Default \"Back\". */\n  back?: string;\n  /** Text of the skip button. Default \"Skip tour\". */\n  skip?: string;\n  /** Text of the next button on the last step. Default \"Done\". */\n  done?: string;\n}\n\nexport interface TourProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'children'> {\n  /** The steps, in order. */\n  steps: TourStep[];\n  /** Whether the tour is showing, when controlled. Pair with `onOpenChange`. */\n  open?: boolean;\n  /** Whether the tour starts open when uncontrolled. Default false. */\n  defaultOpen?: boolean;\n  /** Called with false when the tour ends: Skip, Escape or Done. */\n  onOpenChange?: (open: boolean) => void;\n  /** The current step index when controlled. Pair with `onStepChange`. */\n  step?: number;\n  /** The step to start on when uncontrolled. Default 0. */\n  defaultStep?: number;\n  /** Called with the new index when the user moves between steps. */\n  onStepChange?: (step: number) => void;\n  /** Called when the user finishes the last step (not when they skip or press Escape). */\n  onFinish?: () => void;\n  /** Extra space in px around the highlighted element. Default 6. */\n  spotlightPadding?: number;\n  /** Replaces the button text. */\n  labels?: TourLabels;\n}\n\ntype Box = {top: number; left: number; width: number; height: number};\nconst resolve = (t: TourStep['target']): HTMLElement | null => (typeof t === 'string' ? document.querySelector<HTMLElement>(t) : typeof t === 'function' ? t() : t ?? null);\nconst GAP = 12;\nconst EDGE = 8;\n\n/** A guided tour: a spotlight over a target element with a card holding the step text and Back, Next and Skip buttons. The card is a dialog that takes focus, Escape ends the tour and focus returns to where it was. Arrow keys move between steps, the target scrolls into view, and each step is announced politely. */\nexport function Tour({steps, open, defaultOpen = false, onOpenChange, step, defaultStep = 0, onStepChange, onFinish, spotlightPadding = 6, labels, className, ...rest}: TourProps) {\n  const [innerOpen, setInnerOpen] = useState(defaultOpen);\n  const [innerStep, setInnerStep] = useState(defaultStep);\n  const isOpen = open ?? innerOpen;\n  const index = Math.min(Math.max(step ?? innerStep, 0), Math.max(steps.length - 1, 0));\n  const s = steps[index];\n  const [box, setBox] = useState<Box | null>(null);\n  const [pos, setPos] = useState<{top: number; left: number} | null>(null);\n  const card = useRef<HTMLDivElement>(null);\n  const anchor = useRef<HTMLSpanElement>(null);\n  const [dir, setDir] = useState<'rtl' | 'ltr' | undefined>();\n  const returnTo = useRef<HTMLElement | null>(null);\n  const isRtl = useIsRtl();\n  const id = useId();\n  const L = {next: 'Next', back: 'Back', skip: 'Skip tour', done: 'Done', ...labels};\n  const last = index === steps.length - 1;\n\n  const close = useCallback(() => { if (open === undefined) setInnerOpen(false); onOpenChange?.(false); }, [open, onOpenChange]);\n  const go = (n: number) => { if (n < 0 || n >= steps.length) return; if (step === undefined) setInnerStep(n); onStepChange?.(n); };\n\n  // The card is portalled to <body>, so carry the surrounding text direction across.\n  useLayoutEffect(() => { if (isOpen && anchor.current) setDir(isRtl(anchor.current) ? 'rtl' : 'ltr'); }); // eslint-disable-line\n\n  // Remember where focus was; give it back when the tour closes.\n  useEffect(() => {\n    if (!isOpen) return;\n    returnTo.current = document.activeElement as HTMLElement | null;\n    return () => { returnTo.current?.focus?.(); };\n  }, [isOpen]);\n\n  // Find the target, scroll it into view and measure it.\n  const measure = useCallback(() => {\n    const el = s && resolve(s.target);\n    if (!el) { setBox(null); return el; }\n    const r = el.getBoundingClientRect();\n    setBox({top: r.top, left: r.left, width: r.width, height: r.height});\n    return el;\n  }, [s]);\n  useLayoutEffect(() => {\n    if (!isOpen || !s) return;\n    const el = measure();\n    if (el) {\n      const calm = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;\n      el.scrollIntoView?.({block: 'center', inline: 'nearest', behavior: calm ? 'auto' : 'smooth'});\n      measure();\n    }\n    const again = () => measure();\n    window.addEventListener('resize', again);\n    window.addEventListener('scroll', again, true);\n    return () => { window.removeEventListener('resize', again); window.removeEventListener('scroll', again, true); };\n  }, [isOpen, s, measure]);\n\n  // Place the card beside the spotlight, flipping when there is no room, and keep it on screen.\n  useLayoutEffect(() => {\n    if (!isOpen || !card.current) return;\n    const w = card.current.offsetWidth, h = card.current.offsetHeight;\n    const vw = window.innerWidth, vh = window.innerHeight;\n    if (!box) { setPos({top: Math.max(EDGE, (vh - h) / 2), left: Math.max(EDGE, (vw - w) / 2)}); return; }\n    const rtl = isRtl(card.current);\n    const pad = spotlightPadding;\n    const want = s?.placement ?? 'bottom';\n    const side = want === 'start' ? (rtl ? 'right' : 'left') : want === 'end' ? (rtl ? 'left' : 'right') : want;\n    const room = {top: box.top - pad, bottom: vh - (box.top + box.height + pad), left: box.left - pad, right: vw - (box.left + box.width + pad)};\n    const need = side === 'top' || side === 'bottom' ? h + GAP : w + GAP;\n    const flip = {top: 'bottom', bottom: 'top', left: 'right', right: 'left'} as const;\n    const use = room[side] >= need || room[flip[side]] < need ? side : flip[side];\n    let top: number, left: number;\n    if (use === 'top' || use === 'bottom') {\n      top = use === 'top' ? box.top - pad - GAP - h : box.top + box.height + pad + GAP;\n      left = box.left + box.width / 2 - w / 2;\n    } else {\n      left = use === 'left' ? box.left - pad - GAP - w : box.left + box.width + pad + GAP;\n      top = box.top + box.height / 2 - h / 2;\n    }\n    setPos({top: Math.min(Math.max(EDGE, top), Math.max(EDGE, vh - h - EDGE)), left: Math.min(Math.max(EDGE, left), Math.max(EDGE, vw - w - EDGE))});\n  }, [isOpen, box, s, spotlightPadding]); // isRtl is a fresh function each render, so it is left out on purpose\n\n  // Each step moves focus to the card so a screen reader reads its title and text.\n  useEffect(() => { if (isOpen) card.current?.focus({preventScroll: true}); }, [isOpen, index]);\n\n  if (!isOpen || !s || typeof document === 'undefined') return <span ref={anchor} hidden />;\n\n  const keydown = (e: KeyboardEvent<HTMLDivElement>) => {\n    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); close(); return; }\n    if (e.key === 'Tab') { // keep focus inside the card\n      const items = [...e.currentTarget.querySelectorAll<HTMLElement>('button:not(:disabled)')];\n      const first = items[0], end = items[items.length - 1];\n      if (e.shiftKey && (document.activeElement === first || document.activeElement === e.currentTarget)) { e.preventDefault(); end?.focus(); }\n      else if (!e.shiftKey && document.activeElement === end) { e.preventDefault(); first?.focus(); }\n      return;\n    }\n    if (e.target !== e.currentTarget) return; // arrows only act when the card itself has focus\n    const fwd = isRtl(e.currentTarget) ? 'ArrowLeft' : 'ArrowRight';\n    if (e.key === fwd) { e.preventDefault(); if (last) return; go(index + 1); }\n    else if (e.key === (fwd === 'ArrowRight' ? 'ArrowLeft' : 'ArrowRight')) { e.preventDefault(); go(index - 1); }\n  };\n  const next = () => { if (last) { close(); onFinish?.(); } else go(index + 1); };\n  const pad = spotlightPadding;\n\n  return <>\n    <span ref={anchor} hidden />\n    {createPortal(\n    <div className={cx('tour', className)} dir={dir} {...rest}>\n      <div className=\"tour-overlay\" aria-hidden=\"true\" onMouseDown={(e) => e.preventDefault()} />\n      {box && <div className=\"tour-spotlight\" aria-hidden=\"true\" style={{top: box.top - pad, left: box.left - pad, width: box.width + pad * 2, height: box.height + pad * 2}} />}\n      <div\n        ref={card}\n        role=\"dialog\"\n        aria-labelledby={`${id}-t`}\n        aria-describedby={s.content ? `${id}-c` : undefined}\n        tabIndex={-1}\n        className=\"tour-card\"\n        style={pos ? {top: pos.top, left: pos.left} : {visibility: 'hidden'}}\n        onKeyDown={keydown}\n      >\n        <p className=\"tour-count\">{index + 1} of {steps.length}</p>\n        <h2 id={`${id}-t`} className=\"tour-title\">{s.title}</h2>\n        {s.content && <div id={`${id}-c`} className=\"tour-content\">{s.content}</div>}\n        <div className=\"tour-actions\">\n          <button type=\"button\" className=\"btn btn-ghost btn-sm\" onClick={close}>{L.skip}</button>\n          <span className=\"tour-spacer\" />\n          {index > 0 && <button type=\"button\" className=\"btn btn-sm\" onClick={() => go(index - 1)}>{L.back}</button>}\n          <button type=\"button\" className=\"btn btn-solid btn-sm\" onClick={next}>{last ? L.done : L.next}</button>\n        </div>\n      </div>\n      <div className=\"sr-only\" role=\"status\">{`Step ${index + 1} of ${steps.length}: ${typeof s.title === 'string' ? s.title : ''}`}</div>\n    </div>,\n    document.body,\n  )}</>;\n}\n"
+    }
+  ]
+}

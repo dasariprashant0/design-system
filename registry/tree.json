@@ -34,6 +34,88 @@
     "packages/react/src/components/tree/tree.test.tsx",
     "packages/react/src/components/tree/tree.tsx"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "TreeProps",
+      "props": [
+        {
+          "name": "items",
+          "type": "TreeNode[]",
+          "optional": false,
+          "default": null,
+          "description": "The top-level nodes; each node has an `id`, a `label` and optional `children`."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Selected node id. Controlled with `value` + `onValueChange`, or uncontrolled with `defaultValue`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The id of the node selected at first when uncontrolled. Default none."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((id: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the id of the node the user selects."
+        },
+        {
+          "name": "expanded",
+          "type": "string[]",
+          "optional": true,
+          "default": null,
+          "description": "Open branches. Controlled with `expanded` + `onExpandedChange`, or uncontrolled with `defaultExpanded`."
+        },
+        {
+          "name": "defaultExpanded",
+          "type": "string[]",
+          "optional": true,
+          "default": "[]",
+          "description": "Ids of the branches open at first when uncontrolled. Default none."
+        },
+        {
+          "name": "onExpandedChange",
+          "type": "((ids: string[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the full list of open branch ids when the user opens or closes a branch."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Required: names the tree."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Tree, type TreeNode} from '@monoline/react';\n\nconst items: TreeNode[] = [\n  {id: 'src', label: 'src', children: [\n    {id: 'components', label: 'components', children: [{id: 'button', label: 'button.tsx'}, {id: 'tree', label: 'tree.tsx'}]},\n    {id: 'index', label: 'index.ts'},\n  ]},\n  {id: 'docs', label: 'docs', children: [{id: 'readme', label: 'README.md'}]},\n  {id: 'pkg', label: 'package.json'},\n];\n\n<Tree aria-label=\"Project files\" items={items} defaultExpanded={['src', 'components']} />",
+  "dataAttributes": [
+    {
+      "name": "data-selected",
+      "values": []
+    }
+  ],
+  "classes": [
+    "tree",
+    "tree-group",
+    "tree-item",
+    "tree-row",
+    "tree-twisty"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

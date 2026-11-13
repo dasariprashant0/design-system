@@ -11,11 +11,11 @@
   "css": [
     {
       "path": "packages/css/src/components/container.css",
-      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; margin-inline: auto; padding-inline: var(--s5); }\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
+      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; max-width: var(--content); margin-inline: auto; padding-inline: var(--s5); } /* bare .container; the size classes below override max-width */\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
     },
     {
       "path": "packages/css/src/components/heading.css",
-      "content": ".heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading-md { font-size: var(--text-lg); }\n.heading-sm { font-size: var(--text-base); }\n"
+      "content": ".heading { font-weight: 500; line-height: 1.2; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.75rem); letter-spacing: -0.03em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading.heading-md { font-size: var(--text-lg); } /* two classes: typography.css (later in the bundle) also defines .heading-md and .heading-sm with other sizes */\n.heading.heading-sm { font-size: var(--text-base); }\n/* One casing rule: uppercase and the huge size live on .display / .display-* (the page title) only. Heading size=\"display\" is the h1 of app content: 28px to 44px, sentence case. */\n"
     },
     {
       "path": "packages/css/src/components/block-testimonials.css",
@@ -41,6 +41,59 @@
     "packages/react/src/components/block-testimonials/block-testimonials.tsx",
     "packages/react/src/components/block-testimonials/index.ts",
     "packages/react/src/components/block-testimonials/meta.json"
+  ],
+  "related": [
+    "container",
+    "heading"
+  ],
+  "props": [
+    {
+      "name": "BlockTestimonialsProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "Section heading shown above the quotes."
+        },
+        {
+          "name": "items",
+          "type": "Testimonial[]",
+          "optional": false,
+          "default": null,
+          "description": "The quotes to show, each with `quote`, `name` and optional `role` and `avatar`."
+        },
+        {
+          "name": "headingLevel",
+          "type": "1 | 2 | 3 | 4 | 5 | 6",
+          "optional": true,
+          "default": "2",
+          "description": "Outline level of the section title, 1 to 6. Default 2."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BlockTestimonials} from '@monoline/react';\n\n<BlockTestimonials\n  title=\"What people say\"\n  items={[\n    {quote: 'It stayed out of the way and the pages got simpler.', name: 'Ada Example', role: 'Engineer, Example Co'},\n    {quote: 'Keyboard support worked on day one.', name: 'Sam Sample', role: 'Designer, Sample Studio'},\n    {quote: 'We deleted a lot of CSS.', name: 'Robin Placeholder', role: 'Founder, Placeholder'},\n  ]}\n/>",
+  "dataAttributes": [],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full",
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm",
+    "block-testimonials",
+    "block-testimonials-title",
+    "block-testimonials-grid",
+    "block-testimonial",
+    "block-testimonial-avatar",
+    "block-testimonial-name",
+    "block-testimonial-role"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

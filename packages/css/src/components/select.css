@@ -1,5 +1,5 @@
 /* Select on Radix. The trigger matches .input; the list is a .menu-content. */
-.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; padding: 12px 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }
+.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; height: var(--control-md); padding: 0 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }
 .select-trigger[data-placeholder] { color: var(--muted); }
 .select-trigger[aria-invalid="true"] { border-color: var(--danger); }
 .select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }
@@ -10,3 +10,6 @@
 .select-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }
 .select-item[data-disabled] { opacity: 0.5; pointer-events: none; }
 .select-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.select-trigger.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }
+.select-trigger.input-lg { height: var(--control-lg); padding: 0 18px; }
+.select-trigger[data-invalid] { border-color: var(--danger); }

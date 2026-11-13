@@ -18,9 +18,16 @@ jobs:
         run: node scripts/audit.mjs --accents all
         env:
           CHROME: /usr/bin/google-chrome
+      - name: Computed-style test (real browser, loads the full stylesheet)
+        run: npm run test:css-browser
+        env:
+          CHROME: /usr/bin/google-chrome
   visual:
+    # Informational: it reports every page whose screenshot differs from the base branch. A pull request that
+    # intentionally changes the look will always differ, so this job never blocks a merge; read the artifact.
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
         with: {ref: "${{ github.event.pull_request.base.sha }}"}
@@ -41,7 +48,7 @@ jobs:
         env:
           CHROME: /usr/bin/google-chrome
       - uses: actions/upload-artifact@v4
-        if: failure()
+        if: always()
         with:
           name: visual-diffs
           path: audit/actual

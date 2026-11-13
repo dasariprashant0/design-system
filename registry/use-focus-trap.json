@@ -17,7 +17,7 @@
     "keyboard"
   ],
   "kind": "hooks",
-  "import": "import {UseFocusTrap} from '@monoline/react'",
+  "import": "import {useFocusTrap} from '@monoline/react'",
   "path": "packages/react/src/hooks/use-focus-trap",
   "files": [
     "packages/react/src/hooks/use-focus-trap/index.ts",
@@ -26,6 +26,15 @@
     "packages/react/src/hooks/use-focus-trap/use-focus-trap.test.tsx",
     "packages/react/src/hooks/use-focus-trap/use-focus-trap.ts"
   ],
+  "related": [
+    "use-click-outside",
+    "use-clipboard",
+    "use-controllable-state"
+  ],
+  "props": [],
+  "usage": "import {useState} from 'react';\nimport {Button, useFocusTrap} from '@monoline/react';\n\nfunction TrapDemo() {\n  const [open, setOpen] = useState(false);\n  const ref = useFocusTrap<HTMLDivElement>(open);\n  return (\n    <div>\n      <Button variant=\"line\" onClick={() => setOpen(true)}>Open trapped panel</Button>\n      {open && (\n        <div ref={ref} role=\"dialog\" aria-label=\"Trapped panel\">\n          <p>Tab stays inside this panel.</p>\n          <Button variant=\"line\" onClick={() => setOpen(false)}>Close</Button>\n          <Button variant=\"ghost\">Second action</Button>\n        </div>\n      )}\n    </div>\n  );\n}\n\n<TrapDemo />",
+  "dataAttributes": [],
+  "classes": [],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

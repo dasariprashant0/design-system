@@ -1,0 +1,144 @@
+{
+  "name": "toaster",
+  "title": "Toaster",
+  "category": "feedback",
+  "description": "Show a toast from anywhere with toast('Saved'). Mount one Toaster; call toast.success, toast.error or toast.promise from handlers.",
+  "status": "stable",
+  "uses": [
+    "toast"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/toast.css",
+      "content": "/* Toast on Radix. A dark surface panel (like code), bottom right, stacked. */\n.toast-viewport { position: fixed; inset-inline-end: var(--s5); bottom: var(--s5); z-index: var(--z-toast); display: grid; gap: var(--s2); width: min(360px, calc(100vw - var(--s5) * 2)); margin: 0; padding: 0; list-style: none; outline: none; }\n.toast-item { display: grid; grid-template-columns: 1fr auto; gap: var(--s1) var(--s4); align-items: start; padding: var(--s4); background: var(--surface); color: var(--surface-text); border: 1px solid var(--rule); font-size: var(--text-sm); }\n.toast-item[data-state=\"open\"] { animation: rise-in-r var(--base) var(--ease); }\n.toast-item[data-state=\"closed\"] { animation: toast-out var(--fast) var(--ease) forwards; }\n.toast-title { overflow-wrap: anywhere; font-weight: 500; grid-column: 1; }\n.toast-description { overflow-wrap: anywhere; grid-column: 1; opacity: 0.8; }\n.toast-action, .toast-close { grid-column: 2; font-size: var(--text-xs); text-decoration: underline; text-underline-offset: 3px; color: var(--surface-text); }\n.toast-action { grid-row: 1; } .toast-close { grid-row: 2; opacity: 0.7; }\n.toast-action:hover, .toast-close:hover { opacity: 1; }\n@keyframes toast-out { to { opacity: 0; transform: translateY(8px); } }\n"
+    },
+    {
+      "path": "packages/css/src/components/toaster.css",
+      "content": "/* Toaster: kinds and positions for the toasts made by toast(). Builds on toast.css. */\n.toaster-viewport[data-position=\"start\"] { inset-inline-end: auto; inset-inline-start: var(--s5); }\n.toaster-viewport[data-position=\"center\"] { inset-inline: 0; margin-inline: auto; }\n.toaster-item { border-inline-start: 3px solid var(--foreground); }\n.toaster-item[data-kind=\"success\"] { border-inline-start-color: var(--ok); }\n.toaster-item[data-kind=\"warning\"] { border-inline-start-color: var(--warning); }\n.toaster-item[data-kind=\"error\"] { border-inline-start-color: var(--danger); }\n.toaster-item[data-kind=\"loading\"] { border-inline-start-style: dashed; }\n.toaster-item[data-swipe=\"move\"] { transform: translateX(var(--radix-toast-swipe-move-x)); }\n.toaster-item[data-swipe=\"cancel\"] { transform: none; transition: transform var(--fast) var(--ease); }\n@media (prefers-reduced-motion: reduce) { .toaster-item { animation: none !important; transition: none; } }\n"
+    }
+  ],
+  "a11y": [
+    "Info and success toasts are announced politely; errors are announced assertively.",
+    "F8 moves focus to the notification region; hovering or focusing a toast pauses its timer.",
+    "Each toast has a Dismiss button and an optional action button; Escape closes the focused toast.",
+    "A stack limit keeps at most three visible by default (older ones wait); motion is removed with prefers-reduced-motion.",
+    "Never the only place a critical result appears; keep an inline message too."
+  ],
+  "keywords": [
+    "toast",
+    "sonner",
+    "snackbar",
+    "notification",
+    "imperative",
+    "promise",
+    "useToast"
+  ],
+  "kind": "components",
+  "import": "import {Toaster} from '@monoline/react'",
+  "path": "packages/react/src/components/toaster",
+  "files": [
+    "packages/react/src/components/toaster/index.ts",
+    "packages/react/src/components/toaster/meta.json",
+    "packages/react/src/components/toaster/toaster.demo.tsx",
+    "packages/react/src/components/toaster/toaster.test.tsx",
+    "packages/react/src/components/toaster/toaster.tsx"
+  ],
+  "related": [
+    "toast"
+  ],
+  "props": [
+    {
+      "name": "ToasterProps",
+      "props": [
+        {
+          "name": "limit",
+          "type": "number",
+          "optional": true,
+          "default": "3",
+          "description": "Most toasts shown at once. Older ones wait out of sight and return when there is room. Default 3."
+        },
+        {
+          "name": "position",
+          "type": "\"center\" | \"start\" | \"end\"",
+          "optional": true,
+          "default": "'end'",
+          "description": "Where the stack sits. `end` is the bottom corner at the end of the reading direction. Default \"end\"."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "optional": true,
+          "default": "'Notifications'",
+          "description": "Names the region for screen readers. Default \"Notifications\"."
+        },
+        {
+          "name": "dismissLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Dismiss'",
+          "description": "Text of each close button. Default \"Dismiss\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, Toaster, toast} from '@monoline/react';\n\nfunction Example() {\n  return (\n    <div style={{display: 'flex', gap: 8, flexWrap: 'wrap'}}>\n      <Button onClick={() => toast('Draft saved')}>Default</Button>\n      <Button onClick={() => toast.success('Profile updated', {description: 'Changes are live.'})}>Success</Button>\n      <Button onClick={() => toast.error('Could not save', {description: 'Check your connection.', action: {label: 'Retry', onClick: () => toast.info('Retrying')}})}>Error with retry</Button>\n      <Button onClick={() => toast.warning('Storage almost full')}>Warning</Button>\n      <Button onClick={() => toast.promise(new Promise((r) => setTimeout(r, 1500)), {loading: 'Uploading', success: 'Uploaded', error: 'Upload failed'})}>Promise</Button>\n      <Button variant=\"ghost\" onClick={() => toast.dismiss()}>Dismiss all</Button>\n      <Toaster />\n    </div>\n  );\n}\n\n<Example />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "open",
+        "closed"
+      ]
+    },
+    {
+      "name": "data-position",
+      "values": [
+        "start",
+        "center"
+      ]
+    },
+    {
+      "name": "data-kind",
+      "values": [
+        "success",
+        "warning",
+        "error",
+        "loading"
+      ]
+    },
+    {
+      "name": "data-swipe",
+      "values": [
+        "move",
+        "cancel"
+      ]
+    }
+  ],
+  "classes": [
+    "toast-viewport",
+    "toast-item",
+    "toast-title",
+    "toast-description",
+    "toast-action",
+    "toast-close",
+    "toaster-viewport",
+    "toaster-item"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/toaster/index.ts",
+      "content": "export {Toaster, toast} from './toaster';\nexport type {ToasterProps, ToastOptions, ToastKind, ToastFn, ToastPromiseMessages} from './toaster';\n"
+    },
+    {
+      "path": "packages/react/src/components/toaster/meta.json",
+      "content": "{\"name\":\"toaster\",\"title\":\"Toaster\",\"category\":\"feedback\",\"description\":\"Show a toast from anywhere with toast('Saved'). Mount one Toaster; call toast.success, toast.error or toast.promise from handlers.\",\"status\":\"stable\",\"uses\":[\"toast\"],\"css\":[\"toast.css\",\"toaster.css\"],\"a11y\":[\"Info and success toasts are announced politely; errors are announced assertively.\",\"F8 moves focus to the notification region; hovering or focusing a toast pauses its timer.\",\"Each toast has a Dismiss button and an optional action button; Escape closes the focused toast.\",\"A stack limit keeps at most three visible by default (older ones wait); motion is removed with prefers-reduced-motion.\",\"Never the only place a critical result appears; keep an inline message too.\"],\"keywords\":[\"toast\",\"sonner\",\"snackbar\",\"notification\",\"imperative\",\"promise\",\"useToast\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/toaster/toaster.tsx",
+      "content": "'use client';\nimport {useSyncExternalStore, type ReactNode} from 'react';\nimport {Toast, ToastAction, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport} from '../toast';\nimport {useDirection} from '../direction-provider';\n\n/** Kinds of toast. `loading` stays until it is updated or dismissed. */\nexport type ToastKind = 'default' | 'success' | 'error' | 'info' | 'warning' | 'loading';\n\n/** Options for `toast()` and its helpers. */\nexport interface ToastOptions {\n  /** Longer text under the message. */\n  description?: ReactNode;\n  /** One button, such as Undo or Retry. `label` is also its accessible name. */\n  action?: {label: string; onClick: () => void};\n  /** Milliseconds before it closes. Default 5000; 8000 for errors; `Infinity` keeps it until dismissed. */\n  duration?: number;\n  /** Reuse an id to replace a toast that is already showing instead of adding another. */\n  id?: string | number;\n}\n\n/** Texts for `toast.promise()`. Each may be a string or a function of the result or error. */\nexport interface ToastPromiseMessages<T> {\n  /** Shown while the promise is pending. */\n  loading: ReactNode;\n  /** Shown when it resolves. */\n  success: ReactNode | ((value: T) => ReactNode);\n  /** Shown when it rejects. */\n  error: ReactNode | ((reason: unknown) => ReactNode);\n}\n\ninterface Item extends ToastOptions {\n  id: string | number;\n  kind: ToastKind;\n  message: ReactNode;\n  open: boolean;\n}\n\n// A tiny external store: a list, a version, and listeners. Nothing runs at import time.\nlet items: Item[] = [];\nconst listeners = new Set<() => void>();\nlet seq = 0;\nconst emit = () => listeners.forEach((l) => l());\nconst subscribe = (l: () => void) => { listeners.add(l); return () => { listeners.delete(l); }; };\nconst snapshot = () => items;\n\nfunction show(kind: ToastKind, message: ReactNode, opts: ToastOptions = {}): string | number {\n  const id = opts.id ?? ++seq;\n  const next: Item = {...opts, id, kind, message, open: true};\n  items = items.some((i) => i.id === id) ? items.map((i) => (i.id === id ? next : i)) : [...items, next];\n  emit();\n  return id;\n}\n\nfunction remove(id: string | number) {\n  items = items.filter((i) => i.id !== id);\n  emit();\n}\n\nfunction dismiss(id?: string | number) {\n  items = items.map((i) => (id === undefined || i.id === id ? {...i, open: false} : i));\n  emit();\n  // Let the exit animation play, then forget the toast.\n  setTimeout(() => items.filter((i) => !i.open).forEach((i) => remove(i.id)), 300);\n}\n\n/** The function behind `toast`. Use `toast` itself. */\nexport interface ToastFn {\n  (message: ReactNode, options?: ToastOptions): string | number;\n  /** A success message. */\n  success: (message: ReactNode, options?: ToastOptions) => string | number;\n  /** An error message. Announced assertively and stays longer. */\n  error: (message: ReactNode, options?: ToastOptions) => string | number;\n  /** A neutral information message. */\n  info: (message: ReactNode, options?: ToastOptions) => string | number;\n  /** A warning message. */\n  warning: (message: ReactNode, options?: ToastOptions) => string | number;\n  /** Follows a promise: shows `loading`, then replaces it with `success` or `error`. Returns the promise. */\n  promise: <T>(promise: Promise<T>, messages: ToastPromiseMessages<T>, options?: ToastOptions) => Promise<T>;\n  /** Closes the toast with this id, or all toasts when called without one. */\n  dismiss: (id?: string | number) => void;\n}\n\n/**\n * Show a message from anywhere, no hook needed. Mount one `<Toaster />` first.\n * @example toast.success('Saved', {description: 'Draft stored.', action: {label: 'Undo', onClick: undo}})\n */\nexport const toast: ToastFn = Object.assign(\n  (message: ReactNode, options?: ToastOptions) => show('default', message, options),\n  {\n    success: (m: ReactNode, o?: ToastOptions) => show('success', m, o),\n    error: (m: ReactNode, o?: ToastOptions) => show('error', m, o),\n    info: (m: ReactNode, o?: ToastOptions) => show('info', m, o),\n    warning: (m: ReactNode, o?: ToastOptions) => show('warning', m, o),\n    promise: <T,>(promise: Promise<T>, messages: ToastPromiseMessages<T>, options?: ToastOptions) => {\n      const id = show('loading', messages.loading, {...options, duration: Infinity});\n      const text = <A,>(m: ReactNode | ((a: A) => ReactNode), a: A) => (typeof m === 'function' ? (m as (a: A) => ReactNode)(a) : m);\n      promise.then(\n        (v) => { show('success', text(messages.success, v), {...options, id}); },\n        (e) => { show('error', text(messages.error, e), {...options, id}); },\n      );\n      return promise;\n    },\n    dismiss,\n  },\n);\n\nexport interface ToasterProps {\n  /** Most toasts shown at once. Older ones wait out of sight and return when there is room. Default 3. */\n  limit?: number;\n  /** Where the stack sits. `end` is the bottom corner at the end of the reading direction. Default \"end\". */\n  position?: 'end' | 'start' | 'center';\n  /** Names the region for screen readers. Default \"Notifications\". */\n  label?: string;\n  /** Text of each close button. Default \"Dismiss\". */\n  dismissLabel?: string;\n}\n\n/**\n * Renders the toasts made by `toast()`. Mount it once near the root of the app. Pressing F8 moves focus to the stack;\n * hovering or focusing a toast pauses its timer. Errors are announced assertively, everything else politely.\n * @example <Toaster limit={3} />\n */\nexport function Toaster({limit = 3, position = 'end', label = 'Notifications', dismissLabel = 'Dismiss'}: ToasterProps) {\n  const all = useSyncExternalStore(subscribe, snapshot, snapshot);\n  const dir = useDirection();\n  // Only the newest `limit` open toasts are rendered; older ones simply unmount.\n  const shown = all.filter((i) => i.open).slice(-limit);\n  return (\n    <ToastProvider duration={5000} swipeDirection={dir === 'rtl' ? 'left' : 'right'} label={label}>\n      {shown.map((t) => (\n        <Toast\n          key={t.id}\n          className=\"toaster-item\"\n          data-kind={t.kind}\n          type={t.kind === 'error' ? 'foreground' : 'background'}\n          duration={t.duration ?? (t.kind === 'error' ? 8000 : undefined)}\n          open={t.open}\n          onOpenChange={(o) => { if (!o) dismiss(t.id); }}\n        >\n          <ToastTitle>{t.message}</ToastTitle>\n          {t.description && <ToastDescription>{t.description}</ToastDescription>}\n          {t.action && <ToastAction altText={t.action.label} onClick={t.action.onClick}>{t.action.label}</ToastAction>}\n          <ToastClose>{dismissLabel}</ToastClose>\n        </Toast>\n      ))}\n      <ToastViewport className=\"toaster-viewport\" data-position={position} label={`${label} ({hotkey})`} />\n    </ToastProvider>\n  );\n}\n"
+    }
+  ]
+}

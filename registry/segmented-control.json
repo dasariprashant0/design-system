@@ -11,7 +11,7 @@
   "css": [
     {
       "path": "packages/css/src/components/segmented-control.css",
-      "content": "/* Segmented control: joined toggles, one always on. */\n.segmented { display: inline-flex; border: 1px solid var(--foreground); }\n.segment { padding: var(--s2) var(--s4); font-size: var(--text-sm); color: var(--muted); background: transparent; }\n.segment + .segment { border-inline-start: 1px solid var(--rule); }\n.segment:hover:not(:disabled) { color: var(--foreground); }\n.segment[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.segment:disabled { opacity: 0.5; cursor: not-allowed; }\n.segment:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n"
+      "content": "/* Segmented control: joined toggles, one always on. */\n.segmented { display: inline-flex; border: 1px solid var(--foreground); }\n.segment { padding: var(--s2) var(--s4); font-size: var(--text-sm); color: var(--muted); background: transparent; }\n.segment + .segment { border-inline-start: 1px solid var(--rule); }\n.segment:not([data-state=\"on\"]):hover:not(:disabled) { color: var(--foreground); }\n.segment[data-state=\"on\"] { background: var(--foreground); color: var(--background); }\n.segment:disabled { opacity: 0.5; cursor: not-allowed; }\n.segment:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n"
     }
   ],
   "a11y": [
@@ -33,6 +33,64 @@
     "packages/react/src/components/segmented-control/segmented-control.demo.tsx",
     "packages/react/src/components/segmented-control/segmented-control.test.tsx",
     "packages/react/src/components/segmented-control/segmented-control.tsx"
+  ],
+  "related": [
+    "toggle-group"
+  ],
+  "props": [
+    {
+      "name": "SegmentedControlProps",
+      "props": [
+        {
+          "name": "options",
+          "type": "SegmentedOption[]",
+          "optional": false,
+          "default": null,
+          "description": "The segments to show, each with a `value`, a `label` and an optional `disabled`."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The selected segment's `value` when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The segment selected at first when uncontrolled. Defaults to the first option."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new segment's `value` when the user picks a different one."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Names the control, for example \"View\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {SegmentedControl} from '@monoline/react';\n\n<SegmentedControl aria-label=\"Chart range\" options={[{value: 'day', label: 'Day'}, {value: 'week', label: 'Week'}, {value: 'month', label: 'Month'}]} defaultValue=\"week\" />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "on"
+      ]
+    }
+  ],
+  "classes": [
+    "segmented",
+    "segment"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

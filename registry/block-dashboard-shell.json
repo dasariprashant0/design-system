@@ -13,7 +13,7 @@
   "css": [
     {
       "path": "packages/css/src/components/container.css",
-      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; margin-inline: auto; padding-inline: var(--s5); }\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
+      "content": "/* Container: centred column with side padding. */\n.container { width: 100%; max-width: var(--content); margin-inline: auto; padding-inline: var(--s5); } /* bare .container; the size classes below override max-width */\n.container-text { max-width: calc(var(--measure) + 2 * var(--s5)); }\n.container-page { max-width: calc(var(--content) + 2 * var(--s5)); }\n.container-full { max-width: none; }\n"
     },
     {
       "path": "packages/css/src/components/stack.css",
@@ -21,11 +21,11 @@
     },
     {
       "path": "packages/css/src/components/02-buttons.css",
-      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 14px 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { padding: 6px 12px; font-size: var(--text-xs); }\n.btn-block { width: 100%; }\n"
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
     },
     {
       "path": "packages/css/src/components/dialog.css",
-      "content": "/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }\n"
+      "content": "/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }\n.dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: -0.02em; margin-bottom: var(--s3); } /* sentence case: uppercase is only for .display */\n"
     },
     {
       "path": "packages/css/src/components/drawer.css",
@@ -39,14 +39,19 @@
   "a11y": [
     "The sidebar and the drawer hold the same navigation landmark, named by navLabel; the current page has aria-current=\"page\".",
     "Below 800px the sidebar is hidden and a Menu button opens a left drawer: focus is trapped, Escape closes it and focus returns to the button.",
-    "Choosing a link closes the drawer. The content is a main landmark; put one h1 in it."
+    "Choosing a link closes the drawer. The content is a main landmark; put one h1 in it.",
+    "With renderLink the links are rendered by your router link; the block still sets the class and aria-current=\"page\" on it."
   ],
   "keywords": [
     "dashboard",
     "app shell",
     "sidebar",
     "layout",
-    "admin"
+    "admin",
+    "router",
+    "next link",
+    "react router",
+    "renderLink"
   ],
   "kind": "components",
   "import": "import {BlockDashboardShell} from '@monoline/react'",
@@ -58,13 +63,142 @@
     "packages/react/src/components/block-dashboard-shell/index.ts",
     "packages/react/src/components/block-dashboard-shell/meta.json"
   ],
+  "related": [
+    "container",
+    "stack",
+    "drawer",
+    "button"
+  ],
+  "props": [
+    {
+      "name": "BlockDashboardShellProps",
+      "props": [
+        {
+          "name": "brand",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Your logo or name, shown above the navigation."
+        },
+        {
+          "name": "renderLink",
+          "type": "RenderLink",
+          "optional": true,
+          "default": null,
+          "description": "Renders each navigation link, so a client router can handle the click. Default a plain `<a href>`."
+        },
+        {
+          "name": "nav",
+          "type": "ShellNavItem[]",
+          "optional": false,
+          "default": null,
+          "description": "The navigation links shown in the sidebar and in the small-screen drawer."
+        },
+        {
+          "name": "navLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Main'",
+          "description": "Names the navigation landmark. Default \"Main\"."
+        },
+        {
+          "name": "topbar",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Right side of the top bar: search, account menu."
+        },
+        {
+          "name": "menuLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Menu'",
+          "description": "Text of the button that opens the navigation drawer on small screens. Default \"Menu\"."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The page: put its h1 inside."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Badge, BlockDashboardShell, Heading, Text} from '@monoline/react';\n\n<BlockDashboardShell\n  brand=\"Your app\"\n  nav={[{label: 'Overview', href: '#', current: true}, {label: 'Reports', href: '#'}, {label: 'Customers', href: '#'}, {label: 'Settings', href: '#'}]}\n  topbar={<Badge>Ada Example</Badge>}\n>\n  <Heading level={1} size=\"xl\">Overview</Heading>\n  <Text tone=\"muted\">Your content goes here.</Text>\n</BlockDashboardShell>",
+  "dataAttributes": [
+    {
+      "name": "data-align",
+      "values": [
+        "start",
+        "center",
+        "end",
+        "stretch"
+      ]
+    },
+    {
+      "name": "data-justify",
+      "values": [
+        "start",
+        "center",
+        "end",
+        "between"
+      ]
+    },
+    {
+      "name": "data-side",
+      "values": [
+        "right",
+        "end",
+        "left",
+        "start",
+        "top",
+        "bottom"
+      ]
+    }
+  ],
+  "classes": [
+    "container",
+    "container-text",
+    "container-page",
+    "container-full",
+    "stack",
+    "stack-row",
+    "stack-wrap",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "dialog-overlay",
+    "dialog-content",
+    "dialog-header",
+    "dialog-footer",
+    "dialog-description",
+    "dialog-close",
+    "dialog-title",
+    "drawer-content",
+    "block-shell",
+    "block-shell-side",
+    "block-shell-brand",
+    "block-shell-nav",
+    "block-shell-link",
+    "block-shell-body",
+    "block-shell-top",
+    "block-shell-top-end",
+    "block-shell-content",
+    "block-shell-menu"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },
   "source": [
     {
       "path": "packages/react/src/components/block-dashboard-shell/block-dashboard-shell.tsx",
-      "content": "'use client';\nimport {forwardRef, useState, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Button} from '../button';\nimport {Container} from '../container';\nimport {Drawer, DrawerContent, DrawerTitle, DrawerTrigger} from '../drawer';\nimport {Stack} from '../stack';\n\nexport interface ShellNavItem {\n  label: ReactNode;\n  href: string;\n  /** The current page: sets `aria-current=\"page\"`. */\n  current?: boolean;\n}\n\nexport interface BlockDashboardShellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  /** Your logo or name, shown above the navigation. */\n  brand?: ReactNode;\n  /** The navigation links shown in the sidebar and in the small-screen drawer. */\n  nav: ShellNavItem[];\n  /** Names the navigation landmark. Default \"Main\". */\n  navLabel?: string;\n  /** Right side of the top bar: search, account menu. */\n  topbar?: ReactNode;\n  /** Text of the button that opens the navigation drawer on small screens. Default \"Menu\". */\n  menuLabel?: string;\n  /** The page: put its h1 inside. */\n  children: ReactNode;\n}\n\nfunction Nav({items, label}: {items: ShellNavItem[]; label: string}) {\n  return (\n    <nav aria-label={label} className=\"block-shell-nav\">\n      <Stack gap={1}>\n        {items.map((it, i) => (\n          <a key={i} href={it.href} className=\"block-shell-link\" aria-current={it.current ? 'page' : undefined}>{it.label}</a>\n        ))}\n      </Stack>\n    </nav>\n  );\n}\n\n/**\n * An app frame: sidebar, top bar and content. Wide screens show the sidebar; narrow ones show a \"Menu\" button that opens\n * the same navigation in a left `Drawer`. Put one `h1` in the content.\n */\nexport const BlockDashboardShell = forwardRef<HTMLDivElement, BlockDashboardShellProps>(function BlockDashboardShell({brand, nav, navLabel = 'Main', topbar, menuLabel = 'Menu', children, className, ...rest}, ref) {\n  const [open, setOpen] = useState(false);\n  return (\n    <div ref={ref} className={cx('block-shell', className)} {...rest}>\n      <aside className=\"block-shell-side\">\n        {brand && <div className=\"block-shell-brand\">{brand}</div>}\n        <Nav items={nav} label={navLabel} />\n      </aside>\n      <div className=\"block-shell-body\">\n        <header className=\"block-shell-top\">\n          <div className=\"block-shell-menu\">\n            <Drawer open={open} onOpenChange={setOpen}>\n              <DrawerTrigger asChild><Button size=\"sm\">{menuLabel}</Button></DrawerTrigger>\n              <DrawerContent side=\"left\" aria-describedby={undefined}>\n                <DrawerTitle>{brand ?? menuLabel}</DrawerTitle>\n                <div onClick={(e) => { if ((e.target as HTMLElement).closest('a')) setOpen(false); }}>\n                  <Nav items={nav} label={navLabel} />\n                </div>\n              </DrawerContent>\n            </Drawer>\n          </div>\n          <div className=\"block-shell-top-end\">{topbar}</div>\n        </header>\n        <Container asChild size=\"full\"><main className=\"block-shell-content\">{children}</main></Container>\n      </div>\n    </div>\n  );\n});\n"
+      "content": "'use client';\nimport {Fragment, forwardRef, useState, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Button} from '../button';\nimport {Container} from '../container';\nimport {Drawer, DrawerContent, DrawerTitle, DrawerTrigger} from '../drawer';\nimport {Stack} from '../stack';\nimport type {RenderLink} from '../link';\n\nexport interface ShellNavItem {\n  label: ReactNode;\n  href: string;\n  /** The current page: sets `aria-current=\"page\"`. */\n  current?: boolean;\n}\n\nexport interface BlockDashboardShellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  /** Your logo or name, shown above the navigation. */\n  brand?: ReactNode;\n  /** Renders each navigation link, so a client router can handle the click. Default a plain `<a href>`. @example renderLink={({href, ...p}) => <NavLink to={href} {...p} />} */\n  renderLink?: RenderLink;\n  /** The navigation links shown in the sidebar and in the small-screen drawer. */\n  nav: ShellNavItem[];\n  /** Names the navigation landmark. Default \"Main\". */\n  navLabel?: string;\n  /** Right side of the top bar: search, account menu. */\n  topbar?: ReactNode;\n  /** Text of the button that opens the navigation drawer on small screens. Default \"Menu\". */\n  menuLabel?: string;\n  /** The page: put its h1 inside. */\n  children: ReactNode;\n}\n\nfunction Nav({items, label, renderLink}: {items: ShellNavItem[]; label: string; renderLink?: RenderLink}) {\n  return (\n    <nav aria-label={label} className=\"block-shell-nav\">\n      <Stack gap={1}>\n        {items.map((it, i) => (\n          <Fragment key={i}>\n            {renderLink\n              ? renderLink({href: it.href, className: 'block-shell-link', 'aria-current': it.current ? 'page' : undefined, children: it.label})\n              : <a href={it.href} className=\"block-shell-link\" aria-current={it.current ? 'page' : undefined}>{it.label}</a>}\n          </Fragment>\n        ))}\n      </Stack>\n    </nav>\n  );\n}\n\n/**\n * An app frame: sidebar, top bar and content. Wide screens show the sidebar; narrow ones show a \"Menu\" button that opens\n * the same navigation in a left `Drawer`. Put one `h1` in the content.\n * Pass `renderLink` to use a client router (React Router, Next.js) for the links.\n */\nexport const BlockDashboardShell = forwardRef<HTMLDivElement, BlockDashboardShellProps>(function BlockDashboardShell({brand, nav, renderLink, navLabel = 'Main', topbar, menuLabel = 'Menu', children, className, ...rest}, ref) {\n  const [open, setOpen] = useState(false);\n  return (\n    <div ref={ref} className={cx('block-shell', className)} {...rest}>\n      <aside className=\"block-shell-side\">\n        {brand && <div className=\"block-shell-brand\">{brand}</div>}\n        <Nav items={nav} label={navLabel} renderLink={renderLink} />\n      </aside>\n      <div className=\"block-shell-body\">\n        <header className=\"block-shell-top\">\n          <div className=\"block-shell-menu\">\n            <Drawer open={open} onOpenChange={setOpen}>\n              <DrawerTrigger asChild><Button size=\"sm\">{menuLabel}</Button></DrawerTrigger>\n              <DrawerContent side=\"left\" aria-describedby={undefined}>\n                <DrawerTitle>{brand ?? menuLabel}</DrawerTitle>\n                <div onClick={(e) => { if ((e.target as HTMLElement).closest('a')) setOpen(false); }}>\n                  <Nav items={nav} label={navLabel} renderLink={renderLink} />\n                </div>\n              </DrawerContent>\n            </Drawer>\n          </div>\n          <div className=\"block-shell-top-end\">{topbar}</div>\n        </header>\n        <Container asChild size=\"full\"><main className=\"block-shell-content\">{children}</main></Container>\n      </div>\n    </div>\n  );\n});\n"
     },
     {
       "path": "packages/react/src/components/block-dashboard-shell/index.ts",
@@ -72,7 +206,7 @@
     },
     {
       "path": "packages/react/src/components/block-dashboard-shell/meta.json",
-      "content": "{\"name\": \"block-dashboard-shell\", \"title\": \"Dashboard shell block\", \"category\": \"blocks\", \"description\": \"App frame with sidebar, top bar and content that collapses to a drawer on small screens.\", \"status\": \"beta\", \"uses\": [\"container\", \"stack\", \"drawer\", \"button\"], \"css\": [\"container.css\", \"stack.css\", \"02-buttons.css\", \"dialog.css\", \"drawer.css\", \"block-dashboard-shell.css\"], \"a11y\": [\"The sidebar and the drawer hold the same navigation landmark, named by navLabel; the current page has aria-current=\\\"page\\\".\", \"Below 800px the sidebar is hidden and a Menu button opens a left drawer: focus is trapped, Escape closes it and focus returns to the button.\", \"Choosing a link closes the drawer. The content is a main landmark; put one h1 in it.\"], \"keywords\": [\"dashboard\", \"app shell\", \"sidebar\", \"layout\", \"admin\"]}"
+      "content": "{\"name\": \"block-dashboard-shell\", \"title\": \"Dashboard shell block\", \"category\": \"blocks\", \"description\": \"App frame with sidebar, top bar and content that collapses to a drawer on small screens.\", \"status\": \"beta\", \"uses\": [\"container\", \"stack\", \"drawer\", \"button\"], \"css\": [\"container.css\", \"stack.css\", \"02-buttons.css\", \"dialog.css\", \"drawer.css\", \"block-dashboard-shell.css\"], \"a11y\": [\"The sidebar and the drawer hold the same navigation landmark, named by navLabel; the current page has aria-current=\\\"page\\\".\", \"Below 800px the sidebar is hidden and a Menu button opens a left drawer: focus is trapped, Escape closes it and focus returns to the button.\", \"Choosing a link closes the drawer. The content is a main landmark; put one h1 in it.\", \"With renderLink the links are rendered by your router link; the block still sets the class and aria-current=\\\"page\\\" on it.\"], \"keywords\": [\"dashboard\", \"app shell\", \"sidebar\", \"layout\", \"admin\", \"router\", \"next link\", \"react router\", \"renderLink\"]}"
     }
   ]
 }

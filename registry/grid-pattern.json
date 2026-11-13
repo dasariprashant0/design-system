@@ -31,6 +31,38 @@
     "packages/react/src/components/grid-pattern/index.ts",
     "packages/react/src/components/grid-pattern/meta.json"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "GridPatternProps",
+      "props": [
+        {
+          "name": "size",
+          "type": "number",
+          "optional": true,
+          "default": "32",
+          "description": "Cell size in px. Default 32."
+        },
+        {
+          "name": "fade",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Fade the lines out towards the edges."
+        }
+      ]
+    }
+  ],
+  "usage": "import {GridPattern} from '@monoline/react';\n\n<div style={{position: 'relative', height: 200, display: 'grid', placeItems: 'center', border: '1px solid var(--rule)'}}>\n  <GridPattern fade />\n  <span style={{position: 'relative'}}>Content sits above</span>\n</div>",
+  "dataAttributes": [],
+  "classes": [
+    "grid-pattern",
+    "grid-pattern-fade"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

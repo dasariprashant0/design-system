@@ -31,6 +31,31 @@
     "packages/react/src/components/scroll-progress/scroll-progress.test.tsx",
     "packages/react/src/components/scroll-progress/scroll-progress.tsx"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "ScrollProgressProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Give the bar a name to expose it as a `progressbar` (reading progress). Without it the bar is decorative and `aria-hidden`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {ScrollProgress} from '@monoline/react';\n\n<ScrollProgress />",
+  "dataAttributes": [],
+  "classes": [
+    "scroll-progress",
+    "scroll-progress-bar"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -1,0 +1,129 @@
+{
+  "name": "theme-provider",
+  "title": "Theme provider",
+  "category": "layout",
+  "description": "Set and save the theme, accent, font, corners, density and direction from React with useTheme(), and avoid the first-paint flash with themeScript().",
+  "status": "stable",
+  "uses": [
+    "direction-provider",
+    "native-select"
+  ],
+  "css": [],
+  "a11y": [
+    "The theme follows the system colour scheme until the user chooses one.",
+    "ThemeSwitcher is a labelled group of native selects, fully keyboard operable.",
+    "Changing direction also sets dir on the page so arrow keys follow the reading direction."
+  ],
+  "keywords": [
+    "theme",
+    "dark mode",
+    "accent",
+    "useTheme",
+    "localStorage",
+    "ssr",
+    "no flash",
+    "density"
+  ],
+  "kind": "components",
+  "import": "import {ThemeProvider} from '@monoline/react'",
+  "path": "packages/react/src/components/theme-provider",
+  "files": [
+    "packages/react/src/components/theme-provider/index.ts",
+    "packages/react/src/components/theme-provider/meta.json",
+    "packages/react/src/components/theme-provider/theme-provider.demo.tsx",
+    "packages/react/src/components/theme-provider/theme-provider.test.tsx",
+    "packages/react/src/components/theme-provider/theme-provider.tsx",
+    "packages/react/src/components/theme-provider/theme-switcher.tsx"
+  ],
+  "related": [
+    "direction-provider",
+    "native-select"
+  ],
+  "props": [
+    {
+      "name": "ThemeProviderProps",
+      "props": [
+        {
+          "name": "storageKey",
+          "type": "string",
+          "optional": true,
+          "default": "'monoline'",
+          "description": "Prefix of the localStorage keys, e.g. `monoline` stores `monoline-theme`. Default \"monoline\". Match it in `themeScript`."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "The app."
+        },
+        {
+          "name": "theme",
+          "type": "Theme",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "accent",
+          "type": "Accent",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "font",
+          "type": "Font",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "radius",
+          "type": "Radius",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "density",
+          "type": "Density",
+          "optional": true,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "dir",
+          "type": "Dir",
+          "optional": true,
+          "default": null,
+          "description": ""
+        }
+      ]
+    }
+  ],
+  "usage": "import {Button, ThemeProvider, ThemeSwitcher, useTheme} from '@monoline/react';\n\nfunction Controls() {\n  const {theme, resolvedTheme, accent, density, setTheme, setDensity} = useTheme();\n  return (\n    <div style={{display: 'grid', gap: 12}}>\n      <ThemeSwitcher />\n      <p>Theme: {theme}{theme === 'system' ? ` (${resolvedTheme})` : ''}. Accent: {accent}. Density: {density}.</p>\n      <div style={{display: 'flex', gap: 8}}>\n        <Button onClick={() => setTheme(resolvedTheme === 'dark' ? 'warm' : 'dark')}>Toggle dark</Button>\n        <Button onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}>Toggle compact</Button>\n      </div>\n    </div>\n  );\n}\n\n<ThemeProvider storageKey=\"monoline-demo\"><Controls /></ThemeProvider>",
+  "dataAttributes": [],
+  "classes": [],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/theme-provider/index.ts",
+      "content": "export {ThemeProvider, useTheme, themeScript, themeOptions} from './theme-provider';\nexport type {ThemeProviderProps, ThemeContextValue, Theme, Accent, Font, Radius, Density, Dir} from './theme-provider';\nexport {ThemeSwitcher} from './theme-switcher';\nexport type {ThemeSwitcherProps} from './theme-switcher';\n"
+    },
+    {
+      "path": "packages/react/src/components/theme-provider/meta.json",
+      "content": "{\"name\":\"theme-provider\",\"title\":\"Theme provider\",\"category\":\"layout\",\"description\":\"Set and save the theme, accent, font, corners, density and direction from React with useTheme(), and avoid the first-paint flash with themeScript().\",\"status\":\"stable\",\"uses\":[\"direction-provider\",\"native-select\"],\"css\":[],\"a11y\":[\"The theme follows the system colour scheme until the user chooses one.\",\"ThemeSwitcher is a labelled group of native selects, fully keyboard operable.\",\"Changing direction also sets dir on the page so arrow keys follow the reading direction.\"],\"keywords\":[\"theme\",\"dark mode\",\"accent\",\"useTheme\",\"localStorage\",\"ssr\",\"no flash\",\"density\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/theme-provider/theme-provider.tsx",
+      "content": "'use client';\nimport {createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode} from 'react';\nimport {DirectionProvider} from '../direction-provider';\n\n/** Theme names. `system` follows the operating system setting. */\nexport type Theme = 'warm' | 'dark' | 'midnight' | 'system';\n/** The eight accent presets in `accents.css`. */\nexport type Accent = 'orange' | 'rose' | 'amber' | 'green' | 'teal' | 'blue' | 'violet' | 'slate';\n/** Type family option. */\nexport type Font = 'mono' | 'sans' | 'serif';\n/** Corner option. */\nexport type Radius = 'square' | 'soft' | 'round';\n/** Spacing option. */\nexport type Density = 'compact' | 'comfortable' | 'spacious';\n/** Reading direction. */\nexport type Dir = 'ltr' | 'rtl';\n\n/** Every allowed value, for building your own switchers. */\nexport const themeOptions = {\n  theme: ['warm', 'dark', 'midnight', 'system'],\n  accent: ['orange', 'rose', 'amber', 'green', 'teal', 'blue', 'violet', 'slate'],\n  font: ['mono', 'sans', 'serif'],\n  radius: ['square', 'soft', 'round'],\n  density: ['compact', 'comfortable', 'spacious'],\n  dir: ['ltr', 'rtl'],\n} as const;\n\ntype Look = {theme: Theme; accent: Accent; font: Font; radius: Radius; density: Density; dir: Dir};\nconst DEFAULTS: Look = {theme: 'system', accent: 'orange', font: 'mono', radius: 'square', density: 'comfortable', dir: 'ltr'};\nconst KEYS = Object.keys(DEFAULTS) as (keyof Look)[];\n\n/** What `useTheme()` returns: the current choices, the theme actually applied, and one setter per choice. */\nexport interface ThemeContextValue extends Look {\n  /** The theme in effect: `system` resolved to `warm` or `dark`. */\n  resolvedTheme: 'warm' | 'dark' | 'midnight';\n  /** Choose a theme. */\n  setTheme: (theme: Theme) => void;\n  /** Choose an accent. */\n  setAccent: (accent: Accent) => void;\n  /** Choose a font family. */\n  setFont: (font: Font) => void;\n  /** Choose corner roundness. */\n  setRadius: (radius: Radius) => void;\n  /** Choose spacing density. */\n  setDensity: (density: Density) => void;\n  /** Choose reading direction. Also sets `dir` on the page and for Radix components. */\n  setDir: (dir: Dir) => void;\n}\n\nconst ThemeContext = createContext<ThemeContextValue | null>(null);\n\nexport interface ThemeProviderProps extends Partial<Look> {\n  /** Prefix of the localStorage keys, e.g. `monoline` stores `monoline-theme`. Default \"monoline\". Match it in `themeScript`. */\n  storageKey?: string;\n  /** The app. */\n  children?: ReactNode;\n}\n\nconst read = (key: string): string | null => { try { return window.localStorage.getItem(key); } catch { return null; } };\nconst write = (key: string, value: string) => { try { window.localStorage.setItem(key, value); } catch { /* storage blocked: the choice lasts for this visit only */ } };\nconst systemTheme = () => (typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'warm');\n\n/**\n * Holds the look of the app (theme, accent, font, corners, density, direction), saves it in localStorage and writes it\n * to `<html>` as the `data-*` attributes the CSS reads. Render it once at the root.\n * On the server nothing touches `window`; the saved choice is read after mount. To avoid a flash of the wrong theme,\n * put `themeScript()` in the `<head>` of server-rendered pages.\n * @example <ThemeProvider defaultAccent=\"green\"><App /></ThemeProvider>\n */\nexport function ThemeProvider({storageKey = 'monoline', children, ...initial}: ThemeProviderProps) {\n  const [look, setLook] = useState<Look>({...DEFAULTS, ...initial});\n  const [ready, setReady] = useState(false);\n  const [system, setSystem] = useState<'warm' | 'dark'>('warm');\n\n  // After mount: load saved choices and the system preference.\n  useEffect(() => {\n    setLook((cur) => {\n      const next = {...cur};\n      for (const k of KEYS) {\n        const saved = read(`${storageKey}-${k}`);\n        if (saved && (themeOptions[k] as readonly string[]).includes(saved)) (next[k] as string) = saved;\n      }\n      return next;\n    });\n    setSystem(systemTheme());\n    setReady(true);\n    const mq = typeof matchMedia === 'function' ? matchMedia('(prefers-color-scheme: dark)') : null;\n    const on = () => setSystem(systemTheme());\n    mq?.addEventListener?.('change', on);\n    return () => mq?.removeEventListener?.('change', on);\n  }, [storageKey]);\n\n  const resolvedTheme = look.theme === 'system' ? system : look.theme;\n\n  // Apply to <html>. Skipped until the saved choice is loaded so it never overwrites what themeScript set.\n  useEffect(() => {\n    if (!ready) return;\n    const root = document.documentElement;\n    root.setAttribute('data-theme', resolvedTheme);\n    root.setAttribute('data-accent', look.accent);\n    root.setAttribute('data-font', look.font);\n    root.setAttribute('data-radius', look.radius);\n    root.setAttribute('data-density', look.density);\n    root.setAttribute('dir', look.dir);\n  }, [ready, resolvedTheme, look.accent, look.font, look.radius, look.density, look.dir]);\n\n  const set = useCallback(<K extends keyof Look>(k: K, v: Look[K]) => {\n    setLook((cur) => ({...cur, [k]: v}));\n    write(`${storageKey}-${k}`, v);\n  }, [storageKey]);\n\n  const value = useMemo<ThemeContextValue>(() => ({\n    ...look,\n    resolvedTheme,\n    setTheme: (v) => set('theme', v),\n    setAccent: (v) => set('accent', v),\n    setFont: (v) => set('font', v),\n    setRadius: (v) => set('radius', v),\n    setDensity: (v) => set('density', v),\n    setDir: (v) => set('dir', v),\n  }), [look, resolvedTheme, set]);\n\n  return (\n    <ThemeContext.Provider value={value}>\n      <DirectionProvider dir={look.dir}>{children}</DirectionProvider>\n    </ThemeContext.Provider>\n  );\n}\n\n/**\n * Read and change the app's look. Returns the current `theme`, `resolvedTheme`, `accent`, `font`, `radius`, `density`, `dir`\n * and a setter for each. Must be used under `ThemeProvider`. On the server it returns the defaults.\n * @example const {theme, setTheme} = useTheme();\n */\nexport function useTheme(): ThemeContextValue {\n  const ctx = useContext(ThemeContext);\n  if (!ctx) throw new Error('useTheme must be used inside <ThemeProvider>.');\n  return ctx;\n}\n\n/**\n * A script (as a string) that sets the saved theme, accent, font, corners, density and direction on `<html>` before the\n * page paints, so server-rendered pages do not flash the wrong look. Inline it in `<head>`.\n * @example <script dangerouslySetInnerHTML={{__html: themeScript()}} />\n */\nexport function themeScript(options: {storageKey?: string; defaultTheme?: Theme} = {}): string {\n  const key = JSON.stringify(options.storageKey ?? 'monoline');\n  const def = JSON.stringify(options.defaultTheme ?? 'system');\n  return `(function(){try{var d=document.documentElement,k=${key},g=function(n){return localStorage.getItem(k+'-'+n)},t=g('theme')||${def};if(t==='system')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'warm';d.setAttribute('data-theme',t);['accent','font','radius','density'].forEach(function(n){var v=g(n);if(v)d.setAttribute('data-'+n,v)});var r=g('dir');if(r)d.setAttribute('dir',r)}catch(e){}})()`;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/theme-provider/theme-switcher.tsx",
+      "content": "'use client';\nimport {forwardRef, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {NativeSelect} from '../native-select';\nimport {themeOptions, useTheme} from './theme-provider';\n\nexport interface ThemeSwitcherProps extends HTMLAttributes<HTMLDivElement> {\n  /** Which choices to offer. Default both: `['theme', 'accent']`. */\n  show?: ('theme' | 'accent')[];\n}\n\nconst cap = (s: string) => s[0]!.toUpperCase() + s.slice(1);\n\n/** Two selects, theme and accent, wired to `useTheme()`. Must sit under `ThemeProvider`. Build your own with `useTheme` for more control. */\nexport const ThemeSwitcher = forwardRef<HTMLDivElement, ThemeSwitcherProps>(function ThemeSwitcher({show = ['theme', 'accent'], className, ...rest}, ref) {\n  const {theme, accent, setTheme, setAccent} = useTheme();\n  return (\n    <div ref={ref} role=\"group\" aria-label=\"Appearance\" className={cx('theme-switcher', className)} style={{display: 'flex', gap: 'var(--s2)'}} {...rest}>\n      {show.includes('theme') && (\n        <NativeSelect aria-label=\"Theme\" value={theme} onChange={(e) => setTheme(e.target.value as typeof theme)}>\n          {themeOptions.theme.map((t) => <option key={t} value={t}>{cap(t)}</option>)}\n        </NativeSelect>\n      )}\n      {show.includes('accent') && (\n        <NativeSelect aria-label=\"Accent\" value={accent} onChange={(e) => setAccent(e.target.value as typeof accent)}>\n          {themeOptions.accent.map((a) => <option key={a} value={a}>{cap(a)}</option>)}\n        </NativeSelect>\n      )}\n    </div>\n  );\n});\n"
+    }
+  ]
+}

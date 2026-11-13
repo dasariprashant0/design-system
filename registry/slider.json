@@ -8,7 +8,7 @@
   "css": [
     {
       "path": "packages/css/src/components/slider.css",
-      "content": "/* Slider and toggle on Radix. */\n.slider { position: relative; display: flex; align-items: center; width: 100%; height: 20px; touch-action: none; user-select: none; }\n.slider-track { position: relative; flex: 1; height: 2px; background: var(--rule); }\n.slider-range { position: absolute; height: 100%; background: var(--foreground); }\n.slider-thumb { display: block; width: 14px; height: 14px; background: var(--foreground); border: 0; cursor: grab; }\n.slider[data-disabled] { opacity: 0.5; }\n.toggle { padding: var(--s2) var(--s4); border: 1px solid var(--rule); color: var(--muted); font-size: var(--text-sm); }\n.toggle:hover:not(:disabled) { color: var(--foreground); border-color: var(--foreground); }\n.toggle[data-state=\"on\"] { background: var(--foreground); color: var(--background); border-color: var(--foreground); }\n.toggle:disabled { opacity: 0.5; cursor: not-allowed; }\n.toggle-group { display: inline-flex; gap: var(--s2); }\n"
+      "content": "/* Slider and toggle on Radix. */\n.slider { position: relative; display: flex; align-items: center; width: 100%; height: 20px; touch-action: none; user-select: none; }\n.slider-track { position: relative; flex: 1; height: 2px; background: var(--rule); }\n.slider-range { position: absolute; height: 100%; background: var(--foreground); }\n.slider-thumb { display: block; width: 14px; height: 14px; background: var(--foreground); border: 0; cursor: grab; }\n.slider[data-disabled] { opacity: 0.5; }\n.toggle { padding: var(--s2) var(--s4); border: 1px solid var(--rule); color: var(--muted); font-size: var(--text-sm); }\n.toggle:not([data-state=\"on\"]):hover:not(:disabled) { color: var(--foreground); border-color: var(--foreground); }\n.toggle[data-state=\"on\"] { background: var(--foreground); color: var(--background); border-color: var(--foreground); }\n.toggle:disabled { opacity: 0.5; cursor: not-allowed; }\n.toggle-group { display: inline-flex; gap: var(--s2); }\n"
     },
     {
       "path": "packages/css/src/components/12-range.css",
@@ -34,6 +34,69 @@
     "packages/react/src/components/slider/slider.demo.tsx",
     "packages/react/src/components/slider/slider.test.tsx",
     "packages/react/src/components/slider/slider.tsx"
+  ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "SliderProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "number | [number, number]",
+          "optional": true,
+          "default": null,
+          "description": "A number for one thumb, or [low, high] for a range."
+        },
+        {
+          "name": "defaultValue",
+          "type": "number | [number, number]",
+          "optional": true,
+          "default": null,
+          "description": "The starting value when uncontrolled: a number for one thumb or `[low, high]` for a range. Default 0."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: number[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with an array holding the value of each thumb while the user drags or uses the keyboard."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Accessible name for each thumb. One string for a single thumb, or [low, high] labels for a range."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Slider} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s5)', maxWidth: 420}}><Slider aria-label=\"Volume\" defaultValue={60} /><Slider aria-label=\"Price\" defaultValue={[20, 70]} /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-state",
+      "values": [
+        "on"
+      ]
+    }
+  ],
+  "classes": [
+    "slider",
+    "slider-track",
+    "slider-range",
+    "slider-thumb",
+    "toggle",
+    "toggle-group",
+    "range",
+    "progress"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

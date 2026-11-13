@@ -1,0 +1,151 @@
+{
+  "name": "resizable",
+  "title": "Resizable",
+  "category": "layout",
+  "description": "Panels separated by handles you drag or move with the keyboard.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/resizable.css",
+      "content": "/* Resizable: flex panels sized in percent by the component; the handle is a thin rule with a larger hit area. */\n.resizable { display: flex; width: 100%; min-width: 0; min-height: 0; }\n.resizable[data-direction=\"vertical\"] { flex-direction: column; }\n.resizable-panel { min-width: 0; min-height: 0; overflow: auto; }\n.resizable-handle { position: relative; flex: none; background: var(--rule); touch-action: none; outline: none; }\n.resizable[data-direction=\"horizontal\"] > .resizable-handle { inline-size: 1px; cursor: col-resize; }\n.resizable[data-direction=\"vertical\"] > .resizable-handle { block-size: 1px; cursor: row-resize; }\n.resizable-handle::before { content: \"\"; position: absolute; }\n.resizable[data-direction=\"horizontal\"] > .resizable-handle::before { inset-block: 0; inset-inline: calc(var(--s3) * -1); }\n.resizable[data-direction=\"vertical\"] > .resizable-handle::before { inset-inline: 0; inset-block: calc(var(--s3) * -1); }\n.resizable-handle:hover, .resizable-handle[data-dragging] { background: var(--foreground); }\n.resizable-handle:focus-visible { background: var(--accent); outline: 2px solid var(--accent); outline-offset: 1px; }\n"
+    }
+  ],
+  "a11y": [
+    "Each handle is a focusable role=\"separator\" with aria-orientation, aria-valuenow, aria-valuemin, aria-valuemax and aria-controls pointing at the panel it resizes.",
+    "Arrow keys resize by the step (horizontal groups use Left/Right, vertical groups Up/Down; mirrored in right-to-left); PageUp/PageDown resize by double; Home and End jump to the limits.",
+    "minSize and maxSize are enforced for both keyboard and pointer, and are reflected in aria-valuemin and aria-valuemax.",
+    "Handles are at least 24 CSS px to grab and show the focus ring."
+  ],
+  "keywords": [
+    "split pane",
+    "splitter",
+    "panels",
+    "divider",
+    "drag to resize",
+    "layout"
+  ],
+  "kind": "components",
+  "import": "import {ResizablePanelGroup} from '@monoline/react'",
+  "path": "packages/react/src/components/resizable",
+  "files": [
+    "packages/react/src/components/resizable/index.ts",
+    "packages/react/src/components/resizable/meta.json",
+    "packages/react/src/components/resizable/resizable.demo.tsx",
+    "packages/react/src/components/resizable/resizable.test.tsx",
+    "packages/react/src/components/resizable/resizable.tsx"
+  ],
+  "related": [
+    "aspect-ratio",
+    "box",
+    "container"
+  ],
+  "props": [
+    {
+      "name": "ResizablePanelGroupProps",
+      "props": [
+        {
+          "name": "direction",
+          "type": "\"vertical\" | \"horizontal\"",
+          "optional": true,
+          "default": "'horizontal'",
+          "description": "`horizontal` puts panels side by side; `vertical` stacks them. Default `horizontal`."
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "optional": true,
+          "default": "5",
+          "description": "Percent a panel grows or shrinks per arrow-key press (PageUp/PageDown use double). Default 5."
+        },
+        {
+          "name": "onLayoutChange",
+          "type": "((sizes: number[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with every panel's size in percent (they add up to 100) after each resize."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "`ResizablePanel` and `ResizableHandle` elements, alternating, as direct children: panel, handle, panel..."
+        }
+      ]
+    },
+    {
+      "name": "ResizablePanelProps",
+      "props": [
+        {
+          "name": "defaultSize",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Starting size in percent. Panels without one share what is left equally."
+        },
+        {
+          "name": "minSize",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Smallest size in percent. Default 10."
+        },
+        {
+          "name": "maxSize",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "Largest size in percent. Default 100."
+        }
+      ]
+    },
+    {
+      "name": "ResizableHandleProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Names the handle for screen readers. Default \"Resize panels\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {ResizableHandle, ResizablePanel, ResizablePanelGroup} from '@monoline/react';\n\nconst box = {padding: 'var(--s4)', fontSize: 'var(--text-sm)'};\n\n<ResizablePanelGroup style={{height: '200px', border: '1px solid var(--rule)'}}>\n  <ResizablePanel defaultSize={30} minSize={15}><div style={box}>Sidebar</div></ResizablePanel>\n  <ResizableHandle aria-label=\"Resize sidebar\" />\n  <ResizablePanel defaultSize={70}><div style={box}>Content</div></ResizablePanel>\n</ResizablePanelGroup>",
+  "dataAttributes": [
+    {
+      "name": "data-direction",
+      "values": [
+        "vertical",
+        "horizontal"
+      ]
+    },
+    {
+      "name": "data-dragging",
+      "values": []
+    }
+  ],
+  "classes": [
+    "resizable",
+    "resizable-panel",
+    "resizable-handle"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/resizable/index.ts",
+      "content": "export {ResizablePanelGroup, ResizablePanel, ResizableHandle} from './resizable';\nexport type {ResizablePanelGroupProps, ResizablePanelProps, ResizableHandleProps} from './resizable';\n"
+    },
+    {
+      "path": "packages/react/src/components/resizable/meta.json",
+      "content": "{\"name\":\"resizable\",\"title\":\"Resizable\",\"category\":\"layout\",\"description\":\"Panels separated by handles you drag or move with the keyboard.\",\"status\":\"stable\",\"css\":[\"resizable.css\"],\"a11y\":[\"Each handle is a focusable role=\\\"separator\\\" with aria-orientation, aria-valuenow, aria-valuemin, aria-valuemax and aria-controls pointing at the panel it resizes.\",\"Arrow keys resize by the step (horizontal groups use Left/Right, vertical groups Up/Down; mirrored in right-to-left); PageUp/PageDown resize by double; Home and End jump to the limits.\",\"minSize and maxSize are enforced for both keyboard and pointer, and are reflected in aria-valuemin and aria-valuemax.\",\"Handles are at least 24 CSS px to grab and show the focus ring.\"],\"keywords\":[\"split pane\",\"splitter\",\"panels\",\"divider\",\"drag to resize\",\"layout\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/resizable/resizable.tsx",
+      "content": "'use client';\nimport {Children, createContext, forwardRef, isValidElement, useContext, useId, useRef, useState, type HTMLAttributes, type KeyboardEvent, type PointerEvent, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {useIsRtl} from '../../utils/direction';\n\ninterface GroupCtx {\n  direction: 'horizontal' | 'vertical';\n  sizes: number[];\n  limits: {min: number; max: number}[];\n  base: string;\n  step: number;\n  resize: (handle: number, from: number[], delta: number) => void;\n  root: React.RefObject<HTMLDivElement | null>;\n}\nconst Group = createContext<GroupCtx | null>(null);\nconst Index = createContext(0);\n\nexport interface ResizablePanelGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {\n  /** `horizontal` puts panels side by side; `vertical` stacks them. Default `horizontal`. */\n  direction?: 'horizontal' | 'vertical';\n  /** Percent a panel grows or shrinks per arrow-key press (PageUp/PageDown use double). Default 5. */\n  step?: number;\n  /** Called with every panel's size in percent (they add up to 100) after each resize. */\n  onLayoutChange?: (sizes: number[]) => void;\n  /** `ResizablePanel` and `ResizableHandle` elements, alternating, as direct children: panel, handle, panel... */\n  children: ReactNode;\n}\nexport interface ResizablePanelProps extends HTMLAttributes<HTMLDivElement> {\n  /** Starting size in percent. Panels without one share what is left equally. */\n  defaultSize?: number;\n  /** Smallest size in percent. Default 10. */\n  minSize?: number;\n  /** Largest size in percent. Default 100. */\n  maxSize?: number;\n}\nexport interface ResizableHandleProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {\n  /** Names the handle for screen readers. Default \"Resize panels\". */\n  'aria-label'?: string;\n}\n\nconst clamp = (n: number, lo: number, hi: number) => Math.min(Math.max(n, lo), hi);\n\n/** A row or column of panels separated by draggable, keyboard-operable handles. Put `ResizablePanel` and `ResizableHandle` as direct children, alternating. Sizes are percentages of the group. */\nexport const ResizablePanelGroup = forwardRef<HTMLDivElement, ResizablePanelGroupProps>(function ResizablePanelGroup({direction = 'horizontal', step = 5, onLayoutChange, className, children, ...rest}, ref) {\n  const base = useId();\n  const root = useRef<HTMLDivElement>(null);\n  const items = Children.toArray(children);\n  const panels = items.filter((c) => isValidElement<ResizablePanelProps>(c) && c.type === ResizablePanel) as React.ReactElement<ResizablePanelProps>[];\n  const limits = panels.map((p) => ({min: p.props.minSize ?? 10, max: p.props.maxSize ?? 100}));\n  const [sizes, setSizes] = useState<number[]>(() => {\n    const given = panels.reduce((a, p) => a + (p.props.defaultSize ?? 0), 0);\n    const open = panels.filter((p) => p.props.defaultSize === undefined).length;\n    return panels.map((p) => p.props.defaultSize ?? (open ? Math.max(0, 100 - given) / open : 100 / panels.length));\n  });\n  const live = sizes.length === panels.length ? sizes : panels.map(() => 100 / panels.length);\n\n  const resize = (h: number, from: number[], delta: number) => {\n    const a = from[h], b = from[h + 1], la = limits[h], lb = limits[h + 1];\n    if (a === undefined || b === undefined || !la || !lb) return;\n    const total = a + b;\n    const na = clamp(a + delta, Math.max(la.min, total - lb.max), Math.min(la.max, total - lb.min));\n    const next = from.slice();\n    next[h] = na; next[h + 1] = total - na;\n    if (next[h] === live[h]) return;\n    setSizes(next);\n    onLayoutChange?.(next);\n  };\n\n  let p = -1;\n  return (\n    <Group.Provider value={{direction, sizes: live, limits, base, step, resize, root}}>\n      <div ref={(el) => { root.current = el; if (typeof ref === 'function') ref(el); else if (ref) ref.current = el; }} className={cx('resizable', className)} data-direction={direction} {...rest}>\n        {items.map((c, i) => {\n          if (isValidElement(c) && c.type === ResizablePanel) p++;\n          return <Index.Provider key={isValidElement(c) && c.key !== null ? c.key : i} value={Math.max(p, 0)}>{c}</Index.Provider>;\n        })}\n      </div>\n    </Group.Provider>\n  );\n});\n\n/** One resizable region. Its size is a percentage of the group; it scrolls when its content is larger. */\nexport const ResizablePanel = forwardRef<HTMLDivElement, ResizablePanelProps>(function ResizablePanel({defaultSize: _d, minSize: _n, maxSize: _x, className, style, id, ...rest}, ref) {\n  const g = useContext(Group);\n  const i = useContext(Index);\n  const size = g?.sizes[i] ?? 100;\n  return <div ref={ref} id={id ?? (g ? `${g.base}-${i}` : undefined)} className={cx('resizable-panel', className)} style={{flex: `${size} ${size} 0%`, ...style}} data-size={Math.round(size)} {...rest} />;\n});\n\n/** The draggable divider between two panels. It is a separator you can focus: arrow keys resize, Home and End go to the limits. Drag with a pointer too. */\nexport const ResizableHandle = forwardRef<HTMLDivElement, ResizableHandleProps>(function ResizableHandle({className, onKeyDown, onPointerDown, 'aria-label': label = 'Resize panels', ...rest}, ref) {\n  const g = useContext(Group);\n  const i = useContext(Index); // index of the panel before this handle\n  const isRtl = useIsRtl();\n  const [drag, setDrag] = useState(false);\n  const start = useRef<{pos: number; from: number[]; span: number} | null>(null);\n  if (!g) return null;\n  const horizontal = g.direction === 'horizontal';\n  const here = g.sizes[i] ?? 0, after = g.sizes[i + 1] ?? 0;\n  const la = g.limits[i], lb = g.limits[i + 1];\n  const lo = la && lb ? Math.max(la.min, here + after - lb.max) : 0;\n  const hi = la && lb ? Math.min(la.max, here + after - lb.min) : 100;\n\n  const keydown = (e: KeyboardEvent<HTMLDivElement>) => {\n    onKeyDown?.(e);\n    if (e.defaultPrevented) return;\n    const rtl = horizontal && isRtl(e.currentTarget);\n    const grow = horizontal ? (rtl ? 'ArrowLeft' : 'ArrowRight') : 'ArrowDown';\n    const shrink = horizontal ? (rtl ? 'ArrowRight' : 'ArrowLeft') : 'ArrowUp';\n    const k = e.key;\n    let d: number | null = null;\n    if (k === grow) d = g.step; else if (k === shrink) d = -g.step;\n    else if (k === 'PageDown' || k === 'PageUp') d = (k === 'PageDown' ? 1 : -1) * g.step * 2;\n    else if (k === 'Home') d = lo - here; else if (k === 'End') d = hi - here;\n    if (d === null) return;\n    e.preventDefault();\n    g.resize(i, g.sizes, d);\n  };\n  const down = (e: PointerEvent<HTMLDivElement>) => {\n    onPointerDown?.(e);\n    if (e.defaultPrevented || e.button !== 0) return;\n    const r = g.root.current?.getBoundingClientRect();\n    start.current = {pos: horizontal ? e.clientX : e.clientY, from: g.sizes, span: (horizontal ? r?.width : r?.height) || 1};\n    e.currentTarget.setPointerCapture?.(e.pointerId);\n    setDrag(true);\n  };\n  const move = (e: PointerEvent<HTMLDivElement>) => {\n    const s = start.current;\n    if (!s) return;\n    const px = (horizontal ? e.clientX : e.clientY) - s.pos;\n    g.resize(i, s.from, ((horizontal && isRtl(e.currentTarget) ? -px : px) / s.span) * 100);\n  };\n  const up = (e: PointerEvent<HTMLDivElement>) => { start.current = null; setDrag(false); e.currentTarget.releasePointerCapture?.(e.pointerId); };\n\n  return (\n    <div\n      ref={ref}\n      role=\"separator\"\n      tabIndex={0}\n      aria-orientation={horizontal ? 'vertical' : 'horizontal'}\n      aria-valuenow={Math.round(here)}\n      aria-valuemin={Math.round(lo)}\n      aria-valuemax={Math.round(hi)}\n      aria-controls={`${g.base}-${i}`}\n      aria-label={label}\n      className={cx('resizable-handle', className)}\n      data-dragging={drag || undefined}\n      onKeyDown={keydown}\n      onPointerDown={down}\n      onPointerMove={move}\n      onPointerUp={up}\n      onPointerCancel={up}\n      {...rest}\n    />\n  );\n});\n"
+    }
+  ]
+}

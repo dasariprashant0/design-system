@@ -3,7 +3,7 @@ import {Command, useHotkeys, type CommandItem} from '@monoline/react';
 import {entries} from './registry';
 import {href, navigate} from './router';
 
-const GROUP = {guide: 'Guides', component: 'Components', hook: 'Hooks'} as const;
+const GROUP = {site: 'Explore', guide: 'Guides', component: 'Components', hook: 'Hooks'} as const;
 
 const items: CommandItem[] = entries.map((e) => ({
   id: e.path,

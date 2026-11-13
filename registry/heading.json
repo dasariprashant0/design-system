@@ -7,7 +7,7 @@
   "css": [
     {
       "path": "packages/css/src/components/heading.css",
-      "content": ".heading { font-weight: 500; line-height: 1.15; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: var(--display-md); letter-spacing: -0.035em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading-md { font-size: var(--text-lg); }\n.heading-sm { font-size: var(--text-base); }\n"
+      "content": ".heading { font-weight: 500; line-height: 1.2; text-wrap: balance; }\n.heading-display { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.75rem); letter-spacing: -0.03em; line-height: 0.95; }\n.heading-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); letter-spacing: -0.03em; }\n.heading-lg { font-size: calc(var(--text-lg) * 1.35); }\n.heading.heading-md { font-size: var(--text-lg); } /* two classes: typography.css (later in the bundle) also defines .heading-md and .heading-sm with other sizes */\n.heading.heading-sm { font-size: var(--text-base); }\n/* One casing rule: uppercase and the huge size live on .display / .display-* (the page title) only. Heading size=\"display\" is the h1 of app content: 28px to 44px, sentence case. */\n"
     }
   ],
   "a11y": [
@@ -28,6 +28,42 @@
     "packages/react/src/components/heading/heading.tsx",
     "packages/react/src/components/heading/index.ts",
     "packages/react/src/components/heading/meta.json"
+  ],
+  "related": [
+    "kbd",
+    "link",
+    "text"
+  ],
+  "props": [
+    {
+      "name": "HeadingProps",
+      "props": [
+        {
+          "name": "level",
+          "type": "1 | 2 | 3 | 4 | 5 | 6",
+          "optional": true,
+          "default": "2",
+          "description": "Document outline level, 1 to 6."
+        },
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\" | \"display\" | \"xl\"",
+          "optional": true,
+          "default": null,
+          "description": "Look. Defaults follow the level. `display` uses the display font."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Heading} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}><Heading level={1}>Display</Heading><Heading level={2}>Section</Heading><Heading level={3}>Subsection</Heading><Heading level={2} size=\"sm\">An h2 that looks small</Heading></div>",
+  "dataAttributes": [],
+  "classes": [
+    "heading",
+    "heading-display",
+    "heading-xl",
+    "heading-lg",
+    "heading-md",
+    "heading-sm"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"

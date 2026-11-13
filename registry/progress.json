@@ -31,6 +31,38 @@
     "packages/react/src/components/progress/progress.test.tsx",
     "packages/react/src/components/progress/progress.tsx"
   ],
+  "related": [
+    "alert",
+    "empty-state",
+    "notification-center"
+  ],
+  "props": [
+    {
+      "name": "ProgressProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Accessible name. Required: a progress bar without one is meaningless to assistive tech."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Progress} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s4)', maxWidth: 420}}><Progress aria-label=\"Upload\" value={62} /><Progress aria-label=\"Waiting\" /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "indeterminate"
+      ]
+    }
+  ],
+  "classes": [
+    "progress-bar",
+    "progress-fill"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

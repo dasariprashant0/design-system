@@ -38,6 +38,63 @@
     "packages/react/src/components/menubar/menubar.tsx",
     "packages/react/src/components/menubar/meta.json"
   ],
+  "related": [
+    "breadcrumb",
+    "navigation-menu",
+    "pagination"
+  ],
+  "props": [
+    {
+      "name": "MenubarItemProps",
+      "props": [
+        {
+          "name": "tone",
+          "type": "\"danger\" | \"default\"",
+          "optional": true,
+          "default": "'default'",
+          "description": "`danger` highlights in the danger colour."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger} from '@monoline/react';\n\n<Menubar aria-label=\"Application\">\n  <MenubarMenu><MenubarTrigger>File</MenubarTrigger><MenubarContent><MenubarItem>New file</MenubarItem><MenubarItem>Open</MenubarItem><MenubarSeparator /><MenubarItem>Quit</MenubarItem></MenubarContent></MenubarMenu>\n  <MenubarMenu><MenubarTrigger>Edit</MenubarTrigger><MenubarContent><MenubarItem>Undo</MenubarItem><MenubarItem>Redo</MenubarItem></MenubarContent></MenubarMenu>\n</Menubar>",
+  "dataAttributes": [
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    },
+    {
+      "name": "data-state",
+      "values": [
+        "open"
+      ]
+    }
+  ],
+  "classes": [
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check",
+    "dropdown",
+    "menu",
+    "menu-end",
+    "danger",
+    "menu-sep",
+    "menubar",
+    "menubar-trigger"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

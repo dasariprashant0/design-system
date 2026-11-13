@@ -31,7 +31,7 @@ export const pathOf = (m: ComponentMeta) => `${isHook(m) ? 'hooks' : 'components
 export const guidePath = (g: Guide) => `guides/${g.slug}`;
 
 export interface Entry {
-  kind: 'component' | 'hook' | 'guide';
+  kind: 'component' | 'hook' | 'guide' | 'site';
   name: string;
   title: string;
   description: string;
@@ -39,7 +39,17 @@ export interface Entry {
   keywords: string[];
 }
 
+/** Whole-site pages that are not a component or a guide. Their bodies live in ../site and are mapped in App.tsx. */
+export const sitePages = [
+  {slug: 'blocks', title: 'Blocks', description: 'Full-width page sections (hero, pricing, login, dashboard shell) with a viewport switcher, copy code and install commands.'},
+  {slug: 'themes', title: 'Themes', description: 'Named presets built from the theme, accent, font, corner and density options, with contrast checks and a Copy CSS export.'},
+  {slug: 'compare', title: 'Compare', description: 'Monoline against shadcn/ui, Mantine, MUI, Chakra, daisyUI and HeroUI: distribution, styling, measured bundle size and accessibility proof.'},
+  {slug: 'changelog', title: 'Changelog', description: 'What changed in each Monoline version.'},
+  {slug: 'roadmap', title: 'Roadmap', description: 'Where Monoline honestly stands today and what comes next.'},
+] as const;
+
 export const entries: Entry[] = [
+  ...sitePages.map((p): Entry => ({kind: 'site', name: p.slug, title: p.title, description: p.description, path: p.slug, keywords: [p.slug]})),
   ...guides.map((g): Entry => ({kind: 'guide', name: g.slug, title: g.title, description: g.summary, path: guidePath(g), keywords: [g.slug]})),
   ...components.map((m): Entry => ({kind: 'component', name: m.name, title: m.title, description: m.description, path: pathOf(m), keywords: [m.name, nice(m.category), ...(m.keywords ?? [])]})),
   ...hooks.map((m): Entry => ({kind: 'hook', name: m.name, title: m.title, description: m.description, path: pathOf(m), keywords: [m.name, ...(m.keywords ?? [])]})),
@@ -51,7 +61,7 @@ export const entryAt = (path: string) => entries.find((e) => e.path === path);
 /** Old hash links: `#button`, `#useClipboard`'s folder name, `#guides/forms`. Returns the new route path. */
 export function legacyPath(hash: string): string | undefined {
   const h = hash.replace(/^#\/?/, '');
-  return entries.find((e) => e.path === h || (e.kind !== 'guide' && e.name === h) || (e.kind === 'guide' && `guides/${e.name}` === h))?.path;
+  return entries.find((e) => e.path === h || (e.kind !== 'guide' && e.kind !== 'site' && e.name === h) || (e.kind === 'guide' && `guides/${e.name}` === h))?.path;
 }
 
 /** Previous and next entry of the same kind, in sidebar order. */

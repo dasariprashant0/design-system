@@ -8,8 +8,10 @@ export interface CalendarProps extends Omit<HTMLAttributes<HTMLDivElement>, 'def
   value?: Date | null;
   /** The initially selected date when uncontrolled. Default none. */
   defaultValue?: Date | null;
-  /** Called with the date the user picks. */
-  onValueChange?: (date: Date) => void;
+  /** Called with the date the user picks, or `null` when the user presses "Clear date" (only with `clearable`). */
+  onValueChange?(date: Date | null): void;
+  /** Adds a "Clear date" button under the grid that resets the value to `null`. Default false. */
+  clearable?: boolean;
   /** First day of the week: 0 = Sunday, 1 = Monday. */
   weekStartsOn?: 0 | 1;
   /** Earliest selectable date; earlier days are disabled. */
@@ -26,7 +28,7 @@ const add = (d: Date, n: number) => new Date(d.getFullYear(), d.getMonth(), d.ge
 const addMonths = (d: Date, n: number) => { const t = new Date(d.getFullYear(), d.getMonth() + n, 1); const last = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate(); return new Date(t.getFullYear(), t.getMonth(), Math.min(d.getDate(), last)); };
 
 /** Pick a date. Controlled with `value` + `onValueChange`, or uncontrolled. */
-export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calendar({value, defaultValue = null, onValueChange, weekStartsOn = 0, min, max, locale, className, ...rest}, ref) {
+export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calendar({value, defaultValue = null, onValueChange, clearable = false, weekStartsOn = 0, min, max, locale, className, ...rest}, ref) {
   const [inner, setInner] = useState<Date | null>(defaultValue);
   const selected = value === undefined ? inner : value;
   const [focus, setFocus] = useState<Date>(() => day(selected ?? new Date()));
@@ -93,6 +95,9 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
           ))}
         </tbody>
       </table>
+      {clearable && (
+        <button type="button" className="btn btn-ghost btn-sm" disabled={!selected} onClick={() => { if (value === undefined) setInner(null); onValueChange?.(null); }}>Clear date</button>
+      )}
     </div>
   );
 });

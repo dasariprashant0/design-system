@@ -1,0 +1,124 @@
+{
+  "name": "image-gallery",
+  "title": "Image gallery",
+  "category": "data-display",
+  "description": "A thumbnail grid that opens a lightbox with previous and next.",
+  "status": "stable",
+  "uses": [
+    "button",
+    "dialog"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/dialog.css",
+      "content": "/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }\n.dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: -0.02em; margin-bottom: var(--s3); } /* sentence case: uppercase is only for .display */\n"
+    },
+    {
+      "path": "packages/css/src/components/image-gallery.css",
+      "content": "/* Image gallery: a grid of square thumbnails and a near-full-screen lightbox panel. */\n.image-gallery { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); grid-template-columns: repeat(var(--gallery-columns, 3), minmax(0, 1fr)); }\n.image-gallery-thumb { display: block; width: 100%; padding: 0; border: 1px solid var(--rule); background: var(--wash); cursor: zoom-in; aspect-ratio: 1; overflow: hidden; }\n.image-gallery-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }\n.image-gallery-thumb:hover { border-color: var(--foreground); }\n.image-gallery-thumb:focus-visible { outline: 2px solid var(--ring, var(--accent)); outline-offset: 2px; }\n.image-gallery-lightbox { width: min(960px, 96vw); display: flex; flex-direction: column; gap: var(--s3); }\n.image-gallery-title { margin: 0; }\n.image-gallery-figure { margin: 0; display: grid; gap: var(--s2); justify-items: center; touch-action: pan-y; }\n.image-gallery-figure img { max-width: 100%; max-height: 65vh; object-fit: contain; user-select: none; }\n.image-gallery-figure figcaption { font-size: var(--text-sm); color: var(--muted); }\n.image-gallery-nav { display: flex; justify-content: space-between; gap: var(--s3); }\n"
+    }
+  ],
+  "a11y": [
+    "Each thumbnail is a button named by the image's required alt text, with aria-haspopup=dialog.",
+    "The lightbox is a modal dialog titled 'Image 2 of 5'; focus moves in, is trapped, and returns to the thumbnail on close.",
+    "ArrowLeft and ArrowRight (swapped in RTL) and the Previous and Next buttons move through the images and wrap; a horizontal swipe does the same; Escape closes.",
+    "A polite status message announces the new image's alt text and position. Neighbouring images are preloaded."
+  ],
+  "keywords": [
+    "lightbox",
+    "photos",
+    "carousel",
+    "grid",
+    "thumbnails",
+    "preview",
+    "media"
+  ],
+  "kind": "components",
+  "import": "import {ImageGallery} from '@monoline/react'",
+  "path": "packages/react/src/components/image-gallery",
+  "files": [
+    "packages/react/src/components/image-gallery/image-gallery.demo.tsx",
+    "packages/react/src/components/image-gallery/image-gallery.test.tsx",
+    "packages/react/src/components/image-gallery/image-gallery.tsx",
+    "packages/react/src/components/image-gallery/index.ts",
+    "packages/react/src/components/image-gallery/meta.json"
+  ],
+  "related": [
+    "button",
+    "dialog"
+  ],
+  "props": [
+    {
+      "name": "ImageGalleryProps",
+      "props": [
+        {
+          "name": "images",
+          "type": "GalleryImage[]",
+          "optional": false,
+          "default": null,
+          "description": "The images, in order. Each needs `alt` text."
+        },
+        {
+          "name": "columns",
+          "type": "number",
+          "optional": true,
+          "default": "3",
+          "description": "Number of columns in the thumbnail grid. Default 3."
+        },
+        {
+          "name": "onIndexChange",
+          "type": "((index: number) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the index of the image shown whenever the lightbox opens or moves."
+        }
+      ]
+    }
+  ],
+  "usage": "import {ImageGallery, type GalleryImage} from '@monoline/react';\n\nconst tile = (n: number, fill: string) => `data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><rect width=\"400\" height=\"300\" fill=\"${fill}\"/><text x=\"200\" y=\"165\" font-family=\"monospace\" font-size=\"64\" text-anchor=\"middle\" fill=\"#fff\">${n}</text></svg>`)}`;\n\nconst images: GalleryImage[] = ['#6b4f3a', '#3a5a6b', '#4f6b3a', '#6b3a5a', '#5a3a6b', '#3a6b5a'].map((c, i) => ({src: tile(i + 1, c), alt: `Sample picture ${i + 1}, a flat colour with its number`, caption: `Picture ${i + 1}`}));\n\n<div style={{maxWidth: '480px'}}><ImageGallery images={images} /></div>",
+  "dataAttributes": [],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "dialog-overlay",
+    "dialog-content",
+    "dialog-header",
+    "dialog-footer",
+    "dialog-description",
+    "dialog-close",
+    "dialog-title",
+    "image-gallery",
+    "image-gallery-thumb",
+    "image-gallery-lightbox",
+    "image-gallery-title",
+    "image-gallery-figure",
+    "image-gallery-nav"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/image-gallery/image-gallery.tsx",
+      "content": "'use client';\nimport {forwardRef, useEffect, useRef, useState, type CSSProperties, type HTMLAttributes} from 'react';\nimport {Button} from '../button';\nimport {Dialog, DialogContent, DialogTitle} from '../dialog';\nimport {cx} from '../../utils/cx';\nimport {useIsRtl} from '../../utils/direction';\n\nexport interface GalleryImage {\n  /** Full-size image URL, shown in the lightbox. */\n  src: string;\n  /** Required: describes the image for people who cannot see it. Used for the thumbnail button's name and the lightbox image. */\n  alt: string;\n  /** Smaller image URL for the grid. Defaults to `src`. */\n  thumbnail?: string;\n  /** Optional visible text under the image in the lightbox. */\n  caption?: string;\n}\n\nexport interface ImageGalleryProps extends Omit<HTMLAttributes<HTMLUListElement>, 'children'> {\n  /** The images, in order. Each needs `alt` text. */\n  images: GalleryImage[];\n  /** Number of columns in the thumbnail grid. Default 3. */\n  columns?: number;\n  /** Called with the index of the image shown whenever the lightbox opens or moves. */\n  onIndexChange?: (index: number) => void;\n}\n\n/**\n * A grid of thumbnails; choosing one opens a lightbox dialog with Previous and Next buttons.\n * ArrowLeft and ArrowRight move (wrapping), a horizontal swipe does the same, Escape closes and focus returns to the thumbnail of the image last shown.\n * The next and previous images are preloaded. Every image needs `alt`.\n * @example <ImageGallery images={[{src: '/a.jpg', alt: 'A red door'}, {src: '/b.jpg', alt: 'A blue door'}]} />\n */\nexport const ImageGallery = forwardRef<HTMLUListElement, ImageGalleryProps>(function ImageGallery({images, columns = 3, onIndexChange, className, style, ...rest}, ref) {\n  const [index, setIndex] = useState<number | null>(null);\n  const start = useRef<{x: number; y: number} | null>(null);\n  const thumbs = useRef<Array<HTMLButtonElement | null>>([]);\n  const last = useRef(0);\n  const isRtl = useIsRtl();\n  const n = images.length;\n  const open = index !== null && index < n;\n  const cur = open ? images[index]! : undefined;\n\n  const go = (i: number) => { const next = (i + n) % n; last.current = next; setIndex(next); onIndexChange?.(next); };\n\n  useEffect(() => {\n    if (!open || typeof Image === 'undefined') return;\n    for (const j of [index - 1, index + 1]) { const img = images[(j + n) % n]; if (img && n > 1) new Image().src = img.src; }\n  }, [index, open, images, n]);\n\n  const keydown = (e: React.KeyboardEvent) => {\n    if (n < 2 || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;\n    e.preventDefault();\n    const forward = (e.key === 'ArrowRight') !== isRtl(e.currentTarget as Element);\n    go(index! + (forward ? 1 : -1));\n  };\n\n  return (\n    <>\n      <ul ref={ref} className={cx('image-gallery', className)} style={{'--gallery-columns': columns, ...style} as CSSProperties} {...rest}>\n        {images.map((img, i) => (\n          <li key={img.src}>\n            <button type=\"button\" ref={(el) => { thumbs.current[i] = el; }} className=\"image-gallery-thumb\" aria-haspopup=\"dialog\" onClick={() => go(i)}>\n              <img src={img.thumbnail ?? img.src} alt={img.alt} loading=\"lazy\" />\n            </button>\n          </li>\n        ))}\n      </ul>\n      <Dialog open={open} onOpenChange={(o) => { if (!o) setIndex(null); }}>\n        <DialogContent className=\"image-gallery-lightbox\" aria-describedby={undefined} onKeyDown={keydown} onCloseAutoFocus={(e) => { e.preventDefault(); thumbs.current[last.current]?.focus(); }}>\n          <DialogTitle className=\"image-gallery-title\">Image {(index ?? 0) + 1} of {n}</DialogTitle>\n          {cur && (\n            <figure\n              className=\"image-gallery-figure\"\n              onPointerDown={(e) => { start.current = {x: e.clientX, y: e.clientY}; }}\n              onPointerUp={(e) => {\n                const s = start.current; start.current = null;\n                if (!s || n < 2) return;\n                const dx = e.clientX - s.x;\n                if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(e.clientY - s.y) * 2) go(index! + (dx < 0 !== isRtl(e.currentTarget) ? 1 : -1));\n              }}\n            >\n              <img key={cur.src} src={cur.src} alt={cur.alt} draggable={false} />\n              {cur.caption && <figcaption>{cur.caption}</figcaption>}\n            </figure>\n          )}\n          {n > 1 && (\n            <div className=\"image-gallery-nav\">\n              <Button size=\"sm\" onClick={() => go(index! - 1)}>Previous</Button>\n              <Button size=\"sm\" onClick={() => go(index! + 1)}>Next</Button>\n            </div>\n          )}\n          <span role=\"status\" className=\"sr-only\">{cur ? `${cur.alt}, ${index! + 1} of ${n}` : ''}</span>\n        </DialogContent>\n      </Dialog>\n    </>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/image-gallery/index.ts",
+      "content": "export {ImageGallery} from './image-gallery';\nexport type {GalleryImage, ImageGalleryProps} from './image-gallery';\n"
+    },
+    {
+      "path": "packages/react/src/components/image-gallery/meta.json",
+      "content": "{\"name\":\"image-gallery\",\"title\":\"Image gallery\",\"category\":\"data-display\",\"description\":\"A thumbnail grid that opens a lightbox with previous and next.\",\"status\":\"stable\",\"uses\":[\"button\",\"dialog\"],\"css\":[\"02-buttons.css\",\"dialog.css\",\"image-gallery.css\"],\"a11y\":[\"Each thumbnail is a button named by the image's required alt text, with aria-haspopup=dialog.\",\"The lightbox is a modal dialog titled 'Image 2 of 5'; focus moves in, is trapped, and returns to the thumbnail on close.\",\"ArrowLeft and ArrowRight (swapped in RTL) and the Previous and Next buttons move through the images and wrap; a horizontal swipe does the same; Escape closes.\",\"A polite status message announces the new image's alt text and position. Neighbouring images are preloaded.\"],\"keywords\":[\"lightbox\",\"photos\",\"carousel\",\"grid\",\"thumbnails\",\"preview\",\"media\"]}\n"
+    }
+  ]
+}

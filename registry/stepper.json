@@ -30,6 +30,52 @@
     "packages/react/src/components/stepper/stepper.test.tsx",
     "packages/react/src/components/stepper/stepper.tsx"
   ],
+  "related": [
+    "breadcrumb",
+    "menubar",
+    "navigation-menu"
+  ],
+  "props": [
+    {
+      "name": "StepperProps",
+      "props": [
+        {
+          "name": "steps",
+          "type": "StepperStep[]",
+          "optional": false,
+          "default": null,
+          "description": "The steps in order, each with a `title` and optional `description`."
+        },
+        {
+          "name": "current",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "Zero-based index of the current step. Earlier steps are done."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Stepper} from '@monoline/react';\n\n<Stepper aria-label=\"Checkout\" current={1} steps={[{title: 'Account'}, {title: 'Plan', description: 'Pick one'}, {title: 'Payment'}]} />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "done"
+      ]
+    }
+  ],
+  "classes": [
+    "crumbs",
+    "pager",
+    "steps",
+    "step",
+    "topbar",
+    "brand",
+    "topbar-nav",
+    "tab",
+    "tabpanel"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

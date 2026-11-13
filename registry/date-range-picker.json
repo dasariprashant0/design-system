@@ -1,0 +1,211 @@
+{
+  "name": "date-range-picker",
+  "title": "Date range picker",
+  "category": "forms",
+  "description": "A button that opens a range calendar and two typed date fields.",
+  "status": "stable",
+  "primitive": "radix-ui/Popover",
+  "uses": [
+    "range-calendar",
+    "popover",
+    "field"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select { height: var(--control-md); padding-block: 0; }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }\n.input-lg { height: var(--control-lg); padding: 0 18px; }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-inline-end: var(--s9); }\n.input-end { position: absolute; inset-inline-end: var(--s3); top: 50%; transform: translateY(-50%); min-height: var(--s6); min-width: var(--s6); display: inline-grid; place-items: center; }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; inset-inline-start: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(calc(16px * var(--dir, 1))); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-inline-end: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-inline-start: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/popover.css",
+      "content": "/* Popover, dropdown menu and select content on Radix: a bordered panel above the page. */\n.popover { z-index: var(--z-drawer); min-width: 200px; max-width: min(360px, 92vw); padding: var(--s4); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.popover:focus-visible { outline-offset: 2px; }\n.menu-content { z-index: var(--z-drawer); min-width: 200px; padding: var(--s1) 0; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-fade var(--fast) var(--ease); }\n.menu-content .menu-item { cursor: pointer; }\n.menu-content .menu-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.menu-content .menu-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.menu-content .menu-item[data-variant=\"danger\"][data-highlighted] { background: var(--danger); }\n.menu-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.menu-indicator { width: 14px; display: inline-flex; justify-content: center; }\n.menu-item-check { display: flex; align-items: center; gap: var(--s3); }\n"
+    },
+    {
+      "path": "packages/css/src/components/calendar.css",
+      "content": ".calendar { display: inline-grid; gap: var(--s3); padding: var(--s4); border: 1px solid var(--foreground); background: var(--background); }\n.calendar-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }\n.calendar-title { font-weight: 500; font-size: var(--text-sm); }\n.calendar-nav { width: var(--s6); height: var(--s6); border: 1px solid var(--rule); }\n.calendar-nav:hover { border-color: var(--foreground); }\n.calendar-grid { border-collapse: collapse; }\n.calendar-grid th { font-size: var(--text-xs); font-weight: 400; color: var(--muted); padding: var(--s1) 0; text-transform: uppercase; }\n.calendar-grid td { padding: 0; text-align: center; }\n.calendar-day { width: var(--s6); height: var(--s6); font-size: var(--text-sm); }\n.calendar-day:not([aria-pressed=\"true\"]):hover:not(:disabled) { background: var(--wash-2); }\n.calendar-day[data-outside] { color: var(--muted); }\n.calendar-day[data-today] { box-shadow: inset 0 0 0 1px var(--accent); }\n.calendar-day[aria-pressed=\"true\"] { background: var(--foreground); color: var(--background); }\n.calendar-day:disabled { opacity: 0.35; cursor: not-allowed; }\n.calendar-day:focus-visible, .calendar-nav:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }\n[dir=\"rtl\"] .calendar-nav { transform: scaleX(-1); }\n"
+    },
+    {
+      "path": "packages/css/src/components/date-picker.css",
+      "content": ".date-trigger { text-align: start; }\n.date-trigger[data-empty] { color: var(--muted); }\n/* Two classes: popover.css comes later in the bundle and its single-class rule used to win, leaving a double border. The popover draws the one border. */\n.popover.date-popover { padding: 0; max-width: none; }\n.popover.date-popover .calendar { border: 0; }\n"
+    },
+    {
+      "path": "packages/css/src/components/range-calendar.css",
+      "content": "/* Range calendar: reuses .calendar markup; the cells paint the band between start and end. */\n.range-cell[data-in-range] { background: var(--wash-2); }\n.range-cell[data-in-range][data-range-start] { border-start-start-radius: var(--radius); border-end-start-radius: var(--radius); }\n.range-cell[data-in-range][data-preview] .calendar-day:not([aria-pressed=\"true\"]) { text-decoration: underline dotted; text-underline-offset: 3px; }\n.range-calendar .calendar-day[aria-pressed=\"true\"] { background: var(--foreground); color: var(--background); }\n.range-calendar .calendar-day:hover:not(:disabled):not([aria-pressed=\"true\"]) { background: var(--wash); }\n"
+    },
+    {
+      "path": "packages/css/src/components/date-range-picker.css",
+      "content": ".date-range-popover { display: grid; gap: var(--s3); padding: var(--s3); border: 1px solid var(--foreground); max-width: none; }\n.date-range-popover .calendar { border: 0; padding: 0; }\n.date-range-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }\n.date-range-field { display: grid; gap: var(--s1); font-size: var(--text-xs); color: var(--muted); }\n.date-range-field .input { color: var(--foreground); font-size: var(--text-sm); }\n.date-range-error { margin: 0; min-height: 0; font-size: var(--text-xs); color: var(--danger); }\n.date-range-error:empty { display: none; }\n"
+    }
+  ],
+  "a11y": [
+    "The trigger is a button naming the field and the current range; it opens a dialog with two text fields and the calendar.",
+    "Typed fields are labelled Start and End, accept YYYY-MM-DD, apply on Enter or blur and mark aria-invalid with an alert message when the text is not a pickable date.",
+    "Choosing the end date closes the dialog and returns focus to the trigger; Escape closes without changing.",
+    "All range-calendar keyboard behaviour applies inside."
+  ],
+  "keywords": [
+    "daterange",
+    "date range picker",
+    "between dates",
+    "booking",
+    "period"
+  ],
+  "kind": "components",
+  "import": "import {DateRangePicker} from '@monoline/react'",
+  "path": "packages/react/src/components/date-range-picker",
+  "files": [
+    "packages/react/src/components/date-range-picker/date-range-picker.demo.tsx",
+    "packages/react/src/components/date-range-picker/date-range-picker.test.tsx",
+    "packages/react/src/components/date-range-picker/date-range-picker.tsx",
+    "packages/react/src/components/date-range-picker/index.ts",
+    "packages/react/src/components/date-range-picker/meta.json"
+  ],
+  "related": [
+    "range-calendar",
+    "popover",
+    "field"
+  ],
+  "props": [
+    {
+      "name": "DateRangePickerProps",
+      "props": [
+        {
+          "name": "placeholder",
+          "type": "string",
+          "optional": true,
+          "default": "'Pick dates'",
+          "description": "Text shown on the button while no range is chosen. Default \"Pick dates\"."
+        },
+        {
+          "name": "format",
+          "type": "Intl.DateTimeFormatOptions",
+          "optional": true,
+          "default": "{dateStyle: 'medium'}",
+          "description": "Intl options for the dates on the button. Default: medium date."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Stops the user opening the calendar."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Extra class name for the trigger button."
+        },
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Names the control when it is not inside a Field."
+        }
+      ]
+    }
+  ],
+  "usage": "import {DateRangePicker, Field} from '@monoline/react';\n\n<div style={{maxWidth: '320px', minHeight: '440px'}}><Field label=\"Stay\"><DateRangePicker weekStartsOn={1} /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    },
+    {
+      "name": "data-outside",
+      "values": []
+    },
+    {
+      "name": "data-today",
+      "values": []
+    },
+    {
+      "name": "data-empty",
+      "values": []
+    },
+    {
+      "name": "data-in-range",
+      "values": []
+    },
+    {
+      "name": "data-range-start",
+      "values": []
+    },
+    {
+      "name": "data-preview",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-lg",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check",
+    "calendar",
+    "calendar-head",
+    "calendar-title",
+    "calendar-nav",
+    "calendar-grid",
+    "calendar-day",
+    "date-trigger",
+    "date-popover",
+    "range-cell",
+    "range-calendar",
+    "date-range-popover",
+    "date-range-fields",
+    "date-range-field",
+    "date-range-error"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/date-range-picker/date-range-picker.tsx",
+      "content": "'use client';\nimport {forwardRef, useEffect, useId, useState} from 'react';\nimport {Popover as Radix} from 'radix-ui';\nimport {RangeCalendar, type RangeCalendarProps, type DateRange} from '../range-calendar';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\nexport interface DateRangePickerProps extends Omit<RangeCalendarProps, 'className' | 'aria-label'> {\n  /** Text shown on the button while no range is chosen. Default \"Pick dates\". */\n  placeholder?: string;\n  /** Intl options for the dates on the button. Default: medium date. */\n  format?: Intl.DateTimeFormatOptions;\n  /** Stops the user opening the calendar. */\n  disabled?: boolean;\n  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */\n  invalid?: boolean;\n  /** Extra class name for the trigger button. */\n  className?: string;\n  /** Names the control when it is not inside a Field. */\n  'aria-label'?: string;\n}\n\nconst pad = (n: number) => String(n).padStart(2, '0');\nconst toText = (d: Date | null) => (d ? `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` : '');\n/** Parses YYYY-MM-DD strictly; returns null for anything that is not a real date. */\nconst parse = (s: string): Date | null => {\n  const m = /^(\\d{4})-(\\d{2})-(\\d{2})$/.exec(s.trim());\n  if (!m) return null;\n  const d = new Date(+m[1]!, +m[2]! - 1, +m[3]!);\n  return d.getMonth() === +m[2]! - 1 && d.getDate() === +m[3]! ? d : null;\n};\n\n/** Pick a date range from a popover. It holds two typed fields (YYYY-MM-DD) and a range calendar that stay in sync. Value is `{start, end}`. Same `value` / `defaultValue` / `onValueChange` as RangeCalendar. */\nexport const DateRangePicker = forwardRef<HTMLButtonElement, DateRangePickerProps>(function DateRangePicker({value, defaultValue, onValueChange, placeholder = 'Pick dates', format = {dateStyle: 'medium'}, locale, disabled, invalid, className, 'aria-label': label, min, max, isDateDisabled, ...cal}, ref) {\n  const f = useFieldControl();\n  const errId = useId();\n  const [inner, setInner] = useState<DateRange>(defaultValue ?? {start: null, end: null});\n  const [open, setOpen] = useState(false);\n  const current = value ?? inner;\n  const fmt = (d: Date) => new Intl.DateTimeFormat(locale, format).format(d);\n  const text = current.start ? `${fmt(current.start)}${current.end ? ` – ${fmt(current.end)}` : ' –'}` : '';\n  const [typed, setTyped] = useState({start: toText(current.start), end: toText(current.end)});\n  useEffect(() => setTyped({start: toText(current.start), end: toText(current.end)}), [current.start, current.end]);\n  const [bad, setBad] = useState<'start' | 'end' | null>(null);\n\n  const commit = (r: DateRange) => { if (value === undefined) setInner(r); onValueChange?.(r); };\n  const allowed = (d: Date) => !((min && d < new Date(min.getFullYear(), min.getMonth(), min.getDate())) || (max && d > max) || isDateDisabled?.(d));\n  const apply = (which: 'start' | 'end') => {\n    const raw = typed[which];\n    if (raw.trim() === '') { setBad(null); commit({...current, [which]: null}); return; }\n    const d = parse(raw);\n    if (!d || !allowed(d)) { setBad(which); return; }\n    setBad(null);\n    const next = {...current, [which]: d};\n    commit(next.start && next.end && next.start > next.end ? {start: next.end, end: next.start} : next);\n  };\n  const field = (which: 'start' | 'end', name: string) => (\n    <label className=\"date-range-field\">\n      <span>{name}</span>\n      <input\n        type=\"text\"\n        inputMode=\"numeric\"\n        className=\"input\"\n        placeholder=\"YYYY-MM-DD\"\n        autoComplete=\"off\"\n        value={typed[which]}\n        aria-invalid={bad === which || undefined}\n        aria-describedby={bad === which ? errId : undefined}\n        onChange={(e) => setTyped({...typed, [which]: e.target.value})}\n        onBlur={() => apply(which)}\n        onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); apply(which); } }}\n      />\n    </label>\n  );\n\n  return (\n    <Radix.Root open={open} onOpenChange={setOpen}>\n      <Radix.Trigger asChild>\n        <button ref={ref} type=\"button\" disabled={disabled} className={cx('input date-trigger', className)} {...f} aria-label={label} aria-invalid={invalid || f['aria-invalid']} data-empty={!current.start || undefined}>\n          {text || placeholder}\n        </button>\n      </Radix.Trigger>\n      <Radix.Portal>\n        <Radix.Content className=\"popover date-popover date-range-popover\" sideOffset={6} align=\"start\" aria-label=\"Choose a date range\">\n          <div className=\"date-range-fields\">\n            {field('start', 'Start')}\n            {field('end', 'End')}\n          </div>\n          <p id={errId} className=\"date-range-error\" role=\"alert\">{bad ? 'Enter a date as YYYY-MM-DD that can be picked.' : ''}</p>\n          <RangeCalendar value={current} locale={locale} min={min} max={max} isDateDisabled={isDateDisabled} {...cal} onValueChange={(r) => { commit(r); setBad(null); if (r.start && r.end) setOpen(false); }} />\n        </Radix.Content>\n      </Radix.Portal>\n    </Radix.Root>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/date-range-picker/index.ts",
+      "content": "export {DateRangePicker} from './date-range-picker';\nexport type {DateRangePickerProps} from './date-range-picker';\n"
+    },
+    {
+      "path": "packages/react/src/components/date-range-picker/meta.json",
+      "content": "{\"name\":\"date-range-picker\",\"title\":\"Date range picker\",\"category\":\"forms\",\"description\":\"A button that opens a range calendar and two typed date fields.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Popover\",\"uses\":[\"range-calendar\",\"popover\",\"field\"],\"css\":[\"03-form-fields.css\",\"popover.css\",\"calendar.css\",\"date-picker.css\",\"range-calendar.css\",\"date-range-picker.css\"],\"a11y\":[\"The trigger is a button naming the field and the current range; it opens a dialog with two text fields and the calendar.\",\"Typed fields are labelled Start and End, accept YYYY-MM-DD, apply on Enter or blur and mark aria-invalid with an alert message when the text is not a pickable date.\",\"Choosing the end date closes the dialog and returns focus to the trigger; Escape closes without changing.\",\"All range-calendar keyboard behaviour applies inside.\"],\"keywords\":[\"daterange\",\"date range picker\",\"between dates\",\"booking\",\"period\"]}\n"
+    }
+  ]
+}

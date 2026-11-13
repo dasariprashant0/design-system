@@ -32,6 +32,58 @@
     "packages/react/src/components/number-ticker/number-ticker.tsx",
     "packages/react/src/components/number-ticker/use-reduced-motion.ts"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "NumberTickerProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "The number to count to. Screen readers get this, never the frames in between."
+        },
+        {
+          "name": "from",
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "Where the count starts. Default 0."
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "optional": true,
+          "default": "1500",
+          "description": "Milliseconds for the count. Default 1500."
+        },
+        {
+          "name": "decimals",
+          "type": "number",
+          "optional": true,
+          "default": "0",
+          "description": "Digits after the decimal point. Default 0."
+        },
+        {
+          "name": "format",
+          "type": "((n: number) => string)",
+          "optional": true,
+          "default": null,
+          "description": "Custom formatting, for currency or units. Overrides `decimals`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {NumberTicker} from '@monoline/react';\n\n<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}><NumberTicker value={12840} /></p>",
+  "dataAttributes": [],
+  "classes": [
+    "number-ticker"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

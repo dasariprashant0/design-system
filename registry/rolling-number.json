@@ -1,0 +1,94 @@
+{
+  "name": "rolling-number",
+  "title": "Rolling number",
+  "category": "effects",
+  "description": "A number whose digits roll to the new value when it changes. Screen readers read the final value.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/rolling-number.css",
+      "content": "/* Rolling number: each digit is a window one line tall over a strip of 0 to 9 that slides by --digit lines. */\n.rolling-number { display: inline-block; position: relative; font-variant-numeric: tabular-nums; line-height: 1; }\n.rolling-number-visual { display: inline-flex; }\n.rolling-number-digit { display: inline-block; height: 1em; overflow: hidden; }\n.rolling-number-strip { display: flex; flex-direction: column; transform: translateY(calc(var(--digit) * -1em)); transition: transform var(--slow) var(--ease); }\n.rolling-number-strip > span, .rolling-number-char { display: block; height: 1em; }\n@media (prefers-reduced-motion: reduce) { .rolling-number-strip { transition: none; } }\n"
+    }
+  ],
+  "a11y": [
+    "The animated digits are aria-hidden; the formatted final value is plain text for screen readers.",
+    "With prefers-reduced-motion the digits change without rolling.",
+    "Not interactive: no focus stops."
+  ],
+  "keywords": [
+    "counter",
+    "odometer",
+    "animated number",
+    "ticker",
+    "stat"
+  ],
+  "kind": "components",
+  "import": "import {RollingNumber} from '@monoline/react'",
+  "path": "packages/react/src/components/rolling-number",
+  "files": [
+    "packages/react/src/components/rolling-number/index.ts",
+    "packages/react/src/components/rolling-number/meta.json",
+    "packages/react/src/components/rolling-number/rolling-number.demo.tsx",
+    "packages/react/src/components/rolling-number/rolling-number.test.tsx",
+    "packages/react/src/components/rolling-number/rolling-number.tsx"
+  ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "RollingNumberProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "optional": false,
+          "default": null,
+          "description": "The number to show. When it changes, each digit rolls to its new value."
+        },
+        {
+          "name": "locale",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "BCP 47 locale for the digits and separators, such as \"de-DE\". Default the browser's locale."
+        },
+        {
+          "name": "format",
+          "type": "Intl.NumberFormatOptions",
+          "optional": true,
+          "default": null,
+          "description": "`Intl.NumberFormat` options, for example `{style: 'currency', currency: 'USD'}`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {useState} from 'react';\nimport {Button, RollingNumber} from '@monoline/react';\n\nfunction Counter() {\n  const [n, setN] = useState(1204);\n  return (\n    <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>\n      <strong style={{fontSize: 'var(--display-sm)'}}><RollingNumber value={n} format={{style: 'currency', currency: 'USD', maximumFractionDigits: 0}} /></strong>\n      <Button size=\"sm\" onClick={() => setN((v) => v + 137)}>Add 137</Button>\n      <Button size=\"sm\" onClick={() => setN((v) => Math.max(0, v - 999))}>Subtract 999</Button>\n    </div>\n  );\n}\n\n<Counter />",
+  "dataAttributes": [],
+  "classes": [
+    "rolling-number",
+    "rolling-number-visual",
+    "rolling-number-digit",
+    "rolling-number-strip",
+    "rolling-number-char"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/rolling-number/index.ts",
+      "content": "export {RollingNumber} from './rolling-number';\nexport type {RollingNumberProps} from './rolling-number';\n"
+    },
+    {
+      "path": "packages/react/src/components/rolling-number/meta.json",
+      "content": "{\"name\":\"rolling-number\",\"title\":\"Rolling number\",\"category\":\"effects\",\"description\":\"A number whose digits roll to the new value when it changes. Screen readers read the final value.\",\"status\":\"stable\",\"css\":[\"rolling-number.css\"],\"a11y\":[\"The animated digits are aria-hidden; the formatted final value is plain text for screen readers.\",\"With prefers-reduced-motion the digits change without rolling.\",\"Not interactive: no focus stops.\"],\"keywords\":[\"counter\",\"odometer\",\"animated number\",\"ticker\",\"stat\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/rolling-number/rolling-number.tsx",
+      "content": "'use client';\nimport {forwardRef, type CSSProperties, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface RollingNumberProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {\n  /** The number to show. When it changes, each digit rolls to its new value. */\n  value: number;\n  /** BCP 47 locale for the digits and separators, such as \"de-DE\". Default the browser's locale. */\n  locale?: string;\n  /** `Intl.NumberFormat` options, for example `{style: 'currency', currency: 'USD'}`. */\n  format?: Intl.NumberFormatOptions;\n}\n\nconst DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];\n\n/**\n * A number whose digits roll up or down when `value` changes. Screen readers get the final formatted value as plain text,\n * never the rolling strip; with `prefers-reduced-motion` the digits switch at once.\n * @example <RollingNumber value={1204} format={{style: 'currency', currency: 'USD'}} />\n */\nexport const RollingNumber = forwardRef<HTMLSpanElement, RollingNumberProps>(function RollingNumber({value, locale, format, className, ...rest}, ref) {\n  const text = new Intl.NumberFormat(locale, format).format(value);\n  const chars = Array.from(text);\n  return (\n    <span ref={ref} className={cx('rolling-number', className)} {...rest}>\n      <span className=\"sr-only\">{text}</span>\n      <span className=\"rolling-number-visual\" aria-hidden=\"true\">\n        {chars.map((ch, i) => {\n          // Keyed from the right so a digit keeps its column when the number gains or loses a place.\n          const key = chars.length - i;\n          return /[0-9]/.test(ch) ? (\n            <span key={key} className=\"rolling-number-digit\" style={{'--digit': ch} as CSSProperties}>\n              <span className=\"rolling-number-strip\">{DIGITS.map((d) => <span key={d}>{d}</span>)}</span>\n            </span>\n          ) : <span key={key} className=\"rolling-number-char\">{ch}</span>;\n        })}\n      </span>\n    </span>\n  );\n});\n"
+    }
+  ]
+}

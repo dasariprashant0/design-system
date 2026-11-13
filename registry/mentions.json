@@ -1,0 +1,167 @@
+{
+  "name": "mentions",
+  "title": "Mentions",
+  "category": "forms",
+  "description": "A textarea that suggests people when you type @.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/03-form-fields.css",
+      "content": "/* ─── Form fields ─── */\n.field { display: grid; gap: var(--s2); min-width: 0; }\n.field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }\n.input, .select { height: var(--control-md); padding-block: 0; }\n.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }\n.input::placeholder, .textarea::placeholder { color: var(--muted); }\n.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }\n.input[aria-invalid=\"true\"] { border-color: var(--danger); }\n.textarea { resize: vertical; min-height: 120px; line-height: 1.6; }\n.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }\n.input-lg { height: var(--control-lg); padding: 0 18px; }\n/* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */\n.input-wrap { position: relative; min-width: 0; }\n.input-wrap > .input { padding-inline-end: var(--s9); }\n.input-end { position: absolute; inset-inline-end: var(--s3); top: 50%; transform: translateY(-50%); min-height: var(--s6); min-width: var(--s6); display: inline-grid; place-items: center; }\n/* Text edited in place inside a row: no border; padding with a matching negative margin keeps the text in line with its\n   neighbours while the focus ring clears it by --s2. The right edge stays put, so the next control keeps its gap. */\n.input-bare { display: block; width: calc(100% + var(--s2)); margin: calc(-1 * var(--s2)) 0 calc(-1 * var(--s2)) calc(-1 * var(--s2)); padding: var(--s2); border: 0; background: transparent; resize: none; font: inherit; line-height: inherit; color: inherit; }\n.input-bare:focus-visible { outline-offset: 0; }\n/* A labelled on/off: a native checkbox drawn as a square switch. */\n.switch { display: inline-flex; align-items: center; gap: var(--s3); cursor: pointer; }\n.switch input { appearance: none; width: 36px; height: 20px; margin: 0; flex: none; border: 1px solid var(--foreground); position: relative; cursor: pointer; transition: background var(--fast); }\n.switch input::after { content: \"\"; position: absolute; top: 3px; inset-inline-start: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }\n.switch input:checked { background: var(--foreground); }\n.switch input:checked::after { transform: translateX(calc(16px * var(--dir, 1))); background: var(--background); }\n.switch input:disabled { opacity: 0.5; cursor: not-allowed; }\n/* Settings: label left, control right, a rule between rows. */\n.setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }\n.setting + .setting { border-top: 1px solid var(--rule); }\n.setting > :first-child { display: grid; gap: 2px; }\n\n/* Segmented control: one choice of a few, always visible. */\n.seg { display: flex; align-items: center; gap: var(--s2); }\n.seg > .muted { margin-inline-end: var(--s1); }\n.seg-opt { padding: var(--s1) var(--s3); border: 1px solid var(--rule); color: var(--muted); }\n.seg-opt + .seg-opt { margin-inline-start: calc(-1 * var(--s2) - 1px); }\n.seg-opt[aria-pressed=\"true\"], .seg-opt[aria-checked=\"true\"] { color: var(--background); background: var(--foreground); border-color: var(--foreground); }\n.seg-opt:not([aria-pressed=\"true\"]):not([aria-checked=\"true\"]):hover { color: var(--foreground); }\n"
+    },
+    {
+      "path": "packages/css/src/components/mentions.css",
+      "content": "/* Mentions: a .textarea with a list dropping below it. */\n.mentions { position: relative; width: 100%; }\n.mentions-list { position: absolute; inset-inline-start: 0; inset-inline-end: 0; top: calc(100% + var(--s1)); z-index: var(--z-drawer); max-height: 14rem; overflow-y: auto; margin: 0; padding: var(--s1) 0; list-style: none; background: var(--background); border: 1px solid var(--foreground); }\n.mentions-option { padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.mentions-option[data-active] { background: var(--foreground); color: var(--background); }\n.mentions-option[aria-disabled=\"true\"] { opacity: 0.5; cursor: not-allowed; }\n.mentions-note { padding: var(--s3) var(--s4); font-size: var(--text-sm); color: var(--muted); }\n"
+    }
+  ],
+  "a11y": [
+    "The textarea keeps its native textbox role (ARIA does not allow combobox on a textarea) and adds aria-haspopup=\"listbox\", aria-autocomplete=\"list\", aria-controls while the list is open and aria-activedescendant for the highlighted option; the list is a listbox of options.",
+    "ArrowDown/ArrowUp move the highlight, Enter or Tab insert the mention, Escape closes the list without inserting; focus never leaves the textarea.",
+    "A polite status region announces how many suggestions there are, and when they are loading or empty.",
+    "Async loading ignores answers for outdated queries so the list never shows stale results."
+  ],
+  "keywords": [
+    "at mention",
+    "tagging",
+    "autocomplete",
+    "comment box",
+    "@"
+  ],
+  "kind": "components",
+  "import": "import {Mentions} from '@monoline/react'",
+  "path": "packages/react/src/components/mentions",
+  "files": [
+    "packages/react/src/components/mentions/index.ts",
+    "packages/react/src/components/mentions/mentions.demo.tsx",
+    "packages/react/src/components/mentions/mentions.test.tsx",
+    "packages/react/src/components/mentions/mentions.tsx",
+    "packages/react/src/components/mentions/meta.json"
+  ],
+  "related": [
+    "autocomplete",
+    "calendar",
+    "checkbox"
+  ],
+  "props": [
+    {
+      "name": "MentionsProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The text when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": "''",
+          "description": "The initial text when uncontrolled. Default empty."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the full text after every edit and after a mention is inserted."
+        },
+        {
+          "name": "options",
+          "type": "MentionOption[]",
+          "optional": true,
+          "default": "[]",
+          "description": "The choices, filtered by what is typed after the trigger. Use `onSearch` instead to load them."
+        },
+        {
+          "name": "onSearch",
+          "type": "((query: string, trigger: string) => MentionOption[] | Promise<MentionOption[]>)",
+          "optional": true,
+          "default": null,
+          "description": "Loads choices for the typed query, for example from a server. Return the options or a promise of them. Late answers for an older query are ignored. Replaces `options` filtering when given."
+        },
+        {
+          "name": "triggers",
+          "type": "string[]",
+          "optional": true,
+          "default": "['@']",
+          "description": "Characters that open the list when typed at the start of a word. Default `[\"@\"]`."
+        },
+        {
+          "name": "onMentionSelect",
+          "type": "((option: MentionOption, trigger: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the option and the trigger when the user inserts a mention."
+        },
+        {
+          "name": "loadingText",
+          "type": "string",
+          "optional": true,
+          "default": "'Loading'",
+          "description": "Text shown while `onSearch` is loading. Default \"Loading\"."
+        },
+        {
+          "name": "emptyText",
+          "type": "string",
+          "optional": true,
+          "default": "'No matches'",
+          "description": "Text shown when nothing matches. Default \"No matches\"."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the field as having an error: sets `aria-invalid` and shows the error border."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Field, Mentions, type MentionOption} from '@monoline/react';\n\nconst people: MentionOption[] = [\n  {value: 'ada', label: 'Ada Lovelace'},\n  {value: 'grace', label: 'Grace Hopper'},\n  {value: 'alan', label: 'Alan Turing'},\n  {value: 'linus', label: 'Linus Torvalds', disabled: true},\n];\n\n<div style={{maxWidth: '360px', minHeight: '220px'}}><Field label=\"Comment\"><Mentions options={people} rows={3} /></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-active",
+      "values": []
+    }
+  ],
+  "classes": [
+    "field",
+    "field-hint",
+    "input",
+    "select",
+    "textarea",
+    "input-sm",
+    "input-lg",
+    "input-wrap",
+    "input-end",
+    "input-bare",
+    "switch",
+    "setting",
+    "seg",
+    "muted",
+    "seg-opt",
+    "mentions",
+    "mentions-list",
+    "mentions-option",
+    "mentions-note"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/mentions/index.ts",
+      "content": "export {Mentions} from './mentions';\nexport type {MentionsProps, MentionOption} from './mentions';\n"
+    },
+    {
+      "path": "packages/react/src/components/mentions/mentions.tsx",
+      "content": "'use client';\nimport {forwardRef, useEffect, useId, useRef, useState, type ChangeEvent, type KeyboardEvent, type TextareaHTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\n/** One person or thing the user can mention. */\nexport interface MentionOption {\n  /** Text inserted after the trigger, for example \"jane\" gives \"@jane\". No spaces. */\n  value: string;\n  /** Text shown in the list. */\n  label: string;\n  /** Makes the option unselectable. */\n  disabled?: boolean;\n}\n\nexport interface MentionsProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'value' | 'defaultValue' | 'onChange' | 'role'> {\n  /** The text when controlled. Pair with `onValueChange`. */\n  value?: string;\n  /** The initial text when uncontrolled. Default empty. */\n  defaultValue?: string;\n  /** Called with the full text after every edit and after a mention is inserted. */\n  onValueChange?: (value: string) => void;\n  /** The choices, filtered by what is typed after the trigger. Use `onSearch` instead to load them. */\n  options?: MentionOption[];\n  /** Loads choices for the typed query, for example from a server. Return the options or a promise of them. Late answers for an older query are ignored. Replaces `options` filtering when given. */\n  onSearch?: (query: string, trigger: string) => MentionOption[] | Promise<MentionOption[]>;\n  /** Characters that open the list when typed at the start of a word. Default `[\"@\"]`. */\n  triggers?: string[];\n  /** Called with the option and the trigger when the user inserts a mention. */\n  onMentionSelect?: (option: MentionOption, trigger: string) => void;\n  /** Text shown while `onSearch` is loading. Default \"Loading\". */\n  loadingText?: string;\n  /** Text shown when nothing matches. Default \"No matches\". */\n  emptyText?: string;\n  /** Marks the field as having an error: sets `aria-invalid` and shows the error border. */\n  invalid?: boolean;\n}\n\ninterface Active { trigger: string; start: number; query: string }\n\n/** Finds an open mention at the caret: a trigger at the start of a word followed by non-space text up to the caret. */\nfunction findActive(text: string, caret: number, triggers: string[]): Active | null {\n  for (let i = caret - 1; i >= 0; i--) {\n    const ch = text[i]!;\n    if (/\\s/.test(ch)) return null;\n    if (triggers.includes(ch)) return i === 0 || /\\s/.test(text[i - 1]!) ? {trigger: ch, start: i, query: text.slice(i + 1, caret)} : null;\n  }\n  return null;\n}\n\n/** A textarea that suggests people or items when the user types a trigger such as `@`. It follows the ARIA combobox pattern as far as a `<textarea>` allows (a textarea cannot take role combobox, so it stays a textbox with `aria-haspopup`, `aria-controls` and `aria-activedescendant`): ArrowUp/ArrowDown choose, Enter or Tab insert, Escape closes. Options are filtered locally or loaded with `onSearch`. The list opens under the field, not at the caret. */\nexport const Mentions = forwardRef<HTMLTextAreaElement, MentionsProps>(function Mentions({value, defaultValue = '', onValueChange, options = [], onSearch, triggers = ['@'], onMentionSelect, loadingText = 'Loading', emptyText = 'No matches', invalid, className, onKeyDown, onBlur, onSelect, ...rest}, ref) {\n  const f = useFieldControl();\n  const listId = useId();\n  const [inner, setInner] = useState(defaultValue);\n  const text = value ?? inner;\n  const area = useRef<HTMLTextAreaElement | null>(null);\n  const [active, setActive] = useState<Active | null>(null);\n  const [dismissed, setDismissed] = useState<number | null>(null); // trigger index the user closed with Escape\n  const [index, setIndex] = useState(0);\n  const [loaded, setLoaded] = useState<MentionOption[]>([]);\n  const [loading, setLoading] = useState(false);\n  const seq = useRef(0);\n  const open = !!active && dismissed !== active.start;\n\n  const query = active?.query ?? '';\n  const trigger = active?.trigger ?? '';\n  useEffect(() => {\n    if (!open || !onSearch) return;\n    const n = ++seq.current;\n    setLoading(true);\n    Promise.resolve(onSearch(query, trigger)).then((r) => { if (n === seq.current) { setLoaded(r); setLoading(false); } }, () => { if (n === seq.current) { setLoaded([]); setLoading(false); } });\n    return () => { seq.current++; };\n  }, [open, query, trigger, onSearch]);\n\n  const shown = !open ? [] : onSearch ? loaded : options.filter((o) => o.label.toLowerCase().includes(query.toLowerCase()) || o.value.toLowerCase().includes(query.toLowerCase()));\n  const at = Math.min(index, Math.max(shown.length - 1, 0));\n  const optId = (i: number) => `${listId}-${i}`;\n\n  const sync = (el: HTMLTextAreaElement, next = el.value) => {\n    const a = findActive(next, el.selectionStart ?? next.length, triggers);\n    setActive((p) => { if (p && a && p.start === a.start && p.query === a.query && p.trigger === a.trigger) return p; return a; });\n    if (!a || a.query !== active?.query) setIndex(0);\n    if (!a) setDismissed(null);\n  };\n  const change = (e: ChangeEvent<HTMLTextAreaElement>) => {\n    if (value === undefined) setInner(e.target.value);\n    onValueChange?.(e.target.value);\n    sync(e.target);\n  };\n  const pick = (o: MentionOption | undefined) => {\n    const el = area.current;\n    if (!o || o.disabled || !active || !el) return;\n    const insert = `${active.trigger}${o.value} `;\n    const end = active.start + 1 + active.query.length;\n    const next = text.slice(0, active.start) + insert + text.slice(end);\n    if (value === undefined) setInner(next);\n    onValueChange?.(next);\n    onMentionSelect?.(o, active.trigger);\n    setActive(null); setDismissed(null);\n    const caret = active.start + insert.length;\n    requestAnimationFrame(() => { el.focus(); el.setSelectionRange(caret, caret); });\n  };\n  const move = (dir: 1 | -1) => {\n    if (!shown.length) return;\n    let i = at;\n    for (let n = 0; n < shown.length; n++) { i = (i + dir + shown.length) % shown.length; if (!shown[i]!.disabled) break; }\n    setIndex(i);\n  };\n  const keydown = (e: KeyboardEvent<HTMLTextAreaElement>) => {\n    onKeyDown?.(e);\n    if (e.defaultPrevented || !open) return;\n    if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }\n    else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }\n    else if ((e.key === 'Enter' || e.key === 'Tab') && shown[at] && !e.shiftKey) { e.preventDefault(); pick(shown[at]); }\n    else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); setDismissed(active!.start); }\n    else if (e.key === 'Home' && e.ctrlKey) { e.preventDefault(); setIndex(0); }\n  };\n  const status = !open ? '' : loading ? loadingText : shown.length ? `${shown.length} ${shown.length === 1 ? 'suggestion' : 'suggestions'}` : emptyText;\n\n  return (\n    <div className={cx('mentions', className)}>\n      <textarea\n        ref={(el) => { area.current = el; if (typeof ref === 'function') ref(el); else if (ref) ref.current = el; }}\n        className=\"textarea\"\n        aria-haspopup=\"listbox\"\n        aria-autocomplete=\"list\"\n        aria-controls={open ? listId : undefined}\n        aria-activedescendant={open && shown[at] ? optId(at) : undefined}\n        {...f}\n        {...(invalid ? {'aria-invalid': true as const} : {})}\n        value={text}\n        onChange={change}\n        onKeyDown={keydown}\n        onSelect={(e) => { onSelect?.(e); sync(e.currentTarget); }}\n        onBlur={(e) => { onBlur?.(e); setActive(null); setDismissed(null); }}\n        {...rest}\n      />\n      {open && (\n        <ul id={listId} role=\"listbox\" className=\"mentions-list\" aria-label={rest['aria-label'] ? `${rest['aria-label']} suggestions` : 'Suggestions'}>\n          {loading && <li role=\"presentation\" className=\"mentions-note\">{loadingText}</li>}\n          {!loading && shown.length === 0 && <li role=\"presentation\" className=\"mentions-note\">{emptyText}</li>}\n          {!loading && shown.map((o, i) => (\n            <li\n              key={o.value}\n              id={optId(i)}\n              role=\"option\"\n              aria-selected={i === at}\n              aria-disabled={o.disabled || undefined}\n              data-active={i === at || undefined}\n              className=\"mentions-option\"\n              onMouseDown={(e) => e.preventDefault()}\n              onMouseEnter={() => setIndex(i)}\n              onClick={() => pick(o)}\n            >{o.label}</li>\n          ))}\n        </ul>\n      )}\n      <div role=\"status\" className=\"sr-only\">{status}</div>\n    </div>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/mentions/meta.json",
+      "content": "{\"name\":\"mentions\",\"title\":\"Mentions\",\"category\":\"forms\",\"description\":\"A textarea that suggests people when you type @.\",\"status\":\"stable\",\"css\":[\"03-form-fields.css\",\"mentions.css\"],\"a11y\":[\"The textarea keeps its native textbox role (ARIA does not allow combobox on a textarea) and adds aria-haspopup=\\\"listbox\\\", aria-autocomplete=\\\"list\\\", aria-controls while the list is open and aria-activedescendant for the highlighted option; the list is a listbox of options.\",\"ArrowDown/ArrowUp move the highlight, Enter or Tab insert the mention, Escape closes the list without inserting; focus never leaves the textarea.\",\"A polite status region announces how many suggestions there are, and when they are loading or empty.\",\"Async loading ignores answers for outdated queries so the list never shows stale results.\"],\"keywords\":[\"at mention\",\"tagging\",\"autocomplete\",\"comment box\",\"@\"]}\n"
+    }
+  ]
+}

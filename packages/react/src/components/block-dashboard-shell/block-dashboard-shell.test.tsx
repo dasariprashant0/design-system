@@ -2,6 +2,7 @@ import {render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from '../../test/axe';
 import {BlockDashboardShell} from './block-dashboard-shell';
+import type {RenderLink} from '../link';
 
 const nav = [{label: 'Overview', href: '/', current: true}, {label: 'Reports', href: '#reports'}];
 
@@ -41,5 +42,16 @@ describe('BlockDashboardShell', () => {
     expect(await axe(container)).toHaveNoViolations();
     await userEvent.click(screen.getByRole('button', {name: 'Menu'}));
     expect(await axe(document.body)).toHaveNoViolations();
+  });
+  it('hands links to renderLink so a client router can take over', async () => {
+    const go = vi.fn();
+    const renderLink: RenderLink = ({href, children, ...p}) => <a {...p} href={href} data-router onClick={(e) => { e.preventDefault(); go(href); }}>{children}</a>;
+    render(<BlockDashboardShell nav={nav} renderLink={renderLink}>x</BlockDashboardShell>);
+    const link = within(screen.getByRole('navigation', {name: 'Main'})).getByRole('link', {name: 'Reports'});
+    expect(link).toHaveAttribute('data-router');
+    expect(link).toHaveClass('block-shell-link');
+    expect(within(screen.getByRole('navigation', {name: 'Main'})).getByRole('link', {name: 'Overview'})).toHaveAttribute('aria-current', 'page');
+    await userEvent.click(link);
+    expect(go).toHaveBeenCalledWith('#reports');
   });
 });

@@ -35,6 +35,55 @@
     "packages/react/src/components/context-menu/index.ts",
     "packages/react/src/components/context-menu/meta.json"
   ],
+  "related": [
+    "alert-dialog",
+    "command",
+    "dialog"
+  ],
+  "props": [
+    {
+      "name": "ContextMenuItemProps",
+      "props": [
+        {
+          "name": "tone",
+          "type": "\"danger\" | \"default\"",
+          "optional": true,
+          "default": "'default'",
+          "description": "`danger` highlights in the danger colour."
+        }
+      ]
+    }
+  ],
+  "usage": "import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuTrigger} from '@monoline/react';\n\n<ContextMenu>\n  <ContextMenuTrigger><div style={{display: 'grid', placeItems: 'center', height: '120px', border: '1px dashed var(--rule)'}}>Right click here</div></ContextMenuTrigger>\n  <ContextMenuContent><ContextMenuLabel>File</ContextMenuLabel><ContextMenuItem>Rename</ContextMenuItem><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem tone=\"danger\">Delete</ContextMenuItem></ContextMenuContent>\n</ContextMenu>",
+  "dataAttributes": [
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-variant",
+      "values": [
+        "danger"
+      ]
+    }
+  ],
+  "classes": [
+    "popover",
+    "menu-content",
+    "menu-item",
+    "menu-label",
+    "menu-indicator",
+    "menu-item-check",
+    "dropdown",
+    "menu",
+    "menu-end",
+    "danger",
+    "menu-sep"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

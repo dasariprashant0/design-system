@@ -1,6 +1,8 @@
 /* Code block: dark panel (always dark, like toasts), thin rule, square corners. The copy button is an icon button
    inside the panel: in the header row when there is a title, otherwise floating in the top corner. */
-.code-block { position: relative; background: var(--surface); color: var(--surface-text); border: 1px solid var(--rule); font-size: var(--text-sm); }
+.code-block { min-width: 0; max-width: 100%; position: relative; background: var(--surface); color: var(--surface-text); border: 1px solid var(--rule); font-size: var(--text-sm); }
+/* A bare <pre class="code-block"> (no wrapper, no copy button) still works: it is its own scroller and padding. */
+pre.code-block { margin: 0; padding: var(--s4); overflow-x: auto; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
 .code-head { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); min-height: var(--s7); padding-block: var(--s1); padding-inline: var(--s4) var(--s2); border-bottom: 1px solid var(--rule); }
 .code-title { font-size: var(--text-xs); letter-spacing: 0.04em; color: var(--surface-text); opacity: 0.75; overflow-wrap: anywhere; }
 .code-copy { display: inline-grid; place-items: center; flex: none; width: var(--s6); height: var(--s6); color: var(--surface-text); opacity: 0.8; border: 1px solid transparent; }

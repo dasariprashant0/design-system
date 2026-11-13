@@ -1,0 +1,12 @@
+{
+  "name": "@monoline/mcp",
+  "version": "0.3.0",
+  "description": "Model Context Protocol server for Monoline: list, search and read components, install commands and the theming guide from any AI tool.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {"type": "git", "url": "git+https://github.com/dasariprashant0/design-system.git", "directory": "packages/mcp"},
+  "bin": {"monoline-mcp": "bin/monoline-mcp.mjs"},
+  "files": ["bin", "src"],
+  "engines": {"node": ">=20"},
+  "scripts": {"test": "node --test"}
+}

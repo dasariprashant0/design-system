@@ -1,0 +1,11 @@
+/* Toaster: kinds and positions for the toasts made by toast(). Builds on toast.css. */
+.toaster-viewport[data-position="start"] { inset-inline-end: auto; inset-inline-start: var(--s5); }
+.toaster-viewport[data-position="center"] { inset-inline: 0; margin-inline: auto; }
+.toaster-item { border-inline-start: 3px solid var(--foreground); }
+.toaster-item[data-kind="success"] { border-inline-start-color: var(--ok); }
+.toaster-item[data-kind="warning"] { border-inline-start-color: var(--warning); }
+.toaster-item[data-kind="error"] { border-inline-start-color: var(--danger); }
+.toaster-item[data-kind="loading"] { border-inline-start-style: dashed; }
+.toaster-item[data-swipe="move"] { transform: translateX(var(--radix-toast-swipe-move-x)); }
+.toaster-item[data-swipe="cancel"] { transform: none; transition: transform var(--fast) var(--ease); }
+@media (prefers-reduced-motion: reduce) { .toaster-item { animation: none !important; transition: none; } }

@@ -13,7 +13,9 @@ const sections = [
   {label: 'Docs', to: 'guides/getting-started', on: (p: string) => p.startsWith('guides/')},
   {label: 'Components', to: pathOf(components[0]!), on: (p: string) => p.startsWith('components/')},
   {label: 'Hooks', to: pathOf(hooks[0]!), on: (p: string) => p.startsWith('hooks/')},
-  {label: 'Guides', to: '#guides', on: () => false},
+  {label: 'Blocks', to: 'blocks', on: (p: string) => p === 'blocks'},
+  {label: 'Themes', to: 'themes', on: (p: string) => p === 'themes'},
+  {label: 'Compare', to: 'compare', on: (p: string) => p === 'compare'},
 ];
 
 export function Topbar({path, route, prefs, set, onSearch}: {path: string; route: Route; prefs: Prefs; set: (k: keyof Prefs, v: string) => void; onSearch: () => void}) {

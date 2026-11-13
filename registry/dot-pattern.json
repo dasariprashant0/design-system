@@ -31,6 +31,45 @@
     "packages/react/src/components/dot-pattern/index.ts",
     "packages/react/src/components/dot-pattern/meta.json"
   ],
+  "related": [
+    "animated-list",
+    "bento-grid",
+    "border-beam"
+  ],
+  "props": [
+    {
+      "name": "DotPatternProps",
+      "props": [
+        {
+          "name": "gap",
+          "type": "number",
+          "optional": true,
+          "default": "16",
+          "description": "Distance between dot centres, in px. Default 16."
+        },
+        {
+          "name": "radius",
+          "type": "number",
+          "optional": true,
+          "default": "1",
+          "description": "Dot radius, in px. Default 1."
+        },
+        {
+          "name": "fade",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Fade the pattern out towards the edges."
+        }
+      ]
+    }
+  ],
+  "usage": "import {DotPattern} from '@monoline/react';\n\n<div style={{position: 'relative', height: 200, display: 'grid', placeItems: 'center', border: '1px solid var(--rule)'}}>\n  <DotPattern fade />\n  <span style={{position: 'relative'}}>Content sits above</span>\n</div>",
+  "dataAttributes": [],
+  "classes": [
+    "dot-pattern",
+    "dot-pattern-fade"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

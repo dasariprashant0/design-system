@@ -26,6 +26,12 @@ describe('DatePicker', () => {
     await user.keyboard('{Escape}');
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
+  it('moves focus to the chosen day on open, not the month arrows (regression: found by e2e)', async () => {
+    const user = userEvent.setup();
+    render(<DatePicker aria-label="Start" locale="en-US" defaultValue={new Date(2026, 0, 15)} />);
+    await user.click(screen.getByRole('button', {name: 'Start'}));
+    expect(await screen.findByRole('button', {name: 'Thursday, January 15, 2026'})).toHaveFocus();
+  });
   it('shows a placeholder when empty', () => {
     render(<DatePicker aria-label="Start" placeholder="Choose" />);
     expect(screen.getByRole('button', {name: 'Start'})).toHaveTextContent('Choose');
@@ -37,5 +43,27 @@ describe('DatePicker', () => {
   it('has no axe violations', async () => {
     const {container} = render(<DatePicker aria-label="Start" />);
     expect(await axe(container)).toHaveNoViolations();
+  });
+  it('clears the date from the popover when clearable', async () => {
+    const user = userEvent.setup();
+    const fn = vi.fn();
+    render(<DatePicker aria-label="Start" clearable defaultValue={new Date(2026, 0, 15)} locale="en-US" onValueChange={fn} />);
+    const btn = screen.getByRole('button', {name: 'Start'});
+    await user.click(btn);
+    await user.click(await screen.findByRole('button', {name: 'Clear date'}));
+    expect(fn).toHaveBeenCalledWith(null);
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(btn).toHaveTextContent('Pick a date');
+    expect(btn).toHaveFocus();
+  });
+  it('clears with the keyboard and is axe clean when open', async () => {
+    const user = userEvent.setup();
+    render(<DatePicker aria-label="Start" clearable defaultValue={new Date(2026, 0, 15)} locale="en-US" />);
+    await user.click(screen.getByRole('button', {name: 'Start'}));
+    await screen.findByRole('dialog');
+    expect(await axe(document.body)).toHaveNoViolations();
+    screen.getByRole('button', {name: 'Clear date'}).focus();
+    await user.keyboard('{Enter}');
+    expect(screen.getByRole('button', {name: 'Start'})).toHaveTextContent('Pick a date');
   });
 });

@@ -1,0 +1,144 @@
+{
+  "name": "copy-button",
+  "title": "Copy button",
+  "category": "buttons",
+  "description": "A button that copies a value to the clipboard, shows 'Copied' for a moment and announces it.",
+  "status": "stable",
+  "uses": [
+    "button",
+    "icon-button",
+    "use-clipboard"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/icon-button.css",
+      "content": "/* Icon button: a square .btn. */\n.btn.btn-icon { height: auto; padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn.btn-icon.btn-sm { height: auto; padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
+    },
+    {
+      "path": "packages/css/src/components/copy-button.css",
+      "content": "/* Copy button: a normal .btn; data-copied marks the moment after a successful copy. */\n.btn[data-copied] { color: var(--ok); }\n.btn[data-copied]:hover:not(:disabled) { color: var(--background); }\n"
+    }
+  ],
+  "a11y": [
+    "Native button; the icon-only form is named by the label prop (default 'Copy').",
+    "The result is announced in a polite role=status region: 'Copied' or 'Copy failed'.",
+    "The text button changes its visible text to the copied label and resets itself."
+  ],
+  "keywords": [
+    "clipboard",
+    "copy",
+    "code",
+    "share",
+    "snippet"
+  ],
+  "kind": "components",
+  "import": "import {CopyButton} from '@monoline/react'",
+  "path": "packages/react/src/components/copy-button",
+  "files": [
+    "packages/react/src/components/copy-button/copy-button.demo.tsx",
+    "packages/react/src/components/copy-button/copy-button.test.tsx",
+    "packages/react/src/components/copy-button/copy-button.tsx",
+    "packages/react/src/components/copy-button/index.ts",
+    "packages/react/src/components/copy-button/meta.json"
+  ],
+  "related": [
+    "button",
+    "icon-button",
+    "use-clipboard"
+  ],
+  "props": [
+    {
+      "name": "CopyButtonProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "The text written to the clipboard when the button is pressed."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Visible text. Leave it out for an icon-only button that is named by `label`."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "optional": true,
+          "default": "'Copy'",
+          "description": "The accessible name of the icon-only button (the text button is named by its children). Default \"Copy\"."
+        },
+        {
+          "name": "copiedLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Copied'",
+          "description": "What is shown (text button) and announced to screen readers after a successful copy. Default \"Copied\"."
+        },
+        {
+          "name": "failedLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Copy failed'",
+          "description": "What is announced when the browser refuses to copy. Default \"Copy failed\"."
+        },
+        {
+          "name": "timeout",
+          "type": "number",
+          "optional": true,
+          "default": null,
+          "description": "How long the copied state lasts, in milliseconds. Default 2000."
+        },
+        {
+          "name": "onCopied",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the copied text after a successful copy."
+        }
+      ]
+    }
+  ],
+  "usage": "import {CopyButton} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}>\n  <code>npm i @monoline/react</code>\n  <CopyButton value=\"npm i @monoline/react\" label=\"Copy install command\" size=\"sm\" />\n  <CopyButton value=\"npm i @monoline/react\" variant=\"solid\">Copy command</CopyButton>\n</div>",
+  "dataAttributes": [
+    {
+      "name": "data-copied",
+      "values": []
+    }
+  ],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "btn-icon"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/copy-button/copy-button.tsx",
+      "content": "'use client';\nimport {forwardRef, type ReactNode} from 'react';\nimport {Button, type ButtonProps} from '../button';\nimport {IconButton} from '../icon-button';\nimport {useClipboard} from '../../hooks/use-clipboard';\n\nexport interface CopyButtonProps extends Omit<ButtonProps, 'children' | 'value' | 'aria-label'> {\n  /** The text written to the clipboard when the button is pressed. */\n  value: string;\n  /** Visible text. Leave it out for an icon-only button that is named by `label`. */\n  children?: ReactNode;\n  /** The accessible name of the icon-only button (the text button is named by its children). Default \"Copy\". */\n  label?: string;\n  /** What is shown (text button) and announced to screen readers after a successful copy. Default \"Copied\". */\n  copiedLabel?: string;\n  /** What is announced when the browser refuses to copy. Default \"Copy failed\". */\n  failedLabel?: string;\n  /** How long the copied state lasts, in milliseconds. Default 2000. */\n  timeout?: number;\n  /** Called with the copied text after a successful copy. */\n  onCopied?: (value: string) => void;\n}\n\nconst Copy = () => <svg aria-hidden=\"true\" viewBox=\"0 0 16 16\" width=\"1em\" height=\"1em\" fill=\"none\" stroke=\"currentColor\"><rect x=\"5.5\" y=\"5.5\" width=\"8\" height=\"8\" /><path d=\"M10.5 5.5v-3h-8v8h3\" /></svg>;\nconst Check = () => <svg aria-hidden=\"true\" viewBox=\"0 0 16 16\" width=\"1em\" height=\"1em\" fill=\"none\" stroke=\"currentColor\"><path d=\"M2.5 8.5l3.5 3.5 7.5-8\" /></svg>;\n\n/**\n * A button that copies `value` to the clipboard, swaps to a check or \"Copied\" for two seconds and announces the result in a polite live region.\n * @example <CopyButton value=\"npm i @monoline/react\" />\n */\nexport const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(function CopyButton({value, children, label = 'Copy', copiedLabel = 'Copied', failedLabel = 'Copy failed', timeout, onCopied, onClick, ...rest}, ref) {\n  const {copied, error, copy} = useClipboard({timeout});\n  const press = async (e: React.MouseEvent<HTMLButtonElement>) => {\n    onClick?.(e);\n    if (e.defaultPrevented) return;\n    if (await copy(value)) onCopied?.(value);\n  };\n  const status = <span role=\"status\" className=\"sr-only\">{copied ? copiedLabel : error ? failedLabel : ''}</span>;\n  return children === undefined ? (\n    <>\n      <IconButton ref={ref} aria-label={label} data-copied={copied || undefined} onClick={press} {...rest}>{copied ? <Check /> : <Copy />}</IconButton>\n      {status}\n    </>\n  ) : (\n    <>\n      <Button ref={ref} data-copied={copied || undefined} onClick={press} {...rest}>{copied ? copiedLabel : children}</Button>\n      {status}\n    </>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/copy-button/index.ts",
+      "content": "export {CopyButton} from './copy-button';\nexport type {CopyButtonProps} from './copy-button';\n"
+    },
+    {
+      "path": "packages/react/src/components/copy-button/meta.json",
+      "content": "{\"name\":\"copy-button\",\"title\":\"Copy button\",\"category\":\"buttons\",\"description\":\"A button that copies a value to the clipboard, shows 'Copied' for a moment and announces it.\",\"status\":\"stable\",\"uses\":[\"button\",\"icon-button\",\"use-clipboard\"],\"css\":[\"02-buttons.css\",\"icon-button.css\",\"copy-button.css\"],\"a11y\":[\"Native button; the icon-only form is named by the label prop (default 'Copy').\",\"The result is announced in a polite role=status region: 'Copied' or 'Copy failed'.\",\"The text button changes its visible text to the copied label and resets itself.\"],\"keywords\":[\"clipboard\",\"copy\",\"code\",\"share\",\"snippet\"]}\n"
+    }
+  ]
+}

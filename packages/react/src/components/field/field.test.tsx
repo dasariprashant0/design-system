@@ -88,4 +88,8 @@ describe('Field', () => {
     const {container} = render(<Field label="Email" hint="h" error="e"><Input /></Field>);
     expect(await axe(container)).toHaveNoViolations();
   });
+  it('ignores name outside a Form', () => {
+    render(<Field label="Email" name="email"><Input /></Field>);
+    expect(screen.getByLabelText('Email')).not.toHaveAttribute('aria-invalid');
+  });
 });

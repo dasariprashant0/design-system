@@ -33,6 +33,48 @@
     "packages/react/src/components/switch/switch.test.tsx",
     "packages/react/src/components/switch/switch.tsx"
   ],
+  "related": [
+    "field"
+  ],
+  "props": [
+    {
+      "name": "SwitchProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Visible label. Without it, give the switch an `aria-label`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Switch} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}><Switch label=\"Launch at login\" defaultChecked /><Switch label=\"Weekly digest\" /><Switch label=\"Locked\" disabled /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "checked",
+        "indeterminate"
+      ]
+    },
+    {
+      "name": "data-orientation",
+      "values": [
+        "horizontal"
+      ]
+    }
+  ],
+  "classes": [
+    "checkbox",
+    "radio",
+    "sw",
+    "checkbox-mark",
+    "radio-dot",
+    "radio-group",
+    "sw-thumb"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },

@@ -44,4 +44,11 @@ describe('BlockPricing', () => {
     const {container} = render(<BlockPricing title="Pricing" description="Pick a plan." tiers={tiers} />);
     expect(await axe(container)).toHaveNoViolations();
   });
+  it('renders a tier link through renderLink and keeps the button look', () => {
+    render(<BlockPricing title="Pricing" tiers={tiers} renderLink={({href, children}) => <a href={`/app${href}`} data-router>{children}</a>} />);
+    const link = screen.getByRole('link', {name: 'Start free'});
+    expect(link).toHaveAttribute('href', '/app/start');
+    expect(link).toHaveAttribute('data-router');
+    expect(link).toHaveClass('btn');
+  });
 });

@@ -11,7 +11,7 @@
   "css": [
     {
       "path": "packages/css/src/components/select.css",
-      "content": "/* Select on Radix. The trigger matches .input; the list is a .menu-content. */\n.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; padding: 12px 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }\n.select-trigger[data-placeholder] { color: var(--muted); }\n.select-trigger[aria-invalid=\"true\"] { border-color: var(--danger); }\n.select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }\n.select-trigger::after { content: \"↓\"; color: var(--muted); }\n.select-content { z-index: var(--z-drawer); min-width: var(--radix-select-trigger-width); max-height: min(320px, var(--radix-select-content-available-height)); overflow: hidden; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); }\n.select-viewport { padding: var(--s1) 0; }\n.select-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.select-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.select-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.select-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n"
+      "content": "/* Select on Radix. The trigger matches .input; the list is a .menu-content. */\n.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; height: var(--control-md); padding: 0 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }\n.select-trigger[data-placeholder] { color: var(--muted); }\n.select-trigger[aria-invalid=\"true\"] { border-color: var(--danger); }\n.select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }\n.select-trigger::after { content: \"↓\"; color: var(--muted); }\n.select-content { z-index: var(--z-drawer); min-width: var(--radix-select-trigger-width); max-height: min(320px, var(--radix-select-content-available-height)); overflow: hidden; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); }\n.select-viewport { padding: var(--s1) 0; }\n.select-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.select-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.select-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.select-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.select-trigger.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }\n.select-trigger.input-lg { height: var(--control-lg); padding: 0 18px; }\n.select-trigger[data-invalid] { border-color: var(--danger); }\n"
     }
   ],
   "a11y": [
@@ -34,6 +34,58 @@
     "packages/react/src/components/select/select.test.tsx",
     "packages/react/src/components/select/select.tsx"
   ],
+  "related": [
+    "field"
+  ],
+  "props": [
+    {
+      "name": "SelectTriggerProps",
+      "props": [
+        {
+          "name": "size",
+          "type": "\"sm\" | \"md\" | \"lg\"",
+          "optional": true,
+          "default": "'md'",
+          "description": "`md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size."
+        },
+        {
+          "name": "invalid",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Field, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from '@monoline/react';\n\n<div style={{maxWidth: 320}}><Field label=\"Sync every\"><Select defaultValue=\"15\"><SelectTrigger><SelectValue placeholder=\"Choose\" /></SelectTrigger><SelectContent><SelectGroup><SelectLabel>Interval</SelectLabel><SelectItem value=\"5\">5 minutes</SelectItem><SelectItem value=\"15\">15 minutes</SelectItem><SelectItem value=\"60\">Hour</SelectItem></SelectGroup></SelectContent></Select></Field></div>",
+  "dataAttributes": [
+    {
+      "name": "data-placeholder",
+      "values": []
+    },
+    {
+      "name": "data-highlighted",
+      "values": []
+    },
+    {
+      "name": "data-disabled",
+      "values": []
+    },
+    {
+      "name": "data-invalid",
+      "values": []
+    }
+  ],
+  "classes": [
+    "select-trigger",
+    "select-content",
+    "select-viewport",
+    "select-item",
+    "select-label",
+    "input-sm",
+    "input-lg"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },
@@ -48,7 +100,7 @@
     },
     {
       "path": "packages/react/src/components/select/select.tsx",
-      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Select as RadixSelect} from 'radix-ui';\nimport {cx} from '../../utils/cx';\nimport {useFieldControl} from '../field';\n\n/** The root of a custom single-choice dropdown. Use `value` and `onValueChange` (or `defaultValue`); put a `SelectTrigger` and `SelectContent` inside. For a plain list prefer `NativeSelect`. */\nexport const Select = RadixSelect.Root;\n/** Groups related `SelectItem`s, optionally under a `SelectLabel`. */\nexport const SelectGroup = RadixSelect.Group;\n/** Shows the chosen item's text inside the `SelectTrigger`; `placeholder` appears while nothing is chosen. */\nexport const SelectValue = RadixSelect.Value;\n\nexport interface SelectTriggerProps extends ComponentPropsWithoutRef<typeof RadixSelect.Trigger> {\n  /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */\n  invalid?: boolean;\n}\n/** The button that shows the chosen value. Inside a Field it is labelled and described automatically. */\nexport const SelectTrigger = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectTriggerProps>(function SelectTrigger({className, invalid, children, id, ...rest}, ref) {\n  const f = useFieldControl();\n  return (\n    <RadixSelect.Trigger ref={ref} id={id ?? f.id} aria-describedby={f['aria-describedby']} aria-invalid={invalid || f['aria-invalid']} className={cx('select-trigger', className)} {...rest}>\n      {children}\n    </RadixSelect.Trigger>\n  );\n});\n\n/** The floating list of options, rendered in a portal and positioned under the trigger. */\nexport const SelectContent = forwardRef<ElementRef<typeof RadixSelect.Content>, ComponentPropsWithoutRef<typeof RadixSelect.Content>>(function SelectContent({className, children, position = 'popper', sideOffset = 4, ...rest}, ref) {\n  return (\n    <RadixSelect.Portal>\n      <RadixSelect.Content ref={ref} position={position} sideOffset={sideOffset} className={cx('select-content', className)} {...rest}>\n        <RadixSelect.Viewport className=\"select-viewport\">{children}</RadixSelect.Viewport>\n      </RadixSelect.Content>\n    </RadixSelect.Portal>\n  );\n});\n\n/** One choice in the list; give it a `value` and the visible text as children. */\nexport const SelectItem = forwardRef<ElementRef<typeof RadixSelect.Item>, ComponentPropsWithoutRef<typeof RadixSelect.Item>>(function SelectItem({className, children, ...rest}, ref) {\n  return (\n    <RadixSelect.Item ref={ref} className={cx('select-item', className)} {...rest}>\n      <RadixSelect.ItemText>{children}</RadixSelect.ItemText>\n      <RadixSelect.ItemIndicator>✓</RadixSelect.ItemIndicator>\n    </RadixSelect.Item>\n  );\n});\n\n/** A non-interactive heading for a `SelectGroup`. */\nexport const SelectLabel = forwardRef<ElementRef<typeof RadixSelect.Label>, ComponentPropsWithoutRef<typeof RadixSelect.Label>>(function SelectLabel({className, ...rest}, ref) {\n  return <RadixSelect.Label ref={ref} className={cx('select-label', className)} {...rest} />;\n});\n"
+      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Select as RadixSelect} from 'radix-ui';\nimport {cx} from '../../utils/cx';\nimport {invalidAttrs, useFieldControl} from '../field';\n\n/** The root of a custom single-choice dropdown. Use `value` and `onValueChange` (or `defaultValue`); put a `SelectTrigger` and `SelectContent` inside. For a plain list prefer `NativeSelect`. */\nexport const Select = RadixSelect.Root;\n/** Groups related `SelectItem`s, optionally under a `SelectLabel`. */\nexport const SelectGroup = RadixSelect.Group;\n/** Shows the chosen item's text inside the `SelectTrigger`; `placeholder` appears while nothing is chosen. */\nexport const SelectValue = RadixSelect.Value;\n\nexport interface SelectTriggerProps extends ComponentPropsWithoutRef<typeof RadixSelect.Trigger> {\n  /** `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */\n  invalid?: boolean;\n}\n/** The button that shows the chosen value. Inside a Field it is labelled and described automatically. */\nexport const SelectTrigger = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectTriggerProps>(function SelectTrigger({className, size = 'md', invalid, children, id, ...rest}, ref) {\n  const f = useFieldControl();\n  return (\n    <RadixSelect.Trigger ref={ref} id={id ?? f.id} aria-describedby={f['aria-describedby']} {...invalidAttrs(invalid || Boolean(f['aria-invalid']))} className={cx('select-trigger', size !== 'md' && `input-${size}`, className)} {...rest}>\n      {children}\n    </RadixSelect.Trigger>\n  );\n});\n\n/** The floating list of options, rendered in a portal and positioned under the trigger. */\nexport const SelectContent = forwardRef<ElementRef<typeof RadixSelect.Content>, ComponentPropsWithoutRef<typeof RadixSelect.Content>>(function SelectContent({className, children, position = 'popper', sideOffset = 4, ...rest}, ref) {\n  return (\n    <RadixSelect.Portal>\n      <RadixSelect.Content ref={ref} position={position} sideOffset={sideOffset} className={cx('select-content', className)} {...rest}>\n        <RadixSelect.Viewport className=\"select-viewport\">{children}</RadixSelect.Viewport>\n      </RadixSelect.Content>\n    </RadixSelect.Portal>\n  );\n});\n\n/** One choice in the list; give it a `value` and the visible text as children. */\nexport const SelectItem = forwardRef<ElementRef<typeof RadixSelect.Item>, ComponentPropsWithoutRef<typeof RadixSelect.Item>>(function SelectItem({className, children, ...rest}, ref) {\n  return (\n    <RadixSelect.Item ref={ref} className={cx('select-item', className)} {...rest}>\n      <RadixSelect.ItemText>{children}</RadixSelect.ItemText>\n      <RadixSelect.ItemIndicator>✓</RadixSelect.ItemIndicator>\n    </RadixSelect.Item>\n  );\n});\n\n/** A non-interactive heading for a `SelectGroup`. */\nexport const SelectLabel = forwardRef<ElementRef<typeof RadixSelect.Label>, ComponentPropsWithoutRef<typeof RadixSelect.Label>>(function SelectLabel({className, ...rest}, ref) {\n  return <RadixSelect.Label ref={ref} className={cx('select-label', className)} {...rest} />;\n});\n"
     }
   ]
 }

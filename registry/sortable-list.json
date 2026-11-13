@@ -1,0 +1,115 @@
+{
+  "name": "sortable-list",
+  "title": "Sortable list",
+  "category": "data-display",
+  "description": "A list the user reorders by dragging a handle or with the keyboard, with live announcements.",
+  "status": "stable",
+  "css": [
+    {
+      "path": "packages/css/src/components/sortable-list.css",
+      "content": "/* Sortable list: rows with a grip handle; the picked-up row gets a heavy rule so it is never colour alone. */\n.sortable-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; border: 1px solid var(--rule); }\n.sortable-list-horizontal { flex-direction: row; flex-wrap: wrap; }\n.sortable-list-item { display: flex; align-items: center; gap: var(--s3); padding: var(--s2) var(--s3); background: var(--background); border-block-end: 1px solid var(--rule); font-size: var(--text-sm); }\n.sortable-list-horizontal .sortable-list-item { border-block-end: 0; border-inline-end: 1px solid var(--rule); }\n.sortable-list-item:last-child { border-block-end: 0; border-inline-end: 0; }\n.sortable-list-item[data-dragging] { outline: 2px solid var(--foreground); outline-offset: -2px; background: var(--wash); }\n.sortable-list-handle { display: inline-grid; place-items: center; min-width: 24px; min-height: 24px; padding: 0; border: 0; background: none; color: var(--muted); cursor: grab; touch-action: none; }\n.sortable-list-handle:hover, .sortable-list-handle[aria-pressed=\"true\"] { color: var(--foreground); }\n.sortable-list-handle:focus-visible { outline: 2px solid var(--ring, var(--accent)); outline-offset: 2px; }\n.sortable-list-handle[aria-pressed=\"true\"] { cursor: grabbing; }\n.sortable-list-label { min-width: 0; }\n"
+    }
+  ],
+  "a11y": [
+    "Each row has a handle button named 'Reorder <item>' with aria-pressed while picked up and a description of the keys.",
+    "Space or Enter picks an item up; the arrow keys (or Home and End) move it; Space or Enter drops it; Escape cancels and restores the order; Tab cancels.",
+    "A polite live region announces: picked up, moved to position N of M, dropped, cancelled.",
+    "Pointer drag uses the same handle; reordering never depends on dragging alone."
+  ],
+  "keywords": [
+    "drag and drop",
+    "reorder",
+    "sortable",
+    "dnd",
+    "kanban",
+    "rank"
+  ],
+  "kind": "components",
+  "import": "import {SortableList} from '@monoline/react'",
+  "path": "packages/react/src/components/sortable-list",
+  "files": [
+    "packages/react/src/components/sortable-list/index.ts",
+    "packages/react/src/components/sortable-list/meta.json",
+    "packages/react/src/components/sortable-list/sortable-list.demo.tsx",
+    "packages/react/src/components/sortable-list/sortable-list.test.tsx",
+    "packages/react/src/components/sortable-list/sortable-list.tsx"
+  ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "SortableListProps",
+      "props": [
+        {
+          "name": "aria-label",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "Required: names the list."
+        },
+        {
+          "name": "value",
+          "type": "SortableItem[]",
+          "optional": true,
+          "default": null,
+          "description": "The items in their current order when controlled. Pair with `onValueChange`."
+        },
+        {
+          "name": "defaultValue",
+          "type": "SortableItem[]",
+          "optional": true,
+          "default": "[]",
+          "description": "The items in their starting order when uncontrolled."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((items: SortableItem[]) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new order when the user drops an item in a new place. Not called for a cancelled move or a drop where it started."
+        },
+        {
+          "name": "orientation",
+          "type": "\"vertical\" | \"horizontal\"",
+          "optional": true,
+          "default": "'vertical'",
+          "description": "`vertical` (default) moves with ArrowUp and ArrowDown; `horizontal` lays the items in a row and moves with ArrowLeft and ArrowRight."
+        }
+      ]
+    }
+  ],
+  "usage": "import {SortableList, type SortableItem} from '@monoline/react';\n\nconst items: SortableItem[] = ['Write the brief', 'Draft the spec', 'Review with design', 'Build', 'Ship'].map((t) => ({id: t, label: t}));\n\n<div style={{maxWidth: '360px'}}><SortableList aria-label=\"Tasks\" defaultValue={items} /></div>",
+  "dataAttributes": [
+    {
+      "name": "data-dragging",
+      "values": []
+    }
+  ],
+  "classes": [
+    "sortable-list",
+    "sortable-list-horizontal",
+    "sortable-list-item",
+    "sortable-list-handle",
+    "sortable-list-label"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/sortable-list/index.ts",
+      "content": "export {SortableList} from './sortable-list';\nexport type {SortableItem, SortableListProps} from './sortable-list';\n"
+    },
+    {
+      "path": "packages/react/src/components/sortable-list/meta.json",
+      "content": "{\"name\":\"sortable-list\",\"title\":\"Sortable list\",\"category\":\"data-display\",\"description\":\"A list the user reorders by dragging a handle or with the keyboard, with live announcements.\",\"status\":\"stable\",\"css\":[\"sortable-list.css\"],\"a11y\":[\"Each row has a handle button named 'Reorder <item>' with aria-pressed while picked up and a description of the keys.\",\"Space or Enter picks an item up; the arrow keys (or Home and End) move it; Space or Enter drops it; Escape cancels and restores the order; Tab cancels.\",\"A polite live region announces: picked up, moved to position N of M, dropped, cancelled.\",\"Pointer drag uses the same handle; reordering never depends on dragging alone.\"],\"keywords\":[\"drag and drop\",\"reorder\",\"sortable\",\"dnd\",\"kanban\",\"rank\"]}\n"
+    },
+    {
+      "path": "packages/react/src/components/sortable-list/sortable-list.tsx",
+      "content": "'use client';\nimport {forwardRef, useEffect, useId, useRef, useState, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {useIsRtl} from '../../utils/direction';\nimport {useControllableState} from '../../hooks/use-controllable-state';\n\nexport interface SortableItem {\n  /** Unique key for the item. */\n  id: string;\n  /** What the row shows. */\n  label: ReactNode;\n  /** Plain text used in the handle's name and the live announcements. Defaults to `label` when it is a string, otherwise the `id`. */\n  text?: string;\n}\n\nexport interface SortableListProps extends Omit<HTMLAttributes<HTMLUListElement>, 'defaultValue' | 'onChange'> {\n  /** Required: names the list. */\n  'aria-label': string;\n  /** The items in their current order when controlled. Pair with `onValueChange`. */\n  value?: SortableItem[];\n  /** The items in their starting order when uncontrolled. */\n  defaultValue?: SortableItem[];\n  /** Called with the new order when the user drops an item in a new place. Not called for a cancelled move or a drop where it started. */\n  onValueChange?: (items: SortableItem[]) => void;\n  /** `vertical` (default) moves with ArrowUp and ArrowDown; `horizontal` lays the items in a row and moves with ArrowLeft and ArrowRight. */\n  orientation?: 'vertical' | 'horizontal';\n}\n\nconst nameOf = (i: SortableItem) => i.text ?? (typeof i.label === 'string' ? i.label : i.id);\nconst move = (ids: string[], id: string, to: number) => {\n  const next = ids.filter((x) => x !== id);\n  next.splice(Math.max(0, Math.min(ids.length - 1, to)), 0, id);\n  return next;\n};\n\n/**\n * A list the user can reorder by dragging a handle or with the keyboard: Space picks an item up, the arrow keys move it, Space drops it and Escape cancels.\n * Every step is announced in a polite live region (\"Moved to position 3 of 5\"). Controlled with `value` + `onValueChange`, or uncontrolled with `defaultValue`.\n * @example <SortableList aria-label=\"Priorities\" defaultValue={items} onValueChange={save} />\n */\nexport const SortableList = forwardRef<HTMLUListElement, SortableListProps>(function SortableList({value, defaultValue = [], onValueChange, orientation = 'vertical', className, ...rest}, ref) {\n  const [order, setOrder] = useControllableState<SortableItem[]>({value, defaultValue, onChange: onValueChange});\n  const [draft, setDraftState] = useState<string[] | null>(null);\n  const [active, setActive] = useState<{id: string; pointer: boolean} | null>(null);\n  const [message, setMessage] = useState('');\n  const draftRef = useRef<string[] | null>(null);\n  const rows = useRef(new Map<string, HTMLLIElement>());\n  const handles = useRef(new Map<string, HTMLButtonElement>());\n  const hintId = useId();\n  const isRtl = useIsRtl();\n  const horizontal = orientation === 'horizontal';\n\n  const setDraft = (ids: string[] | null) => { draftRef.current = ids; setDraftState(ids); };\n  const byId = new Map(order.map((i) => [i.id, i]));\n  const shown = draft ? draft.map((id) => byId.get(id)!).filter(Boolean) : order;\n  const total = order.length;\n  const label = (id: string) => nameOf(byId.get(id)!);\n\n  const pickUp = (id: string, pointer: boolean) => {\n    setDraft(order.map((i) => i.id));\n    setActive({id, pointer});\n    setMessage(`Picked up ${label(id)}, position ${order.findIndex((i) => i.id === id) + 1} of ${total}. ${pointer ? 'Drag to move.' : 'Use the arrow keys to move, Space to drop, Escape to cancel.'}`);\n  };\n  const to = (id: string, index: number) => {\n    const cur = draftRef.current!;\n    if (cur.indexOf(id) === index) return;\n    const next = move(cur, id, index);\n    setDraft(next);\n    setMessage(`${label(id)} moved to position ${next.indexOf(id) + 1} of ${total}.`);\n  };\n  const drop = () => {\n    const ids = draftRef.current;\n    if (!ids || !active) return;\n    const changed = ids.some((id, i) => id !== order[i]!.id);\n    setMessage(`${label(active.id)} dropped at position ${ids.indexOf(active.id) + 1} of ${total}.`);\n    if (changed) setOrder(ids.map((id) => byId.get(id)!));\n    setDraft(null); setActive(null);\n  };\n  const cancel = (quiet?: boolean) => {\n    if (!active) return;\n    if (!quiet) setMessage(`Move cancelled. ${label(active.id)} is back at position ${order.findIndex((i) => i.id === active.id) + 1} of ${total}.`);\n    setDraft(null); setActive(null);\n  };\n\n  // Moving a node in the DOM can drop focus in some browsers; give it back to the handle in use.\n  useEffect(() => { if (active && !active.pointer) { const h = handles.current.get(active.id); if (h && document.activeElement !== h) h.focus(); } }, [draft, active]);\n\n  // Pointer drag listens on the document, because the dragged row is re-parented as it moves.\n  useEffect(() => {\n    if (!active?.pointer) return;\n    const id = active.id;\n    const onMove = (e: PointerEvent) => {\n      const p = horizontal ? e.clientX : e.clientY;\n      const others = (draftRef.current ?? []).filter((x) => x !== id);\n      const rtl = horizontal && isRtl(rows.current.get(id));\n      let index = 0;\n      for (const o of others) {\n        const r = rows.current.get(o)?.getBoundingClientRect();\n        if (!r) continue;\n        const mid = horizontal ? (r.left + r.right) / 2 : (r.top + r.bottom) / 2;\n        if (rtl ? p < mid : p > mid) index++;\n      }\n      to(id, index);\n    };\n    const end = () => drop();\n    const abort = () => cancel();\n    document.addEventListener('pointermove', onMove);\n    document.addEventListener('pointerup', end);\n    document.addEventListener('pointercancel', abort);\n    return () => { document.removeEventListener('pointermove', onMove); document.removeEventListener('pointerup', end); document.removeEventListener('pointercancel', abort); };\n  });\n\n  const keydown = (e: React.KeyboardEvent<HTMLButtonElement>, id: string) => {\n    if (e.key === 'Tab') { cancel(true); return; }\n    const grabbed = active?.id === id;\n    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); if (grabbed) drop(); else if (!active) pickUp(id, false); return; }\n    if (!grabbed) return;\n    if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); cancel(); return; }\n    const flip = horizontal && isRtl(e.currentTarget) ? -1 : 1;\n    const step = horizontal ? ({ArrowRight: flip, ArrowLeft: -flip} as Record<string, number>)[e.key] : ({ArrowDown: 1, ArrowUp: -1} as Record<string, number>)[e.key];\n    const edge = e.key === 'Home' ? 0 : e.key === 'End' ? total - 1 : undefined;\n    if (step === undefined && edge === undefined) return;\n    e.preventDefault();\n    to(id, edge ?? draftRef.current!.indexOf(id) + step!);\n  };\n\n  return (\n    <>\n      <ul ref={ref} className={cx('sortable-list', horizontal && 'sortable-list-horizontal', className)} {...rest}>\n        {shown.map((item) => {\n          const grabbed = active?.id === item.id;\n          return (\n            <li key={item.id} ref={(el) => { if (el) rows.current.set(item.id, el); else rows.current.delete(item.id); }} className=\"sortable-list-item\" data-dragging={grabbed || undefined}>\n              <button\n                type=\"button\"\n                ref={(el) => { if (el) handles.current.set(item.id, el); else handles.current.delete(item.id); }}\n                className=\"sortable-list-handle\"\n                aria-label={`Reorder ${nameOf(item)}`}\n                aria-describedby={hintId}\n                aria-pressed={grabbed}\n                onKeyDown={(e) => keydown(e, item.id)}\n                onPointerDown={(e) => { if (e.button === 0 && !active) { e.preventDefault(); e.currentTarget.focus(); pickUp(item.id, true); } }}\n              ><svg aria-hidden=\"true\" viewBox=\"0 0 16 16\" width=\"1em\" height=\"1em\" fill=\"currentColor\"><path d=\"M5 3h2v2H5zM9 3h2v2H9zM5 7h2v2H5zM9 7h2v2H9zM5 11h2v2H5zM9 11h2v2H9z\" /></svg></button>\n              <span className=\"sortable-list-label\">{item.label}</span>\n            </li>\n          );\n        })}\n      </ul>\n      <span id={hintId} className=\"sr-only\">Press Space to pick up, the arrow keys to move, Space again to drop, Escape to cancel.</span>\n      <span role=\"status\" aria-live=\"polite\" className=\"sr-only\">{message}</span>\n    </>\n  );\n});\n"
+    }
+  ]
+}

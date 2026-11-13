@@ -29,6 +29,48 @@
     "packages/react/src/components/timeline/timeline.test.tsx",
     "packages/react/src/components/timeline/timeline.tsx"
   ],
+  "related": [
+    "accordion",
+    "area-chart",
+    "avatar"
+  ],
+  "props": [
+    {
+      "name": "TimelineItemProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "What happened, shown as the entry's heading line."
+        },
+        {
+          "name": "time",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Human text for when it happened, such as \"2 days ago\"."
+        },
+        {
+          "name": "dateTime",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Machine-readable date for the time element."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Timeline, TimelineItem} from '@monoline/react';\n\n<Timeline aria-label=\"Activity\"><TimelineItem title=\"Project created\" time=\"3 days ago\" dateTime=\"2026-11-09\">Ada started the project.</TimelineItem><TimelineItem title=\"First release\" time=\"Yesterday\" dateTime=\"2026-11-11\" /><TimelineItem title=\"Public\" time=\"Today\" dateTime=\"2026-11-12\" /></Timeline>",
+  "dataAttributes": [],
+  "classes": [
+    "timeline",
+    "timeline-item",
+    "timeline-title",
+    "timeline-time",
+    "timeline-body"
+  ],
   "dependencies": {
     "radix-ui": "^1.4.2"
   },
