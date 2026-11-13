@@ -1,4 +1,4 @@
 /* Icon button: a square .btn. */
-.btn-icon { padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }
-.btn-icon.btn-sm { padding: var(--s2); }
+.btn.btn-icon { height: auto; padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }
+.btn.btn-icon.btn-sm { height: auto; padding: var(--s2); }
 .btn-icon svg { width: 1em; height: 1em; }

@@ -4,7 +4,7 @@ import {readdirSync} from 'node:fs';
 import {read, parseTokens, contrast} from './lib.mjs';
 import './check-logical.mjs';
 import './check-layers.mjs';
-import {findDuplicates} from './check-duplicates.mjs';
+import {findDuplicates, parseRules} from './check-duplicates.mjs';
 import './size.mjs';
 
 const {themes, accents} = parseTokens();
@@ -75,6 +75,16 @@ for (const [file, sel, on] of [['segmented-control.css', '.segment', 'data-state
 
 // One source of truth per selector: the same selector defined in two stylesheets with different values means the later one wins silently.
 for (const c of findDuplicates().conflicts) fails.push(`${c.sel} is defined in ${c.files.join(' and ')} with different ${c.props.map((p) => p.prop).join(', ')}; keep one (run node packages/css/scripts/check-duplicates.mjs)`);
+
+// A hover (or active/selected) rule that gives a label the colour of its own fill makes the label vanish. The "hover rule out-ranks
+// the selected rule" version of this bug is caught by the lists above and by scripts/css-computed.mjs (real pointer); this catches the direct one.
+for (const f of linted) {
+  for (const {sel, props} of parseRules(read(f))) {
+    if (!/:(hover|active)|\[(aria-pressed|data-state)=/.test(sel)) continue;
+    const bg = props.background ?? props['background-color'];
+    if (props.color && bg && props.color === bg) fails.push(`${f}: "${sel}" sets colour and background to the same value (${bg}); the label would vanish`);
+  }
+}
 
 if (fails.length) { console.error(fails.map((f) => 'FAIL ' + f).join('\n')); process.exit(1); }
 console.log(`ok: ${n} contrast checks across ${Object.keys(themes).length} themes and ${Object.keys(accents).length + 1} accents; no raw colours in components.`);

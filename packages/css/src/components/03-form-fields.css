@@ -6,7 +6,8 @@
 .input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }
 .input[aria-invalid="true"] { border-color: var(--danger); }
 .textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
-.input-sm { padding: 6px 10px; font-size: var(--text-sm); }
+.input, .select { height: var(--control-h); padding-block: 0; }
+.input-sm { height: var(--control-h-sm); padding: 0 10px; font-size: var(--text-sm); }
 /* A control at a field's right end (a list picker, a clear button): --s3 in from the edge, the text stops before it. */
 .input-wrap { position: relative; min-width: 0; }
 .input-wrap > .input { padding-inline-end: var(--s9); }

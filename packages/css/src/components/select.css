@@ -1,5 +1,5 @@
 /* Select on Radix. The trigger matches .input; the list is a .menu-content. */
-.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; padding: 12px 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }
+.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; height: var(--control-h); padding: 0 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }
 .select-trigger[data-placeholder] { color: var(--muted); }
 .select-trigger[aria-invalid="true"] { border-color: var(--danger); }
 .select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }

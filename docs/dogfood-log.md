@@ -27,7 +27,11 @@ Every fix has a guard that fails if it comes back (jsdom cannot see CSS, so most
 
 Not fixed here but found while fixing: `check.mjs` can only see CSS text. A cascade test that loads `monoline.css` in a real browser and compares computed style with the documented value (size, columns, gap) would have caught A1 to A3 automatically. That is the best next investment in tests.
 
-### Same root cause is still lurking
+### Same root cause: resolved (css session)
+
+`packages/css/scripts/check-duplicates.mjs` (part of `npm run check`) fails when one selector is defined in two stylesheets with different values. Removed or merged: `.stack` (3 definitions, now `stack.css`), `.empty` (legacy 14vh margin), `.code-block` (legacy padding and inset shadow doubled the component's), `.container` and `.grid` (utilities.css; with cascade layers the utilities layer beat the Container and Grid components, so `container-text` and `Grid columns` would have broken again), `.text*`, `.heading*` and `.heading-display` (the whole legacy `typography.css` is gone). `scripts/css-computed.mjs` (`npm run test:css-browser`, also in the audit workflow) loads the built docs CSS in Chrome and asserts computed values: equal Button/Input/Select heights (new `--control-h`, `--control-h-sm`), Stack gap, container widths, heading scale and casing, rhythm, date popover borders, hover labels. Cross-file overrides between *different* selectors on one element (the date popover) are only caught by that browser test.
+
+### Same root cause is still lurking (historic note)
 
 A scan of `dist/monoline.css` finds selectors defined twice with different declarations, from the legacy numbered files and the newer component files: `.stack` (3 definitions), `.empty`, `.code-block`, `.container`, `.text`, `.text-truncate`, `.heading`, `.heading-display`. A1 and A2 came from this. The remaining ones have not been proved harmful; they should be reviewed one by one (see open problem 1).
 
@@ -43,13 +47,13 @@ Fixed in this pass are marked ✔. Everything else is open and should be fixed b
 | V2 | High | Blocks | Feature titles and tier names as large as the section heading, hierarchy inverted | ✔ A2 |
 | V3 | High | Segmented control, Toggle, Toolbar, Calendar | Selected label disappears on hover | ✔ A3 |
 | V4 | Medium | Stat | Misaligned values in a row | ✔ A5 |
-| V5 | Medium | Dialog, AlertDialog, Hero | Titles are UPPERCASE display type ("DELETE YOUR ACCOUNT?") while Card titles, `Heading size="lg"` and the page title are sentence case. Looks inconsistent inside one app. `[data-font="sans"]` turns `.display` to normal case but not `.heading-display`, so a "sans" look still has shouting headings | open |
-| V6 | Medium | Heading level 1 | The default `h1` is the 64px display style. Fine for a landing hero, absurd for an app page title (my dashboard looked broken until I passed `size="lg"`). `size` is easy to miss | open |
+| V5 | Medium | Dialog, AlertDialog, Hero | ✔ Fixed (css session): one rule, uppercase only on `.display`; dialog, prose and `.heading-display` are sentence case in every font look; guarded by `scripts/css-computed.mjs`. Was: titles are UPPERCASE display type ("DELETE YOUR ACCOUNT?") while Card titles, `Heading size="lg"` and the page title are sentence case. Looks inconsistent inside one app. `[data-font="sans"]` turns `.display` to normal case but not `.heading-display`, so a "sans" look still has shouting headings | open |
+| V6 | Medium | Heading level 1 | The default `h1` is the 64px display style. Fine for a landing hero, absurd for an app page title (my dashboard looked broken until I passed `size="lg"`). `size` is easy to miss | ✔ Heading display (h1 default) is clamp(28px,4vw,44px); Hero keeps the big size |
 | V7 | Medium | Button | The default variant is an outlined button, not the solid primary. The docs say "one solid button per view" but a plain `<Button>Save</Button>` never looks like the main action. Every example had to add `variant="solid"` | open (cannot change a default here; document it prominently) |
 | V8 | Medium | Field, Heading, Text, Button outside a Form | Controls have zero vertical spacing. A `<form>` with three `Field`s, or a card with a heading, paragraph and button, is a solid block of touching elements until you wrap it in `Form` or `Stack`. A first-time user thinks the kit is broken | doc comment on `Field` now says so; open for a real fix |
-| V9 | Low | Date picker | The popover shows a double border (outer panel plus the calendar's own) and extra padding | open |
-| V10 | Low | Pricing block | A text price ("Talk to us") wraps onto two lines at display size and strands "/ month" at the right edge | open |
-| V11 | Low | Charts | A single series fills solid accent orange with a black outline: very heavy next to thin rules. The line chart's value axis does not start at zero (documented, but surprising for revenue) | open |
+| V9 | Low | Date picker | The popover shows a double border (outer panel plus the calendar's own) and extra padding | ✔ one border (popover.css used to override date-picker.css) |
+| V10 | Low | Pricing block | A text price ("Talk to us") wraps onto two lines at display size and strands "/ month" at the right edge | ✔ amount no longer wraps; period wraps under it |
+| V11 | Low | Charts | A single series fills solid accent orange with a black outline: very heavy next to thin rules. The line chart's value axis does not start at zero (documented, but surprising for revenue) | ✔ bars are a light fill (opacity .45) with the outline; line-chart axis note unchanged |
 | V12 | Low | Blocks | Every block adds its own section padding (`--s8`), so putting it inside a padded wrapper doubles the gap (I did this; the page had 300px voids). Say so in each block's docs | open |
 | V13 | Low | Dropdown menu on 375px | Opens full width flush right and covers the page title: acceptable, but no collision handling margin | open |
 | V14 | Low | Settings tabs | Tab row has no bottom spacing before the panel (content touches the rule) | open |

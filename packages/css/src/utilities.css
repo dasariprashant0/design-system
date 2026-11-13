@@ -41,3 +41,11 @@
 .text-right { text-align: right; } /* physical: explicit right alignment, use .text-end to follow direction */
 .hide-sm { } @media (max-width: 600px) { .hide-sm { display: none !important; } }
 .show-sm { display: none; } @media (max-width: 600px) { .show-sm { display: initial; } }
+
+/* Default rhythm: bare Field, Heading, Text, Alert, Stack and Button siblings directly inside .prose, a Card or a Dialog
+   get one step of space between them (--flow, default --s4; a Heading gets 1.5 steps) so they never touch. Written with
+   :where() so it has no specificity: any rule of your own overrides it, and Stack/Flex gaps are not affected. Buttons
+   side by side stay on one line. Needs no wrapper; Form and Stack already space their children. */
+:where(.prose, .card, .dialog-content) > :where(.field, .heading, .text, .alert, .empty, .stack, .code-block, .table-wrap, form) + :where(.field, .heading, .text, .alert, .empty, .stack, .code-block, .table-wrap, form, .btn),
+:where(.prose, .card, .dialog-content) > :where(.btn) + :where(.field, .heading, .text, .alert, .empty, .stack, .code-block, .table-wrap, form) { margin-top: var(--flow, var(--s4)); }
+:where(.prose, .card, .dialog-content) > :where(.field, .heading, .text, .alert, .btn) + :where(.heading) { margin-top: calc(var(--flow, var(--s4)) * 1.5); }

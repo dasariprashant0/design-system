@@ -11,3 +11,4 @@
 @media (min-width: 860px) {
   .block-hero:not([data-align="center"]) .block-hero-inner:has(.block-hero-media) { grid-template-columns: 1.1fr 0.9fr; }
 }
+.block-hero .heading.heading-display { font-size: var(--display-md); } /* a hero is the one place a Heading is allowed the big display size */

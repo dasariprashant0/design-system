@@ -18,6 +18,10 @@ jobs:
         run: node scripts/audit.mjs --accents all
         env:
           CHROME: /usr/bin/google-chrome
+      - name: Computed-style test (real browser, loads the full stylesheet)
+        run: npm run test:css-browser
+        env:
+          CHROME: /usr/bin/google-chrome
   visual:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
