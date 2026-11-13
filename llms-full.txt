@@ -1093,7 +1093,7 @@ const items: CommandItem[] = [
   {id: 'help', label: 'Open help'},
 ];
 
-<Command shortcut="mod+k" items={items} trigger={<button type="button" className="btn btn-outline">Open palette</button>} />
+<Command shortcut="mod+j" items={items} trigger={<button type="button" className="btn btn-outline">Open palette</button>} />
 ```
 
 A11y:
