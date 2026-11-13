@@ -27,7 +27,7 @@ export async function serveDist(dist) {
  * `listeners` is an array of functions called with every protocol event of this page (msg.sessionId matches).
  * Chrome path: CHROME=/path/to/chrome, otherwise common macOS/Linux locations are tried.
  */
-export async function launchChrome({extraArgs = [], label = 'monoline'} = {}) {
+async function launchOnce({extraArgs = [], label = 'monoline'} = {}) {
   const candidates = [process.env.CHROME, '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome', '/usr/bin/google-chrome-stable', '/usr/bin/chromium', '/usr/bin/chromium-browser'].filter(Boolean);
   const chromePath = candidates.find((p) => existsSync(p));
   if (!chromePath) throw new Error('Chrome not found. Set CHROME=/path/to/chrome.');
@@ -63,4 +63,18 @@ export async function launchChrome({extraArgs = [], label = 'monoline'} = {}) {
     return r.result.value;
   };
   return {cdp, evaluate, listeners, sessionId, close};
+}
+
+/** Starts Chrome and connects. Chrome on a busy CI runner sometimes never writes its debugging port: retry up to three times before giving up. */
+export async function launchChrome(opts = {}) {
+  let lastError;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try { return await launchOnce(opts); }
+    catch (e) {
+      lastError = e;
+      if (!/Chrome did not start|ECONNREFUSED|WebSocket/i.test(String(e && e.message))) throw e;
+      console.error(`Chrome start attempt ${attempt} failed: ${String(e.message).split('\n')[0]}`);
+    }
+  }
+  throw lastError;
 }
