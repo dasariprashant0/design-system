@@ -20,7 +20,8 @@ const PRELOAD = `(() => {
       const [sel, ...rest] = spec.split('|'); const text = rest.join('|');
       const root = scope ? document.querySelector(scope) : document;
       if (!root) return [];
-      return [...root.querySelectorAll(sel)].filter((e) => !text || (text[0] === '=' ? ((e.closest('label') || e).textContent.trim() === text.slice(1) || (e.getAttribute('aria-label') || '') === text.slice(1)) : label(e).includes(text)));
+      // The props playground (added to every component page) renders a second live copy of the component above the examples: page-level lookups must not match it.
+      return [...root.querySelectorAll(sel)].filter((e) => scope || !e.closest('.pg-stage, .pg-controls')).filter((e) => !text || (text[0] === '=' ? ((e.closest('label') || e).textContent.trim() === text.slice(1) || (e.getAttribute('aria-label') || '') === text.slice(1)) : label(e).includes(text)));
     },
     find(spec, scope) { return this.all(spec, scope).find(visible) || null; },
     describe(e) {

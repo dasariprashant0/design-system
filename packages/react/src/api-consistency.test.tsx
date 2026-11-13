@@ -134,12 +134,12 @@ describe('Pagination controlled and uncontrolled', () => {
 
 /**
  * jsdom has no layout, so heights are checked where they are decided: the CSS. Every single-line control must take
- * its minimum height from the same --control-* token at the same size, so Button, Input and Select line up in a row.
+ * its height from the same --control-* token at the same size, so Button, Input and Select line up in a row.
  */
 describe('control heights come from one scale', () => {
   const rule = (src: string, selector: string) => {
     const m = src.split('\n').find((l) => l.startsWith(selector + ' {') || l.includes(`${selector} {`));
-    return m?.match(/min-height:\s*(var\(--control-(?:sm|md|lg)\))/)?.[1];
+    return m?.match(/(?<![-\w])height:\s*(var\(--control-(?:sm|md|lg)\))/)?.[1];
   };
   it.each([
     ['md', 'var(--control-md)', rule(buttons, '.btn'), rule(fields, '.input, .select'), rule(select, '.select-trigger')],

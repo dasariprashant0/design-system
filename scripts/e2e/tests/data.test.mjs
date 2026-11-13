@@ -9,11 +9,15 @@ const shift = ([y, m, d], days) => ymd(new Date(Date.UTC(y, m - 1, d + days)));
 const monthShift = ([y, m, d], n) => { const t = new Date(Date.UTC(y, m - 1 + n, 1)); const last = new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth() + 1, 0)).getUTCDate(); return [t.getUTCFullYear(), t.getUTCMonth() + 1, Math.min(d, last)]; };
 const dow = ([y, m, d]) => new Date(Date.UTC(y, m - 1, d)).getUTCDay();
 
+// A calendar page can hold several examples (and the playground): page-wide queries must stay inside the one under test.
+let CAL = '';
 async function startCalendar(p, route, example, open) {
   await p.open(route); const ex = await p.example(example);
+  CAL = open ? '' : '[data-cal] ';
+  if (!open) await p.eval(`document.querySelector('[data-e2e]').setAttribute('data-cal', '1')`);
   if (open) await open(ex);
-  await p.waitFor(`document.querySelector('[role=grid] button[tabindex="0"]')`, 'the calendar has no focusable day');
-  await p.eval(`document.querySelector('[role=grid] button[tabindex="0"]').scrollIntoView({block: 'center'})`);
+  await p.waitFor(`document.querySelector('${CAL}[role=grid] button[tabindex="0"]')`, 'the calendar has no focusable day');
+  await p.eval(`document.querySelector('${CAL}[role=grid] button[tabindex="0"]').scrollIntoView({block: 'center'})`);
   await p.focus('[role=grid] button[tabindex="0"]');
   return ex;
 }
@@ -45,7 +49,7 @@ for (const [name, boot] of [['calendar', (p) => startCalendar(p, 'components/cal
     await boot(p);
     const before = await p.text('[aria-live=polite]');
     await p.key('PageDown');
-    await p.waitFor(`document.querySelector('[aria-live=polite]').textContent !== ${JSON.stringify(before)}`, 'heading did not change after PageDown');
+    await p.waitFor(`document.querySelector('${CAL}[aria-live=polite]').textContent !== ${JSON.stringify(before)}`, 'heading did not change after PageDown');
     eq(await p.attr('[role=grid]', 'aria-label'), (await p.text('[aria-live=polite]')).trim(), 'grid aria-label matches the heading');
   });
 }
@@ -55,17 +59,17 @@ test('calendar: Enter and Space select the focused day (aria-pressed), clicking 
   await p.waitFor(`document.activeElement.getAttribute('aria-pressed') === 'true'`, 'Enter did not select the day');
   await p.key('ArrowRight'); await p.key(' ');
   await p.waitFor(`document.activeElement.getAttribute('aria-pressed') === 'true'`, 'Space did not select the day');
-  eq(await p.eval(`document.querySelectorAll('[role=grid] [aria-pressed=true]').length`), 1, 'one selected day at a time');
+  eq(await p.eval(`document.querySelectorAll('${CAL}[role=grid] [aria-pressed=true]').length`), 1, 'one selected day at a time');
   await p.click('button[aria-label="Next month"]');
-  await p.waitFor(`/./.test(document.querySelector('[aria-live=polite]').textContent)`, 'no heading');
-  const days = await p.eval(`[...document.querySelectorAll('[role=grid] button:not([data-outside])')].length`);
+  await p.waitFor(`/./.test(document.querySelector('${CAL}[aria-live=polite]').textContent)`, 'no heading');
+  const days = await p.eval(`[...document.querySelectorAll('${CAL}[role=grid] button:not([data-outside])')].length`);
   assert(days >= 28, `a month should show 28+ days, shows ${days}`);
-  await p.click('[role=grid] button:not([data-outside])|15'); eq(await p.eval(`document.querySelectorAll('[role=grid] [aria-pressed=true]').length`), 1, 'one selected day after a click');
+  await p.click('[role=grid] button:not([data-outside])|15'); eq(await p.eval(`document.querySelectorAll('${CAL}[role=grid] [aria-pressed=true]').length`), 1, 'one selected day after a click');
   assert(d, 'day read');
 });
 test('calendar: the only tab stop in the grid is one day; the nav buttons are reachable', async (p) => {
   await startCalendar(p, 'components/calendar', 'Pick a date');
-  eq(await p.eval(`[...document.querySelectorAll('[role=grid] button')].filter(b => b.tabIndex === 0).length`), 1, 'tab stops in the grid');
+  eq(await p.eval(`[...document.querySelectorAll('${CAL}[role=grid] button')].filter(b => b.tabIndex === 0).length`), 1, 'tab stops in the grid');
   await p.key('Tab', 'shift'); await p.expectActive('button[aria-label="Next month"]', 'Shift+Tab from the grid');
 });
 test('date-picker: Enter opens the calendar with focus on a day; Enter picks; the field shows it; focus returns to the field', async (p) => {
