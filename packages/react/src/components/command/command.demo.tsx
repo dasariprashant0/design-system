@@ -11,7 +11,7 @@ const items: CommandItem[] = [
 ];
 
 export const demos: Demo[] = [
-  {title: 'Palette', description: 'Press Ctrl or Cmd + K, or use the button.', render: () => (
-    <Command shortcut="mod+k" items={items} trigger={<button type="button" className="btn btn-outline">Open palette</button>} />
+  {title: 'Palette', description: 'Press Ctrl or Cmd + J, or use the button. The docs search already owns Ctrl or Cmd + K.', render: () => (
+    <Command shortcut="mod+j" items={items} trigger={<button type="button" className="btn btn-outline">Open palette</button>} />
   )},
 ];

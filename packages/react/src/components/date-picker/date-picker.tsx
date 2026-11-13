@@ -22,12 +22,20 @@ export interface DatePickerProps extends Omit<CalendarProps, 'className' | 'aria
   'aria-label'?: string;
 }
 
+/** On open, move focus to the day that can be tabbed to (the chosen date, else today), not the month arrows, as in the ARIA date-picker pattern. */
+const focusDay = (e: Event) => {
+  const day = (e.currentTarget as HTMLElement).querySelector<HTMLElement>('[role="grid"] button[tabindex="0"]');
+  if (day) { e.preventDefault(); day.focus(); }
+};
+
+/** Keeps the popover inside short viewports: it takes the side with more room and scrolls inside when even that is too small. */
+const FIT = {maxHeight: 'var(--radix-popover-content-available-height)', overflowY: 'auto'} as const;
+
 /**
  * Pick a date from a popover calendar. Same `value` / `defaultValue` / `onValueChange` as Calendar.
  * Add `clearable` to put a "Clear date" button in the popover; it calls `onValueChange(null)` and closes.
  * @example <DatePicker clearable value={date} onValueChange={setDate} aria-label="Due" />
  */
-
 export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(function DatePicker({value, defaultValue = null, onValueChange, placeholder = 'Pick a date', format = {dateStyle: 'medium'}, locale, size = 'md', disabled, invalid, className, 'aria-label': label, ...cal}, ref) {
   const f = useFieldControl();
   const [inner, setInner] = useState<Date | null>(defaultValue);
@@ -42,7 +50,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
         </button>
       </Radix.Trigger>
       <Radix.Portal>
-        <Radix.Content className="popover date-popover" sideOffset={6} align="start" aria-label="Choose a date">
+        <Radix.Content className="popover date-popover" sideOffset={6} align="start" aria-label="Choose a date" onOpenAutoFocus={focusDay} collisionPadding={8} style={FIT}>
           <Calendar value={current} locale={locale} {...cal} onValueChange={(d) => { if (value === undefined) setInner(d); onValueChange?.(d); setOpen(false); }} />
         </Radix.Content>
       </Radix.Portal>

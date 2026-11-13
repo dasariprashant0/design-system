@@ -26,6 +26,12 @@ describe('DatePicker', () => {
     await user.keyboard('{Escape}');
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
+  it('moves focus to the chosen day on open, not the month arrows (regression: found by e2e)', async () => {
+    const user = userEvent.setup();
+    render(<DatePicker aria-label="Start" locale="en-US" defaultValue={new Date(2026, 0, 15)} />);
+    await user.click(screen.getByRole('button', {name: 'Start'}));
+    expect(await screen.findByRole('button', {name: 'Thursday, January 15, 2026'})).toHaveFocus();
+  });
   it('shows a placeholder when empty', () => {
     render(<DatePicker aria-label="Start" placeholder="Choose" />);
     expect(screen.getByRole('button', {name: 'Start'})).toHaveTextContent('Choose');

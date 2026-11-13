@@ -1,7 +1,7 @@
 // The docs frame: skip link, top bar, sidebar, main column, "On this page" rail, search palette.
 // Routing, titles, scroll and focus are handled here; page bodies come from ../page and ../guides.
 import {useEffect, useRef, useState, type ReactNode} from 'react';
-import {Button} from '@monoline/react';
+import {Button, DirectionProvider} from '@monoline/react';
 import {Blocks} from '../site/Blocks';
 import {Compare} from '../site/Compare';
 import {Changelog, Roadmap} from '../site/Doc';
@@ -97,6 +97,8 @@ export function App() {
   }, [path, navs]);
 
   return (
+    // Radix reads its direction from a provider, not from <html dir>: without this the RTL preference flips the CSS but not the arrow keys.
+    <DirectionProvider dir={prefs.dir === 'rtl' ? 'rtl' : 'ltr'}>
     <PrefsContext.Provider value={[prefs, set] as const}>
     <div className="docs" data-home={route.kind === 'home' || undefined} data-rail={headings.length > 1 || undefined}>
       <a className="skip-link" href="#main" onClick={(e) => { e.preventDefault(); const m = main.current; if (m) { m.tabIndex = -1; m.focus(); } }}>Skip to main content</a>
@@ -116,5 +118,6 @@ export function App() {
       <Search open={search} onOpenChange={setSearch} />
     </div>
     </PrefsContext.Provider>
+    </DirectionProvider>
   );
 }
