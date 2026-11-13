@@ -3,7 +3,7 @@ import {test, assert, eq} from '../test.mjs';
 
 const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 /** The date of the focused calendar day, read from its aria-label ("Friday, 13 November 2026"), as [y, m (1-12), d]. */
-const focusedDay = (p) => p.eval(`(() => { const a = document.activeElement; const m = a && a.getAttribute('aria-label') && a.getAttribute('aria-label').match(/(\\d+) (\\w+) (\\d{4})/); return m ? [Number(m[3]), ${JSON.stringify(MONTHS)}.indexOf(m[2].toLowerCase()) + 1, Number(m[1])] : 'focus is on ' + __e2e.describe(a); })()`);
+const focusedDay = (p) => p.eval(`(() => { const a = document.activeElement; const l = a && a.getAttribute('aria-label') || ''; const dmy = l.match(/(\\d+) (\\w+) (\\d{4})/), mdy = l.match(/(\\w+) (\\d+), (\\d{4})/); const M = ${JSON.stringify(MONTHS)}; /* day-month-year (en-GB) or month-day-year (en-US), whichever the browser locale gives */ if (dmy) return [Number(dmy[3]), M.indexOf(dmy[2].toLowerCase()) + 1, Number(dmy[1])]; if (mdy) return [Number(mdy[3]), M.indexOf(mdy[1].toLowerCase()) + 1, Number(mdy[2])]; return 'focus is on ' + __e2e.describe(a); })()`);
 const ymd = (d) => [d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate()];
 const shift = ([y, m, d], days) => ymd(new Date(Date.UTC(y, m - 1, d + days)));
 const monthShift = ([y, m, d], n) => { const t = new Date(Date.UTC(y, m - 1 + n, 1)); const last = new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth() + 1, 0)).getUTCDate(); return [t.getUTCFullYear(), t.getUTCMonth() + 1, Math.min(d, last)]; };
