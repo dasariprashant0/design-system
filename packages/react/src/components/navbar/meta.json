@@ -1,0 +1,32 @@
+{
+  "name": "navbar",
+  "title": "Navbar",
+  "category": "navigation",
+  "description": "A top bar with brand, links and an actions slot; links move into a drawer on small screens.",
+  "status": "beta",
+  "uses": [
+    "drawer",
+    "button"
+  ],
+  "css": [
+    "02-buttons.css",
+    "dialog.css",
+    "drawer.css",
+    "navbar.css"
+  ],
+  "a11y": [
+    "A header (banner landmark) with the links in their own navigation landmark named by linksLabel; the current page has aria-current=\"page\".",
+    "Below 800px a Menu button opens the links in a drawer: focus is trapped, Escape closes it and focus returns to the button.",
+    "Put it first in the page, before main, so a skip link can jump past it."
+  ],
+  "keywords": [
+    "navbar",
+    "top bar",
+    "header",
+    "app bar",
+    "navigation",
+    "sticky",
+    "router",
+    "renderLink"
+  ]
+}
