@@ -5,8 +5,28 @@ on:
   pull_request:
   push:
     branches: [master]
+concurrency:
+  group: audit-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  a11y:
+  # One job per accent, in parallel (each accent is ~170 pages x 3 themes x 2 viewports in one Chrome).
+  audit:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        accent: [orange, green, blue, violet, rose, teal, amber, slate]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - name: Audit all pages, 3 themes, desktop and 375px, accent ${{ matrix.accent }}
+        run: node scripts/audit.mjs --accents ${{ matrix.accent }}
+        env:
+          CHROME: /usr/bin/google-chrome
+  css-computed:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,14 +34,16 @@ jobs:
         with: {node-version: 22, cache: npm}
       - run: npm ci
       - run: npm run build
-      - name: Audit all pages, 3 themes, all accents, desktop and 375px
-        run: node scripts/audit.mjs --accents all
-        env:
-          CHROME: /usr/bin/google-chrome
       - name: Computed-style test (real browser, loads the full stylesheet)
         run: npm run test:css-browser
         env:
           CHROME: /usr/bin/google-chrome
+  # Single check name for the whole audit, so anything that waits for "a11y" keeps working.
+  a11y:
+    needs: [audit, css-computed]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "all accents and the computed-style test passed"
   visual:
     # Informational: it reports every page whose screenshot differs from the base branch. A pull request that
     # intentionally changes the look will always differ, so this job never blocks a merge; read the artifact.

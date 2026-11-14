@@ -5,6 +5,9 @@ on:
   pull_request:
   push:
     branches: [master]
+concurrency:
+  group: ax-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   ax:
     runs-on: ubuntu-latest
