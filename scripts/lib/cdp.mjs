@@ -2,21 +2,24 @@
 // minimal DevTools-protocol client (Node's built-in WebSocket). No dependencies.
 import {spawn} from 'node:child_process';
 import {createServer} from 'node:http';
-import {existsSync, mkdtempSync, readFileSync, rmSync} from 'node:fs';
+import {existsSync, mkdtempSync, readFileSync, rmSync, statSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {extname, join, normalize} from 'node:path';
 
-const mime = {'.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.png': 'image/png', '.txt': 'text/plain'};
+const mime = {'.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.png': 'image/png', '.txt': 'text/plain', '.xml': 'application/xml', '.md': 'text/markdown'};
 
-/** Serves `dist` on a random local port; paths without an extension fall back to index.html (single-page app). */
+/**
+ * Serves `dist` on a random local port the way GitHub Pages does: a file as is, a folder through its index.html,
+ * and anything else with status 404 and the body of 404.html (which redirects into the app).
+ */
 export async function serveDist(dist) {
   const server = createServer((req, res) => {
     const path = normalize(decodeURIComponent((req.url ?? '/').split('?')[0])).replace(/^(\.\.[/\\])+/, '');
-    const file = join(dist, path === '/' || path === '.' ? 'index.html' : path);
-    const target = existsSync(file) && extname(file) ? file : (extname(file) ? null : join(dist, 'index.html'));
-    if (!target || !target.startsWith(dist) || !existsSync(target)) { res.writeHead(404); res.end('not found'); return; }
-    res.writeHead(200, {'content-type': mime[extname(target)] ?? 'application/octet-stream'});
-    res.end(readFileSync(target));
+    const file = join(dist, path);
+    const found = [file, join(file, 'index.html')].find((f) => f.startsWith(dist) && existsSync(f) && statSync(f).isFile());
+    const target = found ?? join(dist, '404.html');
+    res.writeHead(found ? 200 : 404, {'content-type': mime[extname(target)] ?? 'application/octet-stream'});
+    res.end(existsSync(target) ? readFileSync(target) : 'not found');
   });
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
   return {server, base: `http://127.0.0.1:${server.address().port}/`};

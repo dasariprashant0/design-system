@@ -11,6 +11,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 
 ## Components
 ### layout
+- App shell (app-shell, beta): The frame of an app: skip link, navbar, sidebar, main and aside in one responsive grid. Source: packages/react/src/components/app-shell/
 - Aspect ratio (aspect-ratio, stable): Keep media or a placeholder at a fixed width-to-height ratio. Source: packages/react/src/components/aspect-ratio/
 - Box (box, stable): A div with padding and a thin border mapped to the spacing tokens. Source: packages/react/src/components/box/
 - Container (container, stable): Centre content in a column with a sensible maximum width and side padding. Source: packages/react/src/components/container/
@@ -18,6 +19,7 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 - Flex (flex, stable): A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case. Source: packages/react/src/components/flex/
 - Grid (grid, stable): A responsive grid of equal columns with one gap. Source: packages/react/src/components/grid/
 - Overflow list (overflow-list, stable): A row of items that shows as many as fit and puts the rest in a '+N' menu. Source: packages/react/src/components/overflow-list/
+- Page header (page-header, beta): The top of a page: breadcrumbs, title, description and actions. Source: packages/react/src/components/page-header/
 - Resizable (resizable, stable): Panels separated by handles you drag or move with the keyboard. Source: packages/react/src/components/resizable/
 - Scroll area (scroll-area, stable): A scrollable region with thin, themed scrollbars. Source: packages/react/src/components/scroll-area/
 - Separator (separator, stable): A thin rule between groups. Source: packages/react/src/components/separator/
@@ -124,9 +126,12 @@ Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rule
 
 ### navigation
 - Breadcrumb (breadcrumb, stable): The path to the current page. Source: packages/react/src/components/breadcrumb/
+- Breadcrumbs from path (breadcrumbs-auto, beta): A breadcrumb built from the current URL path. Source: packages/react/src/components/breadcrumbs-auto/
 - Menubar (menubar, stable): A horizontal bar of menus, like File, Edit and View in a desktop app. Source: packages/react/src/components/menubar/
+- Navbar (navbar, beta): A top bar with brand, links and an actions slot; links move into a drawer on small screens. Source: packages/react/src/components/navbar/
 - Navigation menu (navigation-menu, stable): Site navigation with links and menus that open panels of links. Source: packages/react/src/components/navigation-menu/
 - Pagination (pagination, stable): Move between pages of results. Source: packages/react/src/components/pagination/
+- Sidebar (sidebar, beta): A collapsible navigation sidebar with groups, icons and a mobile drawer. Source: packages/react/src/components/sidebar/
 - Stepper (stepper, stable): Show progress through a numbered sequence of steps. Source: packages/react/src/components/stepper/
 - Tabs (tabs, stable): Switch between related views in the same place. Source: packages/react/src/components/tabs/
 

@@ -1,0 +1,21 @@
+/* App shell: skip link, navbar, sidebar, main, aside as one grid. Sidebar from 800px, aside beside the page from 1100px. */
+.app-shell { --navbar-h: var(--s7); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: "navbar" "main" "aside"; min-block-size: var(--app-shell-min-height, 100dvh); }
+.app-shell > .skip-link { position: fixed; }
+.app-shell-navbar { grid-area: navbar; position: sticky; inset-block-start: 0; z-index: calc(var(--z-drawer) - 10); }
+.app-shell > .sidebar { grid-area: sidebar; }
+.app-shell-main { grid-area: main; min-inline-size: 0; padding: var(--s6) var(--s5); }
+.app-shell-main:focus { outline: none; }
+.app-shell-aside { grid-area: aside; min-inline-size: 0; padding: var(--s5); border-block-start: 1px solid var(--rule); }
+@media (min-width: 800px) {
+  .app-shell { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: "navbar navbar" "sidebar main" "sidebar aside"; }
+}
+@media (min-width: 1100px) {
+  .app-shell { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr); grid-template-areas: "navbar navbar navbar" "sidebar main aside"; }
+  .app-shell-aside { inline-size: var(--app-shell-aside, 20rem); border-block-start: 0; border-inline-start: 1px solid var(--rule); }
+}
+/* Contained: the shell fills a fixed height and the regions scroll themselves. */
+.app-shell[data-scroll="contained"] { block-size: var(--app-shell-height, 100dvh); min-block-size: 0; overflow: hidden; }
+.app-shell[data-scroll="contained"] .app-shell-navbar { position: static; }
+.app-shell[data-scroll="contained"] .app-shell-main, .app-shell[data-scroll="contained"] .app-shell-aside { overflow: auto; }
+.app-shell[data-scroll="contained"] > .sidebar { min-block-size: 0; }
+.app-shell[data-scroll="contained"] .sidebar-inner { position: static; max-block-size: 100%; block-size: 100%; }

@@ -32,9 +32,9 @@
     "packages/react/src/components/stack/stack.tsx"
   ],
   "related": [
+    "app-shell",
     "aspect-ratio",
-    "box",
-    "container"
+    "box"
   ],
   "props": [
     {

@@ -161,6 +161,70 @@
       ]
     },
     {
+      "name": "app-shell",
+      "title": "App shell",
+      "category": "layout",
+      "description": "The frame of an app: skip link, navbar, sidebar, main and aside in one responsive grid.",
+      "status": "beta",
+      "uses": [
+        "sidebar",
+        "navbar"
+      ],
+      "css": [
+        "09-links.css",
+        "02-buttons.css",
+        "icon-button.css",
+        "tooltip.css",
+        "dialog.css",
+        "drawer.css",
+        "sidebar.css",
+        "navbar.css",
+        "app-shell.css"
+      ],
+      "a11y": [
+        "Landmarks: banner (the navbar), navigation (the sidebar), main and complementary (the aside, named by asideLabel).",
+        "The first focusable element is a skip link to the main region; main takes focus when it is used.",
+        "The sidebar shows from 800px and the aside beside the page from 1100px; below those they move into a drawer or stack under the page.",
+        "scroll=\"page\" keeps the navbar and sidebar in view while the page scrolls; scroll=\"contained\" scrolls the regions on their own."
+      ],
+      "keywords": [
+        "app shell",
+        "layout",
+        "dashboard",
+        "admin",
+        "frame",
+        "skip link",
+        "sticky"
+      ],
+      "kind": "components",
+      "import": "import {AppShell} from '@monoline/react'",
+      "path": "packages/react/src/components/app-shell",
+      "files": [
+        "packages/react/src/components/app-shell/app-shell.demo.tsx",
+        "packages/react/src/components/app-shell/app-shell.test.tsx",
+        "packages/react/src/components/app-shell/app-shell.tsx",
+        "packages/react/src/components/app-shell/index.ts",
+        "packages/react/src/components/app-shell/meta.json"
+      ],
+      "related": [
+        "sidebar",
+        "navbar"
+      ],
+      "propNames": [
+        "navbar",
+        "sidebar",
+        "aside",
+        "asideLabel",
+        "skipLinkLabel",
+        "mainId",
+        "scroll",
+        "collapsed",
+        "defaultCollapsed",
+        "onCollapsedChange",
+        "children"
+      ]
+    },
+    {
       "name": "area-chart",
       "title": "Area chart",
       "category": "data-display",
@@ -235,9 +299,9 @@
         "packages/react/src/components/aspect-ratio/meta.json"
       ],
       "related": [
+        "app-shell",
         "box",
-        "container",
-        "direction-provider"
+        "container"
       ],
       "propNames": []
     },
@@ -561,17 +625,20 @@
       "description": "App frame with sidebar, top bar and content that collapses to a drawer on small screens.",
       "status": "beta",
       "uses": [
-        "container",
-        "stack",
-        "drawer",
-        "button"
+        "app-shell",
+        "sidebar",
+        "navbar"
       ],
       "css": [
-        "container.css",
-        "stack.css",
+        "09-links.css",
         "02-buttons.css",
+        "icon-button.css",
+        "tooltip.css",
         "dialog.css",
         "drawer.css",
+        "sidebar.css",
+        "navbar.css",
+        "app-shell.css",
         "block-dashboard-shell.css"
       ],
       "a11y": [
@@ -602,10 +669,9 @@
         "packages/react/src/components/block-dashboard-shell/meta.json"
       ],
       "related": [
-        "container",
-        "stack",
-        "drawer",
-        "button"
+        "app-shell",
+        "sidebar",
+        "navbar"
       ],
       "propNames": [
         "brand",
@@ -1192,9 +1258,9 @@
         "packages/react/src/components/box/meta.json"
       ],
       "related": [
+        "app-shell",
         "aspect-ratio",
-        "container",
-        "direction-provider"
+        "container"
       ],
       "propNames": [
         "padding",
@@ -1234,13 +1300,54 @@
         "packages/react/src/components/breadcrumb/meta.json"
       ],
       "related": [
+        "breadcrumbs-auto",
         "menubar",
-        "navigation-menu",
-        "pagination"
+        "navbar"
       ],
       "propNames": [
         "items",
         "aria-label"
+      ]
+    },
+    {
+      "name": "breadcrumbs-auto",
+      "title": "Breadcrumbs from path",
+      "category": "navigation",
+      "description": "A breadcrumb built from the current URL path.",
+      "status": "beta",
+      "uses": [
+        "breadcrumb"
+      ],
+      "css": [
+        "18-navigation.css",
+        "09-links.css"
+      ],
+      "a11y": [
+        "Same as Breadcrumb: a navigation landmark with an ordered list; the last crumb is the current page and not a link."
+      ],
+      "keywords": [
+        "breadcrumb",
+        "path",
+        "url",
+        "router"
+      ],
+      "kind": "components",
+      "import": "import {BreadcrumbsAuto} from '@monoline/react'",
+      "path": "packages/react/src/components/breadcrumbs-auto",
+      "files": [
+        "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.demo.tsx",
+        "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.test.tsx",
+        "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.tsx",
+        "packages/react/src/components/breadcrumbs-auto/index.ts",
+        "packages/react/src/components/breadcrumbs-auto/meta.json"
+      ],
+      "related": [
+        "breadcrumb"
+      ],
+      "propNames": [
+        "pathname",
+        "labels",
+        "homeLabel"
       ]
     },
     {
@@ -1794,9 +1901,9 @@
         "packages/react/src/components/container/meta.json"
       ],
       "related": [
+        "app-shell",
         "aspect-ratio",
-        "box",
-        "direction-provider"
+        "box"
       ],
       "propNames": [
         "size",
@@ -2244,9 +2351,9 @@
         "packages/react/src/components/direction-provider/meta.json"
       ],
       "related": [
+        "app-shell",
         "aspect-ratio",
-        "box",
-        "container"
+        "box"
       ],
       "propNames": [
         "dir",
@@ -2573,9 +2680,9 @@
         "packages/react/src/components/flex/meta.json"
       ],
       "related": [
+        "app-shell",
         "aspect-ratio",
-        "box",
-        "container"
+        "box"
       ],
       "propNames": [
         "direction",
@@ -2662,9 +2769,9 @@
         "packages/react/src/components/grid/meta.json"
       ],
       "related": [
+        "app-shell",
         "aspect-ratio",
-        "box",
-        "container"
+        "box"
       ],
       "propNames": [
         "columns",
@@ -3242,8 +3349,8 @@
       ],
       "related": [
         "breadcrumb",
-        "navigation-menu",
-        "pagination"
+        "breadcrumbs-auto",
+        "navbar"
       ],
       "propNames": [
         "tone"
@@ -3342,6 +3449,62 @@
       ]
     },
     {
+      "name": "navbar",
+      "title": "Navbar",
+      "category": "navigation",
+      "description": "A top bar with brand, links and an actions slot; links move into a drawer on small screens.",
+      "status": "beta",
+      "uses": [
+        "drawer",
+        "button"
+      ],
+      "css": [
+        "02-buttons.css",
+        "dialog.css",
+        "drawer.css",
+        "navbar.css"
+      ],
+      "a11y": [
+        "A header (banner landmark) with the links in their own navigation landmark named by linksLabel; the current page has aria-current=\"page\".",
+        "Below 800px a Menu button opens the links in a drawer: focus is trapped, Escape closes it and focus returns to the button.",
+        "Put it first in the page, before main, so a skip link can jump past it."
+      ],
+      "keywords": [
+        "navbar",
+        "top bar",
+        "header",
+        "app bar",
+        "navigation",
+        "sticky",
+        "router",
+        "renderLink"
+      ],
+      "kind": "components",
+      "import": "import {Navbar} from '@monoline/react'",
+      "path": "packages/react/src/components/navbar",
+      "files": [
+        "packages/react/src/components/navbar/index.ts",
+        "packages/react/src/components/navbar/meta.json",
+        "packages/react/src/components/navbar/navbar.demo.tsx",
+        "packages/react/src/components/navbar/navbar.test.tsx",
+        "packages/react/src/components/navbar/navbar.tsx"
+      ],
+      "related": [
+        "drawer",
+        "button"
+      ],
+      "propNames": [
+        "brand",
+        "links",
+        "linksLabel",
+        "renderLink",
+        "leading",
+        "actions",
+        "menuLabel",
+        "sticky"
+      ]
+    },
+    {
       "name": "navigation-menu",
       "title": "Navigation menu",
       "category": "navigation",
@@ -3374,8 +3537,8 @@
       ],
       "related": [
         "breadcrumb",
-        "menubar",
-        "pagination"
+        "breadcrumbs-auto",
+        "menubar"
       ],
       "propNames": []
     },
@@ -3663,6 +3826,49 @@
       ]
     },
     {
+      "name": "page-header",
+      "title": "Page header",
+      "category": "layout",
+      "description": "The top of a page: breadcrumbs, title, description and actions.",
+      "status": "beta",
+      "css": [
+        "page-header.css"
+      ],
+      "a11y": [
+        "The title is a real heading (h1 by default); keep one h1 per page.",
+        "Breadcrumbs and actions are slots, so they keep their own landmark and keyboard behaviour."
+      ],
+      "keywords": [
+        "page header",
+        "title",
+        "breadcrumbs",
+        "actions",
+        "toolbar"
+      ],
+      "kind": "components",
+      "import": "import {PageHeader} from '@monoline/react'",
+      "path": "packages/react/src/components/page-header",
+      "files": [
+        "packages/react/src/components/page-header/index.ts",
+        "packages/react/src/components/page-header/meta.json",
+        "packages/react/src/components/page-header/page-header.demo.tsx",
+        "packages/react/src/components/page-header/page-header.test.tsx",
+        "packages/react/src/components/page-header/page-header.tsx"
+      ],
+      "related": [
+        "app-shell",
+        "aspect-ratio",
+        "box"
+      ],
+      "propNames": [
+        "title",
+        "description",
+        "breadcrumbs",
+        "actions",
+        "level"
+      ]
+    },
+    {
       "name": "pagination",
       "title": "Pagination",
       "category": "navigation",
@@ -3693,8 +3899,8 @@
       ],
       "related": [
         "breadcrumb",
-        "menubar",
-        "navigation-menu"
+        "breadcrumbs-auto",
+        "menubar"
       ],
       "propNames": [
         "page",
@@ -4034,9 +4240,9 @@
         "packages/react/src/components/resizable/resizable.tsx"
       ],
       "related": [
+        "app-shell",
         "aspect-ratio",
-        "box",
-        "container"
+        "box"
       ],
       "propNames": [
         "direction",
@@ -4187,9 +4393,9 @@
         "packages/react/src/components/scroll-area/scroll-area.tsx"
       ],
       "related": [
+        "app-shell",
         "aspect-ratio",
-        "box",
-        "container"
+        "box"
       ],
       "propNames": [
         "orientation",
@@ -4350,9 +4556,9 @@
         "packages/react/src/components/separator/separator.tsx"
       ],
       "related": [
+        "app-shell",
         "aspect-ratio",
-        "box",
-        "container"
+        "box"
       ],
       "propNames": []
     },
@@ -4396,6 +4602,80 @@
         "button"
       ],
       "propNames": []
+    },
+    {
+      "name": "sidebar",
+      "title": "Sidebar",
+      "category": "navigation",
+      "description": "A collapsible navigation sidebar with groups, icons and a mobile drawer.",
+      "status": "beta",
+      "uses": [
+        "drawer",
+        "tooltip",
+        "button",
+        "icon-button"
+      ],
+      "css": [
+        "02-buttons.css",
+        "icon-button.css",
+        "tooltip.css",
+        "dialog.css",
+        "drawer.css",
+        "sidebar.css"
+      ],
+      "a11y": [
+        "A navigation landmark named by the label prop, holding labelled lists of links; the current page has aria-current=\"page\".",
+        "ArrowUp, ArrowDown, Home and End move focus between items; Tab still moves through them in order.",
+        "Collapsing keeps every label in the accessibility tree; a tooltip shows it on hover and keyboard focus. The toggle reports aria-expanded.",
+        "Below 800px the sidebar is hidden and the Menu button opens it in a left drawer: focus is trapped, Escape closes it and focus returns to the button. Choosing a link closes it.",
+        "In right-to-left layouts the sidebar sits on the right and the drawer opens from the right."
+      ],
+      "keywords": [
+        "sidebar",
+        "side nav",
+        "navigation",
+        "collapsible",
+        "app shell",
+        "off-canvas",
+        "router",
+        "renderLink",
+        "asChild"
+      ],
+      "kind": "components",
+      "import": "import {Sidebar} from '@monoline/react'",
+      "path": "packages/react/src/components/sidebar",
+      "files": [
+        "packages/react/src/components/sidebar/index.ts",
+        "packages/react/src/components/sidebar/meta.json",
+        "packages/react/src/components/sidebar/sidebar.demo.tsx",
+        "packages/react/src/components/sidebar/sidebar.test.tsx",
+        "packages/react/src/components/sidebar/sidebar.tsx"
+      ],
+      "related": [
+        "drawer",
+        "tooltip",
+        "button",
+        "icon-button"
+      ],
+      "propNames": [
+        "collapsed",
+        "defaultCollapsed",
+        "onCollapsedChange",
+        "children",
+        "label",
+        "drawerTitle",
+        "renderLink",
+        "children",
+        "label",
+        "children",
+        "href",
+        "icon",
+        "current",
+        "asChild",
+        "children",
+        "label",
+        "children"
+      ]
     },
     {
       "name": "skeleton",
@@ -4679,9 +4959,9 @@
         "packages/react/src/components/stack/stack.tsx"
       ],
       "related": [
+        "app-shell",
         "aspect-ratio",
-        "box",
-        "container"
+        "box"
       ],
       "propNames": [
         "direction",
@@ -4761,8 +5041,8 @@
       ],
       "related": [
         "breadcrumb",
-        "menubar",
-        "navigation-menu"
+        "breadcrumbs-auto",
+        "menubar"
       ],
       "propNames": [
         "steps",
@@ -4880,8 +5160,8 @@
       ],
       "related": [
         "breadcrumb",
-        "menubar",
-        "navigation-menu"
+        "breadcrumbs-auto",
+        "menubar"
       ],
       "propNames": []
     },

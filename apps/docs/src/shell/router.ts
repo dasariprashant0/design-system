@@ -33,8 +33,14 @@ const subscribe = (cb: () => void) => {
   return () => { listeners.delete(cb); removeEventListener('popstate', cb); };
 };
 
+let ssrPathname = BASE;
+/** Prerender only: the pathname the next server render should show. */
+export const setServerPathname = (p: string) => { ssrPathname = p; };
+// Server render uses ssrPathname; the first client (hydration) render must read the real URL so both agree.
+const serverPathname = () => (typeof location === 'undefined' ? ssrPathname : location.pathname);
+
 /** Current pathname; re-renders on navigation and Back/Forward. */
-export const usePathname = () => useSyncExternalStore(subscribe, () => location.pathname, () => BASE);
+export const usePathname = () => useSyncExternalStore(subscribe, () => location.pathname, serverPathname);
 /** Counts every navigation, including ones to the same path, so effects can react to a repeat click. */
 export const useNavCount = () => useSyncExternalStore(subscribe, () => navCount, () => 0);
 

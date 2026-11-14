@@ -65,7 +65,7 @@ export async function createPage(browser, base) {
         // direction is a docs preference (saved in localStorage): set it before the app boots, every time, so no test inherits another's
         const {identifier} = await cdp('Page.addScriptToEvaluateOnNewDocument', {source: `try { localStorage.setItem('monoline-prefs', JSON.stringify({dir: ${J(dir)}})); } catch {}`});
         await cdp('Page.navigate', {url: base + path.replace(/^\//, '')});
-        await api.waitFor(`!!document.querySelector('.docs-main h1') && document.fonts.status === 'loaded'`, `page ${path} did not render`, 20000);
+        await api.waitFor(`!!document.querySelector('.docs-main h1') && document.fonts.status === 'loaded' && document.documentElement.dir === ${J(dir)}`, `page ${path} did not render`, 20000);
         await cdp('Page.removeScriptToEvaluateOnNewDocument', {identifier});
         eq(await evaluate('document.documentElement.dir'), dir, 'document direction');
         await evaluate(`document.activeElement && document.activeElement.blur(); window.scrollTo(0, 0)`);

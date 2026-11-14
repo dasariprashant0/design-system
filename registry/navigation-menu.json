@@ -34,8 +34,8 @@
   ],
   "related": [
     "breadcrumb",
-    "menubar",
-    "pagination"
+    "breadcrumbs-auto",
+    "menubar"
   ],
   "props": [],
   "usage": "import {NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger} from '@monoline/react';\n\n<div style={{minHeight: '200px'}}>\n  <NavigationMenu aria-label=\"Site\">\n    <NavigationMenuList>\n      <NavigationMenuItem><NavigationMenuLink href=\"#\" active>Home</NavigationMenuLink></NavigationMenuItem>\n      <NavigationMenuItem>\n        <NavigationMenuTrigger>Products</NavigationMenuTrigger>\n        <NavigationMenuContent><div className=\"navmenu-panel\"><NavigationMenuLink href=\"#\">UI kit</NavigationMenuLink><NavigationMenuLink href=\"#\">Icons</NavigationMenuLink><NavigationMenuLink href=\"#\">Templates</NavigationMenuLink></div></NavigationMenuContent>\n      </NavigationMenuItem>\n      <NavigationMenuItem><NavigationMenuLink href=\"#\">Docs</NavigationMenuLink></NavigationMenuItem>\n    </NavigationMenuList>\n  </NavigationMenu>\n</div>",

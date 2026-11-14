@@ -1,5 +1,5 @@
 // Look preferences (theme, accent, font, corners, density, direction): data attributes on <html>, saved in localStorage.
-import {createContext, useContext, useEffect, useRef, useState} from 'react';
+import {createContext, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, SegmentedControl} from '@monoline/react';
 
 const ACCENTS = ['orange', 'rose', 'amber', 'green', 'teal', 'blue', 'violet', 'slate'] as const;
@@ -19,9 +19,13 @@ export const usePrefsContext = () => useContext(PrefsContext)!;
 export const parseTokens = (s: string): Array<[string, string]> => s.split(';').map((x) => x.split(/:(.*)/s).slice(0, 2).map((y) => y.trim()) as [string, string]).filter(([k, v]) => k.startsWith('--') && v);
 
 export function usePrefs() {
-  const [prefs, setPrefs] = useState<Prefs>(() => {
-    try { return {...DEFAULTS, ...JSON.parse(localStorage.getItem('monoline-prefs') ?? '{}')}; } catch { return DEFAULTS; }
-  });
+  // Starts from the defaults so the first client render matches the prerendered HTML; saved prefs load right after mount.
+  const [prefs, setPrefs] = useState<Prefs>(DEFAULTS);
+  const loaded = useRef(false);
+  useLayoutEffect(() => {
+    try { setPrefs((p) => ({...p, ...JSON.parse(localStorage.getItem('monoline-prefs') ?? '{}')})); } catch { /* private mode or bad JSON */ }
+    loaded.current = true;
+  }, []);
   useEffect(() => {
     const root = document.documentElement;
     const mq = matchMedia('(prefers-color-scheme: dark)');
@@ -35,7 +39,7 @@ export function usePrefs() {
     };
     apply();
     mq.addEventListener('change', apply);
-    try { localStorage.setItem('monoline-prefs', JSON.stringify(prefs)); } catch { /* private mode */ }
+    try { if (loaded.current) localStorage.setItem('monoline-prefs', JSON.stringify(prefs)); } catch { /* private mode */ }
     return () => mq.removeEventListener('change', apply);
   }, [prefs]);
   return [prefs, ((k, v) => setPrefs((p) => ({...p, [k]: v}))) as Set] as const;
