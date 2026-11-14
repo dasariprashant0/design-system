@@ -1,0 +1,20 @@
+{
+  "name": "@monoline/tokens",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Monoline design tokens as W3C JSON, Figma variables, CSS and TypeScript types. Generated from packages/css/src.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/"
+  },
+  "types": "./dist/tokens.d.ts",
+  "exports": {
+    "./tokens.json": "./dist/tokens.json",
+    "./tokens.css": "./dist/tokens.css",
+    "./figma-variables.json": "./dist/figma-variables.json",
+    "./tokens.d.ts": "./dist/tokens.d.ts"
+  },
+  "files": ["dist", "scripts"]
+}
