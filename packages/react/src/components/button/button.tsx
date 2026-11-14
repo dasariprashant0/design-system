@@ -3,7 +3,7 @@ import {Slot} from 'radix-ui';
 import {cx} from '../../utils/cx';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** `solid` is the one main action per view. `line` for the rest, `ghost` for inline links, `danger` for destructive. */
+  /** Default `solid`: the one main action per view. `line` for the rest, `ghost` for inline links, `danger` for destructive. */
   variant?: 'solid' | 'line' | 'ghost' | 'danger';
   /** `md` (default), `sm` for dense toolbars and table rows, or `lg` for prominent calls to action. Same heights as Input and Select. */
   size?: 'sm' | 'md' | 'lg';
@@ -18,7 +18,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * @example <Button variant="line" onClick={save}>Save</Button>
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  {variant = 'line', size = 'md', loading = false, asChild = false, className, children, disabled, type, onClick, ...rest},
+  {variant = 'solid', size = 'md', loading = false, asChild = false, className, children, disabled, type, onClick, ...rest},
   ref,
 ) {
   const Comp = asChild ? Slot.Root : 'button';

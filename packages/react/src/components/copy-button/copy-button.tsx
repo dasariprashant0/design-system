@@ -43,7 +43,7 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(functio
     </>
   ) : (
     <>
-      <Button ref={ref} data-copied={copied || undefined} onClick={press} {...rest}>{copied ? copiedLabel : children}</Button>
+      <Button ref={ref} variant="line" data-copied={copied || undefined} onClick={press} {...rest}>{copied ? copiedLabel : children}</Button>
       {status}
     </>
   );

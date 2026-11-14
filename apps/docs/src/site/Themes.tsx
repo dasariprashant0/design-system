@@ -105,7 +105,7 @@ function PresetCard({p}: {p: Preset}) {
         </p>
         <div className="theme-actions">
           <Button variant="solid" size="sm" aria-pressed={applied} onClick={apply}>{applied ? 'Applied' : `Apply ${p.title}`}</Button>
-          <Button size="sm" onClick={async () => { try { await navigator.clipboard.writeText(css); setCopied('copied'); } catch { setCopied('failed'); } }}>Copy CSS</Button>
+          <Button variant="line" size="sm" onClick={async () => { try { await navigator.clipboard.writeText(css); setCopied('copied'); } catch { setCopied('failed'); } }}>Copy CSS</Button>
           <span className="cdoc-status" role="status">{copied === 'copied' ? 'Copied' : copied === 'failed' ? 'Copy failed' : ''}</span>
         </div>
         <Collapsible>

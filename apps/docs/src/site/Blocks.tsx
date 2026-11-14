@@ -22,7 +22,7 @@ function CopyCode({code}: {code: string}) {
   useEffect(() => { if (state === 'idle') return; const t = setTimeout(() => setState('idle'), 2000); return () => clearTimeout(t); }, [state]);
   return (
     <>
-      <Button size="sm" onClick={async () => { try { await navigator.clipboard.writeText(code); setState('copied'); } catch { setState('failed'); } }}>Copy code</Button>
+      <Button variant="line" size="sm" onClick={async () => { try { await navigator.clipboard.writeText(code); setState('copied'); } catch { setState('failed'); } }}>Copy code</Button>
       <span className="cdoc-status" role="status">{state === 'copied' ? 'Copied' : state === 'failed' ? 'Copy failed' : ''}</span>
     </>
   );

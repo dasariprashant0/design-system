@@ -64,7 +64,7 @@ export const BlockDashboardShell = forwardRef<HTMLDivElement, BlockDashboardShel
         <header className="block-shell-top">
           <div className="block-shell-menu">
             <Drawer open={open} onOpenChange={setOpen}>
-              <DrawerTrigger asChild><Button size="sm">{menuLabel}</Button></DrawerTrigger>
+              <DrawerTrigger asChild><Button variant="line" size="sm">{menuLabel}</Button></DrawerTrigger>
               <DrawerContent side="left" aria-describedby={undefined}>
                 <DrawerTitle>{brand ?? menuLabel}</DrawerTitle>
                 <div onClick={(e) => { if ((e.target as HTMLElement).closest('a')) setOpen(false); }}>

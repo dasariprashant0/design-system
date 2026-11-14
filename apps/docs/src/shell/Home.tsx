@@ -92,9 +92,9 @@ export function Home() {
           <div className="hero-actions">
             <Button variant="solid" asChild><a href={href('guides/getting-started')}>Get started</a></Button>
             <Button asChild><a href={href(first)}>Components</a></Button>
-            <Button asChild><a href={href('themes')}>Themes</a></Button>
-            <Button asChild><a href={href('blocks')}>Blocks</a></Button>
-            <Button asChild><a href={href('compare')}>Compare</a></Button>
+            <Button variant="line" asChild><a href={href('themes')}>Themes</a></Button>
+            <Button variant="line" asChild><a href={href('blocks')}>Blocks</a></Button>
+            <Button variant="line" asChild><a href={href('compare')}>Compare</a></Button>
           </div>
           <Install />
         </div>

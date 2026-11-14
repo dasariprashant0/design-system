@@ -8,8 +8,8 @@ function Counter() {
   return (
     <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>
       <strong style={{fontSize: 'var(--display-sm)'}}><RollingNumber value={n} format={{style: 'currency', currency: 'USD', maximumFractionDigits: 0}} /></strong>
-      <Button size="sm" onClick={() => setN((v) => v + 137)}>Add 137</Button>
-      <Button size="sm" onClick={() => setN((v) => Math.max(0, v - 999))}>Subtract 999</Button>
+      <Button variant="line" size="sm" onClick={() => setN((v) => v + 137)}>Add 137</Button>
+      <Button variant="line" size="sm" onClick={() => setN((v) => Math.max(0, v - 999))}>Subtract 999</Button>
     </div>
   );
 }
