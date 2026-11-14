@@ -70,7 +70,7 @@ export function ProfileForm() {
       <Controller control={control} name="role" rules={{required: 'Choose a role'}} render={({field, fieldState}) => (
         <Field label="Role" required error={fieldState.error?.message}>
           <Select name={field.name} value={field.value} onValueChange={field.onChange}>
-            <SelectTrigger ref={field.ref} onBlur={field.onBlur}><SelectValue placeholder="Choose a role" /></SelectTrigger>
+            <SelectTrigger ref={field.ref} onBlur={field.onBlur}><SelectValue placeholder="Select a role" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="admin">Admin</SelectItem>
               <SelectItem value="editor">Editor</SelectItem>
