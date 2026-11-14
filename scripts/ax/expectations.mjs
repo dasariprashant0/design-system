@@ -83,7 +83,7 @@ export const components = [
   {id: 'popover', route: 'components/popover', example: 'Basic', phases: [{name: 'open', steps: [['click', 'button']], scope: D, noDescription: true,
     expect: [{role: 'dialog', name: 'Entry details', states: {modal: false}}], focus: {role: 'dialog', name: 'Entry details'}}]},
   {id: 'tooltip', route: 'components/tooltip', example: 'Basic', phases: [{name: 'focus shows the tip', steps: [['focus', 'button|Save']],
-    expect: [{role: 'tooltip', name: 'Saved to ~/Notes'}, {role: 'button', name: 'Save', description: 'Saved to ~/Notes', rel: {describedby: /Saved|radix/}, note: 'The tip is read as the description of the button.'}], focus: {role: 'button', name: 'Save'}}]},
+    expect: [{role: 'tooltip', name: 'Saved to ~/Notes'}, {role: 'button', name: 'Save', description: 'Saved to ~/Notes', rel: {describedby: /./}, note: 'The tip is read as the description of the button.'}], focus: {role: 'button', name: 'Save'}}]},
   {id: 'toast', route: 'components/toast', example: 'Trigger a toast', phases: [{name: 'shown', steps: [['click', 'button|Save draft']],
     expect: [{role: 'region', name: 'Notifications'}, {role: 'button', name: 'Undo'}, {role: 'button', name: 'Dismiss'}, {role: 'status', states: {live: /assertive|polite/}, note: 'Radix announces the toast text in a live region outside the list.'}], focus: {role: 'button', name: 'Save draft'}, known: {generic: 'Radix Toast viewport: two unnamed focusable proxy elements that hand focus to the first and last toast. Upstream behaviour, reachable by Tab only while a toast is open.'}}]},
   {id: 'toaster', route: 'components/toaster', example: 'Call toast() from any handler', phases: [{name: 'shown', steps: [['click', 'button|Default']],

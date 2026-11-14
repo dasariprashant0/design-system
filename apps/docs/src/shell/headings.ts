@@ -11,7 +11,7 @@ const textOf = (h: Element) => [...h.childNodes].filter((n) => !(n instanceof El
 function decorate(root: HTMLElement): Heading[] {
   const out: Heading[] = [];
   root.querySelectorAll<HTMLHeadingElement>('h2, h3').forEach((h) => {
-    if (h.closest('.stage, [data-no-toc]')) return;
+    if (h.closest('.stage, dialog, [role="dialog"], [role="alertdialog"], [data-no-toc]')) return;
     const text = textOf(h);
     if (!text) return;
     if (!h.id) {
