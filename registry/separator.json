@@ -31,9 +31,9 @@
     "packages/react/src/components/separator/separator.tsx"
   ],
   "related": [
+    "app-shell",
     "aspect-ratio",
-    "box",
-    "container"
+    "box"
   ],
   "props": [],
   "usage": "import {Separator} from '@monoline/react';\n\n<div><p>Above</p><Separator /><p>Below</p><div style={{display: 'flex', alignItems: 'center', height: 24}}><span>One</span><Separator orientation=\"vertical\" /><span>Two</span></div></div>",

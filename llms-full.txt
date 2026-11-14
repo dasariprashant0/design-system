@@ -117,6 +117,84 @@ A11y:
 CSS classes: animated-list, animated-list-item
 Source: registry/animated-list.json
 
+## App shell (app-shell)
+The frame of an app: skip link, navbar, sidebar, main and aside in one responsive grid.
+Status: beta | Category: layout | Related: sidebar, navbar
+Import: import {AppShell} from '@monoline/react'
+
+Props (name: type = default, ? means optional):
+- navbar?: ReactNode — A `Navbar`. Sticks to the top while the page scrolls.
+- sidebar?: ReactNode — A `Sidebar`. Hidden below 800px (its drawer opens from a `SidebarTrigger`).
+- aside?: ReactNode — Secondary content in a complementary landmark: a details panel, help, activity. Beside the page from 1100px, below it on narrower screens.
+- asideLabel?: string = 'Details' — Names the aside landmark. Default "Details".
+- skipLinkLabel?: string = 'Skip to main content' — Text of the skip link, the first thing a keyboard user can reach. Default "Skip to main content".
+- mainId?: string — The `id` of the main region, which the skip link targets. Default is generated.
+- scroll?: "page" | "contained" = 'page' — `page` (default): the page scrolls; the navbar and sidebar stay in view. `contained`: the shell fills its height and the sidebar and main scroll on their own. Set the height with the CSS variable `--app-shell-height` (default full viewport); in `page` mode `--app-shell-min-height` sets the minimum.
+- collapsed?: boolean — Whether the sidebar is collapsed to icons, when controlled. Pair with `onCollapsedChange`.
+- defaultCollapsed?: boolean — Whether the sidebar starts collapsed when uncontrolled. Default false.
+- onCollapsedChange?: ((collapsed: boolean) => void) — Called with the new collapsed state. Save it to persist the choice, then pass it back as `defaultCollapsed`.
+- children: ReactNode — The page. Put one h1 in it (a `PageHeader` does).
+
+Usage:
+```tsx
+import {type CSSProperties} from 'react';
+import {AppShell, Breadcrumb, Button, Command, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, Navbar, PageHeader, Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarItem, SidebarToggle, SidebarTrigger} from '@monoline/react';
+
+const Icon = ({d}: {d: string}) => <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d={d} /></svg>;
+
+const height = {'--app-shell-height': '34rem'} as CSSProperties;
+
+const actions = [{id: 'new', label: 'New project', group: 'Create'}, {id: 'invite', label: 'Invite a teammate', group: 'Create'}, {id: 'theme', label: 'Switch theme', group: 'View'}];
+
+const sidebar = (
+  <Sidebar drawerTitle="Acme">
+    <SidebarHeader><span>Acme</span><SidebarToggle /></SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup label="Workspace">
+        <SidebarItem href="#overview" current icon={<Icon d="M2 8l6-5 6 5v6H2z" />}>Overview</SidebarItem>
+        <SidebarItem href="#reports" icon={<Icon d="M3 13V8M8 13V3M13 13V6" />}>Reports</SidebarItem>
+        <SidebarItem href="#team" icon={<Icon d="M8 8a3 3 0 100-6 3 3 0 000 6zM2 14c0-3 3-4 6-4s6 1 6 4" />}>Team</SidebarItem>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+);
+
+const navbar = (
+  <Navbar
+    leading={<SidebarTrigger />}
+    actions={(
+      <>
+        <Command shortcut="mod+j" title="Command palette" items={actions} trigger={<Button size="sm">Search…</Button>} />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild><Button size="sm">Account</Button></DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Ada Example</DropdownMenuLabel>
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Sign out</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </>
+    )}
+  />
+);
+
+const header = <PageHeader breadcrumbs={<Breadcrumb items={[{label: 'Home', href: '#'}, {label: 'Reports'}]} />} title="Reports" description="Weekly numbers for your workspace." actions={<Button variant="solid">New report</Button>} />;
+
+<AppShell scroll="contained" style={height} navbar={navbar} sidebar={sidebar}>{header}<p>Your page goes here.</p></AppShell>
+```
+
+A11y:
+- Landmarks: banner (the navbar), navigation (the sidebar), main and complementary (the aside, named by asideLabel).
+- The first focusable element is a skip link to the main region; main takes focus when it is used.
+- The sidebar shows from 800px and the aside beside the page from 1100px; below those they move into a drawer or stack under the page.
+- scroll="page" keeps the navbar and sidebar in view while the page scrolls; scroll="contained" scrolls the regions on their own.
+
+CSS classes: link, divider, skip-link, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, btn-icon, tooltip, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, drawer-content, sidebar, sidebar-inner, sidebar-header, sidebar-footer, sidebar-content, sidebar-group, sidebar-group-label, sidebar-list, sidebar-item, sidebar-icon, sidebar-label, sidebar-toggle, sidebar-drawer, sidebar-trigger, navbar, navbar-brand, navbar-links, navbar-list, navbar-link, navbar-actions, navbar-drawer, navbar-menu, app-shell, app-shell-navbar, app-shell-main, app-shell-aside
+Data attributes: data-side: right | end | left | start | top | bottom; data-collapsed; data-sticky; data-scroll: contained
+Source: registry/app-shell.json
+
 ## Area chart (area-chart)
 A line chart filled down to zero, optionally stacked to show a running total.
 Status: stable | Category: data-display | Related: accordion, avatar, avatar-group
@@ -149,7 +227,7 @@ Source: registry/area-chart.json
 
 ## Aspect ratio (aspect-ratio)
 Keep media or a placeholder at a fixed width-to-height ratio.
-Status: stable | Category: layout | Primitive: radix-ui/AspectRatio | Related: box, container, direction-provider
+Status: stable | Category: layout | Primitive: radix-ui/AspectRatio | Related: app-shell, box, container
 Import: import {AspectRatio} from '@monoline/react'
 
 Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
@@ -359,7 +437,7 @@ Source: registry/block-cta.json
 
 ## Dashboard shell block (block-dashboard-shell)
 App frame with sidebar, top bar and content that collapses to a drawer on small screens.
-Status: beta | Category: blocks | Related: container, stack, drawer, button
+Status: beta | Category: blocks | Related: app-shell, sidebar, navbar
 Import: import {BlockDashboardShell} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -391,8 +469,8 @@ A11y:
 - Choosing a link closes the drawer. The content is a main landmark; put one h1 in it.
 - With renderLink the links are rendered by your router link; the block still sets the class and aria-current="page" on it.
 
-CSS classes: container, container-text, container-page, container-full, stack, stack-row, stack-wrap, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, drawer-content, block-shell, block-shell-side, block-shell-brand, block-shell-nav, block-shell-link, block-shell-body, block-shell-top, block-shell-top-end, block-shell-content, block-shell-menu
-Data attributes: data-align: start | center | end | stretch; data-justify: start | center | end | between; data-side: right | end | left | start | top | bottom
+CSS classes: link, divider, skip-link, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, btn-icon, tooltip, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, drawer-content, sidebar, sidebar-inner, sidebar-header, sidebar-footer, sidebar-content, sidebar-group, sidebar-group-label, sidebar-list, sidebar-item, sidebar-icon, sidebar-label, sidebar-toggle, sidebar-drawer, sidebar-trigger, navbar, navbar-brand, navbar-links, navbar-list, navbar-link, navbar-actions, navbar-drawer, navbar-menu, app-shell, app-shell-navbar, app-shell-main, app-shell-aside, block-shell, block-shell-brand
+Data attributes: data-side: right | end | left | start | top | bottom; data-collapsed; data-sticky; data-scroll: contained
 Source: registry/block-dashboard-shell.json
 
 ## Empty page block (block-empty-page)
@@ -732,7 +810,7 @@ Source: registry/border-beam.json
 
 ## Box (box)
 A div with padding and a thin border mapped to the spacing tokens.
-Status: stable | Category: layout | Related: aspect-ratio, container, direction-provider
+Status: stable | Category: layout | Related: app-shell, aspect-ratio, container
 Import: import {Box} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -758,7 +836,7 @@ Source: registry/box.json
 
 ## Breadcrumb (breadcrumb)
 The path to the current page.
-Status: stable | Category: navigation | Related: menubar, navigation-menu, pagination
+Status: stable | Category: navigation | Related: breadcrumbs-auto, menubar, navbar
 Import: import {Breadcrumb} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -779,6 +857,30 @@ A11y:
 CSS classes: crumbs, pager, steps, step, topbar, brand, topbar-nav, tab, tabpanel, link, divider, skip-link
 Data attributes: data-state: done
 Source: registry/breadcrumb.json
+
+## Breadcrumbs from path (breadcrumbs-auto)
+A breadcrumb built from the current URL path.
+Status: beta | Category: navigation | Related: breadcrumb
+Import: import {BreadcrumbsAuto} from '@monoline/react'
+
+Props (name: type = default, ? means optional):
+- pathname: string — The current URL path, from your router: `/settings/billing`. Query and hash are ignored.
+- labels?: Record<string, string> = {} — Text for a path segment, keyed by the segment: `{billing: 'Billing and plans'}`. Others are the segment with dashes as spaces, capitalised.
+- homeLabel?: string = 'Home' — Text of the first crumb, which links to `/`. Default "Home".
+
+Usage:
+```tsx
+import {BreadcrumbsAuto} from '@monoline/react';
+
+<BreadcrumbsAuto pathname="/projects/website-redesign/settings" labels={{'website-redesign': 'Website redesign'}} />
+```
+
+A11y:
+- Same as Breadcrumb: a navigation landmark with an ordered list; the last crumb is the current page and not a link.
+
+CSS classes: crumbs, pager, steps, step, topbar, brand, topbar-nav, tab, tabpanel, link, divider, skip-link
+Data attributes: data-state: done
+Source: registry/breadcrumbs-auto.json
 
 ## Button (button)
 Triggers an action. Native button with solid, line, ghost and danger variants.
@@ -1144,11 +1246,11 @@ Source: registry/confetti.json
 
 ## Container (container)
 Centre content in a column with a sensible maximum width and side padding.
-Status: stable | Category: layout | Related: aspect-ratio, box, direction-provider
+Status: stable | Category: layout | Related: app-shell, aspect-ratio, box
 Import: import {Container} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
-- size?: "text" | "page" | "full" = 'page' — `text` is a reading column, `page` the widest main column, `full` no limit.
+- size?: "page" | "text" | "full" = 'page' — `text` is a reading column, `page` the widest main column, `full` no limit.
 - asChild?: boolean — Render the child (a `main`, `section`) with the container styles.
 
 Usage:
@@ -1450,7 +1552,7 @@ Source: registry/dialog.json
 
 ## Direction provider (direction-provider)
 Sets the reading direction (ltr or rtl) once for every Radix-based component below it.
-Status: stable | Category: layout | Primitive: radix-ui/Direction | Related: aspect-ratio, box, container
+Status: stable | Category: layout | Primitive: radix-ui/Direction | Related: app-shell, aspect-ratio, box
 Import: import {DirectionProvider} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -1664,7 +1766,7 @@ Source: registry/file-upload.json
 
 ## Flex (flex)
 A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case.
-Status: stable | Category: layout | Related: aspect-ratio, box, container
+Status: stable | Category: layout | Related: app-shell, aspect-ratio, box
 Import: import {Flex} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -1742,7 +1844,7 @@ Source: registry/form.json
 
 ## Grid (grid)
 A responsive grid of equal columns with one gap.
-Status: stable | Category: layout | Related: aspect-ratio, box, container
+Status: stable | Category: layout | Related: app-shell, aspect-ratio, box
 Import: import {Grid} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -2098,7 +2200,7 @@ Source: registry/mentions.json
 
 ## Menubar (menubar)
 A horizontal bar of menus, like File, Edit and View in a desktop app.
-Status: stable | Category: navigation | Primitive: radix-ui/Menubar | Related: breadcrumb, navigation-menu, pagination
+Status: stable | Category: navigation | Primitive: radix-ui/Menubar | Related: breadcrumb, breadcrumbs-auto, navbar
 Import: import {Menubar} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -2177,9 +2279,42 @@ A11y:
 CSS classes: field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt
 Source: registry/native-select.json
 
+## Navbar (navbar)
+A top bar with brand, links and an actions slot; links move into a drawer on small screens.
+Status: beta | Category: navigation | Related: drawer, button
+Import: import {Navbar} from '@monoline/react'
+
+Props (name: type = default, ? means optional):
+- brand?: ReactNode — Your logo or name, at the start of the bar.
+- links?: NavbarLink[] = [] — Primary links, shown in the bar from 800px and in a drawer opened by a menu button below that. Leave out when the bar only holds actions.
+- linksLabel?: string = 'Main' — Names the links' navigation landmark. Default "Main".
+- renderLink?: RenderLink — Renders each link, so a client router can handle the click. Default a plain `<a href>`.
+- leading?: ReactNode — Goes before the brand: put a `SidebarTrigger` here when the bar sits above a `Sidebar`.
+- actions?: ReactNode — The end of the bar: search, a command palette button, an account menu.
+- menuLabel?: string = 'Menu' — Text of the button that opens the links drawer on small screens. Default "Menu".
+- sticky?: boolean = false — Keeps the bar at the top while the page scrolls. Default false. `AppShell` already does this for its navbar.
+
+Usage:
+```tsx
+import {Button, Navbar} from '@monoline/react';
+
+const links = [{label: 'Product', href: '#product', current: true}, {label: 'Pricing', href: '#pricing'}, {label: 'Docs', href: '#docs'}];
+
+<Navbar brand="Acme" links={links} actions={<Button variant="solid" size="sm">Sign in</Button>} />
+```
+
+A11y:
+- A header (banner landmark) with the links in their own navigation landmark named by linksLabel; the current page has aria-current="page".
+- Below 800px a Menu button opens the links in a drawer: focus is trapped, Escape closes it and focus returns to the button.
+- Put it first in the page, before main, so a skip link can jump past it.
+
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, drawer-content, navbar, navbar-brand, navbar-links, navbar-list, navbar-link, navbar-actions, navbar-drawer, navbar-menu
+Data attributes: data-side: right | end | left | start | top | bottom; data-sticky
+Source: registry/navbar.json
+
 ## Navigation menu (navigation-menu)
 Site navigation with links and menus that open panels of links.
-Status: stable | Category: navigation | Primitive: radix-ui/NavigationMenu | Related: breadcrumb, menubar, pagination
+Status: stable | Category: navigation | Primitive: radix-ui/NavigationMenu | Related: breadcrumb, breadcrumbs-auto, menubar
 Import: import {NavigationMenu} from '@monoline/react'
 
 Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
@@ -2407,9 +2542,40 @@ CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, bt
 Data attributes: data-hidden
 Source: registry/overflow-list.json
 
+## Page header (page-header)
+The top of a page: breadcrumbs, title, description and actions.
+Status: beta | Category: layout | Related: app-shell, aspect-ratio, box
+Import: import {PageHeader} from '@monoline/react'
+
+Props (name: type = default, ? means optional):
+- title: ReactNode — The page title, rendered as a heading.
+- description?: ReactNode — One sentence under the title saying what the page is for.
+- breadcrumbs?: ReactNode — Shown above the title: a `Breadcrumb` or `BreadcrumbsAuto`.
+- actions?: ReactNode — Buttons at the end of the title row. They wrap under the title on small screens.
+- level?: 1 | 2 | 3 | 4 = 1 — The heading level, 1 to 4. Default 1: one per page.
+
+Usage:
+```tsx
+import {Breadcrumb, Button, PageHeader} from '@monoline/react';
+
+<PageHeader
+  breadcrumbs={<Breadcrumb items={[{label: 'Home', href: '#'}, {label: 'Customers', href: '#'}, {label: 'Ada Example'}]} />}
+  title="Ada Example"
+  description="Joined in March. On the Team plan."
+  actions={<><Button>Export</Button><Button variant="solid">Edit customer</Button></>}
+/>
+```
+
+A11y:
+- The title is a real heading (h1 by default); keep one h1 per page.
+- Breadcrumbs and actions are slots, so they keep their own landmark and keyboard behaviour.
+
+CSS classes: page-header, page-header-row, page-header-text, page-header-title, page-header-description, page-header-actions
+Source: registry/page-header.json
+
 ## Pagination (pagination)
 Move between pages of results.
-Status: stable | Category: navigation | Related: breadcrumb, menubar, navigation-menu
+Status: stable | Category: navigation | Related: breadcrumb, breadcrumbs-auto, menubar
 Import: import {Pagination} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -2630,7 +2796,7 @@ Source: registry/rating.json
 
 ## Resizable (resizable)
 Panels separated by handles you drag or move with the keyboard.
-Status: stable | Category: layout | Related: aspect-ratio, box, container
+Status: stable | Category: layout | Related: app-shell, aspect-ratio, box
 Import: import {ResizablePanelGroup} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -2742,7 +2908,7 @@ Source: registry/rolling-number.json
 
 ## Scroll area (scroll-area)
 A scrollable region with thin, themed scrollbars.
-Status: stable | Category: layout | Primitive: radix-ui/ScrollArea | Related: aspect-ratio, box, container
+Status: stable | Category: layout | Primitive: radix-ui/ScrollArea | Related: app-shell, aspect-ratio, box
 Import: import {ScrollArea} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -2841,7 +3007,7 @@ Source: registry/select.json
 
 ## Separator (separator)
 A thin rule between groups.
-Status: stable | Category: layout | Primitive: radix-ui/Separator | Related: aspect-ratio, box, container
+Status: stable | Category: layout | Primitive: radix-ui/Separator | Related: app-shell, aspect-ratio, box
 Import: import {Separator} from '@monoline/react'
 
 Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
@@ -2881,6 +3047,88 @@ A11y:
 
 CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, shimmer-button
 Source: registry/shimmer-button.json
+
+## Sidebar (sidebar)
+A collapsible navigation sidebar with groups, icons and a mobile drawer.
+Status: beta | Category: navigation | Related: drawer, tooltip, button, icon-button
+Import: import {Sidebar} from '@monoline/react'
+
+Props (name: type = default, ? means optional):
+SidebarProviderProps:
+- collapsed?: boolean — Whether the sidebar is collapsed to icons, when controlled. Pair with `onCollapsedChange`.
+- defaultCollapsed?: boolean = false — Whether the sidebar starts collapsed when uncontrolled. Default false.
+- onCollapsedChange?: ((collapsed: boolean) => void) — Called with the new state when the user collapses or expands the sidebar. Save it here (for example in localStorage) and pass it back as `defaultCollapsed` or `collapsed` to persist the choice.
+- children?: ReactNode = 'Menu' — Your layout: a `Sidebar`, plus any `SidebarToggle` or `SidebarTrigger` anywhere below.
+SidebarProps:
+- label?: string = 'Toggle sidebar' — Names the navigation landmark, in the sidebar and in the drawer. Default "Main".
+- drawerTitle?: ReactNode = 'Menu' — Names the drawer on small screens (its dialog title). Default "Menu".
+- renderLink?: RenderLink — Renders each `SidebarItem` link, so a client router can handle the click. Default a plain `<a href>`. The returned element must forward its ref and spread extra props (collapsed tooltips need that).
+- children: ReactNode = 'Menu' — A `SidebarHeader`, `SidebarContent` and `SidebarFooter`. They render twice: in the sidebar (from 800px) and in the drawer (below 800px).
+SidebarGroupProps:
+- label?: ReactNode = 'Toggle sidebar' — A heading for the group. Hidden visually (a rule shows instead) when the sidebar is collapsed, still read by screen readers.
+- children: ReactNode = 'Menu' — `SidebarItem`s.
+SidebarItemProps:
+- href?: string — Where the link goes. Not needed with `asChild`.
+- icon?: ReactNode — An inline SVG with `currentColor`; hidden from screen readers. Shown alone when the sidebar is collapsed.
+- current?: boolean — The current page: sets `aria-current="page"` and the active style.
+- asChild?: boolean — Use the child (your router's link) as the anchor. Its text becomes the label.
+- children: ReactNode = 'Menu' — The label. Visually hidden when collapsed and shown in a tooltip instead.
+SidebarToggleProps:
+- label?: string = 'Toggle sidebar' — The button's accessible name. It reports expanded or collapsed through `aria-expanded`. Default "Toggle sidebar".
+SidebarTriggerProps:
+- children?: ReactNode = 'Menu' — The button text, which is also its name. Default "Menu".
+
+Usage:
+```tsx
+import {type CSSProperties, type ReactNode} from 'react';
+import {Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarItem, SidebarProvider, SidebarToggle, SidebarTrigger, useSidebar} from '@monoline/react';
+
+const Icon = ({d}: {d: string}) => <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d={d} /></svg>;
+
+const frame: CSSProperties = {display: 'flex', alignItems: 'stretch', minBlockSize: '22rem', border: '1px solid var(--rule)'};
+
+function Brand() {
+  const {collapsed} = useSidebar();
+  return <SidebarHeader>{!collapsed && <span>Acme</span>}<SidebarToggle /></SidebarHeader>;
+}
+
+function Nav({children}: {children?: ReactNode}) {
+  return (
+    <>
+      <Brand />
+      <SidebarContent>
+        <SidebarGroup label="Workspace">
+          <SidebarItem href="#overview" current icon={<Icon d="M2 8l6-5 6 5v6H2z" />}>Overview</SidebarItem>
+          <SidebarItem href="#reports" icon={<Icon d="M3 13V8M8 13V3M13 13V6" />}>Reports</SidebarItem>
+          <SidebarItem href="#team" icon={<Icon d="M8 8a3 3 0 100-6 3 3 0 000 6zM2 14c0-3 3-4 6-4s6 1 6 4" />}>Team</SidebarItem>
+        </SidebarGroup>
+        <SidebarGroup label="Account">
+          <SidebarItem href="#billing" icon={<Icon d="M2 4h12v8H2zM2 7h12" />}>Billing</SidebarItem>
+        </SidebarGroup>
+      </SidebarContent>
+      {children}
+    </>
+  );
+}
+
+<SidebarProvider>
+  <div style={frame}>
+    <Sidebar drawerTitle="Acme"><Nav><SidebarFooter><SidebarGroup><SidebarItem href="#help" icon={<Icon d="M8 14A6 6 0 108 2a6 6 0 000 12zM8 11v.01M6.5 6.5a1.5 1.5 0 113 0c0 1-1.5 1-1.5 2" />}>Help</SidebarItem></SidebarGroup></SidebarFooter></Nav></Sidebar>
+    <div style={{padding: 'var(--s5)'}}><SidebarTrigger /></div>
+  </div>
+</SidebarProvider>
+```
+
+A11y:
+- A navigation landmark named by the label prop, holding labelled lists of links; the current page has aria-current="page".
+- ArrowUp, ArrowDown, Home and End move focus between items; Tab still moves through them in order.
+- Collapsing keeps every label in the accessibility tree; a tooltip shows it on hover and keyboard focus. The toggle reports aria-expanded.
+- Below 800px the sidebar is hidden and the Menu button opens it in a left drawer: focus is trapped, Escape closes it and focus returns to the button. Choosing a link closes it.
+- In right-to-left layouts the sidebar sits on the right and the drawer opens from the right.
+
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, btn-icon, tooltip, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, drawer-content, sidebar, sidebar-inner, sidebar-header, sidebar-footer, sidebar-content, sidebar-group, sidebar-group-label, sidebar-list, sidebar-item, sidebar-icon, sidebar-label, sidebar-toggle, sidebar-drawer, sidebar-trigger
+Data attributes: data-side: right | end | left | start | top | bottom; data-collapsed
+Source: registry/sidebar.json
 
 ## Skeleton (skeleton)
 A still placeholder shaped like the content that is loading.
@@ -3041,7 +3289,7 @@ Source: registry/spotlight.json
 
 ## Stack (stack)
 Lay children out in a column or row with one gap from the spacing scale.
-Status: stable | Category: layout | Related: aspect-ratio, box, container
+Status: stable | Category: layout | Related: app-shell, aspect-ratio, box
 Import: import {Stack} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -3090,7 +3338,7 @@ Source: registry/stat.json
 
 ## Stepper (stepper)
 Show progress through a numbered sequence of steps.
-Status: stable | Category: navigation | Related: breadcrumb, menubar, navigation-menu
+Status: stable | Category: navigation | Related: breadcrumb, breadcrumbs-auto, menubar
 Import: import {Stepper} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -3169,7 +3417,7 @@ Source: registry/table.json
 
 ## Tabs (tabs)
 Switch between related views in the same place.
-Status: stable | Category: navigation | Primitive: radix-ui/Tabs | Related: breadcrumb, menubar, navigation-menu
+Status: stable | Category: navigation | Primitive: radix-ui/Tabs | Related: breadcrumb, breadcrumbs-auto, menubar
 Import: import {Tabs} from '@monoline/react'
 
 Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
