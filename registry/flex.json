@@ -92,7 +92,7 @@
       ]
     }
   ],
-  "usage": "import {Badge, Flex} from '@monoline/react';\n\n<Flex justify=\"between\" align=\"center\" gap={3}><Badge>left</Badge><Badge>right</Badge></Flex>",
+  "usage": "import {Badge, Flex} from '@monoline/react';\n\n<Flex justify=\"between\" align=\"center\" gap={3}>\n  <Badge>left</Badge>\n  <Badge>right</Badge>\n</Flex>",
   "dataAttributes": [
     {
       "name": "data-direction",

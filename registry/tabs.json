@@ -41,7 +41,7 @@
     "navigation-menu"
   ],
   "props": [],
-  "usage": "import {Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';\n\n<Tabs defaultValue=\"overview\"><TabsList aria-label=\"Project\"><TabsTrigger value=\"overview\">Overview</TabsTrigger><TabsTrigger value=\"activity\">Activity</TabsTrigger><TabsTrigger value=\"settings\">Settings</TabsTrigger></TabsList><TabsContent value=\"overview\">Overview content.</TabsContent><TabsContent value=\"activity\">Activity content.</TabsContent><TabsContent value=\"settings\">Settings content.</TabsContent></Tabs>",
+  "usage": "import {Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';\n\n<Tabs defaultValue=\"overview\">\n  <TabsList aria-label=\"Project\">\n    <TabsTrigger value=\"overview\">Overview</TabsTrigger>\n    <TabsTrigger value=\"activity\">Activity</TabsTrigger>\n    <TabsTrigger value=\"settings\">Settings</TabsTrigger>\n  </TabsList>\n  <TabsContent value=\"overview\">Overview content.</TabsContent>\n  <TabsContent value=\"activity\">Activity content.</TabsContent>\n  <TabsContent value=\"settings\">Settings content.</TabsContent>\n</Tabs>",
   "dataAttributes": [
     {
       "name": "data-orientation",

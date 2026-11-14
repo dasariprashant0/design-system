@@ -57,7 +57,7 @@
       ]
     }
   ],
-  "usage": "import {Field, NativeSelect} from '@monoline/react';\n\n<div style={{maxWidth: '280px'}}><Field label=\"Plan\"><NativeSelect defaultValue=\"pro\"><option value=\"free\">Free</option><option value=\"pro\">Pro</option><option value=\"team\">Team</option></NativeSelect></Field></div>",
+  "usage": "import {Field, NativeSelect} from '@monoline/react';\n\n<div style={{maxWidth: '280px'}}>\n  <Field label=\"Plan\">\n    <NativeSelect defaultValue=\"pro\">\n      <option value=\"free\">Free</option>\n      <option value=\"pro\">Pro</option>\n      <option value=\"team\">Team</option>\n    </NativeSelect>\n  </Field>\n</div>",
   "dataAttributes": [],
   "classes": [
     "field",

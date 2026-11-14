@@ -56,7 +56,7 @@
       ]
     }
   ],
-  "usage": "import {ScrollArea} from '@monoline/react';\n\n<ScrollArea style={{height: '160px', width: '320px', border: '1px solid var(--rule)'}} viewportProps={{'aria-label': 'Release notes'}}><div style={{padding: 'var(--s3)'}}>{Array.from({length: 20}, (_, i) => <p key={i}>Release note {i + 1}</p>)}</div></ScrollArea>",
+  "usage": "import {ScrollArea} from '@monoline/react';\n\n<ScrollArea\n  style={{height: '160px', width: '320px', border: '1px solid var(--rule)'}}\n  viewportProps={{'aria-label': 'Release notes'}}\n>\n  <div style={{padding: 'var(--s3)'}}>\n    {Array.from({length: 20}, (_, i) => <p key={i}>Release note {i + 1}</p>)}\n  </div>\n</ScrollArea>",
   "dataAttributes": [
     {
       "name": "data-orientation",

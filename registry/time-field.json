@@ -113,7 +113,7 @@
       ]
     }
   ],
-  "usage": "import {Field, TimeField} from '@monoline/react';\n\n<Field label=\"Start time\"><TimeField defaultValue=\"09:30\" /></Field>",
+  "usage": "import {Field, TimeField} from '@monoline/react';\n\n<Field label=\"Start time\">\n  <TimeField defaultValue=\"09:30\" />\n</Field>",
   "dataAttributes": [
     {
       "name": "data-empty",

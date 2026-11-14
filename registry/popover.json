@@ -36,7 +36,7 @@
     "context-menu"
   ],
   "props": [],
-  "usage": "import {Button, Popover, PopoverContent, PopoverTrigger} from '@monoline/react';\n\n<Popover><PopoverTrigger asChild><Button>Details</Button></PopoverTrigger><PopoverContent aria-label=\"Entry details\"><p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p></PopoverContent></Popover>",
+  "usage": "import {Button, Popover, PopoverContent, PopoverTrigger} from '@monoline/react';\n\n<Popover>\n  <PopoverTrigger asChild>\n    <Button>Details</Button>\n  </PopoverTrigger>\n  <PopoverContent aria-label=\"Entry details\">\n    <p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p>\n  </PopoverContent>\n</Popover>",
   "dataAttributes": [
     {
       "name": "data-highlighted",

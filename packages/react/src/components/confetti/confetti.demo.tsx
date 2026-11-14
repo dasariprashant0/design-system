@@ -15,5 +15,11 @@ function Fire() {
 }
 
 export const demos: Demo[] = [
-  {title: 'Fire from a ref', description: 'Does nothing when the system asks for reduced motion.', render: () => <Fire />},
+  {
+    title: 'Fire from a ref',
+    description: 'Does nothing when the system asks for reduced motion.',
+    render: () => (
+      <Fire />
+    ),
+  },
 ];

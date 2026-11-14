@@ -13,8 +13,32 @@ function Controlled() {
 }
 
 export const demos: Demo[] = [
-  {title: 'Basic', render: () => <RichTextEditor aria-label="Notes" placeholder="Write something…" />},
-  {title: 'Controlled, with the HTML shown', render: () => <Controlled />},
-  {title: 'Read only', render: () => <RichTextEditor aria-label="Changelog" readOnly defaultValue="<p>Read-only <em>content</em> with a <a href='https://example.com'>link</a>.</p>" />},
-  {title: 'Disabled', render: () => <RichTextEditor aria-label="Locked notes" disabled defaultValue="<p>Disabled.</p>" />},
+  {
+    title: 'Basic',
+    render: () => (
+      <RichTextEditor aria-label="Notes" placeholder="Write something…" />
+    ),
+  },
+  {
+    title: 'Controlled, with the HTML shown',
+    render: () => (
+      <Controlled />
+    ),
+  },
+  {
+    title: 'Read only',
+    render: () => (
+      <RichTextEditor
+        aria-label="Changelog"
+        readOnly
+        defaultValue="<p>Read-only <em>content</em> with a <a href='https://example.com'>link</a>.</p>"
+      />
+    ),
+  },
+  {
+    title: 'Disabled',
+    render: () => (
+      <RichTextEditor aria-label="Locked notes" disabled defaultValue="<p>Disabled.</p>" />
+    ),
+  },
 ];

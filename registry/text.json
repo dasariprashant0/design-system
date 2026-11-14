@@ -69,7 +69,7 @@
       ]
     }
   ],
-  "usage": "import {Text} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s2)'}}><Text size=\"lg\">Large</Text><Text>Medium</Text><Text size=\"sm\" tone=\"muted\">Small and muted</Text><Text size=\"xs\" tone=\"danger\">Extra small, danger</Text></div>",
+  "usage": "import {Text} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s2)'}}>\n  <Text size=\"lg\">Large</Text>\n  <Text>Medium</Text>\n  <Text size=\"sm\" tone=\"muted\">Small and muted</Text>\n  <Text size=\"xs\" tone=\"danger\">Extra small, danger</Text>\n</div>",
   "dataAttributes": [],
   "classes": [
     "text",

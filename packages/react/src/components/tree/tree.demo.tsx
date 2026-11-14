@@ -17,6 +17,16 @@ function Controlled() {
 }
 
 export const demos: Demo[] = [
-  {title: 'File tree', render: () => <Tree aria-label="Project files" items={items} defaultExpanded={['src', 'components']} />},
-  {title: 'Controlled', render: () => <Controlled />},
+  {
+    title: 'File tree',
+    render: () => (
+      <Tree aria-label="Project files" items={items} defaultExpanded={['src', 'components']} />
+    ),
+  },
+  {
+    title: 'Controlled',
+    render: () => (
+      <Controlled />
+    ),
+  },
 ];

@@ -56,7 +56,7 @@
       ]
     }
   ],
-  "usage": "import {DescriptionList} from '@monoline/react';\n\n<DescriptionList items={[{term: 'Plan', details: 'Pro'}, {term: 'Seats', details: '12'}, {term: 'Renews', details: '1 March 2027'}]} />",
+  "usage": "import {DescriptionList} from '@monoline/react';\n\n<DescriptionList\n  items={[{term: 'Plan', details: 'Pro'}, {term: 'Seats', details: '12'}, {term: 'Renews', details: '1 March 2027'}]}\n/>",
   "dataAttributes": [],
   "classes": [
     "dlist",

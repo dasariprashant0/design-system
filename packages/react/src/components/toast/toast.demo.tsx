@@ -19,4 +19,9 @@ function Example() {
   );
 }
 
-export const demos: Demo[] = [{title: 'Trigger a toast', render: () => <Example />}];
+export const demos: Demo[] = [{
+  title: 'Trigger a toast',
+  render: () => (
+    <Example />
+  ),
+}];

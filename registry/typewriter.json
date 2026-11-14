@@ -77,7 +77,7 @@
       ]
     }
   ],
-  "usage": "import {Typewriter} from '@monoline/react';\n\n<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}><Typewriter text=\"Small parts, drawn with thin lines.\" /></p>",
+  "usage": "import {Typewriter} from '@monoline/react';\n\n<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}>\n  <Typewriter text=\"Small parts, drawn with thin lines.\" />\n</p>",
   "dataAttributes": [],
   "classes": [
     "typewriter-caret"

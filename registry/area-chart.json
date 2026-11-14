@@ -70,7 +70,7 @@
       ]
     }
   ],
-  "usage": "import {AreaChart} from '@monoline/react';\n\nconst months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];\n\n<AreaChart title=\"Active users\" labels={months} series={[{name: 'Users', values: [120, 180, 150, 240, 310, 290]}]} />",
+  "usage": "import {AreaChart} from '@monoline/react';\n\nconst months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];\n\n<AreaChart\n  title=\"Active users\"\n  labels={months}\n  series={[{name: 'Users', values: [120, 180, 150, 240, 310, 290]}]}\n/>",
   "dataAttributes": [
     {
       "name": "data-active",

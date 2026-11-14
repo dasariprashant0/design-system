@@ -16,4 +16,10 @@ function Example() {
   );
 }
 
-export const demos: Demo[] = [{title: 'Call toast() from any handler', description: 'Mount one Toaster, then call toast anywhere. No provider or hook is needed.', render: () => <Example />}];
+export const demos: Demo[] = [{
+  title: 'Call toast() from any handler',
+  description: 'Mount one Toaster, then call toast anywhere. No provider or hook is needed.',
+  render: () => (
+    <Example />
+  ),
+}];

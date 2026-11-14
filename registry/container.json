@@ -54,7 +54,7 @@
       ]
     }
   ],
-  "usage": "import {Container} from '@monoline/react';\n\n<Container size=\"text\"><p>A column about 64 characters wide, centred, with side padding.</p></Container>",
+  "usage": "import {Container} from '@monoline/react';\n\n<Container size=\"text\">\n  <p>A column about 64 characters wide, centred, with side padding.</p>\n</Container>",
   "dataAttributes": [],
   "classes": [
     "container",

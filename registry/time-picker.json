@@ -87,7 +87,7 @@
       ]
     }
   ],
-  "usage": "import {Field, TimePicker} from '@monoline/react';\n\n<div style={{maxWidth: '200px'}}><Field label=\"Start time\"><TimePicker defaultValue=\"09:30\" /></Field></div>",
+  "usage": "import {Field, TimePicker} from '@monoline/react';\n\n<div style={{maxWidth: '200px'}}>\n  <Field label=\"Start time\">\n    <TimePicker defaultValue=\"09:30\" />\n  </Field>\n</div>",
   "dataAttributes": [],
   "classes": [
     "field",

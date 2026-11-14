@@ -91,7 +91,7 @@
       ]
     }
   ],
-  "usage": "import {Autocomplete, Field} from '@monoline/react';\n\nconst cities = ['Amsterdam', 'Berlin', 'Bangalore', 'Boston', 'Lisbon', 'London', 'Lagos'];\n\n<div style={{maxWidth: '320px', minHeight: '220px'}}><Field label=\"City\"><Autocomplete suggestions={cities} placeholder=\"Start typing\" /></Field></div>",
+  "usage": "import {Autocomplete, Field} from '@monoline/react';\n\nconst cities = ['Amsterdam', 'Berlin', 'Bangalore', 'Boston', 'Lisbon', 'London', 'Lagos'];\n\n<div style={{maxWidth: '320px', minHeight: '220px'}}>\n  <Field label=\"City\">\n    <Autocomplete suggestions={cities} placeholder=\"Start typing\" />\n  </Field>\n</div>",
   "dataAttributes": [
     {
       "name": "data-active",

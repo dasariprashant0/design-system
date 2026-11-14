@@ -79,7 +79,7 @@
       ]
     }
   ],
-  "usage": "import {SegmentedControl} from '@monoline/react';\n\n<SegmentedControl aria-label=\"Chart range\" options={[{value: 'day', label: 'Day'}, {value: 'week', label: 'Week'}, {value: 'month', label: 'Month'}]} defaultValue=\"week\" />",
+  "usage": "import {SegmentedControl} from '@monoline/react';\n\n<SegmentedControl\n  aria-label=\"Chart range\"\n  options={[{value: 'day', label: 'Day'}, {value: 'week', label: 'Week'}, {value: 'month', label: 'Month'}]}\n  defaultValue=\"week\"\n/>",
   "dataAttributes": [
     {
       "name": "data-state",

@@ -53,7 +53,7 @@
       ]
     }
   ],
-  "usage": "import {DirectionProvider, Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';\n\n<div dir=\"rtl\"><DirectionProvider dir=\"rtl\"><Tabs defaultValue=\"a\"><TabsList aria-label=\"Sections\"><TabsTrigger value=\"a\">الأول</TabsTrigger><TabsTrigger value=\"b\">الثاني</TabsTrigger></TabsList><TabsContent value=\"a\">محتوى</TabsContent><TabsContent value=\"b\">محتوى آخر</TabsContent></Tabs></DirectionProvider></div>",
+  "usage": "import {DirectionProvider, Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';\n\n<div dir=\"rtl\">\n  <DirectionProvider dir=\"rtl\">\n    <Tabs defaultValue=\"a\">\n      <TabsList aria-label=\"Sections\">\n        <TabsTrigger value=\"a\">الأول</TabsTrigger>\n        <TabsTrigger value=\"b\">الثاني</TabsTrigger>\n      </TabsList>\n      <TabsContent value=\"a\">محتوى</TabsContent>\n      <TabsContent value=\"b\">محتوى آخر</TabsContent>\n    </Tabs>\n  </DirectionProvider>\n</div>",
   "dataAttributes": [],
   "classes": [],
   "dependencies": {

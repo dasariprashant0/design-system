@@ -20,5 +20,9 @@ function Controls() {
 export const demos: Demo[] = [{
   title: 'useTheme and ThemeSwitcher',
   description: 'ThemeProvider writes data-theme, data-accent and the other options to <html> and saves them. On a server-rendered page also put <script dangerouslySetInnerHTML={{__html: themeScript()}} /> in <head>.',
-  render: () => <ThemeProvider storageKey="monoline-demo"><Controls /></ThemeProvider>,
+  render: () => (
+    <ThemeProvider storageKey="monoline-demo">
+      <Controls />
+    </ThemeProvider>
+  ),
 }];

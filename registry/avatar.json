@@ -70,7 +70,7 @@
       ]
     }
   ],
-  "usage": "import {Avatar} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Avatar name=\"Ada Lovelace\" /><Avatar name=\"Grace Hopper\" variant=\"line\" /><Avatar name=\"Alan Turing\" size=\"lg\" /></div>",
+  "usage": "import {Avatar} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}>\n  <Avatar name=\"Ada Lovelace\" />\n  <Avatar name=\"Grace Hopper\" variant=\"line\" />\n  <Avatar name=\"Alan Turing\" size=\"lg\" />\n</div>",
   "dataAttributes": [],
   "classes": [
     "avatar",

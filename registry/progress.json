@@ -50,7 +50,7 @@
       ]
     }
   ],
-  "usage": "import {Progress} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s4)', maxWidth: 420}}><Progress aria-label=\"Upload\" value={62} /><Progress aria-label=\"Waiting\" /></div>",
+  "usage": "import {Progress} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s4)', maxWidth: 420}}>\n  <Progress aria-label=\"Upload\" value={62} />\n  <Progress aria-label=\"Waiting\" />\n</div>",
   "dataAttributes": [
     {
       "name": "data-state",

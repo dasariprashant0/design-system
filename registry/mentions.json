@@ -119,7 +119,7 @@
       ]
     }
   ],
-  "usage": "import {Field, Mentions, type MentionOption} from '@monoline/react';\n\nconst people: MentionOption[] = [\n  {value: 'ada', label: 'Ada Lovelace'},\n  {value: 'grace', label: 'Grace Hopper'},\n  {value: 'alan', label: 'Alan Turing'},\n  {value: 'linus', label: 'Linus Torvalds', disabled: true},\n];\n\n<div style={{maxWidth: '360px', minHeight: '220px'}}><Field label=\"Comment\"><Mentions options={people} rows={3} /></Field></div>",
+  "usage": "import {Field, Mentions, type MentionOption} from '@monoline/react';\n\nconst people: MentionOption[] = [\n  {value: 'ada', label: 'Ada Lovelace'},\n  {value: 'grace', label: 'Grace Hopper'},\n  {value: 'alan', label: 'Alan Turing'},\n  {value: 'linus', label: 'Linus Torvalds', disabled: true},\n];\n\n<div style={{maxWidth: '360px', minHeight: '220px'}}>\n  <Field label=\"Comment\">\n    <Mentions options={people} rows={3} />\n  </Field>\n</div>",
   "dataAttributes": [
     {
       "name": "data-active",

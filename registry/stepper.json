@@ -56,7 +56,7 @@
       ]
     }
   ],
-  "usage": "import {Stepper} from '@monoline/react';\n\n<Stepper aria-label=\"Checkout\" current={1} steps={[{title: 'Account'}, {title: 'Plan', description: 'Pick one'}, {title: 'Payment'}]} />",
+  "usage": "import {Stepper} from '@monoline/react';\n\n<Stepper\n  aria-label=\"Checkout\"\n  current={1}\n  steps={[{title: 'Account'}, {title: 'Plan', description: 'Pick one'}, {title: 'Payment'}]}\n/>",
   "dataAttributes": [
     {
       "name": "data-state",

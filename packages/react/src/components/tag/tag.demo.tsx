@@ -8,6 +8,16 @@ function Removable() {
 }
 
 export const demos: Demo[] = [
-  {title: 'Plain', render: () => <Tag>design</Tag>},
-  {title: 'Removable', render: () => <Removable />},
+  {
+    title: 'Plain',
+    render: () => (
+      <Tag>design</Tag>
+    ),
+  },
+  {
+    title: 'Removable',
+    render: () => (
+      <Removable />
+    ),
+  },
 ];

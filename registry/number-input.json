@@ -63,7 +63,7 @@
       ]
     }
   ],
-  "usage": "import {Field, NumberInput} from '@monoline/react';\n\n<div style={{maxWidth: '200px'}}><Field label=\"Quantity\"><NumberInput defaultValue={1} min={0} max={10} /></Field></div>",
+  "usage": "import {Field, NumberInput} from '@monoline/react';\n\n<div style={{maxWidth: '200px'}}>\n  <Field label=\"Quantity\">\n    <NumberInput defaultValue={1} min={0} max={10} />\n  </Field>\n</div>",
   "dataAttributes": [],
   "classes": [
     "field",

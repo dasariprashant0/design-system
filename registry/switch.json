@@ -50,7 +50,7 @@
       ]
     }
   ],
-  "usage": "import {Switch} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}><Switch label=\"Launch at login\" defaultChecked /><Switch label=\"Weekly digest\" /><Switch label=\"Locked\" disabled /></div>",
+  "usage": "import {Switch} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}>\n  <Switch label=\"Launch at login\" defaultChecked />\n  <Switch label=\"Weekly digest\" />\n  <Switch label=\"Locked\" disabled />\n</div>",
   "dataAttributes": [
     {
       "name": "data-state",

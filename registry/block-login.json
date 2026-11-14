@@ -139,7 +139,7 @@
       ]
     }
   ],
-  "usage": "import {BlockLogin, Link} from '@monoline/react';\n\n<BlockLogin description=\"Use the email you signed up with.\" footer={<><Link href=\"#\">Forgot your password?</Link><Link href=\"#\">Create an account</Link></>} />",
+  "usage": "import {BlockLogin, Link} from '@monoline/react';\n\n<BlockLogin\n  description=\"Use the email you signed up with.\"\n  footer={<><Link href=\"#\">Forgot your password?</Link><Link href=\"#\">Create an account</Link></>}\n/>",
   "dataAttributes": [
     {
       "name": "data-valid",

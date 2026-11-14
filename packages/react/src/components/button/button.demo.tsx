@@ -44,6 +44,10 @@ export const demos: Demo[] = [
   {
     title: 'As a link',
     description: 'asChild keeps the semantics of the child, so this is a real link.',
-    render: () => <Button asChild variant="solid"><a href="#buttons">Read the docs</a></Button>,
+    render: () => (
+      <Button asChild variant="solid">
+        <a href="#buttons">Read the docs</a>
+      </Button>
+    ),
   },
 ];

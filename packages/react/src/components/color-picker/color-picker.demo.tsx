@@ -8,6 +8,22 @@ function Controlled() {
 }
 
 export const demos: Demo[] = [
-  {title: 'Presets, picker and hex', render: () => <Controlled />},
-  {title: 'Custom swatches', render: () => <div style={{maxWidth: '280px'}}><ColorPicker aria-label="Label colour" colors={['#e5484d', '#30a46c', '#0090ff']} defaultValue="#30a46c" /></div>},
+  {
+    title: 'Presets, picker and hex',
+    render: () => (
+      <Controlled />
+    ),
+  },
+  {
+    title: 'Custom swatches',
+    render: () => (
+      <div style={{maxWidth: '280px'}}>
+        <ColorPicker
+          aria-label="Label colour"
+          colors={['#e5484d', '#30a46c', '#0090ff']}
+          defaultValue="#30a46c"
+        />
+      </div>
+    ),
+  },
 ];
