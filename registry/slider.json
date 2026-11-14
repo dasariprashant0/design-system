@@ -75,7 +75,7 @@
       ]
     }
   ],
-  "usage": "import {Slider} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s5)', maxWidth: 420}}><Slider aria-label=\"Volume\" defaultValue={60} /><Slider aria-label=\"Price\" defaultValue={[20, 70]} /></div>",
+  "usage": "import {Slider} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s5)', maxWidth: 420}}>\n  <Slider aria-label=\"Volume\" defaultValue={60} />\n  <Slider aria-label=\"Price\" defaultValue={[20, 70]} />\n</div>",
   "dataAttributes": [
     {
       "name": "data-disabled",

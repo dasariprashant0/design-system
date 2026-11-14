@@ -105,7 +105,7 @@
       ]
     }
   ],
-  "usage": "import {Field, MultiSelect} from '@monoline/react';\n\nconst options = ['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Katherine Johnson', 'Linus Torvalds'].map((n) => ({value: n.toLowerCase().replace(/\\W+/g, '-'), label: n}));\n\n<div style={{maxWidth: '360px', minHeight: '280px'}}><Field label=\"People\"><MultiSelect options={options} placeholder=\"Type a name\" defaultValue={['ada-lovelace']} /></Field></div>",
+  "usage": "import {Field, MultiSelect} from '@monoline/react';\n\nconst options = ['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Katherine Johnson', 'Linus Torvalds'].map((n) => ({value: n.toLowerCase().replace(/\\W+/g, '-'), label: n}));\n\n<div style={{maxWidth: '360px', minHeight: '280px'}}>\n  <Field label=\"People\">\n    <MultiSelect\n      options={options}\n      placeholder=\"Type a name\"\n      defaultValue={['ada-lovelace']}\n    />\n  </Field>\n</div>",
   "dataAttributes": [
     {
       "name": "data-invalid",

@@ -90,7 +90,7 @@
       ]
     }
   ],
-  "usage": "import {Field, Input} from '@monoline/react';\n\n<div style={{maxWidth: 360}}><Field label=\"Email\" hint=\"We never share it.\" required><Input type=\"email\" placeholder=\"you@example.com\" /></Field></div>",
+  "usage": "import {Field, Input} from '@monoline/react';\n\n<div style={{maxWidth: 360}}>\n  <Field label=\"Email\" hint=\"We never share it.\" required>\n    <Input type=\"email\" placeholder=\"you@example.com\" />\n  </Field>\n</div>",
   "dataAttributes": [
     {
       "name": "data-valid",

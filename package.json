@@ -20,6 +20,8 @@
     "test:mcp": "npm test -w @monoline/mcp",
     "cli": "node packages/cli/bin/monoline.mjs",
     "test:cli": "npm test -w monoline",
+    "tokens": "node packages/tokens/scripts/build.mjs",
+    "test:tokens": "node --test packages/tokens/test/",
     "test:release": "node --test scripts/release.test.mjs",
     "size": "node scripts/size.mjs",
     "test:css-browser": "node scripts/css-computed.mjs",

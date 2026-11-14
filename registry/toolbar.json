@@ -36,7 +36,7 @@
     "copy-button"
   ],
   "props": [],
-  "usage": "import {Toolbar, ToolbarButton, ToolbarSeparator} from '@monoline/react';\n\n<Toolbar aria-label=\"Text formatting\"><ToolbarButton>Bold</ToolbarButton><ToolbarButton>Italic</ToolbarButton><ToolbarButton>Underline</ToolbarButton><ToolbarSeparator /><ToolbarButton>Link</ToolbarButton></Toolbar>",
+  "usage": "import {Toolbar, ToolbarButton, ToolbarSeparator} from '@monoline/react';\n\n<Toolbar aria-label=\"Text formatting\">\n  <ToolbarButton>Bold</ToolbarButton>\n  <ToolbarButton>Italic</ToolbarButton>\n  <ToolbarButton>Underline</ToolbarButton>\n  <ToolbarSeparator />\n  <ToolbarButton>Link</ToolbarButton>\n</Toolbar>",
   "dataAttributes": [
     {
       "name": "data-state",

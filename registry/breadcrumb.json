@@ -59,7 +59,7 @@
       ]
     }
   ],
-  "usage": "import {Breadcrumb} from '@monoline/react';\n\n<Breadcrumb items={[{label: 'Home', href: '#'}, {label: 'Projects', href: '#'}, {label: 'Monoline'}]} />",
+  "usage": "import {Breadcrumb} from '@monoline/react';\n\n<Breadcrumb\n  items={[{label: 'Home', href: '#'}, {label: 'Projects', href: '#'}, {label: 'Monoline'}]}\n/>",
   "dataAttributes": [
     {
       "name": "data-state",

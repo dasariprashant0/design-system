@@ -81,7 +81,7 @@
       ]
     }
   ],
-  "usage": "import {SortableList, type SortableItem} from '@monoline/react';\n\nconst items: SortableItem[] = ['Write the brief', 'Draft the spec', 'Review with design', 'Build', 'Ship'].map((t) => ({id: t, label: t}));\n\n<div style={{maxWidth: '360px'}}><SortableList aria-label=\"Tasks\" defaultValue={items} /></div>",
+  "usage": "import {SortableList, type SortableItem} from '@monoline/react';\n\nconst items: SortableItem[] = ['Write the brief', 'Draft the spec', 'Review with design', 'Build', 'Ship'].map((t) => ({id: t, label: t}));\n\n<div style={{maxWidth: '360px'}}>\n  <SortableList aria-label=\"Tasks\" defaultValue={items} />\n</div>",
   "dataAttributes": [
     {
       "name": "data-dragging",

@@ -53,7 +53,7 @@
       ]
     }
   ],
-  "usage": "import {RadioGroup, RadioGroupItem} from '@monoline/react';\n\n<RadioGroup aria-label=\"Plan\" defaultValue=\"monthly\"><RadioGroupItem value=\"monthly\" label=\"Monthly\" /><RadioGroupItem value=\"yearly\" label=\"Yearly\" /></RadioGroup>",
+  "usage": "import {RadioGroup, RadioGroupItem} from '@monoline/react';\n\n<RadioGroup aria-label=\"Plan\" defaultValue=\"monthly\">\n  <RadioGroupItem value=\"monthly\" label=\"Monthly\" />\n  <RadioGroupItem value=\"yearly\" label=\"Yearly\" />\n</RadioGroup>",
   "dataAttributes": [
     {
       "name": "data-state",

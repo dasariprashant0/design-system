@@ -78,7 +78,7 @@
       ]
     }
   ],
-  "usage": "import {Badge, Stack} from '@monoline/react';\n\n<Stack gap={2}><Badge>one</Badge><Badge>two</Badge><Badge>three</Badge></Stack>",
+  "usage": "import {Badge, Stack} from '@monoline/react';\n\n<Stack gap={2}>\n  <Badge>one</Badge>\n  <Badge>two</Badge>\n  <Badge>three</Badge>\n</Stack>",
   "dataAttributes": [
     {
       "name": "data-align",

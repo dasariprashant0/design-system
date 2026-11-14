@@ -60,7 +60,7 @@
       ]
     }
   ],
-  "usage": "import {LineChart} from '@monoline/react';\n\n<LineChart title=\"Response time\" showPoints data={[{label: 'Mon', value: 120}, {label: 'Tue', value: 98}, {label: 'Wed', value: 143}, {label: 'Thu', value: 110}, {label: 'Fri', value: 87}]} />",
+  "usage": "import {LineChart} from '@monoline/react';\n\n<LineChart\n  title=\"Response time\"\n  showPoints\n  data={[{label: 'Mon', value: 120}, {label: 'Tue', value: 98}, {label: 'Wed', value: 143}, {label: 'Thu', value: 110}, {label: 'Fri', value: 87}]}\n/>",
   "dataAttributes": [
     {
       "name": "data-active",

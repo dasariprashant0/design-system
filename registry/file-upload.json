@@ -62,7 +62,7 @@
       ]
     }
   ],
-  "usage": "import {FileUpload} from '@monoline/react';\n\n<div style={{maxWidth: '420px'}}><FileUpload multiple accept=\"image/*,.pdf\" label=\"Drop files here or choose\" /></div>",
+  "usage": "import {FileUpload} from '@monoline/react';\n\n<div style={{maxWidth: '420px'}}>\n  <FileUpload multiple accept=\"image/*,.pdf\" label=\"Drop files here or choose\" />\n</div>",
   "dataAttributes": [
     {
       "name": "data-over",

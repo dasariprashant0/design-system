@@ -98,7 +98,7 @@
       ]
     }
   ],
-  "usage": "import {Combobox, Field} from '@monoline/react';\n\nconst options = ['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Katherine Johnson', 'Linus Torvalds'].map((n) => ({value: n.toLowerCase().replace(/\\W+/g, '-'), label: n}));\n\n<div style={{maxWidth: '320px', minHeight: '260px'}}><Field label=\"Person\"><Combobox options={options} placeholder=\"Type a name\" /></Field></div>",
+  "usage": "import {Combobox, Field} from '@monoline/react';\n\nconst options = ['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Katherine Johnson', 'Linus Torvalds'].map((n) => ({value: n.toLowerCase().replace(/\\W+/g, '-'), label: n}));\n\n<div style={{maxWidth: '320px', minHeight: '260px'}}>\n  <Field label=\"Person\">\n    <Combobox options={options} placeholder=\"Type a name\" />\n  </Field>\n</div>",
   "dataAttributes": [
     {
       "name": "data-active",

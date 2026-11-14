@@ -110,7 +110,7 @@
       ]
     }
   ],
-  "usage": "import {DatePicker, Field} from '@monoline/react';\n\n<div style={{maxWidth: '260px', minHeight: '360px'}}><Field label=\"Due date\"><DatePicker weekStartsOn={1} /></Field></div>",
+  "usage": "import {DatePicker, Field} from '@monoline/react';\n\n<div style={{maxWidth: '260px', minHeight: '360px'}}>\n  <Field label=\"Due date\">\n    <DatePicker weekStartsOn={1} />\n  </Field>\n</div>",
   "dataAttributes": [
     {
       "name": "data-highlighted",

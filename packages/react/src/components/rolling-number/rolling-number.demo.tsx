@@ -14,4 +14,10 @@ function Counter() {
   );
 }
 
-export const demos: Demo[] = [{title: 'Currency', description: 'Digits keep their column as the number grows or shrinks.', render: () => <Counter />}];
+export const demos: Demo[] = [{
+  title: 'Currency',
+  description: 'Digits keep their column as the number grows or shrinks.',
+  render: () => (
+    <Counter />
+  ),
+}];

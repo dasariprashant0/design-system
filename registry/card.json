@@ -60,7 +60,7 @@
       ]
     }
   ],
-  "usage": "import {Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@monoline/react';\n\n<div style={{maxWidth: 360}}><Card><CardHeader><CardTitle>Ship the pricing page</CardTitle><CardDescription>Today, 14:20 · 3 files</CardDescription></CardHeader><CardContent><p>Rewrote the headline and the plan table.</p></CardContent><CardFooter><Button variant=\"solid\" size=\"sm\">Open</Button><Button size=\"sm\">Share</Button></CardFooter></Card></div>",
+  "usage": "import {Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@monoline/react';\n\n<div style={{maxWidth: 360}}>\n  <Card>\n    <CardHeader>\n      <CardTitle>Ship the pricing page</CardTitle>\n      <CardDescription>Today, 14:20 · 3 files</CardDescription>\n    </CardHeader>\n    <CardContent>\n      <p>Rewrote the headline and the plan table.</p>\n    </CardContent>\n    <CardFooter>\n      <Button variant=\"solid\" size=\"sm\">Open</Button>\n      <Button size=\"sm\">Share</Button>\n    </CardFooter>\n  </Card>\n</div>",
   "dataAttributes": [],
   "classes": [
     "card",

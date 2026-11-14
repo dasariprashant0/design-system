@@ -157,7 +157,7 @@
       ]
     }
   ],
-  "usage": "import {Field, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from '@monoline/react';\n\n<div style={{maxWidth: 320}}><Field label=\"Sync every\"><Select defaultValue=\"15\"><SelectTrigger><SelectValue placeholder=\"Choose\" /></SelectTrigger><SelectContent><SelectGroup><SelectLabel>Interval</SelectLabel><SelectItem value=\"5\">5 minutes</SelectItem><SelectItem value=\"15\">15 minutes</SelectItem><SelectItem value=\"60\">Hour</SelectItem></SelectGroup></SelectContent></Select></Field></div>",
+  "usage": "import {Field, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from '@monoline/react';\n\n<div style={{maxWidth: 320}}>\n  <Field label=\"Sync every\">\n    <Select defaultValue=\"15\">\n      <SelectTrigger>\n        <SelectValue placeholder=\"Choose\" />\n      </SelectTrigger>\n      <SelectContent>\n        <SelectGroup>\n          <SelectLabel>Interval</SelectLabel>\n          <SelectItem value=\"5\">5 minutes</SelectItem>\n          <SelectItem value=\"15\">15 minutes</SelectItem>\n          <SelectItem value=\"60\">Hour</SelectItem>\n        </SelectGroup>\n      </SelectContent>\n    </Select>\n  </Field>\n</div>",
   "dataAttributes": [
     {
       "name": "data-placeholder",

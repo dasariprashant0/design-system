@@ -106,7 +106,7 @@
       ]
     }
   ],
-  "usage": "import {Field, TreeSelect, type TreeNode} from '@monoline/react';\n\nconst items: TreeNode[] = [\n  {id: 'eng', label: 'Engineering', children: [\n    {id: 'web', label: 'Web'},\n    {id: 'platform', label: 'Platform', children: [{id: 'infra', label: 'Infrastructure'}, {id: 'data', label: 'Data'}]},\n  ]},\n  {id: 'design', label: 'Design', children: [{id: 'brand', label: 'Brand'}, {id: 'product', label: 'Product design'}]},\n  {id: 'ops', label: 'Operations'},\n];\n\n<div style={{maxWidth: '320px', minHeight: '300px'}}><Field label=\"Team\"><TreeSelect items={items} placeholder=\"Choose a team\" /></Field></div>",
+  "usage": "import {Field, TreeSelect, type TreeNode} from '@monoline/react';\n\nconst items: TreeNode[] = [\n  {id: 'eng', label: 'Engineering', children: [\n    {id: 'web', label: 'Web'},\n    {id: 'platform', label: 'Platform', children: [{id: 'infra', label: 'Infrastructure'}, {id: 'data', label: 'Data'}]},\n  ]},\n  {id: 'design', label: 'Design', children: [{id: 'brand', label: 'Brand'}, {id: 'product', label: 'Product design'}]},\n  {id: 'ops', label: 'Operations'},\n];\n\n<div style={{maxWidth: '320px', minHeight: '300px'}}>\n  <Field label=\"Team\">\n    <TreeSelect items={items} placeholder=\"Choose a team\" />\n  </Field>\n</div>",
   "dataAttributes": [
     {
       "name": "data-active",

@@ -63,7 +63,7 @@
       ]
     }
   ],
-  "usage": "import {Alert} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}><Alert title=\"Synced.\">42 entries up to date as of 14:20.</Alert><Alert tone=\"success\" title=\"Saved.\">Your changes are live.</Alert><Alert tone=\"warning\" title=\"Conflict.\">Two devices edited 12 March. Pick which copy to keep.</Alert><Alert tone=\"danger\" title=\"Can't save.\">The folder is read-only. Pick another folder.</Alert></div>",
+  "usage": "import {Alert} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)'}}>\n  <Alert title=\"Synced.\">42 entries up to date as of 14:20.</Alert>\n  <Alert tone=\"success\" title=\"Saved.\">Your changes are live.</Alert>\n  <Alert tone=\"warning\" title=\"Conflict.\">Two devices edited 12 March. Pick which copy to keep.</Alert>\n  <Alert tone=\"danger\" title=\"Can't save.\">The folder is read-only. Pick another folder.</Alert>\n</div>",
   "dataAttributes": [
     {
       "name": "data-tone",

@@ -48,7 +48,7 @@
       ]
     }
   ],
-  "usage": "import {Label} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s2)', maxWidth: 320}}><Label htmlFor=\"demo-label\" required>Email</Label><input id=\"demo-label\" className=\"input\" placeholder=\"you@example.com\" /></div>",
+  "usage": "import {Label} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s2)', maxWidth: 320}}>\n  <Label htmlFor=\"demo-label\" required>Email</Label>\n  <input id=\"demo-label\" className=\"input\" placeholder=\"you@example.com\" />\n</div>",
   "dataAttributes": [],
   "classes": [
     "field",

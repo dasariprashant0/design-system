@@ -64,7 +64,7 @@
       ]
     }
   ],
-  "usage": "import {Marquee} from '@monoline/react';\n\n<Marquee duration={20}>{['Acme', 'Globex', 'Initech', 'Umbrella', 'Hooli'].map((n) => <span key={n} style={{padding: '0 var(--s5)', fontFamily: 'var(--font-display)'}}>{n}</span>)}</Marquee>",
+  "usage": "import {Marquee} from '@monoline/react';\n\n<Marquee duration={20}>\n  {['Acme', 'Globex', 'Initech', 'Umbrella', 'Hooli'].map((n) => <span key={n} style={{padding: '0 var(--s5)', fontFamily: 'var(--font-display)'}}>{n}</span>)}\n</Marquee>",
   "dataAttributes": [],
   "classes": [
     "marquee",

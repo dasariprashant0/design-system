@@ -48,7 +48,7 @@
       ]
     }
   ],
-  "usage": "import {Spinner} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Spinner /><span className=\"muted small\">Syncing 42 entries</span></div>",
+  "usage": "import {Spinner} from '@monoline/react';\n\n<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}>\n  <Spinner />\n  <span className=\"muted small\">Syncing 42 entries</span>\n</div>",
   "dataAttributes": [],
   "classes": [
     "spinner",

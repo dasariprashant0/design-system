@@ -53,7 +53,7 @@
       ]
     }
   ],
-  "usage": "import {Textarea} from '@monoline/react';\n\n<div style={{maxWidth: 420}}><Textarea aria-label=\"Notes\" placeholder=\"What happened today?\" /></div>",
+  "usage": "import {Textarea} from '@monoline/react';\n\n<div style={{maxWidth: 420}}>\n  <Textarea aria-label=\"Notes\" placeholder=\"What happened today?\" />\n</div>",
   "dataAttributes": [
     {
       "name": "data-valid",

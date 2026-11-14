@@ -62,7 +62,7 @@
       ]
     }
   ],
-  "usage": "import {Card, Grid} from '@monoline/react';\n\n<Grid columns={3}>{['One', 'Two', 'Three'].map((n) => <Card key={n}>{n}</Card>)}</Grid>",
+  "usage": "import {Card, Grid} from '@monoline/react';\n\n<Grid columns={3}>\n  {['One', 'Two', 'Three'].map((n) => <Card key={n}>{n}</Card>)}\n</Grid>",
   "dataAttributes": [],
   "classes": [
     "grid",

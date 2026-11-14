@@ -145,7 +145,7 @@
       ]
     }
   ],
-  "usage": "import {BlockSignup, Link} from '@monoline/react';\n\n<BlockSignup description=\"It takes a minute.\" footer={<span>Already have an account? <Link href=\"#\">Sign in</Link></span>} />",
+  "usage": "import {BlockSignup, Link} from '@monoline/react';\n\n<BlockSignup\n  description=\"It takes a minute.\"\n  footer={<span>Already have an account? <Link href=\"#\">Sign in</Link></span>}\n/>",
   "dataAttributes": [
     {
       "name": "data-valid",

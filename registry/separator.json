@@ -36,7 +36,7 @@
     "box"
   ],
   "props": [],
-  "usage": "import {Separator} from '@monoline/react';\n\n<div><p>Above</p><Separator /><p>Below</p><div style={{display: 'flex', alignItems: 'center', height: 24}}><span>One</span><Separator orientation=\"vertical\" /><span>Two</span></div></div>",
+  "usage": "import {Separator} from '@monoline/react';\n\n<div>\n  <p>Above</p>\n  <Separator />\n  <p>Below</p>\n  <div style={{display: 'flex', alignItems: 'center', height: 24}}>\n    <span>One</span>\n    <Separator orientation=\"vertical\" />\n    <span>Two</span>\n  </div>\n</div>",
   "dataAttributes": [
     {
       "name": "data-orientation",

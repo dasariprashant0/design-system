@@ -13,6 +13,25 @@ const items: TreeNode[] = [
 ];
 
 export const demos: Demo[] = [
-  {title: 'Single', description: 'Type to search. ArrowRight and ArrowLeft open and close branches.', render: () => <div style={{maxWidth: '320px', minHeight: '300px'}}><Field label="Team"><TreeSelect items={items} placeholder="Choose a team" /></Field></div>},
-  {title: 'Multiple', render: () => <div style={{maxWidth: '320px', minHeight: '300px'}}><Field label="Teams"><TreeSelect multiple items={items} placeholder="Choose teams" defaultValue={['web']} /></Field></div>},
+  {
+    title: 'Single',
+    description: 'Type to search. ArrowRight and ArrowLeft open and close branches.',
+    render: () => (
+      <div style={{maxWidth: '320px', minHeight: '300px'}}>
+        <Field label="Team">
+          <TreeSelect items={items} placeholder="Choose a team" />
+        </Field>
+      </div>
+    ),
+  },
+  {
+    title: 'Multiple',
+    render: () => (
+      <div style={{maxWidth: '320px', minHeight: '300px'}}>
+        <Field label="Teams">
+          <TreeSelect multiple items={items} placeholder="Choose teams" defaultValue={['web']} />
+        </Field>
+      </div>
+    ),
+  },
 ];

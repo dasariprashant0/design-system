@@ -50,7 +50,7 @@
       ]
     }
   ],
-  "usage": "import {Carousel} from '@monoline/react';\n\n<Carousel aria-label=\"Featured\">{['Alpha', 'Beta', 'Gamma', 'Delta'].map((n) => <div key={n} style={{display: 'grid', placeItems: 'center', height: '140px', border: '1px solid var(--rule)'}}>{n}</div>)}</Carousel>",
+  "usage": "import {Carousel} from '@monoline/react';\n\n<Carousel aria-label=\"Featured\">\n  {['Alpha', 'Beta', 'Gamma', 'Delta'].map((n) => <div key={n} style={{display: 'grid', placeItems: 'center', height: '140px', border: '1px solid var(--rule)'}}>{n}</div>)}\n</Carousel>",
   "dataAttributes": [],
   "classes": [
     "carousel",

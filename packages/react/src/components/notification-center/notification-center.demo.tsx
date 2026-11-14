@@ -22,4 +22,10 @@ function Demo1() {
   );
 }
 
-export const demos: Demo[] = [{title: 'Inbox', description: 'Mark items read, then clear the list to see the empty state.', render: () => <Demo1 />}];
+export const demos: Demo[] = [{
+  title: 'Inbox',
+  description: 'Mark items read, then clear the list to see the empty state.',
+  render: () => (
+    <Demo1 />
+  ),
+}];
