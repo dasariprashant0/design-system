@@ -38,7 +38,7 @@ function Demo() {
         <CardContent>
           <Field label="Work email"><Input placeholder="ada@example.com" /></Field>
           <div className="home-demo-row"><Switch label="Admin access" /><Badge variant="accent">new</Badge><Tag>design</Tag></div>
-          <div className="home-demo-row"><Button variant="solid">Send invite</Button><Button>Cancel</Button></div>
+          <div className="home-demo-row"><Button variant="solid">Send invite</Button><Button variant="line">Cancel</Button></div>
         </CardContent>
       </Card>
       <p className="muted small">Change the look with <a href={href('themes')}>Themes</a>, or the Customise button above.</p>

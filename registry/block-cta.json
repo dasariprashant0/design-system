@@ -92,7 +92,7 @@
       ]
     }
   ],
-  "usage": "import {BlockCta, Button} from '@monoline/react';\n\n<BlockCta title=\"Start building today\" description=\"Install the package and copy your first component.\" actions={<><Button variant=\"solid\">Get started</Button><Button>Read the docs</Button></>} />",
+  "usage": "import {BlockCta, Button} from '@monoline/react';\n\n<BlockCta title=\"Start building today\" description=\"Install the package and copy your first component.\" actions={<><Button variant=\"solid\">Get started</Button><Button variant=\"line\">Read the docs</Button></>} />",
   "dataAttributes": [],
   "classes": [
     "container",

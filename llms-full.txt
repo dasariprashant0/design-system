@@ -348,7 +348,7 @@ Usage:
 ```tsx
 import {BlockCta, Button} from '@monoline/react';
 
-<BlockCta title="Start building today" description="Install the package and copy your first component." actions={<><Button variant="solid">Get started</Button><Button>Read the docs</Button></>} />
+<BlockCta title="Start building today" description="Install the package and copy your first component." actions={<><Button variant="solid">Get started</Button><Button variant="line">Read the docs</Button></>} />
 ```
 
 A11y:
@@ -411,7 +411,7 @@ Usage:
 ```tsx
 import {BlockEmptyPage, Button} from '@monoline/react';
 
-<BlockEmptyPage code="404" title="Page not found" description="The address may be wrong, or the page moved." actions={<><Button variant="solid">Go home</Button><Button>Contact support</Button></>} />
+<BlockEmptyPage code="404" title="Page not found" description="The address may be wrong, or the page moved." actions={<><Button variant="solid">Go home</Button><Button variant="line">Contact support</Button></>} />
 ```
 
 A11y:
@@ -517,7 +517,7 @@ import {BlockHero, Button} from '@monoline/react';
   eyebrow="Version 1.0"
   title="Interfaces with fewer parts"
   description="A small kit of plain components. Copy the ones you need."
-  actions={<><Button variant="solid">Get started</Button><Button>Read the docs</Button></>}
+  actions={<><Button variant="solid">Get started</Button><Button variant="line">Read the docs</Button></>}
   media={<div style={{border: '1px solid var(--rule)', aspectRatio: '4 / 3', display: 'grid', placeItems: 'center'}}>Preview</div>}
 />
 ```
@@ -786,7 +786,7 @@ Status: stable | Category: buttons | Primitive: radix-ui/Slot | Related: button-
 Import: import {Button} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
-- variant?: "danger" | "line" | "solid" | "ghost" = 'line' — `solid` is the one main action per view. `line` for the rest, `ghost` for inline links, `danger` for destructive.
+- variant?: "danger" | "line" | "solid" | "ghost" = 'solid' — Default `solid`: the one main action per view. `line` for the rest, `ghost` for inline links, `danger` for destructive.
 - size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense toolbars and table rows, or `lg` for prominent calls to action. Same heights as Input and Select.
 - loading?: boolean = false — Shows a spinner, sets `aria-busy` and ignores clicks. The label stays so the width does not jump.
 - asChild?: boolean = false — Render the child element (a link, a router link) with the button styles instead of a `<button>`.
@@ -823,7 +823,7 @@ Usage:
 ```tsx
 import {Button, ButtonGroup} from '@monoline/react';
 
-<ButtonGroup aria-label="View"><Button>Day</Button><Button>Week</Button><Button>Month</Button></ButtonGroup>
+<ButtonGroup aria-label="View"><Button variant="line">Day</Button><Button variant="line">Week</Button><Button variant="line">Month</Button></ButtonGroup>
 ```
 
 A11y:
@@ -883,7 +883,7 @@ Usage:
 ```tsx
 import {Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@monoline/react';
 
-<div style={{maxWidth: 360}}><Card><CardHeader><CardTitle>Ship the pricing page</CardTitle><CardDescription>Today, 14:20 · 3 files</CardDescription></CardHeader><CardContent><p>Rewrote the headline and the plan table.</p></CardContent><CardFooter><Button variant="solid" size="sm">Open</Button><Button size="sm">Share</Button></CardFooter></Card></div>
+<div style={{maxWidth: 360}}><Card><CardHeader><CardTitle>Ship the pricing page</CardTitle><CardDescription>Today, 14:20 · 3 files</CardDescription></CardHeader><CardContent><p>Rewrote the headline and the plan table.</p></CardContent><CardFooter><Button variant="solid" size="sm">Open</Button><Button variant="line" size="sm">Share</Button></CardFooter></Card></div>
 ```
 
 A11y:
@@ -986,7 +986,7 @@ Usage:
 ```tsx
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from '@monoline/react';
 
-<Collapsible><CollapsibleTrigger asChild><Button size="sm">Show details</Button></CollapsibleTrigger><CollapsibleContent><p>Extra detail appears here when the trigger is pressed.</p></CollapsibleContent></Collapsible>
+<Collapsible><CollapsibleTrigger asChild><Button variant="line" size="sm">Show details</Button></CollapsibleTrigger><CollapsibleContent><p>Extra detail appears here when the trigger is pressed.</p></CollapsibleContent></Collapsible>
 ```
 
 A11y:
@@ -1432,10 +1432,10 @@ Usage:
 import {Button, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from '@monoline/react';
 
 <Dialog>
-  <DialogTrigger asChild><Button>Overwrite copy</Button></DialogTrigger>
+  <DialogTrigger asChild><Button variant="line">Overwrite copy</Button></DialogTrigger>
   <DialogContent>
     <DialogHeader><DialogTitle>Overwrite the remote copy?</DialogTitle><DialogDescription>The copy on this device is newer. Changes from 12 March on the other device will be lost.</DialogDescription></DialogHeader>
-    <DialogFooter><DialogClose asChild><Button>Keep both</Button></DialogClose><DialogClose asChild><Button variant="solid">Overwrite</Button></DialogClose></DialogFooter>
+    <DialogFooter><DialogClose asChild><Button variant="line">Keep both</Button></DialogClose><DialogClose asChild><Button variant="solid">Overwrite</Button></DialogClose></DialogFooter>
   </DialogContent>
 </Dialog>
 ```
@@ -1512,7 +1512,7 @@ import {Button, Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTi
 <div style={{display: 'flex', gap: 'var(--s3)'}}>
   {(['right', 'left'] as const).map((side) => (
     <Drawer key={side}>
-      <DrawerTrigger asChild><Button>Open {side}</Button></DrawerTrigger>
+      <DrawerTrigger asChild><Button variant="line">Open {side}</Button></DrawerTrigger>
       <DrawerContent side={side}><DrawerHeader><DrawerTitle>Filters</DrawerTitle><DrawerDescription>Narrow the list by status or owner.</DrawerDescription></DrawerHeader></DrawerContent>
     </Drawer>
   ))}
@@ -1541,7 +1541,7 @@ Usage:
 import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger} from '@monoline/react';
 
 <DropdownMenu>
-  <DropdownMenuTrigger asChild><Button>Actions</Button></DropdownMenuTrigger>
+  <DropdownMenuTrigger asChild><Button variant="line">Actions</Button></DropdownMenuTrigger>
   <DropdownMenuContent>
     <DropdownMenuLabel>Entry</DropdownMenuLabel>
     <DropdownMenuItem>Rename</DropdownMenuItem>
@@ -1724,7 +1724,7 @@ function Example() {
     >
       <Field label="Name" name="name"><Input name="name" /></Field>
       <Field label="Email" name="email"><Input name="email" type="email" /></Field>
-      <FormActions><Button type="submit" variant="solid">Send</Button><Button type="reset">Clear</Button></FormActions>
+      <FormActions><Button type="submit" variant="solid">Send</Button><Button variant="line" type="reset">Clear</Button></FormActions>
     </Form>
   );
 }
@@ -2506,7 +2506,7 @@ Usage:
 ```tsx
 import {Button, Popover, PopoverContent, PopoverTrigger} from '@monoline/react';
 
-<Popover><PopoverTrigger asChild><Button>Details</Button></PopoverTrigger><PopoverContent aria-label="Entry details"><p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p></PopoverContent></Popover>
+<Popover><PopoverTrigger asChild><Button variant="line">Details</Button></PopoverTrigger><PopoverContent aria-label="Entry details"><p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p></PopoverContent></Popover>
 ```
 
 A11y:
@@ -2723,8 +2723,8 @@ function Counter() {
   return (
     <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>
       <strong style={{fontSize: 'var(--display-sm)'}}><RollingNumber value={n} format={{style: 'currency', currency: 'USD', maximumFractionDigits: 0}} /></strong>
-      <Button size="sm" onClick={() => setN((v) => v + 137)}>Add 137</Button>
-      <Button size="sm" onClick={() => setN((v) => Math.max(0, v - 999))}>Subtract 999</Button>
+      <Button variant="line" size="sm" onClick={() => setN((v) => v + 137)}>Add 137</Button>
+      <Button variant="line" size="sm" onClick={() => setN((v) => Math.max(0, v - 999))}>Subtract 999</Button>
     </div>
   );
 }
@@ -3336,8 +3336,8 @@ function Controls() {
       <ThemeSwitcher />
       <p>Theme: {theme}{theme === 'system' ? ` (${resolvedTheme})` : ''}. Accent: {accent}. Density: {density}.</p>
       <div style={{display: 'flex', gap: 8}}>
-        <Button onClick={() => setTheme(resolvedTheme === 'dark' ? 'warm' : 'dark')}>Toggle dark</Button>
-        <Button onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}>Toggle compact</Button>
+        <Button variant="line" onClick={() => setTheme(resolvedTheme === 'dark' ? 'warm' : 'dark')}>Toggle dark</Button>
+        <Button variant="line" onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}>Toggle compact</Button>
       </div>
     </div>
   );
@@ -3451,7 +3451,7 @@ function Example() {
   const [open, setOpen] = useState(false);
   return (
     <ToastProvider duration={5000}>
-      <Button onClick={() => setOpen(true)}>Save draft</Button>
+      <Button variant="line" onClick={() => setOpen(true)}>Save draft</Button>
       <Toast open={open} onOpenChange={setOpen}>
         <ToastTitle>Draft saved</ToastTitle>
         <ToastDescription>Stored on this device.</ToastDescription>
@@ -3493,11 +3493,11 @@ import {Button, Toaster, toast} from '@monoline/react';
 function Example() {
   return (
     <div style={{display: 'flex', gap: 8, flexWrap: 'wrap'}}>
-      <Button onClick={() => toast('Draft saved')}>Default</Button>
-      <Button onClick={() => toast.success('Profile updated', {description: 'Changes are live.'})}>Success</Button>
-      <Button onClick={() => toast.error('Could not save', {description: 'Check your connection.', action: {label: 'Retry', onClick: () => toast.info('Retrying')}})}>Error with retry</Button>
-      <Button onClick={() => toast.warning('Storage almost full')}>Warning</Button>
-      <Button onClick={() => toast.promise(new Promise((r) => setTimeout(r, 1500)), {loading: 'Uploading', success: 'Uploaded', error: 'Upload failed'})}>Promise</Button>
+      <Button variant="line" onClick={() => toast('Draft saved')}>Default</Button>
+      <Button variant="line" onClick={() => toast.success('Profile updated', {description: 'Changes are live.'})}>Success</Button>
+      <Button variant="line" onClick={() => toast.error('Could not save', {description: 'Check your connection.', action: {label: 'Retry', onClick: () => toast.info('Retrying')}})}>Error with retry</Button>
+      <Button variant="line" onClick={() => toast.warning('Storage almost full')}>Warning</Button>
+      <Button variant="line" onClick={() => toast.promise(new Promise((r) => setTimeout(r, 1500)), {loading: 'Uploading', success: 'Uploaded', error: 'Upload failed'})}>Promise</Button>
       <Button variant="ghost" onClick={() => toast.dismiss()}>Dismiss all</Button>
       <Toaster />
     </div>
@@ -3603,7 +3603,7 @@ Usage:
 ```tsx
 import {Button, Tooltip, TooltipProvider} from '@monoline/react';
 
-<TooltipProvider><div style={{display: 'flex', gap: 'var(--s3)'}}><Tooltip content="Saved to ~/Notes"><Button>Save</Button></Tooltip><Tooltip content="Below" side="bottom"><Button>Bottom</Button></Tooltip></div></TooltipProvider>
+<TooltipProvider><div style={{display: 'flex', gap: 'var(--s3)'}}><Tooltip content="Saved to ~/Notes"><Button variant="line">Save</Button></Tooltip><Tooltip content="Below" side="bottom"><Button variant="line">Bottom</Button></Tooltip></div></TooltipProvider>
 ```
 
 A11y:
@@ -3933,7 +3933,7 @@ import {Button, useCounter} from '@monoline/react';
 
 function Demo() {
   const {count, increment, decrement, reset} = useCounter(1, {min: 0, max: 5});
-  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Button onClick={() => decrement()} disabled={count === 0}>Less</Button><output aria-live="polite">{count}</output><Button onClick={() => increment()} disabled={count === 5}>More</Button><Button variant="ghost" onClick={reset}>Reset</Button></div>;
+  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Button variant="line" onClick={() => decrement()} disabled={count === 0}>Less</Button><output aria-live="polite">{count}</output><Button variant="line" onClick={() => increment()} disabled={count === 5}>More</Button><Button variant="ghost" onClick={reset}>Reset</Button></div>;
 }
 
 <Demo />
@@ -4092,7 +4092,7 @@ import {Button, useHash} from '@monoline/react';
 
 function Demo() {
   const [hash, setHash] = useHash();
-  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><output>#{hash || '(empty)'}</output><Button size="sm" onClick={() => setHash('use-hash')}>Set #use-hash</Button></div>;
+  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><output>#{hash || '(empty)'}</output><Button variant="line" size="sm" onClick={() => setHash('use-hash')}>Set #use-hash</Button></div>;
 }
 
 <Demo />

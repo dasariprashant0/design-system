@@ -32,10 +32,13 @@ export function bundles() {
   const index = {};
   const components = {};
   const names = readdirSync(META_DIR, {withFileTypes: true}).filter((d) => d.isDirectory() && !d.name.startsWith('.') && existsSync(new URL(`${d.name}/meta.json`, META_DIR))).map((d) => d.name).sort(); // skip dotfolders (.claude) and folders without a meta.json
+  const metas = Object.fromEntries(names.map((n) => [n, JSON.parse(readFileSync(new URL(`${n}/meta.json`, META_DIR), 'utf8'))]));
+  // A component's bundle holds its own css plus that of every component it renders (meta.json `uses`, transitively).
+  const cssOf = (n, seen = new Set()) => { if (seen.has(n) || !metas[n]) return []; seen.add(n); return [...metas[n].css, ...(metas[n].uses ?? []).flatMap((u) => cssOf(u, seen))]; };
   for (const name of names) {
-    const meta = JSON.parse(readFileSync(new URL(`${name}/meta.json`, META_DIR), 'utf8'));
-    for (const f of meta.css) if (!order.includes(f)) throw new Error(`${name}/meta.json lists ${f}, not found in src/components`);
-    const files = order.filter((f) => meta.css.includes(f)); // de-duplicated, in cascade order
+    for (const f of metas[name].css) if (!order.includes(f)) throw new Error(`${name}/meta.json lists ${f}, not found in src/components`);
+    const own = new Set(cssOf(name));
+    const files = order.filter((f) => own.has(f)); // de-duplicated, in cascade order
     index[name] = files;
     if (files.length) components[name] = banner(version) + layer('monoline.components', files.map(src).join('\n'));
   }

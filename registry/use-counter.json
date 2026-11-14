@@ -50,7 +50,7 @@
       ]
     }
   ],
-  "usage": "import {Button, useCounter} from '@monoline/react';\n\nfunction Demo() {\n  const {count, increment, decrement, reset} = useCounter(1, {min: 0, max: 5});\n  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Button onClick={() => decrement()} disabled={count === 0}>Less</Button><output aria-live=\"polite\">{count}</output><Button onClick={() => increment()} disabled={count === 5}>More</Button><Button variant=\"ghost\" onClick={reset}>Reset</Button></div>;\n}\n\n<Demo />",
+  "usage": "import {Button, useCounter} from '@monoline/react';\n\nfunction Demo() {\n  const {count, increment, decrement, reset} = useCounter(1, {min: 0, max: 5});\n  return <div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Button variant=\"line\" onClick={() => decrement()} disabled={count === 0}>Less</Button><output aria-live=\"polite\">{count}</output><Button variant=\"line\" onClick={() => increment()} disabled={count === 5}>More</Button><Button variant=\"ghost\" onClick={reset}>Reset</Button></div>;\n}\n\n<Demo />",
   "dataAttributes": [],
   "classes": [],
   "dependencies": {

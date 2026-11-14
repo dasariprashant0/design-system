@@ -92,7 +92,7 @@
       ]
     }
   ],
-  "usage": "import {Button, Tooltip, TooltipProvider} from '@monoline/react';\n\n<TooltipProvider><div style={{display: 'flex', gap: 'var(--s3)'}}><Tooltip content=\"Saved to ~/Notes\"><Button>Save</Button></Tooltip><Tooltip content=\"Below\" side=\"bottom\"><Button>Bottom</Button></Tooltip></div></TooltipProvider>",
+  "usage": "import {Button, Tooltip, TooltipProvider} from '@monoline/react';\n\n<TooltipProvider><div style={{display: 'flex', gap: 'var(--s3)'}}><Tooltip content=\"Saved to ~/Notes\"><Button variant=\"line\">Save</Button></Tooltip><Tooltip content=\"Below\" side=\"bottom\"><Button variant=\"line\">Bottom</Button></Tooltip></div></TooltipProvider>",
   "dataAttributes": [],
   "classes": [
     "tooltip"

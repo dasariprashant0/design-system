@@ -109,7 +109,7 @@
       ]
     }
   ],
-  "usage": "import {BlockHero, Button} from '@monoline/react';\n\n<BlockHero\n  eyebrow=\"Version 1.0\"\n  title=\"Interfaces with fewer parts\"\n  description=\"A small kit of plain components. Copy the ones you need.\"\n  actions={<><Button variant=\"solid\">Get started</Button><Button>Read the docs</Button></>}\n  media={<div style={{border: '1px solid var(--rule)', aspectRatio: '4 / 3', display: 'grid', placeItems: 'center'}}>Preview</div>}\n/>",
+  "usage": "import {BlockHero, Button} from '@monoline/react';\n\n<BlockHero\n  eyebrow=\"Version 1.0\"\n  title=\"Interfaces with fewer parts\"\n  description=\"A small kit of plain components. Copy the ones you need.\"\n  actions={<><Button variant=\"solid\">Get started</Button><Button variant=\"line\">Read the docs</Button></>}\n  media={<div style={{border: '1px solid var(--rule)', aspectRatio: '4 / 3', display: 'grid', placeItems: 'center'}}>Preview</div>}\n/>",
   "dataAttributes": [
     {
       "name": "data-align",

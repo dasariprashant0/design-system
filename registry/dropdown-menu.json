@@ -55,7 +55,7 @@
       ]
     }
   ],
-  "usage": "import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger} from '@monoline/react';\n\n<DropdownMenu>\n  <DropdownMenuTrigger asChild><Button>Actions</Button></DropdownMenuTrigger>\n  <DropdownMenuContent>\n    <DropdownMenuLabel>Entry</DropdownMenuLabel>\n    <DropdownMenuItem>Rename</DropdownMenuItem>\n    <DropdownMenuItem>Duplicate</DropdownMenuItem>\n    <DropdownMenuSeparator />\n    <DropdownMenuItem tone=\"danger\">Delete</DropdownMenuItem>\n  </DropdownMenuContent>\n</DropdownMenu>",
+  "usage": "import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger} from '@monoline/react';\n\n<DropdownMenu>\n  <DropdownMenuTrigger asChild><Button variant=\"line\">Actions</Button></DropdownMenuTrigger>\n  <DropdownMenuContent>\n    <DropdownMenuLabel>Entry</DropdownMenuLabel>\n    <DropdownMenuItem>Rename</DropdownMenuItem>\n    <DropdownMenuItem>Duplicate</DropdownMenuItem>\n    <DropdownMenuSeparator />\n    <DropdownMenuItem tone=\"danger\">Delete</DropdownMenuItem>\n  </DropdownMenuContent>\n</DropdownMenu>",
   "dataAttributes": [
     {
       "name": "data-highlighted",

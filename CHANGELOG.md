@@ -2,6 +2,12 @@
 
 Versions follow [semver](https://semver.org). Before 1.0, a minor version may change class names; each change is listed here.
 
+## Unreleased
+
+- **Breaking: `Button` now defaults to `variant="solid"`** (was `line`), the primary action, as in shadcn/ui, Mantine and Chakra. Use `variant="line"` for secondary buttons. `IconButton`, `CopyButton`, `ButtonGroup` children in our demos, and the other internal buttons keep the outlined look because they pass `variant="line"` themselves. The CSS classes are unchanged: `.btn` plus `.btn-solid` or `.btn-line`.
+- **Per-component CSS is the recommended path.** `@monoline/css/core.css` plus `@monoline/css/components/<name>.css`. Each bundle now includes the CSS of every component it renders (transitively, from `meta.json` `uses`); `Form`, `Select`, `Checkbox` and others were missing parts before. `@monoline/react` exports a generated `styles` map (component name to bundle path). Measured: core 3.4 KB gzip, core plus the landing example 6.2 KB, plus the dashboard example 10.3 KB, against 18.3 KB for everything.
+- `.flow` (and `--flow`) is documented; Card, Dialog and `.prose` content apply it by default.
+
 ## 0.3.0
 
 Monoline is now a monorepo: `@monoline/css`, `@monoline/react`, the `monoline` CLI and a docs app.
