@@ -12,7 +12,7 @@ export const AlertDialogContent = forwardRef<ElementRef<typeof Radix.Content>, C
   return (
     <Radix.Portal>
       <Radix.Overlay className="dialog-overlay" />
-      <Radix.Content ref={ref} className={cx('dialog-content', className)} {...rest} />
+      <Radix.Content ref={ref} aria-modal="true" className={cx('dialog-content', className)} {...rest} />
     </Radix.Portal>
   );
 });

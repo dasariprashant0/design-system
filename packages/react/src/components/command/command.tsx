@@ -101,7 +101,7 @@ export function Command({items, open, defaultOpen = false, onOpenChange, shortcu
       {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="dialog-overlay" />
-        <RadixDialog.Content className={cx('command', className)} aria-describedby={undefined}>
+        <RadixDialog.Content className={cx('command', className)} aria-describedby={undefined} aria-modal="true">
           <RadixDialog.Title className="sr-only">{title}</RadixDialog.Title>
           <input
             type="text"

@@ -19,7 +19,7 @@ export const DialogContent = forwardRef<ElementRef<typeof RadixDialog.Content>, 
   return (
     <RadixDialog.Portal>
       <RadixDialog.Overlay className="dialog-overlay" />
-      <RadixDialog.Content ref={ref} className={cx('dialog-content', className)} {...rest}>
+      <RadixDialog.Content ref={ref} aria-modal="true" className={cx('dialog-content', className)} {...rest}>
         {children}
         {showClose && <RadixDialog.Close className="dialog-close">Close</RadixDialog.Close>}
       </RadixDialog.Content>

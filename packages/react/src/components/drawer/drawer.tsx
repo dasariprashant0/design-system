@@ -21,7 +21,7 @@ export const DrawerContent = forwardRef<ElementRef<typeof Radix.Content>, Drawer
   return (
     <Radix.Portal>
       <Radix.Overlay className="dialog-overlay" />
-      <Radix.Content ref={ref} className={cx('drawer-content', className)} data-side={side} {...rest}>
+      <Radix.Content ref={ref} aria-modal="true" className={cx('drawer-content', className)} data-side={side} {...rest}>
         {children}
         {showClose && <Radix.Close className="dialog-close">Close</Radix.Close>}
       </Radix.Content>

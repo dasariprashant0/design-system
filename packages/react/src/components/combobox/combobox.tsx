@@ -90,7 +90,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Com
         {...rest}
       />
       {open && (
-        <ul id={listId} role="listbox" className="combobox-list" aria-label={rest['aria-label']}>
+        <ul id={listId} role="listbox" className="combobox-list" aria-label={rest['aria-label']} aria-labelledby={rest['aria-label'] ? undefined : f.id}>
           {shown.length === 0 && <li className="combobox-empty" role="presentation">{emptyText}</li>}
           {shown.map((o, i) => (
             <li

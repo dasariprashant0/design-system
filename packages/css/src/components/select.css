@@ -3,7 +3,7 @@
 .select-trigger[data-placeholder] { color: var(--muted); }
 .select-trigger[aria-invalid="true"] { border-color: var(--danger); }
 .select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }
-.select-trigger::after { content: "↓"; color: var(--muted); }
+.select-trigger::after { content: "↓" / ""; color: var(--muted); }
 .select-content { z-index: var(--z-drawer); min-width: var(--radix-select-trigger-width); max-height: min(320px, var(--radix-select-content-available-height)); overflow: hidden; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); }
 .select-viewport { padding: var(--s1) 0; }
 .select-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }

@@ -24,6 +24,12 @@ describe('Combobox', () => {
     expect(screen.getAllByRole('option')).toHaveLength(1);
     expect(screen.getByRole('option', {name: 'Grace Hopper'})).toBeInTheDocument();
   });
+  it('names the list after the field label', async () => {
+    const user = userEvent.setup();
+    render(<Field label="Person"><Combobox options={options} /></Field>);
+    await user.click(screen.getByRole('combobox', {name: 'Person'}));
+    expect(screen.getByRole('listbox')).toHaveAccessibleName('Person');
+  });
   it('picks with the keyboard, skipping disabled options', async () => {
     const user = userEvent.setup();
     const fn = vi.fn();
