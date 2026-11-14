@@ -57,7 +57,7 @@ Source: registry/alert.json
 
 ## Alert dialog (alert-dialog)
 A modal that interrupts to confirm a destructive or irreversible action.
-Status: stable | Category: overlays | Primitive: radix-ui/AlertDialog | Related: command, context-menu, dialog
+Status: stable | Category: overlays | Primitive: native <dialog> | Related: dialog
 Import: import {AlertDialog} from '@monoline/react'
 
 Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
@@ -81,7 +81,7 @@ A11y:
 - Escape cancels; focus is trapped; the page behind is inert.
 - Clicking the overlay does not close it.
 
-CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block
+CSS classes: dialog-content, drawer-content, command, dialog-overlay, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block
 Source: registry/alert-dialog.json
 
 ## Animated list (animated-list)
@@ -391,7 +391,7 @@ A11y:
 - Choosing a link closes the drawer. The content is a main landmark; put one h1 in it.
 - With renderLink the links are rendered by your router link; the block still sets the class and aria-current="page" on it.
 
-CSS classes: container, container-text, container-page, container-full, stack, stack-row, stack-wrap, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, drawer-content, block-shell, block-shell-side, block-shell-brand, block-shell-nav, block-shell-link, block-shell-body, block-shell-top, block-shell-top-end, block-shell-content, block-shell-menu
+CSS classes: container, container-text, container-page, container-full, stack, stack-row, stack-wrap, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, dialog-content, drawer-content, command, dialog-overlay, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, block-shell, block-shell-side, block-shell-brand, block-shell-nav, block-shell-link, block-shell-body, block-shell-top, block-shell-top-end, block-shell-content, block-shell-menu
 Data attributes: data-align: start | center | end | stretch; data-justify: start | center | end | between; data-side: right | end | left | start | top | bottom
 Source: registry/block-dashboard-shell.json
 
@@ -1065,7 +1065,7 @@ Source: registry/combobox.json
 
 ## Command (command)
 A searchable palette of actions that opens over the page, with an optional global shortcut.
-Status: stable | Category: overlays | Primitive: radix-ui/Dialog | Related: alert-dialog, context-menu, dialog
+Status: stable | Category: overlays | Primitive: native <dialog> | Related: dialog
 Import: import {Command} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -1102,7 +1102,7 @@ A11y:
 - ArrowUp and ArrowDown move (skipping disabled items), Home and End jump, Enter runs the item, Escape closes.
 - The shortcut prop toggles the palette from anywhere (mod is Cmd on Mac, Ctrl elsewhere); result count is announced through a status region.
 
-CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, command, command-input, command-list, command-heading, command-item, command-hint, command-empty
+CSS classes: dialog-content, drawer-content, command, dialog-overlay, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, command-input, command-list, command-heading, command-item, command-hint, command-empty
 Data attributes: data-active
 Source: registry/command.json
 
@@ -1166,7 +1166,7 @@ Source: registry/container.json
 
 ## Context menu (context-menu)
 A menu of actions opened by right click or long press on an area.
-Status: stable | Category: overlays | Primitive: radix-ui/ContextMenu | Related: alert-dialog, command, dialog
+Status: stable | Category: overlays | Primitive: native ARIA (shared positioning) | Related: dropdown-menu, popover
 Import: import {ContextMenu} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -1338,7 +1338,7 @@ Source: registry/data-table.json
 
 ## Date picker (date-picker)
 A button that opens a calendar and shows the chosen date.
-Status: stable | Category: forms | Primitive: radix-ui/Popover | Related: calendar, popover, field
+Status: stable | Category: forms | Related: calendar, popover, field
 Import: import {DatePicker} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -1369,7 +1369,7 @@ Source: registry/date-picker.json
 
 ## Date range picker (date-range-picker)
 A button that opens a range calendar and two typed date fields.
-Status: stable | Category: forms | Primitive: radix-ui/Popover | Related: range-calendar, popover, field
+Status: stable | Category: forms | Related: range-calendar, popover, field
 Import: import {DateRangePicker} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -1421,11 +1421,11 @@ Source: registry/description-list.json
 
 ## Dialog (dialog)
 A modal window for a question or short task that blocks the page.
-Status: stable | Category: overlays | Primitive: radix-ui/Dialog | Related: alert-dialog, command, context-menu
+Status: stable | Category: overlays | Primitive: native <dialog> | Related: alert-dialog, command, context-menu
 Import: import {Dialog} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
-- showClose?: boolean = true — Shows a "Close" text button in the corner. Escape and the overlay always close it.
+- showClose?: boolean = true — Shows a "Close" text button in the corner. Escape and the backdrop always close it.
 
 Usage:
 ```tsx
@@ -1445,7 +1445,7 @@ A11y:
 - Focus moves into the dialog, is trapped there, and returns to the trigger on close.
 - Escape and the Close button close it; the page behind is inert.
 
-CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title
+CSS classes: dialog-content, drawer-content, command, dialog-overlay, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title
 Source: registry/dialog.json
 
 ## Direction provider (direction-provider)
@@ -1498,12 +1498,12 @@ Source: registry/dot-pattern.json
 
 ## Drawer (drawer)
 A panel that slides in from an edge for secondary tasks, details or navigation.
-Status: stable | Category: overlays | Primitive: radix-ui/Dialog | Related: alert-dialog, command, context-menu
+Status: stable | Category: overlays | Primitive: native <dialog> | Related: dialog
 Import: import {Drawer} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
 - side?: "start" | "top" | "right" | "bottom" | "left" | "end" = 'right' — The edge it slides from. `start` and `end` follow the reading direction; `left` and `right` are fixed.
-- showClose?: boolean = true — Shows a "Close" text button. Escape and the overlay always close it.
+- showClose?: boolean = true — Shows a "Close" text button. Escape and the backdrop always close it.
 
 Usage:
 ```tsx
@@ -1524,13 +1524,13 @@ A11y:
 - Focus is trapped while open and returns to the trigger on close.
 - Escape and the overlay close it.
 
-CSS classes: dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, drawer-content
+CSS classes: dialog-content, drawer-content, command, dialog-overlay, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title
 Data attributes: data-side: right | end | left | start | top | bottom
 Source: registry/drawer.json
 
 ## Dropdown menu (dropdown-menu)
 A list of actions that opens from a button.
-Status: stable | Category: overlays | Primitive: radix-ui/DropdownMenu | Related: alert-dialog, command, context-menu
+Status: stable | Category: overlays | Primitive: native ARIA (shared positioning) | Related: popover
 Import: import {DropdownMenu} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -1813,10 +1813,16 @@ Source: registry/heading.json
 
 ## Hover card (hover-card)
 Preview extra content when a link or element is hovered or focused.
-Status: stable | Category: overlays | Primitive: radix-ui/HoverCard | Related: alert-dialog, command, context-menu
+Status: stable | Category: overlays | Primitive: native ARIA (shared positioning) | Related: popover
 Import: import {HoverCard} from '@monoline/react'
 
-Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
+Props (name: type = default, ? means optional):
+- open?: boolean — Controlled open state.
+- defaultOpen?: boolean = false — Initial open state when uncontrolled. Default false.
+- onOpenChange?: ((open: boolean) => void) — Called with the next open state.
+- openDelay?: number = 700 — Milliseconds the pointer must rest on the trigger before the card opens. Default 700.
+- closeDelay?: number = 300 — Milliseconds before the card closes after the pointer leaves the trigger and the card. Default 300.
+- children?: ReactNode — The parts of the component: a trigger and its content.
 
 Usage:
 ```tsx
@@ -1912,7 +1918,7 @@ A11y:
 - ArrowLeft and ArrowRight (swapped in RTL) and the Previous and Next buttons move through the images and wrap; a horizontal swipe does the same; Escape closes.
 - A polite status message announces the new image's alt text and position. Neighbouring images are preloaded.
 
-CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, dialog-overlay, dialog-content, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, image-gallery, image-gallery-thumb, image-gallery-lightbox, image-gallery-title, image-gallery-figure, image-gallery-nav
+CSS classes: btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, dialog-content, drawer-content, command, dialog-overlay, dialog-header, dialog-footer, dialog-description, dialog-close, dialog-title, image-gallery, image-gallery-thumb, image-gallery-lightbox, image-gallery-title, image-gallery-figure, image-gallery-nav
 Source: registry/image-gallery.json
 
 ## Input (input)
@@ -2098,7 +2104,7 @@ Source: registry/mentions.json
 
 ## Menubar (menubar)
 A horizontal bar of menus, like File, Edit and View in a desktop app.
-Status: stable | Category: navigation | Primitive: radix-ui/Menubar | Related: breadcrumb, navigation-menu, pagination
+Status: stable | Category: navigation | Primitive: native ARIA (shared positioning) | Related: dropdown-menu, popover
 Import: import {Menubar} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
@@ -2497,10 +2503,20 @@ Source: registry/pie-chart.json
 
 ## Popover (popover)
 A floating panel of content or controls anchored to a button.
-Status: stable | Category: overlays | Primitive: radix-ui/Popover | Related: alert-dialog, command, context-menu
+Status: stable | Category: overlays | Primitive: native ARIA (shared positioning) | Related: alert-dialog, command, context-menu
 Import: import {Popover} from '@monoline/react'
 
-Props: no exported *Props type in the source. Extra props go to the underlying element or primitive.
+Props (name: type = default, ? means optional):
+PopoverProps:
+- open?: boolean — Controlled open state.
+- defaultOpen?: boolean = false — Initial open state when uncontrolled. Default false.
+- onOpenChange?: ((open: boolean) => void) — Called with the next open state when the user opens or dismisses it.
+- children?: ReactNode — The parts of the component: a trigger and its content.
+PopoverContentProps:
+- onEscapeKeyDown?: ((event: Event) => void) — Called when Escape is pressed; call `event.preventDefault()` to keep it open.
+- onInteractOutside?: ((event: Event) => void) — Called when a press or focus lands outside; call `event.preventDefault()` to keep it open.
+- onOpenAutoFocus?: ((event: Event) => void) — Called after it opens, before focus moves in; `preventDefault()` keeps focus where it is or lets you move it yourself.
+- onCloseAutoFocus?: ((event: Event) => void) — Called after it closes, before focus returns to the trigger; `preventDefault()` lets you move focus yourself.
 
 Usage:
 ```tsx
@@ -2816,12 +2832,28 @@ Source: registry/segmented-control.json
 
 ## Select (select)
 Pick one value from a list of five or more options.
-Status: stable | Category: forms | Primitive: radix-ui/Select | Related: field
+Status: stable | Category: forms | Primitive: native ARIA (shared positioning) | Related: field
 Import: import {Select} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
+SelectProps:
+- value?: string — Controlled value. An empty string shows the placeholder.
+- defaultValue?: string = '' — Initial value when uncontrolled.
+- onValueChange?: ((value: string) => void) — Called with the chosen item's value.
+- open?: boolean — Controlled open state.
+- defaultOpen?: boolean = false — Initial open state when uncontrolled. Default false.
+- onOpenChange?: ((open: boolean) => void) — Called with the next open state.
+- disabled?: boolean — Disables the trigger.
+- name?: string — Form field name; the value is submitted through a hidden input.
+- children?: ReactNode — The parts of the component: a trigger and its content.
+SelectTriggerProps:
 - size?: "sm" | "md" | "lg" = 'md' — `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size.
 - invalid?: boolean — Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`.
+SelectContentProps:
+- position?: "item-aligned" | "popper" — Accepted for compatibility with earlier versions; the list is always positioned against the trigger.
+SelectItemProps:
+- value: string — The value reported by `onValueChange` when this item is chosen. Must be non-empty.
+- disabled?: boolean — Makes the item unselectable and skipped by the keyboard.
 
 Usage:
 ```tsx
@@ -2835,7 +2867,7 @@ A11y:
 - Arrow keys, Home, End and type-ahead move; Enter selects; Escape closes.
 - Inside a Field it is labelled by the Field's label.
 
-CSS classes: select-trigger, select-content, select-viewport, select-item, select-label, input-sm, input-lg
+CSS classes: select-trigger, select-content, select-item, select-label, input-sm, input-lg
 Data attributes: data-placeholder; data-highlighted; data-disabled; data-invalid
 Source: registry/select.json
 
@@ -3587,16 +3619,16 @@ Source: registry/toolbar.json
 
 ## Tooltip (tooltip)
 Short hint text on hover and keyboard focus.
-Status: stable | Category: overlays | Primitive: radix-ui/Tooltip | Related: alert-dialog, command, context-menu
+Status: stable | Category: overlays | Primitive: native ARIA (shared positioning) | Related: popover
 Import: import {Tooltip} from '@monoline/react'
 
 Props (name: type = default, ? means optional):
 - content: ReactNode — The text shown. Keep it short; it repeats or extends a label and must never hold essential information alone.
 - children: ReactNode — The trigger element. It receives aria-describedby when open.
 - side?: "top" | "right" | "bottom" | "left" = 'top' — Which side of the trigger the tooltip appears on: `top` (default), `right`, `bottom` or `left`.
-- delayDuration?: number — Milliseconds to wait before showing on hover. Defaults to the `TooltipProvider` value.
+- delayDuration?: number = 700 — Milliseconds to wait before showing on hover. Defaults to the `TooltipProvider` value.
 - open?: boolean — Whether the tooltip is open when controlled. Pair with `onOpenChange`.
-- defaultOpen?: boolean — Whether the tooltip starts open when uncontrolled. Default false.
+- defaultOpen?: boolean = false — Whether the tooltip starts open when uncontrolled. Default false.
 - onOpenChange?: ((open: boolean) => void) — Called with the new open state when the tooltip shows or hides.
 
 Usage:

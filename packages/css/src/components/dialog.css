@@ -1,6 +1,6 @@
 /* Dialog, alert dialog and drawer on the native <dialog> (showModal): the backdrop is ::backdrop, the page behind is inert and the scroll lock is :has(). Reads tokens only. */
 .dialog-content::backdrop, .drawer-content::backdrop, .command::backdrop { background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }
-html:has(dialog[open]:modal) { overflow: hidden; scrollbar-gutter: stable; }
+html:has(dialog[open]:modal) { overflow: hidden; }
 .dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }
 .dialog-content { position: fixed; z-index: var(--z-drawer); inset: 0; margin: auto; width: min(520px, 92vw); height: fit-content; max-width: none; max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* centred by auto margins in the top layer: the same in both directions */
 .dialog-content:focus { outline: none; }
