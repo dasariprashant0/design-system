@@ -54,7 +54,7 @@
       ]
     }
   ],
-  "usage": "import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuTrigger} from '@monoline/react';\n\n<ContextMenu>\n  <ContextMenuTrigger><div style={{display: 'grid', placeItems: 'center', height: '120px', border: '1px dashed var(--rule)'}}>Right click here</div></ContextMenuTrigger>\n  <ContextMenuContent><ContextMenuLabel>File</ContextMenuLabel><ContextMenuItem>Rename</ContextMenuItem><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem tone=\"danger\">Delete</ContextMenuItem></ContextMenuContent>\n</ContextMenu>",
+  "usage": "import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuTrigger} from '@monoline/react';\n\n<ContextMenu>\n  <ContextMenuTrigger><div style={{display: 'grid', placeItems: 'center', height: '120px', border: '1px dashed var(--rule)'}}>Right click here</div></ContextMenuTrigger>\n  <ContextMenuContent aria-label=\"File actions\"><ContextMenuLabel>File</ContextMenuLabel><ContextMenuItem>Rename</ContextMenuItem><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem tone=\"danger\">Delete</ContextMenuItem></ContextMenuContent>\n</ContextMenu>",
   "dataAttributes": [
     {
       "name": "data-highlighted",
