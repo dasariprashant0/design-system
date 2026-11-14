@@ -120,7 +120,11 @@ for (const vp of VPS) {
     for (const page of pages) {
       currentPage = page; currentState = `${vp}/${theme}/${accent}`;
       if (!(await waitForPage(page))) { note('page-did-not-render', ''); continue; }
-      if (OVERLAYS) { await sweepOverlays(page, 'overlay'); continue; }
+      if (OVERLAYS) {
+        if (args.includes('--verbose')) console.error(`overlays ${currentState} ${page}`);
+        try { await Promise.race([sweepOverlays(page, 'overlay'), new Promise((_, rej) => setTimeout(() => rej(new Error('timed out after 60s')), 60000))]); } catch (e) { note('overlay-sweep-failed', e.message.slice(0, 160)); try { await closeOverlay(); } catch {} }
+        continue;
+      }
       states++;
       if (VISUAL) {
         const {data} = await cdp('Page.captureScreenshot', {format: 'png', captureBeyondViewport: false});

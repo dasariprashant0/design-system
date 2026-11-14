@@ -1,6 +1,6 @@
 # Examples
 
-Three small apps that use Monoline the way a consumer would: `import '@monoline/css'` and `import {…} from '@monoline/react'`, built with Vite and React 19, type-checked against `packages/react/dist/index.d.ts` in strict mode. They exist to catch the problems unit tests cannot (cascade, layout, hover, overlays at 375px). What they found is in [../docs/dogfood-log.md](../docs/dogfood-log.md).
+Three small apps that use Monoline the way a consumer would: `import '@monoline/css/core.css'` plus one CSS file per component, and `import {…} from '@monoline/react'`, built with Vite and React 19, type-checked against `packages/react/dist/index.d.ts` in strict mode. They exist to catch the problems unit tests cannot (cascade, layout, hover, overlays at 375px). What they found is in [../docs/dogfood-log.md](../docs/dogfood-log.md).
 
 | App | What it shows |
 |---|---|
@@ -22,7 +22,7 @@ npx tsc --noEmit -p examples/dashboard
 cd examples/dashboard && npx vite build        # also: npx vite   for the dev server
 ```
 
-Each app's `vite.config.ts` has an `alias` block that points `@monoline/react` and `@monoline/css` at the built output. In your own project, delete the block and `npm install @monoline/react @monoline/css`.
+Each app's `vite.config.ts` has an `alias` block that points `@monoline/react` and `@monoline/css/*` at the built output. In your own project, delete the block and `npm install @monoline/react @monoline/css`.
 
 ## Check them in a real browser
 
@@ -36,10 +36,12 @@ It drives real mouse and keyboard input (open the command palette, dialogs and m
 
 ## Bundle sizes (gzip, React 19 included)
 
-| App | JS | CSS |
-|---|---|---|
-| dashboard | 121.8 KB | 16.6 KB |
-| auth-settings | 114.6 KB | 16.6 KB |
-| landing | 84.1 KB | 16.6 KB |
+The apps load `@monoline/css/core.css` plus one file per component they use (see each `main.tsx`), not the whole stylesheet.
 
-An empty React 19 app is 69.2 KB, so the kit itself adds about 53, 45 and 15 KB.
+| App | JS | CSS (core + its components) | CSS if it loaded everything |
+|---|---|---|---|
+| dashboard | 121.8 KB | 10.4 KB | 18.3 KB |
+| auth-settings | 114.6 KB | 8.1 KB | 18.3 KB |
+| landing | 84.1 KB | 6.5 KB | 18.3 KB |
+
+An empty React 19 app is 69.2 KB, so the kit itself adds about 53, 45 and 15 KB of JavaScript.

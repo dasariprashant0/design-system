@@ -22,6 +22,7 @@ import '@monoline/css/components/segmented-control.css';
 import '@monoline/css/components/stat.css';
 import '@monoline/css/components/text.css';
 import '@monoline/css/components/toast.css';
+import '@monoline/css/components/tooltip.css';
 import './app.css';
 import {App} from './App';
 

@@ -37,6 +37,9 @@ const SCENARIOS = {
     {name: 'new-order-dialog', hash: '', actions: [C('button', 'New order'), {wait: 300}]},
     // known: axe reports aria-hidden-focus on #root while a Radix menu is open (axe only forgives it for aria-modal dialogs). Focus is trapped in the menu, so it is not a user-facing problem; listed, not failed.
     {name: 'look-menu', hash: '', known: ['axe:aria-hidden-focus'], actions: [C('button', 'Look'), {wait: 300}]},
+    {name: 'tooltip', hash: '', actions: [{hover: ['button', 'Search or run']}, {wait: 900}]},
+    // The shell collapses to a drawer on a phone; the Menu button only exists there.
+    {name: 'nav-drawer', hash: '', only: 'mobile', actions: [C('button', 'Menu'), {wait: 400}]},
     {name: 'date-picker', hash: '', actions: [C('button', 'Any date'), {wait: 300}]},
     {name: 'sort-by-amount', hash: 'orders', actions: [C('th button, th [role=button]', 'Amount'), {wait: 200}]},
     {name: 'toast', hash: '', actions: [C('button', 'New order'), {wait: 300}, {type: ['[role=dialog] input', 'Ada']}, C('[role=dialog] button[type=submit]'), {wait: 500}]},
@@ -139,8 +142,14 @@ async function mouseClick([sel, text]) {
   await cdp('Input.dispatchMouseEvent', {type: 'mousePressed', x: rect.x, y: rect.y, button: 'left', clickCount: 1});
   await cdp('Input.dispatchMouseEvent', {type: 'mouseReleased', x: rect.x, y: rect.y, button: 'left', clickCount: 1});
 }
+async function mouseHover([sel, text]) {
+  const rect = await evaluate(`(() => { const els = [...document.querySelectorAll(${JSON.stringify(sel)})].filter(e => e.getClientRects().length); const el = els.find(e => (e.textContent || '').trim().startsWith(${JSON.stringify(text)})); if (!el) return null; const r = el.getBoundingClientRect(); return {x: r.x + r.width / 2, y: r.y + r.height / 2}; })()`);
+  if (!rect) throw new Error(`hover target not found: ${sel} ${text}`);
+  await cdp('Input.dispatchMouseEvent', {type: 'mouseMoved', x: rect.x, y: rect.y});
+}
 async function act(a) {
   if (a.click) await mouseClick(a.click);
+  else if (a.hover) await mouseHover(a.hover);
   else if (a.key) await key(a.key);
   else if (a.wait) await sleep(a.wait);
   else if (a.js) await evaluate(a.js);
@@ -161,7 +170,7 @@ for (const app of apps) {
   for (const [vp, v] of Object.entries(VIEWPORTS)) {
     await cdp('Emulation.setDeviceMetricsOverride', {width: v.width, height: v.height, deviceScaleFactor: 1, mobile: v.mobile});
     await cdp('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'reduce'}]});
-    for (const theme of THEMES) for (const sc of SCENARIOS[app].filter((x) => x.name.includes(scenarioFilter))) {
+    for (const theme of THEMES) for (const sc of SCENARIOS[app].filter((x) => x.name.includes(scenarioFilter) && (!x.only || x.only === vp))) {
       state = `${app}/${sc.name}/${vp}/${theme}`; knownKinds = sc.known ?? [];
       await cdp('Page.navigate', {url: 'about:blank'});
       await cdp('Page.addScriptToEvaluateOnNewDocument', {source: `try { localStorage.setItem('theme', ${JSON.stringify(theme)}); } catch {}`});

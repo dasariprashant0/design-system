@@ -3,7 +3,7 @@ import {
   Avatar, Badge, BarChart, BlockDashboardShell, Button, Card, CardContent, CardHeader, CardTitle, Command, DataTable, DatePicker,
   Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DropdownMenu, DropdownMenuContent,
   DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger,
-  Field, Form, Grid, Heading, Input, LineChart, SegmentedControl, Stat, Text, useHash, type DataTableColumn,
+  Field, Form, Grid, Heading, Input, LineChart, SegmentedControl, Stat, Text, Tooltip, TooltipProvider, useHash, type DataTableColumn,
 } from '@monoline/react';
 import {money, orders, type Order} from './data';
 import {accents, themes, useLook, type Accent, type Theme} from './theme';
@@ -57,7 +57,7 @@ function Dashboard() {
       ]}
       topbar={
         <>
-          <Button variant="line" size="sm" aria-haspopup="dialog" onClick={() => setCmdOpen(true)}>Search or run a command</Button>
+          <TooltipProvider><Tooltip content="Ctrl or Cmd + K"><Button variant="line" size="sm" aria-haspopup="dialog" onClick={() => setCmdOpen(true)}>Search or run a command</Button></Tooltip></TooltipProvider>
           <DropdownMenu>
             <DropdownMenuTrigger asChild><Button variant="line" size="sm">Look</Button></DropdownMenuTrigger>
             <DropdownMenuContent>

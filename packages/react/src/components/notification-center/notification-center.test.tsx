@@ -39,7 +39,7 @@ describe('NotificationCenter', () => {
     const onMarkRead = vi.fn(), onMarkAllRead = vi.fn();
     render(<NotificationCenter notifications={list} onMarkRead={onMarkRead} onMarkAllRead={onMarkAllRead} />);
     await user.click(screen.getByRole('button', {name: /Notifications/}));
-    await user.click(await screen.findByRole('button', {name: 'Mark "New comment" as read'}));
+    await user.click(await screen.findByRole('button', {name: 'Mark read: New comment'}));
     expect(onMarkRead).toHaveBeenCalledWith('b');
     await user.click(screen.getByRole('button', {name: 'Mark all read'}));
     expect(onMarkAllRead).toHaveBeenCalled();

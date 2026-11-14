@@ -80,7 +80,9 @@ const PAGE = String.raw`(() => {
     }
     return false;
   };
-  const layer = (e) => e.closest('.toast-item,.toast-viewport,[role="dialog"],[role="alertdialog"],[role="menu"],[role="listbox"],[role="tooltip"],[data-radix-popper-content-wrapper]');
+  // Overlays and fixed or sticky bars (the docs top bar) legitimately cover the page: only text in the same layer is compared.
+  const stuck = (e) => { for (let p = e; p && p !== document.body; p = p.parentElement) { const pos = getComputedStyle(p).position; if (pos === 'fixed' || pos === 'sticky') return p; } return null; };
+  const layer = (e) => stuck(e) || e.closest('.toast-item,.toast-viewport,[role="dialog"],[role="alertdialog"],[role="menu"],[role="listbox"],[role="tooltip"],[data-radix-popper-content-wrapper]');
   const collisions = (root) => {
     const items = [];
     for (const e of [root, ...root.querySelectorAll('*')]) {
