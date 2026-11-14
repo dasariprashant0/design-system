@@ -16,7 +16,7 @@ import {Topbar} from './Topbar';
 import {useHeadings} from './headings';
 import {PrefsContext, usePrefs} from './prefs';
 import {components, guides, hooks, type Entry} from './registry';
-import {href, resolve, useNavCount, usePathname} from './router';
+import {href, resolve, useNavCount, usePathname, type Route} from './router';
 
 const SITE = 'Monoline';
 const HOME_DESCRIPTION = 'Monoline: an open-source UI kit with plain CSS tokens and accessible React components on Radix.';
@@ -68,6 +68,13 @@ function Missing({path}: {path: string}) {
   );
 }
 
+/** Title and description of a route, shared by the browser (setMeta) and the prerender script. */
+export function pageMeta(route: Route) {
+  if (route.kind === 'page') return {title: `${route.entry.title} · ${SITE}`, description: route.entry.description};
+  if (route.kind === 'missing') return {title: `Page not found · ${SITE}`, description: HOME_DESCRIPTION};
+  return {title: `${SITE}: plain CSS and accessible React components`, description: HOME_DESCRIPTION};
+}
+
 export function App() {
   const pathname = usePathname();
   const navs = useNavCount();
@@ -80,9 +87,8 @@ export function App() {
   const headings = useHeadings(main, path);
 
   useEffect(() => {
-    if (route.kind === 'page') setMeta(`${route.entry.title} · ${SITE}`, route.entry.description);
-    else if (route.kind === 'missing') setMeta(`Page not found · ${SITE}`, HOME_DESCRIPTION);
-    else setMeta(`${SITE}: plain CSS and accessible React components`, HOME_DESCRIPTION);
+    const {title, description} = pageMeta(route);
+    setMeta(title, description);
   }, [path]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // After every navigation: scroll to the hash anchor or the top, and move focus to the page heading

@@ -83,9 +83,14 @@ function CopyMarkdown({name}: {name: string}) {
   );
 }
 
+const noop = () => () => {};
+/** False in the prerendered HTML and during hydration, true afterwards. Live demos wait for it: they may depend on the viewer's clock, locale or screen. */
+const useHydrated = () => useSyncExternalStore(noop, () => true, () => false);
+
 /** One example: Preview / Code tabs. The Code tab holds only this demo's source and collapses when long. */
 function Example({id, demo, code}: {id: string; demo: Demo; code?: DemoCode}) {
   const [open, setOpen] = useState(false);
+  const hydrated = useHydrated();
   const long = !!code && code.code.split('\n').length > 14;
   return (
     <div className="cdoc-example">
@@ -96,7 +101,7 @@ function Example({id, demo, code}: {id: string; demo: Demo; code?: DemoCode}) {
           <TabsTrigger value="preview">Preview</TabsTrigger>
           {code && <TabsTrigger value="code">Code</TabsTrigger>}
         </TabsList>
-        <TabsContent value="preview"><div className="cdoc-stage">{demo.render()}</div></TabsContent>
+        <TabsContent value="preview"><div className="cdoc-stage">{hydrated && demo.render()}</div></TabsContent>
         {code && (
           <TabsContent value="code">
             <Collapsible open={open || !long} onOpenChange={setOpen} className="cdoc-code" data-long={long || undefined}>

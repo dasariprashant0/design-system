@@ -33,8 +33,8 @@ function notFoundBase(): Plugin {
   return {
     name: 'monoline-404-base',
     apply: 'build',
-    configResolved: (c) => { out = join(c.root, c.build.outDir, '404.html'); },
-    closeBundle() { if (existsSync(out)) writeFileSync(out, readFileSync(out, 'utf8').replaceAll('__BASE__', base)); },
+    configResolved: (c) => { out = c.build.ssr ? '' : join(c.root, c.build.outDir, '404.html'); },
+    closeBundle() { if (out && existsSync(out)) writeFileSync(out, readFileSync(out, 'utf8').replaceAll('__BASE__', base)); },
   };
 }
 
@@ -45,7 +45,7 @@ function aiFilesPlugin(): Plugin {
   let out = '';
   return {
     name: 'monoline-ai-files',
-    configResolved: (c) => { out = join(c.root, c.build.outDir); },
+    configResolved: (c) => { out = c.build.ssr ? '' : join(c.root, c.build.outDir); }, // the prerender's server build copies nothing
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const rel = decodeURIComponent((req.url ?? '').split('?')[0]!.slice(base.length)).replace(/^\/+/, '');
@@ -55,7 +55,7 @@ function aiFilesPlugin(): Plugin {
         res.end(readFileSync(hit));
       });
     },
-    closeBundle() { for (const f of aiFiles) if (existsSync(join(repo, f))) cpSync(join(repo, f), join(out, f), {recursive: true}); },
+    closeBundle() { if (out) for (const f of aiFiles) if (existsSync(join(repo, f))) cpSync(join(repo, f), join(out, f), {recursive: true}); },
   };
 }
 
