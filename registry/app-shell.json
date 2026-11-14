@@ -1,0 +1,256 @@
+{
+  "name": "app-shell",
+  "title": "App shell",
+  "category": "layout",
+  "description": "The frame of an app: skip link, navbar, sidebar, main and aside in one responsive grid.",
+  "status": "beta",
+  "uses": [
+    "sidebar",
+    "navbar"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/09-links.css",
+      "content": "/* ─── Links, dividers, skip link ─── */\n.link { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.link:hover { text-decoration-color: currentColor; }\n.divider { border: 0; border-top: 1px solid var(--rule); margin: var(--s5) 0; }\n.skip-link { position: absolute; inset-inline-start: var(--s4); top: -100px; z-index: var(--z-toast); padding: var(--s3) var(--s4); background: var(--foreground); color: var(--background); }\n.skip-link:focus { top: var(--s4); }\n"
+    },
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/icon-button.css",
+      "content": "/* Icon button: a square .btn. */\n.btn.btn-icon { height: auto; padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn.btn-icon.btn-sm { height: auto; padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
+    },
+    {
+      "path": "packages/css/src/components/tooltip.css",
+      "content": "/* Radix tooltip content. The legacy .tip-wrap/.tip CSS-only tooltip still works. */\n.tooltip { z-index: var(--z-toast); padding: var(--s1) var(--s3); background: var(--surface); color: var(--surface-text); font-size: var(--text-xs); max-width: 280px; animation: dialog-fade var(--fast) var(--ease); }\n"
+    },
+    {
+      "path": "packages/css/src/components/dialog.css",
+      "content": "/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }\n.dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: -0.02em; margin-bottom: var(--s3); } /* sentence case: uppercase is only for .display */\n"
+    },
+    {
+      "path": "packages/css/src/components/drawer.css",
+      "content": "/* Drawer: a Radix Dialog pinned to an edge. Overlay, header and footer reuse dialog.css. */\n.drawer-content { position: fixed; z-index: var(--z-drawer); display: flex; flex-direction: column; gap: var(--s4); padding: var(--s6); background: var(--background); color: var(--foreground); border: 0 solid var(--foreground); overflow-y: auto; }\n.drawer-content:focus { outline: none; }\n.drawer-content[data-side=\"right\"] { top: 0; right: 0; bottom: 0; width: min(420px, 100vw); border-left-width: 1px; animation: drawer-in-right var(--base) var(--ease); } /* physical: explicit right edge, use data-side=\"end\" to follow direction */\n.drawer-content[data-side=\"end\"] { top: 0; inset-inline-end: 0; bottom: 0; width: min(420px, 100vw); border-inline-start-width: 1px; animation: drawer-in-end var(--base) var(--ease); }\n.drawer-content[data-side=\"left\"] { top: 0; left: 0; bottom: 0; width: min(420px, 100vw); border-right-width: 1px; animation: drawer-in-left var(--base) var(--ease); } /* physical: explicit left edge, use data-side=\"start\" to follow direction */\n.drawer-content[data-side=\"start\"] { top: 0; inset-inline-start: 0; bottom: 0; width: min(420px, 100vw); border-inline-end-width: 1px; animation: drawer-in-start var(--base) var(--ease); }\n.drawer-content[data-side=\"top\"] { top: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-bottom-width: 1px; animation: drawer-in-top var(--base) var(--ease); }\n.drawer-content[data-side=\"bottom\"] { bottom: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-top-width: 1px; animation: drawer-in-bottom var(--base) var(--ease); }\n@keyframes drawer-in-right { from { transform: translateX(100%); } to { transform: none; } }\n@keyframes drawer-in-left { from { transform: translateX(-100%); } to { transform: none; } }\n@keyframes drawer-in-end { from { transform: translateX(calc(100% * var(--dir, 1))); } to { transform: none; } }\n@keyframes drawer-in-start { from { transform: translateX(calc(-100% * var(--dir, 1))); } to { transform: none; } }\n@keyframes drawer-in-top { from { transform: translateY(-100%); } to { transform: none; } }\n@keyframes drawer-in-bottom { from { transform: translateY(100%); } to { transform: none; } }\n"
+    },
+    {
+      "path": "packages/css/src/components/sidebar.css",
+      "content": "/* Sidebar: a navigation column that collapses to icons from 800px; below that it is hidden and the same content opens in a Drawer. */\n.sidebar { --sidebar-collapsed: calc(var(--s7) + var(--s3)); display: none; inline-size: var(--side); flex: none; border-inline-end: 1px solid var(--rule); background: var(--background); transition: inline-size var(--base) var(--ease); }\n.sidebar[data-collapsed] { inline-size: var(--sidebar-collapsed); }\n.sidebar-inner { position: sticky; inset-block-start: var(--navbar-h, 0rem); display: flex; flex-direction: column; gap: var(--s4); box-sizing: border-box; min-block-size: min(100%, calc(100dvh - var(--navbar-h, 0rem))); max-block-size: calc(100dvh - var(--navbar-h, 0rem)); padding: var(--s4) var(--s3); overflow: hidden auto; }\n.sidebar-header { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); min-block-size: var(--control-sm); padding-inline: var(--s2); font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); }\n.sidebar-footer { margin-block-start: auto; display: flex; flex-direction: column; gap: var(--s2); }\n.sidebar-content { display: flex; flex-direction: column; gap: var(--s4); }\n.sidebar-group { display: flex; flex-direction: column; gap: var(--s1); }\n.sidebar-group-label { padding-inline: var(--s3); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.sidebar-list { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }\n.sidebar-item { display: flex; align-items: center; gap: var(--s3); min-block-size: var(--control-sm); padding: var(--s2) var(--s3); font-size: var(--text-sm); color: var(--muted); text-decoration: none; border-inline-start: 2px solid transparent; }\n.sidebar-item:hover { color: var(--foreground); background: var(--wash); }\n.sidebar-item[aria-current=\"page\"] { color: var(--foreground); border-inline-start-color: var(--accent); background: var(--wash); }\n.sidebar-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.sidebar-icon { display: inline-flex; flex: none; inline-size: var(--s4); block-size: var(--s4); }\n.sidebar-icon > svg { inline-size: 100%; block-size: 100%; }\n.sidebar-label { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n.sidebar-toggle { display: none; }\n.sidebar-toggle svg { display: block; }\n[dir=\"rtl\"] .sidebar-toggle svg { transform: scaleX(-1); }\n\n/* Collapsed: icons only. Labels stay in the accessibility tree and show in a tooltip. */\n.sidebar[data-collapsed] .sidebar-label,\n.sidebar[data-collapsed] .sidebar-group-label { position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }\n.sidebar[data-collapsed] .sidebar-item { justify-content: center; padding-inline: var(--s2); border-inline-start-color: transparent; }\n.sidebar[data-collapsed] .sidebar-item[aria-current=\"page\"] { box-shadow: inset 0 -2px 0 var(--accent); }\n.sidebar[data-collapsed] .sidebar-group + .sidebar-group { padding-block-start: var(--s4); border-block-start: 1px solid var(--rule); }\n.sidebar[data-collapsed] .sidebar-header { justify-content: center; padding-inline: 0; }\n.sidebar[data-collapsed] .sidebar-inner { padding-inline: var(--s2); }\n\n/* The drawer (below 800px) is never collapsed. */\n.sidebar-drawer { gap: var(--s4); padding: var(--s4); inline-size: min(var(--side), 100vw); }\n.sidebar-drawer .sidebar-toggle, .sidebar-drawer .sidebar-header { display: none; } /* the drawer title takes the header's place */\n\n@media (min-width: 800px) {\n  .sidebar { display: block; }\n  .sidebar-toggle { display: inline-grid; }\n  .sidebar-trigger { display: none; }\n}\n"
+    },
+    {
+      "path": "packages/css/src/components/navbar.css",
+      "content": "/* Navbar: brand, links, actions. Links collapse into a Drawer behind a Menu button below 800px. */\n.navbar { display: flex; align-items: center; gap: var(--s4); box-sizing: border-box; block-size: var(--navbar-h, var(--s7)); padding-inline: var(--s4); background: var(--background); border-block-end: 1px solid var(--rule); }\n.navbar[data-sticky] { position: sticky; inset-block-start: 0; z-index: calc(var(--z-drawer) - 10); }\n.navbar-brand { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); }\n.navbar-links { display: none; }\n.navbar-list { display: flex; gap: var(--s1); margin: 0; padding: 0; list-style: none; }\n.navbar-link { display: block; padding: var(--s2) var(--s3); font-size: var(--text-sm); color: var(--muted); text-decoration: none; border-block-end: 2px solid transparent; }\n.navbar-link:hover { color: var(--foreground); background: var(--wash); }\n.navbar-link[aria-current=\"page\"] { color: var(--foreground); border-block-end-color: var(--accent); }\n.navbar-link:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.navbar-actions { display: flex; align-items: center; gap: var(--s3); margin-inline-start: auto; }\n.navbar-drawer .navbar-list { flex-direction: column; }\n.navbar-drawer .navbar-link { border-block-end: 0; border-inline-start: 2px solid transparent; }\n.navbar-drawer .navbar-link[aria-current=\"page\"] { border-inline-start-color: var(--accent); }\n@media (min-width: 800px) {\n  .navbar-links { display: block; }\n  .navbar-menu { display: none; }\n}\n"
+    },
+    {
+      "path": "packages/css/src/components/app-shell.css",
+      "content": "/* App shell: skip link, navbar, sidebar, main, aside as one grid. Sidebar from 800px, aside beside the page from 1100px. */\n.app-shell { --navbar-h: var(--s7); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: \"navbar\" \"main\" \"aside\"; min-block-size: var(--app-shell-min-height, 100dvh); }\n.app-shell > .skip-link { position: fixed; }\n.app-shell-navbar { grid-area: navbar; position: sticky; inset-block-start: 0; z-index: calc(var(--z-drawer) - 10); }\n.app-shell > .sidebar { grid-area: sidebar; }\n.app-shell-main { grid-area: main; min-inline-size: 0; padding: var(--s6) var(--s5); }\n.app-shell-main:focus { outline: none; }\n.app-shell-aside { grid-area: aside; min-inline-size: 0; padding: var(--s5); border-block-start: 1px solid var(--rule); }\n@media (min-width: 800px) {\n  .app-shell { grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: \"navbar navbar\" \"sidebar main\" \"sidebar aside\"; }\n}\n@media (min-width: 1100px) {\n  .app-shell { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: auto minmax(0, 1fr); grid-template-areas: \"navbar navbar navbar\" \"sidebar main aside\"; }\n  .app-shell-aside { inline-size: var(--app-shell-aside, 20rem); border-block-start: 0; border-inline-start: 1px solid var(--rule); }\n}\n/* Contained: the shell fills a fixed height and the regions scroll themselves. */\n.app-shell[data-scroll=\"contained\"] { block-size: var(--app-shell-height, 100dvh); min-block-size: 0; overflow: hidden; }\n.app-shell[data-scroll=\"contained\"] .app-shell-navbar { position: static; }\n.app-shell[data-scroll=\"contained\"] .app-shell-main, .app-shell[data-scroll=\"contained\"] .app-shell-aside { overflow: auto; }\n.app-shell[data-scroll=\"contained\"] > .sidebar { min-block-size: 0; }\n.app-shell[data-scroll=\"contained\"] .sidebar-inner { position: static; max-block-size: 100%; block-size: 100%; }\n"
+    }
+  ],
+  "a11y": [
+    "Landmarks: banner (the navbar), navigation (the sidebar), main and complementary (the aside, named by asideLabel).",
+    "The first focusable element is a skip link to the main region; main takes focus when it is used.",
+    "The sidebar shows from 800px and the aside beside the page from 1100px; below those they move into a drawer or stack under the page.",
+    "scroll=\"page\" keeps the navbar and sidebar in view while the page scrolls; scroll=\"contained\" scrolls the regions on their own."
+  ],
+  "keywords": [
+    "app shell",
+    "layout",
+    "dashboard",
+    "admin",
+    "frame",
+    "skip link",
+    "sticky"
+  ],
+  "kind": "components",
+  "import": "import {AppShell} from '@monoline/react'",
+  "path": "packages/react/src/components/app-shell",
+  "files": [
+    "packages/react/src/components/app-shell/app-shell.demo.tsx",
+    "packages/react/src/components/app-shell/app-shell.test.tsx",
+    "packages/react/src/components/app-shell/app-shell.tsx",
+    "packages/react/src/components/app-shell/index.ts",
+    "packages/react/src/components/app-shell/meta.json"
+  ],
+  "related": [
+    "sidebar",
+    "navbar"
+  ],
+  "props": [
+    {
+      "name": "AppShellProps",
+      "props": [
+        {
+          "name": "navbar",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "A `Navbar`. Sticks to the top while the page scrolls."
+        },
+        {
+          "name": "sidebar",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "A `Sidebar`. Hidden below 800px (its drawer opens from a `SidebarTrigger`)."
+        },
+        {
+          "name": "aside",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Secondary content in a complementary landmark: a details panel, help, activity. Beside the page from 1100px, below it on narrower screens."
+        },
+        {
+          "name": "asideLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Details'",
+          "description": "Names the aside landmark. Default \"Details\"."
+        },
+        {
+          "name": "skipLinkLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Skip to main content'",
+          "description": "Text of the skip link, the first thing a keyboard user can reach. Default \"Skip to main content\"."
+        },
+        {
+          "name": "mainId",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "The `id` of the main region, which the skip link targets. Default is generated."
+        },
+        {
+          "name": "scroll",
+          "type": "\"page\" | \"contained\"",
+          "optional": true,
+          "default": "'page'",
+          "description": "`page` (default): the page scrolls; the navbar and sidebar stay in view. `contained`: the shell fills its height and the sidebar and main scroll on their own.\nSet the height with the CSS variable `--app-shell-height` (default full viewport); in `page` mode `--app-shell-min-height` sets the minimum."
+        },
+        {
+          "name": "collapsed",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Whether the sidebar is collapsed to icons, when controlled. Pair with `onCollapsedChange`."
+        },
+        {
+          "name": "defaultCollapsed",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Whether the sidebar starts collapsed when uncontrolled. Default false."
+        },
+        {
+          "name": "onCollapsedChange",
+          "type": "((collapsed: boolean) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new collapsed state. Save it to persist the choice, then pass it back as `defaultCollapsed`."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The page. Put one h1 in it (a `PageHeader` does)."
+        }
+      ]
+    }
+  ],
+  "usage": "import {type CSSProperties} from 'react';\nimport {AppShell, Breadcrumb, Button, Command, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, Navbar, PageHeader, Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarItem, SidebarToggle, SidebarTrigger} from '@monoline/react';\n\nconst Icon = ({d}: {d: string}) => <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.5\" aria-hidden=\"true\"><path d={d} /></svg>;\n\nconst height = {'--app-shell-height': '34rem'} as CSSProperties;\n\nconst actions = [{id: 'new', label: 'New project', group: 'Create'}, {id: 'invite', label: 'Invite a teammate', group: 'Create'}, {id: 'theme', label: 'Switch theme', group: 'View'}];\n\nconst sidebar = (\n  <Sidebar drawerTitle=\"Acme\">\n    <SidebarHeader><span>Acme</span><SidebarToggle /></SidebarHeader>\n    <SidebarContent>\n      <SidebarGroup label=\"Workspace\">\n        <SidebarItem href=\"#overview\" current icon={<Icon d=\"M2 8l6-5 6 5v6H2z\" />}>Overview</SidebarItem>\n        <SidebarItem href=\"#reports\" icon={<Icon d=\"M3 13V8M8 13V3M13 13V6\" />}>Reports</SidebarItem>\n        <SidebarItem href=\"#team\" icon={<Icon d=\"M8 8a3 3 0 100-6 3 3 0 000 6zM2 14c0-3 3-4 6-4s6 1 6 4\" />}>Team</SidebarItem>\n      </SidebarGroup>\n    </SidebarContent>\n  </Sidebar>\n);\n\nconst navbar = (\n  <Navbar\n    leading={<SidebarTrigger />}\n    actions={(\n      <>\n        <Command shortcut=\"mod+j\" title=\"Command palette\" items={actions} trigger={<Button size=\"sm\">Search…</Button>} />\n        <DropdownMenu>\n          <DropdownMenuTrigger asChild><Button size=\"sm\">Account</Button></DropdownMenuTrigger>\n          <DropdownMenuContent align=\"end\">\n            <DropdownMenuLabel>Ada Example</DropdownMenuLabel>\n            <DropdownMenuItem>Profile</DropdownMenuItem>\n            <DropdownMenuItem>Settings</DropdownMenuItem>\n            <DropdownMenuSeparator />\n            <DropdownMenuItem>Sign out</DropdownMenuItem>\n          </DropdownMenuContent>\n        </DropdownMenu>\n      </>\n    )}\n  />\n);\n\nconst header = <PageHeader breadcrumbs={<Breadcrumb items={[{label: 'Home', href: '#'}, {label: 'Reports'}]} />} title=\"Reports\" description=\"Weekly numbers for your workspace.\" actions={<Button variant=\"solid\">New report</Button>} />;\n\n<AppShell scroll=\"contained\" style={height} navbar={navbar} sidebar={sidebar}>{header}<p>Your page goes here.</p></AppShell>",
+  "dataAttributes": [
+    {
+      "name": "data-side",
+      "values": [
+        "right",
+        "end",
+        "left",
+        "start",
+        "top",
+        "bottom"
+      ]
+    },
+    {
+      "name": "data-collapsed",
+      "values": []
+    },
+    {
+      "name": "data-sticky",
+      "values": []
+    },
+    {
+      "name": "data-scroll",
+      "values": [
+        "contained"
+      ]
+    }
+  ],
+  "classes": [
+    "link",
+    "divider",
+    "skip-link",
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "btn-icon",
+    "tooltip",
+    "dialog-overlay",
+    "dialog-content",
+    "dialog-header",
+    "dialog-footer",
+    "dialog-description",
+    "dialog-close",
+    "dialog-title",
+    "drawer-content",
+    "sidebar",
+    "sidebar-inner",
+    "sidebar-header",
+    "sidebar-footer",
+    "sidebar-content",
+    "sidebar-group",
+    "sidebar-group-label",
+    "sidebar-list",
+    "sidebar-item",
+    "sidebar-icon",
+    "sidebar-label",
+    "sidebar-toggle",
+    "sidebar-drawer",
+    "sidebar-trigger",
+    "navbar",
+    "navbar-brand",
+    "navbar-links",
+    "navbar-list",
+    "navbar-link",
+    "navbar-actions",
+    "navbar-drawer",
+    "navbar-menu",
+    "app-shell",
+    "app-shell-navbar",
+    "app-shell-main",
+    "app-shell-aside"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/app-shell/app-shell.tsx",
+      "content": "'use client';\nimport {forwardRef, useId, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\nimport {SidebarProvider} from '../sidebar';\n\nexport interface AppShellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  /** A `Navbar`. Sticks to the top while the page scrolls. */\n  navbar?: ReactNode;\n  /** A `Sidebar`. Hidden below 800px (its drawer opens from a `SidebarTrigger`). */\n  sidebar?: ReactNode;\n  /** Secondary content in a complementary landmark: a details panel, help, activity. Beside the page from 1100px, below it on narrower screens. */\n  aside?: ReactNode;\n  /** Names the aside landmark. Default \"Details\". */\n  asideLabel?: string;\n  /** Text of the skip link, the first thing a keyboard user can reach. Default \"Skip to main content\". */\n  skipLinkLabel?: string;\n  /** The `id` of the main region, which the skip link targets. Default is generated. */\n  mainId?: string;\n  /**\n   * `page` (default): the page scrolls; the navbar and sidebar stay in view. `contained`: the shell fills its height and the sidebar and main scroll on their own.\n   * Set the height with the CSS variable `--app-shell-height` (default full viewport); in `page` mode `--app-shell-min-height` sets the minimum.\n   */\n  scroll?: 'page' | 'contained';\n  /** Whether the sidebar is collapsed to icons, when controlled. Pair with `onCollapsedChange`. */\n  collapsed?: boolean;\n  /** Whether the sidebar starts collapsed when uncontrolled. Default false. */\n  defaultCollapsed?: boolean;\n  /** Called with the new collapsed state. Save it to persist the choice, then pass it back as `defaultCollapsed`. */\n  onCollapsedChange?: (collapsed: boolean) => void;\n  /** The page. Put one h1 in it (a `PageHeader` does). */\n  children: ReactNode;\n}\n\n/**\n * The frame of an app: skip link, navbar, sidebar, main and an optional aside, as one responsive grid with the right landmarks\n * (banner, navigation, main, complementary). It owns the `SidebarProvider`, so a `SidebarToggle` or `SidebarTrigger` anywhere inside works.\n * @example <AppShell navbar={<Navbar brand=\"Acme\" leading={<SidebarTrigger />} />} sidebar={<Sidebar>...</Sidebar>}><PageHeader title=\"Overview\" /></AppShell>\n */\nexport const AppShell = forwardRef<HTMLDivElement, AppShellProps>(function AppShell({navbar, sidebar, aside, asideLabel = 'Details', skipLinkLabel = 'Skip to main content', mainId, scroll = 'page', collapsed, defaultCollapsed, onCollapsedChange, children, className, ...rest}, ref) {\n  const generated = useId();\n  const id = mainId ?? `main-${generated.replace(/:/g, '')}`;\n  return (\n    <SidebarProvider collapsed={collapsed} defaultCollapsed={defaultCollapsed} onCollapsedChange={onCollapsedChange}>\n      <div ref={ref} className={cx('app-shell', className)} data-scroll={scroll} {...rest}>\n        <a className=\"skip-link\" href={`#${id}`}>{skipLinkLabel}</a>\n        {navbar && <div className=\"app-shell-navbar\">{navbar}</div>}\n        {sidebar}\n        <main id={id} tabIndex={-1} className=\"app-shell-main\">{children}</main>\n        {aside && <aside aria-label={asideLabel} className=\"app-shell-aside\">{aside}</aside>}\n      </div>\n    </SidebarProvider>\n  );\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/app-shell/index.ts",
+      "content": "export {AppShell} from './app-shell';\nexport type {AppShellProps} from './app-shell';\n"
+    },
+    {
+      "path": "packages/react/src/components/app-shell/meta.json",
+      "content": "{\n  \"name\": \"app-shell\",\n  \"title\": \"App shell\",\n  \"category\": \"layout\",\n  \"description\": \"The frame of an app: skip link, navbar, sidebar, main and aside in one responsive grid.\",\n  \"status\": \"beta\",\n  \"uses\": [\n    \"sidebar\",\n    \"navbar\"\n  ],\n  \"css\": [\n    \"09-links.css\",\n    \"02-buttons.css\",\n    \"icon-button.css\",\n    \"tooltip.css\",\n    \"dialog.css\",\n    \"drawer.css\",\n    \"sidebar.css\",\n    \"navbar.css\",\n    \"app-shell.css\"\n  ],\n  \"a11y\": [\n    \"Landmarks: banner (the navbar), navigation (the sidebar), main and complementary (the aside, named by asideLabel).\",\n    \"The first focusable element is a skip link to the main region; main takes focus when it is used.\",\n    \"The sidebar shows from 800px and the aside beside the page from 1100px; below those they move into a drawer or stack under the page.\",\n    \"scroll=\\\"page\\\" keeps the navbar and sidebar in view while the page scrolls; scroll=\\\"contained\\\" scrolls the regions on their own.\"\n  ],\n  \"keywords\": [\n    \"app shell\",\n    \"layout\",\n    \"dashboard\",\n    \"admin\",\n    \"frame\",\n    \"skip link\",\n    \"sticky\"\n  ]\n}\n"
+    }
+  ]
+}

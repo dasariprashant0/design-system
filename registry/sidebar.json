@@ -1,0 +1,293 @@
+{
+  "name": "sidebar",
+  "title": "Sidebar",
+  "category": "navigation",
+  "description": "A collapsible navigation sidebar with groups, icons and a mobile drawer.",
+  "status": "beta",
+  "uses": [
+    "drawer",
+    "tooltip",
+    "button",
+    "icon-button"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/02-buttons.css",
+      "content": "/* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */\n.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }\n.btn:active:not(:disabled) { transform: scale(0.98); }\n.btn:disabled { opacity: 0.55; cursor: not-allowed; }\n.btn-solid { background: var(--foreground); color: var(--background); }\n.btn-solid:hover:not(:disabled) { background: var(--ink-2); }\n.btn-line { box-shadow: inset 0 0 0 1px var(--foreground); }\n.btn-line:hover:not(:disabled) { background: var(--foreground); color: var(--background); }\n.btn-danger { box-shadow: inset 0 0 0 1px var(--danger); color: var(--danger); }\n.btn-danger:hover:not(:disabled) { background: var(--danger); color: var(--background); }\n.btn-ghost { min-height: 0; padding-inline-start: 0; padding-inline-end: 0; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.btn-ghost:hover:not(:disabled) { text-decoration-color: currentColor; }\n.btn-sm { height: var(--control-sm); padding: 0 12px; font-size: var(--text-xs); }\n.btn-lg { height: var(--control-lg); padding: 0 32px; font-size: var(--text-base); }\n.btn-ghost.btn-sm, .btn-ghost.btn-lg { height: auto; padding-block: var(--s2); }\n.btn-block { width: 100%; }\n"
+    },
+    {
+      "path": "packages/css/src/components/icon-button.css",
+      "content": "/* Icon button: a square .btn. */\n.btn.btn-icon { height: auto; padding: var(--s3); aspect-ratio: 1; display: inline-grid; place-items: center; line-height: 0; }\n.btn.btn-icon.btn-sm { height: auto; padding: var(--s2); }\n.btn-icon svg { width: 1em; height: 1em; }\n"
+    },
+    {
+      "path": "packages/css/src/components/tooltip.css",
+      "content": "/* Radix tooltip content. The legacy .tip-wrap/.tip CSS-only tooltip still works. */\n.tooltip { z-index: var(--z-toast); padding: var(--s1) var(--s3); background: var(--surface); color: var(--surface-text); font-size: var(--text-xs); max-width: 280px; animation: dialog-fade var(--fast) var(--ease); }\n"
+    },
+    {
+      "path": "packages/css/src/components/dialog.css",
+      "content": "/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }\n.dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: -0.02em; margin-bottom: var(--s3); } /* sentence case: uppercase is only for .display */\n"
+    },
+    {
+      "path": "packages/css/src/components/drawer.css",
+      "content": "/* Drawer: a Radix Dialog pinned to an edge. Overlay, header and footer reuse dialog.css. */\n.drawer-content { position: fixed; z-index: var(--z-drawer); display: flex; flex-direction: column; gap: var(--s4); padding: var(--s6); background: var(--background); color: var(--foreground); border: 0 solid var(--foreground); overflow-y: auto; }\n.drawer-content:focus { outline: none; }\n.drawer-content[data-side=\"right\"] { top: 0; right: 0; bottom: 0; width: min(420px, 100vw); border-left-width: 1px; animation: drawer-in-right var(--base) var(--ease); } /* physical: explicit right edge, use data-side=\"end\" to follow direction */\n.drawer-content[data-side=\"end\"] { top: 0; inset-inline-end: 0; bottom: 0; width: min(420px, 100vw); border-inline-start-width: 1px; animation: drawer-in-end var(--base) var(--ease); }\n.drawer-content[data-side=\"left\"] { top: 0; left: 0; bottom: 0; width: min(420px, 100vw); border-right-width: 1px; animation: drawer-in-left var(--base) var(--ease); } /* physical: explicit left edge, use data-side=\"start\" to follow direction */\n.drawer-content[data-side=\"start\"] { top: 0; inset-inline-start: 0; bottom: 0; width: min(420px, 100vw); border-inline-end-width: 1px; animation: drawer-in-start var(--base) var(--ease); }\n.drawer-content[data-side=\"top\"] { top: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-bottom-width: 1px; animation: drawer-in-top var(--base) var(--ease); }\n.drawer-content[data-side=\"bottom\"] { bottom: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-top-width: 1px; animation: drawer-in-bottom var(--base) var(--ease); }\n@keyframes drawer-in-right { from { transform: translateX(100%); } to { transform: none; } }\n@keyframes drawer-in-left { from { transform: translateX(-100%); } to { transform: none; } }\n@keyframes drawer-in-end { from { transform: translateX(calc(100% * var(--dir, 1))); } to { transform: none; } }\n@keyframes drawer-in-start { from { transform: translateX(calc(-100% * var(--dir, 1))); } to { transform: none; } }\n@keyframes drawer-in-top { from { transform: translateY(-100%); } to { transform: none; } }\n@keyframes drawer-in-bottom { from { transform: translateY(100%); } to { transform: none; } }\n"
+    },
+    {
+      "path": "packages/css/src/components/sidebar.css",
+      "content": "/* Sidebar: a navigation column that collapses to icons from 800px; below that it is hidden and the same content opens in a Drawer. */\n.sidebar { --sidebar-collapsed: calc(var(--s7) + var(--s3)); display: none; inline-size: var(--side); flex: none; border-inline-end: 1px solid var(--rule); background: var(--background); transition: inline-size var(--base) var(--ease); }\n.sidebar[data-collapsed] { inline-size: var(--sidebar-collapsed); }\n.sidebar-inner { position: sticky; inset-block-start: var(--navbar-h, 0rem); display: flex; flex-direction: column; gap: var(--s4); box-sizing: border-box; min-block-size: min(100%, calc(100dvh - var(--navbar-h, 0rem))); max-block-size: calc(100dvh - var(--navbar-h, 0rem)); padding: var(--s4) var(--s3); overflow: hidden auto; }\n.sidebar-header { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); min-block-size: var(--control-sm); padding-inline: var(--s2); font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); }\n.sidebar-footer { margin-block-start: auto; display: flex; flex-direction: column; gap: var(--s2); }\n.sidebar-content { display: flex; flex-direction: column; gap: var(--s4); }\n.sidebar-group { display: flex; flex-direction: column; gap: var(--s1); }\n.sidebar-group-label { padding-inline: var(--s3); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.sidebar-list { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }\n.sidebar-item { display: flex; align-items: center; gap: var(--s3); min-block-size: var(--control-sm); padding: var(--s2) var(--s3); font-size: var(--text-sm); color: var(--muted); text-decoration: none; border-inline-start: 2px solid transparent; }\n.sidebar-item:hover { color: var(--foreground); background: var(--wash); }\n.sidebar-item[aria-current=\"page\"] { color: var(--foreground); border-inline-start-color: var(--accent); background: var(--wash); }\n.sidebar-item:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }\n.sidebar-icon { display: inline-flex; flex: none; inline-size: var(--s4); block-size: var(--s4); }\n.sidebar-icon > svg { inline-size: 100%; block-size: 100%; }\n.sidebar-label { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n.sidebar-toggle { display: none; }\n.sidebar-toggle svg { display: block; }\n[dir=\"rtl\"] .sidebar-toggle svg { transform: scaleX(-1); }\n\n/* Collapsed: icons only. Labels stay in the accessibility tree and show in a tooltip. */\n.sidebar[data-collapsed] .sidebar-label,\n.sidebar[data-collapsed] .sidebar-group-label { position: absolute; inline-size: 1px; block-size: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }\n.sidebar[data-collapsed] .sidebar-item { justify-content: center; padding-inline: var(--s2); border-inline-start-color: transparent; }\n.sidebar[data-collapsed] .sidebar-item[aria-current=\"page\"] { box-shadow: inset 0 -2px 0 var(--accent); }\n.sidebar[data-collapsed] .sidebar-group + .sidebar-group { padding-block-start: var(--s4); border-block-start: 1px solid var(--rule); }\n.sidebar[data-collapsed] .sidebar-header { justify-content: center; padding-inline: 0; }\n.sidebar[data-collapsed] .sidebar-inner { padding-inline: var(--s2); }\n\n/* The drawer (below 800px) is never collapsed. */\n.sidebar-drawer { gap: var(--s4); padding: var(--s4); inline-size: min(var(--side), 100vw); }\n.sidebar-drawer .sidebar-toggle, .sidebar-drawer .sidebar-header { display: none; } /* the drawer title takes the header's place */\n\n@media (min-width: 800px) {\n  .sidebar { display: block; }\n  .sidebar-toggle { display: inline-grid; }\n  .sidebar-trigger { display: none; }\n}\n"
+    }
+  ],
+  "a11y": [
+    "A navigation landmark named by the label prop, holding labelled lists of links; the current page has aria-current=\"page\".",
+    "ArrowUp, ArrowDown, Home and End move focus between items; Tab still moves through them in order.",
+    "Collapsing keeps every label in the accessibility tree; a tooltip shows it on hover and keyboard focus. The toggle reports aria-expanded.",
+    "Below 800px the sidebar is hidden and the Menu button opens it in a left drawer: focus is trapped, Escape closes it and focus returns to the button. Choosing a link closes it.",
+    "In right-to-left layouts the sidebar sits on the right and the drawer opens from the right."
+  ],
+  "keywords": [
+    "sidebar",
+    "side nav",
+    "navigation",
+    "collapsible",
+    "app shell",
+    "off-canvas",
+    "router",
+    "renderLink",
+    "asChild"
+  ],
+  "kind": "components",
+  "import": "import {Sidebar} from '@monoline/react'",
+  "path": "packages/react/src/components/sidebar",
+  "files": [
+    "packages/react/src/components/sidebar/index.ts",
+    "packages/react/src/components/sidebar/meta.json",
+    "packages/react/src/components/sidebar/sidebar.demo.tsx",
+    "packages/react/src/components/sidebar/sidebar.test.tsx",
+    "packages/react/src/components/sidebar/sidebar.tsx"
+  ],
+  "related": [
+    "drawer",
+    "tooltip",
+    "button",
+    "icon-button"
+  ],
+  "props": [
+    {
+      "name": "SidebarProviderProps",
+      "props": [
+        {
+          "name": "collapsed",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Whether the sidebar is collapsed to icons, when controlled. Pair with `onCollapsedChange`."
+        },
+        {
+          "name": "defaultCollapsed",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Whether the sidebar starts collapsed when uncontrolled. Default false."
+        },
+        {
+          "name": "onCollapsedChange",
+          "type": "((collapsed: boolean) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the new state when the user collapses or expands the sidebar. Save it here (for example in localStorage) and pass it back as `defaultCollapsed` or `collapsed` to persist the choice."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Menu'",
+          "description": "Your layout: a `Sidebar`, plus any `SidebarToggle` or `SidebarTrigger` anywhere below."
+        }
+      ]
+    },
+    {
+      "name": "SidebarProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "optional": true,
+          "default": "'Toggle sidebar'",
+          "description": "Names the navigation landmark, in the sidebar and in the drawer. Default \"Main\"."
+        },
+        {
+          "name": "drawerTitle",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Menu'",
+          "description": "Names the drawer on small screens (its dialog title). Default \"Menu\"."
+        },
+        {
+          "name": "renderLink",
+          "type": "RenderLink",
+          "optional": true,
+          "default": null,
+          "description": "Renders each `SidebarItem` link, so a client router can handle the click. Default a plain `<a href>`. The returned element must forward its ref and spread extra props (collapsed tooltips need that)."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": "'Menu'",
+          "description": "A `SidebarHeader`, `SidebarContent` and `SidebarFooter`. They render twice: in the sidebar (from 800px) and in the drawer (below 800px)."
+        }
+      ]
+    },
+    {
+      "name": "SidebarGroupProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Toggle sidebar'",
+          "description": "A heading for the group. Hidden visually (a rule shows instead) when the sidebar is collapsed, still read by screen readers."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": "'Menu'",
+          "description": "`SidebarItem`s."
+        }
+      ]
+    },
+    {
+      "name": "SidebarItemProps",
+      "props": [
+        {
+          "name": "href",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Where the link goes. Not needed with `asChild`."
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "An inline SVG with `currentColor`; hidden from screen readers. Shown alone when the sidebar is collapsed."
+        },
+        {
+          "name": "current",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "The current page: sets `aria-current=\"page\"` and the active style."
+        },
+        {
+          "name": "asChild",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Use the child (your router's link) as the anchor. Its text becomes the label."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": false,
+          "default": "'Menu'",
+          "description": "The label. Visually hidden when collapsed and shown in a tooltip instead."
+        }
+      ]
+    },
+    {
+      "name": "SidebarToggleProps",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "optional": true,
+          "default": "'Toggle sidebar'",
+          "description": "The button's accessible name. It reports expanded or collapsed through `aria-expanded`. Default \"Toggle sidebar\"."
+        }
+      ]
+    },
+    {
+      "name": "SidebarTriggerProps",
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": "'Menu'",
+          "description": "The button text, which is also its name. Default \"Menu\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {type CSSProperties, type ReactNode} from 'react';\nimport {Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarItem, SidebarProvider, SidebarToggle, SidebarTrigger, useSidebar} from '@monoline/react';\n\nconst Icon = ({d}: {d: string}) => <svg viewBox=\"0 0 16 16\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.5\" aria-hidden=\"true\"><path d={d} /></svg>;\n\nconst frame: CSSProperties = {display: 'flex', alignItems: 'stretch', minBlockSize: '22rem', border: '1px solid var(--rule)'};\n\nfunction Brand() {\n  const {collapsed} = useSidebar();\n  return <SidebarHeader>{!collapsed && <span>Acme</span>}<SidebarToggle /></SidebarHeader>;\n}\n\nfunction Nav({children}: {children?: ReactNode}) {\n  return (\n    <>\n      <Brand />\n      <SidebarContent>\n        <SidebarGroup label=\"Workspace\">\n          <SidebarItem href=\"#overview\" current icon={<Icon d=\"M2 8l6-5 6 5v6H2z\" />}>Overview</SidebarItem>\n          <SidebarItem href=\"#reports\" icon={<Icon d=\"M3 13V8M8 13V3M13 13V6\" />}>Reports</SidebarItem>\n          <SidebarItem href=\"#team\" icon={<Icon d=\"M8 8a3 3 0 100-6 3 3 0 000 6zM2 14c0-3 3-4 6-4s6 1 6 4\" />}>Team</SidebarItem>\n        </SidebarGroup>\n        <SidebarGroup label=\"Account\">\n          <SidebarItem href=\"#billing\" icon={<Icon d=\"M2 4h12v8H2zM2 7h12\" />}>Billing</SidebarItem>\n        </SidebarGroup>\n      </SidebarContent>\n      {children}\n    </>\n  );\n}\n\n<SidebarProvider>\n  <div style={frame}>\n    <Sidebar drawerTitle=\"Acme\"><Nav><SidebarFooter><SidebarGroup><SidebarItem href=\"#help\" icon={<Icon d=\"M8 14A6 6 0 108 2a6 6 0 000 12zM8 11v.01M6.5 6.5a1.5 1.5 0 113 0c0 1-1.5 1-1.5 2\" />}>Help</SidebarItem></SidebarGroup></SidebarFooter></Nav></Sidebar>\n    <div style={{padding: 'var(--s5)'}}><SidebarTrigger /></div>\n  </div>\n</SidebarProvider>",
+  "dataAttributes": [
+    {
+      "name": "data-side",
+      "values": [
+        "right",
+        "end",
+        "left",
+        "start",
+        "top",
+        "bottom"
+      ]
+    },
+    {
+      "name": "data-collapsed",
+      "values": []
+    }
+  ],
+  "classes": [
+    "btn",
+    "btn-solid",
+    "btn-line",
+    "btn-danger",
+    "btn-ghost",
+    "btn-sm",
+    "btn-lg",
+    "btn-block",
+    "btn-icon",
+    "tooltip",
+    "dialog-overlay",
+    "dialog-content",
+    "dialog-header",
+    "dialog-footer",
+    "dialog-description",
+    "dialog-close",
+    "dialog-title",
+    "drawer-content",
+    "sidebar",
+    "sidebar-inner",
+    "sidebar-header",
+    "sidebar-footer",
+    "sidebar-content",
+    "sidebar-group",
+    "sidebar-group-label",
+    "sidebar-list",
+    "sidebar-item",
+    "sidebar-icon",
+    "sidebar-label",
+    "sidebar-toggle",
+    "sidebar-drawer",
+    "sidebar-trigger"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/sidebar/index.ts",
+      "content": "export {Sidebar, SidebarProvider, SidebarHeader, SidebarContent, SidebarGroup, SidebarItem, SidebarFooter, SidebarToggle, SidebarTrigger, useSidebar} from './sidebar';\nexport type {SidebarProps, SidebarProviderProps, SidebarGroupProps, SidebarItemProps, SidebarToggleProps, SidebarTriggerProps} from './sidebar';\n"
+    },
+    {
+      "path": "packages/react/src/components/sidebar/meta.json",
+      "content": "{\n  \"name\": \"sidebar\",\n  \"title\": \"Sidebar\",\n  \"category\": \"navigation\",\n  \"description\": \"A collapsible navigation sidebar with groups, icons and a mobile drawer.\",\n  \"status\": \"beta\",\n  \"uses\": [\n    \"drawer\",\n    \"tooltip\",\n    \"button\",\n    \"icon-button\"\n  ],\n  \"css\": [\n    \"02-buttons.css\",\n    \"icon-button.css\",\n    \"tooltip.css\",\n    \"dialog.css\",\n    \"drawer.css\",\n    \"sidebar.css\"\n  ],\n  \"a11y\": [\n    \"A navigation landmark named by the label prop, holding labelled lists of links; the current page has aria-current=\\\"page\\\".\",\n    \"ArrowUp, ArrowDown, Home and End move focus between items; Tab still moves through them in order.\",\n    \"Collapsing keeps every label in the accessibility tree; a tooltip shows it on hover and keyboard focus. The toggle reports aria-expanded.\",\n    \"Below 800px the sidebar is hidden and the Menu button opens it in a left drawer: focus is trapped, Escape closes it and focus returns to the button. Choosing a link closes it.\",\n    \"In right-to-left layouts the sidebar sits on the right and the drawer opens from the right.\"\n  ],\n  \"keywords\": [\n    \"sidebar\",\n    \"side nav\",\n    \"navigation\",\n    \"collapsible\",\n    \"app shell\",\n    \"off-canvas\",\n    \"router\",\n    \"renderLink\",\n    \"asChild\"\n  ]\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/sidebar/sidebar.tsx",
+      "content": "'use client';\nimport {cloneElement, createContext, forwardRef, isValidElement, useContext, useEffect, useId, type AnchorHTMLAttributes, type HTMLAttributes, type KeyboardEvent, type MouseEvent, type ReactElement, type ReactNode} from 'react';\nimport {Slot} from 'radix-ui';\nimport {cx} from '../../utils/cx';\nimport {useControllableState} from '../../hooks/use-controllable-state';\nimport {useMediaQuery} from '../../hooks/use-media-query';\nimport {Button} from '../button';\nimport {IconButton} from '../icon-button';\nimport {Drawer, DrawerContent, DrawerTitle, DrawerTrigger} from '../drawer';\nimport {Tooltip, TooltipProvider} from '../tooltip';\nimport type {RenderLink} from '../link';\n\ninterface SidebarState {\n  collapsed: boolean;\n  setCollapsed: (collapsed: boolean) => void;\n  toggle: () => void;\n  mobileOpen: boolean;\n  setMobileOpen: (open: boolean) => void;\n}\nconst StateCtx = createContext<SidebarState | null>(null);\n// Set by Sidebar so items know whether they sit in the drawer (never collapsed) and which links to render.\nconst PartCtx = createContext<{inDrawer: boolean; label: string; renderLink?: RenderLink}>({inDrawer: false, label: 'Main'});\n\n/** The collapsed state and the mobile drawer state of the nearest `SidebarProvider`: `{collapsed, setCollapsed, toggle, mobileOpen, setMobileOpen}`. Throws outside a provider. Server rendering uses the initial state. */\nexport function useSidebar(): SidebarState {\n  const s = useContext(StateCtx);\n  if (!s) throw new Error('useSidebar must be used inside a SidebarProvider');\n  return s;\n}\n\nexport interface SidebarProviderProps {\n  /** Whether the sidebar is collapsed to icons, when controlled. Pair with `onCollapsedChange`. */\n  collapsed?: boolean;\n  /** Whether the sidebar starts collapsed when uncontrolled. Default false. */\n  defaultCollapsed?: boolean;\n  /** Called with the new state when the user collapses or expands the sidebar. Save it here (for example in localStorage) and pass it back as `defaultCollapsed` or `collapsed` to persist the choice. */\n  onCollapsedChange?: (collapsed: boolean) => void;\n  /** Your layout: a `Sidebar`, plus any `SidebarToggle` or `SidebarTrigger` anywhere below. */\n  children?: ReactNode;\n}\n\n/**\n * Holds the sidebar's collapsed state and the small-screen drawer state, so a `SidebarToggle` in the top bar can control a `Sidebar` elsewhere in the tree. `AppShell` includes one.\n * @example <SidebarProvider defaultCollapsed><Sidebar>...</Sidebar></SidebarProvider>\n */\nexport function SidebarProvider({collapsed, defaultCollapsed = false, onCollapsedChange, children}: SidebarProviderProps) {\n  const [isCollapsed, setCollapsed] = useControllableState({value: collapsed, defaultValue: defaultCollapsed, onChange: onCollapsedChange});\n  const [mobileOpen, setMobileOpen] = useControllableState({defaultValue: false});\n  const wide = useMediaQuery('(min-width: 800px)');\n  useEffect(() => { if (wide) setMobileOpen(false); }, [wide, setMobileOpen]); // a drawer left open must not outlive the small layout\n  const state = {collapsed: isCollapsed, setCollapsed, toggle: () => setCollapsed(!isCollapsed), mobileOpen, setMobileOpen};\n  return (\n    <StateCtx.Provider value={state}>\n      <Drawer open={mobileOpen} onOpenChange={setMobileOpen}>{children}</Drawer>\n    </StateCtx.Provider>\n  );\n}\n\nexport interface SidebarProps extends HTMLAttributes<HTMLDivElement> {\n  /** Names the navigation landmark, in the sidebar and in the drawer. Default \"Main\". */\n  label?: string;\n  /** Names the drawer on small screens (its dialog title). Default \"Menu\". */\n  drawerTitle?: ReactNode;\n  /** Renders each `SidebarItem` link, so a client router can handle the click. Default a plain `<a href>`. The returned element must forward its ref and spread extra props (collapsed tooltips need that). @example renderLink={({href, ...p}) => <NavLink to={href} {...p} />} */\n  renderLink?: RenderLink;\n  /** A `SidebarHeader`, `SidebarContent` and `SidebarFooter`. They render twice: in the sidebar (from 800px) and in the drawer (below 800px). */\n  children: ReactNode;\n}\n\n/**\n * A navigation column that collapses to icons. Below 800px it is hidden and the same content opens in a left `Drawer` from a `SidebarTrigger`.\n * Must be inside a `SidebarProvider`.\n */\nexport const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(function Sidebar({label = 'Main', drawerTitle = 'Menu', renderLink, children, className, ...rest}, ref) {\n  const s = useSidebar();\n  const close = (e: MouseEvent) => { if ((e.target as HTMLElement).closest('a')) s.setMobileOpen(false); };\n  return (\n    <TooltipProvider delayDuration={300}>\n      <div ref={ref} className={cx('sidebar', className)} data-collapsed={s.collapsed || undefined} {...rest}>\n        <div className=\"sidebar-inner\">\n          <PartCtx.Provider value={{inDrawer: false, label, renderLink}}>{children}</PartCtx.Provider>\n        </div>\n      </div>\n      <DrawerContent side=\"start\" className=\"sidebar-drawer\" aria-describedby={undefined} onClick={close}>\n        <DrawerTitle>{drawerTitle}</DrawerTitle>\n        <PartCtx.Provider value={{inDrawer: true, label, renderLink}}>{children}</PartCtx.Provider>\n      </DrawerContent>\n    </TooltipProvider>\n  );\n});\n\n/** The top of the sidebar: brand and a `SidebarToggle`. Not shown in the small-screen drawer, whose title is the `Sidebar`'s `drawerTitle`. Read `useSidebar().collapsed` to show only the icon when collapsed. */\nexport const SidebarHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function SidebarHeader({className, ...rest}, ref) {\n  return <div ref={ref} className={cx('sidebar-header', className)} {...rest} />;\n});\n\n/** The bottom of the sidebar: put a `SidebarGroup` of account, settings or help links in it. Stays at the bottom when the groups are short. */\nexport const SidebarFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function SidebarFooter({className, ...rest}, ref) {\n  return <div ref={ref} className={cx('sidebar-footer', className)} {...rest} />;\n});\n\n/** The navigation landmark holding the groups. ArrowUp, ArrowDown, Home and End move focus between items (Tab still works). */\nexport const SidebarContent = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(function SidebarContent({className, ...rest}, ref) {\n  const {label} = useContext(PartCtx);\n  const onKeyDown = (e: KeyboardEvent<HTMLElement>) => {\n    rest.onKeyDown?.(e);\n    if (e.defaultPrevented || !['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) return;\n    const items = [...e.currentTarget.querySelectorAll<HTMLElement>('.sidebar-item')];\n    const i = items.indexOf(document.activeElement as HTMLElement);\n    if (i < 0) return;\n    e.preventDefault();\n    const to = e.key === 'Home' ? 0 : e.key === 'End' ? items.length - 1 : Math.min(items.length - 1, Math.max(0, i + (e.key === 'ArrowDown' ? 1 : -1)));\n    items[to]?.focus();\n  };\n  return <nav ref={ref} aria-label={label} className={cx('sidebar-content', className)} {...rest} onKeyDown={onKeyDown} />;\n});\n\nexport interface SidebarGroupProps extends Omit<HTMLAttributes<HTMLUListElement>, 'children'> {\n  /** A heading for the group. Hidden visually (a rule shows instead) when the sidebar is collapsed, still read by screen readers. */\n  label?: ReactNode;\n  /** `SidebarItem`s. */\n  children: ReactNode;\n}\n\n/** A labelled list of items. */\nexport const SidebarGroup = forwardRef<HTMLUListElement, SidebarGroupProps>(function SidebarGroup({label, children, className, ...rest}, ref) {\n  const id = useId();\n  return (\n    <div className=\"sidebar-group\">\n      {label && <div id={id} className=\"sidebar-group-label\">{label}</div>}\n      <ul ref={ref} aria-labelledby={label ? id : undefined} className={cx('sidebar-list', className)} {...rest}>{children}</ul>\n    </div>\n  );\n});\n\nexport interface SidebarItemProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> {\n  /** Where the link goes. Not needed with `asChild`. */\n  href?: string;\n  /** An inline SVG with `currentColor`; hidden from screen readers. Shown alone when the sidebar is collapsed. */\n  icon?: ReactNode;\n  /** The current page: sets `aria-current=\"page\"` and the active style. */\n  current?: boolean;\n  /** Use the child (your router's link) as the anchor. Its text becomes the label. */\n  asChild?: boolean;\n  /** The label. Visually hidden when collapsed and shown in a tooltip instead. */\n  children: ReactNode;\n}\n\n/** One link in the sidebar. Put it in a `SidebarGroup`. Use `asChild` or the `Sidebar`'s `renderLink` for a client router. */\nexport const SidebarItem = forwardRef<HTMLAnchorElement, SidebarItemProps>(function SidebarItem({href, icon, current, asChild, children, className, ...rest}, ref) {\n  const {collapsed} = useSidebar();\n  const {inDrawer, renderLink} = useContext(PartCtx);\n  const cls = cx('sidebar-item', className);\n  const ariaCurrent = current ? ('page' as const) : undefined;\n  const child = asChild && isValidElement(children) ? (children as ReactElement<{children?: ReactNode}>) : null;\n  const text = child ? child.props.children : children;\n  const inner = <>{icon && <span className=\"sidebar-icon\" aria-hidden=\"true\">{icon}</span>}<span className=\"sidebar-label\">{text}</span></>;\n  let link: ReactElement;\n  if (child) link = <Slot.Root ref={ref} className={cls} aria-current={ariaCurrent} {...rest}>{cloneElement(child, undefined, inner)}</Slot.Root>;\n  else if (renderLink && href !== undefined) link = renderLink({href, className: cls, 'aria-current': ariaCurrent, children: inner}) as ReactElement;\n  else link = <a ref={ref} href={href} className={cls} aria-current={ariaCurrent} {...rest}>{inner}</a>;\n  return <li>{collapsed && !inDrawer ? <Tooltip content={text} side=\"right\">{link}</Tooltip> : link}</li>;\n});\n\nconst PanelIcon = () => <svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"1.5\" aria-hidden=\"true\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" /><path d=\"M6 3v10\" /></svg>;\n\nexport interface SidebarToggleProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'children'> {\n  /** The button's accessible name. It reports expanded or collapsed through `aria-expanded`. Default \"Toggle sidebar\". */\n  label?: string;\n}\n\n/** A button that collapses and expands the sidebar. Shown from 800px up; on small screens use `SidebarTrigger`. */\nexport const SidebarToggle = forwardRef<HTMLButtonElement, SidebarToggleProps>(function SidebarToggle({label = 'Toggle sidebar', className, onClick, ...rest}, ref) {\n  const s = useSidebar();\n  return <IconButton ref={ref} size=\"sm\" aria-label={label} aria-expanded={!s.collapsed} className={cx('sidebar-toggle', className)} {...rest} onClick={(e) => { onClick?.(e); s.toggle(); }}><PanelIcon /></IconButton>;\n});\n\nexport interface SidebarTriggerProps extends Omit<HTMLAttributes<HTMLButtonElement>, 'children'> {\n  /** The button text, which is also its name. Default \"Menu\". */\n  children?: ReactNode;\n}\n\n/** The small-screen menu button: opens the sidebar in a drawer, and focus returns here on close. Hidden from 800px up. */\nexport const SidebarTrigger = forwardRef<HTMLButtonElement, SidebarTriggerProps>(function SidebarTrigger({children = 'Menu', className, ...rest}, ref) {\n  useSidebar();\n  return <DrawerTrigger asChild><Button ref={ref} size=\"sm\" className={cx('sidebar-trigger', className)} {...rest}>{children}</Button></DrawerTrigger>;\n});\n"
+    }
+  ]
+}

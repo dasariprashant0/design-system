@@ -1,0 +1,110 @@
+{
+  "name": "breadcrumbs-auto",
+  "title": "Breadcrumbs from path",
+  "category": "navigation",
+  "description": "A breadcrumb built from the current URL path.",
+  "status": "beta",
+  "uses": [
+    "breadcrumb"
+  ],
+  "css": [
+    {
+      "path": "packages/css/src/components/18-navigation.css",
+      "content": "/* ─── Navigation: breadcrumb, pager, steps, top bar ─── */\n.crumbs { min-width: 0; display: flex; flex-wrap: wrap; gap: var(--s2); font-size: var(--text-sm); color: var(--muted); }\n.crumbs li + li::before { content: \"/\"; margin-inline-end: var(--s2); color: var(--ink-3); }\n.crumbs [aria-current=\"page\"] { color: var(--foreground); }\n.pager { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); font-size: var(--text-sm); }\n.pager a, .pager button { min-width: 36px; padding: var(--s2) var(--s3); text-align: center; border: 1px solid var(--rule); text-decoration: none; }\n.pager a:hover, .pager button:hover:not(:disabled) { border-color: var(--foreground); }\n.pager [aria-current=\"page\"] { background: var(--foreground); color: var(--background); border-color: var(--foreground); }\n.pager button:disabled { opacity: 0.5; cursor: not-allowed; }\n.steps { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--s3); counter-reset: step; }\n.step { counter-increment: step; padding-top: var(--s3); border-top: 2px solid var(--rule); font-size: var(--text-sm); color: var(--muted); }\n.step::before { content: counter(step, decimal-leading-zero); display: block; font-size: var(--text-xs); }\n.step[data-state=\"done\"] { border-top-color: var(--foreground); color: var(--foreground); }\n.step[aria-current=\"step\"] { border-top-color: var(--accent); color: var(--foreground); font-weight: 500; }\n.topbar { display: flex; align-items: center; gap: var(--s5); padding: var(--s4) var(--s5); border-bottom: 1px solid var(--rule); flex-wrap: wrap; }\n.topbar .brand { padding: 0; }\n.topbar-nav { display: flex; flex-wrap: wrap; gap: var(--s5); margin-inline-end: auto; font-size: var(--text-sm); }\n.topbar-nav a { text-decoration: none; color: var(--muted); }\n.topbar-nav a:hover, .topbar-nav a[aria-current=\"page\"] { color: var(--foreground); }\n.tab[aria-selected=\"true\"] { color: var(--foreground); box-shadow: inset 0 2px 0 var(--foreground); }\n.tabpanel { padding-top: var(--s5); }\n.tabpanel[hidden] { display: none; }\n[dir=\"rtl\"] .crumbs li + li::before { display: inline-block; transform: scaleX(-1); }\n"
+    },
+    {
+      "path": "packages/css/src/components/09-links.css",
+      "content": "/* ─── Links, dividers, skip link ─── */\n.link { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n.link:hover { text-decoration-color: currentColor; }\n.divider { border: 0; border-top: 1px solid var(--rule); margin: var(--s5) 0; }\n.skip-link { position: absolute; inset-inline-start: var(--s4); top: -100px; z-index: var(--z-toast); padding: var(--s3) var(--s4); background: var(--foreground); color: var(--background); }\n.skip-link:focus { top: var(--s4); }\n"
+    }
+  ],
+  "a11y": [
+    "Same as Breadcrumb: a navigation landmark with an ordered list; the last crumb is the current page and not a link."
+  ],
+  "keywords": [
+    "breadcrumb",
+    "path",
+    "url",
+    "router"
+  ],
+  "kind": "components",
+  "import": "import {BreadcrumbsAuto} from '@monoline/react'",
+  "path": "packages/react/src/components/breadcrumbs-auto",
+  "files": [
+    "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.demo.tsx",
+    "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.test.tsx",
+    "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.tsx",
+    "packages/react/src/components/breadcrumbs-auto/index.ts",
+    "packages/react/src/components/breadcrumbs-auto/meta.json"
+  ],
+  "related": [
+    "breadcrumb"
+  ],
+  "props": [
+    {
+      "name": "BreadcrumbsAutoProps",
+      "props": [
+        {
+          "name": "pathname",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "The current URL path, from your router: `/settings/billing`. Query and hash are ignored."
+        },
+        {
+          "name": "labels",
+          "type": "Record<string, string>",
+          "optional": true,
+          "default": "{}",
+          "description": "Text for a path segment, keyed by the segment: `{billing: 'Billing and plans'}`. Others are the segment with dashes as spaces, capitalised."
+        },
+        {
+          "name": "homeLabel",
+          "type": "string",
+          "optional": true,
+          "default": "'Home'",
+          "description": "Text of the first crumb, which links to `/`. Default \"Home\"."
+        }
+      ]
+    }
+  ],
+  "usage": "import {BreadcrumbsAuto} from '@monoline/react';\n\n<BreadcrumbsAuto pathname=\"/projects/website-redesign/settings\" labels={{'website-redesign': 'Website redesign'}} />",
+  "dataAttributes": [
+    {
+      "name": "data-state",
+      "values": [
+        "done"
+      ]
+    }
+  ],
+  "classes": [
+    "crumbs",
+    "pager",
+    "steps",
+    "step",
+    "topbar",
+    "brand",
+    "topbar-nav",
+    "tab",
+    "tabpanel",
+    "link",
+    "divider",
+    "skip-link"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.tsx",
+      "content": "import {forwardRef} from 'react';\nimport {Breadcrumb, type BreadcrumbProps} from '../breadcrumb';\n\nexport interface BreadcrumbsAutoProps extends Omit<BreadcrumbProps, 'items'> {\n  /** The current URL path, from your router: `/settings/billing`. Query and hash are ignored. */\n  pathname: string;\n  /** Text for a path segment, keyed by the segment: `{billing: 'Billing and plans'}`. Others are the segment with dashes as spaces, capitalised. */\n  labels?: Record<string, string>;\n  /** Text of the first crumb, which links to `/`. Default \"Home\". */\n  homeLabel?: string;\n}\n\nconst title = (s: string) => { const t = decodeURIComponent(s).replace(/-/g, ' '); return t.charAt(0).toUpperCase() + t.slice(1); };\n\n/**\n * A `Breadcrumb` built from the URL path: `/settings/billing` becomes Home / Settings / Billing. The last segment is the current page.\n * @example <BreadcrumbsAuto pathname={location.pathname} labels={{api: 'API'}} />\n */\nexport const BreadcrumbsAuto = forwardRef<HTMLElement, BreadcrumbsAutoProps>(function BreadcrumbsAuto({pathname, labels = {}, homeLabel = 'Home', ...rest}, ref) {\n  const parts = (pathname.split(/[?#]/)[0] ?? '').split('/').filter(Boolean);\n  const items = [{label: homeLabel, href: '/'}, ...parts.map((p, i) => ({label: labels[p] ?? title(p), href: '/' + parts.slice(0, i + 1).join('/')}))];\n  return <Breadcrumb ref={ref} items={items} {...rest} />;\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/breadcrumbs-auto/index.ts",
+      "content": "export {BreadcrumbsAuto} from './breadcrumbs-auto';\nexport type {BreadcrumbsAutoProps} from './breadcrumbs-auto';\n"
+    },
+    {
+      "path": "packages/react/src/components/breadcrumbs-auto/meta.json",
+      "content": "{\n  \"name\": \"breadcrumbs-auto\",\n  \"title\": \"Breadcrumbs from path\",\n  \"category\": \"navigation\",\n  \"description\": \"A breadcrumb built from the current URL path.\",\n  \"status\": \"beta\",\n  \"uses\": [\n    \"breadcrumb\"\n  ],\n  \"css\": [\n    \"18-navigation.css\",\n    \"09-links.css\"\n  ],\n  \"a11y\": [\n    \"Same as Breadcrumb: a navigation landmark with an ordered list; the last crumb is the current page and not a link.\"\n  ],\n  \"keywords\": [\n    \"breadcrumb\",\n    \"path\",\n    \"url\",\n    \"router\"\n  ]\n}\n"
+    }
+  ]
+}
