@@ -2,7 +2,7 @@
 import {createContext, forwardRef, useContext, useEffect, useId, useLayoutEffect, useRef, useState, type ButtonHTMLAttributes, type HTMLAttributes, type KeyboardEvent, type ReactNode, type RefObject} from 'react';
 import {useControllableState} from '../../hooks/use-controllable-state';
 import {cx} from '../../utils/cx';
-import {setRefs} from '../../utils/overlay';
+import {nextItem, setRefs} from '../../utils/overlay';
 import {invalidAttrs, useFieldControl} from '../field';
 import {Floating, useDismiss, type Placement} from '../popover/float';
 
@@ -109,19 +109,9 @@ const List = forwardRef<HTMLDivElement, SelectContentProps>(function List({class
   const keydown = (e: KeyboardEvent<HTMLDivElement>) => {
     onKeyDown?.(e);
     if (e.defaultPrevented) return;
-    const opts = [...el.current!.querySelectorAll<HTMLElement>(OPTION)], at = opts.indexOf(document.activeElement as HTMLElement);
-    let next: HTMLElement | undefined;
-    if (e.key === 'ArrowDown') next = opts[Math.min(at + 1, opts.length - 1)];
-    else if (e.key === 'ArrowUp') next = opts[Math.max(at - 1, 0)];
-    else if (e.key === 'Home' || e.key === 'PageUp') next = opts[0];
-    else if (e.key === 'End' || e.key === 'PageDown') next = opts[opts.length - 1];
-    else if (e.key === 'Tab') { e.preventDefault(); return; }
-    else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && !(e.key === ' ' && !typed.current.text)) { // type-ahead; a lone Space selects
-      const t = typed.current, now = Date.now(), ch = e.key.toLowerCase();
-      t.text = now - t.at > 500 ? ch : t.text + ch; t.at = now;
-      const from = t.text.length === 1 ? at + 1 : at; // one repeated letter cycles; more letters narrow the current match
-      next = [...opts.slice(from), ...opts.slice(0, from)].find((o) => o.textContent!.trim().toLowerCase().startsWith(t.text));
-    } else return;
+    if (e.key === 'Tab') { e.preventDefault(); return; }
+    const next = nextItem(e.key, !e.ctrlKey && !e.metaKey && !e.altKey, [...el.current!.querySelectorAll<HTMLElement>(OPTION)], typed.current);
+    if (next === null) return;
     e.preventDefault(); next?.focus(); next?.scrollIntoView?.({block: 'nearest'});
   };
   return (
