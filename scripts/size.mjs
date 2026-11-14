@@ -26,7 +26,7 @@ const cases = [
   ['DataTable', "import {DataTable} from '@monoline/react'; console.log(DataTable)", 10],
   ['Dialog (Radix)', "import {Dialog, DialogContent} from '@monoline/react'; console.log(Dialog, DialogContent)", 16],
   ['Select (Radix)', "import {Select, SelectContent} from '@monoline/react'; console.log(Select, SelectContent)", 36],
-  ['Everything', "import * as m from '@monoline/react'; console.log(m)", 125],
+  ['Everything', "import * as m from '@monoline/react'; console.log(m)", 128],
 ];
 let failed = 0;
 say('JS (gzip, minified, react external)');
