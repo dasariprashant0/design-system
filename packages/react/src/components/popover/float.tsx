@@ -1,6 +1,6 @@
 'use client';
 import {createPortal} from 'react-dom';
-import {forwardRef, useEffect, useLayoutEffect, useRef, type HTMLAttributes, type RefObject} from 'react';
+import {forwardRef, useEffect, useLayoutEffect, useRef, useSyncExternalStore, type HTMLAttributes, type RefObject} from 'react';
 import {setRefs} from '../../utils/overlay';
 
 /* Shared floating layer for Popover, Tooltip, HoverCard, Select and the menus: one positioning function (side,
@@ -46,6 +46,7 @@ export function place(anchor: Element, panel: HTMLElement, {side = 'bottom', ali
   panel.dataset.side = side; panel.dataset.align = align;
 }
 
+const noop = () => () => {};
 const useLayout = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 
 export interface FloatingProps extends HTMLAttributes<HTMLDivElement>, Placement {
@@ -57,15 +58,18 @@ export interface FloatingProps extends HTMLAttributes<HTMLDivElement>, Placement
  *  inside a modal) or `document.body`. Repositions on resize, scroll and size changes. */
 export const Floating = forwardRef<HTMLDivElement, FloatingProps>(function Floating({anchor, side, align, sideOffset, alignOffset, collisionPadding, style, ...rest}, forwarded) {
   const el = useRef<HTMLDivElement | null>(null);
+  // false while hydrating (matches the server's empty output), true on every later render
+  const ready = useSyncExternalStore(noop, () => true, () => false);
   useLayout(() => {
-    const p = el.current!, go = () => { const a = anchor(); if (a) place(a, p, {side, align, sideOffset, alignOffset, collisionPadding}); };
+    const p = el.current; if (!p) return;
+    const go = () => { const a = anchor(); if (a) place(a, p, {side, align, sideOffset, alignOffset, collisionPadding}); };
     go();
     addEventListener('resize', go); addEventListener('scroll', go, true);
     const ro = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(go);
     ro?.observe(p);
     return () => { removeEventListener('resize', go); removeEventListener('scroll', go, true); ro?.disconnect(); };
-  }, [side, align, sideOffset, alignOffset, collisionPadding]);
-  if (typeof document === 'undefined') return null;
+  }, [ready, side, align, sideOffset, alignOffset, collisionPadding]);
+  if (!ready || typeof document === 'undefined') return null;
   return createPortal(<div ref={(n) => setRefs(n, el, forwarded)} style={{position: 'fixed', ...style}} {...rest} />, anchor()?.closest('dialog[open]') ?? document.body);
 });
 
