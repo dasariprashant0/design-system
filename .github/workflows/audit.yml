@@ -18,6 +18,16 @@ jobs:
         run: node scripts/audit.mjs --accents all
         env:
           CHROME: /usr/bin/google-chrome
+      - name: Open every overlay on every page; contrast, text overlap, hover and focus in each state
+        run: node scripts/audit.mjs --overlays
+        env:
+          CHROME: /usr/bin/google-chrome
+      - name: Example apps in a real browser (flows, overlays, hover, focus)
+        run: |
+          for n in dashboard auth-settings landing; do (cd examples/$n && npx vite build); done
+          node scripts/audit-examples.mjs
+        env:
+          CHROME: /usr/bin/google-chrome
       - name: Computed-style test (real browser, loads the full stylesheet)
         run: npm run test:css-browser
         env:
