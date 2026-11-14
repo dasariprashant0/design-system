@@ -14,6 +14,7 @@ import {existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync, rmSync}
 import {tmpdir} from 'node:os';
 import {extname, join, normalize} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {installSweep, sweepState} from './lib/sweep.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const args = process.argv.slice(2);
@@ -21,6 +22,7 @@ const opt = (n, d) => { const i = args.indexOf(`--${n}`); return i >= 0 && args[
 const shotsDir = opt('shots', '');
 const apps = opt('apps', 'dashboard,auth-settings,landing').split(',');
 const scenarioFilter = opt('scenario', '');
+const SWEEP = !args.includes('--no-sweep'); // hover and focus every control in every state; --no-sweep keeps only the page-level checks
 const THEMES = opt('themes', 'warm,dark,midnight').split(',');
 if (shotsDir) mkdirSync(shotsDir, {recursive: true});
 
@@ -119,6 +121,7 @@ listeners.push((m) => {
 });
 await cdp('Runtime.enable'); await cdp('Network.enable'); await cdp('Page.enable');
 await cdp('Page.addScriptToEvaluateOnNewDocument', {source: readFileSync(join(root, 'node_modules/axe-core/axe.min.js'), 'utf8')});
+await installSweep(cdp);
 
 const KEYS = {Escape: 27, Tab: 9, Enter: 13};
 async function key(combo) {
@@ -169,6 +172,7 @@ for (const app of apps) {
       await sleep(250);
       states++;
       if (await evaluate('document.documentElement.scrollWidth > innerWidth + 1')) note('horizontal-overflow', `${await evaluate('document.documentElement.scrollWidth')}px wide`);
+      for (const x of await sweepState({cdp, evaluate, sleep, controls: SWEEP && sc.sweep !== false})) note(x.kind, x.detail);
       for (const x of await evaluate(AXE)) note(`axe:${x.id}`, `${x.impact}, ${x.nodes} node(s), e.g. ${x.sample}${x.msg ? ' (' + x.msg.slice(0, 110) + ')' : ''}`);
       if (shotsDir && (theme === 'warm' || sc.name === 'overview' || sc.name === 'top')) {
         const {data} = await cdp('Page.captureScreenshot', {format: 'png', captureBeyondViewport: sc.name === 'top' || sc.name === 'overview'});
