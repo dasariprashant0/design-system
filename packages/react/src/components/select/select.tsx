@@ -4,7 +4,7 @@ import {useControllableState} from '../../hooks/use-controllable-state';
 import {cx} from '../../utils/cx';
 import {nextItem, setRefs} from '../../utils/overlay';
 import {invalidAttrs, useFieldControl} from '../field';
-import {Floating, useDismiss, type Placement} from '../popover/float';
+import {Floating, useDismiss, useHydrated, type Placement} from '../popover/float';
 
 interface Ctx {
   open: boolean; setOpen: (o: boolean) => void; value: string; setValue: (v: string) => void;
@@ -124,7 +124,8 @@ const List = forwardRef<HTMLDivElement, SelectContentProps>(function List({class
 
 /** The floating list of options, rendered in a portal and positioned under the trigger. Closed, its items stay mounted but hidden so the trigger can show the chosen text. */
 export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(function SelectContent(props, ref) {
-  return useContext(Context).open ? <List ref={ref} {...props} /> : <div hidden>{props.children}</div>;
+  const {open} = useContext(Context), hydrated = useHydrated();
+  return open && hydrated ? <List ref={ref} {...props} /> : <div hidden>{props.children}</div>;
 });
 
 export interface SelectItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> {

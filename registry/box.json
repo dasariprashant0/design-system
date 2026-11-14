@@ -31,9 +31,9 @@
     "packages/react/src/components/box/meta.json"
   ],
   "related": [
+    "app-shell",
     "aspect-ratio",
-    "container",
-    "direction-provider"
+    "container"
   ],
   "props": [
     {

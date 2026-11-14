@@ -1,0 +1,108 @@
+{
+  "name": "page-header",
+  "title": "Page header",
+  "category": "layout",
+  "description": "The top of a page: breadcrumbs, title, description and actions.",
+  "status": "beta",
+  "css": [
+    {
+      "path": "packages/css/src/components/page-header.css",
+      "content": "/* Page header: breadcrumbs, title, description, actions. */\n.page-header { display: flex; flex-direction: column; gap: var(--s3); margin-block-end: var(--s5); }\n.page-header-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s4); }\n.page-header-text { min-inline-size: 0; display: flex; flex-direction: column; gap: var(--s2); }\n.page-header-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); line-height: 1.15; }\n.page-header-description { margin: 0; max-inline-size: var(--measure); color: var(--muted); }\n.page-header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); }\n"
+    }
+  ],
+  "a11y": [
+    "The title is a real heading (h1 by default); keep one h1 per page.",
+    "Breadcrumbs and actions are slots, so they keep their own landmark and keyboard behaviour."
+  ],
+  "keywords": [
+    "page header",
+    "title",
+    "breadcrumbs",
+    "actions",
+    "toolbar"
+  ],
+  "kind": "components",
+  "import": "import {PageHeader} from '@monoline/react'",
+  "path": "packages/react/src/components/page-header",
+  "files": [
+    "packages/react/src/components/page-header/index.ts",
+    "packages/react/src/components/page-header/meta.json",
+    "packages/react/src/components/page-header/page-header.demo.tsx",
+    "packages/react/src/components/page-header/page-header.test.tsx",
+    "packages/react/src/components/page-header/page-header.tsx"
+  ],
+  "related": [
+    "app-shell",
+    "aspect-ratio",
+    "box"
+  ],
+  "props": [
+    {
+      "name": "PageHeaderProps",
+      "props": [
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "optional": false,
+          "default": null,
+          "description": "The page title, rendered as a heading."
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "One sentence under the title saying what the page is for."
+        },
+        {
+          "name": "breadcrumbs",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Shown above the title: a `Breadcrumb` or `BreadcrumbsAuto`."
+        },
+        {
+          "name": "actions",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "Buttons at the end of the title row. They wrap under the title on small screens."
+        },
+        {
+          "name": "level",
+          "type": "1 | 2 | 3 | 4",
+          "optional": true,
+          "default": "1",
+          "description": "The heading level, 1 to 4. Default 1: one per page."
+        }
+      ]
+    }
+  ],
+  "usage": "import {Breadcrumb, Button, PageHeader} from '@monoline/react';\n\n<PageHeader\n  breadcrumbs={<Breadcrumb items={[{label: 'Home', href: '#'}, {label: 'Customers', href: '#'}, {label: 'Ada Example'}]} />}\n  title=\"Ada Example\"\n  description=\"Joined in March. On the Team plan.\"\n  actions={<><Button>Export</Button><Button variant=\"solid\">Edit customer</Button></>}\n/>",
+  "dataAttributes": [],
+  "classes": [
+    "page-header",
+    "page-header-row",
+    "page-header-text",
+    "page-header-title",
+    "page-header-description",
+    "page-header-actions"
+  ],
+  "dependencies": {
+    "radix-ui": "^1.4.2"
+  },
+  "source": [
+    {
+      "path": "packages/react/src/components/page-header/index.ts",
+      "content": "export {PageHeader} from './page-header';\nexport type {PageHeaderProps} from './page-header';\n"
+    },
+    {
+      "path": "packages/react/src/components/page-header/meta.json",
+      "content": "{\n  \"name\": \"page-header\",\n  \"title\": \"Page header\",\n  \"category\": \"layout\",\n  \"description\": \"The top of a page: breadcrumbs, title, description and actions.\",\n  \"status\": \"beta\",\n  \"css\": [\n    \"page-header.css\"\n  ],\n  \"a11y\": [\n    \"The title is a real heading (h1 by default); keep one h1 per page.\",\n    \"Breadcrumbs and actions are slots, so they keep their own landmark and keyboard behaviour.\"\n  ],\n  \"keywords\": [\n    \"page header\",\n    \"title\",\n    \"breadcrumbs\",\n    \"actions\",\n    \"toolbar\"\n  ]\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/page-header/page-header.tsx",
+      "content": "import {createElement, forwardRef, type HTMLAttributes, type ReactNode} from 'react';\nimport {cx} from '../../utils/cx';\n\nexport interface PageHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {\n  /** The page title, rendered as a heading. */\n  title: ReactNode;\n  /** One sentence under the title saying what the page is for. */\n  description?: ReactNode;\n  /** Shown above the title: a `Breadcrumb` or `BreadcrumbsAuto`. */\n  breadcrumbs?: ReactNode;\n  /** Buttons at the end of the title row. They wrap under the title on small screens. */\n  actions?: ReactNode;\n  /** The heading level, 1 to 4. Default 1: one per page. */\n  level?: 1 | 2 | 3 | 4;\n}\n\n/**\n * The top of a page: breadcrumbs, a title, a description and actions.\n * @example <PageHeader title=\"Customers\" description=\"Everyone who has signed up.\" actions={<Button variant=\"solid\">Add customer</Button>} />\n */\nexport const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(function PageHeader({title, description, breadcrumbs, actions, level = 1, className, ...rest}, ref) {\n  return (\n    <div ref={ref} className={cx('page-header', className)} {...rest}>\n      {breadcrumbs}\n      <div className=\"page-header-row\">\n        <div className=\"page-header-text\">\n          {createElement(`h${level}`, {className: 'page-header-title'}, title)}\n          {description && <p className=\"page-header-description\">{description}</p>}\n        </div>\n        {actions && <div className=\"page-header-actions\">{actions}</div>}\n      </div>\n    </div>\n  );\n});\n"
+    }
+  ]
+}

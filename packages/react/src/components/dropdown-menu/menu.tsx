@@ -3,7 +3,7 @@ import {createContext, forwardRef, useContext, useEffect, useId, useRef, type HT
 import {useControllableState} from '../../hooks/use-controllable-state';
 import {cx} from '../../utils/cx';
 import {nextItem, setRefs} from '../../utils/overlay';
-import {Floating, useDismiss, type Placement} from '../popover/float';
+import {Floating, useDismiss, useHydrated, type Placement} from '../popover/float';
 
 /* The menu core behind DropdownMenu, ContextMenu and Menubar: state, the floating role="menu" panel with roving
    focus and type-ahead, and the item kinds. The three components only add their trigger and class names. */
@@ -81,7 +81,8 @@ const Panel = forwardRef<HTMLDivElement, MenuContentProps>(function Panel({onEsc
 
 /** Internal: the floating `role="menu"` panel with roving focus and type-ahead. Renders nothing while closed. */
 export const MenuContent = forwardRef<HTMLDivElement, MenuContentProps>(function MenuContent({className, ...props}, ref) {
-  return useContext(MenuContext).open ? <Panel ref={ref} className={cx('menu-content', className)} {...props} /> : null;
+  const {open} = useContext(MenuContext), hydrated = useHydrated();
+  return open && hydrated ? <Panel ref={ref} className={cx('menu-content', className)} {...props} /> : null;
 });
 
 export interface MenuItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> {

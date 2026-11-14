@@ -1,6 +1,6 @@
 'use client';
 import {createPortal} from 'react-dom';
-import {forwardRef, useEffect, useLayoutEffect, useRef, type HTMLAttributes, type RefObject} from 'react';
+import {forwardRef, useEffect, useLayoutEffect, useRef, useSyncExternalStore, type HTMLAttributes, type RefObject} from 'react';
 import {setRefs} from '../../utils/overlay';
 
 /* Shared floating layer for Popover, Tooltip, HoverCard, Select and the menus: one positioning function (side,
@@ -45,6 +45,10 @@ export function place(anchor: Element, panel: HTMLElement, {side = 'bottom', ali
   s.setProperty('--available-height', Math.max(0, vertical ? room[side] - sideOffset - pad : vh - 2 * pad) + 'px');
   panel.dataset.side = side; panel.dataset.align = align;
 }
+
+const noop = () => () => {};
+/** False while hydrating server HTML (portals have no server markup to match), true on the client from then on. */
+export const useHydrated = () => useSyncExternalStore(noop, () => true, () => false);
 
 const useLayout = typeof document === 'undefined' ? useEffect : useLayoutEffect;
 

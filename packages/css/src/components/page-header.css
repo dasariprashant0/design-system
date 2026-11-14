@@ -1,0 +1,7 @@
+/* Page header: breadcrumbs, title, description, actions. */
+.page-header { display: flex; flex-direction: column; gap: var(--s3); margin-block-end: var(--s5); }
+.page-header-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s4); }
+.page-header-text { min-inline-size: 0; display: flex; flex-direction: column; gap: var(--s2); }
+.page-header-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); line-height: 1.15; }
+.page-header-description { margin: 0; max-inline-size: var(--measure); color: var(--muted); }
+.page-header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); }
