@@ -129,6 +129,7 @@ describe('Sidebar', () => {
     c.unmount();
     render(ui());
     await userEvent.click(screen.getByRole('button', {name: 'Menu'}));
-    expect(await axe(document.body)).toHaveNoViolations();
+    // jsdom does not make the page inert behind a native <dialog>, so check the open dialog on its own
+    expect(await axe(document.querySelector('dialog[open]') as HTMLElement)).toHaveNoViolations();
   });
 });
