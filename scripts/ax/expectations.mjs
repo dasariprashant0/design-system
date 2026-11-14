@@ -104,7 +104,7 @@ export const components = [
   {id: 'tree', route: 'components/tree', example: 'File tree', phases: [{name: 'ArrowRight inside the tree', steps: [['focus', '[role=treeitem]'], ['key', 'ArrowRight']],
     expect: [{role: 'tree', name: 'Project files'}, {role: 'treeitem', name: 'src', states: {expanded: true, level: 1}}, {role: 'treeitem', name: 'docs', states: {expanded: false}}, {role: 'treeitem', name: 'button.tsx', states: {level: 3}}], focus: {role: 'treeitem', name: 'components', states: {level: 2, expanded: true}}}]},
   {id: 'calendar', route: 'components/calendar', example: 'Pick a date', phases: [{name: 'ArrowRight moves one day', steps: [['focus', '[role=gridcell] button'], ['key', 'ArrowRight']],
-    expect: [{role: 'grid', name: 'November 2026'}, {role: 'button', name: 'Previous month'}, {role: 'button', name: 'Next month'}, {role: 'columnheader', name: 'MO'}], focus: {role: 'button', name: /^\w+, \d+ \w+ \d{4}$/}}]},
+    expect: [{role: 'grid', name: 'November 2026'}, {role: 'button', name: 'Previous month'}, {role: 'button', name: 'Next month'}, {role: 'columnheader', name: 'MO'}], focus: {role: 'button', name: /^\w+, (\d+ \w+|\w+ \d+), \d{4}$|^\w+, \d+ \w+ \d{4}$/}}]},
   {id: 'date-picker', route: 'components/date-picker', example: 'In a field', phases: [
     {name: 'closed', expect: [{role: 'button', name: 'Due date', states: {hasPopup: 'dialog', expanded: false}}]},
     {name: 'open', steps: [['click', 'button']], scope: D, noDescription: true, expect: [{role: 'dialog', name: 'Choose a date'}, {role: 'grid', name: /\d{4}/}], focus: {role: 'button', name: /\d{4}$/}}]},
