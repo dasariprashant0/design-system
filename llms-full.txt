@@ -1,6 +1,6 @@
 # Monoline
 
-> Open-source UI kit: a plain CSS core (@monoline/css) with accessible React components (@monoline/react). Three themes, nine accents, font, corner and density options, no Tailwind, no runtime CSS-in-JS.
+> Open-source UI kit: a plain CSS core (@monoline/css) with accessible React components (@monoline/react). Three themes, eight accents, font, corner and density options, no Tailwind, no runtime CSS-in-JS.
 
 Start with AGENTS.md (how to work in this repo) and DESIGN.md (the look and rules). Every component is a folder with source, test, demo and meta.json. Install the packages, or copy one component with npx monoline add <name> (source in registry/<name>.json).
 
@@ -354,7 +354,7 @@ import {BlockCta, Button} from '@monoline/react';
 A11y:
 - A section named by its title; actions are ordinary buttons or links.
 
-CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, block-cta, block-cta-box, block-cta-copy, block-cta-actions
+CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-full, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, block-cta, block-cta-box, block-cta-copy, block-cta-actions
 Source: registry/block-cta.json
 
 ## Dashboard shell block (block-dashboard-shell)
@@ -418,7 +418,7 @@ A11y:
 - A section named by its title, with the title as the page heading.
 - The large code is decorative and hidden from assistive technology.
 
-CSS classes: heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-empty-page, block-empty-page-code, block-empty-page-description, block-empty-page-actions
+CSS classes: heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-full, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-empty-page, block-empty-page-code, block-empty-page-description, block-empty-page-actions
 Source: registry/block-empty-page.json
 
 ## Feature grid block (block-feature-grid)
@@ -455,7 +455,7 @@ A11y:
 - A section named by its title; features are a list of items.
 - Feature titles are headings one level below the section title, so the outline stays in order.
 
-CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-features, block-features-head, block-features-grid, block-feature, block-feature-icon
+CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-full, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-features, block-features-head, block-features-grid, block-feature, block-feature-icon
 Data attributes: data-columns: 3 | 4
 Source: registry/block-feature-grid.json
 
@@ -527,7 +527,7 @@ A11y:
 - The title is a real heading; headingLevel sets the outline level (h1 by default).
 - Media is passed in: give images alt text.
 
-CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-hero, block-hero-inner, block-hero-copy, block-hero-eyebrow, block-hero-description, block-hero-actions, block-hero-media
+CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-full, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-hero, block-hero-inner, block-hero-copy, block-hero-eyebrow, block-hero-description, block-hero-actions, block-hero-media
 Data attributes: data-align: center
 Source: registry/block-hero.json
 
@@ -558,7 +558,7 @@ A11y:
 - Invalid submits show a role=alert summary whose links move focus to each field, and each field gets aria-invalid and an error message.
 - Email and password carry autocomplete hints for password managers.
 
-CSS classes: form, form-errors, form-errors-title, form-actions, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-login, block-login-head, block-login-footer
+CSS classes: form, form-errors, form-errors-title, form-actions, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-full, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-login, block-login-head, block-login-footer
 Data attributes: data-valid: true
 Source: registry/block-login.json
 
@@ -597,7 +597,7 @@ A11y:
 - The billing switch is a named radio group operable with arrow keys.
 - Prices are plain text next to their period, never colour alone; the popular plan carries a text badge.
 
-CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, swatch, check, check-pass, check-fail, badge, badge-solid, badge-accent, kbd, key-hints, dot, heat-0, heat-1, heat-2, heat-3, heat-4, segmented, segment, block-pricing, block-pricing-head, block-pricing-tiers, block-tier, block-tier-head, block-tier-price, block-tier-amount, block-tier-period, block-tier-features
+CSS classes: container, container-text, container-page, container-full, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-full, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, swatch, check, check-pass, check-fail, badge, badge-solid, badge-accent, kbd, key-hints, dot, heat-0, heat-1, heat-2, heat-3, heat-4, segmented, segment, block-pricing, block-pricing-head, block-pricing-tiers, block-tier, block-tier-head, block-tier-price, block-tier-amount, block-tier-period, block-tier-features
 Data attributes: data-state: on; data-highlighted
 Source: registry/block-pricing.json
 
@@ -641,7 +641,7 @@ A11y:
 - Switches have role=switch with visible labels; hints are linked with aria-describedby.
 - Selects are native and labelled.
 
-CSS classes: form, form-errors, form-errors-title, form-actions, fieldset, fieldset-legend, checkbox, radio, sw, checkbox-mark, radio-dot, radio-group, sw-thumb, choice, choice-group, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-settings, block-settings-head, block-settings-row
+CSS classes: form, form-errors, form-errors-title, form-actions, fieldset, fieldset-legend, checkbox, radio, sw, checkbox-mark, radio-dot, radio-group, sw-thumb, choice, choice-group, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-full, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-settings, block-settings-head, block-settings-row
 Data attributes: data-state: checked | indeterminate; data-orientation: horizontal; data-valid: true
 Source: registry/block-settings-form.json
 
@@ -673,7 +673,7 @@ A11y:
 - Invalid submits show a role=alert summary whose links move focus to each field, and each field gets aria-invalid and an error message.
 - The password hint states the minimum length; autocomplete hints are set.
 
-CSS classes: form, form-errors, form-errors-title, form-actions, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-signup, block-signup-head, block-signup-footer
+CSS classes: form, form-errors, form-errors-title, form-actions, field, field-hint, input, select, textarea, input-sm, input-lg, input-wrap, input-end, input-bare, switch, setting, seg, muted, seg-opt, field-error, field-ok, input-group, input-affix, field-required, form-row, btn, btn-solid, btn-line, btn-danger, btn-ghost, btn-sm, btn-lg, btn-block, spinner, skeleton, skeleton-block, skeleton-hatch, heading, heading-display, heading-xl, heading-lg, heading-md, heading-sm, text, text-full, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate, block-signup, block-signup-head, block-signup-footer
 Data attributes: data-valid: true
 Source: registry/block-signup.json
 
@@ -3249,6 +3249,7 @@ Props (name: type = default, ? means optional):
 - size?: "sm" | "md" | "lg" | "xs" = 'md' — Type size: `xs`, `sm`, `md` (default) or `lg`.
 - tone?: "success" | "warning" | "danger" | "accent" | "default" | "muted" | "ok" = 'default' — Colour role: `default`, `muted`, `success`, `warning`, `danger` or `accent`, the same names as Alert. Never rely on colour alone to carry meaning. `ok` still works.
 - truncate?: boolean — One line with an ellipsis.
+- fullWidth?: boolean — Lets the text run the full width of its container. By default a paragraph stops at a readable line length (`--measure`). Default false.
 - asChild?: boolean — Render the child (a span, label, li) with the text styles.
 
 Usage:
@@ -3261,7 +3262,7 @@ import {Text} from '@monoline/react';
 A11y:
 - A plain p (or the child with asChild); tone is never the only signal, so pair danger text with words.
 
-CSS classes: text, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate
+CSS classes: text, text-full, text-xs, text-sm, text-md, text-lg, text-muted, text-danger, text-success, text-ok, text-warning, text-accent, text-truncate
 Source: registry/text.json
 
 ## Text reveal (text-reveal)

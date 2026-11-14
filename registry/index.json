@@ -5009,6 +5009,7 @@
         "size",
         "tone",
         "truncate",
+        "fullWidth",
         "asChild"
       ]
     },
