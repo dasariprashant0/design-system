@@ -1,5 +1,5 @@
 import {forwardRef, type ButtonHTMLAttributes} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {cx} from '../../utils/cx';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -21,7 +21,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   {variant = 'line', size = 'md', loading = false, asChild = false, className, children, disabled, type, onClick, ...rest},
   ref,
 ) {
-  const Comp = asChild ? Slot.Root : 'button';
+  const Comp = asChild ? Slot : 'button';
   return (
     <Comp
       ref={ref}

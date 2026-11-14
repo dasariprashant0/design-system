@@ -1,6 +1,6 @@
 'use client';
 import {forwardRef, useState} from 'react';
-import {Popover as Radix} from 'radix-ui';
+import {Popover, PopoverContent, PopoverTrigger} from '../popover';
 import {Calendar, type CalendarProps} from '../calendar';
 import {cx} from '../../utils/cx';
 import {invalidAttrs, useFieldControl} from '../field';
@@ -29,7 +29,7 @@ const focusDay = (e: Event) => {
 };
 
 /** Keeps the popover inside short viewports: it takes the side with more room and scrolls inside when even that is too small. */
-const FIT = {maxHeight: 'var(--radix-popover-content-available-height)', overflowY: 'auto'} as const;
+const FIT = {maxHeight: 'var(--available-height)', overflowY: 'auto'} as const;
 
 /**
  * Pick a date from a popover calendar. Same `value` / `defaultValue` / `onValueChange` as Calendar.
@@ -43,17 +43,15 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
   const current = value === undefined ? inner : value;
   const text = current ? new Intl.DateTimeFormat(locale, format).format(current) : '';
   return (
-    <Radix.Root open={open} onOpenChange={setOpen}>
-      <Radix.Trigger asChild>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
         <button ref={ref} type="button" disabled={disabled} className={cx('input date-trigger', size !== 'md' && `input-${size}`, className)} {...f} aria-label={label} {...invalidAttrs(invalid)} data-disabled={disabled ? '' : undefined} data-empty={!current || undefined}>
           {text || placeholder}
         </button>
-      </Radix.Trigger>
-      <Radix.Portal>
-        <Radix.Content className="popover date-popover" sideOffset={6} align="start" aria-label="Choose a date" onOpenAutoFocus={focusDay} collisionPadding={8} style={FIT}>
+      </PopoverTrigger>
+              <PopoverContent className="date-popover" sideOffset={6} align="start" aria-label="Choose a date" onOpenAutoFocus={focusDay} collisionPadding={8} style={FIT}>
           <Calendar value={current} locale={locale} {...cal} onValueChange={(d) => { if (value === undefined) setInner(d); onValueChange?.(d); setOpen(false); }} />
-        </Radix.Content>
-      </Radix.Portal>
-    </Radix.Root>
+        </PopoverContent>
+          </Popover>
   );
 });

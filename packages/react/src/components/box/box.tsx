@@ -1,5 +1,5 @@
 import {forwardRef, type CSSProperties, type HTMLAttributes} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {cx} from '../../utils/cx';
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
@@ -24,7 +24,7 @@ const v = (s: Step | undefined) => (s ? `var(--s${s})` : undefined);
  * reach for `Card` when the thing is a bordered object, `Stack` or `Flex` for spacing between children.
  */
 export const Box = forwardRef<HTMLDivElement, BoxProps>(function Box({padding, paddingX, paddingY, border, asChild, className, style, ...rest}, ref) {
-  const Comp = asChild ? Slot.Root : 'div';
+  const Comp = asChild ? Slot : 'div';
   const vars = {'--box-px': v(paddingX ?? padding), '--box-py': v(paddingY ?? padding)};
   return (
     <Comp

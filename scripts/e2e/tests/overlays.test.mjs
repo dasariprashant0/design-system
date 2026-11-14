@@ -5,6 +5,7 @@ const TABBABLE = `a[href], button:not([disabled]), input:not([disabled]), select
 /** Focusable elements outside the open dialog that are not hidden from assistive tech or inert. */
 const reachableBehind = (p) => p.eval(`(() => {
   const dlg = document.querySelector('[role=dialog][data-state=open], [role=alertdialog][data-state=open]');
+  if (dlg.matches(':modal')) return []; // a native modal <dialog> makes the whole page behind inert (the browser's own guarantee)
   return [...document.querySelectorAll(${JSON.stringify(TABBABLE)})].filter((e) => !dlg.contains(e) && !e.closest('[aria-hidden=true], [inert], [data-aria-hidden=true]') && __e2e.visible(e)).map(__e2e.describe).slice(0, 3);
 })()`);
 const inside = (p) => p.eval(`(() => { const d = document.querySelector('[role=dialog][data-state=open], [role=alertdialog][data-state=open]'); return !!d && d.contains(document.activeElement); })()`);

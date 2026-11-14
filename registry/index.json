@@ -86,7 +86,7 @@
       "category": "overlays",
       "description": "A modal that interrupts to confirm a destructive or irreversible action.",
       "status": "stable",
-      "primitive": "radix-ui/AlertDialog",
+      "primitive": "native <dialog>",
       "css": [
         "dialog.css",
         "02-buttons.css"
@@ -103,6 +103,9 @@
         "delete",
         "modal"
       ],
+      "uses": [
+        "dialog"
+      ],
       "kind": "components",
       "import": "import {AlertDialog} from '@monoline/react'",
       "path": "packages/react/src/components/alert-dialog",
@@ -114,8 +117,6 @@
         "packages/react/src/components/alert-dialog/meta.json"
       ],
       "related": [
-        "command",
-        "context-menu",
         "dialog"
       ],
       "propNames": []
@@ -1783,7 +1784,7 @@
       "category": "overlays",
       "description": "A searchable palette of actions that opens over the page, with an optional global shortcut.",
       "status": "stable",
-      "primitive": "radix-ui/Dialog",
+      "primitive": "native <dialog>",
       "css": [
         "dialog.css",
         "command.css"
@@ -1802,6 +1803,9 @@
         "search",
         "shortcut"
       ],
+      "uses": [
+        "dialog"
+      ],
       "kind": "components",
       "import": "import {Command} from '@monoline/react'",
       "path": "packages/react/src/components/command",
@@ -1813,8 +1817,6 @@
         "packages/react/src/components/command/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "context-menu",
         "dialog"
       ],
       "propNames": [
@@ -1916,7 +1918,7 @@
       "category": "overlays",
       "description": "A menu of actions opened by right click or long press on an area.",
       "status": "stable",
-      "primitive": "radix-ui/ContextMenu",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css",
         "17-dropdown-menu.css"
@@ -1931,6 +1933,10 @@
         "menu",
         "actions"
       ],
+      "uses": [
+        "dropdown-menu",
+        "popover"
+      ],
       "kind": "components",
       "import": "import {ContextMenu} from '@monoline/react'",
       "path": "packages/react/src/components/context-menu",
@@ -1942,9 +1948,8 @@
         "packages/react/src/components/context-menu/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "dialog"
+        "dropdown-menu",
+        "popover"
       ],
       "propNames": [
         "tone"
@@ -2137,7 +2142,6 @@
       "category": "forms",
       "description": "A button that opens a calendar and shows the chosen date.",
       "status": "stable",
-      "primitive": "radix-ui/Popover",
       "uses": [
         "calendar",
         "popover",
@@ -2192,7 +2196,6 @@
       "category": "forms",
       "description": "A button that opens a range calendar and two typed date fields.",
       "status": "stable",
-      "primitive": "radix-ui/Popover",
       "uses": [
         "range-calendar",
         "popover",
@@ -2288,7 +2291,7 @@
       "category": "overlays",
       "description": "A modal window for a question or short task that blocks the page.",
       "status": "stable",
-      "primitive": "radix-ui/Dialog",
+      "primitive": "native <dialog>",
       "css": [
         "dialog.css"
       ],
@@ -2310,7 +2313,8 @@
         "packages/react/src/components/dialog/dialog.test.tsx",
         "packages/react/src/components/dialog/dialog.tsx",
         "packages/react/src/components/dialog/index.ts",
-        "packages/react/src/components/dialog/meta.json"
+        "packages/react/src/components/dialog/meta.json",
+        "packages/react/src/components/dialog/modal.tsx"
       ],
       "related": [
         "alert-dialog",
@@ -2407,7 +2411,7 @@
       "category": "overlays",
       "description": "A panel that slides in from an edge for secondary tasks, details or navigation.",
       "status": "stable",
-      "primitive": "radix-ui/Dialog",
+      "primitive": "native <dialog>",
       "css": [
         "dialog.css",
         "drawer.css"
@@ -2423,6 +2427,9 @@
         "slide over",
         "offcanvas"
       ],
+      "uses": [
+        "dialog"
+      ],
       "kind": "components",
       "import": "import {Drawer} from '@monoline/react'",
       "path": "packages/react/src/components/drawer",
@@ -2434,9 +2441,7 @@
         "packages/react/src/components/drawer/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "context-menu"
+        "dialog"
       ],
       "propNames": [
         "side",
@@ -2449,7 +2454,7 @@
       "category": "overlays",
       "description": "A list of actions that opens from a button.",
       "status": "stable",
-      "primitive": "radix-ui/DropdownMenu",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css",
         "17-dropdown-menu.css"
@@ -2465,6 +2470,9 @@
         "context",
         "options"
       ],
+      "uses": [
+        "popover"
+      ],
       "kind": "components",
       "import": "import {DropdownMenu} from '@monoline/react'",
       "path": "packages/react/src/components/dropdown-menu",
@@ -2473,12 +2481,11 @@
         "packages/react/src/components/dropdown-menu/dropdown-menu.test.tsx",
         "packages/react/src/components/dropdown-menu/dropdown-menu.tsx",
         "packages/react/src/components/dropdown-menu/index.ts",
+        "packages/react/src/components/dropdown-menu/menu.tsx",
         "packages/react/src/components/dropdown-menu/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "context-menu"
+        "popover"
       ],
       "propNames": [
         "tone"
@@ -2863,7 +2870,7 @@
       "category": "overlays",
       "description": "Preview extra content when a link or element is hovered or focused.",
       "status": "stable",
-      "primitive": "radix-ui/HoverCard",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css"
       ],
@@ -2878,6 +2885,9 @@
         "peek",
         "profile card"
       ],
+      "uses": [
+        "popover"
+      ],
       "kind": "components",
       "import": "import {HoverCard} from '@monoline/react'",
       "path": "packages/react/src/components/hover-card",
@@ -2889,11 +2899,16 @@
         "packages/react/src/components/hover-card/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "context-menu"
+        "popover"
       ],
-      "propNames": []
+      "propNames": [
+        "open",
+        "defaultOpen",
+        "onOpenChange",
+        "openDelay",
+        "closeDelay",
+        "children"
+      ]
     },
     {
       "name": "icon-button",
@@ -3322,7 +3337,7 @@
       "category": "navigation",
       "description": "A horizontal bar of menus, like File, Edit and View in a desktop app.",
       "status": "stable",
-      "primitive": "radix-ui/Menubar",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css",
         "17-dropdown-menu.css",
@@ -3337,6 +3352,10 @@
         "file edit view",
         "toolbar menu"
       ],
+      "uses": [
+        "dropdown-menu",
+        "popover"
+      ],
       "kind": "components",
       "import": "import {Menubar} from '@monoline/react'",
       "path": "packages/react/src/components/menubar",
@@ -3348,9 +3367,8 @@
         "packages/react/src/components/menubar/meta.json"
       ],
       "related": [
-        "breadcrumb",
-        "breadcrumbs-auto",
-        "navbar"
+        "dropdown-menu",
+        "popover"
       ],
       "propNames": [
         "tone"
@@ -4003,7 +4021,7 @@
       "category": "overlays",
       "description": "A floating panel of content or controls anchored to a button.",
       "status": "stable",
-      "primitive": "radix-ui/Popover",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css"
       ],
@@ -4020,6 +4038,7 @@
       "import": "import {Popover} from '@monoline/react'",
       "path": "packages/react/src/components/popover",
       "files": [
+        "packages/react/src/components/popover/float.tsx",
         "packages/react/src/components/popover/index.ts",
         "packages/react/src/components/popover/meta.json",
         "packages/react/src/components/popover/popover.demo.tsx",
@@ -4031,7 +4050,16 @@
         "command",
         "context-menu"
       ],
-      "propNames": []
+      "propNames": [
+        "open",
+        "defaultOpen",
+        "onOpenChange",
+        "children",
+        "onEscapeKeyDown",
+        "onInteractOutside",
+        "onOpenAutoFocus",
+        "onCloseAutoFocus"
+      ]
     },
     {
       "name": "progress",
@@ -4491,7 +4519,7 @@
       "category": "forms",
       "description": "Pick one value from a list of five or more options.",
       "status": "stable",
-      "primitive": "radix-ui/Select",
+      "primitive": "native ARIA (shared positioning)",
       "uses": [
         "field"
       ],
@@ -4522,8 +4550,20 @@
         "field"
       ],
       "propNames": [
+        "value",
+        "defaultValue",
+        "onValueChange",
+        "open",
+        "defaultOpen",
+        "onOpenChange",
+        "disabled",
+        "name",
+        "children",
         "size",
-        "invalid"
+        "invalid",
+        "position",
+        "value",
+        "disabled"
       ]
     },
     {
@@ -5764,7 +5804,7 @@
       "category": "overlays",
       "description": "Short hint text on hover and keyboard focus.",
       "status": "stable",
-      "primitive": "radix-ui/Tooltip",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "tooltip.css"
       ],
@@ -5778,6 +5818,9 @@
         "title",
         "hover"
       ],
+      "uses": [
+        "popover"
+      ],
       "kind": "components",
       "import": "import {Tooltip} from '@monoline/react'",
       "path": "packages/react/src/components/tooltip",
@@ -5789,9 +5832,7 @@
         "packages/react/src/components/tooltip/tooltip.tsx"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "context-menu"
+        "popover"
       ],
       "propNames": [
         "content",

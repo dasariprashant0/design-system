@@ -2,6 +2,16 @@
 
 Versions follow [semver](https://semver.org). Before 1.0, a minor version may change class names; each change is listed here.
 
+## Unreleased
+
+Lighter bundles, same public API and the same keyboard behaviour (114 real-browser tests, 1,394 unit tests).
+
+- **Dialog, AlertDialog, Drawer and Command** now use the native `<dialog>` element with `showModal()`: free focus trap, inert page, Escape and top layer. The backdrop is `::backdrop`, scroll lock is `html:has(dialog[open]:modal)` in `dialog.css`. Dialog 14.1 to 1.8 KB gzip.
+- **Popover, Tooltip, HoverCard, Select, DropdownMenu, ContextMenu and Menubar** use one shared floating layer (`popover/float.tsx`: side, align, offsets, flip, shift, `--available-height`, `--anchor-width`) and one dismiss stack, instead of Radix and floating-ui. Select 32.4 to 5.0 KB, Popover 24.3 to 2.3 KB, Tooltip 20.0 to 2.2 KB, DropdownMenu 31.7 to 3.3 KB. DatePicker and DateRangePicker use the new Popover.
+- **Smaller `asChild`.** An own `Slot` (`utils/slot.tsx`) replaces Radix's, taking Button from 1.8 to 0.7 KB.
+- Whole library 123.6 to 93.1 KB gzip. `node scripts/size.mjs --detail` writes `docs/bundle-report.md` with every component and its top contributing packages; budgets in `scripts/size.mjs` are tightened to the new sizes plus 10 percent.
+- **Behaviour notes.** Content refs are now `HTMLDialogElement` (dialog family) and `HTMLDivElement`; `forceMount`, `asChild` on content and the Radix `modal` prop of menus and popovers are gone (Dialog keeps `modal`). Menus and popovers are non-modal: the page stays interactive and a press outside closes them. `--radix-select-*` and `--radix-popover-*` custom properties are replaced by `--anchor-width` and `--available-height`. The Select list keeps its items mounted (hidden) while closed so the trigger can show the chosen text.
+
 ## 0.3.0
 
 Monoline is now a monorepo: `@monoline/css`, `@monoline/react`, the `monoline` CLI and a docs app.

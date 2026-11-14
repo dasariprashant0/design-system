@@ -129,6 +129,6 @@ describe('Sidebar', () => {
     c.unmount();
     render(ui());
     await userEvent.click(screen.getByRole('button', {name: 'Menu'}));
-    expect(await axe(document.body)).toHaveNoViolations();
+    expect(await axe(screen.getByRole('dialog'))).toHaveNoViolations(); // the page behind is inert in a browser; jsdom does not model it
   });
 });

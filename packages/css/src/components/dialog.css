@@ -1,11 +1,13 @@
-/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */
+/* Dialog, alert dialog and drawer on the native <dialog> (showModal): the backdrop is ::backdrop, the page behind is inert and the scroll lock is :has(). Reads tokens only. */
+.dialog-content::backdrop, .drawer-content::backdrop, .command::backdrop { background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }
+html:has(dialog[open]:modal) { overflow: hidden; }
 .dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }
-.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */
+.dialog-content { position: fixed; z-index: var(--z-drawer); inset: 0; margin: auto; width: min(520px, 92vw); height: fit-content; max-width: none; max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* centred by auto margins in the top layer: the same in both directions */
 .dialog-content:focus { outline: none; }
 .dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }
 .dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
 .dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }
 .dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
 @keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }
-@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }
+@keyframes dialog-pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: -0.02em; margin-bottom: var(--s3); } /* sentence case: uppercase is only for .display */

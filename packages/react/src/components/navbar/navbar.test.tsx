@@ -58,6 +58,6 @@ describe('Navbar', () => {
     const {container} = render(<Navbar brand="Acme" links={links} actions={<button>Sign in</button>} />);
     expect(await axe(container)).toHaveNoViolations();
     await userEvent.click(screen.getByRole('button', {name: 'Menu'}));
-    expect(await axe(document.body)).toHaveNoViolations();
+    expect(await axe(screen.getByRole('dialog'))).toHaveNoViolations(); // the page behind is inert in a browser; jsdom does not model it
   });
 });

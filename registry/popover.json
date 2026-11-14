@@ -4,7 +4,7 @@
   "category": "overlays",
   "description": "A floating panel of content or controls anchored to a button.",
   "status": "stable",
-  "primitive": "radix-ui/Popover",
+  "primitive": "native ARIA (shared positioning)",
   "css": [
     {
       "path": "packages/css/src/components/popover.css",
@@ -24,6 +24,7 @@
   "import": "import {Popover} from '@monoline/react'",
   "path": "packages/react/src/components/popover",
   "files": [
+    "packages/react/src/components/popover/float.tsx",
     "packages/react/src/components/popover/index.ts",
     "packages/react/src/components/popover/meta.json",
     "packages/react/src/components/popover/popover.demo.tsx",
@@ -35,7 +36,74 @@
     "command",
     "context-menu"
   ],
-  "props": [],
+  "props": [
+    {
+      "name": "PopoverProps",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Controlled open state."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Initial open state when uncontrolled. Default false."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the next open state when the user opens or dismisses it."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "The parts of the component: a trigger and its content."
+        }
+      ]
+    },
+    {
+      "name": "PopoverContentProps",
+      "props": [
+        {
+          "name": "onEscapeKeyDown",
+          "type": "((event: Event) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called when Escape is pressed; call `event.preventDefault()` to keep it open."
+        },
+        {
+          "name": "onInteractOutside",
+          "type": "((event: Event) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called when a press or focus lands outside; call `event.preventDefault()` to keep it open."
+        },
+        {
+          "name": "onOpenAutoFocus",
+          "type": "((event: Event) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called after it opens, before focus moves in; `preventDefault()` keeps focus where it is or lets you move it yourself."
+        },
+        {
+          "name": "onCloseAutoFocus",
+          "type": "((event: Event) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called after it closes, before focus returns to the trigger; `preventDefault()` lets you move focus yourself."
+        }
+      ]
+    }
+  ],
   "usage": "import {Button, Popover, PopoverContent, PopoverTrigger} from '@monoline/react';\n\n<Popover><PopoverTrigger asChild><Button>Details</Button></PopoverTrigger><PopoverContent aria-label=\"Entry details\"><p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p></PopoverContent></Popover>",
   "dataAttributes": [
     {
@@ -66,16 +134,20 @@
   },
   "source": [
     {
+      "path": "packages/react/src/components/popover/float.tsx",
+      "content": "'use client';\nimport {createPortal} from 'react-dom';\nimport {forwardRef, useEffect, useLayoutEffect, useRef, useSyncExternalStore, type HTMLAttributes, type RefObject} from 'react';\nimport {setRefs} from '../../utils/overlay';\n\n/* Shared floating layer for Popover, Tooltip, HoverCard, Select and the menus: one positioning function (side,\n   align, offsets, flip, shift, available height) and one dismiss stack (Escape, outside press, focus leaving).\n   No floating-ui, no scroll lock. */\n\nexport type Side = 'top' | 'right' | 'bottom' | 'left';\nexport type Align = 'start' | 'center' | 'end';\nexport interface Placement {\n  /** Preferred side of the anchor. Flips to the opposite side when it does not fit. Default `bottom`. */\n  side?: Side;\n  /** Alignment along the anchor's edge. `start` and `end` follow the reading direction. Default `center`. */\n  align?: Align;\n  /** Gap in px between the anchor and the panel. */\n  sideOffset?: number;\n  /** Shift in px along the anchor's edge. */\n  alignOffset?: number;\n  /** Minimum gap in px kept to the viewport edges. Default 8. */\n  collisionPadding?: number;\n}\n\nconst OPPOSITE = {top: 'bottom', bottom: 'top', left: 'right', right: 'left'} as const;\n\n/** Positions a `position: fixed` panel against an anchor. Sets `left`/`top`, `data-side`, `data-align` and the\n *  `--anchor-width` and `--available-height` custom properties. Call again on resize and scroll. */\nexport function place(anchor: Element, panel: HTMLElement, {side = 'bottom', align = 'center', sideOffset = 0, alignOffset = 0, collisionPadding: pad = 8}: Placement) {\n  const a = anchor.getBoundingClientRect(), root = document.documentElement, vw = root.clientWidth, vh = root.clientHeight;\n  const rtl = getComputedStyle(anchor).direction === 'rtl';\n  panel.style.left = panel.style.top = '0px'; // measure at the origin so the viewport edge cannot squeeze it\n  const {width: w, height: h} = panel.getBoundingClientRect();\n  const room = {top: a.top, bottom: vh - a.bottom, left: a.left, right: vw - a.right};\n  const vertical = side === 'top' || side === 'bottom';\n  if (room[side] - pad < (vertical ? h : w) + sideOffset && room[OPPOSITE[side]] > room[side]) side = OPPOSITE[side];\n  const along = (lo: number, size: number, panelSize: number, flip: boolean) => align === 'center' ? lo + (size - panelSize) / 2 : (align === 'start') !== flip ? lo : lo + size - panelSize;\n  let x: number, y: number;\n  if (vertical) { y = side === 'top' ? a.top - h - sideOffset : a.bottom + sideOffset; x = along(a.left, a.width, w, rtl) + (rtl ? -alignOffset : alignOffset); }\n  else { x = side === 'left' ? a.left - w - sideOffset : a.right + sideOffset; y = along(a.top, a.height, h, false) + alignOffset; }\n  x = Math.max(pad, Math.min(x, vw - w - pad)); y = Math.max(pad, Math.min(y, vh - h - pad));\n  const s = panel.style;\n  s.left = x + 'px'; s.top = y + 'px';\n  s.setProperty('--anchor-width', a.width + 'px');\n  s.setProperty('--available-height', Math.max(0, vertical ? room[side] - sideOffset - pad : vh - 2 * pad) + 'px');\n  panel.dataset.side = side; panel.dataset.align = align;\n}\n\nconst noop = () => () => {};\n/** False while hydrating server HTML (portals have no server markup to match), true on the client from then on. */\nexport const useHydrated = () => useSyncExternalStore(noop, () => true, () => false);\n\nconst useLayout = typeof document === 'undefined' ? useEffect : useLayoutEffect;\n\nexport interface FloatingProps extends HTMLAttributes<HTMLDivElement>, Placement {\n  /** Returns the element to position against, read when it opens and on every reposition. */\n  anchor: () => Element | null;\n}\n\n/** A fixed-position panel placed against an anchor. Rendered into the nearest open `<dialog>` (so it stays usable\n *  inside a modal) or `document.body`. Repositions on resize, scroll and size changes. */\nexport const Floating = forwardRef<HTMLDivElement, FloatingProps>(function Floating({anchor, side, align, sideOffset, alignOffset, collisionPadding, style, ...rest}, forwarded) {\n  const el = useRef<HTMLDivElement | null>(null);\n  useLayout(() => {\n    const p = el.current!, go = () => { const a = anchor(); if (a) place(a, p, {side, align, sideOffset, alignOffset, collisionPadding}); };\n    go();\n    addEventListener('resize', go); addEventListener('scroll', go, true);\n    const ro = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(go);\n    ro?.observe(p);\n    return () => { removeEventListener('resize', go); removeEventListener('scroll', go, true); ro?.disconnect(); };\n  }, [side, align, sideOffset, alignOffset, collisionPadding]);\n  if (typeof document === 'undefined') return null;\n  return createPortal(<div ref={(n) => setRefs(n, el, forwarded)} style={{position: 'fixed', ...style}} {...rest} />, anchor()?.closest('dialog[open]') ?? document.body);\n});\n\nconst layers: object[] = [];\n\n/** While `open`, calls `dismiss` for Escape, a press outside every ref, or focus moving outside. Only the topmost\n *  layer reacts, so a menu inside a popover closes first. */\nexport function useDismiss(open: boolean, inside: Array<RefObject<Element | null>>, dismiss: (kind: 'escape' | 'outside', e: Event) => void) {\n  const latest = useRef({inside, dismiss});\n  latest.current = {inside, dismiss};\n  useEffect(() => {\n    if (!open) return;\n    const me = {}; layers.push(me);\n    const key = (e: KeyboardEvent) => { if (e.key === 'Escape' && layers[layers.length - 1] === me) { e.preventDefault(); latest.current.dismiss('escape', e); } };\n    const out = (e: Event) => { if (layers[layers.length - 1] === me && !latest.current.inside.some((r) => r.current?.contains(e.target as Node))) latest.current.dismiss('outside', e); };\n    document.addEventListener('keydown', key, true); document.addEventListener('pointerdown', out, true); document.addEventListener('focusin', out, true);\n    return () => { document.removeEventListener('keydown', key, true); document.removeEventListener('pointerdown', out, true); document.removeEventListener('focusin', out, true); layers.splice(layers.indexOf(me), 1); };\n  }, [open]);\n}\n\n/** Hover-intent timing for Tooltip and HoverCard: `show` and `hide` take effect after a delay (ms) unless the pointer\n *  comes back first. */\nexport function useHoverIntent(setOpen: (o: boolean) => void) {\n  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);\n  useEffect(() => () => clearTimeout(timer.current), []);\n  return (open: boolean, delay = 0) => { clearTimeout(timer.current); if (delay) timer.current = setTimeout(() => setOpen(open), delay); else setOpen(open); };\n}\n"
+    },
+    {
       "path": "packages/react/src/components/popover/index.ts",
       "content": "export {Popover, PopoverTrigger, PopoverAnchor, PopoverClose, PopoverContent} from './popover';\n"
     },
     {
       "path": "packages/react/src/components/popover/meta.json",
-      "content": "{\"name\":\"popover\",\"title\":\"Popover\",\"category\":\"overlays\",\"description\":\"A floating panel of content or controls anchored to a button.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Popover\",\"css\":[\"popover.css\"],\"a11y\":[\"The trigger has aria-expanded and aria-controls; the panel is role=dialog.\",\"Focus moves into the panel; Escape or an outside click closes it and focus returns to the trigger.\"],\"keywords\":[\"floating\",\"popup\",\"overlay\"]}\n"
+      "content": "{\"name\":\"popover\",\"title\":\"Popover\",\"category\":\"overlays\",\"description\":\"A floating panel of content or controls anchored to a button.\",\"status\":\"stable\",\"primitive\":\"native ARIA (shared positioning)\",\"css\":[\"popover.css\"],\"a11y\":[\"The trigger has aria-expanded and aria-controls; the panel is role=dialog.\",\"Focus moves into the panel; Escape or an outside click closes it and focus returns to the trigger.\"],\"keywords\":[\"floating\",\"popup\",\"overlay\"]}\n"
     },
     {
       "path": "packages/react/src/components/popover/popover.tsx",
-      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Popover as RadixPopover} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** The root of a floating panel. Holds the open state (`open`, `defaultOpen`, `onOpenChange`); put a `PopoverTrigger` and `PopoverContent` inside. */\nexport const Popover = RadixPopover.Root;\n/** The element (usually a `Button`) that toggles the popover; use `asChild` to render your own element. */\nexport const PopoverTrigger = RadixPopover.Trigger;\n/** Positions the popover against this element instead of the trigger. */\nexport const PopoverAnchor = RadixPopover.Anchor;\n/** An element that closes the popover when activated; use `asChild` to wrap your own button. */\nexport const PopoverClose = RadixPopover.Close;\n\n/** A floating panel anchored to its trigger. Focus moves in, Escape closes and returns focus to the trigger. */\nexport const PopoverContent = forwardRef<ElementRef<typeof RadixPopover.Content>, ComponentPropsWithoutRef<typeof RadixPopover.Content>>(function PopoverContent({className, sideOffset = 8, align = 'start', ...rest}, ref) {\n  return (\n    <RadixPopover.Portal>\n      <RadixPopover.Content ref={ref} sideOffset={sideOffset} align={align} className={cx('popover', className)} {...rest} />\n    </RadixPopover.Portal>\n  );\n});\n"
+      "content": "'use client';\nimport {createContext, forwardRef, useContext, useEffect, useId, useRef, type ButtonHTMLAttributes, type HTMLAttributes, type MouseEvent, type ReactNode, type RefObject} from 'react';\nimport {Slot} from '../../utils/slot';\nimport {useControllableState} from '../../hooks/use-controllable-state';\nimport {cx} from '../../utils/cx';\nimport {TABBABLE, setRefs, vetoed} from '../../utils/overlay';\nimport {Floating, useDismiss, useHydrated, type Placement} from './float';\n\ninterface Ctx { open: boolean; setOpen: (o: boolean) => void; contentId: string; trigger: RefObject<HTMLElement | null>; anchor: RefObject<HTMLElement | null> }\nconst Context = createContext<Ctx>(null as never);\n\nexport interface PopoverProps {\n  /** Controlled open state. */\n  open?: boolean;\n  /** Initial open state when uncontrolled. Default false. */\n  defaultOpen?: boolean;\n  /** Called with the next open state when the user opens or dismisses it. */\n  onOpenChange?: (open: boolean) => void;\n  /** The parts of the component: a trigger and its content. */\n  children?: ReactNode;\n}\n\n/** The root of a floating panel. Holds the open state (`open`, `defaultOpen`, `onOpenChange`); put a `PopoverTrigger` and `PopoverContent` inside. */\nexport function Popover({open, defaultOpen = false, onOpenChange, children}: PopoverProps) {\n  const [isOpen, setOpen] = useControllableState({value: open, defaultValue: defaultOpen, onChange: onOpenChange});\n  const trigger = useRef<HTMLElement | null>(null), anchor = useRef<HTMLElement | null>(null);\n  return <Context.Provider value={{open: isOpen, setOpen, contentId: useId(), trigger, anchor}}>{children}</Context.Provider>;\n}\n\ninterface AsChild { /** Render your own element instead of the default; it receives the props and handlers. */ asChild?: boolean }\n\n/** The element (usually a `Button`) that toggles the popover; use `asChild` to render your own element. */\nexport const PopoverTrigger = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement> & AsChild>(function PopoverTrigger({asChild, onClick, ...rest}, ref) {\n  const c = useContext(Context);\n  const Comp = asChild ? Slot : 'button';\n  return <Comp ref={(n: HTMLButtonElement | null) => setRefs(n, c.trigger, ref)} type={asChild ? undefined : 'button'} aria-haspopup=\"dialog\" aria-expanded={c.open} aria-controls={c.open ? c.contentId : undefined} data-state={c.open ? 'open' : 'closed'} {...rest} onClick={(e: MouseEvent<HTMLButtonElement>) => { onClick?.(e); if (!e.defaultPrevented) c.setOpen(!c.open); }} />;\n});\n\n/** Positions the popover against this element instead of the trigger. */\nexport const PopoverAnchor = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & AsChild>(function PopoverAnchor({asChild, ...rest}, ref) {\n  const c = useContext(Context);\n  const Comp = asChild ? Slot : 'div';\n  return <Comp ref={(n: HTMLDivElement | null) => setRefs(n, c.anchor, ref)} {...rest} />;\n});\n\n/** An element that closes the popover when activated; use `asChild` to wrap your own button. */\nexport const PopoverClose = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement> & AsChild>(function PopoverClose({asChild, onClick, ...rest}, ref) {\n  const c = useContext(Context);\n  const Comp = asChild ? Slot : 'button';\n  return <Comp ref={ref} type={asChild ? undefined : 'button'} {...rest} onClick={(e: MouseEvent<HTMLButtonElement>) => { onClick?.(e); if (!e.defaultPrevented) c.setOpen(false); }} />;\n});\n\nexport interface PopoverContentProps extends HTMLAttributes<HTMLDivElement>, Placement {\n  /** Called when Escape is pressed; call `event.preventDefault()` to keep it open. */\n  onEscapeKeyDown?: (event: Event) => void;\n  /** Called when a press or focus lands outside; call `event.preventDefault()` to keep it open. */\n  onInteractOutside?: (event: Event) => void;\n  /** Called after it opens, before focus moves in; `preventDefault()` keeps focus where it is or lets you move it yourself. */\n  onOpenAutoFocus?: (event: Event) => void;\n  /** Called after it closes, before focus returns to the trigger; `preventDefault()` lets you move focus yourself. */\n  onCloseAutoFocus?: (event: Event) => void;\n}\n\nconst Panel = forwardRef<HTMLDivElement, PopoverContentProps>(function Panel({className, sideOffset = 8, align = 'start', side, onEscapeKeyDown, onInteractOutside, onOpenAutoFocus, onCloseAutoFocus, ...rest}, forwarded) {\n  const c = useContext(Context);\n  const el = useRef<HTMLDivElement | null>(null);\n  const outside = useRef(false);\n  const hooks = useRef({onOpenAutoFocus, onCloseAutoFocus});\n  hooks.current = {onOpenAutoFocus, onCloseAutoFocus};\n  useDismiss(true, [el, c.trigger, c.anchor], (kind) => {\n    if (vetoed(kind === 'escape' ? onEscapeKeyDown : onInteractOutside, el.current!)) return;\n    outside.current = kind === 'outside';\n    c.setOpen(false);\n  });\n  useEffect(() => {\n    const p = el.current!;\n    if (!vetoed(hooks.current.onOpenAutoFocus, p)) (p.querySelector<HTMLElement>(TABBABLE) ?? p).focus();\n    return () => { if (!vetoed(hooks.current.onCloseAutoFocus, p) && !outside.current) c.trigger.current?.focus(); };\n  }, []);\n  return <Floating ref={(n) => setRefs(n, el, forwarded)} anchor={() => c.anchor.current ?? c.trigger.current} side={side} align={align} sideOffset={sideOffset} role=\"dialog\" id={c.contentId} tabIndex={-1} data-state=\"open\" className={cx('popover', className)} {...rest} />;\n});\n\n/** A floating panel anchored to its trigger, placed on the side with room. Focus moves in, Escape closes and returns focus to the trigger, a press outside closes it. */\nexport const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(function PopoverContent(props, ref) {\n  const {open} = useContext(Context), hydrated = useHydrated();\n  return open && hydrated ? <Panel ref={ref} {...props} /> : null;\n});\n"
     }
   ]
 }
