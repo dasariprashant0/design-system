@@ -10,7 +10,7 @@ export const demos: Demo[] = [
         code="404"
         title="Page not found"
         description="The address may be wrong, or the page moved."
-        actions={<><Button variant="solid">Go home</Button><Button>Contact support</Button></>}
+        actions={<><Button variant="solid">Go home</Button><Button variant="line">Contact support</Button></>}
       />
     ),
   },

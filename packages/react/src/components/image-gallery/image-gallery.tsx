@@ -86,8 +86,8 @@ export const ImageGallery = forwardRef<HTMLUListElement, ImageGalleryProps>(func
           )}
           {n > 1 && (
             <div className="image-gallery-nav">
-              <Button size="sm" onClick={() => go(index! - 1)}>Previous</Button>
-              <Button size="sm" onClick={() => go(index! + 1)}>Next</Button>
+              <Button variant="line" size="sm" onClick={() => go(index! - 1)}>Previous</Button>
+              <Button variant="line" size="sm" onClick={() => go(index! + 1)}>Next</Button>
             </div>
           )}
           <span role="status" className="sr-only">{cur ? `${cur.alt}, ${index! + 1} of ${n}` : ''}</span>

@@ -1,6 +1,6 @@
 // Guide pages. Plain content, shown under "Guides" in the sidebar. Routes are `#guides/<slug>`.
 import type {ReactNode} from 'react';
-import {CodeBlock} from '@monoline/react';
+import {CodeBlock, Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@monoline/react';
 import {ThemeBuilder} from './theme-builder';
 import {Section, P} from './guide-parts';
 import {forms} from './guides-forms';
@@ -17,14 +17,27 @@ const gettingStarted = () => (
     </Section>
     <Section title="A minimal React app">
       <P>Import the stylesheet once at your entry point, then import components by name.</P>
-      <CodeBlock title="main.tsx" code={"import {createRoot} from 'react-dom/client';\nimport '@monoline/css';\nimport {Button} from '@monoline/react';\n\ncreateRoot(document.getElementById('root')!).render(\n  <Button variant=\"solid\">Save</Button>\n);"} />
+      <CodeBlock title="main.tsx" code={"import {createRoot} from 'react-dom/client';\nimport '@monoline/css';\nimport {Button} from '@monoline/react';\n\ncreateRoot(document.getElementById('root')!).render(\n  <Button>Save</Button>\n);"} />
       <P>Set a theme and accent on <code>&lt;html&gt;</code> (see Theming). Without attributes you get the warm theme with the orange accent.</P>
       <CodeBlock title="index.html" code={'<html lang="en" data-theme="warm" data-accent="orange">'} />
     </Section>
-    <Section title="Granular CSS imports">
-      <P><code>import '@monoline/css'</code> loads everything as one file (<code>dist/monoline.css</code>; a minified <code>@monoline/css/monoline.min.css</code> is also exported). To load less, import the source files yourself, in this order.</P>
-      <CodeBlock title="main.tsx" code={"import '@monoline/css/src/tokens.css';\nimport '@monoline/css/src/base.css';\nimport '@monoline/css/src/accents.css';\nimport '@monoline/css/src/options.css';\n// then the stylesheet of each component you use:\nimport '@monoline/css/src/components/button.css';"} />
-      <P>Each component page lists its stylesheets under Details.</P>
+    <Section title="Load only the CSS you use">
+      <P><code>import '@monoline/css'</code> is the easy start: one file with every component (about 18 KB gzip). Most apps use a fraction of it. The better path is the core plus one small file per component you use. Each bundle already contains the styles of the parts it renders (a <code>Form</code> brings <code>Field</code> and <code>Button</code>), and every file is wrapped in a cascade layer, so order does not matter between components.</P>
+      <CodeBlock title="main.tsx" code={"import '@monoline/css/core.css';              // tokens, themes, accents, base: always\nimport '@monoline/css/components/button.css';\nimport '@monoline/css/components/dialog.css';\nimport '@monoline/css/components/card.css';"} />
+      <P>Each component page shows its import line under Details. In code, <code>import {'{styles}'} from '@monoline/react'</code> is a map from component name to its file, for tooling and for checking what you load (<code>styles.core</code>, <code>styles.button</code>). Measured, minified and gzipped (<code>npm run size</code>):</P>
+      <Table><TableHeader><TableRow><TableHead>You load</TableHead><TableHead>CSS gzip</TableHead></TableRow></TableHeader><TableBody>
+        <TableRow><TableCell>everything: <code>@monoline/css</code></TableCell><TableCell>18.3 KB</TableCell></TableRow>
+        <TableRow><TableCell>core only</TableCell><TableCell>3.4 KB</TableCell></TableRow>
+        <TableRow><TableCell>core + Button</TableCell><TableCell>3.8 KB</TableCell></TableRow>
+        <TableRow><TableCell>core + the 11 components of the landing example</TableCell><TableCell>6.2 KB</TableCell></TableRow>
+        <TableRow><TableCell>core + the 21 components of the dashboard example</TableCell><TableCell>10.3 KB</TableCell></TableRow>
+      </TableBody></Table>
+      <P>The three example apps in <code>examples/</code> use this path. Without a bundler, link <code>core.css</code> and the component files from <code>node_modules/@monoline/css/dist/</code> in the same way, or copy the source files with the CLI.</P>
+      <P>If you write your own CSS, it wins over Monoline without specificity tricks, because Monoline lives in <code>@layer monoline.*</code> and unlayered CSS beats any layer. Your <code>.card</code> or <code>.badge</code> rules apply as written.</P>
+    </Section>
+    <Section title="Spacing between blocks">
+      <P>A <code>Field</code>, <code>Heading</code>, <code>Text</code> or <code>Button</code> has no outer margin, so siblings in a plain <code>div</code> touch. <code>Form</code> and <code>Stack</code> space their children. <code>Card</code> and <code>Dialog</code> content and <code>.prose</code> do it for you (<code>--flow</code>, default <code>--s4</code>; a heading after a block gets 1.5 steps); <code>Drawer</code> and <code>Alert</code> are flex and grid containers with a gap of their own. Anywhere else, add the <code>flow</code> class to the container, and set <code>--flow</code> (or <code>flow-s2</code> to <code>flow-s8</code>) to change the step.</P>
+      <CodeBlock title="Page.tsx" code={'<section className="flow">\n  <Heading level={2}>Billing</Heading>\n  <Text>Your plan renews on the 1st.</Text>\n  <Button>Update card</Button>\n</section>'} />
     </Section>
     <Section title="Plain CSS, no React">
       <P>Every component is a set of class names. Link the stylesheet and write HTML.</P>

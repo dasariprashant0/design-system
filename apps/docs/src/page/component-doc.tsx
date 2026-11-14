@@ -167,6 +167,7 @@ function Installation({meta, extra}: {meta: ComponentMeta; extra: Extra}) {
         <TabsContent value="npm">
           <PmCode packages="@monoline/react @monoline/css" label="npm" />
           <CodeBlock language="tsx" code={importLine} />
+          {meta.css.length > 0 && <><p className="cdoc-muted">Load only this component's styles instead of all of <code>@monoline/css</code> (add the core once):</p><CodeBlock language="tsx" code={`import '@monoline/css/core.css';\nimport '@monoline/css/components/${meta.name}.css';`} /></>}
         </TabsContent>
       </Tabs>
     </Section>
@@ -267,7 +268,7 @@ export function ComponentDoc({meta, linkTo = (n) => `#${n}`}: ComponentDocProps)
 
       <Section id="details" title="Details">
         <dl className="cdoc-kv">
-          {!hook && <><dt>Built on</dt><dd>{meta.primitive ?? 'native elements'}</dd><dt>Stylesheets</dt><dd>{meta.css.length ? meta.css.join(', ') : 'none'}</dd></>}
+          {!hook && <><dt>Built on</dt><dd>{meta.primitive ?? 'native elements'}</dd><dt>Stylesheet</dt><dd>{meta.css.length ? <code>@monoline/css/components/{meta.name}.css</code> : 'none'}</dd></>}
           <dt>Status</dt><dd>{meta.status}</dd>
           {meta.keywords?.length ? <><dt>Also called</dt><dd>{meta.keywords.join(', ')}</dd></> : null}
         </dl>

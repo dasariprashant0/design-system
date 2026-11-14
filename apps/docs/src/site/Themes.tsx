@@ -73,7 +73,7 @@ function Dashboard({p, onResults}: {p: Preset; onResults: (r: Result[]) => void}
       </div>
       <Progress aria-label="Quarter goal" value={64} />
       <div className="tp-row"><Tag>design</Tag><Tag>billing</Tag><span className="tp-error">Card declined</span></div>
-      <div className="tp-row"><Button variant="solid" size="sm">Invite</Button><Button size="sm">Export</Button><Button variant="ghost" size="sm">Skip</Button></div>
+      <div className="tp-row"><Button variant="solid" size="sm">Invite</Button><Button variant="line" size="sm">Export</Button><Button variant="ghost" size="sm">Skip</Button></div>
     </div>
   );
 }
@@ -105,7 +105,7 @@ function PresetCard({p}: {p: Preset}) {
         </p>
         <div className="theme-actions">
           <Button variant="solid" size="sm" aria-pressed={applied} onClick={apply}>{applied ? 'Applied' : `Apply ${p.title}`}</Button>
-          <Button size="sm" onClick={async () => { try { await navigator.clipboard.writeText(css); setCopied('copied'); } catch { setCopied('failed'); } }}>Copy CSS</Button>
+          <Button variant="line" size="sm" onClick={async () => { try { await navigator.clipboard.writeText(css); setCopied('copied'); } catch { setCopied('failed'); } }}>Copy CSS</Button>
           <span className="cdoc-status" role="status">{copied === 'copied' ? 'Copied' : copied === 'failed' ? 'Copy failed' : ''}</span>
         </div>
         <Collapsible>

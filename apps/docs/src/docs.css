@@ -75,7 +75,7 @@ html, body, #root { height: auto; min-height: 100%; }
 .kv { display: grid; grid-template-columns: max-content 1fr; gap: var(--s2) var(--s5); font-size: var(--text-sm); }
 .kv dt { color: var(--muted); }
 code { font-family: var(--font-body); background: var(--wash-2); color: var(--foreground); padding: 0 var(--s1); }
-.code-block code { background: none; padding: 0; }
+.code-block code { background: none; color: inherit; padding: 0; } /* the plain `code` rule above made code in a code block ink on the always-dark surface */
 
 @media (max-width: 1180px) {
   .docs[data-rail] { grid-template-columns: var(--side) minmax(0, 1fr); }

@@ -1,6 +1,6 @@
 # @monoline/css
 
-Plain CSS for Monoline: design tokens, three themes, nine accents, font/corner/density options and one stylesheet per component. No framework and no build step needed.
+Plain CSS for Monoline: design tokens, three themes, eight accents, font/corner/density options and one stylesheet per component. No framework and no build step needed.
 
 ```bash
 npm install @monoline/css

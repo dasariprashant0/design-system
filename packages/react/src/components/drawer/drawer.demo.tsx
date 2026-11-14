@@ -7,7 +7,7 @@ export const demos: Demo[] = [
     <div style={{display: 'flex', gap: 'var(--s3)'}}>
       {(['right', 'left'] as const).map((side) => (
         <Drawer key={side}>
-          <DrawerTrigger asChild><Button>Open {side}</Button></DrawerTrigger>
+          <DrawerTrigger asChild><Button variant="line">Open {side}</Button></DrawerTrigger>
           <DrawerContent side={side}><DrawerHeader><DrawerTitle>Filters</DrawerTitle><DrawerDescription>Narrow the list by status or owner.</DrawerDescription></DrawerHeader></DrawerContent>
         </Drawer>
       ))}

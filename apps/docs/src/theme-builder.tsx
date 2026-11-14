@@ -71,7 +71,7 @@ export function ThemeBuilder() {
             <CardContent>
               <div className="builder-row"><Badge variant="accent">new</Badge><Tag>design</Tag><Tag>code</Tag></div>
               <Field label="Work email"><Input placeholder="you@example.com" /></Field>
-              <div className="builder-row"><Button variant="solid">Start trial</Button><Button>Learn more</Button><Button variant="ghost">Skip</Button></div>
+              <div className="builder-row"><Button variant="solid">Start trial</Button><Button variant="line">Learn more</Button><Button variant="ghost">Skip</Button></div>
             </CardContent>
           </Card>
         </div>

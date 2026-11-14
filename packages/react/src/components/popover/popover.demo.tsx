@@ -8,7 +8,7 @@ export const demos: Demo[] = [
     render: () => (
       <Popover>
         <PopoverTrigger asChild>
-          <Button>Details</Button>
+          <Button variant="line">Details</Button>
         </PopoverTrigger>
         <PopoverContent aria-label="Entry details">
           <p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p>

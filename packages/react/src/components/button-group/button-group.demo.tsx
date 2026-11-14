@@ -7,9 +7,9 @@ export const demos: Demo[] = [
     title: 'Basic',
     render: () => (
       <ButtonGroup aria-label="View">
-        <Button>Day</Button>
-        <Button>Week</Button>
-        <Button>Month</Button>
+        <Button variant="line">Day</Button>
+        <Button variant="line">Week</Button>
+        <Button variant="line">Month</Button>
       </ButtonGroup>
     ),
   },

@@ -183,5 +183,5 @@ export interface SidebarTriggerProps extends Omit<HTMLAttributes<HTMLButtonEleme
 /** The small-screen menu button: opens the sidebar in a drawer, and focus returns here on close. Hidden from 800px up. */
 export const SidebarTrigger = forwardRef<HTMLButtonElement, SidebarTriggerProps>(function SidebarTrigger({children = 'Menu', className, ...rest}, ref) {
   useSidebar();
-  return <DrawerTrigger asChild><Button ref={ref} size="sm" className={cx('sidebar-trigger', className)} {...rest}>{children}</Button></DrawerTrigger>;
+  return <DrawerTrigger asChild><Button ref={ref} variant="line" size="sm" className={cx('sidebar-trigger', className)} {...rest}>{children}</Button></DrawerTrigger>;
 });

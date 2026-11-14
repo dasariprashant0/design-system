@@ -92,7 +92,7 @@ export const BlockSettingsForm = forwardRef<HTMLElement, BlockSettingsFormProps>
         ))}
         <FormActions>
           <Button type="submit" variant="solid" loading={loading}>{saveLabel}</Button>
-          <Button type="reset">{resetLabel}</Button>
+          <Button variant="line" type="reset">{resetLabel}</Button>
         </FormActions>
       </Form>
     </section>

@@ -5,7 +5,7 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, 
 export const demos: Demo[] = [
   {title: 'Actions', render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild><Button>Actions</Button></DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild><Button variant="line">Actions</Button></DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Entry</DropdownMenuLabel>
         <DropdownMenuItem>Rename</DropdownMenuItem>

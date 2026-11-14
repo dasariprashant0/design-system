@@ -12,6 +12,10 @@ Lighter bundles, same public API and the same keyboard behaviour (114 real-brows
 - Whole library 123.6 to 93.1 KB gzip. `node scripts/size.mjs --detail` writes `docs/bundle-report.md` with every component and its top contributing packages; budgets in `scripts/size.mjs` are tightened to the new sizes plus 10 percent.
 - **Behaviour notes.** Content refs are now `HTMLDialogElement` (dialog family) and `HTMLDivElement`; `forceMount`, `asChild` on content and the Radix `modal` prop of menus and popovers are gone (Dialog keeps `modal`). Menus and popovers are non-modal: the page stays interactive and a press outside closes them. `--radix-select-*` and `--radix-popover-*` custom properties are replaced by `--anchor-width` and `--available-height`. The Select list keeps its items mounted (hidden) while closed so the trigger can show the chosen text.
 
+- **Breaking: `Button` now defaults to `variant="solid"`** (was `line`), the primary action, as in shadcn/ui, Mantine and Chakra. Use `variant="line"` for secondary buttons. `IconButton`, `CopyButton`, `ButtonGroup` children in our demos, and the other internal buttons keep the outlined look because they pass `variant="line"` themselves. The CSS classes are unchanged: `.btn` plus `.btn-solid` or `.btn-line`.
+- **Per-component CSS is the recommended path.** `@monoline/css/core.css` plus `@monoline/css/components/<name>.css`. Each bundle now includes the CSS of every component it renders (transitively, from `meta.json` `uses`); `Form`, `Select`, `Checkbox` and others were missing parts before. `@monoline/react` exports a generated `styles` map (component name to bundle path). Measured: core 3.4 KB gzip, core plus the landing example 6.2 KB, plus the dashboard example 10.3 KB, against 18.3 KB for everything.
+- `.flow` (and `--flow`) is documented; Card, Dialog and `.prose` content apply it by default.
+
 ## 0.3.0
 
 Monoline is now a monorepo: `@monoline/css`, `@monoline/react`, the `monoline` CLI and a docs app.

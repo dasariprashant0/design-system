@@ -104,7 +104,7 @@
       ]
     }
   ],
-  "usage": "import {Button, Popover, PopoverContent, PopoverTrigger} from '@monoline/react';\n\n<Popover>\n  <PopoverTrigger asChild>\n    <Button>Details</Button>\n  </PopoverTrigger>\n  <PopoverContent aria-label=\"Entry details\">\n    <p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p>\n  </PopoverContent>\n</Popover>",
+  "usage": "import {Button, Popover, PopoverContent, PopoverTrigger} from '@monoline/react';\n\n<Popover>\n  <PopoverTrigger asChild>\n    <Button variant=\"line\">Details</Button>\n  </PopoverTrigger>\n  <PopoverContent aria-label=\"Entry details\">\n    <p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p>\n  </PopoverContent>\n</Popover>",
   "dataAttributes": [
     {
       "name": "data-highlighted",

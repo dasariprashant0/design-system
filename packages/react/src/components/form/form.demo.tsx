@@ -24,7 +24,7 @@ function Example() {
     >
       <Field label="Name" name="name"><Input name="name" /></Field>
       <Field label="Email" name="email"><Input name="email" type="email" /></Field>
-      <FormActions><Button type="submit" variant="solid">Send</Button><Button type="reset">Clear</Button></FormActions>
+      <FormActions><Button type="submit" variant="solid">Send</Button><Button variant="line" type="reset">Clear</Button></FormActions>
     </Form>
   );
 }

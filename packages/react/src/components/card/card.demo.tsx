@@ -17,7 +17,7 @@ export const demos: Demo[] = [
           </CardContent>
           <CardFooter>
             <Button variant="solid" size="sm">Open</Button>
-            <Button size="sm">Share</Button>
+            <Button variant="line" size="sm">Share</Button>
           </CardFooter>
         </Card>
       </div>

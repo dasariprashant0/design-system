@@ -66,7 +66,7 @@ export const NotificationCenter = forwardRef<HTMLSpanElement, NotificationCenter
                     {n.description && <span className="notification-center-desc">{n.description}</span>}
                     {n.time && <span className="notification-center-time">{n.time}</span>}
                   </div>
-                  {!n.read && <Button variant="ghost" size="sm" aria-label={`Mark "${n.title}" as read`} onClick={() => onMarkRead?.(n.id)}>Mark read</Button>}
+                  {!n.read && <Button variant="ghost" size="sm" aria-label={`Mark read: ${n.title}`} onClick={() => onMarkRead?.(n.id)}>Mark read</Button>}
                 </li>
               ))}
             </ul>
