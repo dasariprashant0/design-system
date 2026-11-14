@@ -636,9 +636,9 @@ Page `components/calendar`, example "Pick a date".
 | button | Previous month | none | Previous month, button |
 | button | Next month | none | Next month, button |
 | columnheader | MO | none | MO, column header |
-| button (focused) | Sunday, 15 November 2026 | pressed=false | Sunday, 15 November 2026, button, not pressed |
+| button (focused) | Sunday, <date> | pressed=false | Sunday, <date>, button, not pressed |
 
-Focus after the steps: button "Sunday, 15 November 2026".
+Focus after the steps: button "Sunday, <date>".
 
 ### date-picker
 
@@ -656,9 +656,9 @@ Page `components/date-picker`, example "In a field".
 |---|---|---|---|
 | dialog | Choose a date | none | Choose a date, dialog |
 | grid | November 2026 | none | November 2026, grid |
-| button (focused) | Saturday, 14 November 2026 | pressed=false | Saturday, 14 November 2026, button, not pressed |
+| button (focused) | Saturday, <date> | pressed=false | Saturday, <date>, button, not pressed |
 
-Focus after the steps: button "Saturday, 14 November 2026".
+Focus after the steps: button "Saturday, <date>".
 
 ### otp-input
 

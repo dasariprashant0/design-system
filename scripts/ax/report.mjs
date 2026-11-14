@@ -99,5 +99,6 @@ export function renderReport(results) {
       if (p.findings.length) L.push('');
     }
   }
-  return L.join('\n') + '\n';
+  // calendar day names carry today's date and the browser's date order; keep the file stable across days and locales
+  return L.join('\n').replace(/\b(Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day, (\d+\s[A-Z][a-z]+|[A-Z][a-z]+\s\d+),?\s\d{4}/g, '$1day, <date>') + '\n';
 }
