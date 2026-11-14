@@ -4,15 +4,15 @@
   "category": "overlays",
   "description": "A panel that slides in from an edge for secondary tasks, details or navigation.",
   "status": "stable",
-  "primitive": "radix-ui/Dialog",
+  "primitive": "native <dialog>",
   "css": [
     {
       "path": "packages/css/src/components/dialog.css",
-      "content": "/* Dialog, alert dialog and drawer on Radix. Overlay and content are portalled; they read tokens only. */\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 92vw); max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* physical: centred with translate, same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); } to { opacity: 1; transform: translate(-50%, -50%); } }\n.dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: -0.02em; margin-bottom: var(--s3); } /* sentence case: uppercase is only for .display */\n"
+      "content": "/* Dialog, alert dialog and drawer on the native <dialog> (showModal): the backdrop is ::backdrop, the page behind is inert and the scroll lock is :has(). Reads tokens only. */\n.dialog-content::backdrop, .drawer-content::backdrop, .command::backdrop { background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\nhtml:has(dialog[open]:modal) { overflow: hidden; }\n.dialog-overlay { position: fixed; inset: 0; z-index: var(--z-drawer); background: color-mix(in srgb, var(--surface) 45%, transparent); animation: dialog-fade var(--base) var(--ease); }\n.dialog-content { position: fixed; z-index: var(--z-drawer); inset: 0; margin: auto; width: min(520px, 92vw); height: fit-content; max-width: none; max-height: 90vh; overflow-y: auto; padding: var(--s6); background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); animation: dialog-pop var(--base) var(--ease); } /* centred by auto margins in the top layer: the same in both directions */\n.dialog-content:focus { outline: none; }\n.dialog-header { display: grid; gap: var(--s2); margin-bottom: var(--s5); }\n.dialog-footer { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }\n.dialog-description { overflow-wrap: anywhere; color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.dialog-close { position: absolute; top: var(--s4); inset-inline-end: var(--s4); padding: var(--s1) var(--s2); font-size: var(--text-sm); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }\n@keyframes dialog-fade { from { opacity: 0; } to { opacity: 1; } }\n@keyframes dialog-pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }\n.dialog-title { overflow-wrap: anywhere; font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: -0.02em; margin-bottom: var(--s3); } /* sentence case: uppercase is only for .display */\n"
     },
     {
       "path": "packages/css/src/components/drawer.css",
-      "content": "/* Drawer: a Radix Dialog pinned to an edge. Overlay, header and footer reuse dialog.css. */\n.drawer-content { position: fixed; z-index: var(--z-drawer); display: flex; flex-direction: column; gap: var(--s4); padding: var(--s6); background: var(--background); color: var(--foreground); border: 0 solid var(--foreground); overflow-y: auto; }\n.drawer-content:focus { outline: none; }\n.drawer-content[data-side=\"right\"] { top: 0; right: 0; bottom: 0; width: min(420px, 100vw); border-left-width: 1px; animation: drawer-in-right var(--base) var(--ease); } /* physical: explicit right edge, use data-side=\"end\" to follow direction */\n.drawer-content[data-side=\"end\"] { top: 0; inset-inline-end: 0; bottom: 0; width: min(420px, 100vw); border-inline-start-width: 1px; animation: drawer-in-end var(--base) var(--ease); }\n.drawer-content[data-side=\"left\"] { top: 0; left: 0; bottom: 0; width: min(420px, 100vw); border-right-width: 1px; animation: drawer-in-left var(--base) var(--ease); } /* physical: explicit left edge, use data-side=\"start\" to follow direction */\n.drawer-content[data-side=\"start\"] { top: 0; inset-inline-start: 0; bottom: 0; width: min(420px, 100vw); border-inline-end-width: 1px; animation: drawer-in-start var(--base) var(--ease); }\n.drawer-content[data-side=\"top\"] { top: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-bottom-width: 1px; animation: drawer-in-top var(--base) var(--ease); }\n.drawer-content[data-side=\"bottom\"] { bottom: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-top-width: 1px; animation: drawer-in-bottom var(--base) var(--ease); }\n@keyframes drawer-in-right { from { transform: translateX(100%); } to { transform: none; } }\n@keyframes drawer-in-left { from { transform: translateX(-100%); } to { transform: none; } }\n@keyframes drawer-in-end { from { transform: translateX(calc(100% * var(--dir, 1))); } to { transform: none; } }\n@keyframes drawer-in-start { from { transform: translateX(calc(-100% * var(--dir, 1))); } to { transform: none; } }\n@keyframes drawer-in-top { from { transform: translateY(-100%); } to { transform: none; } }\n@keyframes drawer-in-bottom { from { transform: translateY(100%); } to { transform: none; } }\n"
+      "content": "/* Drawer: a native <dialog> pinned to an edge. Overlay, header and footer reuse dialog.css. */\n.drawer-content { position: fixed; z-index: var(--z-drawer); inset: auto; margin: 0; max-width: none; max-height: none; width: auto; height: auto; display: flex; flex-direction: column; gap: var(--s4); padding: var(--s6); background: var(--background); color: var(--foreground); border: 0 solid var(--foreground); overflow-y: auto; }\n.drawer-content:focus { outline: none; }\n.drawer-content[data-side=\"right\"] { height: 100%; top: 0; right: 0; bottom: 0; width: min(420px, 100vw); border-left-width: 1px; animation: drawer-in-right var(--base) var(--ease); } /* physical: explicit right edge, use data-side=\"end\" to follow direction */\n.drawer-content[data-side=\"end\"] { height: 100%; top: 0; inset-inline-end: 0; bottom: 0; width: min(420px, 100vw); border-inline-start-width: 1px; animation: drawer-in-end var(--base) var(--ease); }\n.drawer-content[data-side=\"left\"] { height: 100%; top: 0; left: 0; bottom: 0; width: min(420px, 100vw); border-right-width: 1px; animation: drawer-in-left var(--base) var(--ease); } /* physical: explicit left edge, use data-side=\"start\" to follow direction */\n.drawer-content[data-side=\"start\"] { height: 100%; top: 0; inset-inline-start: 0; bottom: 0; width: min(420px, 100vw); border-inline-end-width: 1px; animation: drawer-in-start var(--base) var(--ease); }\n.drawer-content[data-side=\"top\"] { top: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-bottom-width: 1px; animation: drawer-in-top var(--base) var(--ease); }\n.drawer-content[data-side=\"bottom\"] { bottom: 0; inset-inline-start: 0; inset-inline-end: 0; max-height: 80vh; border-top-width: 1px; animation: drawer-in-bottom var(--base) var(--ease); }\n@keyframes drawer-in-right { from { transform: translateX(100%); } to { transform: none; } }\n@keyframes drawer-in-left { from { transform: translateX(-100%); } to { transform: none; } }\n@keyframes drawer-in-end { from { transform: translateX(calc(100% * var(--dir, 1))); } to { transform: none; } }\n@keyframes drawer-in-start { from { transform: translateX(calc(-100% * var(--dir, 1))); } to { transform: none; } }\n@keyframes drawer-in-top { from { transform: translateY(-100%); } to { transform: none; } }\n@keyframes drawer-in-bottom { from { transform: translateY(100%); } to { transform: none; } }\n"
     }
   ],
   "a11y": [
@@ -26,6 +26,9 @@
     "slide over",
     "offcanvas"
   ],
+  "uses": [
+    "dialog"
+  ],
   "kind": "components",
   "import": "import {Drawer} from '@monoline/react'",
   "path": "packages/react/src/components/drawer",
@@ -37,9 +40,7 @@
     "packages/react/src/components/drawer/meta.json"
   ],
   "related": [
-    "alert-dialog",
-    "command",
-    "context-menu"
+    "dialog"
   ],
   "props": [
     {
@@ -57,7 +58,7 @@
           "type": "boolean",
           "optional": true,
           "default": "true",
-          "description": "Shows a \"Close\" text button. Escape and the overlay always close it."
+          "description": "Shows a \"Close\" text button. Escape and the backdrop always close it."
         }
       ]
     }
@@ -77,14 +78,15 @@
     }
   ],
   "classes": [
-    "dialog-overlay",
     "dialog-content",
+    "drawer-content",
+    "command",
+    "dialog-overlay",
     "dialog-header",
     "dialog-footer",
     "dialog-description",
     "dialog-close",
-    "dialog-title",
-    "drawer-content"
+    "dialog-title"
   ],
   "dependencies": {
     "radix-ui": "^1.4.2"
@@ -92,7 +94,7 @@
   "source": [
     {
       "path": "packages/react/src/components/drawer/drawer.tsx",
-      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type HTMLAttributes} from 'react';\nimport {Dialog as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** The root of a panel that slides in from an edge. Holds the open state (`open`, `defaultOpen`, `onOpenChange`); put a `DrawerTrigger` and `DrawerContent` inside. */\nexport const Drawer = Radix.Root;\n/** The element (usually a `Button`) that opens the drawer; use `asChild` to render your own element. */\nexport const DrawerTrigger = Radix.Trigger;\n/** An element that closes the drawer when activated; use `asChild` to wrap your own button. */\nexport const DrawerClose = Radix.Close;\n\nexport interface DrawerContentProps extends ComponentPropsWithoutRef<typeof Radix.Content> {\n  /** The edge it slides from. `start` and `end` follow the reading direction; `left` and `right` are fixed. */\n  side?: 'right' | 'left' | 'top' | 'bottom' | 'start' | 'end';\n  /** Shows a \"Close\" text button. Escape and the overlay always close it. */\n  showClose?: boolean;\n}\n\n/** The panel with its overlay. Include a DrawerTitle. */\nexport const DrawerContent = forwardRef<ElementRef<typeof Radix.Content>, DrawerContentProps>(function DrawerContent({side = 'right', showClose = true, className, children, ...rest}, ref) {\n  return (\n    <Radix.Portal>\n      <Radix.Overlay className=\"dialog-overlay\" />\n      <Radix.Content ref={ref} aria-modal=\"true\" className={cx('drawer-content', className)} data-side={side} {...rest}>\n        {children}\n        {showClose && <Radix.Close className=\"dialog-close\">Close</Radix.Close>}\n      </Radix.Content>\n    </Radix.Portal>\n  );\n});\n\n/** Wrapper for the title and description at the top of the drawer. */\nexport const DrawerHeader = ({className, ...rest}: HTMLAttributes<HTMLDivElement>) => <div className={cx('dialog-header', className)} {...rest} />;\n/** Wrapper for the action buttons at the bottom of the drawer. */\nexport const DrawerFooter = ({className, ...rest}: HTMLAttributes<HTMLDivElement>) => <div className={cx('dialog-footer', className)} {...rest} />;\n/** The drawer's accessible name, rendered as the heading. Required. */\nexport const DrawerTitle = forwardRef<ElementRef<typeof Radix.Title>, ComponentPropsWithoutRef<typeof Radix.Title>>(function DrawerTitle({className, ...rest}, ref) {\n  return <Radix.Title ref={ref} className={cx('dialog-title', className)} {...rest} />;\n});\n/** A sentence explaining the drawer, read out when it opens. Recommended. */\nexport const DrawerDescription = forwardRef<ElementRef<typeof Radix.Description>, ComponentPropsWithoutRef<typeof Radix.Description>>(function DrawerDescription({className, ...rest}, ref) {\n  return <Radix.Description ref={ref} className={cx('dialog-description', className)} {...rest} />;\n});\n"
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {cx} from '../../utils/cx';\nimport {Modal, ModalClose, ModalContent, ModalDescription, ModalTitle, ModalTrigger, type ModalContentProps} from '../dialog/modal';\n\n/** The root of a panel that slides in from an edge, built on the native `<dialog>` element. Holds the open state (`open`, `defaultOpen`, `onOpenChange`); put a `DrawerTrigger` and `DrawerContent` inside. */\nexport const Drawer = Modal;\n/** The element (usually a `Button`) that opens the drawer; use `asChild` to render your own element. */\nexport const DrawerTrigger = ModalTrigger;\n/** An element that closes the drawer when activated; use `asChild` to wrap your own button. */\nexport const DrawerClose = ModalClose;\n\nexport interface DrawerContentProps extends ModalContentProps {\n  /** The edge it slides from. `start` and `end` follow the reading direction; `left` and `right` are fixed. */\n  side?: 'right' | 'left' | 'top' | 'bottom' | 'start' | 'end';\n  /** Shows a \"Close\" text button. Escape and the backdrop always close it. */\n  showClose?: boolean;\n}\n\n/** The panel, opened as a modal `<dialog>` (focus trapped, page behind inert). Include a DrawerTitle. */\nexport const DrawerContent = forwardRef<HTMLDialogElement, DrawerContentProps>(function DrawerContent({side = 'right', showClose = true, className, children, ...rest}, ref) {\n  return (\n    <ModalContent ref={ref} className={cx('drawer-content', className)} data-side={side} {...rest}>\n      {children}\n      {showClose && <ModalClose className=\"dialog-close\">Close</ModalClose>}\n    </ModalContent>\n  );\n});\n\n/** Wrapper for the title and description at the top of the drawer. */\nexport const DrawerHeader = ({className, ...rest}: HTMLAttributes<HTMLDivElement>) => <div className={cx('dialog-header', className)} {...rest} />;\n/** Wrapper for the action buttons at the bottom of the drawer. */\nexport const DrawerFooter = ({className, ...rest}: HTMLAttributes<HTMLDivElement>) => <div className={cx('dialog-footer', className)} {...rest} />;\n/** The drawer's accessible name, rendered as the heading. Required. */\nexport const DrawerTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(function DrawerTitle({className, ...rest}, ref) {\n  return <ModalTitle ref={ref} className={cx('dialog-title', className)} {...rest} />;\n});\n/** A sentence explaining the drawer, read out when it opens. Recommended. */\nexport const DrawerDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(function DrawerDescription({className, ...rest}, ref) {\n  return <ModalDescription ref={ref} className={cx('dialog-description', className)} {...rest} />;\n});\n"
     },
     {
       "path": "packages/react/src/components/drawer/index.ts",
@@ -100,7 +102,7 @@
     },
     {
       "path": "packages/react/src/components/drawer/meta.json",
-      "content": "{\"name\":\"drawer\",\"title\":\"Drawer\",\"category\":\"overlays\",\"description\":\"A panel that slides in from an edge for secondary tasks, details or navigation.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Dialog\",\"css\":[\"dialog.css\",\"drawer.css\"],\"a11y\":[\"role=\\\"dialog\\\" named by the title.\",\"Focus is trapped while open and returns to the trigger on close.\",\"Escape and the overlay close it.\"],\"keywords\":[\"sheet\",\"side panel\",\"slide over\",\"offcanvas\"]}\n"
+      "content": "{\"name\":\"drawer\",\"title\":\"Drawer\",\"category\":\"overlays\",\"description\":\"A panel that slides in from an edge for secondary tasks, details or navigation.\",\"status\":\"stable\",\"primitive\":\"native <dialog>\",\"css\":[\"dialog.css\",\"drawer.css\"],\"a11y\":[\"role=\\\"dialog\\\" named by the title.\",\"Focus is trapped while open and returns to the trigger on close.\",\"Escape and the overlay close it.\"],\"keywords\":[\"sheet\",\"side panel\",\"slide over\",\"offcanvas\"],\"uses\":[\"dialog\"]}\n"
     }
   ]
 }

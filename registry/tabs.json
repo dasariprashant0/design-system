@@ -8,7 +8,7 @@
   "css": [
     {
       "path": "packages/css/src/components/tabs.css",
-      "content": "/* Tabs on Radix: state comes from data-state. The legacy .tab[aria-selected] rules still work for CSS-only markup. */\n.tabs-root { display: grid; gap: var(--s4); }\n.tabs-root[data-orientation=\"vertical\"] { grid-template-columns: max-content 1fr; align-items: start; }\n.tabs-list { display: flex; gap: var(--s5); border-bottom: 1px solid var(--rule); }\n.tabs-list[data-orientation=\"vertical\"] { flex-direction: column; gap: 0; border-bottom: 0; border-inline-end: 1px solid var(--rule); }\n.tabs-trigger { overflow-wrap: anywhere; padding: var(--s3) 0; margin-bottom: -1px; font-weight: 500; color: var(--muted); border-bottom: 2px solid transparent; }\n.tabs-list[data-orientation=\"vertical\"] .tabs-trigger { padding-block: var(--s2); padding-inline: 0 var(--s4); margin-block: 0; margin-inline: 0 -1px; border-bottom: 0; border-inline-end: 2px solid transparent; text-align: start; }\n.tabs-trigger:hover:not(:disabled) { color: var(--foreground); }\n.tabs-trigger[data-state=\"active\"] { color: var(--foreground); border-color: var(--foreground); }\n.tabs-trigger:disabled { opacity: 0.5; cursor: not-allowed; }\n.tabs-content:focus-visible { outline-offset: 4px; }\n"
+      "content": "/* Tabs on Radix: state comes from data-state. The legacy .tab[aria-selected] rules still work for CSS-only markup. */\n.tabs-root { display: grid; gap: var(--s4); min-width: 0; }\n.tabs-root[data-orientation=\"vertical\"] { grid-template-columns: max-content 1fr; align-items: start; }\n.tabs-list { display: flex; gap: var(--s5); border-bottom: 1px solid var(--rule); }\n/* Many tabs on a narrow screen scroll sideways inside the list instead of pushing the page wider. */\n.tabs-list[data-orientation=\"horizontal\"] { max-width: 100%; overflow-x: auto; scrollbar-width: thin; }\n.tabs-list[data-orientation=\"vertical\"] { flex-direction: column; gap: 0; border-bottom: 0; border-inline-end: 1px solid var(--rule); }\n.tabs-trigger { overflow-wrap: anywhere; padding: var(--s3) 0; margin-bottom: -1px; font-weight: 500; color: var(--muted); border-bottom: 2px solid transparent; }\n.tabs-list[data-orientation=\"vertical\"] .tabs-trigger { padding-block: var(--s2); padding-inline: 0 var(--s4); margin-block: 0; margin-inline: 0 -1px; border-bottom: 0; border-inline-end: 2px solid transparent; text-align: start; }\n.tabs-trigger:hover:not(:disabled) { color: var(--foreground); }\n.tabs-trigger[data-state=\"active\"] { color: var(--foreground); border-color: var(--foreground); }\n.tabs-trigger:disabled { opacity: 0.5; cursor: not-allowed; }\n.tabs-content:focus-visible { outline-offset: 4px; }\n"
     },
     {
       "path": "packages/css/src/components/18-navigation.css",
@@ -46,7 +46,8 @@
     {
       "name": "data-orientation",
       "values": [
-        "vertical"
+        "vertical",
+        "horizontal"
       ]
     },
     {

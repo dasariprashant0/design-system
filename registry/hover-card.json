@@ -4,7 +4,7 @@
   "category": "overlays",
   "description": "Preview extra content when a link or element is hovered or focused.",
   "status": "stable",
-  "primitive": "radix-ui/HoverCard",
+  "primitive": "native ARIA (shared positioning)",
   "css": [
     {
       "path": "packages/css/src/components/popover.css",
@@ -22,6 +22,9 @@
     "peek",
     "profile card"
   ],
+  "uses": [
+    "popover"
+  ],
   "kind": "components",
   "import": "import {HoverCard} from '@monoline/react'",
   "path": "packages/react/src/components/hover-card",
@@ -33,11 +36,57 @@
     "packages/react/src/components/hover-card/meta.json"
   ],
   "related": [
-    "alert-dialog",
-    "command",
-    "context-menu"
+    "popover"
   ],
-  "props": [],
+  "props": [
+    {
+      "name": "HoverCardProps",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Controlled open state."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Initial open state when uncontrolled. Default false."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the next open state."
+        },
+        {
+          "name": "openDelay",
+          "type": "number",
+          "optional": true,
+          "default": "700",
+          "description": "Milliseconds the pointer must rest on the trigger before the card opens. Default 700."
+        },
+        {
+          "name": "closeDelay",
+          "type": "number",
+          "optional": true,
+          "default": "300",
+          "description": "Milliseconds before the card closes after the pointer leaves the trigger and the card. Default 300."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "The parts of the component: a trigger and its content."
+        }
+      ]
+    }
+  ],
   "usage": "import {HoverCard, HoverCardContent, HoverCardTrigger} from '@monoline/react';\n\n<HoverCard>\n  <HoverCardTrigger asChild>\n    <a href=\"#ada\">@ada</a>\n  </HoverCardTrigger>\n  <HoverCardContent>\n    <strong>Ada Lovelace</strong>\n    <p className=\"muted small\">Wrote the first published program.</p>\n  </HoverCardContent>\n</HoverCard>",
   "dataAttributes": [
     {
@@ -69,7 +118,7 @@
   "source": [
     {
       "path": "packages/react/src/components/hover-card/hover-card.tsx",
-      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {HoverCard as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** The root of a card that shows extra detail when its trigger is hovered or focused. Put a `HoverCardTrigger` and `HoverCardContent` inside. */\nexport const HoverCard = Radix.Root;\n/** The element (usually a link) that shows the card on hover or focus; use `asChild` to render your own element. */\nexport const HoverCardTrigger = Radix.Trigger;\n\n/** The floating card, rendered in a portal. Opens 8px from the trigger, aligned to its start. Keep it supplementary: it is not reachable by touch. */\nexport const HoverCardContent = forwardRef<ElementRef<typeof Radix.Content>, ComponentPropsWithoutRef<typeof Radix.Content>>(function HoverCardContent({className, sideOffset = 8, align = 'start', ...rest}, ref) {\n  return (\n    <Radix.Portal>\n      <Radix.Content ref={ref} sideOffset={sideOffset} align={align} className={cx('popover', className)} {...rest} />\n    </Radix.Portal>\n  );\n});\n"
+      "content": "'use client';\nimport {createContext, forwardRef, useContext, useRef, type AnchorHTMLAttributes, type HTMLAttributes, type PointerEvent, type ReactNode, type RefObject} from 'react';\nimport {Slot} from '../../utils/slot';\nimport {useControllableState} from '../../hooks/use-controllable-state';\nimport {cx} from '../../utils/cx';\nimport {setRefs} from '../../utils/overlay';\nimport {Floating, useDismiss, useHoverIntent, type Placement} from '../popover/float';\n\ninterface Ctx { open: boolean; show: (open: boolean, delay?: number) => void; openDelay: number; closeDelay: number; trigger: RefObject<HTMLElement | null> }\nconst Context = createContext<Ctx>(null as never);\n\nexport interface HoverCardProps {\n  /** Controlled open state. */\n  open?: boolean;\n  /** Initial open state when uncontrolled. Default false. */\n  defaultOpen?: boolean;\n  /** Called with the next open state. */\n  onOpenChange?: (open: boolean) => void;\n  /** Milliseconds the pointer must rest on the trigger before the card opens. Default 700. */\n  openDelay?: number;\n  /** Milliseconds before the card closes after the pointer leaves the trigger and the card. Default 300. */\n  closeDelay?: number;\n  /** The parts of the component: a trigger and its content. */\n  children?: ReactNode;\n}\n\n/** The root of a card that shows extra detail when its trigger is hovered or focused. Put a `HoverCardTrigger` and `HoverCardContent` inside. */\nexport function HoverCard({open, defaultOpen = false, onOpenChange, openDelay = 700, closeDelay = 300, children}: HoverCardProps) {\n  const [isOpen, setOpen] = useControllableState({value: open, defaultValue: defaultOpen, onChange: onOpenChange});\n  const show = useHoverIntent(setOpen);\n  const trigger = useRef<HTMLElement | null>(null);\n  return <Context.Provider value={{open: isOpen, show, openDelay, closeDelay, trigger}}>{children}</Context.Provider>;\n}\n\n/** The element (usually a link) that shows the card on hover or focus; use `asChild` to render your own element. */\nexport const HoverCardTrigger = forwardRef<HTMLAnchorElement, AnchorHTMLAttributes<HTMLAnchorElement> & {\n  /** Render your own element instead of an anchor; it receives the props and handlers. */\n  asChild?: boolean;\n}>(function HoverCardTrigger({asChild, ...rest}, ref) {\n  const c = useContext(Context);\n  const Comp = asChild ? Slot : 'a';\n  return <Comp ref={(n: HTMLAnchorElement | null) => setRefs(n, c.trigger, ref)} data-state={c.open ? 'open' : 'closed'} {...rest} onPointerEnter={(e: PointerEvent) => { if (e.pointerType !== 'touch') c.show(true, c.openDelay); }} onPointerLeave={() => c.show(false, c.closeDelay)} onFocus={() => c.show(true)} onBlur={() => c.show(false)} />;\n});\n\nconst Panel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Placement>(function Panel({className, sideOffset = 8, align = 'start', ...rest}, forwarded) {\n  const c = useContext(Context);\n  const el = useRef<HTMLDivElement | null>(null);\n  useDismiss(true, [el, c.trigger], () => c.show(false));\n  return <Floating ref={(n) => setRefs(n, el, forwarded)} anchor={() => c.trigger.current} sideOffset={sideOffset} align={align} data-state=\"open\" onPointerEnter={() => c.show(true)} onPointerLeave={() => c.show(false, c.closeDelay)} className={cx('popover', className)} {...rest} />;\n});\n\n/** The floating card, opening 8px from the trigger and aligned to its start. Keep it supplementary: it is not reachable by touch. */\nexport const HoverCardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Placement>(function HoverCardContent(props, ref) {\n  return useContext(Context).open ? <Panel ref={ref} {...props} /> : null;\n});\n"
     },
     {
       "path": "packages/react/src/components/hover-card/index.ts",
@@ -77,7 +126,7 @@
     },
     {
       "path": "packages/react/src/components/hover-card/meta.json",
-      "content": "{\"name\":\"hover-card\",\"title\":\"Hover card\",\"category\":\"overlays\",\"description\":\"Preview extra content when a link or element is hovered or focused.\",\"status\":\"stable\",\"primitive\":\"radix-ui/HoverCard\",\"css\":[\"popover.css\"],\"a11y\":[\"Opens on pointer hover and on keyboard focus of the trigger.\",\"Supplementary only: never put the sole path to information or actions in it.\",\"Not shown on touch devices; the trigger must work on its own.\"],\"keywords\":[\"preview\",\"tooltip\",\"peek\",\"profile card\"]}\n"
+      "content": "{\"name\":\"hover-card\",\"title\":\"Hover card\",\"category\":\"overlays\",\"description\":\"Preview extra content when a link or element is hovered or focused.\",\"status\":\"stable\",\"primitive\":\"native ARIA (shared positioning)\",\"css\":[\"popover.css\"],\"a11y\":[\"Opens on pointer hover and on keyboard focus of the trigger.\",\"Supplementary only: never put the sole path to information or actions in it.\",\"Not shown on touch devices; the trigger must work on its own.\"],\"keywords\":[\"preview\",\"tooltip\",\"peek\",\"profile card\"],\"uses\":[\"popover\"]}\n"
     }
   ]
 }
