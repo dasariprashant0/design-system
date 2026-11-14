@@ -228,6 +228,16 @@ if (!dump) {
     }
   } finally { b2.close(); }
 }
+if (!dump) {
+  // The heading scale must keep its order on a phone too (h1 and h2 used to be 28px both at 375px).
+  const b3 = await openBrowser({dist});
+  try {
+    await b3.setViewport(375, 800); await b3.navigate(b3.base);
+    const m = await b3.evaluate(MEASURE); n++;
+    const z = ['display', 'xl', 'lg', 'md', 'sm'].map((k) => m['h:' + k + ':size']);
+    if (!z.every((v, i) => i === 0 || z[i - 1] > v)) fails.push(`[375px] heading sizes must strictly descend display > xl > lg > md > sm, got ${z.join(', ')}`);
+  } finally { b3.close(); }
+}
 if (dump) process.exit(0);
 if (fails.length) { console.error(fails.map((f) => 'FAIL ' + f).join('\n')); console.error(`${fails.length} of ${n} computed-style checks failed`); process.exit(1); }
 console.log(`ok: ${n} computed-style checks across ${THEMES.length} themes and 3 font looks`);

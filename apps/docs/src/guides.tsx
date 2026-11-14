@@ -35,6 +35,10 @@ const gettingStarted = () => (
       <P>The three example apps in <code>examples/</code> use this path. Without a bundler, link <code>core.css</code> and the component files from <code>node_modules/@monoline/css/dist/</code> in the same way, or copy the source files with the CLI.</P>
       <P>If you write your own CSS, it wins over Monoline without specificity tricks, because Monoline lives in <code>@layer monoline.*</code> and unlayered CSS beats any layer. Your <code>.card</code> or <code>.badge</code> rules apply as written.</P>
     </Section>
+    <Section title="Spacing between blocks">
+      <P>A <code>Field</code>, <code>Heading</code>, <code>Text</code> or <code>Button</code> has no outer margin, so siblings in a plain <code>div</code> touch. <code>Form</code> and <code>Stack</code> space their children. <code>Card</code> and <code>Dialog</code> content and <code>.prose</code> do it for you (<code>--flow</code>, default <code>--s4</code>; a heading after a block gets 1.5 steps); <code>Drawer</code> and <code>Alert</code> are flex and grid containers with a gap of their own. Anywhere else, add the <code>flow</code> class to the container, and set <code>--flow</code> (or <code>flow-s2</code> to <code>flow-s8</code>) to change the step.</P>
+      <CodeBlock title="Page.tsx" code={'<section className="flow">\n  <Heading level={2}>Billing</Heading>\n  <Text>Your plan renews on the 1st.</Text>\n  <Button>Update card</Button>\n</section>'} />
+    </Section>
     <Section title="Plain CSS, no React">
       <P>Every component is a set of class names. Link the stylesheet and write HTML.</P>
       <CodeBlock title="index.html" code={'<link rel="stylesheet" href="node_modules/@monoline/css/dist/monoline.css">\n\n<html data-theme="warm" data-accent="green">\n  <button class="btn btn-solid">Save</button>\n  <button class="btn btn-line">Cancel</button>\n</html>'} />

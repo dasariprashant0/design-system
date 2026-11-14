@@ -25,10 +25,10 @@ export function SignIn({onDone, go}: {onDone: () => void; go: (h: string) => voi
       <CardContent>
         {failed && <Alert tone="danger" title="Wrong email or password">Check them and try again.</Alert>}
         <Form preventDefault noValidate onSubmit={submit} errors={list(errors)}>
-          <Field label="Email" error={errors.email}>
+          <Field label="Email" name="email">
             <Input name="email" type="email" autoComplete="email" value={v.email} onChange={(e) => setV({...v, email: e.target.value})} />
           </Field>
-          <Field label="Password" error={errors.password}>
+          <Field label="Password" name="password">
             <PasswordInput name="password" autoComplete="current-password" value={v.password} onChange={(e) => setV({...v, password: e.target.value})} />
           </Field>
           <FormActions><Button type="submit" variant="solid" loading={busy}>Sign in</Button></FormActions>
@@ -49,11 +49,11 @@ export function SignUp({onDone, go}: {onDone: () => void; go: (h: string) => voi
       <CardHeader><CardTitle>Create your account</CardTitle><CardDescription>Free for 14 days. No card needed.</CardDescription></CardHeader>
       <CardContent>
         <Form preventDefault noValidate errors={list(errors)} onSubmit={() => { const e = signUp(v); setErrors(e); if (!Object.keys(e).length) onDone(); }}>
-          <Field label="Name" error={errors.name}><Input name="name" autoComplete="name" value={v.name} onChange={set('name')} /></Field>
-          <Field label="Email" error={errors.email}><Input name="email" type="email" autoComplete="email" value={v.email} onChange={set('email')} /></Field>
-          <Field label="Password" hint="At least 8 characters." error={errors.password}><PasswordInput name="password" autoComplete="new-password" value={v.password} onChange={set('password')} /></Field>
-          <Field label="Confirm password" error={errors.confirm}><PasswordInput name="confirm" autoComplete="new-password" value={v.confirm} onChange={set('confirm')} /></Field>
-          <Field label="Terms" error={errors.terms}>
+          <Field label="Name" name="name"><Input name="name" autoComplete="name" value={v.name} onChange={set('name')} /></Field>
+          <Field label="Email" name="email"><Input name="email" type="email" autoComplete="email" value={v.email} onChange={set('email')} /></Field>
+          <Field label="Password" hint="At least 8 characters." name="password"><PasswordInput name="password" autoComplete="new-password" value={v.password} onChange={set('password')} /></Field>
+          <Field label="Confirm password" name="confirm"><PasswordInput name="confirm" autoComplete="new-password" value={v.confirm} onChange={set('confirm')} /></Field>
+          <Field label="Terms" name="terms">
             <Checkbox name="terms" label="I accept the terms of service" checked={v.terms} onCheckedChange={(c) => setV({...v, terms: c === true})} />
           </Field>
           <FormActions><Button type="submit" variant="solid">Create account</Button></FormActions>

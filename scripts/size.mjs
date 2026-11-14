@@ -42,9 +42,9 @@ const css = join(root, 'packages/css/dist/monoline.min.css');
 if (existsSync(css)) {
   const kb = gzipSync(readFileSync(css)).length / KB;
   const budget = 20; const ok = kb <= budget; if (!ok) failed++;
-  report.css = {name: 'All components, 3 themes, 9 accents', kb: +kb.toFixed(2), budget};
+  report.css = {name: 'All components, 3 themes, 8 accents', kb: +kb.toFixed(2), budget};
   say('CSS');
-  say(`${ok ? 'ok  ' : 'FAIL'} ${'All components, 3 themes, 9 accents'.padEnd(32)} ${kb.toFixed(1).padStart(6)} KB   budget ${budget} KB`);
+  say(`${ok ? 'ok  ' : 'FAIL'} ${'All components, 3 themes, 8 accents'.padEnd(32)} ${kb.toFixed(1).padStart(6)} KB   budget ${budget} KB`);
 }
 // "Core plus the components you use": the @monoline/css/core.css + components/<name>.css path.
 const {bundles, minify} = await import(join(root, 'packages/css/scripts/bundle.mjs'));

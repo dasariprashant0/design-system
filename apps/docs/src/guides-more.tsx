@@ -98,6 +98,7 @@ export const accessibility = () => (
         <dt>Slider</dt><dd>Arrows step, Home and End jump, PageUp and PageDown take larger steps.</dd>
         <dt>Calendar</dt><dd>Arrows move by day and week, Home and End go to the ends of the week, PageUp and PageDown change month.</dd>
       </dl>
+      <P>If you run axe against an open <strong>menu</strong> or <strong>select</strong>, it reports <code>aria-hidden-focus</code> on the app root. Radix hides the page behind the menu with <code>aria-hidden</code> and keeps focus trapped in the menu, so no user can reach the hidden content; axe only forgives this for <code>aria-modal</code> dialogs. It is a known false alarm of the Radix pattern, not a Monoline bug. <code>scripts/audit-examples.mjs</code> lists it as KNOWN.</P>
       <P>The exact behaviour of each component is listed in the Accessibility section of its page, from <code>meta.json</code>, and each item is covered by a test.</P>
     </Section>
     <Section title="Focus ring and motion">
@@ -234,7 +235,7 @@ export const contributing = () => (
     <Section title="Checklist: definition of done">
       <ul className="why">
         <li>The folder has all five files, <code>meta.json</code> is valid and <code>index.ts</code> exports the component and its <code>*Props</code> types.</li>
-        <li>CSS is in its own file, uses tokens only, and works in warm, dark and midnight, all nine accents, the font, corner and density options, at 360px and 1200px.</li>
+        <li>CSS is in its own file, uses tokens only, and works in warm, dark and midnight, all eight accents, the font, corner and density options, at 360px and 1200px.</li>
         <li>Keyboard and screen reader behaviour is implemented, listed in <code>meta.json</code> and tested.</li>
         <li><code>npm test</code>, <code>npm run typecheck</code> and <code>npm run check</code> pass.</li>
         <li>Your demos render in <code>all-demos.test.tsx</code> without errors or axe violations.</li>

@@ -4,6 +4,10 @@ import {Text} from './text';
 import {createRef} from 'react';
 
 describe('Text', () => {
+  it('fullWidth adds text-full so the readable-width cap is lifted', () => {
+    render(<Text fullWidth>Wide</Text>);
+    expect(screen.getByText('Wide')).toHaveClass('text-full');
+  });
   it('renders a paragraph with size and tone classes', () => {
     render(<Text size="sm" tone="muted">Hello</Text>);
     const el = screen.getByText('Hello');

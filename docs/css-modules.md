@@ -7,7 +7,7 @@
 | Import | Size |
 |---|---|
 | `@monoline/css` (everything, `monoline.min.css`) | 16.3 KB (was 16.4 KB before layers) |
-| `@monoline/css/core.css` (tokens, 3 themes, 9 accents, options, base, utilities) | 3.3 KB |
+| `@monoline/css/core.css` (tokens, 3 themes, 8 accents, options, base, utilities) | 3.3 KB |
 | a component bundle (`button` 0.6, `dialog` 0.5, `card` 0.5, `select` 0.5, `data-grid` 0.7) | 0.1 to 2.3 KB; the largest is `block-settings-form` |
 | core + button + card + dialog | about 5.0 KB |
 

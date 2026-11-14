@@ -50,6 +50,7 @@ function Dashboard() {
   return (
     <BlockDashboardShell
       brand={<strong>Acme Console</strong>}
+      renderLink={({href, children, ...p}) => <a href={href} {...p} onClick={() => setHash(href.slice(1))}>{children}</a>} // a client router would render its own link here
       nav={[
         {label: 'Overview', href: '#overview', current: page === 'overview'},
         {label: 'Orders', href: '#orders', current: page === 'orders'},
@@ -79,11 +80,10 @@ function Dashboard() {
 
       <div className="filters">
         <Field label="From">
-          <DatePicker value={from} onValueChange={setFrom} placeholder="Any date" />
+          <DatePicker clearable value={from} onValueChange={setFrom} placeholder="Any date" />
         </Field>
         <Field label="Customer"><Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search by name" /></Field>
         <SegmentedControl aria-label="Status" value={status} onValueChange={setStatus} options={[{value: 'all', label: 'All'}, {value: 'paid', label: 'Paid'}, {value: 'pending', label: 'Pending'}, {value: 'refunded', label: 'Refunded'}]} />
-        {from && <Button variant="ghost" size="sm" onClick={() => setFrom(null)}>Clear date</Button>}
         <Button variant="solid" onClick={() => setNewOpen(true)}>New order</Button>
       </div>
 

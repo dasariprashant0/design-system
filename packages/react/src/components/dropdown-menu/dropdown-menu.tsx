@@ -12,8 +12,8 @@ export const DropdownMenuGroup = RadixMenu.Group;
 export const DropdownMenuRadioGroup = RadixMenu.RadioGroup;
 
 /** The floating panel that lists the entries, rendered in a portal. Opens 6px from the trigger, aligned to its start. */
-export const DropdownMenuContent = forwardRef<ElementRef<typeof RadixMenu.Content>, ComponentPropsWithoutRef<typeof RadixMenu.Content>>(function DropdownMenuContent({className, sideOffset = 6, align = 'start', ...rest}, ref) {
-  return <RadixMenu.Portal><RadixMenu.Content ref={ref} sideOffset={sideOffset} align={align} className={cx('menu-content', className)} {...rest} /></RadixMenu.Portal>;
+export const DropdownMenuContent = forwardRef<ElementRef<typeof RadixMenu.Content>, ComponentPropsWithoutRef<typeof RadixMenu.Content>>(function DropdownMenuContent({className, sideOffset = 6, align = 'start', collisionPadding = 8, ...rest}, ref) {
+  return <RadixMenu.Portal><RadixMenu.Content ref={ref} sideOffset={sideOffset} align={align} collisionPadding={collisionPadding} className={cx('menu-content', className)} {...rest} /></RadixMenu.Portal>;
 });
 
 export interface DropdownMenuItemProps extends ComponentPropsWithoutRef<typeof RadixMenu.Item> {
