@@ -4,7 +4,7 @@ import {Slot} from '../../utils/slot';
 import {useControllableState} from '../../hooks/use-controllable-state';
 import {cx} from '../../utils/cx';
 import {setRefs} from '../../utils/overlay';
-import {Floating, useDismiss, useHoverIntent, type Placement} from '../popover/float';
+import {Floating, useDismiss, useHydrated, useHoverIntent, type Placement} from '../popover/float';
 
 const Shared = createContext({delayDuration: 700, skipDelayDuration: 300});
 let lastClosed = 0; // when any tooltip last closed: moving between tooltips shows the next one at once
@@ -45,7 +45,7 @@ export interface TooltipProps {
  * @example <Tooltip content="Saved to ~/Notes"><Button>Save</Button></Tooltip>
  */
 export function Tooltip({content, children, side = 'top', delayDuration, open, defaultOpen = false, onOpenChange}: TooltipProps) {
-  const shared = useContext(Shared);
+  const shared = useContext(Shared), hydrated = useHydrated();
   const [isOpen, setOpen] = useControllableState({value: open, defaultValue: defaultOpen, onChange: (o) => { if (!o) lastClosed = Date.now(); onOpenChange?.(o); }});
   const show = useHoverIntent(setOpen);
   const trigger = useRef<HTMLElement | null>(null), pressed = useRef(false), moved = useRef(false), id = useId();
@@ -62,7 +62,7 @@ export function Tooltip({content, children, side = 'top', delayDuration, open, d
         onFocus={() => { if (!pressed.current) show(true); }}
         onBlur={() => show(false)}
       >{children}</Slot>
-      {isOpen && <TooltipContent side={side}>{content}</TooltipContent>}
+      {isOpen && hydrated && <TooltipContent side={side}>{content}</TooltipContent>}
     </Context.Provider>
   );
 }

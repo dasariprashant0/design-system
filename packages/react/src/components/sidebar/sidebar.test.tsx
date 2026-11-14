@@ -129,7 +129,6 @@ describe('Sidebar', () => {
     c.unmount();
     render(ui());
     await userEvent.click(screen.getByRole('button', {name: 'Menu'}));
-    // jsdom does not make the page inert behind a native <dialog>, so check the open dialog on its own
-    expect(await axe(document.querySelector('dialog[open]') as HTMLElement)).toHaveNoViolations();
+    expect(await axe(screen.getByRole('dialog'))).toHaveNoViolations(); // the page behind is inert in a browser; jsdom does not model it
   });
 });

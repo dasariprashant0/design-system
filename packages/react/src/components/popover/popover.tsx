@@ -4,7 +4,7 @@ import {Slot} from '../../utils/slot';
 import {useControllableState} from '../../hooks/use-controllable-state';
 import {cx} from '../../utils/cx';
 import {TABBABLE, setRefs, vetoed} from '../../utils/overlay';
-import {Floating, useDismiss, type Placement} from './float';
+import {Floating, useDismiss, useHydrated, type Placement} from './float';
 
 interface Ctx { open: boolean; setOpen: (o: boolean) => void; contentId: string; trigger: RefObject<HTMLElement | null>; anchor: RefObject<HTMLElement | null> }
 const Context = createContext<Ctx>(null as never);
@@ -82,5 +82,6 @@ const Panel = forwardRef<HTMLDivElement, PopoverContentProps>(function Panel({cl
 
 /** A floating panel anchored to its trigger, placed on the side with room. Focus moves in, Escape closes and returns focus to the trigger, a press outside closes it. */
 export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(function PopoverContent(props, ref) {
-  return useContext(Context).open ? <Panel ref={ref} {...props} /> : null;
+  const {open} = useContext(Context), hydrated = useHydrated();
+  return open && hydrated ? <Panel ref={ref} {...props} /> : null;
 });

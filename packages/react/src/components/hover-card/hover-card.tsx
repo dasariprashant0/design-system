@@ -4,7 +4,7 @@ import {Slot} from '../../utils/slot';
 import {useControllableState} from '../../hooks/use-controllable-state';
 import {cx} from '../../utils/cx';
 import {setRefs} from '../../utils/overlay';
-import {Floating, useDismiss, useHoverIntent, type Placement} from '../popover/float';
+import {Floating, useDismiss, useHydrated, useHoverIntent, type Placement} from '../popover/float';
 
 interface Ctx { open: boolean; show: (open: boolean, delay?: number) => void; openDelay: number; closeDelay: number; trigger: RefObject<HTMLElement | null> }
 const Context = createContext<Ctx>(null as never);
@@ -51,5 +51,6 @@ const Panel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Placem
 
 /** The floating card, opening 8px from the trigger and aligned to its start. Keep it supplementary: it is not reachable by touch. */
 export const HoverCardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Placement>(function HoverCardContent(props, ref) {
-  return useContext(Context).open ? <Panel ref={ref} {...props} /> : null;
+  const {open} = useContext(Context), hydrated = useHydrated();
+  return open && hydrated ? <Panel ref={ref} {...props} /> : null;
 });
