@@ -1,0 +1,18 @@
+/* Navbar: brand, links, actions. Links collapse into a Drawer behind a Menu button below 800px. */
+.navbar { display: flex; align-items: center; gap: var(--s4); box-sizing: border-box; block-size: var(--navbar-h, var(--s7)); padding-inline: var(--s4); background: var(--background); border-block-end: 1px solid var(--rule); }
+.navbar[data-sticky] { position: sticky; inset-block-start: 0; z-index: calc(var(--z-drawer) - 10); }
+.navbar-brand { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); }
+.navbar-links { display: none; }
+.navbar-list { display: flex; gap: var(--s1); margin: 0; padding: 0; list-style: none; }
+.navbar-link { display: block; padding: var(--s2) var(--s3); font-size: var(--text-sm); color: var(--muted); text-decoration: none; border-block-end: 2px solid transparent; }
+.navbar-link:hover { color: var(--foreground); background: var(--wash); }
+.navbar-link[aria-current="page"] { color: var(--foreground); border-block-end-color: var(--accent); }
+.navbar-link:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.navbar-actions { display: flex; align-items: center; gap: var(--s3); margin-inline-start: auto; }
+.navbar-drawer .navbar-list { flex-direction: column; }
+.navbar-drawer .navbar-link { border-block-end: 0; border-inline-start: 2px solid transparent; }
+.navbar-drawer .navbar-link[aria-current="page"] { border-inline-start-color: var(--accent); }
+@media (min-width: 800px) {
+  .navbar-links { display: block; }
+  .navbar-menu { display: none; }
+}

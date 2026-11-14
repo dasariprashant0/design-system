@@ -1,0 +1,39 @@
+{
+  "name": "sidebar",
+  "title": "Sidebar",
+  "category": "navigation",
+  "description": "A collapsible navigation sidebar with groups, icons and a mobile drawer.",
+  "status": "beta",
+  "uses": [
+    "drawer",
+    "tooltip",
+    "button",
+    "icon-button"
+  ],
+  "css": [
+    "02-buttons.css",
+    "icon-button.css",
+    "tooltip.css",
+    "dialog.css",
+    "drawer.css",
+    "sidebar.css"
+  ],
+  "a11y": [
+    "A navigation landmark named by the label prop, holding labelled lists of links; the current page has aria-current=\"page\".",
+    "ArrowUp, ArrowDown, Home and End move focus between items; Tab still moves through them in order.",
+    "Collapsing keeps every label in the accessibility tree; a tooltip shows it on hover and keyboard focus. The toggle reports aria-expanded.",
+    "Below 800px the sidebar is hidden and the Menu button opens it in a left drawer: focus is trapped, Escape closes it and focus returns to the button. Choosing a link closes it.",
+    "In right-to-left layouts the sidebar sits on the right and the drawer opens from the right."
+  ],
+  "keywords": [
+    "sidebar",
+    "side nav",
+    "navigation",
+    "collapsible",
+    "app shell",
+    "off-canvas",
+    "router",
+    "renderLink",
+    "asChild"
+  ]
+}

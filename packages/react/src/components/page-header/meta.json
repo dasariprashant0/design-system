@@ -1,0 +1,21 @@
+{
+  "name": "page-header",
+  "title": "Page header",
+  "category": "layout",
+  "description": "The top of a page: breadcrumbs, title, description and actions.",
+  "status": "beta",
+  "css": [
+    "page-header.css"
+  ],
+  "a11y": [
+    "The title is a real heading (h1 by default); keep one h1 per page.",
+    "Breadcrumbs and actions are slots, so they keep their own landmark and keyboard behaviour."
+  ],
+  "keywords": [
+    "page header",
+    "title",
+    "breadcrumbs",
+    "actions",
+    "toolbar"
+  ]
+}

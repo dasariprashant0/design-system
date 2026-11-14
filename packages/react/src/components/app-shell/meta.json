@@ -1,0 +1,37 @@
+{
+  "name": "app-shell",
+  "title": "App shell",
+  "category": "layout",
+  "description": "The frame of an app: skip link, navbar, sidebar, main and aside in one responsive grid.",
+  "status": "beta",
+  "uses": [
+    "sidebar",
+    "navbar"
+  ],
+  "css": [
+    "09-links.css",
+    "02-buttons.css",
+    "icon-button.css",
+    "tooltip.css",
+    "dialog.css",
+    "drawer.css",
+    "sidebar.css",
+    "navbar.css",
+    "app-shell.css"
+  ],
+  "a11y": [
+    "Landmarks: banner (the navbar), navigation (the sidebar), main and complementary (the aside, named by asideLabel).",
+    "The first focusable element is a skip link to the main region; main takes focus when it is used.",
+    "The sidebar shows from 800px and the aside beside the page from 1100px; below those they move into a drawer or stack under the page.",
+    "scroll=\"page\" keeps the navbar and sidebar in view while the page scrolls; scroll=\"contained\" scrolls the regions on their own."
+  ],
+  "keywords": [
+    "app shell",
+    "layout",
+    "dashboard",
+    "admin",
+    "frame",
+    "skip link",
+    "sticky"
+  ]
+}

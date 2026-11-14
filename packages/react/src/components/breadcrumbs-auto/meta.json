@@ -1,0 +1,23 @@
+{
+  "name": "breadcrumbs-auto",
+  "title": "Breadcrumbs from path",
+  "category": "navigation",
+  "description": "A breadcrumb built from the current URL path.",
+  "status": "beta",
+  "uses": [
+    "breadcrumb"
+  ],
+  "css": [
+    "18-navigation.css",
+    "09-links.css"
+  ],
+  "a11y": [
+    "Same as Breadcrumb: a navigation landmark with an ordered list; the last crumb is the current page and not a link."
+  ],
+  "keywords": [
+    "breadcrumb",
+    "path",
+    "url",
+    "router"
+  ]
+}
