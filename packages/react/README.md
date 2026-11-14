@@ -1,6 +1,6 @@
 # @monoline/react
 
-Accessible, typed React components for Monoline. Radix underneath for the complex ones; native elements for the rest. Styled by [`@monoline/css`](../css).
+Accessible, typed React components for Monoline. Native `<dialog>` and a small shared floating layer for overlays, menus and select; Radix underneath for tabs, toast, slider and a few more; native elements for the rest. Styled by [`@monoline/css`](../css).
 
 ```bash
 npm install @monoline/react @monoline/css

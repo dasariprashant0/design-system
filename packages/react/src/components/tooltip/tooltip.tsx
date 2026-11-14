@@ -1,6 +1,6 @@
 'use client';
 import {createContext, forwardRef, useContext, useEffect, useId, useRef, type HTMLAttributes, type ReactNode} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {useControllableState} from '../../hooks/use-controllable-state';
 import {cx} from '../../utils/cx';
 import {setRefs} from '../../utils/overlay';
@@ -52,7 +52,7 @@ export function Tooltip({content, children, side = 'top', delayDuration, open, d
   const delay = Date.now() - lastClosed < shared.skipDelayDuration ? 0 : delayDuration ?? shared.delayDuration;
   return (
     <Context.Provider value={{open: isOpen, show, id, trigger}}>
-      <Slot.Root
+      <Slot
         ref={trigger}
         aria-describedby={isOpen ? id : undefined}
         data-state={isOpen ? 'open' : 'closed'}
@@ -61,7 +61,7 @@ export function Tooltip({content, children, side = 'top', delayDuration, open, d
         onPointerDown={() => { pressed.current = true; document.addEventListener('pointerup', () => { pressed.current = false; }, {once: true}); show(false); }}
         onFocus={() => { if (!pressed.current) show(true); }}
         onBlur={() => show(false)}
-      >{children}</Slot.Root>
+      >{children}</Slot>
       {isOpen && <TooltipContent side={side}>{content}</TooltipContent>}
     </Context.Provider>
   );

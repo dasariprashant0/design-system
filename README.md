@@ -3,7 +3,7 @@
 An open-source UI kit with a plain CSS core and accessible React components. Thin rules, one accent, monospace by default, and every part of the look can be changed: nine accents, three themes, three font families, three corner styles and three densities.
 
 - **129 components and hooks**: buttons, forms (combobox, calendar, date picker, OTP, file upload), overlays (dialog, drawer, menus, toast), data display (data table, tree, timeline), navigation, effects and page blocks.
-- **Accessible by default**: built on Radix or native elements, with keyboard and axe tests for every component.
+- **Accessible by default**: built on native elements (`<dialog>`, a small floating layer) or Radix, with keyboard and axe tests for every component.
 - **Plain CSS tokens**: no Tailwind, no runtime CSS-in-JS. Restyle by changing variables.
 - **Two ways to use it**: install the packages, or copy a component into your project with the CLI.
 - **AI-readable**: every component has a `meta.json`; `llms.txt`, `llms-full.txt` and `registry/` list and describe them all. See [AGENTS.md](AGENTS.md).

@@ -1,6 +1,6 @@
 'use client';
 import {forwardRef, useContext, type ButtonHTMLAttributes, type MouseEvent} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {cx} from '../../utils/cx';
 import {setRefs} from '../../utils/overlay';
 import {MenuCheckboxItem, MenuContent, MenuContext, MenuGroup, MenuItem, MenuLabel, MenuRadioGroup, MenuRadioItem, MenuRoot, MenuSeparator, openWith, type MenuCheckboxItemProps, type MenuContentProps, type MenuItemProps, type MenuProps, type MenuRadioGroupProps} from './menu';
@@ -14,7 +14,7 @@ export const DropdownMenuTrigger = forwardRef<HTMLButtonElement, ButtonHTMLAttri
   asChild?: boolean;
 }>(function DropdownMenuTrigger({asChild, onClick, onKeyDown, ...rest}, ref) {
   const c = useContext(MenuContext);
-  const Comp = asChild ? Slot.Root : 'button';
+  const Comp = asChild ? Slot : 'button';
   return (
     <Comp
       ref={(n: HTMLButtonElement | null) => setRefs(n, c.trigger, ref)} type={asChild ? undefined : 'button'} id={c.triggerId} aria-haspopup="menu" aria-expanded={c.open} aria-controls={c.open ? c.menuId : undefined} data-state={c.open ? 'open' : 'closed'}

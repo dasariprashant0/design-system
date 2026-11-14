@@ -1,6 +1,6 @@
 'use client';
 import {createContext, forwardRef, useContext, useEffect, useId, useRef, type ButtonHTMLAttributes, type HTMLAttributes, type MouseEvent, type ReactNode, type RefObject} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {useControllableState} from '../../hooks/use-controllable-state';
 import {cx} from '../../utils/cx';
 import {TABBABLE, setRefs, vetoed} from '../../utils/overlay';
@@ -16,6 +16,7 @@ export interface PopoverProps {
   defaultOpen?: boolean;
   /** Called with the next open state when the user opens or dismisses it. */
   onOpenChange?: (open: boolean) => void;
+  /** The parts of the component: a trigger and its content. */
   children?: ReactNode;
 }
 
@@ -31,21 +32,21 @@ interface AsChild { /** Render your own element instead of the default; it recei
 /** The element (usually a `Button`) that toggles the popover; use `asChild` to render your own element. */
 export const PopoverTrigger = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement> & AsChild>(function PopoverTrigger({asChild, onClick, ...rest}, ref) {
   const c = useContext(Context);
-  const Comp = asChild ? Slot.Root : 'button';
+  const Comp = asChild ? Slot : 'button';
   return <Comp ref={(n: HTMLButtonElement | null) => setRefs(n, c.trigger, ref)} type={asChild ? undefined : 'button'} aria-haspopup="dialog" aria-expanded={c.open} aria-controls={c.open ? c.contentId : undefined} data-state={c.open ? 'open' : 'closed'} {...rest} onClick={(e: MouseEvent<HTMLButtonElement>) => { onClick?.(e); if (!e.defaultPrevented) c.setOpen(!c.open); }} />;
 });
 
 /** Positions the popover against this element instead of the trigger. */
 export const PopoverAnchor = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & AsChild>(function PopoverAnchor({asChild, ...rest}, ref) {
   const c = useContext(Context);
-  const Comp = asChild ? Slot.Root : 'div';
+  const Comp = asChild ? Slot : 'div';
   return <Comp ref={(n: HTMLDivElement | null) => setRefs(n, c.anchor, ref)} {...rest} />;
 });
 
 /** An element that closes the popover when activated; use `asChild` to wrap your own button. */
 export const PopoverClose = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement> & AsChild>(function PopoverClose({asChild, onClick, ...rest}, ref) {
   const c = useContext(Context);
-  const Comp = asChild ? Slot.Root : 'button';
+  const Comp = asChild ? Slot : 'button';
   return <Comp ref={ref} type={asChild ? undefined : 'button'} {...rest} onClick={(e: MouseEvent<HTMLButtonElement>) => { onClick?.(e); if (!e.defaultPrevented) c.setOpen(false); }} />;
 });
 

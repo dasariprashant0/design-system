@@ -32,6 +32,7 @@ export interface SelectProps {
   disabled?: boolean;
   /** Form field name; the value is submitted through a hidden input. */
   name?: string;
+  /** The parts of the component: a trigger and its content. */
   children?: ReactNode;
 }
 

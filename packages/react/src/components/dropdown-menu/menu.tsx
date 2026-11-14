@@ -19,6 +19,7 @@ export interface MenuCtx {
   /** Menubar only: ArrowLeft/ArrowRight inside the panel moves to the neighbouring menu. */
   step?: (dir: 1 | -1, from: Element | null) => void;
 }
+/** Internal: open state, trigger and ids shared by a menu and its parts. */
 export const MenuContext = createContext<MenuCtx>(null as never);
 
 export interface MenuProps {
@@ -28,9 +29,11 @@ export interface MenuProps {
   defaultOpen?: boolean;
   /** Called with the next open state. */
   onOpenChange?: (open: boolean) => void;
+  /** The parts of the component: a trigger and its content. */
   children?: ReactNode;
 }
 
+/** Internal: holds a menu's open state for DropdownMenu, ContextMenu and Menubar. */
 export function MenuRoot({open, defaultOpen = false, onOpenChange, children, extra}: MenuProps & {extra?: Partial<MenuCtx>}) {
   const [isOpen, setOpen] = useControllableState({value: open, defaultValue: defaultOpen, onChange: onOpenChange});
   const trigger = useRef<HTMLElement | null>(null), id = useId();
@@ -76,6 +79,7 @@ const Panel = forwardRef<HTMLDivElement, MenuContentProps>(function Panel({onEsc
   return <Floating ref={(n) => setRefs(n, el, forwarded)} anchor={() => (c.anchor ?? (() => c.trigger.current))()} role="menu" id={c.menuId} aria-orientation="vertical" aria-labelledby={c.anchor ? undefined : c.triggerId} tabIndex={-1} data-state="open" {...rest} onKeyDown={keydown} />;
 });
 
+/** Internal: the floating `role="menu"` panel with roving focus and type-ahead. Renders nothing while closed. */
 export const MenuContent = forwardRef<HTMLDivElement, MenuContentProps>(function MenuContent({className, ...props}, ref) {
   return useContext(MenuContext).open ? <Panel ref={ref} className={cx('menu-content', className)} {...props} /> : null;
 });
@@ -87,6 +91,7 @@ export interface MenuItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onS
   onSelect?: (event: Event) => void;
 }
 
+/** Internal: one menu entry; `role` picks menuitem, menuitemcheckbox or menuitemradio. */
 export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps & {role?: string}>(function MenuItem({role = 'menuitem', disabled, onSelect, onClick, onKeyDown, onPointerMove, onFocus, onBlur, ...rest}, ref) {
   const c = useContext(MenuContext);
   const choose = () => { const e = new Event('menu.itemSelect', {cancelable: true}); onSelect?.(e); if (!e.defaultPrevented) c.setOpen(false); };
@@ -108,6 +113,7 @@ export interface MenuCheckboxItemProps extends MenuItemProps {
   /** Called with the next state when the entry is chosen. */
   onCheckedChange?: (checked: boolean) => void;
 }
+/** Internal: a menu entry that toggles. */
 export const MenuCheckboxItem = forwardRef<HTMLDivElement, MenuCheckboxItemProps>(function MenuCheckboxItem({checked = false, onCheckedChange, onSelect, children, className, ...rest}, ref) {
   return (
     <MenuItem ref={ref} role="menuitemcheckbox" aria-checked={checked === 'indeterminate' ? 'mixed' : checked} data-state={checked === 'indeterminate' ? 'indeterminate' : checked ? 'checked' : 'unchecked'} className={cx('menu-item', className)} onSelect={(e) => { onCheckedChange?.(checked !== true); onSelect?.(e); }} {...rest}>
@@ -123,9 +129,11 @@ export interface MenuRadioGroupProps extends HTMLAttributes<HTMLDivElement> {
   /** Called with the value of the item the user chose. */
   onValueChange?: (value: string) => void;
 }
+/** Internal: a set of radio entries sharing one value. */
 export const MenuRadioGroup = forwardRef<HTMLDivElement, MenuRadioGroupProps>(function MenuRadioGroup({value, onValueChange, ...rest}, ref) {
   return <Radio.Provider value={{value, onValueChange}}><div ref={ref} role="group" {...rest} /></Radio.Provider>;
 });
+/** Internal: one choice in a radio group of menu entries. */
 export const MenuRadioItem = forwardRef<HTMLDivElement, MenuItemProps & {
   /** The value this item reports to its `MenuRadioGroup`. */
   value: string;
@@ -138,12 +146,15 @@ export const MenuRadioItem = forwardRef<HTMLDivElement, MenuItemProps & {
   );
 });
 
+/** Internal: groups menu entries. */
 export const MenuGroup = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function MenuGroup(props, ref) {
   return <div ref={ref} role="group" {...props} />;
 });
+/** Internal: a line between groups of entries. */
 export const MenuSeparator = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function MenuSeparator({className, ...rest}, ref) {
   return <div ref={ref} role="separator" aria-orientation="horizontal" className={cx('menu-sep', className)} {...rest} />;
 });
+/** Internal: a heading for a group of entries. */
 export const MenuLabel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function MenuLabel({className, ...rest}, ref) {
   return <div ref={ref} className={cx('menu-label', className)} {...rest} />;
 });

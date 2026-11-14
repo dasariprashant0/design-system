@@ -1,6 +1,6 @@
 'use client';
 import {createContext, forwardRef, useContext, useRef, type AnchorHTMLAttributes, type HTMLAttributes, type PointerEvent, type ReactNode, type RefObject} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {useControllableState} from '../../hooks/use-controllable-state';
 import {cx} from '../../utils/cx';
 import {setRefs} from '../../utils/overlay';
@@ -20,6 +20,7 @@ export interface HoverCardProps {
   openDelay?: number;
   /** Milliseconds before the card closes after the pointer leaves the trigger and the card. Default 300. */
   closeDelay?: number;
+  /** The parts of the component: a trigger and its content. */
   children?: ReactNode;
 }
 
@@ -37,7 +38,7 @@ export const HoverCardTrigger = forwardRef<HTMLAnchorElement, AnchorHTMLAttribut
   asChild?: boolean;
 }>(function HoverCardTrigger({asChild, ...rest}, ref) {
   const c = useContext(Context);
-  const Comp = asChild ? Slot.Root : 'a';
+  const Comp = asChild ? Slot : 'a';
   return <Comp ref={(n: HTMLAnchorElement | null) => setRefs(n, c.trigger, ref)} data-state={c.open ? 'open' : 'closed'} {...rest} onPointerEnter={(e: PointerEvent) => { if (e.pointerType !== 'touch') c.show(true, c.openDelay); }} onPointerLeave={() => c.show(false, c.closeDelay)} onFocus={() => c.show(true)} onBlur={() => c.show(false)} />;
 });
 

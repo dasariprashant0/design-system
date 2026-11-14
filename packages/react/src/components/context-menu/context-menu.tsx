@@ -1,6 +1,6 @@
 'use client';
 import {createContext, forwardRef, useContext, useEffect, useRef, useState, type HTMLAttributes, type PointerEvent} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {cx} from '../../utils/cx';
 import {setRefs} from '../../utils/overlay';
 import {MenuContent, MenuContext, MenuItem, MenuLabel, MenuRoot, MenuSeparator, openWith, type MenuContentProps, type MenuItemProps, type MenuProps} from '../dropdown-menu/menu';
@@ -28,7 +28,7 @@ export const ContextMenuTrigger = forwardRef<HTMLSpanElement, HTMLAttributes<HTM
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   useEffect(() => () => clearTimeout(timer.current), []);
   const open = (x: number, y: number) => { at(x, y); openWith('panel'); c.setOpen(true); };
-  const Comp = asChild ? Slot.Root : 'span';
+  const Comp = asChild ? Slot : 'span';
   return (
     <Comp
       ref={(n: HTMLSpanElement | null) => setRefs(n, c.trigger, ref)} data-state={c.open ? 'open' : 'closed'} {...rest}

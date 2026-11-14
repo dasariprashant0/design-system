@@ -1,5 +1,5 @@
 import {forwardRef, type HTMLAttributes} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {cx} from '../../utils/cx';
 
 export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
@@ -19,6 +19,6 @@ export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 
 /** A paragraph by default. */
 export const Text = forwardRef<HTMLParagraphElement, TextProps>(function Text({size = 'md', tone = 'default', truncate, asChild, className, ...rest}, ref) {
-  const Comp = asChild ? Slot.Root : 'p';
+  const Comp = asChild ? Slot : 'p';
   return <Comp ref={ref} className={cx('text', `text-${size}`, tone !== 'default' && `text-${tone}`, truncate && 'text-truncate', className)} {...rest} />;
 });

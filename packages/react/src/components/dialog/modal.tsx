@@ -1,6 +1,6 @@
 'use client';
 import {createContext, forwardRef, useContext, useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type DialogHTMLAttributes, type HTMLAttributes, type PointerEvent, type ReactNode} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {useControllableState} from '../../hooks/use-controllable-state';
 import {TABBABLE, setRefs, vetoed} from '../../utils/overlay';
 
@@ -20,9 +20,11 @@ export interface ModalProps {
   onOpenChange?: (open: boolean) => void;
   /** `false` opens it as a non-modal dialog: no backdrop, no focus trap, page stays interactive. Default true. */
   modal?: boolean;
+  /** The parts of the dialog: a trigger and its content. */
   children?: ReactNode;
 }
 
+/** Internal: holds the open state for Dialog, Drawer and AlertDialog (`open`, `defaultOpen`, `onOpenChange`, `modal`). */
 export function Modal({open, defaultOpen = false, onOpenChange, modal = true, children}: ModalProps) {
   const [isOpen, setOpen] = useControllableState({value: open, defaultValue: defaultOpen, onChange: onOpenChange});
   const [hasDesc, setHasDesc] = useState(false);
@@ -35,15 +37,17 @@ export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
   asChild?: boolean;
 }
 
+/** Internal: the opener behind DialogTrigger, DrawerTrigger and AlertDialogTrigger. */
 export const ModalTrigger = forwardRef<HTMLButtonElement, ModalButtonProps>(function ModalTrigger({asChild, onClick, ...rest}, ref) {
   const c = useContext(Context);
-  const Comp = asChild ? Slot.Root : 'button';
+  const Comp = asChild ? Slot : 'button';
   return <Comp ref={ref} type={asChild ? undefined : 'button'} aria-haspopup="dialog" aria-expanded={c.open} aria-controls={c.open ? c.contentId : undefined} data-state={c.open ? 'open' : 'closed'} {...rest} onClick={(e: React.MouseEvent<HTMLButtonElement>) => { onClick?.(e); if (!e.defaultPrevented) c.setOpen(!c.open); }} />;
 });
 
+/** Internal: the closer behind DialogClose, DrawerClose and the alert dialog buttons. */
 export const ModalClose = forwardRef<HTMLButtonElement, ModalButtonProps>(function ModalClose({asChild, onClick, ...rest}, ref) {
   const c = useContext(Context);
-  const Comp = asChild ? Slot.Root : 'button';
+  const Comp = asChild ? Slot : 'button';
   return <Comp ref={ref} type={asChild ? undefined : 'button'} {...rest} onClick={(e: React.MouseEvent<HTMLButtonElement>) => { onClick?.(e); if (!e.defaultPrevented) c.setOpen(false); }} />;
 });
 
@@ -104,14 +108,17 @@ const Panel = forwardRef<HTMLDialogElement, ModalContentProps>(function Panel({o
   );
 });
 
+/** Internal: the native `<dialog>` panel behind every modal component. Renders nothing while closed. */
 export const ModalContent = forwardRef<HTMLDialogElement, ModalContentProps>(function ModalContent(props, ref) {
   return useContext(Context).open ? <Panel ref={ref} {...props} /> : null;
 });
 
+/** Internal: the heading that names the dialog (`aria-labelledby`). */
 export const ModalTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(function ModalTitle(props, ref) {
   return <h2 ref={ref} id={useContext(Context).titleId} {...props} />;
 });
 
+/** Internal: the sentence that describes the dialog (`aria-describedby`, set only while rendered). */
 export const ModalDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(function ModalDescription(props, ref) {
   const {descId, setHasDesc} = useContext(Context);
   useEffect(() => { setHasDesc(true); return () => setHasDesc(false); }, [setHasDesc]);
