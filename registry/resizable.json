@@ -35,9 +35,9 @@
     "packages/react/src/components/resizable/resizable.tsx"
   ],
   "related": [
+    "app-shell",
     "aspect-ratio",
-    "box",
-    "container"
+    "box"
   ],
   "props": [
     {

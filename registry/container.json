@@ -29,9 +29,9 @@
     "packages/react/src/components/container/meta.json"
   ],
   "related": [
+    "app-shell",
     "aspect-ratio",
-    "box",
-    "direction-provider"
+    "box"
   ],
   "props": [
     {
@@ -39,7 +39,7 @@
       "props": [
         {
           "name": "size",
-          "type": "\"text\" | \"page\" | \"full\"",
+          "type": "\"page\" | \"text\" | \"full\"",
           "optional": true,
           "default": "'page'",
           "description": "`text` is a reading column, `page` the widest main column, `full` no limit."

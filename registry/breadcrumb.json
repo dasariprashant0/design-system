@@ -34,9 +34,9 @@
     "packages/react/src/components/breadcrumb/meta.json"
   ],
   "related": [
+    "breadcrumbs-auto",
     "menubar",
-    "navigation-menu",
-    "pagination"
+    "navbar"
   ],
   "props": [
     {

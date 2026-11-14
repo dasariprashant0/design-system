@@ -30,9 +30,9 @@
     "packages/react/src/components/grid/meta.json"
   ],
   "related": [
+    "app-shell",
     "aspect-ratio",
-    "box",
-    "container"
+    "box"
   ],
   "props": [
     {

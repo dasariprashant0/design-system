@@ -32,9 +32,9 @@
     "packages/react/src/components/flex/meta.json"
   ],
   "related": [
+    "app-shell",
     "aspect-ratio",
-    "box",
-    "container"
+    "box"
   ],
   "props": [
     {

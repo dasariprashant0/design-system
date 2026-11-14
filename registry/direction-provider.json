@@ -28,9 +28,9 @@
     "packages/react/src/components/direction-provider/meta.json"
   ],
   "related": [
+    "app-shell",
     "aspect-ratio",
-    "box",
-    "container"
+    "box"
   ],
   "props": [
     {

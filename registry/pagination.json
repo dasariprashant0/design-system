@@ -32,8 +32,8 @@
   ],
   "related": [
     "breadcrumb",
-    "menubar",
-    "navigation-menu"
+    "breadcrumbs-auto",
+    "menubar"
   ],
   "props": [
     {
