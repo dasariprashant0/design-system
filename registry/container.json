@@ -68,7 +68,7 @@
   "source": [
     {
       "path": "packages/react/src/components/container/container.tsx",
-      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {Slot} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\nexport interface ContainerProps extends HTMLAttributes<HTMLDivElement> {\n  /** `text` is a reading column, `page` the widest main column, `full` no limit. */\n  size?: 'text' | 'page' | 'full';\n  /** Render the child (a `main`, `section`) with the container styles. */\n  asChild?: boolean;\n}\n\n/** Centres content and limits its width. */\nexport const Container = forwardRef<HTMLDivElement, ContainerProps>(function Container({size = 'page', asChild, className, ...rest}, ref) {\n  const Comp = asChild ? Slot.Root : 'div';\n  return <Comp ref={ref} className={cx('container', `container-${size}`, className)} {...rest} />;\n});\n"
+      "content": "import {forwardRef, type HTMLAttributes} from 'react';\nimport {Slot} from '../../utils/slot';\nimport {cx} from '../../utils/cx';\n\nexport interface ContainerProps extends HTMLAttributes<HTMLDivElement> {\n  /** `text` is a reading column, `page` the widest main column, `full` no limit. */\n  size?: 'text' | 'page' | 'full';\n  /** Render the child (a `main`, `section`) with the container styles. */\n  asChild?: boolean;\n}\n\n/** Centres content and limits its width. */\nexport const Container = forwardRef<HTMLDivElement, ContainerProps>(function Container({size = 'page', asChild, className, ...rest}, ref) {\n  const Comp = asChild ? Slot : 'div';\n  return <Comp ref={ref} className={cx('container', `container-${size}`, className)} {...rest} />;\n});\n"
     },
     {
       "path": "packages/react/src/components/container/index.ts",

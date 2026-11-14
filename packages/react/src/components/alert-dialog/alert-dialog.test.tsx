@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react';
+import {render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {axe} from '../../test/axe';
 import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger} from './alert-dialog';
@@ -38,7 +38,8 @@ describe('AlertDialog', () => {
     const fn = vi.fn();
     render(ui(fn));
     await user.click(screen.getByRole('button', {name: 'Delete'}));
-    await user.click(await screen.findByRole('button', {name: 'Delete', hidden: false}).then(() => screen.getAllByRole('button', {name: 'Delete'}).at(-1)!));
+    // the page behind is inert in a browser (jsdom does not model that), so look inside the dialog
+    await user.click(within(await screen.findByRole('alertdialog')).getByRole('button', {name: 'Delete'}));
     expect(fn).toHaveBeenCalled();
     expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
   });

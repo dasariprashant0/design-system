@@ -1,5 +1,5 @@
 import {forwardRef, type AnchorHTMLAttributes, type ReactNode} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {cx} from '../../utils/cx';
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -18,7 +18,7 @@ export type RenderLink = (props: {href: string; className?: string; 'aria-curren
 
 /** An anchor with the Monoline underline. */
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link({external, asChild, className, children, ...rest}, ref) {
-  const Comp = asChild ? Slot.Root : 'a';
+  const Comp = asChild ? Slot : 'a';
   const extra = external ? {target: '_blank', rel: 'noopener noreferrer'} : {};
   return (
     <Comp ref={ref} className={cx('link', className)} {...extra} {...rest}>

@@ -1,5 +1,5 @@
 import {forwardRef, type CSSProperties, type HTMLAttributes} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {cx} from '../../utils/cx';
 
 export interface FlexProps extends HTMLAttributes<HTMLDivElement> {
@@ -25,7 +25,7 @@ export interface FlexProps extends HTMLAttributes<HTMLDivElement> {
  * baseline alignment, space-around or an inline container.
  */
 export const Flex = forwardRef<HTMLDivElement, FlexProps>(function Flex({direction = 'row', wrap, align, justify, gap, inline, asChild, className, style, ...rest}, ref) {
-  const Comp = asChild ? Slot.Root : 'div';
+  const Comp = asChild ? Slot : 'div';
   return (
     <Comp
       ref={ref}

@@ -4,7 +4,7 @@
   "category": "overlays",
   "description": "A menu of actions opened by right click or long press on an area.",
   "status": "stable",
-  "primitive": "radix-ui/ContextMenu",
+  "primitive": "native ARIA (shared positioning)",
   "css": [
     {
       "path": "packages/css/src/components/popover.css",
@@ -25,6 +25,10 @@
     "menu",
     "actions"
   ],
+  "uses": [
+    "dropdown-menu",
+    "popover"
+  ],
   "kind": "components",
   "import": "import {ContextMenu} from '@monoline/react'",
   "path": "packages/react/src/components/context-menu",
@@ -36,9 +40,8 @@
     "packages/react/src/components/context-menu/meta.json"
   ],
   "related": [
-    "alert-dialog",
-    "command",
-    "dialog"
+    "dropdown-menu",
+    "popover"
   ],
   "props": [
     {
@@ -90,7 +93,7 @@
   "source": [
     {
       "path": "packages/react/src/components/context-menu/context-menu.tsx",
-      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {ContextMenu as Radix} from 'radix-ui';\nimport {cx} from '../../utils/cx';\n\n/** The root of a right-click (or long-press) menu. Put a `ContextMenuTrigger` and a `ContextMenuContent` inside. */\nexport const ContextMenu = Radix.Root;\n/** The area that opens the menu when right-clicked or long-pressed; use `asChild` to make your own element the area. */\nexport const ContextMenuTrigger = Radix.Trigger;\n\n/** The floating panel that lists the menu entries, rendered in a portal. */\nexport const ContextMenuContent = forwardRef<ElementRef<typeof Radix.Content>, ComponentPropsWithoutRef<typeof Radix.Content>>(function ContextMenuContent({className, ...rest}, ref) {\n  return <Radix.Portal><Radix.Content ref={ref} className={cx('menu-content', className)} {...rest} /></Radix.Portal>;\n});\n\n/** A thin line that separates groups of entries. */\nexport const ContextMenuSeparator = forwardRef<ElementRef<typeof Radix.Separator>, ComponentPropsWithoutRef<typeof Radix.Separator>>(function ContextMenuSeparator({className, ...rest}, ref) {\n  return <Radix.Separator ref={ref} className={cx('menu-sep', className)} {...rest} />;\n});\n/** A non-interactive heading for a group of entries. */\nexport const ContextMenuLabel = forwardRef<ElementRef<typeof Radix.Label>, ComponentPropsWithoutRef<typeof Radix.Label>>(function ContextMenuLabel({className, ...rest}, ref) {\n  return <Radix.Label ref={ref} className={cx('menu-label', className)} {...rest} />;\n});\nexport interface ContextMenuItemProps extends ComponentPropsWithoutRef<typeof Radix.Item> {\n  /** `danger` highlights in the danger colour. */\n  tone?: 'default' | 'danger';\n}\n/** One action in the menu; call `onSelect` when it is chosen. */\nexport const ContextMenuItem = forwardRef<ElementRef<typeof Radix.Item>, ContextMenuItemProps>(function ContextMenuItem({className, tone = 'default', ...rest}, ref) {\n  return <Radix.Item ref={ref} data-variant={tone} className={cx('menu-item', className)} {...rest} />;\n});\n"
+      "content": "'use client';\nimport {createContext, forwardRef, useContext, useEffect, useRef, useState, type HTMLAttributes, type PointerEvent} from 'react';\nimport {Slot} from '../../utils/slot';\nimport {cx} from '../../utils/cx';\nimport {setRefs} from '../../utils/overlay';\nimport {MenuContent, MenuContext, MenuItem, MenuLabel, MenuRoot, MenuSeparator, openWith, type MenuContentProps, type MenuItemProps, type MenuProps} from '../dropdown-menu/menu';\n\nconst Point = createContext<(x: number, y: number) => void>(() => {});\n\n/** The root of a right-click (or long-press) menu. Put a `ContextMenuTrigger` and a `ContextMenuContent` inside. */\nexport function ContextMenu({children, ...props}: MenuProps) {\n  const [at, setAt] = useState({x: 0, y: 0});\n  const dot = useRef<HTMLSpanElement | null>(null);\n  return (\n    <MenuRoot {...props} extra={{anchor: () => dot.current}}>\n      <Point.Provider value={(x, y) => setAt({x, y})}>{children}</Point.Provider>\n      <span ref={dot} aria-hidden=\"true\" style={{position: 'fixed', left: at.x, top: at.y, width: 0, height: 0, pointerEvents: 'none'}} />\n    </MenuRoot>\n  );\n}\n\n/** The area that opens the menu when right-clicked or long-pressed; use `asChild` to make your own element the area. */\nexport const ContextMenuTrigger = forwardRef<HTMLSpanElement, HTMLAttributes<HTMLSpanElement> & {\n  /** Render your own element instead of a span; it receives the props and handlers. */\n  asChild?: boolean;\n}>(function ContextMenuTrigger({asChild, onContextMenu, onPointerDown, onPointerUp, onPointerMove, ...rest}, ref) {\n  const c = useContext(MenuContext), at = useContext(Point);\n  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);\n  useEffect(() => () => clearTimeout(timer.current), []);\n  const open = (x: number, y: number) => { at(x, y); openWith('panel'); c.setOpen(true); };\n  const Comp = asChild ? Slot : 'span';\n  return (\n    <Comp\n      ref={(n: HTMLSpanElement | null) => setRefs(n, c.trigger, ref)} data-state={c.open ? 'open' : 'closed'} {...rest}\n      onContextMenu={(e: React.MouseEvent) => { onContextMenu?.(e as never); if (e.defaultPrevented) return; e.preventDefault(); clearTimeout(timer.current); open(e.clientX, e.clientY); }}\n      onPointerDown={(e: PointerEvent) => { onPointerDown?.(e as never); if (e.pointerType === 'touch') { const {clientX: x, clientY: y} = e; timer.current = setTimeout(() => open(x, y), 700); } }}\n      onPointerMove={(e: PointerEvent) => { onPointerMove?.(e as never); clearTimeout(timer.current); }}\n      onPointerUp={(e: PointerEvent) => { onPointerUp?.(e as never); clearTimeout(timer.current); }}\n    />\n  );\n});\n\n/** The floating panel that lists the menu entries, opened at the pointer. */\nexport const ContextMenuContent = forwardRef<HTMLDivElement, MenuContentProps>(function ContextMenuContent({side = 'right', align = 'start', ...rest}, ref) {\n  return <MenuContent ref={ref} side={side} align={align} {...rest} />;\n});\n\n/** A thin line that separates groups of entries. */\nexport const ContextMenuSeparator = MenuSeparator;\n/** A non-interactive heading for a group of entries. */\nexport const ContextMenuLabel = MenuLabel;\nexport interface ContextMenuItemProps extends MenuItemProps {\n  /** `danger` highlights in the danger colour. */\n  tone?: 'default' | 'danger';\n}\n/** One action in the menu; call `onSelect` when it is chosen. */\nexport const ContextMenuItem = forwardRef<HTMLDivElement, ContextMenuItemProps>(function ContextMenuItem({className, tone = 'default', ...rest}, ref) {\n  return <MenuItem ref={ref} data-variant={tone} className={cx('menu-item', className)} {...rest} />;\n});\n"
     },
     {
       "path": "packages/react/src/components/context-menu/index.ts",
@@ -98,7 +101,7 @@
     },
     {
       "path": "packages/react/src/components/context-menu/meta.json",
-      "content": "{\"name\":\"context-menu\",\"title\":\"Context menu\",\"category\":\"overlays\",\"description\":\"A menu of actions opened by right click or long press on an area.\",\"status\":\"stable\",\"primitive\":\"radix-ui/ContextMenu\",\"css\":[\"popover.css\",\"17-dropdown-menu.css\"],\"a11y\":[\"Opens with right click, long press or the context-menu key (Shift+F10).\",\"Arrow keys move, Enter or Space selects, Escape closes and returns focus.\",\"Every action must also exist elsewhere in the UI for people who cannot open it.\"],\"keywords\":[\"right click\",\"menu\",\"actions\"]}\n"
+      "content": "{\"name\":\"context-menu\",\"title\":\"Context menu\",\"category\":\"overlays\",\"description\":\"A menu of actions opened by right click or long press on an area.\",\"status\":\"stable\",\"primitive\":\"native ARIA (shared positioning)\",\"css\":[\"popover.css\",\"17-dropdown-menu.css\"],\"a11y\":[\"Opens with right click, long press or the context-menu key (Shift+F10).\",\"Arrow keys move, Enter or Space selects, Escape closes and returns focus.\",\"Every action must also exist elsewhere in the UI for people who cannot open it.\"],\"keywords\":[\"right click\",\"menu\",\"actions\"],\"uses\":[\"dropdown-menu\",\"popover\"]}\n"
     }
   ]
 }

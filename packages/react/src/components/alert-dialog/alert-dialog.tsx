@@ -1,20 +1,15 @@
-import {forwardRef, type ComponentPropsWithoutRef, type ElementRef, type HTMLAttributes} from 'react';
-import {AlertDialog as Radix} from 'radix-ui';
+import {forwardRef, type ButtonHTMLAttributes, type HTMLAttributes} from 'react';
 import {cx} from '../../utils/cx';
+import {Modal, ModalClose, ModalContent, ModalDescription, ModalTitle, ModalTrigger, type ModalContentProps} from '../dialog/modal';
 
-/** The root of a confirmation dialog that must be answered. Holds the open state; put `AlertDialogTrigger` and `AlertDialogContent` inside. Unlike `Dialog` it cannot be dismissed by clicking outside. */
-export const AlertDialog = Radix.Root;
+/** The root of a confirmation dialog that must be answered, built on the native `<dialog>` element. Holds the open state; put `AlertDialogTrigger` and `AlertDialogContent` inside. Unlike `Dialog` it cannot be dismissed by clicking outside. */
+export const AlertDialog = Modal;
 /** The element (usually a `Button`) that opens the alert dialog; use `asChild` to render your own element. */
-export const AlertDialogTrigger = Radix.Trigger;
+export const AlertDialogTrigger = ModalTrigger;
 
-/** The panel with its overlay. Always include a title and description. */
-export const AlertDialogContent = forwardRef<ElementRef<typeof Radix.Content>, ComponentPropsWithoutRef<typeof Radix.Content>>(function AlertDialogContent({className, ...rest}, ref) {
-  return (
-    <Radix.Portal>
-      <Radix.Overlay className="dialog-overlay" />
-      <Radix.Content ref={ref} className={cx('dialog-content', className)} {...rest} />
-    </Radix.Portal>
-  );
+/** The panel (`role="alertdialog"`, opened with `showModal()`). Always include a title and description. Escape cancels; clicking outside does not. */
+export const AlertDialogContent = forwardRef<HTMLDialogElement, Omit<ModalContentProps, 'dismissOnOutside'>>(function AlertDialogContent({className, ...rest}, ref) {
+  return <ModalContent ref={ref} role="alertdialog" dismissOnOutside={false} className={cx('dialog-content', className)} {...rest} />;
 });
 
 /** Wrapper for the title and description at the top of the dialog. */
@@ -23,19 +18,24 @@ export const AlertDialogHeader = ({className, ...rest}: HTMLAttributes<HTMLDivEl
 export const AlertDialogFooter = ({className, ...rest}: HTMLAttributes<HTMLDivElement>) => <div className={cx('dialog-footer', className)} {...rest} />;
 
 /** The dialog's accessible name, rendered as the heading. Required. */
-export const AlertDialogTitle = forwardRef<ElementRef<typeof Radix.Title>, ComponentPropsWithoutRef<typeof Radix.Title>>(function AlertDialogTitle({className, ...rest}, ref) {
-  return <Radix.Title ref={ref} className={cx('dialog-title', className)} {...rest} />;
+export const AlertDialogTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(function AlertDialogTitle({className, ...rest}, ref) {
+  return <ModalTitle ref={ref} className={cx('dialog-title', className)} {...rest} />;
 });
 /** Explains what will happen if the user confirms; read out when the dialog opens. Required. */
-export const AlertDialogDescription = forwardRef<ElementRef<typeof Radix.Description>, ComponentPropsWithoutRef<typeof Radix.Description>>(function AlertDialogDescription({className, ...rest}, ref) {
-  return <Radix.Description ref={ref} className={cx('dialog-description', className)} {...rest} />;
+export const AlertDialogDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(function AlertDialogDescription({className, ...rest}, ref) {
+  return <ModalDescription ref={ref} className={cx('dialog-description', className)} {...rest} />;
 });
 
-/** Confirms. Styled as the danger button by default; pass `className="btn-solid"` for a non-destructive confirm. */
-export const AlertDialogAction = forwardRef<ElementRef<typeof Radix.Action>, ComponentPropsWithoutRef<typeof Radix.Action>>(function AlertDialogAction({className, ...rest}, ref) {
-  return <Radix.Action ref={ref} className={cx('btn btn-danger', className)} {...rest} />;
+type ActionProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  /** Render your own element instead of a button. */
+  asChild?: boolean;
+};
+
+/** Confirms and closes. Styled as the danger button by default; pass `className="btn-solid"` for a non-destructive confirm. */
+export const AlertDialogAction = forwardRef<HTMLButtonElement, ActionProps>(function AlertDialogAction({className, ...rest}, ref) {
+  return <ModalClose ref={ref} className={cx('btn btn-danger', className)} {...rest} />;
 });
-/** Cancels. Receives focus first so Enter never confirms by accident. */
-export const AlertDialogCancel = forwardRef<ElementRef<typeof Radix.Cancel>, ComponentPropsWithoutRef<typeof Radix.Cancel>>(function AlertDialogCancel({className, ...rest}, ref) {
-  return <Radix.Cancel ref={ref} className={cx('btn btn-line', className)} {...rest} />;
+/** Cancels and closes. Receives focus first so Enter never confirms by accident. */
+export const AlertDialogCancel = forwardRef<HTMLButtonElement, ActionProps>(function AlertDialogCancel({className, ...rest}, ref) {
+  return <ModalClose ref={ref} data-autofocus="" className={cx('btn btn-line', className)} {...rest} />;
 });

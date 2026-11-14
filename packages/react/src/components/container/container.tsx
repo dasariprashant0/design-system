@@ -1,5 +1,5 @@
 import {forwardRef, type HTMLAttributes} from 'react';
-import {Slot} from 'radix-ui';
+import {Slot} from '../../utils/slot';
 import {cx} from '../../utils/cx';
 
 export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,6 +11,6 @@ export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
 
 /** Centres content and limits its width. */
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(function Container({size = 'page', asChild, className, ...rest}, ref) {
-  const Comp = asChild ? Slot.Root : 'div';
+  const Comp = asChild ? Slot : 'div';
   return <Comp ref={ref} className={cx('container', `container-${size}`, className)} {...rest} />;
 });

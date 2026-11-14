@@ -86,7 +86,7 @@
       "category": "overlays",
       "description": "A modal that interrupts to confirm a destructive or irreversible action.",
       "status": "stable",
-      "primitive": "radix-ui/AlertDialog",
+      "primitive": "native <dialog>",
       "css": [
         "dialog.css",
         "02-buttons.css"
@@ -103,6 +103,9 @@
         "delete",
         "modal"
       ],
+      "uses": [
+        "dialog"
+      ],
       "kind": "components",
       "import": "import {AlertDialog} from '@monoline/react'",
       "path": "packages/react/src/components/alert-dialog",
@@ -114,8 +117,6 @@
         "packages/react/src/components/alert-dialog/meta.json"
       ],
       "related": [
-        "command",
-        "context-menu",
         "dialog"
       ],
       "propNames": []
@@ -158,70 +159,6 @@
       ],
       "propNames": [
         "interval"
-      ]
-    },
-    {
-      "name": "app-shell",
-      "title": "App shell",
-      "category": "layout",
-      "description": "The frame of an app: skip link, navbar, sidebar, main and aside in one responsive grid.",
-      "status": "beta",
-      "uses": [
-        "sidebar",
-        "navbar"
-      ],
-      "css": [
-        "09-links.css",
-        "02-buttons.css",
-        "icon-button.css",
-        "tooltip.css",
-        "dialog.css",
-        "drawer.css",
-        "sidebar.css",
-        "navbar.css",
-        "app-shell.css"
-      ],
-      "a11y": [
-        "Landmarks: banner (the navbar), navigation (the sidebar), main and complementary (the aside, named by asideLabel).",
-        "The first focusable element is a skip link to the main region; main takes focus when it is used.",
-        "The sidebar shows from 800px and the aside beside the page from 1100px; below those they move into a drawer or stack under the page.",
-        "scroll=\"page\" keeps the navbar and sidebar in view while the page scrolls; scroll=\"contained\" scrolls the regions on their own."
-      ],
-      "keywords": [
-        "app shell",
-        "layout",
-        "dashboard",
-        "admin",
-        "frame",
-        "skip link",
-        "sticky"
-      ],
-      "kind": "components",
-      "import": "import {AppShell} from '@monoline/react'",
-      "path": "packages/react/src/components/app-shell",
-      "files": [
-        "packages/react/src/components/app-shell/app-shell.demo.tsx",
-        "packages/react/src/components/app-shell/app-shell.test.tsx",
-        "packages/react/src/components/app-shell/app-shell.tsx",
-        "packages/react/src/components/app-shell/index.ts",
-        "packages/react/src/components/app-shell/meta.json"
-      ],
-      "related": [
-        "sidebar",
-        "navbar"
-      ],
-      "propNames": [
-        "navbar",
-        "sidebar",
-        "aside",
-        "asideLabel",
-        "skipLinkLabel",
-        "mainId",
-        "scroll",
-        "collapsed",
-        "defaultCollapsed",
-        "onCollapsedChange",
-        "children"
       ]
     },
     {
@@ -299,9 +236,9 @@
         "packages/react/src/components/aspect-ratio/meta.json"
       ],
       "related": [
-        "app-shell",
         "box",
-        "container"
+        "container",
+        "direction-provider"
       ],
       "propNames": []
     },
@@ -625,20 +562,17 @@
       "description": "App frame with sidebar, top bar and content that collapses to a drawer on small screens.",
       "status": "beta",
       "uses": [
-        "app-shell",
-        "sidebar",
-        "navbar"
+        "container",
+        "stack",
+        "drawer",
+        "button"
       ],
       "css": [
-        "09-links.css",
+        "container.css",
+        "stack.css",
         "02-buttons.css",
-        "icon-button.css",
-        "tooltip.css",
         "dialog.css",
         "drawer.css",
-        "sidebar.css",
-        "navbar.css",
-        "app-shell.css",
         "block-dashboard-shell.css"
       ],
       "a11y": [
@@ -669,9 +603,10 @@
         "packages/react/src/components/block-dashboard-shell/meta.json"
       ],
       "related": [
-        "app-shell",
-        "sidebar",
-        "navbar"
+        "container",
+        "stack",
+        "drawer",
+        "button"
       ],
       "propNames": [
         "brand",
@@ -1258,9 +1193,9 @@
         "packages/react/src/components/box/meta.json"
       ],
       "related": [
-        "app-shell",
         "aspect-ratio",
-        "container"
+        "container",
+        "direction-provider"
       ],
       "propNames": [
         "padding",
@@ -1300,54 +1235,13 @@
         "packages/react/src/components/breadcrumb/meta.json"
       ],
       "related": [
-        "breadcrumbs-auto",
         "menubar",
-        "navbar"
+        "navigation-menu",
+        "pagination"
       ],
       "propNames": [
         "items",
         "aria-label"
-      ]
-    },
-    {
-      "name": "breadcrumbs-auto",
-      "title": "Breadcrumbs from path",
-      "category": "navigation",
-      "description": "A breadcrumb built from the current URL path.",
-      "status": "beta",
-      "uses": [
-        "breadcrumb"
-      ],
-      "css": [
-        "18-navigation.css",
-        "09-links.css"
-      ],
-      "a11y": [
-        "Same as Breadcrumb: a navigation landmark with an ordered list; the last crumb is the current page and not a link."
-      ],
-      "keywords": [
-        "breadcrumb",
-        "path",
-        "url",
-        "router"
-      ],
-      "kind": "components",
-      "import": "import {BreadcrumbsAuto} from '@monoline/react'",
-      "path": "packages/react/src/components/breadcrumbs-auto",
-      "files": [
-        "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.demo.tsx",
-        "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.test.tsx",
-        "packages/react/src/components/breadcrumbs-auto/breadcrumbs-auto.tsx",
-        "packages/react/src/components/breadcrumbs-auto/index.ts",
-        "packages/react/src/components/breadcrumbs-auto/meta.json"
-      ],
-      "related": [
-        "breadcrumb"
-      ],
-      "propNames": [
-        "pathname",
-        "labels",
-        "homeLabel"
       ]
     },
     {
@@ -1783,7 +1677,7 @@
       "category": "overlays",
       "description": "A searchable palette of actions that opens over the page, with an optional global shortcut.",
       "status": "stable",
-      "primitive": "radix-ui/Dialog",
+      "primitive": "native <dialog>",
       "css": [
         "dialog.css",
         "command.css"
@@ -1802,6 +1696,9 @@
         "search",
         "shortcut"
       ],
+      "uses": [
+        "dialog"
+      ],
       "kind": "components",
       "import": "import {Command} from '@monoline/react'",
       "path": "packages/react/src/components/command",
@@ -1813,8 +1710,6 @@
         "packages/react/src/components/command/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "context-menu",
         "dialog"
       ],
       "propNames": [
@@ -1901,9 +1796,9 @@
         "packages/react/src/components/container/meta.json"
       ],
       "related": [
-        "app-shell",
         "aspect-ratio",
-        "box"
+        "box",
+        "direction-provider"
       ],
       "propNames": [
         "size",
@@ -1916,7 +1811,7 @@
       "category": "overlays",
       "description": "A menu of actions opened by right click or long press on an area.",
       "status": "stable",
-      "primitive": "radix-ui/ContextMenu",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css",
         "17-dropdown-menu.css"
@@ -1931,6 +1826,10 @@
         "menu",
         "actions"
       ],
+      "uses": [
+        "dropdown-menu",
+        "popover"
+      ],
       "kind": "components",
       "import": "import {ContextMenu} from '@monoline/react'",
       "path": "packages/react/src/components/context-menu",
@@ -1942,9 +1841,8 @@
         "packages/react/src/components/context-menu/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "dialog"
+        "dropdown-menu",
+        "popover"
       ],
       "propNames": [
         "tone"
@@ -2137,7 +2035,6 @@
       "category": "forms",
       "description": "A button that opens a calendar and shows the chosen date.",
       "status": "stable",
-      "primitive": "radix-ui/Popover",
       "uses": [
         "calendar",
         "popover",
@@ -2192,7 +2089,6 @@
       "category": "forms",
       "description": "A button that opens a range calendar and two typed date fields.",
       "status": "stable",
-      "primitive": "radix-ui/Popover",
       "uses": [
         "range-calendar",
         "popover",
@@ -2288,7 +2184,7 @@
       "category": "overlays",
       "description": "A modal window for a question or short task that blocks the page.",
       "status": "stable",
-      "primitive": "radix-ui/Dialog",
+      "primitive": "native <dialog>",
       "css": [
         "dialog.css"
       ],
@@ -2310,7 +2206,8 @@
         "packages/react/src/components/dialog/dialog.test.tsx",
         "packages/react/src/components/dialog/dialog.tsx",
         "packages/react/src/components/dialog/index.ts",
-        "packages/react/src/components/dialog/meta.json"
+        "packages/react/src/components/dialog/meta.json",
+        "packages/react/src/components/dialog/modal.tsx"
       ],
       "related": [
         "alert-dialog",
@@ -2351,9 +2248,9 @@
         "packages/react/src/components/direction-provider/meta.json"
       ],
       "related": [
-        "app-shell",
         "aspect-ratio",
-        "box"
+        "box",
+        "container"
       ],
       "propNames": [
         "dir",
@@ -2407,7 +2304,7 @@
       "category": "overlays",
       "description": "A panel that slides in from an edge for secondary tasks, details or navigation.",
       "status": "stable",
-      "primitive": "radix-ui/Dialog",
+      "primitive": "native <dialog>",
       "css": [
         "dialog.css",
         "drawer.css"
@@ -2423,6 +2320,9 @@
         "slide over",
         "offcanvas"
       ],
+      "uses": [
+        "dialog"
+      ],
       "kind": "components",
       "import": "import {Drawer} from '@monoline/react'",
       "path": "packages/react/src/components/drawer",
@@ -2434,9 +2334,7 @@
         "packages/react/src/components/drawer/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "context-menu"
+        "dialog"
       ],
       "propNames": [
         "side",
@@ -2449,7 +2347,7 @@
       "category": "overlays",
       "description": "A list of actions that opens from a button.",
       "status": "stable",
-      "primitive": "radix-ui/DropdownMenu",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css",
         "17-dropdown-menu.css"
@@ -2465,6 +2363,9 @@
         "context",
         "options"
       ],
+      "uses": [
+        "popover"
+      ],
       "kind": "components",
       "import": "import {DropdownMenu} from '@monoline/react'",
       "path": "packages/react/src/components/dropdown-menu",
@@ -2473,12 +2374,11 @@
         "packages/react/src/components/dropdown-menu/dropdown-menu.test.tsx",
         "packages/react/src/components/dropdown-menu/dropdown-menu.tsx",
         "packages/react/src/components/dropdown-menu/index.ts",
+        "packages/react/src/components/dropdown-menu/menu.tsx",
         "packages/react/src/components/dropdown-menu/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "context-menu"
+        "popover"
       ],
       "propNames": [
         "tone"
@@ -2680,9 +2580,9 @@
         "packages/react/src/components/flex/meta.json"
       ],
       "related": [
-        "app-shell",
         "aspect-ratio",
-        "box"
+        "box",
+        "container"
       ],
       "propNames": [
         "direction",
@@ -2769,9 +2669,9 @@
         "packages/react/src/components/grid/meta.json"
       ],
       "related": [
-        "app-shell",
         "aspect-ratio",
-        "box"
+        "box",
+        "container"
       ],
       "propNames": [
         "columns",
@@ -2863,7 +2763,7 @@
       "category": "overlays",
       "description": "Preview extra content when a link or element is hovered or focused.",
       "status": "stable",
-      "primitive": "radix-ui/HoverCard",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css"
       ],
@@ -2878,6 +2778,9 @@
         "peek",
         "profile card"
       ],
+      "uses": [
+        "popover"
+      ],
       "kind": "components",
       "import": "import {HoverCard} from '@monoline/react'",
       "path": "packages/react/src/components/hover-card",
@@ -2889,11 +2792,16 @@
         "packages/react/src/components/hover-card/meta.json"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "context-menu"
+        "popover"
       ],
-      "propNames": []
+      "propNames": [
+        "open",
+        "defaultOpen",
+        "onOpenChange",
+        "openDelay",
+        "closeDelay",
+        "children"
+      ]
     },
     {
       "name": "icon-button",
@@ -3322,7 +3230,7 @@
       "category": "navigation",
       "description": "A horizontal bar of menus, like File, Edit and View in a desktop app.",
       "status": "stable",
-      "primitive": "radix-ui/Menubar",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css",
         "17-dropdown-menu.css",
@@ -3337,6 +3245,10 @@
         "file edit view",
         "toolbar menu"
       ],
+      "uses": [
+        "dropdown-menu",
+        "popover"
+      ],
       "kind": "components",
       "import": "import {Menubar} from '@monoline/react'",
       "path": "packages/react/src/components/menubar",
@@ -3348,9 +3260,8 @@
         "packages/react/src/components/menubar/meta.json"
       ],
       "related": [
-        "breadcrumb",
-        "breadcrumbs-auto",
-        "navbar"
+        "dropdown-menu",
+        "popover"
       ],
       "propNames": [
         "tone"
@@ -3449,62 +3360,6 @@
       ]
     },
     {
-      "name": "navbar",
-      "title": "Navbar",
-      "category": "navigation",
-      "description": "A top bar with brand, links and an actions slot; links move into a drawer on small screens.",
-      "status": "beta",
-      "uses": [
-        "drawer",
-        "button"
-      ],
-      "css": [
-        "02-buttons.css",
-        "dialog.css",
-        "drawer.css",
-        "navbar.css"
-      ],
-      "a11y": [
-        "A header (banner landmark) with the links in their own navigation landmark named by linksLabel; the current page has aria-current=\"page\".",
-        "Below 800px a Menu button opens the links in a drawer: focus is trapped, Escape closes it and focus returns to the button.",
-        "Put it first in the page, before main, so a skip link can jump past it."
-      ],
-      "keywords": [
-        "navbar",
-        "top bar",
-        "header",
-        "app bar",
-        "navigation",
-        "sticky",
-        "router",
-        "renderLink"
-      ],
-      "kind": "components",
-      "import": "import {Navbar} from '@monoline/react'",
-      "path": "packages/react/src/components/navbar",
-      "files": [
-        "packages/react/src/components/navbar/index.ts",
-        "packages/react/src/components/navbar/meta.json",
-        "packages/react/src/components/navbar/navbar.demo.tsx",
-        "packages/react/src/components/navbar/navbar.test.tsx",
-        "packages/react/src/components/navbar/navbar.tsx"
-      ],
-      "related": [
-        "drawer",
-        "button"
-      ],
-      "propNames": [
-        "brand",
-        "links",
-        "linksLabel",
-        "renderLink",
-        "leading",
-        "actions",
-        "menuLabel",
-        "sticky"
-      ]
-    },
-    {
       "name": "navigation-menu",
       "title": "Navigation menu",
       "category": "navigation",
@@ -3537,8 +3392,8 @@
       ],
       "related": [
         "breadcrumb",
-        "breadcrumbs-auto",
-        "menubar"
+        "menubar",
+        "pagination"
       ],
       "propNames": []
     },
@@ -3826,49 +3681,6 @@
       ]
     },
     {
-      "name": "page-header",
-      "title": "Page header",
-      "category": "layout",
-      "description": "The top of a page: breadcrumbs, title, description and actions.",
-      "status": "beta",
-      "css": [
-        "page-header.css"
-      ],
-      "a11y": [
-        "The title is a real heading (h1 by default); keep one h1 per page.",
-        "Breadcrumbs and actions are slots, so they keep their own landmark and keyboard behaviour."
-      ],
-      "keywords": [
-        "page header",
-        "title",
-        "breadcrumbs",
-        "actions",
-        "toolbar"
-      ],
-      "kind": "components",
-      "import": "import {PageHeader} from '@monoline/react'",
-      "path": "packages/react/src/components/page-header",
-      "files": [
-        "packages/react/src/components/page-header/index.ts",
-        "packages/react/src/components/page-header/meta.json",
-        "packages/react/src/components/page-header/page-header.demo.tsx",
-        "packages/react/src/components/page-header/page-header.test.tsx",
-        "packages/react/src/components/page-header/page-header.tsx"
-      ],
-      "related": [
-        "app-shell",
-        "aspect-ratio",
-        "box"
-      ],
-      "propNames": [
-        "title",
-        "description",
-        "breadcrumbs",
-        "actions",
-        "level"
-      ]
-    },
-    {
       "name": "pagination",
       "title": "Pagination",
       "category": "navigation",
@@ -3899,8 +3711,8 @@
       ],
       "related": [
         "breadcrumb",
-        "breadcrumbs-auto",
-        "menubar"
+        "menubar",
+        "navigation-menu"
       ],
       "propNames": [
         "page",
@@ -4003,7 +3815,7 @@
       "category": "overlays",
       "description": "A floating panel of content or controls anchored to a button.",
       "status": "stable",
-      "primitive": "radix-ui/Popover",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "popover.css"
       ],
@@ -4020,6 +3832,7 @@
       "import": "import {Popover} from '@monoline/react'",
       "path": "packages/react/src/components/popover",
       "files": [
+        "packages/react/src/components/popover/float.tsx",
         "packages/react/src/components/popover/index.ts",
         "packages/react/src/components/popover/meta.json",
         "packages/react/src/components/popover/popover.demo.tsx",
@@ -4031,7 +3844,16 @@
         "command",
         "context-menu"
       ],
-      "propNames": []
+      "propNames": [
+        "open",
+        "defaultOpen",
+        "onOpenChange",
+        "children",
+        "onEscapeKeyDown",
+        "onInteractOutside",
+        "onOpenAutoFocus",
+        "onCloseAutoFocus"
+      ]
     },
     {
       "name": "progress",
@@ -4240,9 +4062,9 @@
         "packages/react/src/components/resizable/resizable.tsx"
       ],
       "related": [
-        "app-shell",
         "aspect-ratio",
-        "box"
+        "box",
+        "container"
       ],
       "propNames": [
         "direction",
@@ -4393,9 +4215,9 @@
         "packages/react/src/components/scroll-area/scroll-area.tsx"
       ],
       "related": [
-        "app-shell",
         "aspect-ratio",
-        "box"
+        "box",
+        "container"
       ],
       "propNames": [
         "orientation",
@@ -4491,7 +4313,7 @@
       "category": "forms",
       "description": "Pick one value from a list of five or more options.",
       "status": "stable",
-      "primitive": "radix-ui/Select",
+      "primitive": "native ARIA (shared positioning)",
       "uses": [
         "field"
       ],
@@ -4522,8 +4344,20 @@
         "field"
       ],
       "propNames": [
+        "value",
+        "defaultValue",
+        "onValueChange",
+        "open",
+        "defaultOpen",
+        "onOpenChange",
+        "disabled",
+        "name",
+        "children",
         "size",
-        "invalid"
+        "invalid",
+        "position",
+        "value",
+        "disabled"
       ]
     },
     {
@@ -4556,9 +4390,9 @@
         "packages/react/src/components/separator/separator.tsx"
       ],
       "related": [
-        "app-shell",
         "aspect-ratio",
-        "box"
+        "box",
+        "container"
       ],
       "propNames": []
     },
@@ -4602,80 +4436,6 @@
         "button"
       ],
       "propNames": []
-    },
-    {
-      "name": "sidebar",
-      "title": "Sidebar",
-      "category": "navigation",
-      "description": "A collapsible navigation sidebar with groups, icons and a mobile drawer.",
-      "status": "beta",
-      "uses": [
-        "drawer",
-        "tooltip",
-        "button",
-        "icon-button"
-      ],
-      "css": [
-        "02-buttons.css",
-        "icon-button.css",
-        "tooltip.css",
-        "dialog.css",
-        "drawer.css",
-        "sidebar.css"
-      ],
-      "a11y": [
-        "A navigation landmark named by the label prop, holding labelled lists of links; the current page has aria-current=\"page\".",
-        "ArrowUp, ArrowDown, Home and End move focus between items; Tab still moves through them in order.",
-        "Collapsing keeps every label in the accessibility tree; a tooltip shows it on hover and keyboard focus. The toggle reports aria-expanded.",
-        "Below 800px the sidebar is hidden and the Menu button opens it in a left drawer: focus is trapped, Escape closes it and focus returns to the button. Choosing a link closes it.",
-        "In right-to-left layouts the sidebar sits on the right and the drawer opens from the right."
-      ],
-      "keywords": [
-        "sidebar",
-        "side nav",
-        "navigation",
-        "collapsible",
-        "app shell",
-        "off-canvas",
-        "router",
-        "renderLink",
-        "asChild"
-      ],
-      "kind": "components",
-      "import": "import {Sidebar} from '@monoline/react'",
-      "path": "packages/react/src/components/sidebar",
-      "files": [
-        "packages/react/src/components/sidebar/index.ts",
-        "packages/react/src/components/sidebar/meta.json",
-        "packages/react/src/components/sidebar/sidebar.demo.tsx",
-        "packages/react/src/components/sidebar/sidebar.test.tsx",
-        "packages/react/src/components/sidebar/sidebar.tsx"
-      ],
-      "related": [
-        "drawer",
-        "tooltip",
-        "button",
-        "icon-button"
-      ],
-      "propNames": [
-        "collapsed",
-        "defaultCollapsed",
-        "onCollapsedChange",
-        "children",
-        "label",
-        "drawerTitle",
-        "renderLink",
-        "children",
-        "label",
-        "children",
-        "href",
-        "icon",
-        "current",
-        "asChild",
-        "children",
-        "label",
-        "children"
-      ]
     },
     {
       "name": "skeleton",
@@ -4959,9 +4719,9 @@
         "packages/react/src/components/stack/stack.tsx"
       ],
       "related": [
-        "app-shell",
         "aspect-ratio",
-        "box"
+        "box",
+        "container"
       ],
       "propNames": [
         "direction",
@@ -5041,8 +4801,8 @@
       ],
       "related": [
         "breadcrumb",
-        "breadcrumbs-auto",
-        "menubar"
+        "menubar",
+        "navigation-menu"
       ],
       "propNames": [
         "steps",
@@ -5160,8 +4920,8 @@
       ],
       "related": [
         "breadcrumb",
-        "breadcrumbs-auto",
-        "menubar"
+        "menubar",
+        "navigation-menu"
       ],
       "propNames": []
     },
@@ -5764,7 +5524,7 @@
       "category": "overlays",
       "description": "Short hint text on hover and keyboard focus.",
       "status": "stable",
-      "primitive": "radix-ui/Tooltip",
+      "primitive": "native ARIA (shared positioning)",
       "css": [
         "tooltip.css"
       ],
@@ -5778,6 +5538,9 @@
         "title",
         "hover"
       ],
+      "uses": [
+        "popover"
+      ],
       "kind": "components",
       "import": "import {Tooltip} from '@monoline/react'",
       "path": "packages/react/src/components/tooltip",
@@ -5789,9 +5552,7 @@
         "packages/react/src/components/tooltip/tooltip.tsx"
       ],
       "related": [
-        "alert-dialog",
-        "command",
-        "context-menu"
+        "popover"
       ],
       "propNames": [
         "content",

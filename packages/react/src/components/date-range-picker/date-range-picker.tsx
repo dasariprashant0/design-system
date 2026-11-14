@@ -1,6 +1,6 @@
 'use client';
 import {forwardRef, useEffect, useId, useState} from 'react';
-import {Popover as Radix} from 'radix-ui';
+import {Popover, PopoverContent, PopoverTrigger} from '../popover';
 import {RangeCalendar, type RangeCalendarProps, type DateRange} from '../range-calendar';
 import {cx} from '../../utils/cx';
 import {useFieldControl} from '../field';
@@ -74,22 +74,20 @@ export const DateRangePicker = forwardRef<HTMLButtonElement, DateRangePickerProp
   );
 
   return (
-    <Radix.Root open={open} onOpenChange={setOpen}>
-      <Radix.Trigger asChild>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
         <button ref={ref} type="button" disabled={disabled} className={cx('input date-trigger', className)} {...f} aria-label={label} aria-invalid={invalid || f['aria-invalid']} data-empty={!current.start || undefined}>
           {text || placeholder}
         </button>
-      </Radix.Trigger>
-      <Radix.Portal>
-        <Radix.Content className="popover date-popover date-range-popover" sideOffset={6} align="start" aria-label="Choose a date range">
+      </PopoverTrigger>
+              <PopoverContent className="date-popover date-range-popover" sideOffset={6} align="start" aria-label="Choose a date range">
           <div className="date-range-fields">
             {field('start', 'Start')}
             {field('end', 'End')}
           </div>
           <p id={errId} className="date-range-error" role="alert">{bad ? 'Enter a date as YYYY-MM-DD that can be picked.' : ''}</p>
           <RangeCalendar value={current} locale={locale} min={min} max={max} isDateDisabled={isDateDisabled} {...cal} onValueChange={(r) => { commit(r); setBad(null); if (r.start && r.end) setOpen(false); }} />
-        </Radix.Content>
-      </Radix.Portal>
-    </Radix.Root>
+        </PopoverContent>
+          </Popover>
   );
 });

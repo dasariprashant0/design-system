@@ -1,6 +1,6 @@
 'use client';
 import {useEffect, useId, useState, type ReactNode} from 'react';
-import {Dialog as RadixDialog} from 'radix-ui';
+import {Modal, ModalContent, ModalTitle, ModalTrigger} from '../dialog/modal';
 import {cx} from '../../utils/cx';
 
 export interface CommandItem {
@@ -97,12 +97,10 @@ export function Command({items, open, defaultOpen = false, onOpenChange, shortcu
   };
 
   return (
-    <RadixDialog.Root open={isOpen} onOpenChange={setOpen}>
-      {trigger && <RadixDialog.Trigger asChild>{trigger}</RadixDialog.Trigger>}
-      <RadixDialog.Portal>
-        <RadixDialog.Overlay className="dialog-overlay" />
-        <RadixDialog.Content className={cx('command', className)} aria-describedby={undefined}>
-          <RadixDialog.Title className="sr-only">{title}</RadixDialog.Title>
+    <Modal open={isOpen} onOpenChange={setOpen}>
+      {trigger && <ModalTrigger asChild>{trigger}</ModalTrigger>}
+        <ModalContent className={cx('command', className)} aria-describedby={undefined}>
+          <ModalTitle className="sr-only">{title}</ModalTitle>
           <input
             type="text"
             role="combobox"
@@ -147,8 +145,7 @@ export function Command({items, open, defaultOpen = false, onOpenChange, shortcu
             })}
           </div>
           <p className="sr-only" role="status">{flat.length === 0 ? emptyText : `${flat.length} results`}</p>
-        </RadixDialog.Content>
-      </RadixDialog.Portal>
-    </RadixDialog.Root>
+        </ModalContent>
+    </Modal>
   );
 }

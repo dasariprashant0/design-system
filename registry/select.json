@@ -4,14 +4,14 @@
   "category": "forms",
   "description": "Pick one value from a list of five or more options.",
   "status": "stable",
-  "primitive": "radix-ui/Select",
+  "primitive": "native ARIA (shared positioning)",
   "uses": [
     "field"
   ],
   "css": [
     {
       "path": "packages/css/src/components/select.css",
-      "content": "/* Select on Radix. The trigger matches .input; the list is a .menu-content. */\n.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; height: var(--control-md); padding: 0 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }\n.select-trigger[data-placeholder] { color: var(--muted); }\n.select-trigger[aria-invalid=\"true\"] { border-color: var(--danger); }\n.select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }\n.select-trigger::after { content: \"↓\"; color: var(--muted); }\n.select-content { z-index: var(--z-drawer); min-width: var(--radix-select-trigger-width); max-height: min(320px, var(--radix-select-content-available-height)); overflow: hidden; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); }\n.select-viewport { padding: var(--s1) 0; }\n.select-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.select-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.select-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.select-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.select-trigger.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }\n.select-trigger.input-lg { height: var(--control-lg); padding: 0 18px; }\n.select-trigger[data-invalid] { border-color: var(--danger); }\n"
+      "content": "/* Select (Monoline's own listbox and floating layer). The trigger matches .input; the list is a .menu-content. */\n.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; height: var(--control-md); padding: 0 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }\n.select-trigger[data-placeholder] { color: var(--muted); }\n.select-trigger[aria-invalid=\"true\"] { border-color: var(--danger); }\n.select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }\n.select-trigger::after { content: \"↓\"; color: var(--muted); }\n.select-content { z-index: var(--z-drawer); min-width: var(--anchor-width); max-height: min(320px, var(--available-height)); overflow-y: auto; padding: var(--s1) 0; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); }\n.select-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.select-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.select-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.select-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.select-trigger.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }\n.select-trigger.input-lg { height: var(--control-lg); padding: 0 18px; }\n.select-trigger[data-invalid] { border-color: var(--danger); }\n"
     }
   ],
   "a11y": [
@@ -39,6 +39,74 @@
   ],
   "props": [
     {
+      "name": "SelectProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Controlled value. An empty string shows the placeholder."
+        },
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "optional": true,
+          "default": "''",
+          "description": "Initial value when uncontrolled."
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: string) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the chosen item's value."
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Controlled open state."
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean",
+          "optional": true,
+          "default": "false",
+          "description": "Initial open state when uncontrolled. Default false."
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void)",
+          "optional": true,
+          "default": null,
+          "description": "Called with the next open state."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Disables the trigger."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "optional": true,
+          "default": null,
+          "description": "Form field name; the value is submitted through a hidden input."
+        },
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "optional": true,
+          "default": null,
+          "description": "The parts of the component: a trigger and its content."
+        }
+      ]
+    },
+    {
       "name": "SelectTriggerProps",
       "props": [
         {
@@ -54,6 +122,37 @@
           "optional": true,
           "default": null,
           "description": "Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`."
+        }
+      ]
+    },
+    {
+      "name": "SelectContentProps",
+      "props": [
+        {
+          "name": "position",
+          "type": "\"item-aligned\" | \"popper\"",
+          "optional": true,
+          "default": null,
+          "description": "Accepted for compatibility with earlier versions; the list is always positioned against the trigger."
+        }
+      ]
+    },
+    {
+      "name": "SelectItemProps",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "optional": false,
+          "default": null,
+          "description": "The value reported by `onValueChange` when this item is chosen. Must be non-empty."
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "optional": true,
+          "default": null,
+          "description": "Makes the item unselectable and skipped by the keyboard."
         }
       ]
     }
@@ -80,7 +179,6 @@
   "classes": [
     "select-trigger",
     "select-content",
-    "select-viewport",
     "select-item",
     "select-label",
     "input-sm",
@@ -96,11 +194,11 @@
     },
     {
       "path": "packages/react/src/components/select/meta.json",
-      "content": "{\"name\":\"select\",\"title\":\"Select\",\"category\":\"forms\",\"description\":\"Pick one value from a list of five or more options.\",\"status\":\"stable\",\"primitive\":\"radix-ui/Select\",\"uses\":[\"field\"],\"css\":[\"select.css\"],\"a11y\":[\"Trigger is role=combobox with aria-expanded; the list is role=listbox with option items.\",\"Arrow keys, Home, End and type-ahead move; Enter selects; Escape closes.\",\"Inside a Field it is labelled by the Field's label.\"],\"keywords\":[\"dropdown\",\"picker\",\"combobox\"]}\n"
+      "content": "{\"name\":\"select\",\"title\":\"Select\",\"category\":\"forms\",\"description\":\"Pick one value from a list of five or more options.\",\"status\":\"stable\",\"primitive\":\"native ARIA (shared positioning)\",\"uses\":[\"field\"],\"css\":[\"select.css\"],\"a11y\":[\"Trigger is role=combobox with aria-expanded; the list is role=listbox with option items.\",\"Arrow keys, Home, End and type-ahead move; Enter selects; Escape closes.\",\"Inside a Field it is labelled by the Field's label.\"],\"keywords\":[\"dropdown\",\"picker\",\"combobox\"]}\n"
     },
     {
       "path": "packages/react/src/components/select/select.tsx",
-      "content": "import {forwardRef, type ComponentPropsWithoutRef, type ElementRef} from 'react';\nimport {Select as RadixSelect} from 'radix-ui';\nimport {cx} from '../../utils/cx';\nimport {invalidAttrs, useFieldControl} from '../field';\n\n/** The root of a custom single-choice dropdown. Use `value` and `onValueChange` (or `defaultValue`); put a `SelectTrigger` and `SelectContent` inside. For a plain list prefer `NativeSelect`. */\nexport const Select = RadixSelect.Root;\n/** Groups related `SelectItem`s, optionally under a `SelectLabel`. */\nexport const SelectGroup = RadixSelect.Group;\n/** Shows the chosen item's text inside the `SelectTrigger`; `placeholder` appears while nothing is chosen. */\nexport const SelectValue = RadixSelect.Value;\n\nexport interface SelectTriggerProps extends ComponentPropsWithoutRef<typeof RadixSelect.Trigger> {\n  /** `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */\n  invalid?: boolean;\n}\n/** The button that shows the chosen value. Inside a Field it is labelled and described automatically. */\nexport const SelectTrigger = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectTriggerProps>(function SelectTrigger({className, size = 'md', invalid, children, id, ...rest}, ref) {\n  const f = useFieldControl();\n  return (\n    <RadixSelect.Trigger ref={ref} id={id ?? f.id} aria-describedby={f['aria-describedby']} {...invalidAttrs(invalid || Boolean(f['aria-invalid']))} className={cx('select-trigger', size !== 'md' && `input-${size}`, className)} {...rest}>\n      {children}\n    </RadixSelect.Trigger>\n  );\n});\n\n/** The floating list of options, rendered in a portal and positioned under the trigger. */\nexport const SelectContent = forwardRef<ElementRef<typeof RadixSelect.Content>, ComponentPropsWithoutRef<typeof RadixSelect.Content>>(function SelectContent({className, children, position = 'popper', sideOffset = 4, ...rest}, ref) {\n  return (\n    <RadixSelect.Portal>\n      <RadixSelect.Content ref={ref} position={position} sideOffset={sideOffset} className={cx('select-content', className)} {...rest}>\n        <RadixSelect.Viewport className=\"select-viewport\">{children}</RadixSelect.Viewport>\n      </RadixSelect.Content>\n    </RadixSelect.Portal>\n  );\n});\n\n/** One choice in the list; give it a `value` and the visible text as children. */\nexport const SelectItem = forwardRef<ElementRef<typeof RadixSelect.Item>, ComponentPropsWithoutRef<typeof RadixSelect.Item>>(function SelectItem({className, children, ...rest}, ref) {\n  return (\n    <RadixSelect.Item ref={ref} className={cx('select-item', className)} {...rest}>\n      <RadixSelect.ItemText>{children}</RadixSelect.ItemText>\n      <RadixSelect.ItemIndicator>✓</RadixSelect.ItemIndicator>\n    </RadixSelect.Item>\n  );\n});\n\n/** A non-interactive heading for a `SelectGroup`. */\nexport const SelectLabel = forwardRef<ElementRef<typeof RadixSelect.Label>, ComponentPropsWithoutRef<typeof RadixSelect.Label>>(function SelectLabel({className, ...rest}, ref) {\n  return <RadixSelect.Label ref={ref} className={cx('select-label', className)} {...rest} />;\n});\n"
+      "content": "'use client';\nimport {createContext, forwardRef, useContext, useEffect, useId, useLayoutEffect, useRef, useState, type ButtonHTMLAttributes, type HTMLAttributes, type KeyboardEvent, type ReactNode, type RefObject} from 'react';\nimport {useControllableState} from '../../hooks/use-controllable-state';\nimport {cx} from '../../utils/cx';\nimport {nextItem, setRefs} from '../../utils/overlay';\nimport {invalidAttrs, useFieldControl} from '../field';\nimport {Floating, useDismiss, type Placement} from '../popover/float';\n\ninterface Ctx {\n  open: boolean; setOpen: (o: boolean) => void; value: string; setValue: (v: string) => void;\n  trigger: RefObject<HTMLButtonElement | null>; triggerId: string; listId: string; disabled?: boolean;\n  /** Item text by value, so the trigger can show the chosen item while the list is closed. */\n  labels: Map<string, ReactNode>; label: (value: string, text: ReactNode) => void;\n}\nconst Context = createContext<Ctx>(null as never);\nconst Group = createContext<string | undefined>(undefined);\n\nexport interface SelectProps {\n  /** Controlled value. An empty string shows the placeholder. */\n  value?: string;\n  /** Initial value when uncontrolled. */\n  defaultValue?: string;\n  /** Called with the chosen item's value. */\n  onValueChange?: (value: string) => void;\n  /** Controlled open state. */\n  open?: boolean;\n  /** Initial open state when uncontrolled. Default false. */\n  defaultOpen?: boolean;\n  /** Called with the next open state. */\n  onOpenChange?: (open: boolean) => void;\n  /** Disables the trigger. */\n  disabled?: boolean;\n  /** Form field name; the value is submitted through a hidden input. */\n  name?: string;\n  /** The parts of the component: a trigger and its content. */\n  children?: ReactNode;\n}\n\n/** The root of a custom single-choice dropdown. Use `value` and `onValueChange` (or `defaultValue`); put a `SelectTrigger` and `SelectContent` inside. For a plain list prefer `NativeSelect`. */\nexport function Select({value, defaultValue = '', onValueChange, open, defaultOpen = false, onOpenChange, disabled, name, children}: SelectProps) {\n  const [val, setValue] = useControllableState({value, defaultValue, onChange: onValueChange});\n  const [isOpen, setOpen] = useControllableState({value: open, defaultValue: defaultOpen, onChange: onOpenChange});\n  const [, bump] = useState(0);\n  const trigger = useRef<HTMLButtonElement | null>(null), labels = useRef(new Map<string, ReactNode>());\n  const label = (v: string, text: ReactNode) => { if (labels.current.get(v) !== text) { labels.current.set(v, text); if (v === val) bump((n) => n + 1); } };\n  const id = useId();\n  return (\n    <Context.Provider value={{open: isOpen, setOpen, value: val, setValue, trigger, triggerId: id + 't', listId: id + 'l', disabled, labels: labels.current, label}}>\n      {children}\n      {name && <input type=\"hidden\" name={name} value={val} disabled={disabled} />}\n    </Context.Provider>\n  );\n}\n\n/** Groups related `SelectItem`s, optionally under a `SelectLabel`. */\nexport const SelectGroup = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function SelectGroup(props, ref) {\n  const id = useId();\n  return <Group.Provider value={id}><div ref={ref} role=\"group\" aria-labelledby={id} {...props} /></Group.Provider>;\n});\n\n/** Shows the chosen item's text inside the `SelectTrigger`; `placeholder` appears while nothing is chosen. */\nexport function SelectValue({placeholder, children}: {\n  /** Text shown while no item is chosen. */\n  placeholder?: ReactNode;\n  /** Overrides the shown text. */\n  children?: ReactNode;\n}) {\n  const c = useContext(Context);\n  return <span>{children ?? (c.value ? c.labels.get(c.value) : undefined) ?? placeholder}</span>;\n}\n\nexport interface SelectTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  /** `md` (default), `sm` for dense layouts or `lg` for prominent forms. Heights match Button, Input and Select at each size. */\n  size?: 'sm' | 'md' | 'lg';\n  /** Marks the control invalid (`aria-invalid`). A surrounding Field sets this from its `error`. */\n  invalid?: boolean;\n}\n/** The button that shows the chosen value. Inside a Field it is labelled and described automatically. */\nexport const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(function SelectTrigger({className, size = 'md', invalid, children, id, onClick, onKeyDown, disabled, ...rest}, ref) {\n  const f = useFieldControl(), c = useContext(Context);\n  const off = disabled ?? c.disabled;\n  return (\n    <button\n      ref={(n) => setRefs(n, c.trigger, ref)} type=\"button\" role=\"combobox\" aria-haspopup=\"listbox\" aria-expanded={c.open} aria-controls={c.open ? c.listId : undefined} aria-autocomplete=\"none\"\n      id={id ?? f.id ?? c.triggerId} aria-describedby={f['aria-describedby']} {...invalidAttrs(invalid || Boolean(f['aria-invalid']))}\n      data-state={c.open ? 'open' : 'closed'} data-placeholder={c.value ? undefined : ''} data-disabled={off ? '' : undefined} disabled={off}\n      className={cx('select-trigger', size !== 'md' && `input-${size}`, className)} {...rest}\n      onClick={(e) => { onClick?.(e); if (!e.defaultPrevented) c.setOpen(!c.open); }}\n      onKeyDown={(e) => { onKeyDown?.(e); if (!e.defaultPrevented && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) { e.preventDefault(); c.setOpen(true); } }}\n    >{children}</button>\n  );\n});\n\nexport interface SelectContentProps extends HTMLAttributes<HTMLDivElement>, Placement {\n  /** Accepted for compatibility with earlier versions; the list is always positioned against the trigger. */\n  position?: 'item-aligned' | 'popper';\n}\n\nconst OPTION = '[role=option]:not([aria-disabled=true])';\n\nconst List = forwardRef<HTMLDivElement, SelectContentProps>(function List({className, children, position: _p, sideOffset = 4, align = 'start', onKeyDown, ...rest}, forwarded) {\n  const c = useContext(Context);\n  const el = useRef<HTMLDivElement | null>(null), outside = useRef(false), typed = useRef({text: '', at: 0});\n  useDismiss(true, [el, c.trigger], (kind) => { outside.current = kind === 'outside'; c.setOpen(false); });\n  useEffect(() => {\n    const first = el.current!.querySelector<HTMLElement>('[aria-selected=true]') ?? el.current!.querySelector<HTMLElement>(OPTION);\n    first?.focus(); first?.scrollIntoView?.({block: 'nearest'});\n    return () => { if (!outside.current) c.trigger.current?.focus({preventScroll: true}); };\n  }, []);\n  const keydown = (e: KeyboardEvent<HTMLDivElement>) => {\n    onKeyDown?.(e);\n    if (e.defaultPrevented) return;\n    if (e.key === 'Tab') { e.preventDefault(); return; }\n    const next = nextItem(e.key, !e.ctrlKey && !e.metaKey && !e.altKey, [...el.current!.querySelectorAll<HTMLElement>(OPTION)], typed.current);\n    if (next === null) return;\n    e.preventDefault(); next?.focus(); next?.scrollIntoView?.({block: 'nearest'});\n  };\n  return (\n    <Floating ref={(n) => setRefs(n, el, forwarded)} anchor={() => c.trigger.current} align={align} sideOffset={sideOffset} role=\"listbox\" id={c.listId} aria-labelledby={c.triggerId} data-state=\"open\" className={cx('select-content', className)} {...rest} onKeyDown={keydown}>\n      {children}\n    </Floating>\n  );\n});\n\n/** The floating list of options, rendered in a portal and positioned under the trigger. Closed, its items stay mounted but hidden so the trigger can show the chosen text. */\nexport const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>(function SelectContent(props, ref) {\n  return useContext(Context).open ? <List ref={ref} {...props} /> : <div hidden>{props.children}</div>;\n});\n\nexport interface SelectItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> {\n  /** The value reported by `onValueChange` when this item is chosen. Must be non-empty. */\n  value: string;\n  /** Makes the item unselectable and skipped by the keyboard. */\n  disabled?: boolean;\n}\n/** One choice in the list; give it a `value` and the visible text as children. */\nexport const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(function SelectItem({className, children, value, disabled, onClick, onFocus, onBlur, onPointerMove, onKeyDown, ...rest}, ref) {\n  const c = useContext(Context);\n  const selected = c.value === value;\n  useLayoutEffect(() => c.label(value, children), [value, children]);\n  const pick = () => { c.setValue(value); c.setOpen(false); };\n  return (\n    <div\n      ref={ref} role=\"option\" tabIndex={-1} aria-selected={selected} aria-disabled={disabled || undefined} data-state={selected ? 'checked' : 'unchecked'} data-disabled={disabled ? '' : undefined}\n      className={cx('select-item', className)} {...rest}\n      onClick={(e) => { onClick?.(e); if (!e.defaultPrevented && !disabled) pick(); }}\n      onKeyDown={(e) => { onKeyDown?.(e); if (!e.defaultPrevented && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); if (!disabled) pick(); } }}\n      onPointerMove={(e) => { onPointerMove?.(e); if (!disabled) e.currentTarget.focus({preventScroll: true}); }}\n      onFocus={(e) => { onFocus?.(e); e.currentTarget.setAttribute('data-highlighted', ''); }}\n      onBlur={(e) => { onBlur?.(e); e.currentTarget.removeAttribute('data-highlighted'); }}\n    >\n      <span>{children}</span>\n      {selected && <span aria-hidden=\"true\">✓</span>}\n    </div>\n  );\n});\n\n/** A non-interactive heading for a `SelectGroup`. */\nexport const SelectLabel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function SelectLabel({className, ...rest}, ref) {\n  return <div ref={ref} id={useContext(Group)} className={cx('select-label', className)} {...rest} />;\n});\n"
     }
   ]
 }
