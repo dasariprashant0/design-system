@@ -6,6 +6,8 @@
 //   node scripts/audit.mjs                       a11y + layout audit, all pages, 3 themes, desktop and 375px
 //   node scripts/audit.mjs --accents all         also every accent (contrast in each)
 //   node scripts/audit.mjs --pages button,card   a subset
+//   node scripts/audit.mjs --overlays            open every dialog, drawer, menu, select, popover, tooltip, toast, command palette and
+//                                                date picker on each page; check contrast, text overlap, hover and focus in each
 //   node scripts/audit.mjs --visual --update     write screenshot baselines to audit/baseline
 //   node scripts/audit.mjs --visual              compare screenshots with the baseline (byte-exact PNGs)
 //
@@ -16,6 +18,7 @@ import {existsSync, mkdirSync, readFileSync, writeFileSync, rmSync} from 'node:f
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {launchChrome, serveDist} from './lib/cdp.mjs';
+import {installSweep, sweepState} from './lib/sweep.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const args = process.argv.slice(2);
@@ -30,6 +33,7 @@ const ACCENTS = opt('accents', 'orange') === 'all' ? ALL_ACCENTS : opt('accents'
 const VIEWPORTS = {desktop: {width: 1280, height: 800, mobile: false}, mobile: {width: 375, height: 812, mobile: true}};
 const VPS = opt('viewports', 'desktop,mobile').split(',');
 const VISUAL = flag('visual');
+const OVERLAYS = flag('overlays');
 const baselineDir = join(root, 'audit', 'baseline');
 const actualDir = join(root, 'audit', 'actual');
 
@@ -53,6 +57,7 @@ listeners.push((m) => {
 await cdp('Runtime.enable'); await cdp('Network.enable'); await cdp('Page.enable');
 const axeSource = readFileSync(join(root, 'node_modules/axe-core/axe.min.js'), 'utf8');
 await cdp('Page.addScriptToEvaluateOnNewDocument', {source: axeSource});
+await installSweep(cdp);
 
 // --- pages: read the sidebar after load
 await cdp('Emulation.setDeviceMetricsOverride', {width: 1280, height: 800, deviceScaleFactor: 1, mobile: false});
@@ -69,6 +74,39 @@ const waitForPage = (page) => evaluate(`(async () => { const a = document.queryS
 const setLook = (theme, accent) => evaluate(`(() => { const r = document.documentElement; r.dataset.theme = ${JSON.stringify(theme)}; r.dataset.accent = ${JSON.stringify(accent)}; return true; })()`);
 const AXE = `axe.run(document.body, {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']}, resultTypes: ['violations']}).then(r => r.violations.map(v => ({id: v.id, impact: v.impact, nodes: v.nodes.length, sample: v.nodes[0] && v.nodes[0].target.join(' ').slice(0, 120), msg: v.nodes[0] && (v.nodes[0].any[0] || v.nodes[0].all[0] || v.nodes[0].none[0] || {}).message})))`;
 
+
+// --- --overlays: open each overlay a page offers and sweep it (contrast, text overlap, hover and focus of every control)
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const mouse = (type, x, y, button = 'left') => cdp('Input.dispatchMouseEvent', {type, x, y, button, clickCount: type === 'mouseMoved' ? 0 : 1});
+const overlayOpen = () => evaluate(`__mlcheck.scopeName() !== 'body'`);
+const closeOverlay = async () => {
+  for (let i = 0; i < 3 && await overlayOpen(); i++) { await cdp('Input.dispatchKeyEvent', {type: 'rawKeyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27}); await cdp('Input.dispatchKeyEvent', {type: 'keyUp', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27}); await sleep(250); }
+  await mouse('mouseMoved', 1, 1); await sleep(100);
+};
+/** Mark what can open something: popup triggers, closed-state triggers (tooltip, hover card, context menu), and every button on toast pages. */
+const markTriggers = (page) => evaluate(`(() => { const toast = /toast/.test(${JSON.stringify(page)}); const sel = toast ? '.cdoc-stage button' : '.cdoc-stage [aria-haspopup]:not([aria-haspopup="false"]), .cdoc-stage [data-state="closed"]'; let n = 0; document.querySelectorAll('[data-audit-i]').forEach((e) => e.removeAttribute('data-audit-i')); for (const e of document.querySelectorAll(sel)) { if (!e.getClientRects().length || e.matches('[role=tab],[aria-disabled=true],:disabled') || n >= 8) continue; e.setAttribute('data-audit-i', n++); } return n; })()`);
+async function sweepOverlays(page, label) {
+  const n = await markTriggers(page);
+  for (let i = 0; i < n; i++) {
+    const pt = await evaluate(`(() => { const e = document.querySelector('[data-audit-i="${i}"]'); if (!e) return null; e.scrollIntoView({block: 'center'}); const r = e.getBoundingClientRect(); return {x: r.x + Math.min(r.width / 2, 60), y: r.y + r.height / 2}; })()`);
+    if (!pt) continue;
+    const before = currentState; currentState = `${before}/${label}${i}`;
+    let how = '';
+    await mouse('mouseMoved', pt.x, pt.y); await sleep(750);
+    if (await overlayOpen()) how = 'hover';
+    else { await mouse('mousePressed', pt.x, pt.y); await mouse('mouseReleased', pt.x, pt.y); await sleep(450); if (await overlayOpen() || (/toast/.test(page) && await evaluate(`!!document.querySelector('.toast-item')`))) how = 'click'; }
+    if (!how) { await mouse('mousePressed', pt.x, pt.y, 'right'); await mouse('mouseReleased', pt.x, pt.y, 'right'); await sleep(350); if (await overlayOpen()) how = 'right-click'; }
+    if (how) {
+      states++; overlaysOpened++;
+      for (const x of await sweepState({cdp, evaluate, sleep, controls: how !== 'hover', max: 25})) note(x.kind, x.detail);
+      for (const x of await evaluate(AXE)) if (x.id !== 'aria-hidden-focus') note(`axe:${x.id}`, `${x.impact}, ${x.nodes} node(s), e.g. ${x.sample}${x.msg ? ' (' + x.msg.slice(0, 110) + ')' : ''}`);
+      await closeOverlay();
+      if (await overlayOpen()) { note('overlay-stuck', 'Escape did not close it'); await cdp('Page.reload'); await sleep(1200); await setLook(...currentLook); await waitForPage(page); }
+    }
+    currentState = before;
+  }
+}
+let overlaysOpened = 0, currentLook = ['warm', 'orange'];
 let states = 0, shots = 0, changed = 0, created = 0;
 if (VISUAL) { mkdirSync(baselineDir, {recursive: true}); rmSync(actualDir, {recursive: true, force: true}); mkdirSync(actualDir, {recursive: true}); }
 const started = Date.now();
@@ -78,10 +116,11 @@ for (const vp of VPS) {
   await cdp('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'reduce'}]});
   await cdp('Page.navigate', {url: base}); await new Promise((r) => setTimeout(r, 1200));
   for (const theme of THEMES) for (const accent of VISUAL ? ['orange'] : ACCENTS) {
-    await setLook(theme, accent);
+    await setLook(theme, accent); currentLook = [theme, accent];
     for (const page of pages) {
       currentPage = page; currentState = `${vp}/${theme}/${accent}`;
       if (!(await waitForPage(page))) { note('page-did-not-render', ''); continue; }
+      if (OVERLAYS) { await sweepOverlays(page, 'overlay'); continue; }
       states++;
       if (VISUAL) {
         const {data} = await cdp('Page.captureScreenshot', {format: 'png', captureBeyondViewport: false});
@@ -105,7 +144,7 @@ cleanup();
 const groups = new Map();
 for (const p of problems) { const k = `${p.kind} | ${p.page} | ${p.detail}`; (groups.get(k) ?? groups.set(k, []).get(k)).push(p.state); }
 if (VISUAL) console.log(`${shots} screenshots in ${seconds}s: ${created} written, ${changed} changed${changed ? ` (see audit/actual vs audit/baseline)` : ''}`);
-else console.log(`${states} page states audited in ${seconds}s`);
+else console.log(`${states} ${OVERLAYS ? `overlay states (${overlaysOpened} opened)` : 'page states'} audited in ${seconds}s`);
 if (groups.size) {
   for (const [k, st] of groups) console.log(`FAIL ${k}  [${[...new Set(st)].slice(0, 4).join(', ')}${new Set(st).size > 4 ? ` +${new Set(st).size - 4}` : ''}]`);
   console.log(`${groups.size} distinct problem(s)`);

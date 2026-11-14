@@ -106,7 +106,7 @@ const PAGE = String.raw`(() => {
   const CONTROLS = 'button,a[href],input:not([type="hidden"]),select,textarea,summary,[role="tab"],[role="menuitem"],[role="menuitemcheckbox"],[role="menuitemradio"],[role="option"],[role="radio"],[role="checkbox"],[role="switch"],[role="combobox"],[role="slider"],[role="gridcell"][tabindex],[tabindex]:not([tabindex="-1"]):not(body)';
   let list = [];
   // What makes two controls "the same" for the sweep: element, classes, state. Text is left out, so 31 calendar days cost one hover.
-  const kind = (e) => [sig(e), ...['data-state', 'data-tone', 'aria-selected', 'aria-pressed', 'aria-checked', 'aria-current', 'type'].map((a) => e.getAttribute(a) || '')].join('|');
+  const kind = (e) => [sig(e), ...['data-state', 'data-tone', 'aria-selected', 'aria-pressed', 'aria-checked', 'aria-current', 'data-outside', 'data-today', 'type'].map((a) => e.getAttribute(a) || '')].join('|');
   const controlSig = (e) => sig(e) + '|' + (text(e) || e.getAttribute('aria-label') || e.value || '').slice(0, 20);
   const controls = (max) => {
     const seen = new Set(); list = [];

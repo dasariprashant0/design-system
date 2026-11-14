@@ -9,6 +9,7 @@
 .calendar-day { width: var(--s6); height: var(--s6); font-size: var(--text-sm); }
 .calendar-day:not([aria-pressed="true"]):hover:not(:disabled) { background: var(--wash-2); }
 .calendar-day[data-outside] { color: var(--muted); }
+.calendar-day[data-outside]:not([aria-pressed="true"]):hover:not(:disabled) { color: var(--foreground); } /* muted on the hover wash is under 4.5:1 */
 .calendar-day[data-today] { box-shadow: inset 0 0 0 1px var(--accent); }
 .calendar-day[aria-pressed="true"] { background: var(--foreground); color: var(--background); }
 .calendar-day:disabled { opacity: 0.35; cursor: not-allowed; }
