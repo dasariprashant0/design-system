@@ -2,6 +2,7 @@
 import {createContext, forwardRef, useContext, useEffect, useId, useRef, useState, type ButtonHTMLAttributes, type DialogHTMLAttributes, type HTMLAttributes, type PointerEvent, type ReactNode} from 'react';
 import {Slot} from 'radix-ui';
 import {useControllableState} from '../../hooks/use-controllable-state';
+import {TABBABLE, setRefs, vetoed} from '../../utils/overlay';
 
 /* The native-<dialog> core behind Dialog, AlertDialog, Drawer and Command. showModal() gives the focus trap,
    the inert page, Escape and the top layer for free; this file adds controlled state, the Radix-style parts,
@@ -59,9 +60,6 @@ export interface ModalContentProps extends Omit<DialogHTMLAttributes<HTMLDialogE
   dismissOnOutside?: boolean;
 }
 
-const TABBABLE = 'a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
-/** Runs a handler with a cancelable event and reports whether it called preventDefault. */
-const vetoed = (h?: (e: Event) => void) => { const e = new Event('x', {cancelable: true}); h?.(e); return e.defaultPrevented; };
 
 const Panel = forwardRef<HTMLDialogElement, ModalContentProps>(function Panel({onEscapeKeyDown, onPointerDownOutside, onOpenAutoFocus, onCloseAutoFocus, dismissOnOutside = true, onPointerDown, onClick, onKeyDown, children, ...rest}, forwarded) {
   const c = useContext(Context);
@@ -73,16 +71,16 @@ const Panel = forwardRef<HTMLDialogElement, ModalContentProps>(function Panel({o
   useEffect(() => {
     const d = el.current!, prev = document.activeElement as HTMLElement | null;
     if (c.modal) d.showModal(); else d.show();
-    if (!vetoed(hooks.current.onOpenAutoFocus)) d.querySelector<HTMLElement>('[data-autofocus]')?.focus();
+    if (!vetoed(hooks.current.onOpenAutoFocus, d)) d.querySelector<HTMLElement>('[data-autofocus]')?.focus();
     return () => {
       d.close();
-      if (!vetoed(hooks.current.onCloseAutoFocus)) prev?.focus();
+      if (!vetoed(hooks.current.onCloseAutoFocus, d)) prev?.focus();
     };
   }, []);
   const outside = (e: PointerEvent | React.MouseEvent) => { const r = (e.currentTarget as HTMLElement).getBoundingClientRect(); return e.target === e.currentTarget && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom); };
   return (
     <dialog
-      ref={(n) => { el.current = n; if (typeof forwarded === 'function') forwarded(n); else if (forwarded) forwarded.current = n; }}
+      ref={(n) => setRefs(n, el, forwarded)}
       id={c.contentId}
       role="dialog"
       aria-modal={c.modal || undefined}
@@ -97,8 +95,8 @@ const Panel = forwardRef<HTMLDialogElement, ModalContentProps>(function Panel({o
         const t = [...e.currentTarget.querySelectorAll<HTMLElement>(TABBABLE)], edge = t[e.shiftKey ? 0 : t.length - 1];
         if (!t.length || document.activeElement === edge || document.activeElement === e.currentTarget) { e.preventDefault(); (e.shiftKey ? t[t.length - 1] : t[0])?.focus(); }
       }}
-      onCancel={(e) => { e.preventDefault(); if (!vetoed(onEscapeKeyDown)) c.setOpen(false); }}
-      onPointerDown={(e) => { armed.current = dismissOnOutside && outside(e) && !vetoed(onPointerDownOutside); onPointerDown?.(e); }}
+      onCancel={(e) => { e.preventDefault(); if (!vetoed(onEscapeKeyDown, e.currentTarget)) c.setOpen(false); }}
+      onPointerDown={(e) => { armed.current = dismissOnOutside && outside(e) && !vetoed(onPointerDownOutside, e.currentTarget); onPointerDown?.(e); }}
       onClick={(e) => { if (armed.current && outside(e)) c.setOpen(false); armed.current = false; onClick?.(e); }}
     >
       {children}
