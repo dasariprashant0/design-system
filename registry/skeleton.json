@@ -48,7 +48,7 @@
       ]
     }
   ],
-  "usage": "import {Skeleton} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)', maxWidth: 420}}><Skeleton style={{width: '60%'}} /><Skeleton style={{width: '90%'}} /><Skeleton variant=\"hatch\" /></div>",
+  "usage": "import {Skeleton} from '@monoline/react';\n\n<div style={{display: 'grid', gap: 'var(--s3)', maxWidth: 420}}>\n  <Skeleton style={{width: '60%'}} />\n  <Skeleton style={{width: '90%'}} />\n  <Skeleton variant=\"hatch\" />\n</div>",
   "dataAttributes": [],
   "classes": [
     "spinner",

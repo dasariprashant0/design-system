@@ -12,6 +12,20 @@ const features = [
 ];
 
 export const demos: Demo[] = [
-  {title: 'Three columns', render: () => <BlockFeatureGrid title="Why Monoline" description="Fewer parts, clearer pages." features={features} />},
-  {title: 'Two columns', render: () => <BlockFeatureGrid title="Principles" columns={2} features={features.slice(0, 4)} />},
+  {
+    title: 'Three columns',
+    render: () => (
+      <BlockFeatureGrid
+        title="Why Monoline"
+        description="Fewer parts, clearer pages."
+        features={features}
+      />
+    ),
+  },
+  {
+    title: 'Two columns',
+    render: () => (
+      <BlockFeatureGrid title="Principles" columns={2} features={features.slice(0, 4)} />
+    ),
+  },
 ];

@@ -30,5 +30,11 @@ function Example() {
 }
 
 export const demos: Demo[] = [
-  {title: 'With an error summary', description: 'Submit empty. Each error is passed once, in errors; every Field reads its own message by name, and the summary links to each invalid field.', render: () => <Example />},
+  {
+    title: 'With an error summary',
+    description: 'Submit empty. Each error is passed once, in errors; every Field reads its own message by name, and the summary links to each invalid field.',
+    render: () => (
+      <Example />
+    ),
+  },
 ];

@@ -38,7 +38,7 @@
     "avatar"
   ],
   "props": [],
-  "usage": "import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from '@monoline/react';\n\n<Collapsible><CollapsibleTrigger asChild><Button size=\"sm\">Show details</Button></CollapsibleTrigger><CollapsibleContent><p>Extra detail appears here when the trigger is pressed.</p></CollapsibleContent></Collapsible>",
+  "usage": "import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from '@monoline/react';\n\n<Collapsible>\n  <CollapsibleTrigger asChild>\n    <Button size=\"sm\">Show details</Button>\n  </CollapsibleTrigger>\n  <CollapsibleContent>\n    <p>Extra detail appears here when the trigger is pressed.</p>\n  </CollapsibleContent>\n</Collapsible>",
   "dataAttributes": [],
   "classes": [
     "collapsible-content"

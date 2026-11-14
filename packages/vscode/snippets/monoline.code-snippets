@@ -1,0 +1,1792 @@
+{
+	"Monoline Accordion": {
+		"prefix": "ml-accordion",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Accordion: Stacked headings that each show or hide a section.",
+		"body": [
+			"import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@monoline/react';",
+			"",
+			"<Accordion type=\"single\" collapsible defaultValue=\"a\">",
+			"  <AccordionItem value=\"a\"><AccordionTrigger>What is Monoline?</AccordionTrigger><AccordionContent>A small UI kit: plain CSS plus accessible React components.</AccordionContent></AccordionItem>",
+			"  <AccordionItem value=\"b\"><AccordionTrigger>Do I need React?</AccordionTrigger><AccordionContent>No. The CSS works on its own.</AccordionContent></AccordionItem>",
+			"</Accordion>"
+		]
+	},
+	"Monoline Alert dialog": {
+		"prefix": "ml-alert-dialog",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Alert dialog: A modal that interrupts to confirm a destructive or irreversible action.",
+		"body": [
+			"import {AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, Button} from '@monoline/react';",
+			"",
+			"<AlertDialog>",
+			"  <AlertDialogTrigger asChild><Button variant=\"danger\">Delete project</Button></AlertDialogTrigger>",
+			"  <AlertDialogContent>",
+			"    <AlertDialogHeader><AlertDialogTitle>Delete this project?</AlertDialogTitle><AlertDialogDescription>All files and history are removed. This cannot be undone.</AlertDialogDescription></AlertDialogHeader>",
+			"    <AlertDialogFooter><AlertDialogCancel>Keep it</AlertDialogCancel><AlertDialogAction>Delete project</AlertDialogAction></AlertDialogFooter>",
+			"  </AlertDialogContent>",
+			"</AlertDialog>"
+		]
+	},
+	"Monoline Alert": {
+		"prefix": "ml-alert",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Alert: A message that stays on screen, with a title and a tone.",
+		"body": [
+			"import {Alert} from '@monoline/react';",
+			"",
+			"<div style={{display: 'grid', gap: 'var(--s3)'}}><Alert title=\"Synced.\">42 entries up to date as of 14:20.</Alert><Alert tone=\"success\" title=\"Saved.\">Your changes are live.</Alert><Alert tone=\"warning\" title=\"Conflict.\">Two devices edited 12 March. Pick which copy to keep.</Alert><Alert tone=\"danger\" title=\"Can't save.\">The folder is read-only. Pick another folder.</Alert></div>"
+		]
+	},
+	"Monoline Animated list": {
+		"prefix": "ml-animated-list",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Animated list: A list whose items enter one by one without shifting the layout.",
+		"body": [
+			"import {AnimatedList} from '@monoline/react';",
+			"",
+			"<AnimatedList style={{display: 'grid', gap: 'var(--s2)', maxWidth: '24rem'}}>",
+			"  {row('Build passed', 'main, 2 minutes ago')}",
+			"  {row('Review requested', 'Docs update, 5 minutes ago')}",
+			"  {row('Deploy finished', 'Production, 9 minutes ago')}",
+			"</AnimatedList>"
+		]
+	},
+	"Monoline Area chart": {
+		"prefix": "ml-area-chart",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Area chart: A line chart filled down to zero, optionally stacked to show a running total.",
+		"body": [
+			"import {AreaChart} from '@monoline/react';",
+			"",
+			"<AreaChart title=\"Active users\" labels={months} series={[{name: 'Users', values: [120, 180, 150, 240, 310, 290]}]} />"
+		]
+	},
+	"Monoline Aspect ratio": {
+		"prefix": "ml-aspect-ratio",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Aspect ratio: Keep media or a placeholder at a fixed width-to-height ratio.",
+		"body": [
+			"import {AspectRatio} from '@monoline/react';",
+			"",
+			"<div style={{width: '320px'}}><AspectRatio ratio={16 / 9}><div style={{width: '100%', height: '100%', border: '1px solid var(--rule)', display: 'grid', placeItems: 'center'}}>16:9</div></AspectRatio></div>"
+		]
+	},
+	"Monoline Autocomplete": {
+		"prefix": "ml-autocomplete",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Autocomplete: A text field that suggests values while you type and accepts anything you enter.",
+		"body": [
+			"import {Autocomplete, Field} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '320px', minHeight: '220px'}}><Field label=\"City\"><Autocomplete suggestions={cities} placeholder=\"Start typing\" /></Field></div>"
+		]
+	},
+	"Monoline Avatar group": {
+		"prefix": "ml-avatar-group",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Avatar group: Overlap several avatars and show how many more there are.",
+		"body": [
+			"import {Avatar, AvatarGroup} from '@monoline/react';",
+			"",
+			"<AvatarGroup aria-label=\"Project members\" max={3}>{['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Linus Torvalds'].map((n) => <Avatar key={n} name={n} />)}</AvatarGroup>"
+		]
+	},
+	"Monoline Avatar": {
+		"prefix": "ml-avatar",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Avatar: A person or thing as an image with an initials fallback.",
+		"body": [
+			"import {Avatar} from '@monoline/react';",
+			"",
+			"<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Avatar name=\"Ada Lovelace\" /><Avatar name=\"Grace Hopper\" variant=\"line\" /><Avatar name=\"Alan Turing\" size=\"lg\" /></div>"
+		]
+	},
+	"Monoline Badge": {
+		"prefix": "ml-badge",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Badge: A short status word or count.",
+		"body": [
+			"import {Badge} from '@monoline/react';",
+			"",
+			"<div style={{display: 'flex', gap: 'var(--s3)', flexWrap: 'wrap'}}><Badge>draft</Badge><Badge variant=\"solid\">12 days</Badge><Badge variant=\"accent\">new</Badge></div>"
+		]
+	},
+	"Monoline Bar chart": {
+		"prefix": "ml-bar-chart",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Bar chart: Compare values across categories with vertical or horizontal bars, grouped or stacked.",
+		"body": [
+			"import {BarChart} from '@monoline/react';",
+			"",
+			"<BarChart title=\"Signups per weekday\" data={week} showValues />"
+		]
+	},
+	"Monoline Bento grid": {
+		"prefix": "ml-bento-grid",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Bento grid: A responsive asymmetric grid of cards with column and row spans.",
+		"body": [
+			"import {BentoCard, BentoGrid} from '@monoline/react';",
+			"",
+			"<BentoGrid>",
+			"  <BentoCard colSpan={2} rowSpan={2}>{tile('Tokens first', 'Every colour, space and rule comes from one small set of tokens.')}</BentoCard>",
+			"  <BentoCard>{tile('Three themes', 'Warm, dark and midnight.')}</BentoCard>",
+			"  <BentoCard>{tile('Four accents', 'One accent at a time.')}</BentoCard>",
+			"  <BentoCard colSpan={3}>{tile('Plain CSS core', 'Use the stylesheets alone, or the React layer on top.')}</BentoCard>",
+			"</BentoGrid>"
+		]
+	},
+	"Monoline Call to action block": {
+		"prefix": "ml-block-cta",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Call to action block: A closing call to action with one sentence and one next step.",
+		"body": [
+			"import {BlockCta, Button} from '@monoline/react';",
+			"",
+			"<BlockCta title=\"Start building today\" description=\"Install the package and copy your first component.\" actions={<><Button variant=\"solid\">Get started</Button><Button>Read the docs</Button></>} />"
+		]
+	},
+	"Monoline Dashboard shell block": {
+		"prefix": "ml-block-dashboard-shell",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Dashboard shell block: App frame with sidebar, top bar and content that collapses to a drawer on small screens.",
+		"body": [
+			"import {Badge, BlockDashboardShell, Heading, Text} from '@monoline/react';",
+			"",
+			"<BlockDashboardShell",
+			"  brand=\"Your app\"",
+			"  nav={[{label: 'Overview', href: '#', current: true}, {label: 'Reports', href: '#'}, {label: 'Customers', href: '#'}, {label: 'Settings', href: '#'}]}",
+			"  topbar={<Badge>Ada Example</Badge>}",
+			">",
+			"  <Heading level={1} size=\"xl\">Overview</Heading>",
+			"  <Text tone=\"muted\">Your content goes here.</Text>",
+			"</BlockDashboardShell>"
+		]
+	},
+	"Monoline Empty page block": {
+		"prefix": "ml-block-empty-page",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Empty page block: A full-page message for not found, nothing yet or no access.",
+		"body": [
+			"import {BlockEmptyPage, Button} from '@monoline/react';",
+			"",
+			"<BlockEmptyPage code=\"404\" title=\"Page not found\" description=\"The address may be wrong, or the page moved.\" actions={<><Button variant=\"solid\">Go home</Button><Button>Contact support</Button></>} />"
+		]
+	},
+	"Monoline Feature grid block": {
+		"prefix": "ml-block-feature-grid",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Feature grid block: A section title above a responsive grid of short features.",
+		"body": [
+			"import {BlockFeatureGrid} from '@monoline/react';",
+			"",
+			"<BlockFeatureGrid title=\"Why Monoline\" description=\"Fewer parts, clearer pages.\" features={features} />"
+		]
+	},
+	"Monoline Footer block": {
+		"prefix": "ml-block-footer",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Footer block: A site footer with brand, link columns and small print.",
+		"body": [
+			"import {BlockFooter} from '@monoline/react';",
+			"",
+			"<BlockFooter",
+			"  brand=\"Your brand\"",
+			"  description=\"Short line about what you make.\"",
+			"  columns={[",
+			"    {title: 'Product', links: [{label: 'Components', href: '#'}, {label: 'Blocks', href: '#'}, {label: 'Changelog', href: '#'}]},",
+			"    {title: 'Resources', links: [{label: 'Docs', href: '#'}, {label: 'Source', href: '#'}]},",
+			"    {title: 'Company', links: [{label: 'About', href: '#'}, {label: 'Contact', href: '#'}]},",
+			"  ]}",
+			"  legal=\"© 2026 Your brand. All rights reserved.\"",
+			"/>"
+		]
+	},
+	"Monoline Hero block": {
+		"prefix": "ml-block-hero",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Hero block: A page opener with eyebrow, title, description, actions and optional media.",
+		"body": [
+			"import {BlockHero, Button} from '@monoline/react';",
+			"",
+			"<BlockHero",
+			"  eyebrow=\"Version 1.0\"",
+			"  title=\"Interfaces with fewer parts\"",
+			"  description=\"A small kit of plain components. Copy the ones you need.\"",
+			"  actions={<><Button variant=\"solid\">Get started</Button><Button>Read the docs</Button></>}",
+			"  media={<div style={{border: '1px solid var(--rule)', aspectRatio: '4 / 3', display: 'grid', placeItems: 'center'}}>Preview</div>}",
+			"/>"
+		]
+	},
+	"Monoline Login block": {
+		"prefix": "ml-block-login",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Login block: Email and password sign-in form with validation messages.",
+		"body": [
+			"import {BlockLogin, Link} from '@monoline/react';",
+			"",
+			"<BlockLogin description=\"Use the email you signed up with.\" footer={<><Link href=\"#\">Forgot your password?</Link><Link href=\"#\">Create an account</Link></>} />"
+		]
+	},
+	"Monoline Pricing block": {
+		"prefix": "ml-block-pricing",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Pricing block: Plan cards with a monthly and yearly switch.",
+		"body": [
+			"import {BlockPricing} from '@monoline/react';",
+			"",
+			"<BlockPricing",
+			"  title=\"Simple pricing\"",
+			"  description=\"Switch to yearly for two months free.\"",
+			"  tiers={[",
+			"    {name: 'Free', description: 'For trying it out.', price: {monthly: '\\$0', yearly: '\\$0'}, features: ['One project', 'Community support'], ctaLabel: 'Start free', href: '#'},",
+			"    {name: 'Team', description: 'For small teams.', price: {monthly: '\\$12', yearly: '\\$120'}, features: ['Unlimited projects', 'Email support', 'Shared themes'], ctaLabel: 'Choose Team', highlighted: true},",
+			"    {name: 'Scale', description: 'For larger groups.', price: {monthly: '\\$48', yearly: '\\$480'}, features: ['Everything in Team', 'Single sign-on', 'Priority support'], ctaLabel: 'Talk to us', href: '#'},",
+			"  ]}",
+			"/>"
+		]
+	},
+	"Monoline Settings form block": {
+		"prefix": "ml-block-settings-form",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Settings form block: Settings sections of switches and selects, each in a fieldset.",
+		"body": [
+			"import {BlockSettingsForm} from '@monoline/react';",
+			"",
+			"<BlockSettingsForm",
+			"  title=\"Settings\"",
+			"  description=\"Changes apply to your account.\"",
+			"  sections={[",
+			"    {legend: 'Notifications', description: 'Choose what we email you.', items: [",
+			"      {kind: 'switch', name: 'product', label: 'Product updates', hint: 'About once a month.', defaultChecked: true},",
+			"      {kind: 'switch', name: 'digest', label: 'Weekly digest'},",
+			"    ]},",
+			"    {legend: 'Display', items: [",
+			"      {kind: 'select', name: 'theme', label: 'Theme', options: [{value: 'warm', label: 'Warm'}, {value: 'dark', label: 'Dark'}, {value: 'midnight', label: 'Midnight'}], defaultValue: 'warm'},",
+			"      {kind: 'select', name: 'density', label: 'Density', hint: 'Compact fits more rows.', options: [{value: 'comfortable', label: 'Comfortable'}, {value: 'compact', label: 'Compact'}]},",
+			"    ]},",
+			"  ]}",
+			"/>"
+		]
+	},
+	"Monoline Sign-up block": {
+		"prefix": "ml-block-signup",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Sign-up block: Name, email and password account form with validation messages.",
+		"body": [
+			"import {BlockSignup, Link} from '@monoline/react';",
+			"",
+			"<BlockSignup description=\"It takes a minute.\" footer={<span>Already have an account? <Link href=\"#\">Sign in</Link></span>} />"
+		]
+	},
+	"Monoline Testimonials block": {
+		"prefix": "ml-block-testimonials",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Testimonials block: Quotes with their authors, as figures with blockquotes.",
+		"body": [
+			"import {BlockTestimonials} from '@monoline/react';",
+			"",
+			"<BlockTestimonials",
+			"  title=\"What people say\"",
+			"  items={[",
+			"    {quote: 'It stayed out of the way and the pages got simpler.', name: 'Ada Example', role: 'Engineer, Example Co'},",
+			"    {quote: 'Keyboard support worked on day one.', name: 'Sam Sample', role: 'Designer, Sample Studio'},",
+			"    {quote: 'We deleted a lot of CSS.', name: 'Robin Placeholder', role: 'Founder, Placeholder'},",
+			"  ]}",
+			"/>"
+		]
+	},
+	"Monoline Border beam": {
+		"prefix": "ml-border-beam",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Border beam: A thin bordered box with a light that travels around its edge. CSS only.",
+		"body": [
+			"import {BorderBeam} from '@monoline/react';",
+			"",
+			"<BorderBeam style={{padding: 'var(--s6)', maxWidth: '24rem'}}><p style={{margin: 0}}>A light travels the edge of this box.</p></BorderBeam>"
+		]
+	},
+	"Monoline Box": {
+		"prefix": "ml-box",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Box: A div with padding and a thin border mapped to the spacing tokens.",
+		"body": [
+			"import {Box} from '@monoline/react';",
+			"",
+			"<Box padding={5} border>A bordered box with step 5 padding.</Box>"
+		]
+	},
+	"Monoline Breadcrumb": {
+		"prefix": "ml-breadcrumb",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Breadcrumb: The path to the current page.",
+		"body": [
+			"import {Breadcrumb} from '@monoline/react';",
+			"",
+			"<Breadcrumb items={[{label: 'Home', href: '#'}, {label: 'Projects', href: '#'}, {label: 'Monoline'}]} />"
+		]
+	},
+	"Monoline Button group": {
+		"prefix": "ml-button-group",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Button group: Join related buttons into one segmented bar.",
+		"body": [
+			"import {Button, ButtonGroup} from '@monoline/react';",
+			"",
+			"<ButtonGroup aria-label=\"View\"><Button>Day</Button><Button>Week</Button><Button>Month</Button></ButtonGroup>"
+		]
+	},
+	"Monoline Button": {
+		"prefix": "ml-button",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Button: Triggers an action. Native button with solid, line, ghost and danger variants.",
+		"body": [
+			"import {Button} from '@monoline/react';",
+			"",
+			"<Button variant=\"solid\">Write today</Button>"
+		]
+	},
+	"Monoline Calendar": {
+		"prefix": "ml-calendar",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Calendar: A month grid for picking one date.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Calendar} from '@monoline/react';",
+			"",
+			"return <div style={{display: 'grid', gap: 'var(--s3)', justifyItems: 'start'}}><Calendar value={d} onValueChange={setD} weekStartsOn={1} /><p className=\"muted small\" role=\"status\">{d ? d.toDateString() : 'No date picked'}</p></div>;"
+		]
+	},
+	"Monoline Card": {
+		"prefix": "ml-card",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Card: A bordered group for one thing you can pick up or open.",
+		"body": [
+			"import {Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: 360}}><Card><CardHeader><CardTitle>Ship the pricing page</CardTitle><CardDescription>Today, 14:20 · 3 files</CardDescription></CardHeader><CardContent><p>Rewrote the headline and the plan table.</p></CardContent><CardFooter><Button variant=\"solid\" size=\"sm\">Open</Button><Button size=\"sm\">Share</Button></CardFooter></Card></div>"
+		]
+	},
+	"Monoline Carousel": {
+		"prefix": "ml-carousel",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Carousel: A row of slides you scroll or step through with buttons.",
+		"body": [
+			"import {Carousel} from '@monoline/react';",
+			"",
+			"<Carousel aria-label=\"Featured\">{['Alpha', 'Beta', 'Gamma', 'Delta'].map((n) => <div key={n} style={{display: 'grid', placeItems: 'center', height: '140px', border: '1px solid var(--rule)'}}>{n}</div>)}</Carousel>"
+		]
+	},
+	"Monoline Checkbox": {
+		"prefix": "ml-checkbox",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Checkbox: A box to turn one choice on or off, with an indeterminate state.",
+		"body": [
+			"import {Checkbox} from '@monoline/react';",
+			"",
+			"<div style={{display: 'grid', gap: 'var(--s3)'}}><Checkbox label=\"Replies\" defaultChecked /><Checkbox label=\"Mentions\" /><Checkbox label=\"Billing (locked)\" disabled /></div>"
+		]
+	},
+	"Monoline Code block": {
+		"prefix": "ml-code-block",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Code block: A block of code with a copy button.",
+		"body": [
+			"import {CodeBlock} from '@monoline/react';",
+			"",
+			"<CodeBlock title=\"save.tsx\" code={tsx} />"
+		]
+	},
+	"Monoline Collapsible": {
+		"prefix": "ml-collapsible",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Collapsible: Show or hide one region of content from a trigger.",
+		"body": [
+			"import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from '@monoline/react';",
+			"",
+			"<Collapsible><CollapsibleTrigger asChild><Button size=\"sm\">Show details</Button></CollapsibleTrigger><CollapsibleContent><p>Extra detail appears here when the trigger is pressed.</p></CollapsibleContent></Collapsible>"
+		]
+	},
+	"Monoline Color picker": {
+		"prefix": "ml-color-picker",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Color picker: Choose a colour from preset swatches, the native colour control, or a hex value.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {ColorPicker} from '@monoline/react';",
+			"",
+			"return <div style={{maxWidth: '280px'}}><ColorPicker aria-label=\"Brand colour\" value={c} onValueChange={setC} /><p>Chosen: {c}</p></div>;"
+		]
+	},
+	"Monoline Combobox": {
+		"prefix": "ml-combobox",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Combobox: Type to filter a list and pick one option.",
+		"body": [
+			"import {Combobox, Field} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '320px', minHeight: '260px'}}><Field label=\"Person\"><Combobox options={options} placeholder=\"Type a name\" /></Field></div>"
+		]
+	},
+	"Monoline Command": {
+		"prefix": "ml-command",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Command: A searchable palette of actions that opens over the page, with an optional global shortcut.",
+		"body": [
+			"import {Command, type CommandItem} from '@monoline/react';",
+			"",
+			"<Command shortcut=\"mod+j\" items={items} trigger={<button type=\"button\" className=\"btn btn-outline\">Open palette</button>} />"
+		]
+	},
+	"Monoline Confetti": {
+		"prefix": "ml-confetti",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Confetti: A short burst of square confetti on a canvas, triggered by a prop or a ref method.",
+		"body": [
+			"import {useRef} from 'react';",
+			"import {Button, Confetti, type ConfettiHandle} from '@monoline/react';",
+			"",
+			"<Confetti ref={ref} />"
+		]
+	},
+	"Monoline Container": {
+		"prefix": "ml-container",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Container: Centre content in a column with a sensible maximum width and side padding.",
+		"body": [
+			"import {Container} from '@monoline/react';",
+			"",
+			"<Container size=\"text\"><p>A column about 64 characters wide, centred, with side padding.</p></Container>"
+		]
+	},
+	"Monoline Context menu": {
+		"prefix": "ml-context-menu",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Context menu: A menu of actions opened by right click or long press on an area.",
+		"body": [
+			"import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuTrigger} from '@monoline/react';",
+			"",
+			"<ContextMenu>",
+			"  <ContextMenuTrigger><div style={{display: 'grid', placeItems: 'center', height: '120px', border: '1px dashed var(--rule)'}}>Right click here</div></ContextMenuTrigger>",
+			"  <ContextMenuContent><ContextMenuLabel>File</ContextMenuLabel><ContextMenuItem>Rename</ContextMenuItem><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem tone=\"danger\">Delete</ContextMenuItem></ContextMenuContent>",
+			"</ContextMenu>"
+		]
+	},
+	"Monoline Copy button": {
+		"prefix": "ml-copy-button",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Copy button: A button that copies a value to the clipboard, shows 'Copied' for a moment and announces it.",
+		"body": [
+			"import {CopyButton} from '@monoline/react';",
+			"",
+			"<CopyButton value=\"npm i @monoline/react\" label=\"Copy install command\" size=\"sm\" />"
+		]
+	},
+	"Monoline Data grid": {
+		"prefix": "ml-data-grid",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Data grid: A virtualised, keyboard-navigable grid for very large data sets, with sortable columns and row selection.",
+		"body": [
+			"import {DataGrid, type DataGridColumn} from '@monoline/react';",
+			"",
+			"<DataGrid aria-label=\"Orders, 100,000 rows\" columns={columns} rows={big} height={320} getRowId={(r) => r.id} />"
+		]
+	},
+	"Monoline Data table": {
+		"prefix": "ml-data-table",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Data table: A table with sortable columns, row selection and pagination.",
+		"body": [
+			"import {DataTable, type DataTableColumn} from '@monoline/react';",
+			"",
+			"<DataTable label=\"Team\" columns={columns} data={people} defaultSort={{id: 'name', direction: 'asc'}} />"
+		]
+	},
+	"Monoline Date picker": {
+		"prefix": "ml-date-picker",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Date picker: A button that opens a calendar and shows the chosen date.",
+		"body": [
+			"import {DatePicker, Field} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '260px', minHeight: '360px'}}><Field label=\"Due date\"><DatePicker weekStartsOn={1} /></Field></div>"
+		]
+	},
+	"Monoline Date range picker": {
+		"prefix": "ml-date-range-picker",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Date range picker: A button that opens a range calendar and two typed date fields.",
+		"body": [
+			"import {DateRangePicker, Field} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '320px', minHeight: '440px'}}><Field label=\"Stay\"><DateRangePicker weekStartsOn={1} /></Field></div>"
+		]
+	},
+	"Monoline Description list": {
+		"prefix": "ml-description-list",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Description list: Label and value pairs, like the details of a record.",
+		"body": [
+			"import {DescriptionList} from '@monoline/react';",
+			"",
+			"<DescriptionList items={[{term: 'Plan', details: 'Pro'}, {term: 'Seats', details: '12'}, {term: 'Renews', details: '1 March 2027'}]} />"
+		]
+	},
+	"Monoline Dialog": {
+		"prefix": "ml-dialog",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Dialog: A modal window for a question or short task that blocks the page.",
+		"body": [
+			"import {Button, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from '@monoline/react';",
+			"",
+			"<Dialog>",
+			"  <DialogTrigger asChild><Button>Overwrite copy</Button></DialogTrigger>",
+			"  <DialogContent>",
+			"    <DialogHeader><DialogTitle>Overwrite the remote copy?</DialogTitle><DialogDescription>The copy on this device is newer. Changes from 12 March on the other device will be lost.</DialogDescription></DialogHeader>",
+			"    <DialogFooter><DialogClose asChild><Button>Keep both</Button></DialogClose><DialogClose asChild><Button variant=\"solid\">Overwrite</Button></DialogClose></DialogFooter>",
+			"  </DialogContent>",
+			"</Dialog>"
+		]
+	},
+	"Monoline Direction provider": {
+		"prefix": "ml-direction-provider",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Direction provider: Sets the reading direction (ltr or rtl) once for every Radix-based component below it.",
+		"body": [
+			"import {DirectionProvider, Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';",
+			"",
+			"<div dir=\"rtl\"><DirectionProvider dir=\"rtl\"><Tabs defaultValue=\"a\"><TabsList aria-label=\"Sections\"><TabsTrigger value=\"a\">الأول</TabsTrigger><TabsTrigger value=\"b\">الثاني</TabsTrigger></TabsList><TabsContent value=\"a\">محتوى</TabsContent><TabsContent value=\"b\">محتوى آخر</TabsContent></Tabs></DirectionProvider></div>"
+		]
+	},
+	"Monoline Dot pattern": {
+		"prefix": "ml-dot-pattern",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Dot pattern: A decorative dot grid background drawn in SVG with currentColor.",
+		"body": [
+			"import {DotPattern} from '@monoline/react';",
+			"",
+			"<DotPattern fade />"
+		]
+	},
+	"Monoline Drawer": {
+		"prefix": "ml-drawer",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Drawer: A panel that slides in from an edge for secondary tasks, details or navigation.",
+		"body": [
+			"import {Button, Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger} from '@monoline/react';",
+			"",
+			"<Drawer key={side}>",
+			"  <DrawerTrigger asChild><Button>Open {side}</Button></DrawerTrigger>",
+			"  <DrawerContent side={side}><DrawerHeader><DrawerTitle>Filters</DrawerTitle><DrawerDescription>Narrow the list by status or owner.</DrawerDescription></DrawerHeader></DrawerContent>",
+			"</Drawer>"
+		]
+	},
+	"Monoline Dropdown menu": {
+		"prefix": "ml-dropdown-menu",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Dropdown menu: A list of actions that opens from a button.",
+		"body": [
+			"import {Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger} from '@monoline/react';",
+			"",
+			"<DropdownMenu>",
+			"  <DropdownMenuTrigger asChild><Button>Actions</Button></DropdownMenuTrigger>",
+			"  <DropdownMenuContent>",
+			"    <DropdownMenuLabel>Entry</DropdownMenuLabel>",
+			"    <DropdownMenuItem>Rename</DropdownMenuItem>",
+			"    <DropdownMenuItem>Duplicate</DropdownMenuItem>",
+			"    <DropdownMenuSeparator />",
+			"    <DropdownMenuItem tone=\"danger\">Delete</DropdownMenuItem>",
+			"  </DropdownMenuContent>",
+			"</DropdownMenu>"
+		]
+	},
+	"Monoline Empty state": {
+		"prefix": "ml-empty-state",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Empty state: Say that there is nothing here yet and offer the next step.",
+		"body": [
+			"import {Button, EmptyState} from '@monoline/react';",
+			"",
+			"<EmptyState title=\"No projects yet\" description=\"Projects you create show up here.\"><Button variant=\"solid\">New project</Button></EmptyState>"
+		]
+	},
+	"Monoline Field": {
+		"prefix": "ml-field",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Field: Connects a label, a control, a hint and an error with the right ids and ARIA.",
+		"body": [
+			"import {Field, Input} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: 360}}><Field label=\"Email\" hint=\"We never share it.\" required><Input type=\"email\" placeholder=\"you@example.com\" /></Field></div>"
+		]
+	},
+	"Monoline Fieldset": {
+		"prefix": "ml-fieldset",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Fieldset: Group related controls under one legend.",
+		"body": [
+			"import {Field, Fieldset, Input} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '360px'}}><Fieldset legend=\"Contact\"><Field label=\"Name\"><Input /></Field><Field label=\"Email\"><Input type=\"email\" /></Field></Fieldset></div>"
+		]
+	},
+	"Monoline File upload": {
+		"prefix": "ml-file-upload",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "File upload: Choose files by browsing or dropping them, and see what is selected.",
+		"body": [
+			"import {FileUpload} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '420px'}}><FileUpload multiple accept=\"image/*,.pdf\" label=\"Drop files here or choose\" /></div>"
+		]
+	},
+	"Monoline Flex": {
+		"prefix": "ml-flex",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Flex: A flex container with direction, wrap, align, justify, gap and an inline form. Stack covers the common case.",
+		"body": [
+			"import {Badge, Flex} from '@monoline/react';",
+			"",
+			"<Flex justify=\"between\" align=\"center\" gap={3}><Badge>left</Badge><Badge>right</Badge></Flex>"
+		]
+	},
+	"Monoline Form": {
+		"prefix": "ml-form",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Form: A form wrapper with a submit helper, an error summary that links to invalid fields, and an actions footer.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, Field, Form, FormActions, Input, type FormError} from '@monoline/react';",
+			"",
+			"function Example() {",
+			"  const [errors, setErrors] = useState<FormError[]>([]);",
+			"  return (",
+			"    <Form",
+			"      aria-label=\"Contact\"",
+			"      noValidate",
+			"      preventDefault",
+			"      errors={errors}",
+			"      onSubmit={(e) => {",
+			"        const data = new FormData(e.currentTarget);",
+			"        const next: FormError[] = [];",
+			"        if (!data.get('name')) next.push({name: 'name', message: 'Enter your name.'});",
+			"        if (!data.get('email')) next.push({name: 'email', message: 'Enter your email.'});",
+			"        setErrors(next);",
+			"      }}",
+			"    >",
+			"      <Field label=\"Name\" name=\"name\"><Input name=\"name\" /></Field>",
+			"      <Field label=\"Email\" name=\"email\"><Input name=\"email\" type=\"email\" /></Field>",
+			"      <FormActions><Button type=\"submit\" variant=\"solid\">Send</Button><Button type=\"reset\">Clear</Button></FormActions>",
+			"    </Form>",
+			"  );",
+			"}",
+			"",
+			"<Example />"
+		]
+	},
+	"Monoline Grid pattern": {
+		"prefix": "ml-grid-pattern",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Grid pattern: A decorative line grid background drawn in SVG with currentColor.",
+		"body": [
+			"import {GridPattern} from '@monoline/react';",
+			"",
+			"<GridPattern fade />"
+		]
+	},
+	"Monoline Grid": {
+		"prefix": "ml-grid",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Grid: A responsive grid of equal columns with one gap.",
+		"body": [
+			"import {Card, Grid} from '@monoline/react';",
+			"",
+			"<Grid columns={3}>{['One', 'Two', 'Three'].map((n) => <Card key={n}>{n}</Card>)}</Grid>"
+		]
+	},
+	"Monoline Heading": {
+		"prefix": "ml-heading",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Heading: A heading whose level (for structure) is separate from its size (for looks).",
+		"body": [
+			"import {Heading} from '@monoline/react';",
+			"",
+			"<div style={{display: 'grid', gap: 'var(--s3)'}}><Heading level={1}>Display</Heading><Heading level={2}>Section</Heading><Heading level={3}>Subsection</Heading><Heading level={2} size=\"sm\">An h2 that looks small</Heading></div>"
+		]
+	},
+	"Monoline Hover card": {
+		"prefix": "ml-hover-card",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Hover card: Preview extra content when a link or element is hovered or focused.",
+		"body": [
+			"import {HoverCard, HoverCardContent, HoverCardTrigger} from '@monoline/react';",
+			"",
+			"<HoverCard><HoverCardTrigger asChild><a href=\"#ada\">@ada</a></HoverCardTrigger><HoverCardContent><strong>Ada Lovelace</strong><p className=\"muted small\">Wrote the first published program.</p></HoverCardContent></HoverCard>"
+		]
+	},
+	"Monoline Icon button": {
+		"prefix": "ml-icon-button",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Icon button: A square button holding only an icon. The accessible name is required.",
+		"body": [
+			"import {IconButton} from '@monoline/react';",
+			"",
+			"<div style={{display: 'flex', gap: 'var(--s3)'}}><IconButton aria-label=\"Add\"><Plus /></IconButton><IconButton variant=\"solid\" aria-label=\"Add item\"><Plus /></IconButton><IconButton variant=\"ghost\" size=\"sm\" aria-label=\"Add row\"><Plus /></IconButton></div>"
+		]
+	},
+	"Monoline Image gallery": {
+		"prefix": "ml-image-gallery",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Image gallery: A thumbnail grid that opens a lightbox with previous and next.",
+		"body": [
+			"import {ImageGallery, type GalleryImage} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '480px'}}><ImageGallery images={images} /></div>"
+		]
+	},
+	"Monoline Image": {
+		"prefix": "ml-image",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Image: An image with required alt text, a ratio, and a fallback when it fails to load.",
+		"body": [
+			"import {Image} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '320px'}}><Image src={svg('#999')} alt=\"A grey placeholder\" ratio={16 / 9} /></div>"
+		]
+	},
+	"Monoline Input": {
+		"prefix": "ml-input",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Input: A single-line text field.",
+		"body": [
+			"import {Input} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: 320}}><Input aria-label=\"Name\" placeholder=\"Ada Lovelace\" /></div>"
+		]
+	},
+	"Monoline Kbd": {
+		"prefix": "ml-kbd",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Kbd: Show a keyboard key or shortcut.",
+		"body": [
+			"import {Kbd} from '@monoline/react';",
+			"",
+			"<p>Press <Kbd>⌘</Kbd> <Kbd>K</Kbd> to search.</p>"
+		]
+	},
+	"Monoline Label": {
+		"prefix": "ml-label",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Label: The visible name of a form control.",
+		"body": [
+			"import {Label} from '@monoline/react';",
+			"",
+			"<div style={{display: 'grid', gap: 'var(--s2)', maxWidth: 320}}><Label htmlFor=\"demo-label\" required>Email</Label><input id=\"demo-label\" className=\"input\" placeholder=\"you@example.com\" /></div>"
+		]
+	},
+	"Monoline Line chart": {
+		"prefix": "ml-line-chart",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Line chart: Show how one or more values change across an ordered axis, with straight or stepped lines.",
+		"body": [
+			"import {LineChart} from '@monoline/react';",
+			"",
+			"<LineChart title=\"Response time\" showPoints data={[{label: 'Mon', value: 120}, {label: 'Tue', value: 98}, {label: 'Wed', value: 143}, {label: 'Thu', value: 110}, {label: 'Fri', value: 87}]} />"
+		]
+	},
+	"Monoline Link": {
+		"prefix": "ml-link",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Link: An underlined link. External links open safely and say so.",
+		"body": [
+			"import {Link} from '@monoline/react';",
+			"",
+			"<p>Read the <Link href=\"#button\">button docs</Link> or visit <Link href=\"https://github.com\" external>GitHub</Link>.</p>"
+		]
+	},
+	"Monoline Marquee": {
+		"prefix": "ml-marquee",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Marquee: Scroll a row of items endlessly; pauses on hover and stops for reduced motion.",
+		"body": [
+			"import {Marquee} from '@monoline/react';",
+			"",
+			"<Marquee duration={20}>{['Acme', 'Globex', 'Initech', 'Umbrella', 'Hooli'].map((n) => <span key={n} style={{padding: '0 var(--s5)', fontFamily: 'var(--font-display)'}}>{n}</span>)}</Marquee>"
+		]
+	},
+	"Monoline Mentions": {
+		"prefix": "ml-mentions",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Mentions: A textarea that suggests people when you type @.",
+		"body": [
+			"import {Field, Mentions, type MentionOption} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '360px', minHeight: '220px'}}><Field label=\"Comment\"><Mentions options={people} rows={3} /></Field></div>"
+		]
+	},
+	"Monoline Menubar": {
+		"prefix": "ml-menubar",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Menubar: A horizontal bar of menus, like File, Edit and View in a desktop app.",
+		"body": [
+			"import {Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger} from '@monoline/react';",
+			"",
+			"<Menubar aria-label=\"Application\">",
+			"  <MenubarMenu><MenubarTrigger>File</MenubarTrigger><MenubarContent><MenubarItem>New file</MenubarItem><MenubarItem>Open</MenubarItem><MenubarSeparator /><MenubarItem>Quit</MenubarItem></MenubarContent></MenubarMenu>",
+			"  <MenubarMenu><MenubarTrigger>Edit</MenubarTrigger><MenubarContent><MenubarItem>Undo</MenubarItem><MenubarItem>Redo</MenubarItem></MenubarContent></MenubarMenu>",
+			"</Menubar>"
+		]
+	},
+	"Monoline Multi select": {
+		"prefix": "ml-multi-select",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Multi select: Type to filter a list and pick several options, shown as removable tags.",
+		"body": [
+			"import {Field, MultiSelect} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '360px', minHeight: '280px'}}><Field label=\"People\"><MultiSelect options={options} placeholder=\"Type a name\" defaultValue={['ada-lovelace']} /></Field></div>"
+		]
+	},
+	"Monoline Native select": {
+		"prefix": "ml-native-select",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Native select: The browser select, styled. Best on mobile and for long simple lists.",
+		"body": [
+			"import {Field, NativeSelect} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '280px'}}><Field label=\"Plan\"><NativeSelect defaultValue=\"pro\"><option value=\"free\">Free</option><option value=\"pro\">Pro</option><option value=\"team\">Team</option></NativeSelect></Field></div>"
+		]
+	},
+	"Monoline Navigation menu": {
+		"prefix": "ml-navigation-menu",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Navigation menu: Site navigation with links and menus that open panels of links.",
+		"body": [
+			"import {NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger} from '@monoline/react';",
+			"",
+			"<NavigationMenu aria-label=\"Site\">",
+			"  <NavigationMenuList>",
+			"    <NavigationMenuItem><NavigationMenuLink href=\"#\" active>Home</NavigationMenuLink></NavigationMenuItem>",
+			"    <NavigationMenuItem>",
+			"      <NavigationMenuTrigger>Products</NavigationMenuTrigger>",
+			"      <NavigationMenuContent><div className=\"navmenu-panel\"><NavigationMenuLink href=\"#\">UI kit</NavigationMenuLink><NavigationMenuLink href=\"#\">Icons</NavigationMenuLink><NavigationMenuLink href=\"#\">Templates</NavigationMenuLink></div></NavigationMenuContent>",
+			"    </NavigationMenuItem>",
+			"    <NavigationMenuItem><NavigationMenuLink href=\"#\">Docs</NavigationMenuLink></NavigationMenuItem>",
+			"  </NavigationMenuList>",
+			"</NavigationMenu>"
+		]
+	},
+	"Monoline Notification center": {
+		"prefix": "ml-notification-center",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Notification center: A bell button with an unread count that opens a list of notifications, with mark read, clear and an empty state.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {NotificationCenter, type NotificationItem} from '@monoline/react';",
+			"",
+			"const start: NotificationItem[] = [",
+			"  {id: '1', title: 'Deploy finished', description: 'Production, 41 seconds.', time: '2 min ago'},",
+			"  {id: '2', title: 'Ada commented on your pull request', time: '1 hour ago'},",
+			"  {id: '3', title: 'Invoice paid', time: 'Yesterday', read: true},",
+			"];",
+			"",
+			"function Demo1() {",
+			"  const [list, setList] = useState(start);",
+			"  return (",
+			"    <div style={{display: 'flex', justifyContent: 'flex-end', minHeight: '280px'}}>",
+			"      <NotificationCenter",
+			"        notifications={list}",
+			"        onMarkRead={(id) => setList((l) => l.map((n) => (n.id === id ? {...n, read: true} : n)))}",
+			"        onMarkAllRead={() => setList((l) => l.map((n) => ({...n, read: true})))}",
+			"        onClear={() => setList([])}",
+			"      />",
+			"    </div>",
+			"  );",
+			"}",
+			"",
+			"<Demo1 />"
+		]
+	},
+	"Monoline Number input": {
+		"prefix": "ml-number-input",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Number input: A numeric field with decrease and increase buttons.",
+		"body": [
+			"import {Field, NumberInput} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '200px'}}><Field label=\"Quantity\"><NumberInput defaultValue={1} min={0} max={10} /></Field></div>"
+		]
+	},
+	"Monoline Number ticker": {
+		"prefix": "ml-number-ticker",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Number ticker: Count up to a number when it scrolls into view. Shows the final value at once for reduced motion.",
+		"body": [
+			"import {NumberTicker} from '@monoline/react';",
+			"",
+			"<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}><NumberTicker value={12840} /></p>"
+		]
+	},
+	"Monoline Orbiting circles": {
+		"prefix": "ml-orbiting-circles",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Orbiting circles: Small items circling a centre. Decorative.",
+		"body": [
+			"import {OrbitingCircles} from '@monoline/react';",
+			"",
+			"<OrbitingCircles radius={96} center={dot('M')}>{dot('A')}{dot('B')}{dot('C')}</OrbitingCircles>"
+		]
+	},
+	"Monoline OTP input": {
+		"prefix": "ml-otp-input",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "OTP input: Enter a one-time code, one digit per box, with paste support.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {OtpInput} from '@monoline/react';",
+			"",
+			"return <div style={{display: 'grid', gap: 'var(--s3)'}}><OtpInput aria-label=\"Verification code\" onComplete={setDone} /><p className=\"muted small\" role=\"status\">{done ? `Entered \\${done}` : 'Enter 6 digits'}</p></div>;"
+		]
+	},
+	"Monoline Overflow list": {
+		"prefix": "ml-overflow-list",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Overflow list: A row of items that shows as many as fit and puts the rest in a '+N' menu.",
+		"body": [
+			"import {OverflowList, Tag} from '@monoline/react';",
+			"",
+			"<OverflowList items={names.map((n) => ({id: n, label: <Tag>{n}</Tag>}))} />"
+		]
+	},
+	"Monoline Pagination": {
+		"prefix": "ml-pagination",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Pagination: Move between pages of results.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Pagination} from '@monoline/react';",
+			"",
+			"return <Pagination page={page} pageCount={20} onPageChange={setPage} />;"
+		]
+	},
+	"Monoline Password input": {
+		"prefix": "ml-password-input",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Password input: A password field with a show/hide toggle.",
+		"body": [
+			"import {Field, PasswordInput} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '320px'}}><Field label=\"Password\"><PasswordInput autoComplete=\"current-password\" /></Field></div>"
+		]
+	},
+	"Monoline Pie chart": {
+		"prefix": "ml-pie-chart",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Pie chart: Parts of a whole as a pie, or a donut with innerRadius.",
+		"body": [
+			"import {PieChart} from '@monoline/react';",
+			"",
+			"<PieChart title=\"Traffic by source\" data={sources} />"
+		]
+	},
+	"Monoline Popover": {
+		"prefix": "ml-popover",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Popover: A floating panel of content or controls anchored to a button.",
+		"body": [
+			"import {Button, Popover, PopoverContent, PopoverTrigger} from '@monoline/react';",
+			"",
+			"<Popover><PopoverTrigger asChild><Button>Details</Button></PopoverTrigger><PopoverContent aria-label=\"Entry details\"><p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p></PopoverContent></Popover>"
+		]
+	},
+	"Monoline Progress": {
+		"prefix": "ml-progress",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Progress: How far along a task is, or that it is still working.",
+		"body": [
+			"import {Progress} from '@monoline/react';",
+			"",
+			"<div style={{display: 'grid', gap: 'var(--s4)', maxWidth: 420}}><Progress aria-label=\"Upload\" value={62} /><Progress aria-label=\"Waiting\" /></div>"
+		]
+	},
+	"Monoline Radio group": {
+		"prefix": "ml-radio-group",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Radio group: Pick exactly one option from a short list.",
+		"body": [
+			"import {RadioGroup, RadioGroupItem} from '@monoline/react';",
+			"",
+			"<RadioGroup aria-label=\"Plan\" defaultValue=\"monthly\"><RadioGroupItem value=\"monthly\" label=\"Monthly\" /><RadioGroupItem value=\"yearly\" label=\"Yearly\" /></RadioGroup>"
+		]
+	},
+	"Monoline Range calendar": {
+		"prefix": "ml-range-calendar",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Range calendar: A month grid for picking a start and an end date.",
+		"body": [
+			"import {RangeCalendar} from '@monoline/react';",
+			"",
+			"<RangeCalendar weekStartsOn={1} />"
+		]
+	},
+	"Monoline Rating": {
+		"prefix": "ml-rating",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Rating: Pick or show a score from 1 to a maximum, as stars.",
+		"body": [
+			"import {Rating} from '@monoline/react';",
+			"",
+			"<Rating aria-label=\"Rate this page\" defaultValue={3} />"
+		]
+	},
+	"Monoline Resizable": {
+		"prefix": "ml-resizable",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Resizable: Panels separated by handles you drag or move with the keyboard.",
+		"body": [
+			"import {ResizableHandle, ResizablePanel, ResizablePanelGroup} from '@monoline/react';",
+			"",
+			"<ResizablePanelGroup style={{height: '200px', border: '1px solid var(--rule)'}}>",
+			"  <ResizablePanel defaultSize={30} minSize={15}><div style={box}>Sidebar</div></ResizablePanel>",
+			"  <ResizableHandle aria-label=\"Resize sidebar\" />",
+			"  <ResizablePanel defaultSize={70}><div style={box}>Content</div></ResizablePanel>",
+			"</ResizablePanelGroup>"
+		]
+	},
+	"Monoline Rich text editor": {
+		"prefix": "ml-rich-text-editor",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Rich text editor: A dependency-free rich text editor with a formatting toolbar and sanitized HTML in and out.",
+		"body": [
+			"import {RichTextEditor} from '@monoline/react';",
+			"",
+			"<RichTextEditor aria-label=\"Notes\" placeholder=\"Write something…\" />"
+		]
+	},
+	"Monoline Rolling number": {
+		"prefix": "ml-rolling-number",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Rolling number: A number whose digits roll to the new value when it changes. Screen readers read the final value.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, RollingNumber} from '@monoline/react';",
+			"",
+			"<strong style={{fontSize: 'var(--display-sm)'}}><RollingNumber value={n} format={{style: 'currency', currency: 'USD', maximumFractionDigits: 0}} /></strong>"
+		]
+	},
+	"Monoline Scroll area": {
+		"prefix": "ml-scroll-area",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Scroll area: A scrollable region with thin, themed scrollbars.",
+		"body": [
+			"import {ScrollArea} from '@monoline/react';",
+			"",
+			"<ScrollArea style={{height: '160px', width: '320px', border: '1px solid var(--rule)'}} viewportProps={{'aria-label': 'Release notes'}}><div style={{padding: 'var(--s3)'}}>{Array.from({length: 20}, (_, i) => <p key={i}>Release note {i + 1}</p>)}</div></ScrollArea>"
+		]
+	},
+	"Monoline Scroll progress": {
+		"prefix": "ml-scroll-progress",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Scroll progress: A thin bar fixed to the top of the window that fills as the page scrolls.",
+		"body": [
+			"import {ScrollProgress} from '@monoline/react';",
+			"",
+			"<ScrollProgress />"
+		]
+	},
+	"Monoline Segmented control": {
+		"prefix": "ml-segmented-control",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Segmented control: Pick exactly one option from a short row, shown as joined segments.",
+		"body": [
+			"import {SegmentedControl} from '@monoline/react';",
+			"",
+			"<SegmentedControl aria-label=\"Chart range\" options={[{value: 'day', label: 'Day'}, {value: 'week', label: 'Week'}, {value: 'month', label: 'Month'}]} defaultValue=\"week\" />"
+		]
+	},
+	"Monoline Select": {
+		"prefix": "ml-select",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Select: Pick one value from a list of five or more options.",
+		"body": [
+			"import {Field, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: 320}}><Field label=\"Sync every\"><Select defaultValue=\"15\"><SelectTrigger><SelectValue placeholder=\"Choose\" /></SelectTrigger><SelectContent><SelectGroup><SelectLabel>Interval</SelectLabel><SelectItem value=\"5\">5 minutes</SelectItem><SelectItem value=\"15\">15 minutes</SelectItem><SelectItem value=\"60\">Hour</SelectItem></SelectGroup></SelectContent></Select></Field></div>"
+		]
+	},
+	"Monoline Separator": {
+		"prefix": "ml-separator",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Separator: A thin rule between groups.",
+		"body": [
+			"import {Separator} from '@monoline/react';",
+			"",
+			"<div><p>Above</p><Separator /><p>Below</p><div style={{display: 'flex', alignItems: 'center', height: 24}}><span>One</span><Separator orientation=\"vertical\" /><span>Two</span></div></div>"
+		]
+	},
+	"Monoline Shimmer button": {
+		"prefix": "ml-shimmer-button",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Shimmer button: The Button with a light sweep across it. Still a native button.",
+		"body": [
+			"import {ShimmerButton} from '@monoline/react';",
+			"",
+			"<ShimmerButton>Start free trial</ShimmerButton>"
+		]
+	},
+	"Monoline Skeleton": {
+		"prefix": "ml-skeleton",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Skeleton: A still placeholder shaped like the content that is loading.",
+		"body": [
+			"import {Skeleton} from '@monoline/react';",
+			"",
+			"<div style={{display: 'grid', gap: 'var(--s3)', maxWidth: 420}}><Skeleton style={{width: '60%'}} /><Skeleton style={{width: '90%'}} /><Skeleton variant=\"hatch\" /></div>"
+		]
+	},
+	"Monoline Slider": {
+		"prefix": "ml-slider",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Slider: Pick a number, or a range, by dragging or with the keyboard.",
+		"body": [
+			"import {Slider} from '@monoline/react';",
+			"",
+			"<div style={{display: 'grid', gap: 'var(--s5)', maxWidth: 420}}><Slider aria-label=\"Volume\" defaultValue={60} /><Slider aria-label=\"Price\" defaultValue={[20, 70]} /></div>"
+		]
+	},
+	"Monoline Sortable list": {
+		"prefix": "ml-sortable-list",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Sortable list: A list the user reorders by dragging a handle or with the keyboard, with live announcements.",
+		"body": [
+			"import {SortableList, type SortableItem} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '360px'}}><SortableList aria-label=\"Tasks\" defaultValue={items} /></div>"
+		]
+	},
+	"Monoline Sparkline": {
+		"prefix": "ml-sparkline",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Sparkline: A tiny inline trend line for a table cell or a sentence.",
+		"body": [
+			"import {Sparkline} from '@monoline/react';",
+			"",
+			"<p>Signups <Sparkline title=\"Signups, last 10 days\" data={[3, 5, 4, 8, 6, 9, 12, 10, 14, 13]} /> up 18% this week.</p>"
+		]
+	},
+	"Monoline Spinner": {
+		"prefix": "ml-spinner",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Spinner: A small indicator that something is loading.",
+		"body": [
+			"import {Spinner} from '@monoline/react';",
+			"",
+			"<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Spinner /><span className=\"muted small\">Syncing 42 entries</span></div>"
+		]
+	},
+	"Monoline Spotlight": {
+		"prefix": "ml-spotlight",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Spotlight: A surface with a soft highlight that follows the pointer.",
+		"body": [
+			"import {Spotlight} from '@monoline/react';",
+			"",
+			"<Spotlight style={{padding: 'var(--s7)', border: '1px solid var(--rule)', maxWidth: '28rem'}}>",
+			"  <h3 style={{margin: 0, fontWeight: 500}}>Hover here</h3>",
+			"  <p style={{margin: 'var(--s2) 0 0', color: 'var(--muted)'}}>A soft light follows the pointer. Keyboard and touch see a plain surface.</p>",
+			"</Spotlight>"
+		]
+	},
+	"Monoline Stack": {
+		"prefix": "ml-stack",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Stack: Lay children out in a column or row with one gap from the spacing scale.",
+		"body": [
+			"import {Badge, Stack} from '@monoline/react';",
+			"",
+			"<Stack gap={2}><Badge>one</Badge><Badge>two</Badge><Badge>three</Badge></Stack>"
+		]
+	},
+	"Monoline Stat": {
+		"prefix": "ml-stat",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Stat: One number with its label and a note.",
+		"body": [
+			"import {Stat} from '@monoline/react';",
+			"",
+			"<div style={{display: 'flex', gap: 'var(--s7)', flexWrap: 'wrap'}}><Stat label=\"Revenue\" value=\"\\$12k\" note=\"+4% this week\" /><Stat label=\"Users\" value=\"1,204\" note=\"all time\" /></div>"
+		]
+	},
+	"Monoline Stepper": {
+		"prefix": "ml-stepper",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Stepper: Show progress through a numbered sequence of steps.",
+		"body": [
+			"import {Stepper} from '@monoline/react';",
+			"",
+			"<Stepper aria-label=\"Checkout\" current={1} steps={[{title: 'Account'}, {title: 'Plan', description: 'Pick one'}, {title: 'Payment'}]} />"
+		]
+	},
+	"Monoline Switch": {
+		"prefix": "ml-switch",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Switch: An on/off setting that takes effect immediately.",
+		"body": [
+			"import {Switch} from '@monoline/react';",
+			"",
+			"<div style={{display: 'grid', gap: 'var(--s3)'}}><Switch label=\"Launch at login\" defaultChecked /><Switch label=\"Weekly digest\" /><Switch label=\"Locked\" disabled /></div>"
+		]
+	},
+	"Monoline Table": {
+		"prefix": "ml-table",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Table: Rows and columns of data with a header, in a horizontally scrolling wrapper.",
+		"body": [
+			"import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from '@monoline/react';",
+			"",
+			"<Table wrapperLabel=\"Team\">",
+			"  <TableCaption>Team members</TableCaption>",
+			"  <TableHeader><TableRow><TableHead>Name</TableHead><TableHead>Role</TableHead><TableHead numeric>Projects</TableHead></TableRow></TableHeader>",
+			"  <TableBody>",
+			"    <TableRow><TableCell>Ada Lovelace</TableCell><TableCell>Engineer</TableCell><TableCell numeric>4</TableCell></TableRow>",
+			"    <TableRow><TableCell>Grace Hopper</TableCell><TableCell>Admiral</TableCell><TableCell numeric>9</TableCell></TableRow>",
+			"  </TableBody>",
+			"</Table>"
+		]
+	},
+	"Monoline Tabs": {
+		"prefix": "ml-tabs",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Tabs: Switch between related views in the same place.",
+		"body": [
+			"import {Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';",
+			"",
+			"<Tabs defaultValue=\"overview\"><TabsList aria-label=\"Project\"><TabsTrigger value=\"overview\">Overview</TabsTrigger><TabsTrigger value=\"activity\">Activity</TabsTrigger><TabsTrigger value=\"settings\">Settings</TabsTrigger></TabsList><TabsContent value=\"overview\">Overview content.</TabsContent><TabsContent value=\"activity\">Activity content.</TabsContent><TabsContent value=\"settings\">Settings content.</TabsContent></Tabs>"
+		]
+	},
+	"Monoline Tag": {
+		"prefix": "ml-tag",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Tag: A short label, optionally removable.",
+		"body": [
+			"import {Tag} from '@monoline/react';",
+			"",
+			"<Tag>design</Tag>"
+		]
+	},
+	"Monoline Tags input": {
+		"prefix": "ml-tags-input",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Tags input: Type text and press Enter or comma to add it as a removable tag.",
+		"body": [
+			"import {Field, TagsInput} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '360px'}}><Field label=\"Keywords\"><TagsInput placeholder=\"Add a keyword\" defaultValue={['design', 'css']} /></Field></div>"
+		]
+	},
+	"Monoline Text reveal": {
+		"prefix": "ml-text-reveal",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Text reveal: Fade a sentence in word by word. Static for reduced motion.",
+		"body": [
+			"import {TextReveal} from '@monoline/react';",
+			"",
+			"<TextReveal text=\"Every word arrives in turn, so the eye can follow the sentence.\" style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}} />"
+		]
+	},
+	"Monoline Text": {
+		"prefix": "ml-text",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Text: Body text with a size and tone from the scale.",
+		"body": [
+			"import {Text} from '@monoline/react';",
+			"",
+			"<div style={{display: 'grid', gap: 'var(--s2)'}}><Text size=\"lg\">Large</Text><Text>Medium</Text><Text size=\"sm\" tone=\"muted\">Small and muted</Text><Text size=\"xs\" tone=\"danger\">Extra small, danger</Text></div>"
+		]
+	},
+	"Monoline Textarea": {
+		"prefix": "ml-textarea",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Textarea: A multi-line text field.",
+		"body": [
+			"import {Textarea} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: 420}}><Textarea aria-label=\"Notes\" placeholder=\"What happened today?\" /></div>"
+		]
+	},
+	"Monoline Theme provider": {
+		"prefix": "ml-theme-provider",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Theme provider: Set and save the theme, accent, font, corners, density and direction from React with useTheme(), and avoid the first-paint flash with themeScript().",
+		"body": [
+			"import {Button, ThemeProvider, ThemeSwitcher, useTheme} from '@monoline/react';",
+			"",
+			"<ThemeProvider storageKey=\"monoline-demo\"><Controls /></ThemeProvider>"
+		]
+	},
+	"Monoline Time field": {
+		"prefix": "ml-time-field",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Time field: Hour, minute and AM/PM segments you step with arrow keys or type into.",
+		"body": [
+			"import {Field, TimeField} from '@monoline/react';",
+			"",
+			"<Field label=\"Start time\"><TimeField defaultValue=\"09:30\" /></Field>"
+		]
+	},
+	"Monoline Time picker": {
+		"prefix": "ml-time-picker",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Time picker: Pick a time of day with hour, minute and AM/PM segments, using the browser's own control.",
+		"body": [
+			"import {Field, TimePicker} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '200px'}}><Field label=\"Start time\"><TimePicker defaultValue=\"09:30\" /></Field></div>"
+		]
+	},
+	"Monoline Timeline": {
+		"prefix": "ml-timeline",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Timeline: A vertical list of events with times, joined by a rule.",
+		"body": [
+			"import {Timeline, TimelineItem} from '@monoline/react';",
+			"",
+			"<Timeline aria-label=\"Activity\"><TimelineItem title=\"Project created\" time=\"3 days ago\" dateTime=\"2026-11-09\">Ada started the project.</TimelineItem><TimelineItem title=\"First release\" time=\"Yesterday\" dateTime=\"2026-11-11\" /><TimelineItem title=\"Public\" time=\"Today\" dateTime=\"2026-11-12\" /></Timeline>"
+		]
+	},
+	"Monoline Toast": {
+		"prefix": "ml-toast",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Toast: A short message that appears briefly and does not block the page.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, Toast, ToastAction, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport} from '@monoline/react';",
+			"",
+			"<Toast open={open} onOpenChange={setOpen}>",
+			"  <ToastTitle>Draft saved</ToastTitle>",
+			"  <ToastDescription>Stored on this device.</ToastDescription>",
+			"  <ToastAction altText=\"Undo the save\">Undo</ToastAction>",
+			"  <ToastClose />",
+			"</Toast>"
+		]
+	},
+	"Monoline Toaster": {
+		"prefix": "ml-toaster",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Toaster: Show a toast from anywhere with toast('Saved'). Mount one Toaster; call toast.success, toast.error or toast.promise from handlers.",
+		"body": [
+			"import {Button, Toaster, toast} from '@monoline/react';",
+			"",
+			"<Toaster />"
+		]
+	},
+	"Monoline Toggle group": {
+		"prefix": "ml-toggle-group",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Toggle group: A row of toggles where one or several can be on.",
+		"body": [
+			"import {ToggleGroup, ToggleGroupItem} from '@monoline/react';",
+			"",
+			"<ToggleGroup type=\"single\" defaultValue=\"30\" aria-label=\"Range\"><ToggleGroupItem value=\"7\">7 days</ToggleGroupItem><ToggleGroupItem value=\"30\">30 days</ToggleGroupItem><ToggleGroupItem value=\"365\">Year</ToggleGroupItem></ToggleGroup>"
+		]
+	},
+	"Monoline Toggle": {
+		"prefix": "ml-toggle",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Toggle: A button that stays pressed or not.",
+		"body": [
+			"import {Toggle} from '@monoline/react';",
+			"",
+			"<div style={{display: 'flex', gap: 'var(--s3)'}}><Toggle>Bold</Toggle><Toggle defaultPressed>Italic</Toggle><Toggle disabled>Locked</Toggle></div>"
+		]
+	},
+	"Monoline Toolbar": {
+		"prefix": "ml-toolbar",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Toolbar: A row of related controls that share one tab stop and arrow-key movement.",
+		"body": [
+			"import {Toolbar, ToolbarButton, ToolbarSeparator} from '@monoline/react';",
+			"",
+			"<Toolbar aria-label=\"Text formatting\"><ToolbarButton>Bold</ToolbarButton><ToolbarButton>Italic</ToolbarButton><ToolbarButton>Underline</ToolbarButton><ToolbarSeparator /><ToolbarButton>Link</ToolbarButton></Toolbar>"
+		]
+	},
+	"Monoline Tooltip": {
+		"prefix": "ml-tooltip",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Tooltip: Short hint text on hover and keyboard focus.",
+		"body": [
+			"import {Button, Tooltip, TooltipProvider} from '@monoline/react';",
+			"",
+			"<TooltipProvider><div style={{display: 'flex', gap: 'var(--s3)'}}><Tooltip content=\"Saved to ~/Notes\"><Button>Save</Button></Tooltip><Tooltip content=\"Below\" side=\"bottom\"><Button>Bottom</Button></Tooltip></div></TooltipProvider>"
+		]
+	},
+	"Monoline Tour": {
+		"prefix": "ml-tour",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Tour: A guided walkthrough: a spotlight on one element at a time with a card and Next, Back and Skip.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Tour} from '@monoline/react';",
+			"",
+			"function Basic() {",
+			"  const [open, setOpen] = useState(false);",
+			"  return (",
+			"    <div>",
+			"      <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>",
+			"        <button type=\"button\" className=\"btn btn-solid\" onClick={() => setOpen(true)}>Start tour</button>",
+			"        <button type=\"button\" className=\"btn\" id=\"tour-demo-a\">Create</button>",
+			"        <button type=\"button\" className=\"btn\" id=\"tour-demo-b\">Share</button>",
+			"      </div>",
+			"      <Tour",
+			"        open={open}",
+			"        onOpenChange={setOpen}",
+			"        steps={[",
+			"          {target: '#tour-demo-a', title: 'Create', content: 'Start a new project from here.'},",
+			"          {target: '#tour-demo-b', title: 'Share', content: 'Invite people by email.', placement: 'end'},",
+			"          {title: 'That is all', content: 'You can restart the tour at any time.'},",
+			"        ]}",
+			"      />",
+			"    </div>",
+			"  );",
+			"}",
+			"",
+			"<Basic />"
+		]
+	},
+	"Monoline Tree select": {
+		"prefix": "ml-tree-select",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Tree select: A select whose options are a nested tree, with search and single or multiple selection.",
+		"body": [
+			"import {Field, TreeSelect, type TreeNode} from '@monoline/react';",
+			"",
+			"<div style={{maxWidth: '320px', minHeight: '300px'}}><Field label=\"Team\"><TreeSelect items={items} placeholder=\"Choose a team\" /></Field></div>"
+		]
+	},
+	"Monoline Tree": {
+		"prefix": "ml-tree",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Tree: A nested list of items that open and close, with one selected item.",
+		"body": [
+			"import {Tree, type TreeNode} from '@monoline/react';",
+			"",
+			"<Tree aria-label=\"Project files\" items={items} defaultExpanded={['src', 'components']} />"
+		]
+	},
+	"Monoline Typewriter": {
+		"prefix": "ml-typewriter",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Typewriter: Type a string one character at a time. Static for reduced motion.",
+		"body": [
+			"import {Typewriter} from '@monoline/react';",
+			"",
+			"<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}><Typewriter text=\"Small parts, drawn with thin lines.\" /></p>"
+		]
+	},
+	"Monoline useClickOutside": {
+		"prefix": "ml-use-click-outside",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useClickOutside: Calls a function when a pointer goes down outside an element, to close menus and popovers.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, useClickOutside} from '@monoline/react';",
+			"",
+			"function PopoverDemo() {",
+			"  const [open, setOpen] = useState(false);",
+			"  const ref = useClickOutside<HTMLDivElement>(() => setOpen(false), open);",
+			"  return (",
+			"    <div>",
+			"      <Button variant=\"line\" aria-expanded={open} onClick={() => setOpen((o) => !o)}>Open panel</Button>",
+			"      {open && (",
+			"        <div ref={ref} role=\"group\" aria-label=\"Panel\">",
+			"          <p>Click anywhere outside this panel to close it.</p>",
+			"        </div>",
+			"      )}",
+			"    </div>",
+			"  );",
+			"}",
+			"",
+			"<PopoverDemo />"
+		]
+	},
+	"Monoline useClipboard": {
+		"prefix": "ml-use-clipboard",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useClipboard: Copy text with the Clipboard API, with a copied flag that resets after a delay and an error when it fails.",
+		"body": [
+			"import {Button, useClipboard} from '@monoline/react';",
+			"",
+			"const {copied, error, copy} = useClipboard();"
+		]
+	},
+	"Monoline useControllableState": {
+		"prefix": "ml-use-controllable-state",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useControllableState: The value, defaultValue and onChange pattern for custom components that can be controlled or uncontrolled.",
+		"body": [
+			"import {Button, useControllableState} from '@monoline/react';",
+			"",
+			"const [count, setCount] = useControllableState({value, defaultValue, onChange: onValueChange});"
+		]
+	},
+	"Monoline useCounter": {
+		"prefix": "ml-use-counter",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useCounter: A number with increment, decrement, set and reset, bounded by optional min and max.",
+		"body": [
+			"import {Button, useCounter} from '@monoline/react';",
+			"",
+			"const {count, increment, decrement, reset} = useCounter(1, {min: 0, max: 5});"
+		]
+	},
+	"Monoline useDebounce": {
+		"prefix": "ml-use-debounce",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useDebounce: Debounced value and debounced callback: wait for input to settle before acting.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {useDebounce} from '@monoline/react';",
+			"",
+			"const settled = useDebounce(query, 400);"
+		]
+	},
+	"Monoline useDisclosure": {
+		"prefix": "ml-use-disclosure",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useDisclosure: Open and closed state with open, close and toggle functions, and callbacks when it changes.",
+		"body": [
+			"import {Button, useDisclosure} from '@monoline/react';",
+			"",
+			"const {isOpen, toggle} = useDisclosure();"
+		]
+	},
+	"Monoline useDocumentTitle": {
+		"prefix": "ml-use-document-title",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useDocumentTitle: Set document.title while a component is mounted, then restore it.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, useDocumentTitle} from '@monoline/react';",
+			"",
+			"useDocumentTitle(n ? `(\\${n}) Monoline docs` : 'Monoline docs');"
+		]
+	},
+	"Monoline useFocusTrap": {
+		"prefix": "ml-use-focus-trap",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useFocusTrap: Keeps Tab focus inside an element while it is active, and returns focus when it closes.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, useFocusTrap} from '@monoline/react';",
+			"",
+			"function TrapDemo() {",
+			"  const [open, setOpen] = useState(false);",
+			"  const ref = useFocusTrap<HTMLDivElement>(open);",
+			"  return (",
+			"    <div>",
+			"      <Button variant=\"line\" onClick={() => setOpen(true)}>Open trapped panel</Button>",
+			"      {open && (",
+			"        <div ref={ref} role=\"dialog\" aria-label=\"Trapped panel\">",
+			"          <p>Tab stays inside this panel.</p>",
+			"          <Button variant=\"line\" onClick={() => setOpen(false)}>Close</Button>",
+			"          <Button variant=\"ghost\">Second action</Button>",
+			"        </div>",
+			"      )}",
+			"    </div>",
+			"  );",
+			"}",
+			"",
+			"<TrapDemo />"
+		]
+	},
+	"Monoline useHash": {
+		"prefix": "ml-use-hash",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useHash: Read and set location.hash as state.",
+		"body": [
+			"import {Button, useHash} from '@monoline/react';",
+			"",
+			"const [hash, setHash] = useHash();"
+		]
+	},
+	"Monoline useHotkeys": {
+		"prefix": "ml-use-hotkeys",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useHotkeys: Keyboard shortcuts such as mod+k or escape, ignored while typing in fields unless allowed.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {useHotkeys} from '@monoline/react';",
+			"",
+			"useHotkeys({"
+		]
+	},
+	"Monoline useHover": {
+		"prefix": "ml-use-hover",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useHover: Track whether the pointer is over an element.",
+		"body": [
+			"import {useHover} from '@monoline/react';",
+			"",
+			"function Demo() {",
+			"  const [ref, hovered] = useHover<HTMLDivElement>();",
+			"  return <div ref={ref} style={{padding: 'var(--s5)', border: '1px solid var(--rule)', background: hovered ? 'var(--wash-2)' : 'transparent'}}>{hovered ? 'Pointer is over this box' : 'Move the pointer here'}</div>;",
+			"}",
+			"",
+			"<Demo />"
+		]
+	},
+	"Monoline useIntersection": {
+		"prefix": "ml-use-intersection",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useIntersection: Know whether an element is in view, with an IntersectionObserver.",
+		"body": [
+			"import {useIntersection} from '@monoline/react';",
+			"",
+			"function Demo() {",
+			"  const [ref, entry] = useIntersection<HTMLDivElement>({threshold: 0.5});",
+			"  return (",
+			"    <div style={{height: '120px', overflowY: 'auto', border: '1px solid var(--rule)'}} tabIndex={0} aria-label=\"Scrollable area\">",
+			"      <div style={{height: '160px', padding: 'var(--s3)'}}>Scroll down</div>",
+			"      <div ref={ref} style={{padding: 'var(--s4)', background: entry?.isIntersecting ? 'var(--wash-2)' : 'transparent'}}>{entry?.isIntersecting ? 'In view' : 'Out of view'}</div>",
+			"      <div style={{height: '120px'}} />",
+			"    </div>",
+			"  );",
+			"}",
+			"",
+			"<Demo />"
+		]
+	},
+	"Monoline useInterval": {
+		"prefix": "ml-use-interval",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useInterval: Calls a function on a timer, with a null delay to pause it. Cleared on unmount.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, useInterval} from '@monoline/react';",
+			"",
+			"useInterval(() => setSeconds((s) => s + 1), running ? 1000 : null);"
+		]
+	},
+	"Monoline useLocalStorage": {
+		"prefix": "ml-use-local-storage",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useLocalStorage: A JSON value kept in localStorage, shaped like useState, that stays in sync across tabs.",
+		"body": [
+			"import {Button, useLocalStorage} from '@monoline/react';",
+			"",
+			"const [count, setCount] = useLocalStorage('monoline-demo-count', 0);"
+		]
+	},
+	"Monoline useLongPress": {
+		"prefix": "ml-use-long-press",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useLongPress: Call a handler when an element is held down, cancelling if the pointer moves or lifts early.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, useLongPress} from '@monoline/react';",
+			"",
+			"const press = useLongPress(() => setN((v) => v + 1), {delay: 600});"
+		]
+	},
+	"Monoline useMediaQuery": {
+		"prefix": "ml-use-media-query",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useMediaQuery: Whether a CSS media query matches, updated live, and safe to render on the server.",
+		"body": [
+			"import {useMediaQuery} from '@monoline/react';",
+			"",
+			"const wide = useMediaQuery('(min-width: 40rem)');"
+		]
+	},
+	"Monoline useMounted": {
+		"prefix": "ml-use-mounted",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useMounted: True after the first client render. Use it to avoid server and client markup differences.",
+		"body": [
+			"import {useMounted} from '@monoline/react';",
+			"",
+			"const mounted = useMounted();"
+		]
+	},
+	"Monoline usePrevious": {
+		"prefix": "ml-use-previous",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "usePrevious: The value from the previous render, for comparing a change.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, usePrevious} from '@monoline/react';",
+			"",
+			"const previous = usePrevious(value);"
+		]
+	},
+	"Monoline useReducedMotion": {
+		"prefix": "ml-use-reduced-motion",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useReducedMotion: Whether the user has asked the system to reduce motion, for skipping or simplifying animation in code.",
+		"body": [
+			"import {useReducedMotion} from '@monoline/react';",
+			"",
+			"const reduce = useReducedMotion();"
+		]
+	},
+	"Monoline useScrollSpy": {
+		"prefix": "ml-use-scroll-spy",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useScrollSpy: Find which section is currently in view, for a table of contents or sticky nav.",
+		"body": [
+			"import {useScrollSpy} from '@monoline/react';",
+			"",
+			"const active = useScrollSpy(['intro', 'usage'], 0);"
+		]
+	},
+	"Monoline useTimeout": {
+		"prefix": "ml-use-timeout",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useTimeout: Run a callback after a delay, with start and clear controls.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {Button, useTimeout} from '@monoline/react';",
+			"",
+			"const {start, clear} = useTimeout(() => setMsg('Done after one second'), 1000);"
+		]
+	},
+	"Monoline useToggle": {
+		"prefix": "ml-use-toggle",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useToggle: Cycle through a list of values, or flip a boolean.",
+		"body": [
+			"import {Button, useToggle} from '@monoline/react';",
+			"",
+			"const themes = ['warm', 'dark', 'midnight'] as const;",
+			"",
+			"function Demo() {",
+			"  const [theme, next] = useToggle<string>(themes as unknown as readonly [string, ...string[]]);",
+			"  return <Button onClick={() => next()}>Theme: {theme}</Button>;",
+			"}",
+			"",
+			"<Demo />"
+		]
+	},
+	"Monoline useWindowEvent": {
+		"prefix": "ml-use-window-event",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "useWindowEvent: Add a typed window event listener that is removed on unmount.",
+		"body": [
+			"import {useState} from 'react';",
+			"import {useWindowEvent} from '@monoline/react';",
+			"",
+			"useWindowEvent('keydown', (e) => setKey(e.key));"
+		]
+	},
+	"Monoline Virtual list": {
+		"prefix": "ml-virtual-list",
+		"scope": "typescriptreact,javascriptreact",
+		"description": "Virtual list: A windowed list for thousands of rows: only the rows in view are in the page.",
+		"body": [
+			"import {VirtualList} from '@monoline/react';",
+			"",
+			"<VirtualList aria-label=\"Ten thousand rows\" count={10000} itemHeight={32} height={192} renderItem={(i) => <span className=\"virtual-list-cell\">Row {i + 1}</span>} />"
+		]
+	}
+}

@@ -28,7 +28,30 @@ function Selectable() {
 }
 
 export const demos: Demo[] = [
-  {title: '100,000 rows', description: 'Only the visible rows are in the DOM. Click a header to sort, use the arrow keys, PageUp, PageDown, Ctrl+Home and Ctrl+End to move.', render: () => <DataGrid aria-label="Orders, 100,000 rows" columns={columns} rows={big} height={320} getRowId={(r) => r.id} />},
-  {title: 'Row selection', description: 'Space or a click toggles the focused row.', render: () => <Selectable />},
-  {title: 'Empty', render: () => <DataGrid aria-label="No orders" columns={columns} rows={[]} height={200} />},
+  {
+    title: '100,000 rows',
+    description: 'Only the visible rows are in the DOM. Click a header to sort, use the arrow keys, PageUp, PageDown, Ctrl+Home and Ctrl+End to move.',
+    render: () => (
+      <DataGrid
+        aria-label="Orders, 100,000 rows"
+        columns={columns}
+        rows={big}
+        height={320}
+        getRowId={(r) => r.id}
+      />
+    ),
+  },
+  {
+    title: 'Row selection',
+    description: 'Space or a click toggles the focused row.',
+    render: () => (
+      <Selectable />
+    ),
+  },
+  {
+    title: 'Empty',
+    render: () => (
+      <DataGrid aria-label="No orders" columns={columns} rows={[]} height={200} />
+    ),
+  },
 ];

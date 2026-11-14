@@ -125,6 +125,10 @@ export const playgrounds: Record<string, PlaygroundConfig> = {
     ],
     build: (v) => el('Avatar', {name: text(v.name, 'Ada Lovelace'), size: diff(v.size, 'md'), variant: diff(v.variant, 'solid')}),
   },
+  'rolling-number': {
+    controls: [{name: 'value', kind: 'number', initial: 1204, min: 0, max: 999999}, {name: 'locale', kind: 'text', initial: 'en-US'}],
+    build: (v) => el('RollingNumber', {value: v.value, locale: text(v.locale, 'en-US')}),
+  },
   progress: {
     controls: [{name: 'value', kind: 'number', initial: 60, min: 0, max: 100}, {name: 'indeterminate', kind: 'switch'}],
     build: (v) => el('Progress', {'aria-label': 'Upload', value: v.indeterminate ? undefined : v.value}),

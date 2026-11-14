@@ -102,7 +102,7 @@
       ]
     }
   ],
-  "usage": "import {Button, ThemeProvider, ThemeSwitcher, useTheme} from '@monoline/react';\n\nfunction Controls() {\n  const {theme, resolvedTheme, accent, density, setTheme, setDensity} = useTheme();\n  return (\n    <div style={{display: 'grid', gap: 12}}>\n      <ThemeSwitcher />\n      <p>Theme: {theme}{theme === 'system' ? ` (${resolvedTheme})` : ''}. Accent: {accent}. Density: {density}.</p>\n      <div style={{display: 'flex', gap: 8}}>\n        <Button onClick={() => setTheme(resolvedTheme === 'dark' ? 'warm' : 'dark')}>Toggle dark</Button>\n        <Button onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}>Toggle compact</Button>\n      </div>\n    </div>\n  );\n}\n\n<ThemeProvider storageKey=\"monoline-demo\"><Controls /></ThemeProvider>",
+  "usage": "import {Button, ThemeProvider, ThemeSwitcher, useTheme} from '@monoline/react';\n\nfunction Controls() {\n  const {theme, resolvedTheme, accent, density, setTheme, setDensity} = useTheme();\n  return (\n    <div style={{display: 'grid', gap: 12}}>\n      <ThemeSwitcher />\n      <p>Theme: {theme}{theme === 'system' ? ` (${resolvedTheme})` : ''}. Accent: {accent}. Density: {density}.</p>\n      <div style={{display: 'flex', gap: 8}}>\n        <Button onClick={() => setTheme(resolvedTheme === 'dark' ? 'warm' : 'dark')}>Toggle dark</Button>\n        <Button onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}>Toggle compact</Button>\n      </div>\n    </div>\n  );\n}\n\n<ThemeProvider storageKey=\"monoline-demo\">\n  <Controls />\n</ThemeProvider>",
   "dataAttributes": [],
   "classes": [],
   "dependencies": {

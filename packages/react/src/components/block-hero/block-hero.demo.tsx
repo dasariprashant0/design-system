@@ -13,6 +13,11 @@ export const demos: Demo[] = [
     />
   )},
   {title: 'Centred', render: () => (
-    <BlockHero align="center" title="One accent, three themes" description="Tokens carry every colour." actions={<Button variant="solid">Try it</Button>} />
+    <BlockHero
+      align="center"
+      title="One accent, three themes"
+      description="Tokens carry every colour."
+      actions={<Button variant="solid">Try it</Button>}
+    />
   )},
 ];

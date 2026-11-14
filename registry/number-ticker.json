@@ -79,7 +79,7 @@
       ]
     }
   ],
-  "usage": "import {NumberTicker} from '@monoline/react';\n\n<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}><NumberTicker value={12840} /></p>",
+  "usage": "import {NumberTicker} from '@monoline/react';\n\n<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}>\n  <NumberTicker value={12840} />\n</p>",
   "dataAttributes": [],
   "classes": [
     "number-ticker"

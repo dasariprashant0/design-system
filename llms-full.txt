@@ -44,7 +44,12 @@ Usage:
 ```tsx
 import {Alert} from '@monoline/react';
 
-<div style={{display: 'grid', gap: 'var(--s3)'}}><Alert title="Synced.">42 entries up to date as of 14:20.</Alert><Alert tone="success" title="Saved.">Your changes are live.</Alert><Alert tone="warning" title="Conflict.">Two devices edited 12 March. Pick which copy to keep.</Alert><Alert tone="danger" title="Can't save.">The folder is read-only. Pick another folder.</Alert></div>
+<div style={{display: 'grid', gap: 'var(--s3)'}}>
+  <Alert title="Synced.">42 entries up to date as of 14:20.</Alert>
+  <Alert tone="success" title="Saved.">Your changes are live.</Alert>
+  <Alert tone="warning" title="Conflict.">Two devices edited 12 March. Pick which copy to keep.</Alert>
+  <Alert tone="danger" title="Can't save.">The folder is read-only. Pick another folder.</Alert>
+</div>
 ```
 
 A11y:
@@ -210,7 +215,11 @@ import {AreaChart} from '@monoline/react';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
 
-<AreaChart title="Active users" labels={months} series={[{name: 'Users', values: [120, 180, 150, 240, 310, 290]}]} />
+<AreaChart
+  title="Active users"
+  labels={months}
+  series={[{name: 'Users', values: [120, 180, 150, 240, 310, 290]}]}
+/>
 ```
 
 A11y:
@@ -236,7 +245,11 @@ Usage:
 ```tsx
 import {AspectRatio} from '@monoline/react';
 
-<div style={{width: '320px'}}><AspectRatio ratio={16 / 9}><div style={{width: '100%', height: '100%', border: '1px solid var(--rule)', display: 'grid', placeItems: 'center'}}>16:9</div></AspectRatio></div>
+<div style={{width: '320px'}}>
+  <AspectRatio ratio={16 / 9}>
+    <div style={{width: '100%', height: '100%', border: '1px solid var(--rule)', display: 'grid', placeItems: 'center'}}>16:9</div>
+  </AspectRatio>
+</div>
 ```
 
 A11y:
@@ -262,7 +275,11 @@ import {Autocomplete, Field} from '@monoline/react';
 
 const cities = ['Amsterdam', 'Berlin', 'Bangalore', 'Boston', 'Lisbon', 'London', 'Lagos'];
 
-<div style={{maxWidth: '320px', minHeight: '220px'}}><Field label="City"><Autocomplete suggestions={cities} placeholder="Start typing" /></Field></div>
+<div style={{maxWidth: '320px', minHeight: '220px'}}>
+  <Field label="City">
+    <Autocomplete suggestions={cities} placeholder="Start typing" />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -289,7 +306,11 @@ Usage:
 ```tsx
 import {Avatar} from '@monoline/react';
 
-<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Avatar name="Ada Lovelace" /><Avatar name="Grace Hopper" variant="line" /><Avatar name="Alan Turing" size="lg" /></div>
+<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}>
+  <Avatar name="Ada Lovelace" />
+  <Avatar name="Grace Hopper" variant="line" />
+  <Avatar name="Alan Turing" size="lg" />
+</div>
 ```
 
 A11y:
@@ -312,7 +333,9 @@ Usage:
 ```tsx
 import {Avatar, AvatarGroup} from '@monoline/react';
 
-<AvatarGroup aria-label="Project members" max={3}>{['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Linus Torvalds'].map((n) => <Avatar key={n} name={n} />)}</AvatarGroup>
+<AvatarGroup aria-label="Project members" max={3}>
+  {['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Linus Torvalds'].map((n) => <Avatar key={n} name={n} />)}
+</AvatarGroup>
 ```
 
 A11y:
@@ -333,7 +356,11 @@ Usage:
 ```tsx
 import {Badge} from '@monoline/react';
 
-<div style={{display: 'flex', gap: 'var(--s3)', flexWrap: 'wrap'}}><Badge>draft</Badge><Badge variant="solid">12 days</Badge><Badge variant="accent">new</Badge></div>
+<div style={{display: 'flex', gap: 'var(--s3)', flexWrap: 'wrap'}}>
+  <Badge>draft</Badge>
+  <Badge variant="solid">12 days</Badge>
+  <Badge variant="accent">new</Badge>
+</div>
 ```
 
 A11y:
@@ -426,7 +453,11 @@ Usage:
 ```tsx
 import {BlockCta, Button} from '@monoline/react';
 
-<BlockCta title="Start building today" description="Install the package and copy your first component." actions={<><Button variant="solid">Get started</Button><Button>Read the docs</Button></>} />
+<BlockCta
+  title="Start building today"
+  description="Install the package and copy your first component."
+  actions={<><Button variant="solid">Get started</Button><Button>Read the docs</Button></>}
+/>
 ```
 
 A11y:
@@ -489,7 +520,12 @@ Usage:
 ```tsx
 import {BlockEmptyPage, Button} from '@monoline/react';
 
-<BlockEmptyPage code="404" title="Page not found" description="The address may be wrong, or the page moved." actions={<><Button variant="solid">Go home</Button><Button>Contact support</Button></>} />
+<BlockEmptyPage
+  code="404"
+  title="Page not found"
+  description="The address may be wrong, or the page moved."
+  actions={<><Button variant="solid">Go home</Button><Button>Contact support</Button></>}
+/>
 ```
 
 A11y:
@@ -526,7 +562,11 @@ const features = [
   {title: 'No runtime styling', description: 'Tokens and classes only.', icon: dot},
 ];
 
-<BlockFeatureGrid title="Why Monoline" description="Fewer parts, clearer pages." features={features} />
+<BlockFeatureGrid
+  title="Why Monoline"
+  description="Fewer parts, clearer pages."
+  features={features}
+/>
 ```
 
 A11y:
@@ -628,7 +668,10 @@ Usage:
 ```tsx
 import {BlockLogin, Link} from '@monoline/react';
 
-<BlockLogin description="Use the email you signed up with." footer={<><Link href="#">Forgot your password?</Link><Link href="#">Create an account</Link></>} />
+<BlockLogin
+  description="Use the email you signed up with."
+  footer={<><Link href="#">Forgot your password?</Link><Link href="#">Create an account</Link></>}
+/>
 ```
 
 A11y:
@@ -743,7 +786,10 @@ Usage:
 ```tsx
 import {BlockSignup, Link} from '@monoline/react';
 
-<BlockSignup description="It takes a minute." footer={<span>Already have an account? <Link href="#">Sign in</Link></span>} />
+<BlockSignup
+  description="It takes a minute."
+  footer={<span>Already have an account? <Link href="#">Sign in</Link></span>}
+/>
 ```
 
 A11y:
@@ -798,7 +844,9 @@ Usage:
 ```tsx
 import {BorderBeam} from '@monoline/react';
 
-<BorderBeam style={{padding: 'var(--s6)', maxWidth: '24rem'}}><p style={{margin: 0}}>A light travels the edge of this box.</p></BorderBeam>
+<BorderBeam style={{padding: 'var(--s6)', maxWidth: '24rem'}}>
+  <p style={{margin: 0}}>A light travels the edge of this box.</p>
+</BorderBeam>
 ```
 
 A11y:
@@ -847,7 +895,9 @@ Usage:
 ```tsx
 import {Breadcrumb} from '@monoline/react';
 
-<Breadcrumb items={[{label: 'Home', href: '#'}, {label: 'Projects', href: '#'}, {label: 'Monoline'}]} />
+<Breadcrumb
+  items={[{label: 'Home', href: '#'}, {label: 'Projects', href: '#'}, {label: 'Monoline'}]}
+/>
 ```
 
 A11y:
@@ -925,7 +975,11 @@ Usage:
 ```tsx
 import {Button, ButtonGroup} from '@monoline/react';
 
-<ButtonGroup aria-label="View"><Button>Day</Button><Button>Week</Button><Button>Month</Button></ButtonGroup>
+<ButtonGroup aria-label="View">
+  <Button>Day</Button>
+  <Button>Week</Button>
+  <Button>Month</Button>
+</ButtonGroup>
 ```
 
 A11y:
@@ -985,7 +1039,21 @@ Usage:
 ```tsx
 import {Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@monoline/react';
 
-<div style={{maxWidth: 360}}><Card><CardHeader><CardTitle>Ship the pricing page</CardTitle><CardDescription>Today, 14:20 · 3 files</CardDescription></CardHeader><CardContent><p>Rewrote the headline and the plan table.</p></CardContent><CardFooter><Button variant="solid" size="sm">Open</Button><Button size="sm">Share</Button></CardFooter></Card></div>
+<div style={{maxWidth: 360}}>
+  <Card>
+    <CardHeader>
+      <CardTitle>Ship the pricing page</CardTitle>
+      <CardDescription>Today, 14:20 · 3 files</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <p>Rewrote the headline and the plan table.</p>
+    </CardContent>
+    <CardFooter>
+      <Button variant="solid" size="sm">Open</Button>
+      <Button size="sm">Share</Button>
+    </CardFooter>
+  </Card>
+</div>
 ```
 
 A11y:
@@ -1007,7 +1075,9 @@ Usage:
 ```tsx
 import {Carousel} from '@monoline/react';
 
-<Carousel aria-label="Featured">{['Alpha', 'Beta', 'Gamma', 'Delta'].map((n) => <div key={n} style={{display: 'grid', placeItems: 'center', height: '140px', border: '1px solid var(--rule)'}}>{n}</div>)}</Carousel>
+<Carousel aria-label="Featured">
+  {['Alpha', 'Beta', 'Gamma', 'Delta'].map((n) => <div key={n} style={{display: 'grid', placeItems: 'center', height: '140px', border: '1px solid var(--rule)'}}>{n}</div>)}
+</Carousel>
 ```
 
 A11y:
@@ -1031,7 +1101,11 @@ Usage:
 ```tsx
 import {Checkbox} from '@monoline/react';
 
-<div style={{display: 'grid', gap: 'var(--s3)'}}><Checkbox label="Replies" defaultChecked /><Checkbox label="Mentions" /><Checkbox label="Billing (locked)" disabled /></div>
+<div style={{display: 'grid', gap: 'var(--s3)'}}>
+  <Checkbox label="Replies" defaultChecked />
+  <Checkbox label="Mentions" />
+  <Checkbox label="Billing (locked)" disabled />
+</div>
 ```
 
 A11y:
@@ -1088,7 +1162,14 @@ Usage:
 ```tsx
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger} from '@monoline/react';
 
-<Collapsible><CollapsibleTrigger asChild><Button size="sm">Show details</Button></CollapsibleTrigger><CollapsibleContent><p>Extra detail appears here when the trigger is pressed.</p></CollapsibleContent></Collapsible>
+<Collapsible>
+  <CollapsibleTrigger asChild>
+    <Button size="sm">Show details</Button>
+  </CollapsibleTrigger>
+  <CollapsibleContent>
+    <p>Extra detail appears here when the trigger is pressed.</p>
+  </CollapsibleContent>
+</Collapsible>
 ```
 
 A11y:
@@ -1153,7 +1234,11 @@ import {Combobox, Field} from '@monoline/react';
 
 const options = ['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Katherine Johnson', 'Linus Torvalds'].map((n) => ({value: n.toLowerCase().replace(/\W+/g, '-'), label: n}));
 
-<div style={{maxWidth: '320px', minHeight: '260px'}}><Field label="Person"><Combobox options={options} placeholder="Type a name" /></Field></div>
+<div style={{maxWidth: '320px', minHeight: '260px'}}>
+  <Field label="Person">
+    <Combobox options={options} placeholder="Type a name" />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -1195,7 +1280,11 @@ const items: CommandItem[] = [
   {id: 'help', label: 'Open help'},
 ];
 
-<Command shortcut="mod+j" items={items} trigger={<button type="button" className="btn btn-outline">Open palette</button>} />
+<Command
+  shortcut="mod+j"
+  items={items}
+  trigger={<button type="button" className="btn btn-outline">Open palette</button>}
+/>
 ```
 
 A11y:
@@ -1257,7 +1346,9 @@ Usage:
 ```tsx
 import {Container} from '@monoline/react';
 
-<Container size="text"><p>A column about 64 characters wide, centred, with side padding.</p></Container>
+<Container size="text">
+  <p>A column about 64 characters wide, centred, with side padding.</p>
+</Container>
 ```
 
 A11y:
@@ -1280,7 +1371,7 @@ import {ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuLabel, Cont
 
 <ContextMenu>
   <ContextMenuTrigger><div style={{display: 'grid', placeItems: 'center', height: '120px', border: '1px dashed var(--rule)'}}>Right click here</div></ContextMenuTrigger>
-  <ContextMenuContent><ContextMenuLabel>File</ContextMenuLabel><ContextMenuItem>Rename</ContextMenuItem><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem tone="danger">Delete</ContextMenuItem></ContextMenuContent>
+  <ContextMenuContent aria-label="File actions"><ContextMenuLabel>File</ContextMenuLabel><ContextMenuItem>Rename</ContextMenuItem><ContextMenuItem>Duplicate</ContextMenuItem><ContextMenuSeparator /><ContextMenuItem tone="danger">Delete</ContextMenuItem></ContextMenuContent>
 </ContextMenu>
 ```
 
@@ -1373,7 +1464,13 @@ const columns: DataGridColumn<Order>[] = [
 
 const big = make(100000);
 
-<DataGrid aria-label="Orders, 100,000 rows" columns={columns} rows={big} height={320} getRowId={(r) => r.id} />
+<DataGrid
+  aria-label="Orders, 100,000 rows"
+  columns={columns}
+  rows={big}
+  height={320}
+  getRowId={(r) => r.id}
+/>
 ```
 
 A11y:
@@ -1425,7 +1522,12 @@ const columns: DataTableColumn<Person>[] = [
   {id: 'projects', header: 'Projects', sortable: true, align: 'end'},
 ];
 
-<DataTable label="Team" columns={columns} data={people} defaultSort={{id: 'name', direction: 'asc'}} />
+<DataTable
+  label="Team"
+  columns={columns}
+  data={people}
+  defaultSort={{id: 'name', direction: 'asc'}}
+/>
 ```
 
 A11y:
@@ -1456,7 +1558,11 @@ Usage:
 ```tsx
 import {DatePicker, Field} from '@monoline/react';
 
-<div style={{maxWidth: '260px', minHeight: '360px'}}><Field label="Due date"><DatePicker weekStartsOn={1} /></Field></div>
+<div style={{maxWidth: '260px', minHeight: '360px'}}>
+  <Field label="Due date">
+    <DatePicker weekStartsOn={1} />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -1486,7 +1592,11 @@ Usage:
 ```tsx
 import {DateRangePicker, Field} from '@monoline/react';
 
-<div style={{maxWidth: '320px', minHeight: '440px'}}><Field label="Stay"><DateRangePicker weekStartsOn={1} /></Field></div>
+<div style={{maxWidth: '320px', minHeight: '440px'}}>
+  <Field label="Stay">
+    <DateRangePicker weekStartsOn={1} />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -1512,7 +1622,9 @@ Usage:
 ```tsx
 import {DescriptionList} from '@monoline/react';
 
-<DescriptionList items={[{term: 'Plan', details: 'Pro'}, {term: 'Seats', details: '12'}, {term: 'Renews', details: '1 March 2027'}]} />
+<DescriptionList
+  items={[{term: 'Plan', details: 'Pro'}, {term: 'Seats', details: '12'}, {term: 'Renews', details: '1 March 2027'}]}
+/>
 ```
 
 A11y:
@@ -1563,7 +1675,18 @@ Usage:
 ```tsx
 import {DirectionProvider, Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';
 
-<div dir="rtl"><DirectionProvider dir="rtl"><Tabs defaultValue="a"><TabsList aria-label="Sections"><TabsTrigger value="a">الأول</TabsTrigger><TabsTrigger value="b">الثاني</TabsTrigger></TabsList><TabsContent value="a">محتوى</TabsContent><TabsContent value="b">محتوى آخر</TabsContent></Tabs></DirectionProvider></div>
+<div dir="rtl">
+  <DirectionProvider dir="rtl">
+    <Tabs defaultValue="a">
+      <TabsList aria-label="Sections">
+        <TabsTrigger value="a">الأول</TabsTrigger>
+        <TabsTrigger value="b">الثاني</TabsTrigger>
+      </TabsList>
+      <TabsContent value="a">محتوى</TabsContent>
+      <TabsContent value="b">محتوى آخر</TabsContent>
+    </Tabs>
+  </DirectionProvider>
+</div>
 ```
 
 A11y:
@@ -1678,7 +1801,9 @@ Usage:
 ```tsx
 import {Button, EmptyState} from '@monoline/react';
 
-<EmptyState title="No projects yet" description="Projects you create show up here."><Button variant="solid">New project</Button></EmptyState>
+<EmptyState title="No projects yet" description="Projects you create show up here.">
+  <Button variant="solid">New project</Button>
+</EmptyState>
 ```
 
 A11y:
@@ -1704,7 +1829,11 @@ Usage:
 ```tsx
 import {Field, Input} from '@monoline/react';
 
-<div style={{maxWidth: 360}}><Field label="Email" hint="We never share it." required><Input type="email" placeholder="you@example.com" /></Field></div>
+<div style={{maxWidth: 360}}>
+  <Field label="Email" hint="We never share it." required>
+    <Input type="email" placeholder="you@example.com" />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -1729,7 +1858,16 @@ Usage:
 ```tsx
 import {Field, Fieldset, Input} from '@monoline/react';
 
-<div style={{maxWidth: '360px'}}><Fieldset legend="Contact"><Field label="Name"><Input /></Field><Field label="Email"><Input type="email" /></Field></Fieldset></div>
+<div style={{maxWidth: '360px'}}>
+  <Fieldset legend="Contact">
+    <Field label="Name">
+      <Input />
+    </Field>
+    <Field label="Email">
+      <Input type="email" />
+    </Field>
+  </Fieldset>
+</div>
 ```
 
 A11y:
@@ -1752,7 +1890,9 @@ Usage:
 ```tsx
 import {FileUpload} from '@monoline/react';
 
-<div style={{maxWidth: '420px'}}><FileUpload multiple accept="image/*,.pdf" label="Drop files here or choose" /></div>
+<div style={{maxWidth: '420px'}}>
+  <FileUpload multiple accept="image/*,.pdf" label="Drop files here or choose" />
+</div>
 ```
 
 A11y:
@@ -1782,7 +1922,10 @@ Usage:
 ```tsx
 import {Badge, Flex} from '@monoline/react';
 
-<Flex justify="between" align="center" gap={3}><Badge>left</Badge><Badge>right</Badge></Flex>
+<Flex justify="between" align="center" gap={3}>
+  <Badge>left</Badge>
+  <Badge>right</Badge>
+</Flex>
 ```
 
 A11y:
@@ -1856,7 +1999,9 @@ Usage:
 ```tsx
 import {Card, Grid} from '@monoline/react';
 
-<Grid columns={3}>{['One', 'Two', 'Three'].map((n) => <Card key={n}>{n}</Card>)}</Grid>
+<Grid columns={3}>
+  {['One', 'Two', 'Three'].map((n) => <Card key={n}>{n}</Card>)}
+</Grid>
 ```
 
 A11y:
@@ -1904,7 +2049,12 @@ Usage:
 ```tsx
 import {Heading} from '@monoline/react';
 
-<div style={{display: 'grid', gap: 'var(--s3)'}}><Heading level={1}>Display</Heading><Heading level={2}>Section</Heading><Heading level={3}>Subsection</Heading><Heading level={2} size="sm">An h2 that looks small</Heading></div>
+<div style={{display: 'grid', gap: 'var(--s3)'}}>
+  <Heading level={1}>Display</Heading>
+  <Heading level={2}>Section</Heading>
+  <Heading level={3}>Subsection</Heading>
+  <Heading level={2} size="sm">An h2 that looks small</Heading>
+</div>
 ```
 
 A11y:
@@ -1930,7 +2080,15 @@ Usage:
 ```tsx
 import {HoverCard, HoverCardContent, HoverCardTrigger} from '@monoline/react';
 
-<HoverCard><HoverCardTrigger asChild><a href="#ada">@ada</a></HoverCardTrigger><HoverCardContent><strong>Ada Lovelace</strong><p className="muted small">Wrote the first published program.</p></HoverCardContent></HoverCard>
+<HoverCard>
+  <HoverCardTrigger asChild>
+    <a href="#ada">@ada</a>
+  </HoverCardTrigger>
+  <HoverCardContent>
+    <strong>Ada Lovelace</strong>
+    <p className="muted small">Wrote the first published program.</p>
+  </HoverCardContent>
+</HoverCard>
 ```
 
 A11y:
@@ -1957,7 +2115,17 @@ import {IconButton} from '@monoline/react';
 
 const Plus = () => <svg aria-hidden="true" viewBox="0 0 12 12" width="12" height="12"><path d="M6 1v10M1 6h10" stroke="currentColor" fill="none" /></svg>;
 
-<div style={{display: 'flex', gap: 'var(--s3)'}}><IconButton aria-label="Add"><Plus /></IconButton><IconButton variant="solid" aria-label="Add item"><Plus /></IconButton><IconButton variant="ghost" size="sm" aria-label="Add row"><Plus /></IconButton></div>
+<div style={{display: 'flex', gap: 'var(--s3)'}}>
+  <IconButton aria-label="Add">
+    <Plus />
+  </IconButton>
+  <IconButton variant="solid" aria-label="Add item">
+    <Plus />
+  </IconButton>
+  <IconButton variant="ghost" size="sm" aria-label="Add row">
+    <Plus />
+  </IconButton>
+</div>
 ```
 
 A11y:
@@ -1983,7 +2151,9 @@ import {Image} from '@monoline/react';
 
 const svg = (c: string) => 'data:image/svg+xml;utf8,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180"><rect width="320" height="180" fill="${c}"/></svg>`);
 
-<div style={{maxWidth: '320px'}}><Image src={svg('#999')} alt="A grey placeholder" ratio={16 / 9} /></div>
+<div style={{maxWidth: '320px'}}>
+  <Image src={svg('#999')} alt="A grey placeholder" ratio={16 / 9} />
+</div>
 ```
 
 A11y:
@@ -2011,7 +2181,9 @@ const tile = (n: number, fill: string) => `data:image/svg+xml;utf8,${encodeURICo
 
 const images: GalleryImage[] = ['#6b4f3a', '#3a5a6b', '#4f6b3a', '#6b3a5a', '#5a3a6b', '#3a6b5a'].map((c, i) => ({src: tile(i + 1, c), alt: `Sample picture ${i + 1}, a flat colour with its number`, caption: `Picture ${i + 1}`}));
 
-<div style={{maxWidth: '480px'}}><ImageGallery images={images} /></div>
+<div style={{maxWidth: '480px'}}>
+  <ImageGallery images={images} />
+</div>
 ```
 
 A11y:
@@ -2036,7 +2208,9 @@ Usage:
 ```tsx
 import {Input} from '@monoline/react';
 
-<div style={{maxWidth: 320}}><Input aria-label="Name" placeholder="Ada Lovelace" /></div>
+<div style={{maxWidth: 320}}>
+  <Input aria-label="Name" placeholder="Ada Lovelace" />
+</div>
 ```
 
 A11y:
@@ -2079,7 +2253,10 @@ Usage:
 ```tsx
 import {Label} from '@monoline/react';
 
-<div style={{display: 'grid', gap: 'var(--s2)', maxWidth: 320}}><Label htmlFor="demo-label" required>Email</Label><input id="demo-label" className="input" placeholder="you@example.com" /></div>
+<div style={{display: 'grid', gap: 'var(--s2)', maxWidth: 320}}>
+  <Label htmlFor="demo-label" required>Email</Label>
+  <input id="demo-label" className="input" placeholder="you@example.com" />
+</div>
 ```
 
 A11y:
@@ -2101,7 +2278,11 @@ Usage:
 ```tsx
 import {LineChart} from '@monoline/react';
 
-<LineChart title="Response time" showPoints data={[{label: 'Mon', value: 120}, {label: 'Tue', value: 98}, {label: 'Wed', value: 143}, {label: 'Thu', value: 110}, {label: 'Fri', value: 87}]} />
+<LineChart
+  title="Response time"
+  showPoints
+  data={[{label: 'Mon', value: 120}, {label: 'Tue', value: 98}, {label: 'Wed', value: 143}, {label: 'Thu', value: 110}, {label: 'Fri', value: 87}]}
+/>
 ```
 
 A11y:
@@ -2153,7 +2334,9 @@ Usage:
 ```tsx
 import {Marquee} from '@monoline/react';
 
-<Marquee duration={20}>{['Acme', 'Globex', 'Initech', 'Umbrella', 'Hooli'].map((n) => <span key={n} style={{padding: '0 var(--s5)', fontFamily: 'var(--font-display)'}}>{n}</span>)}</Marquee>
+<Marquee duration={20}>
+  {['Acme', 'Globex', 'Initech', 'Umbrella', 'Hooli'].map((n) => <span key={n} style={{padding: '0 var(--s5)', fontFamily: 'var(--font-display)'}}>{n}</span>)}
+</Marquee>
 ```
 
 A11y:
@@ -2191,7 +2374,11 @@ const people: MentionOption[] = [
   {value: 'linus', label: 'Linus Torvalds', disabled: true},
 ];
 
-<div style={{maxWidth: '360px', minHeight: '220px'}}><Field label="Comment"><Mentions options={people} rows={3} /></Field></div>
+<div style={{maxWidth: '360px', minHeight: '220px'}}>
+  <Field label="Comment">
+    <Mentions options={people} rows={3} />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -2250,7 +2437,15 @@ import {Field, MultiSelect} from '@monoline/react';
 
 const options = ['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Katherine Johnson', 'Linus Torvalds'].map((n) => ({value: n.toLowerCase().replace(/\W+/g, '-'), label: n}));
 
-<div style={{maxWidth: '360px', minHeight: '280px'}}><Field label="People"><MultiSelect options={options} placeholder="Type a name" defaultValue={['ada-lovelace']} /></Field></div>
+<div style={{maxWidth: '360px', minHeight: '280px'}}>
+  <Field label="People">
+    <MultiSelect
+      options={options}
+      placeholder="Type a name"
+      defaultValue={['ada-lovelace']}
+    />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -2275,7 +2470,15 @@ Usage:
 ```tsx
 import {Field, NativeSelect} from '@monoline/react';
 
-<div style={{maxWidth: '280px'}}><Field label="Plan"><NativeSelect defaultValue="pro"><option value="free">Free</option><option value="pro">Pro</option><option value="team">Team</option></NativeSelect></Field></div>
+<div style={{maxWidth: '280px'}}>
+  <Field label="Plan">
+    <NativeSelect defaultValue="pro">
+      <option value="free">Free</option>
+      <option value="pro">Pro</option>
+      <option value="team">Team</option>
+    </NativeSelect>
+  </Field>
+</div>
 ```
 
 A11y:
@@ -2416,7 +2619,11 @@ Usage:
 ```tsx
 import {Field, NumberInput} from '@monoline/react';
 
-<div style={{maxWidth: '200px'}}><Field label="Quantity"><NumberInput defaultValue={1} min={0} max={10} /></Field></div>
+<div style={{maxWidth: '200px'}}>
+  <Field label="Quantity">
+    <NumberInput defaultValue={1} min={0} max={10} />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -2442,7 +2649,9 @@ Usage:
 ```tsx
 import {NumberTicker} from '@monoline/react';
 
-<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}><NumberTicker value={12840} /></p>
+<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}>
+  <NumberTicker value={12840} />
+</p>
 ```
 
 A11y:
@@ -2624,7 +2833,11 @@ Usage:
 ```tsx
 import {Field, PasswordInput} from '@monoline/react';
 
-<div style={{maxWidth: '320px'}}><Field label="Password"><PasswordInput autoComplete="current-password" /></Field></div>
+<div style={{maxWidth: '320px'}}>
+  <Field label="Password">
+    <PasswordInput autoComplete="current-password" />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -2688,7 +2901,14 @@ Usage:
 ```tsx
 import {Button, Popover, PopoverContent, PopoverTrigger} from '@monoline/react';
 
-<Popover><PopoverTrigger asChild><Button>Details</Button></PopoverTrigger><PopoverContent aria-label="Entry details"><p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p></PopoverContent></Popover>
+<Popover>
+  <PopoverTrigger asChild>
+    <Button>Details</Button>
+  </PopoverTrigger>
+  <PopoverContent aria-label="Entry details">
+    <p style={{margin: 0}}>Logged today at 14:20. 3 files changed.</p>
+  </PopoverContent>
+</Popover>
 ```
 
 A11y:
@@ -2711,7 +2931,10 @@ Usage:
 ```tsx
 import {Progress} from '@monoline/react';
 
-<div style={{display: 'grid', gap: 'var(--s4)', maxWidth: 420}}><Progress aria-label="Upload" value={62} /><Progress aria-label="Waiting" /></div>
+<div style={{display: 'grid', gap: 'var(--s4)', maxWidth: 420}}>
+  <Progress aria-label="Upload" value={62} />
+  <Progress aria-label="Waiting" />
+</div>
 ```
 
 A11y:
@@ -2735,7 +2958,10 @@ Usage:
 ```tsx
 import {RadioGroup, RadioGroupItem} from '@monoline/react';
 
-<RadioGroup aria-label="Plan" defaultValue="monthly"><RadioGroupItem value="monthly" label="Monthly" /><RadioGroupItem value="yearly" label="Yearly" /></RadioGroup>
+<RadioGroup aria-label="Plan" defaultValue="monthly">
+  <RadioGroupItem value="monthly" label="Monthly" />
+  <RadioGroupItem value="yearly" label="Yearly" />
+</RadioGroup>
 ```
 
 A11y:
@@ -2935,7 +3161,14 @@ Usage:
 ```tsx
 import {ScrollArea} from '@monoline/react';
 
-<ScrollArea style={{height: '160px', width: '320px', border: '1px solid var(--rule)'}} viewportProps={{'aria-label': 'Release notes'}}><div style={{padding: 'var(--s3)'}}>{Array.from({length: 20}, (_, i) => <p key={i}>Release note {i + 1}</p>)}</div></ScrollArea>
+<ScrollArea
+  style={{height: '160px', width: '320px', border: '1px solid var(--rule)'}}
+  viewportProps={{'aria-label': 'Release notes'}}
+>
+  <div style={{padding: 'var(--s3)'}}>
+    {Array.from({length: 20}, (_, i) => <p key={i}>Release note {i + 1}</p>)}
+  </div>
+</ScrollArea>
 ```
 
 A11y:
@@ -2985,7 +3218,11 @@ Usage:
 ```tsx
 import {SegmentedControl} from '@monoline/react';
 
-<SegmentedControl aria-label="Chart range" options={[{value: 'day', label: 'Day'}, {value: 'week', label: 'Week'}, {value: 'month', label: 'Month'}]} defaultValue="week" />
+<SegmentedControl
+  aria-label="Chart range"
+  options={[{value: 'day', label: 'Day'}, {value: 'week', label: 'Week'}, {value: 'month', label: 'Month'}]}
+  defaultValue="week"
+/>
 ```
 
 A11y:
@@ -3025,7 +3262,23 @@ Usage:
 ```tsx
 import {Field, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from '@monoline/react';
 
-<div style={{maxWidth: 320}}><Field label="Sync every"><Select defaultValue="15"><SelectTrigger><SelectValue placeholder="Choose" /></SelectTrigger><SelectContent><SelectGroup><SelectLabel>Interval</SelectLabel><SelectItem value="5">5 minutes</SelectItem><SelectItem value="15">15 minutes</SelectItem><SelectItem value="60">Hour</SelectItem></SelectGroup></SelectContent></Select></Field></div>
+<div style={{maxWidth: 320}}>
+  <Field label="Sync every">
+    <Select defaultValue="15">
+      <SelectTrigger>
+        <SelectValue placeholder="Choose" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Interval</SelectLabel>
+          <SelectItem value="5">5 minutes</SelectItem>
+          <SelectItem value="15">15 minutes</SelectItem>
+          <SelectItem value="60">Hour</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  </Field>
+</div>
 ```
 
 A11y:
@@ -3034,7 +3287,7 @@ A11y:
 - Inside a Field it is labelled by the Field's label.
 
 CSS classes: select-trigger, select-content, select-item, select-label, input-sm, input-lg
-Data attributes: data-placeholder; data-highlighted; data-disabled; data-invalid
+Data attributes: data-placeholder; data-state: open; data-highlighted; data-disabled; data-invalid
 Source: registry/select.json
 
 ## Separator (separator)
@@ -3048,7 +3301,16 @@ Usage:
 ```tsx
 import {Separator} from '@monoline/react';
 
-<div><p>Above</p><Separator /><p>Below</p><div style={{display: 'flex', alignItems: 'center', height: 24}}><span>One</span><Separator orientation="vertical" /><span>Two</span></div></div>
+<div>
+  <p>Above</p>
+  <Separator />
+  <p>Below</p>
+  <div style={{display: 'flex', alignItems: 'center', height: 24}}>
+    <span>One</span>
+    <Separator orientation="vertical" />
+    <span>Two</span>
+  </div>
+</div>
 ```
 
 A11y:
@@ -3174,7 +3436,11 @@ Usage:
 ```tsx
 import {Skeleton} from '@monoline/react';
 
-<div style={{display: 'grid', gap: 'var(--s3)', maxWidth: 420}}><Skeleton style={{width: '60%'}} /><Skeleton style={{width: '90%'}} /><Skeleton variant="hatch" /></div>
+<div style={{display: 'grid', gap: 'var(--s3)', maxWidth: 420}}>
+  <Skeleton style={{width: '60%'}} />
+  <Skeleton style={{width: '90%'}} />
+  <Skeleton variant="hatch" />
+</div>
 ```
 
 A11y:
@@ -3199,7 +3465,10 @@ Usage:
 ```tsx
 import {Slider} from '@monoline/react';
 
-<div style={{display: 'grid', gap: 'var(--s5)', maxWidth: 420}}><Slider aria-label="Volume" defaultValue={60} /><Slider aria-label="Price" defaultValue={[20, 70]} /></div>
+<div style={{display: 'grid', gap: 'var(--s5)', maxWidth: 420}}>
+  <Slider aria-label="Volume" defaultValue={60} />
+  <Slider aria-label="Price" defaultValue={[20, 70]} />
+</div>
 ```
 
 A11y:
@@ -3229,7 +3498,9 @@ import {SortableList, type SortableItem} from '@monoline/react';
 
 const items: SortableItem[] = ['Write the brief', 'Draft the spec', 'Review with design', 'Build', 'Ship'].map((t) => ({id: t, label: t}));
 
-<div style={{maxWidth: '360px'}}><SortableList aria-label="Tasks" defaultValue={items} /></div>
+<div style={{maxWidth: '360px'}}>
+  <SortableList aria-label="Tasks" defaultValue={items} />
+</div>
 ```
 
 A11y:
@@ -3283,7 +3554,10 @@ Usage:
 ```tsx
 import {Spinner} from '@monoline/react';
 
-<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}><Spinner /><span className="muted small">Syncing 42 entries</span></div>
+<div style={{display: 'flex', gap: 'var(--s3)', alignItems: 'center'}}>
+  <Spinner />
+  <span className="muted small">Syncing 42 entries</span>
+</div>
 ```
 
 A11y:
@@ -3335,7 +3609,11 @@ Usage:
 ```tsx
 import {Badge, Stack} from '@monoline/react';
 
-<Stack gap={2}><Badge>one</Badge><Badge>two</Badge><Badge>three</Badge></Stack>
+<Stack gap={2}>
+  <Badge>one</Badge>
+  <Badge>two</Badge>
+  <Badge>three</Badge>
+</Stack>
 ```
 
 A11y:
@@ -3359,7 +3637,10 @@ Usage:
 ```tsx
 import {Stat} from '@monoline/react';
 
-<div style={{display: 'flex', gap: 'var(--s7)', flexWrap: 'wrap'}}><Stat label="Revenue" value="$12k" note="+4% this week" /><Stat label="Users" value="1,204" note="all time" /></div>
+<div style={{display: 'flex', gap: 'var(--s7)', flexWrap: 'wrap'}}>
+  <Stat label="Revenue" value="$12k" note="+4% this week" />
+  <Stat label="Users" value="1,204" note="all time" />
+</div>
 ```
 
 A11y:
@@ -3381,7 +3662,11 @@ Usage:
 ```tsx
 import {Stepper} from '@monoline/react';
 
-<Stepper aria-label="Checkout" current={1} steps={[{title: 'Account'}, {title: 'Plan', description: 'Pick one'}, {title: 'Payment'}]} />
+<Stepper
+  aria-label="Checkout"
+  current={1}
+  steps={[{title: 'Account'}, {title: 'Plan', description: 'Pick one'}, {title: 'Payment'}]}
+/>
 ```
 
 A11y:
@@ -3404,7 +3689,11 @@ Usage:
 ```tsx
 import {Switch} from '@monoline/react';
 
-<div style={{display: 'grid', gap: 'var(--s3)'}}><Switch label="Launch at login" defaultChecked /><Switch label="Weekly digest" /><Switch label="Locked" disabled /></div>
+<div style={{display: 'grid', gap: 'var(--s3)'}}>
+  <Switch label="Launch at login" defaultChecked />
+  <Switch label="Weekly digest" />
+  <Switch label="Locked" disabled />
+</div>
 ```
 
 A11y:
@@ -3458,7 +3747,16 @@ Usage:
 ```tsx
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@monoline/react';
 
-<Tabs defaultValue="overview"><TabsList aria-label="Project"><TabsTrigger value="overview">Overview</TabsTrigger><TabsTrigger value="activity">Activity</TabsTrigger><TabsTrigger value="settings">Settings</TabsTrigger></TabsList><TabsContent value="overview">Overview content.</TabsContent><TabsContent value="activity">Activity content.</TabsContent><TabsContent value="settings">Settings content.</TabsContent></Tabs>
+<Tabs defaultValue="overview">
+  <TabsList aria-label="Project">
+    <TabsTrigger value="overview">Overview</TabsTrigger>
+    <TabsTrigger value="activity">Activity</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
+  </TabsList>
+  <TabsContent value="overview">Overview content.</TabsContent>
+  <TabsContent value="activity">Activity content.</TabsContent>
+  <TabsContent value="settings">Settings content.</TabsContent>
+</Tabs>
 ```
 
 A11y:
@@ -3467,7 +3765,7 @@ A11y:
 - Give the list an accessible name with aria-label.
 
 CSS classes: tabs-root, tabs-list, tabs-trigger, tabs-content, crumbs, pager, steps, step, topbar, brand, topbar-nav, tab, tabpanel
-Data attributes: data-orientation: vertical; data-state: active | done
+Data attributes: data-orientation: vertical | horizontal; data-state: active | done
 Source: registry/tabs.json
 
 ## Tag (tag)
@@ -3508,7 +3806,11 @@ Usage:
 ```tsx
 import {Field, TagsInput} from '@monoline/react';
 
-<div style={{maxWidth: '360px'}}><Field label="Keywords"><TagsInput placeholder="Add a keyword" defaultValue={['design', 'css']} /></Field></div>
+<div style={{maxWidth: '360px'}}>
+  <Field label="Keywords">
+    <TagsInput placeholder="Add a keyword" defaultValue={['design', 'css']} />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -3535,7 +3837,12 @@ Usage:
 ```tsx
 import {Text} from '@monoline/react';
 
-<div style={{display: 'grid', gap: 'var(--s2)'}}><Text size="lg">Large</Text><Text>Medium</Text><Text size="sm" tone="muted">Small and muted</Text><Text size="xs" tone="danger">Extra small, danger</Text></div>
+<div style={{display: 'grid', gap: 'var(--s2)'}}>
+  <Text size="lg">Large</Text>
+  <Text>Medium</Text>
+  <Text size="sm" tone="muted">Small and muted</Text>
+  <Text size="xs" tone="danger">Extra small, danger</Text>
+</div>
 ```
 
 A11y:
@@ -3557,7 +3864,10 @@ Usage:
 ```tsx
 import {TextReveal} from '@monoline/react';
 
-<TextReveal text="Every word arrives in turn, so the eye can follow the sentence." style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}} />
+<TextReveal
+  text="Every word arrives in turn, so the eye can follow the sentence."
+  style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}
+/>
 ```
 
 A11y:
@@ -3579,7 +3889,9 @@ Usage:
 ```tsx
 import {Textarea} from '@monoline/react';
 
-<div style={{maxWidth: 420}}><Textarea aria-label="Notes" placeholder="What happened today?" /></div>
+<div style={{maxWidth: 420}}>
+  <Textarea aria-label="Notes" placeholder="What happened today?" />
+</div>
 ```
 
 A11y:
@@ -3623,7 +3935,9 @@ function Controls() {
   );
 }
 
-<ThemeProvider storageKey="monoline-demo"><Controls /></ThemeProvider>
+<ThemeProvider storageKey="monoline-demo">
+  <Controls />
+</ThemeProvider>
 ```
 
 A11y:
@@ -3652,7 +3966,9 @@ Usage:
 ```tsx
 import {Field, TimeField} from '@monoline/react';
 
-<Field label="Start time"><TimeField defaultValue="09:30" /></Field>
+<Field label="Start time">
+  <TimeField defaultValue="09:30" />
+</Field>
 ```
 
 A11y:
@@ -3681,7 +3997,11 @@ Usage:
 ```tsx
 import {Field, TimePicker} from '@monoline/react';
 
-<div style={{maxWidth: '200px'}}><Field label="Start time"><TimePicker defaultValue="09:30" /></Field></div>
+<div style={{maxWidth: '200px'}}>
+  <Field label="Start time">
+    <TimePicker defaultValue="09:30" />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -3706,7 +4026,11 @@ Usage:
 ```tsx
 import {Timeline, TimelineItem} from '@monoline/react';
 
-<Timeline aria-label="Activity"><TimelineItem title="Project created" time="3 days ago" dateTime="2026-11-09">Ada started the project.</TimelineItem><TimelineItem title="First release" time="Yesterday" dateTime="2026-11-11" /><TimelineItem title="Public" time="Today" dateTime="2026-11-12" /></Timeline>
+<Timeline aria-label="Activity">
+  <TimelineItem title="Project created" time="3 days ago" dateTime="2026-11-09">Ada started the project.</TimelineItem>
+  <TimelineItem title="First release" time="Yesterday" dateTime="2026-11-11" />
+  <TimelineItem title="Public" time="Today" dateTime="2026-11-12" />
+</Timeline>
 ```
 
 A11y:
@@ -3809,7 +4133,11 @@ Usage:
 ```tsx
 import {Toggle} from '@monoline/react';
 
-<div style={{display: 'flex', gap: 'var(--s3)'}}><Toggle>Bold</Toggle><Toggle defaultPressed>Italic</Toggle><Toggle disabled>Locked</Toggle></div>
+<div style={{display: 'flex', gap: 'var(--s3)'}}>
+  <Toggle>Bold</Toggle>
+  <Toggle defaultPressed>Italic</Toggle>
+  <Toggle disabled>Locked</Toggle>
+</div>
 ```
 
 A11y:
@@ -3831,7 +4159,11 @@ Usage:
 ```tsx
 import {ToggleGroup, ToggleGroupItem} from '@monoline/react';
 
-<ToggleGroup type="single" defaultValue="30" aria-label="Range"><ToggleGroupItem value="7">7 days</ToggleGroupItem><ToggleGroupItem value="30">30 days</ToggleGroupItem><ToggleGroupItem value="365">Year</ToggleGroupItem></ToggleGroup>
+<ToggleGroup type="single" defaultValue="30" aria-label="Range">
+  <ToggleGroupItem value="7">7 days</ToggleGroupItem>
+  <ToggleGroupItem value="30">30 days</ToggleGroupItem>
+  <ToggleGroupItem value="365">Year</ToggleGroupItem>
+</ToggleGroup>
 ```
 
 A11y:
@@ -3854,7 +4186,13 @@ Usage:
 ```tsx
 import {Toolbar, ToolbarButton, ToolbarSeparator} from '@monoline/react';
 
-<Toolbar aria-label="Text formatting"><ToolbarButton>Bold</ToolbarButton><ToolbarButton>Italic</ToolbarButton><ToolbarButton>Underline</ToolbarButton><ToolbarSeparator /><ToolbarButton>Link</ToolbarButton></Toolbar>
+<Toolbar aria-label="Text formatting">
+  <ToolbarButton>Bold</ToolbarButton>
+  <ToolbarButton>Italic</ToolbarButton>
+  <ToolbarButton>Underline</ToolbarButton>
+  <ToolbarSeparator />
+  <ToolbarButton>Link</ToolbarButton>
+</Toolbar>
 ```
 
 A11y:
@@ -3883,7 +4221,16 @@ Usage:
 ```tsx
 import {Button, Tooltip, TooltipProvider} from '@monoline/react';
 
-<TooltipProvider><div style={{display: 'flex', gap: 'var(--s3)'}}><Tooltip content="Saved to ~/Notes"><Button>Save</Button></Tooltip><Tooltip content="Below" side="bottom"><Button>Bottom</Button></Tooltip></div></TooltipProvider>
+<TooltipProvider>
+  <div style={{display: 'flex', gap: 'var(--s3)'}}>
+    <Tooltip content="Saved to ~/Notes">
+      <Button>Save</Button>
+    </Tooltip>
+    <Tooltip content="Below" side="bottom">
+      <Button>Bottom</Button>
+    </Tooltip>
+  </div>
+</TooltipProvider>
 ```
 
 A11y:
@@ -4019,7 +4366,11 @@ const items: TreeNode[] = [
   {id: 'ops', label: 'Operations'},
 ];
 
-<div style={{maxWidth: '320px', minHeight: '300px'}}><Field label="Team"><TreeSelect items={items} placeholder="Choose a team" /></Field></div>
+<div style={{maxWidth: '320px', minHeight: '300px'}}>
+  <Field label="Team">
+    <TreeSelect items={items} placeholder="Choose a team" />
+  </Field>
+</div>
 ```
 
 A11y:
@@ -4049,7 +4400,9 @@ Usage:
 ```tsx
 import {Typewriter} from '@monoline/react';
 
-<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}><Typewriter text="Small parts, drawn with thin lines." /></p>
+<p style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}>
+  <Typewriter text="Small parts, drawn with thin lines." />
+</p>
 ```
 
 A11y:
@@ -4076,7 +4429,13 @@ Usage:
 ```tsx
 import {VirtualList} from '@monoline/react';
 
-<VirtualList aria-label="Ten thousand rows" count={10000} itemHeight={32} height={192} renderItem={(i) => <span className="virtual-list-cell">Row {i + 1}</span>} />
+<VirtualList
+  aria-label="Ten thousand rows"
+  count={10000}
+  itemHeight={32}
+  height={192}
+  renderItem={(i) => <span className="virtual-list-cell">Row {i + 1}</span>}
+/>
 ```
 
 A11y:

@@ -48,7 +48,7 @@
       ]
     }
   ],
-  "usage": "import {Field, Fieldset, Input} from '@monoline/react';\n\n<div style={{maxWidth: '360px'}}><Fieldset legend=\"Contact\"><Field label=\"Name\"><Input /></Field><Field label=\"Email\"><Input type=\"email\" /></Field></Fieldset></div>",
+  "usage": "import {Field, Fieldset, Input} from '@monoline/react';\n\n<div style={{maxWidth: '360px'}}>\n  <Fieldset legend=\"Contact\">\n    <Field label=\"Name\">\n      <Input />\n    </Field>\n    <Field label=\"Email\">\n      <Input type=\"email\" />\n    </Field>\n  </Fieldset>\n</div>",
   "dataAttributes": [],
   "classes": [
     "fieldset",

@@ -1,7 +1,9 @@
 /* Tabs on Radix: state comes from data-state. The legacy .tab[aria-selected] rules still work for CSS-only markup. */
-.tabs-root { display: grid; gap: var(--s4); }
+.tabs-root { display: grid; gap: var(--s4); min-width: 0; }
 .tabs-root[data-orientation="vertical"] { grid-template-columns: max-content 1fr; align-items: start; }
 .tabs-list { display: flex; gap: var(--s5); border-bottom: 1px solid var(--rule); }
+/* Many tabs on a narrow screen scroll sideways inside the list instead of pushing the page wider. */
+.tabs-list[data-orientation="horizontal"] { max-width: 100%; overflow-x: auto; scrollbar-width: thin; }
 .tabs-list[data-orientation="vertical"] { flex-direction: column; gap: 0; border-bottom: 0; border-inline-end: 1px solid var(--rule); }
 .tabs-trigger { overflow-wrap: anywhere; padding: var(--s3) 0; margin-bottom: -1px; font-weight: 500; color: var(--muted); border-bottom: 2px solid transparent; }
 .tabs-list[data-orientation="vertical"] .tabs-trigger { padding-block: var(--s2); padding-inline: 0 var(--s4); margin-block: 0; margin-inline: 0 -1px; border-bottom: 0; border-inline-end: 2px solid transparent; text-align: start; }

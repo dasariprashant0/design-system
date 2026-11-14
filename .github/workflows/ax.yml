@@ -1,0 +1,24 @@
+name: ax
+# Reads Chrome's accessibility tree for ~40 components after real key presses and fails when a role, name, state or
+# relationship is missing. It is NOT a screen reader test (see docs/a11y-report.md). Chrome is preinstalled on ubuntu runners.
+on:
+  pull_request:
+  push:
+    branches: [master]
+concurrency:
+  group: ax-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  ax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - run: npm run ax
+        env:
+          CHROME: /usr/bin/google-chrome
+      - name: Report is up to date
+        run: git diff --exit-code docs/a11y-report.md

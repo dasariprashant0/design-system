@@ -88,7 +88,7 @@
       ]
     }
   ],
-  "usage": "import {BlockEmptyPage, Button} from '@monoline/react';\n\n<BlockEmptyPage code=\"404\" title=\"Page not found\" description=\"The address may be wrong, or the page moved.\" actions={<><Button variant=\"solid\">Go home</Button><Button>Contact support</Button></>} />",
+  "usage": "import {BlockEmptyPage, Button} from '@monoline/react';\n\n<BlockEmptyPage\n  code=\"404\"\n  title=\"Page not found\"\n  description=\"The address may be wrong, or the page moved.\"\n  actions={<><Button variant=\"solid\">Go home</Button><Button>Contact support</Button></>}\n/>",
   "dataAttributes": [],
   "classes": [
     "heading",

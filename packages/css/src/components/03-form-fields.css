@@ -2,7 +2,9 @@
 .field { display: grid; gap: var(--s2); min-width: 0; }
 .field-hint { overflow-wrap: anywhere; font-size: var(--text-xs); color: var(--muted); margin-top: var(--s1); }
 .input, .select { height: var(--control-md); padding-block: 0; }
-.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: 12px 14px; color: var(--foreground); }
+.input, .select, .textarea { width: 100%; min-width: 0; background: transparent; border: 1px solid var(--foreground); border-radius: var(--radius); padding: var(--s3) var(--s4); color: var(--foreground); }
+/* Native select: one chevron in every browser and theme. Two gradients in currentColor draw the V, so there is no image to colour per theme. */
+.select { appearance: none; -webkit-appearance: none; padding-inline-end: calc(var(--s4) + 1em); background-image: linear-gradient(to bottom left, transparent 40%, currentColor 40%, currentColor 60%, transparent 60%), linear-gradient(to bottom right, transparent 40%, currentColor 40%, currentColor 60%, transparent 60%); background-repeat: no-repeat; background-size: 0.4em 0.4em, 0.4em 0.4em; background-position: calc(100% - var(--s4) - 0.4em) 50%, calc(100% - var(--s4)) 50%; }
 .input::placeholder, .textarea::placeholder { color: var(--muted); }
 .input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }
 .input[aria-invalid="true"] { border-color: var(--danger); }

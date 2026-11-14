@@ -3,7 +3,7 @@
 .accordion:last-of-type { border-bottom: 1px solid var(--rule); }
 .accordion > summary { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s4); padding: var(--s4) 0; cursor: pointer; font-weight: 500; list-style: none; }
 .accordion > summary::-webkit-details-marker { display: none; }
-.accordion > summary::after { content: "+"; color: var(--muted); font-weight: 400; }
-.accordion[open] > summary::after { content: "−"; }
+.accordion > summary::after { content: "+" / ""; color: var(--muted); font-weight: 400; }
+.accordion[open] > summary::after { content: "−" / ""; }
 .accordion > summary:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--muted); }
 .accordion-body { padding: 0 0 var(--s5); max-width: var(--measure); color: var(--muted); }

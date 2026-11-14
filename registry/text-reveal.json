@@ -57,7 +57,7 @@
       ]
     }
   ],
-  "usage": "import {TextReveal} from '@monoline/react';\n\n<TextReveal text=\"Every word arrives in turn, so the eye can follow the sentence.\" style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}} />",
+  "usage": "import {TextReveal} from '@monoline/react';\n\n<TextReveal\n  text=\"Every word arrives in turn, so the eye can follow the sentence.\"\n  style={{fontFamily: 'var(--font-display)', fontSize: 'var(--display-sm)'}}\n/>",
   "dataAttributes": [],
   "classes": [
     "text-reveal-word"

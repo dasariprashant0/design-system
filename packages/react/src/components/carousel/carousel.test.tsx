@@ -24,6 +24,10 @@ describe('Carousel', () => {
     render(ui());
     expect(screen.getByLabelText('Projects slides')).toHaveAttribute('tabindex', '0');
   });
+  it('names the scrollable track as a group', () => {
+    render(<Carousel aria-label="Featured"><p>A</p><p>B</p></Carousel>);
+    expect(screen.getByRole('group', {name: 'Featured slides'})).toHaveAttribute('tabindex', '0');
+  });
   it('has no axe violations', async () => {
     const {container} = render(ui());
     expect(await axe(container)).toHaveNoViolations();

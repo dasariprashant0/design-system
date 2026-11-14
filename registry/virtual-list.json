@@ -87,7 +87,7 @@
       ]
     }
   ],
-  "usage": "import {VirtualList} from '@monoline/react';\n\n<VirtualList aria-label=\"Ten thousand rows\" count={10000} itemHeight={32} height={192} renderItem={(i) => <span className=\"virtual-list-cell\">Row {i + 1}</span>} />",
+  "usage": "import {VirtualList} from '@monoline/react';\n\n<VirtualList\n  aria-label=\"Ten thousand rows\"\n  count={10000}\n  itemHeight={32}\n  height={192}\n  renderItem={(i) => <span className=\"virtual-list-cell\">Row {i + 1}</span>}\n/>",
   "dataAttributes": [],
   "classes": [
     "virtual-list",

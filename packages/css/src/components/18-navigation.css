@@ -1,6 +1,6 @@
 /* ─── Navigation: breadcrumb, pager, steps, top bar ─── */
 .crumbs { min-width: 0; display: flex; flex-wrap: wrap; gap: var(--s2); font-size: var(--text-sm); color: var(--muted); }
-.crumbs li + li::before { content: "/"; margin-inline-end: var(--s2); color: var(--ink-3); }
+.crumbs li + li::before { content: "/" / ""; margin-inline-end: var(--s2); color: var(--ink-3); }
 .crumbs [aria-current="page"] { color: var(--foreground); }
 .pager { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); font-size: var(--text-sm); }
 .pager a, .pager button { min-width: 36px; padding: var(--s2) var(--s3); text-align: center; border: 1px solid var(--rule); text-decoration: none; }

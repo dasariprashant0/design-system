@@ -11,7 +11,7 @@
   "css": [
     {
       "path": "packages/css/src/components/select.css",
-      "content": "/* Select (Monoline's own listbox and floating layer). The trigger matches .input; the list is a .menu-content. */\n.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; height: var(--control-md); padding: 0 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }\n.select-trigger[data-placeholder] { color: var(--muted); }\n.select-trigger[aria-invalid=\"true\"] { border-color: var(--danger); }\n.select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }\n.select-trigger::after { content: \"↓\"; color: var(--muted); }\n.select-content { z-index: var(--z-drawer); min-width: var(--anchor-width); max-height: min(320px, var(--available-height)); overflow-y: auto; padding: var(--s1) 0; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); }\n.select-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.select-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.select-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.select-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.select-trigger.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }\n.select-trigger.input-lg { height: var(--control-lg); padding: 0 18px; }\n.select-trigger[data-invalid] { border-color: var(--danger); }\n"
+      "content": "/* Select (Monoline's own listbox and floating layer). The trigger matches .input; the list is a .menu-content. */\n.select-trigger { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); width: 100%; min-width: 0; height: var(--control-md); padding: 0 14px; background: transparent; border: 1px solid var(--foreground); color: var(--foreground); text-align: start; }\n.select-trigger[data-placeholder] { color: var(--muted); }\n.select-trigger[aria-invalid=\"true\"] { border-color: var(--danger); }\n.select-trigger:disabled { opacity: 0.55; cursor: not-allowed; border-color: var(--rule); }\n/* Chevron drawn from a mask, so it takes the trigger's colour in every theme (a text glyph sat on the baseline). */\n.select-trigger::after { content: \"\"; flex: none; width: 0.6em; height: 0.6em; background: currentColor; color: var(--muted); mask: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E\") center / contain no-repeat; }\n.select-trigger[data-state=\"open\"]::after { transform: rotate(180deg); }\n.select-content { z-index: var(--z-drawer); min-width: var(--anchor-width); max-height: min(320px, var(--available-height)); overflow-y: auto; padding: var(--s1) 0; background: var(--background); color: var(--foreground); border: 1px solid var(--foreground); }\n.select-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }\n.select-item[data-highlighted] { background: var(--foreground); color: var(--background); outline: none; }\n.select-item[data-disabled] { opacity: 0.5; pointer-events: none; }\n.select-label { padding: var(--s2) var(--s4); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }\n.select-trigger.input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }\n.select-trigger.input-lg { height: var(--control-lg); padding: 0 18px; }\n.select-trigger[data-invalid] { border-color: var(--danger); }\n"
     }
   ],
   "a11y": [
@@ -157,11 +157,17 @@
       ]
     }
   ],
-  "usage": "import {Field, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from '@monoline/react';\n\n<div style={{maxWidth: 320}}><Field label=\"Sync every\"><Select defaultValue=\"15\"><SelectTrigger><SelectValue placeholder=\"Choose\" /></SelectTrigger><SelectContent><SelectGroup><SelectLabel>Interval</SelectLabel><SelectItem value=\"5\">5 minutes</SelectItem><SelectItem value=\"15\">15 minutes</SelectItem><SelectItem value=\"60\">Hour</SelectItem></SelectGroup></SelectContent></Select></Field></div>",
+  "usage": "import {Field, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue} from '@monoline/react';\n\n<div style={{maxWidth: 320}}>\n  <Field label=\"Sync every\">\n    <Select defaultValue=\"15\">\n      <SelectTrigger>\n        <SelectValue placeholder=\"Choose\" />\n      </SelectTrigger>\n      <SelectContent>\n        <SelectGroup>\n          <SelectLabel>Interval</SelectLabel>\n          <SelectItem value=\"5\">5 minutes</SelectItem>\n          <SelectItem value=\"15\">15 minutes</SelectItem>\n          <SelectItem value=\"60\">Hour</SelectItem>\n        </SelectGroup>\n      </SelectContent>\n    </Select>\n  </Field>\n</div>",
   "dataAttributes": [
     {
       "name": "data-placeholder",
       "values": []
+    },
+    {
+      "name": "data-state",
+      "values": [
+        "open"
+      ]
     },
     {
       "name": "data-highlighted",

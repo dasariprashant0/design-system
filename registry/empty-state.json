@@ -69,7 +69,7 @@
       ]
     }
   ],
-  "usage": "import {Button, EmptyState} from '@monoline/react';\n\n<EmptyState title=\"No projects yet\" description=\"Projects you create show up here.\"><Button variant=\"solid\">New project</Button></EmptyState>",
+  "usage": "import {Button, EmptyState} from '@monoline/react';\n\n<EmptyState title=\"No projects yet\" description=\"Projects you create show up here.\">\n  <Button variant=\"solid\">New project</Button>\n</EmptyState>",
   "dataAttributes": [],
   "classes": [
     "empty",

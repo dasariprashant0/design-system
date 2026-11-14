@@ -24,4 +24,10 @@ function Basic() {
   );
 }
 
-export const demos: Demo[] = [{title: 'Three steps', description: 'The last step has no target, so its card is centred.', render: () => <Basic />}];
+export const demos: Demo[] = [{
+  title: 'Three steps',
+  description: 'The last step has no target, so its card is centred.',
+  render: () => (
+    <Basic />
+  ),
+}];

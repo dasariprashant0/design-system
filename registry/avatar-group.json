@@ -56,7 +56,7 @@
       ]
     }
   ],
-  "usage": "import {Avatar, AvatarGroup} from '@monoline/react';\n\n<AvatarGroup aria-label=\"Project members\" max={3}>{['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Linus Torvalds'].map((n) => <Avatar key={n} name={n} />)}</AvatarGroup>",
+  "usage": "import {Avatar, AvatarGroup} from '@monoline/react';\n\n<AvatarGroup aria-label=\"Project members\" max={3}>\n  {['Ada Lovelace', 'Grace Hopper', 'Alan Turing', 'Linus Torvalds'].map((n) => <Avatar key={n} name={n} />)}\n</AvatarGroup>",
   "dataAttributes": [],
   "classes": [
     "avatar",

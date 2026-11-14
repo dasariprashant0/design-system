@@ -62,7 +62,7 @@
       ]
     }
   ],
-  "usage": "import {Timeline, TimelineItem} from '@monoline/react';\n\n<Timeline aria-label=\"Activity\"><TimelineItem title=\"Project created\" time=\"3 days ago\" dateTime=\"2026-11-09\">Ada started the project.</TimelineItem><TimelineItem title=\"First release\" time=\"Yesterday\" dateTime=\"2026-11-11\" /><TimelineItem title=\"Public\" time=\"Today\" dateTime=\"2026-11-12\" /></Timeline>",
+  "usage": "import {Timeline, TimelineItem} from '@monoline/react';\n\n<Timeline aria-label=\"Activity\">\n  <TimelineItem title=\"Project created\" time=\"3 days ago\" dateTime=\"2026-11-09\">Ada started the project.</TimelineItem>\n  <TimelineItem title=\"First release\" time=\"Yesterday\" dateTime=\"2026-11-11\" />\n  <TimelineItem title=\"Public\" time=\"Today\" dateTime=\"2026-11-12\" />\n</Timeline>",
   "dataAttributes": [],
   "classes": [
     "timeline",

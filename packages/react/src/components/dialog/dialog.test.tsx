@@ -20,6 +20,12 @@ describe('Dialog', () => {
     expect(dlg).toHaveAccessibleName('Title');
     expect(dlg).toHaveAccessibleDescription('Details');
   });
+  it('reports itself as modal', async () => {
+    const user = userEvent.setup();
+    render(ui());
+    await user.click(screen.getByRole('button', {name: 'Open'}));
+    expect(await screen.findByRole('dialog')).toHaveAttribute('aria-modal', 'true');
+  });
   it('closes with Escape and returns focus to the trigger', async () => {
     const user = userEvent.setup();
     render(ui());

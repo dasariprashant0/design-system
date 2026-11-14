@@ -52,7 +52,7 @@
       ]
     }
   ],
-  "usage": "import {Button, ButtonGroup} from '@monoline/react';\n\n<ButtonGroup aria-label=\"View\"><Button>Day</Button><Button>Week</Button><Button>Month</Button></ButtonGroup>",
+  "usage": "import {Button, ButtonGroup} from '@monoline/react';\n\n<ButtonGroup aria-label=\"View\">\n  <Button>Day</Button>\n  <Button>Week</Button>\n  <Button>Month</Button>\n</ButtonGroup>",
   "dataAttributes": [],
   "classes": [
     "btn",

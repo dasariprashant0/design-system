@@ -1,0 +1,2 @@
+# dist/ is generated and committed (the root .gitignore ignores dist/)
+!dist/

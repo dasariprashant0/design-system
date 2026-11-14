@@ -50,7 +50,7 @@
       ]
     }
   ],
-  "usage": "import {BorderBeam} from '@monoline/react';\n\n<BorderBeam style={{padding: 'var(--s6)', maxWidth: '24rem'}}><p style={{margin: 0}}>A light travels the edge of this box.</p></BorderBeam>",
+  "usage": "import {BorderBeam} from '@monoline/react';\n\n<BorderBeam style={{padding: 'var(--s6)', maxWidth: '24rem'}}>\n  <p style={{margin: 0}}>A light travels the edge of this box.</p>\n</BorderBeam>",
   "dataAttributes": [],
   "classes": [
     "border-beam",

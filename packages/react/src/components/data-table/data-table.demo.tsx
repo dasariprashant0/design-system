@@ -14,7 +14,33 @@ const columns: DataTableColumn<Person>[] = [
 ];
 
 export const demos: Demo[] = [
-  {title: 'Sortable', render: () => <DataTable label="Team" columns={columns} data={people} defaultSort={{id: 'name', direction: 'asc'}} />},
-  {title: 'Selectable with pages', render: () => <DataTable label="Team, paged" columns={columns} data={people} selectable pageSize={4} />},
-  {title: 'Empty', render: () => <DataTable label="Empty team" columns={columns} data={[]} emptyTitle="No people yet" emptyDescription="Invite someone to see them here." />},
+  {
+    title: 'Sortable',
+    render: () => (
+      <DataTable
+        label="Team"
+        columns={columns}
+        data={people}
+        defaultSort={{id: 'name', direction: 'asc'}}
+      />
+    ),
+  },
+  {
+    title: 'Selectable with pages',
+    render: () => (
+      <DataTable label="Team, paged" columns={columns} data={people} selectable pageSize={4} />
+    ),
+  },
+  {
+    title: 'Empty',
+    render: () => (
+      <DataTable
+        label="Empty team"
+        columns={columns}
+        data={[]}
+        emptyTitle="No people yet"
+        emptyDescription="Invite someone to see them here."
+      />
+    ),
+  },
 ];

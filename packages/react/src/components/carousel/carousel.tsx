@@ -16,7 +16,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(function Carou
   const step = (dir: 1 | -1) => { const el = track.current; if (el) el.scrollBy?.({left: dir * (isRtl(el) ? -1 : 1) * el.clientWidth * 0.9, behavior: 'smooth'}); };
   return (
     <div ref={ref} role="region" aria-roledescription="carousel" className={cx('carousel', className)} {...rest}>
-      <div ref={track} className="carousel-track" tabIndex={0} aria-label={`${rest['aria-label']} slides`}>
+      <div ref={track} role="group" className="carousel-track" tabIndex={0} aria-label={`${rest['aria-label']} slides`}>
         {items.map((c, i) => <div key={i} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${items.length}`} className="carousel-slide">{c}</div>)}
       </div>
       <div className="carousel-controls">

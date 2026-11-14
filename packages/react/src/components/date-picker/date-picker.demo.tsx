@@ -9,6 +9,21 @@ function Clearable() {
 }
 
 export const demos: Demo[] = [
-  {title: 'In a field', render: () => <div style={{maxWidth: '260px', minHeight: '360px'}}><Field label="Due date"><DatePicker weekStartsOn={1} /></Field></div>},
-  {title: 'Clearable', description: 'clearable adds a "Clear date" button in the popover; onValueChange receives null.', render: () => <Clearable />},
+  {
+    title: 'In a field',
+    render: () => (
+      <div style={{maxWidth: '260px', minHeight: '360px'}}>
+        <Field label="Due date">
+          <DatePicker weekStartsOn={1} />
+        </Field>
+      </div>
+    ),
+  },
+  {
+    title: 'Clearable',
+    description: 'clearable adds a "Clear date" button in the popover; onValueChange receives null.',
+    render: () => (
+      <Clearable />
+    ),
+  },
 ];
