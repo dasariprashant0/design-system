@@ -6,7 +6,7 @@ import {Nav} from './Nav';
 import {components, hooks, pathOf} from './registry';
 import {href, type Route} from './router';
 
-export const GITHUB = 'https://github.com/dasariprashant0/design-system';
+export const GITHUB = 'https://github.com/dasariprashant0/monoline';
 const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform);
 
 const sections = [

@@ -6,7 +6,7 @@ import {entryAt, legacyPath, type Entry} from './registry';
 
 export const BASE = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
-/** Full href for a route path: `href('components/button#usage')` gives `/design-system/components/button#usage`. */
+/** Full href for a route path: `href('components/button#usage')` gives `/monoline/components/button#usage`. */
 export const href = (path = '') => BASE + path.replace(/^\//, '');
 
 /** The route path of a pathname: strips the base and trailing slash. `/` gives ''. */

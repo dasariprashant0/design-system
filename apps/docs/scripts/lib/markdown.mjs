@@ -34,7 +34,7 @@ export function componentMarkdown({meta, extra, props = [], styling = [], hook})
     out.push('## Styling', '', 'CSS classes and attribute selectors in the stylesheets this component uses.', '');
     out.push(table(['Selector', 'File'], styling.flatMap((s) => [...s.classes.map((c) => [`.${c}`, s.file]), ...s.attributes.map((a) => [a, s.file])])), '');
   }
-  out.push('## Details', '', `- Stylesheets: ${meta.css.length ? meta.css.join(', ') : 'none'}`, `- Status: ${meta.status}`, `- Source: https://github.com/dasariprashant0/design-system/tree/master/packages/react/src/${hook ? 'hooks' : 'components'}/${meta.name}`);
+  out.push('## Details', '', `- Stylesheets: ${meta.css.length ? meta.css.join(', ') : 'none'}`, `- Status: ${meta.status}`, `- Source: https://github.com/dasariprashant0/monoline/tree/master/packages/react/src/${hook ? 'hooks' : 'components'}/${meta.name}`);
   if (meta.keywords?.length) out.push(`- Also called: ${meta.keywords.join(', ')}`);
   return out.join('\n') + '\n';
 }

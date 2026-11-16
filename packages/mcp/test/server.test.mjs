@@ -415,7 +415,7 @@ test('resolveRegistry order: flag, env, ./registry, repo registry, GitHub', () =
   assert.equal(resolveRegistry({env: {MONOLINE_REGISTRY: 'b'}, cwd: root}), 'b');
   assert.equal(resolveRegistry({env: {}, cwd: root}), dir);
   assert.equal(resolveRegistry({env: {}, cwd: '/nonexistent', pkgDir: '/nonexistent/a/b/c'}),
-    'https://raw.githubusercontent.com/dasariprashant0/design-system/master/registry');
+    'https://raw.githubusercontent.com/dasariprashant0/monoline/master/registry');
   if (existsSync(join(REPO_REGISTRY, 'index.json'))) {
     assert.equal(resolveRegistry({env: {}, cwd: '/nonexistent', pkgDir: new URL('../src', import.meta.url).pathname}), REPO_REGISTRY);
   }

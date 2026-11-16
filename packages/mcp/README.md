@@ -55,7 +55,7 @@ Settings, Developer, Edit config (`claude_desktop_config.json`), then restart:
   "mcpServers": {
     "monoline": {
       "command": "node",
-      "args": ["/path/to/design-system/packages/mcp/bin/monoline-mcp.mjs", "--registry", "/path/to/design-system/registry"]
+      "args": ["/path/to/monoline/packages/mcp/bin/monoline-mcp.mjs", "--registry", "/path/to/monoline/registry"]
     }
   }
 }
@@ -63,7 +63,7 @@ Settings, Developer, Edit config (`claude_desktop_config.json`), then restart:
 
 ## Registry
 
-Resolved in this order: `--registry <folder|url>`, env `MONOLINE_REGISTRY`, `./registry` in the working folder, the `registry/` of the repo this package lives in, then `https://raw.githubusercontent.com/dasariprashant0/design-system/master/registry`. Remote files are fetched on first use and cached in memory for the life of the process. `llms.txt` is read from the folder or URL one level above the registry.
+Resolved in this order: `--registry <folder|url>`, env `MONOLINE_REGISTRY`, `./registry` in the working folder, the `registry/` of the repo this package lives in, then `https://raw.githubusercontent.com/dasariprashant0/monoline/master/registry`. Remote files are fetched on first use and cached in memory for the life of the process. `llms.txt` is read from the folder or URL one level above the registry.
 
 ## Tools
 

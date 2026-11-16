@@ -7,7 +7,7 @@ export const repo = fileURLToPath(new URL('../../../../', import.meta.url));
 export const docsRoot = fileURLToPath(new URL('../../', import.meta.url));
 export const reactSrc = join(repo, 'packages/react/src');
 export const cssDir = join(repo, 'packages/css/src/components');
-export const GITHUB = 'https://github.com/dasariprashant0/design-system/tree/master';
+export const GITHUB = 'https://github.com/dasariprashant0/monoline/tree/master';
 
 /** -> [{meta, dir, kind: 'components' | 'hooks'}] sorted by name. */
 export function discover() {

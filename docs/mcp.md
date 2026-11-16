@@ -54,7 +54,7 @@ Resources: `monoline://llms.txt` and `monoline://component/<name>`. Prompt: `bui
 3. `./registry` in the current folder, or the `registry/` of the repo the package sits in
 4. the registry on GitHub (`master`), fetched once and kept in memory
 
-To point at a local checkout: `"args": ["-y", "@monoline/mcp", "--registry", "/path/to/design-system/registry"]`.
+To point at a local checkout: `"args": ["-y", "@monoline/mcp", "--registry", "/path/to/monoline/registry"]`.
 
 ## Try it by hand
 

@@ -5,7 +5,7 @@ import type {ReactNode} from 'react';
 import {CodeBlock, Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@monoline/react';
 
 const LANGS = ['tsx', 'ts', 'jsx', 'js', 'css', 'html', 'bash', 'json', 'text'];
-const REPO = 'https://github.com/dasariprashant0/design-system/blob/master/';
+const REPO = 'https://github.com/dasariprashant0/monoline/blob/master/';
 
 /** Relative links in the Markdown point at repo files; send them to GitHub. */
 const fixHref = (h: string) => (/^(https?:|mailto:|#|\/)/.test(h) ? h : REPO + h.replace(/^\.\//, ''));

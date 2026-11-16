@@ -41,7 +41,7 @@ The CSS files assume the tokens are loaded: `npm i @monoline/css` and import `@m
 
 | Option | Meaning |
 |---|---|
-| `--registry <path\|url>` | Registry folder or URL. Default: `https://raw.githubusercontent.com/dasariprashant0/design-system/master/registry`. A local checkout works: `--registry ./registry`. |
+| `--registry <path\|url>` | Registry folder or URL. Default: `https://raw.githubusercontent.com/dasariprashant0/monoline/master/registry`. A local checkout works: `--registry ./registry`. |
 | `--dir <path>` | Component folder. Default `src/components/monoline`. |
 | `--styles <path>` | CSS folder. Default `src/styles/monoline`. |
 | `--all` | (`add`) every component in the registry. |
