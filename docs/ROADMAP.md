@@ -9,7 +9,7 @@ Last updated 2026-11-12. This replaces the earlier task table. The component lis
 | Components | 114 components and 23 hooks | `registry/index.json`, 137 entries |
 | Tests | 1182 unit tests with axe and keyboard checks; every demo renders in a test | `npm run check` |
 | Real-browser checks | axe (with colour contrast), overflow and console errors on every docs page in 3 themes at desktop and 375px, orange accent | `scripts/audit.mjs` |
-| Look options | 9 accents, 3 fonts, 3 corner styles, 3 densities, RTL pass | `docs/rtl.md`, `packages/css/src/options.css` |
+| Look options | 8 accents, 3 fonts, 3 corner styles, 3 densities, RTL pass | `docs/rtl.md`, `packages/css/src/options.css` |
 | Docs | page per component, search, TOC rail, per-example code, props, a11y, styling | live site |
 | AI-readable | `meta.json`, `registry/`, `llms.txt`, `llms-full.txt`, Markdown per page, `AGENTS.md` | generated |
 | Bundle size | one Button is 1.7 KB gzip, all CSS 16.4 KB gzip (after the fix below) | `npm run size` |
@@ -25,7 +25,7 @@ MUI, Ant Design, Mantine and shadcn/ui have years of community, thousands of iss
 1. **Small and fast.** Plain CSS, no runtime styling, per-component bundles. Target: a 10-component app under 25 KB gzip of JS and about 10 KB of CSS.
 2. **Accessible, with proof.** Axe plus a real-browser audit in CI across every theme and accent, and published results. Others claim it; we show it.
 3. **AI-first.** Registry, `llms.txt`, Markdown per page, an MCP server, and a CLI that copies source. Only shadcn/ui and Mantine do part of this today.
-4. **One distinct, themeable identity.** Monospace and thin rules by default, but font, corners, density and nine accents on one switch, so people who dislike the default still can use it.
+4. **One distinct, themeable identity.** Monospace and thin rules by default, but font, corners, density and eight accents on one switch, so people who dislike the default still can use it.
 5. **Copy or install.** Both routes work from the same source.
 
 Skip on purpose: 3D, WebGL, glow and aurora effects (Aceternity, parts of Magic UI); enterprise-only widgets such as Transfer, Cascader and Watermark until someone asks; Tailwind as a dependency.
@@ -90,7 +90,7 @@ Components that Mantine, Ant Design or Chakra ship and we do not:
 
 ## Quality gates (always on)
 
-- `npm run check`: contrast (3 themes × 9 accents, code colours), no raw colours, no physical CSS properties, doc comments on every prop, 1182+ tests
+- `npm run check`: contrast (3 themes × 8 accents, code colours), no raw colours, no physical CSS properties, doc comments on every prop, 1182+ tests
 - `npm run size`: per-component and CSS budgets
 - `node scripts/audit.mjs`: real-browser axe, overflow, console errors
 - `node scripts/audit.mjs --visual`: screenshot comparison on pull requests

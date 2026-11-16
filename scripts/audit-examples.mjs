@@ -14,6 +14,7 @@ import {existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync, rmSync}
 import {tmpdir} from 'node:os';
 import {extname, join, normalize} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {installSweep, sweepState} from './lib/sweep.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const args = process.argv.slice(2);
@@ -21,6 +22,7 @@ const opt = (n, d) => { const i = args.indexOf(`--${n}`); return i >= 0 && args[
 const shotsDir = opt('shots', '');
 const apps = opt('apps', 'dashboard,auth-settings,landing').split(',');
 const scenarioFilter = opt('scenario', '');
+const SWEEP = !args.includes('--no-sweep'); // hover and focus every control in every state; --no-sweep keeps only the page-level checks
 const THEMES = opt('themes', 'warm,dark,midnight').split(',');
 if (shotsDir) mkdirSync(shotsDir, {recursive: true});
 
@@ -35,6 +37,9 @@ const SCENARIOS = {
     {name: 'new-order-dialog', hash: '', actions: [C('button', 'New order'), {wait: 300}]},
     // known: axe reports aria-hidden-focus on #root while a Radix menu is open (axe only forgives it for aria-modal dialogs). Focus is trapped in the menu, so it is not a user-facing problem; listed, not failed.
     {name: 'look-menu', hash: '', known: ['axe:aria-hidden-focus'], actions: [C('button', 'Look'), {wait: 300}]},
+    {name: 'tooltip', hash: '', actions: [{hover: ['button', 'Search or run']}, {wait: 900}]},
+    // The shell collapses to a drawer on a phone; the Menu button only exists there.
+    {name: 'nav-drawer', hash: '', only: 'mobile', actions: [C('button', 'Menu'), {wait: 400}]},
     {name: 'date-picker', hash: '', actions: [C('button', 'Any date'), {wait: 300}]},
     {name: 'sort-by-amount', hash: 'orders', actions: [C('th button, th [role=button]', 'Amount'), {wait: 200}]},
     {name: 'toast', hash: '', actions: [C('button', 'New order'), {wait: 300}, {type: ['[role=dialog] input', 'Ada']}, C('[role=dialog] button[type=submit]'), {wait: 500}]},
@@ -119,6 +124,7 @@ listeners.push((m) => {
 });
 await cdp('Runtime.enable'); await cdp('Network.enable'); await cdp('Page.enable');
 await cdp('Page.addScriptToEvaluateOnNewDocument', {source: readFileSync(join(root, 'node_modules/axe-core/axe.min.js'), 'utf8')});
+await installSweep(cdp);
 
 const KEYS = {Escape: 27, Tab: 9, Enter: 13};
 async function key(combo) {
@@ -136,8 +142,14 @@ async function mouseClick([sel, text]) {
   await cdp('Input.dispatchMouseEvent', {type: 'mousePressed', x: rect.x, y: rect.y, button: 'left', clickCount: 1});
   await cdp('Input.dispatchMouseEvent', {type: 'mouseReleased', x: rect.x, y: rect.y, button: 'left', clickCount: 1});
 }
+async function mouseHover([sel, text]) {
+  const rect = await evaluate(`(() => { const els = [...document.querySelectorAll(${JSON.stringify(sel)})].filter(e => e.getClientRects().length); const el = els.find(e => (e.textContent || '').trim().startsWith(${JSON.stringify(text)})); if (!el) return null; const r = el.getBoundingClientRect(); return {x: r.x + r.width / 2, y: r.y + r.height / 2}; })()`);
+  if (!rect) throw new Error(`hover target not found: ${sel} ${text}`);
+  await cdp('Input.dispatchMouseEvent', {type: 'mouseMoved', x: rect.x, y: rect.y});
+}
 async function act(a) {
   if (a.click) await mouseClick(a.click);
+  else if (a.hover) await mouseHover(a.hover);
   else if (a.key) await key(a.key);
   else if (a.wait) await sleep(a.wait);
   else if (a.js) await evaluate(a.js);
@@ -158,7 +170,7 @@ for (const app of apps) {
   for (const [vp, v] of Object.entries(VIEWPORTS)) {
     await cdp('Emulation.setDeviceMetricsOverride', {width: v.width, height: v.height, deviceScaleFactor: 1, mobile: v.mobile});
     await cdp('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'reduce'}]});
-    for (const theme of THEMES) for (const sc of SCENARIOS[app].filter((x) => x.name.includes(scenarioFilter))) {
+    for (const theme of THEMES) for (const sc of SCENARIOS[app].filter((x) => x.name.includes(scenarioFilter) && (!x.only || x.only === vp))) {
       state = `${app}/${sc.name}/${vp}/${theme}`; knownKinds = sc.known ?? [];
       await cdp('Page.navigate', {url: 'about:blank'});
       await cdp('Page.addScriptToEvaluateOnNewDocument', {source: `try { localStorage.setItem('theme', ${JSON.stringify(theme)}); } catch {}`});
@@ -169,6 +181,7 @@ for (const app of apps) {
       await sleep(250);
       states++;
       if (await evaluate('document.documentElement.scrollWidth > innerWidth + 1')) note('horizontal-overflow', `${await evaluate('document.documentElement.scrollWidth')}px wide`);
+      for (const x of await sweepState({cdp, evaluate, sleep, controls: SWEEP && sc.sweep !== false})) note(x.kind, x.detail);
       for (const x of await evaluate(AXE)) note(`axe:${x.id}`, `${x.impact}, ${x.nodes} node(s), e.g. ${x.sample}${x.msg ? ' (' + x.msg.slice(0, 110) + ')' : ''}`);
       if (shotsDir && (theme === 'warm' || sc.name === 'overview' || sc.name === 'top')) {
         const {data} = await cdp('Page.captureScreenshot', {format: 'png', captureBeyondViewport: sc.name === 'top' || sc.name === 'overview'});

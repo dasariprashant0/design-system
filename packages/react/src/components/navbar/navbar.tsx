@@ -57,7 +57,7 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(function Navbar({bran
         {actions}
         {links.length > 0 && (
           <Drawer open={open} onOpenChange={setOpen}>
-            <DrawerTrigger asChild><Button size="sm" className="navbar-menu">{menuLabel}</Button></DrawerTrigger>
+            <DrawerTrigger asChild><Button variant="line" size="sm" className="navbar-menu">{menuLabel}</Button></DrawerTrigger>
             <DrawerContent side="end" className="navbar-drawer" aria-describedby={undefined} onClick={(e) => { if ((e.target as HTMLElement).closest('a')) setOpen(false); }}>
               <DrawerTitle>{brand ?? menuLabel}</DrawerTitle>
               <nav aria-label={linksLabel}>{list}</nav>

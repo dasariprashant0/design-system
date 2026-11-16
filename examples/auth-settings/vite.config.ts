@@ -9,10 +9,10 @@ const p = (rel: string) => fileURLToPath(new URL(rel, import.meta.url));
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      '@monoline/react': p('../../packages/react/dist/index.js'),
-      '@monoline/css': p('../../packages/css/dist/monoline.css'),
-    },
+    alias: [
+      {find: '@monoline/react', replacement: p('../../packages/react/dist/index.js')},
+      {find: /^@monoline\/css\//, replacement: p('../../packages/css/dist/') },
+    ],
   },
   build: {outDir: 'dist'},
 });

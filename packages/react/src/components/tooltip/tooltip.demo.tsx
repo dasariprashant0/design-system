@@ -9,10 +9,10 @@ export const demos: Demo[] = [
       <TooltipProvider>
         <div style={{display: 'flex', gap: 'var(--s3)'}}>
           <Tooltip content="Saved to ~/Notes">
-            <Button>Save</Button>
+            <Button variant="line">Save</Button>
           </Tooltip>
           <Tooltip content="Below" side="bottom">
-            <Button>Bottom</Button>
+            <Button variant="line">Bottom</Button>
           </Tooltip>
         </div>
       </TooltipProvider>

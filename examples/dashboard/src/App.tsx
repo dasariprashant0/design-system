@@ -3,7 +3,7 @@ import {
   Avatar, Badge, BarChart, BlockDashboardShell, Button, Card, CardContent, CardHeader, CardTitle, Command, DataTable, DatePicker,
   Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DropdownMenu, DropdownMenuContent,
   DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger,
-  Field, Form, Grid, Heading, Input, LineChart, SegmentedControl, Stat, Text, useHash, type DataTableColumn,
+  Field, Form, Grid, Heading, Input, LineChart, SegmentedControl, Stat, Text, Tooltip, TooltipProvider, useHash, type DataTableColumn,
 } from '@monoline/react';
 import {money, orders, type Order} from './data';
 import {accents, themes, useLook, type Accent, type Theme} from './theme';
@@ -50,13 +50,14 @@ function Dashboard() {
   return (
     <BlockDashboardShell
       brand={<strong>Acme Console</strong>}
+      renderLink={({href, children, ...p}) => <a href={href} {...p} onClick={() => setHash(href.slice(1))}>{children}</a>} // a client router would render its own link here
       nav={[
         {label: 'Overview', href: '#overview', current: page === 'overview'},
         {label: 'Orders', href: '#orders', current: page === 'orders'},
       ]}
       topbar={
         <>
-          <Button variant="line" size="sm" aria-haspopup="dialog" onClick={() => setCmdOpen(true)}>Search or run a command</Button>
+          <TooltipProvider><Tooltip content="Ctrl or Cmd + K"><Button variant="line" size="sm" aria-haspopup="dialog" onClick={() => setCmdOpen(true)}>Search or run a command</Button></Tooltip></TooltipProvider>
           <DropdownMenu>
             <DropdownMenuTrigger asChild><Button variant="line" size="sm">Look</Button></DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -79,11 +80,10 @@ function Dashboard() {
 
       <div className="filters">
         <Field label="From">
-          <DatePicker value={from} onValueChange={setFrom} placeholder="Any date" />
+          <DatePicker clearable value={from} onValueChange={setFrom} placeholder="Any date" />
         </Field>
         <Field label="Customer"><Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search by name" /></Field>
         <SegmentedControl aria-label="Status" value={status} onValueChange={setStatus} options={[{value: 'all', label: 'All'}, {value: 'paid', label: 'Paid'}, {value: 'pending', label: 'Pending'}, {value: 'refunded', label: 'Refunded'}]} />
-        {from && <Button variant="ghost" size="sm" onClick={() => setFrom(null)}>Clear date</Button>}
         <Button variant="solid" onClick={() => setNewOpen(true)}>New order</Button>
       </div>
 

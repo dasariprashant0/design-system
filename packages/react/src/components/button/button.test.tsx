@@ -8,7 +8,7 @@ describe('Button', () => {
     render(<Button>Save</Button>);
     const btn = screen.getByRole('button', {name: 'Save'});
     expect(btn).toHaveAttribute('type', 'button');
-    expect(btn).toHaveClass('btn', 'btn-line');
+    expect(btn).toHaveClass('btn', 'btn-solid');
   });
 
   it('applies variant and size classes', () => {

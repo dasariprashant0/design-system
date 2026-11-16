@@ -13,6 +13,14 @@ const columns: DataTableColumn<Person>[] = [
   {id: 'projects', header: 'Projects', sortable: true, align: 'end'},
 ];
 
+interface Order {id: string; customer: string; date: Date}
+const orders: Order[] = [['Ada', '2026-03-02'], ['Grace', '2026-01-15'], ['Alan', '2026-02-20']].map(([customer, d], i) => ({id: String(i), customer: customer as string, date: new Date(`${d}T12:00:00Z`)}));
+const dateColumns: DataTableColumn<Order>[] = [
+  {id: 'customer', header: 'Customer', sortable: true},
+  // accessor returns the Date, so sorting is by time; cell formats it for display
+  {id: 'date', header: 'Date', sortable: true, accessor: (o) => o.date, cell: (o) => o.date.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC'})},
+];
+
 export const demos: Demo[] = [
   {
     title: 'Sortable',
@@ -41,6 +49,13 @@ export const demos: Demo[] = [
         emptyTitle="No people yet"
         emptyDescription="Invite someone to see them here."
       />
+    ),
+  },
+  {
+    title: 'Sort by date',
+    description: 'accessor returns the Date to sort by; cell formats it for display.',
+    render: () => (
+      <DataTable label="Orders" columns={dateColumns} data={orders} defaultSort={{id: 'date', direction: 'desc'}} />
     ),
   },
 ];

@@ -75,7 +75,7 @@ export const OverflowList = forwardRef<HTMLDivElement, OverflowListProps>(functi
         <span ref={more} className="overflow-list-more">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button size="sm" aria-label={moreLabel(hidden.length)}>+{hidden.length}</Button>
+              <Button variant="line" size="sm" aria-label={moreLabel(hidden.length)}>+{hidden.length}</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {hidden.map((it) => <DropdownMenuItem key={it.id} disabled={it.disabled} onSelect={it.onSelect}>{it.label}</DropdownMenuItem>)}

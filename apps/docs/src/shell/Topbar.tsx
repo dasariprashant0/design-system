@@ -24,7 +24,7 @@ export function Topbar({path, route, prefs, set, onSearch}: {path: string; route
   return (
     <header className="docs-bar">
       <Drawer open={menu} onOpenChange={setMenu}>
-        <DrawerTrigger asChild><Button size="sm" className="docs-menu">Menu</Button></DrawerTrigger>
+        <DrawerTrigger asChild><Button variant="line" size="sm" className="docs-menu">Menu</Button></DrawerTrigger>
         <DrawerContent side="start" aria-describedby={undefined} className="docs-drawer">
           <DrawerTitle>Monoline</DrawerTitle>
           <Nav current={route.kind === 'page' ? route.entry.path : ''} />
@@ -34,10 +34,10 @@ export function Topbar({path, route, prefs, set, onSearch}: {path: string; route
       <nav className="docs-links" aria-label="Main">
         {sections.map((s) => <a key={s.label} href={href(s.to)} aria-current={s.on(path) ? 'true' : undefined}>{s.label}</a>)}
       </nav>
-      <Button size="sm" className="docs-searchbtn" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K /" onClick={onSearch}>
+      <Button variant="line" size="sm" className="docs-searchbtn" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K /" onClick={onSearch}>
         Search <Kbd aria-hidden="true">{isMac ? '⌘ K' : 'Ctrl K'}</Kbd>
       </Button>
-      <Button size="sm" asChild className="docs-github"><a href={GITHUB}>GitHub</a></Button>
+      <Button variant="line" size="sm" asChild className="docs-github"><a href={GITHUB}>GitHub</a></Button>
       <CustomisePanel prefs={prefs} set={set} />
     </header>
   );

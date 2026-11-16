@@ -65,7 +65,7 @@
       ]
     }
   ],
-  "usage": "import {useState} from 'react';\nimport {Button, RollingNumber} from '@monoline/react';\n\nfunction Counter() {\n  const [n, setN] = useState(1204);\n  return (\n    <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>\n      <strong style={{fontSize: 'var(--display-sm)'}}><RollingNumber value={n} format={{style: 'currency', currency: 'USD', maximumFractionDigits: 0}} /></strong>\n      <Button size=\"sm\" onClick={() => setN((v) => v + 137)}>Add 137</Button>\n      <Button size=\"sm\" onClick={() => setN((v) => Math.max(0, v - 999))}>Subtract 999</Button>\n    </div>\n  );\n}\n\n<Counter />",
+  "usage": "import {useState} from 'react';\nimport {Button, RollingNumber} from '@monoline/react';\n\nfunction Counter() {\n  const [n, setN] = useState(1204);\n  return (\n    <div style={{display: 'flex', gap: 'var(--s4)', alignItems: 'center'}}>\n      <strong style={{fontSize: 'var(--display-sm)'}}><RollingNumber value={n} format={{style: 'currency', currency: 'USD', maximumFractionDigits: 0}} /></strong>\n      <Button variant=\"line\" size=\"sm\" onClick={() => setN((v) => v + 137)}>Add 137</Button>\n      <Button variant=\"line\" size=\"sm\" onClick={() => setN((v) => Math.max(0, v - 999))}>Subtract 999</Button>\n    </div>\n  );\n}\n\n<Counter />",
   "dataAttributes": [],
   "classes": [
     "rolling-number",

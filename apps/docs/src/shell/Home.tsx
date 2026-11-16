@@ -38,7 +38,7 @@ function Demo() {
         <CardContent>
           <Field label="Work email"><Input placeholder="ada@example.com" /></Field>
           <div className="home-demo-row"><Switch label="Admin access" /><Badge variant="accent">new</Badge><Tag>design</Tag></div>
-          <div className="home-demo-row"><Button variant="solid">Send invite</Button><Button>Cancel</Button></div>
+          <div className="home-demo-row"><Button variant="solid">Send invite</Button><Button variant="line">Cancel</Button></div>
         </CardContent>
       </Card>
       <p className="muted small">Change the look with <a href={href('themes')}>Themes</a>, or the Customise button above.</p>
@@ -91,10 +91,10 @@ export function Home() {
           <p className="lede">A small, accessible UI kit: plain CSS tokens and {components.length} React components on Radix, with {hooks.length} hooks. Thin rules, one accent, {ACCENT_COUNT} accent settings and three themes.</p>
           <div className="hero-actions">
             <Button variant="solid" asChild><a href={href('guides/getting-started')}>Get started</a></Button>
-            <Button asChild><a href={href(first)}>Components</a></Button>
-            <Button asChild><a href={href('themes')}>Themes</a></Button>
-            <Button asChild><a href={href('blocks')}>Blocks</a></Button>
-            <Button asChild><a href={href('compare')}>Compare</a></Button>
+            <Button variant="line" asChild><a href={href(first)}>Components</a></Button>
+            <Button variant="line" asChild><a href={href('themes')}>Themes</a></Button>
+            <Button variant="line" asChild><a href={href('blocks')}>Blocks</a></Button>
+            <Button variant="line" asChild><a href={href('compare')}>Compare</a></Button>
           </div>
           <Install />
         </div>

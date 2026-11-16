@@ -32,7 +32,7 @@ const verdicts: Array<{area: string; verdict: Verdict; text: string}> = [
   {area: 'Accessibility proof', verdict: 'Equal', text: 'An axe test per component plus a real-browser audit in CI. Mantine states jest-axe too. Manual NVDA, JAWS and VoiceOver testing is planned, so Radix and React Aria based libraries have the longer track record.'},
   {area: 'Component count', verdict: 'Equal', text: `${components.length} components and ${hooks.length} hooks. By navigation count (2026-11-12) that is above shadcn/ui, MUI, HeroUI and daisyUI and below Mantine (122 components, 83 hooks). Counting methods differ, so read it as a rough guide.`},
   {area: 'Maturity and community', verdict: 'Behind', text: 'Not on npm yet and no outside users. MUI, Mantine, shadcn/ui and Chakra have years of fixed issues, ecosystems and answers on the web.'},
-  {area: 'Theming depth', verdict: 'Behind', text: 'Theme, nine accent settings, font, corners and density, plus any token you override. Mantine, Chakra and MUI offer theme objects with per-component defaults and variants; Monoline does not.'},
+  {area: 'Theming depth', verdict: 'Behind', text: 'Theme, eight accent settings, font, corners and density, plus any token you override. Mantine, Chakra and MUI offer theme objects with per-component defaults and variants; Monoline does not.'},
 ];
 
 const tone = (v: Verdict) => (v === 'Smaller' ? 'accent' : v === 'Behind' ? 'solid' : 'outline');
@@ -97,7 +97,7 @@ export function Compare() {
           <li>You need a battle-tested library with a large community today: choose MUI, Mantine or shadcn/ui.</li>
           <li>Your team already writes Tailwind everywhere: shadcn/ui or daisyUI will feel native.</li>
           <li>You want a rich theme object with per-component defaults: Mantine or Chakra.</li>
-          <li>You want a small, dependency-light kit with plain CSS, nine accent settings and a CLI that copies source, and you are fine being early: Monoline.</li>
+          <li>You want a small, dependency-light kit with plain CSS, eight accent settings and a CLI that copies source, and you are fine being early: Monoline.</li>
         </ul>
       </section>
     </>

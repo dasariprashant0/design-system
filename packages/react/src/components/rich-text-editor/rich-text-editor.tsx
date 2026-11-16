@@ -181,7 +181,7 @@ export const RichTextEditor = forwardRef<HTMLDivElement, RichTextEditorProps>(fu
               {urlError && <p id={errId} role="alert" className="rte-link-error">Use an address that starts with http://, https:// or mailto:.</p>}
               <div className="rte-link-actions">
                 <Button type="submit" variant="solid" size="sm">Apply</Button>
-                <Button size="sm" onClick={() => { setLinkOpen(false); run('unlink'); }}>Remove link</Button>
+                <Button variant="line" size="sm" onClick={() => { setLinkOpen(false); run('unlink'); }}>Remove link</Button>
               </div>
             </form>
           </PopoverContent>

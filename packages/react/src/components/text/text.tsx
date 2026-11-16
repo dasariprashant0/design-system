@@ -13,12 +13,14 @@ export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
   tone?: 'default' | 'muted' | 'success' | 'warning' | 'danger' | 'accent' | 'ok';
   /** One line with an ellipsis. */
   truncate?: boolean;
+  /** Lets the text run the full width of its container. By default a paragraph stops at a readable line length (`--measure`). Default false. */
+  fullWidth?: boolean;
   /** Render the child (a span, label, li) with the text styles. */
   asChild?: boolean;
 }
 
 /** A paragraph by default. */
-export const Text = forwardRef<HTMLParagraphElement, TextProps>(function Text({size = 'md', tone = 'default', truncate, asChild, className, ...rest}, ref) {
+export const Text = forwardRef<HTMLParagraphElement, TextProps>(function Text({size = 'md', tone = 'default', truncate, fullWidth, asChild, className, ...rest}, ref) {
   const Comp = asChild ? Slot : 'p';
-  return <Comp ref={ref} className={cx('text', `text-${size}`, tone !== 'default' && `text-${tone}`, truncate && 'text-truncate', className)} {...rest} />;
+  return <Comp ref={ref} className={cx('text', `text-${size}`, tone !== 'default' && `text-${tone}`, truncate && 'text-truncate', fullWidth && 'text-full', className)} {...rest} />;
 });

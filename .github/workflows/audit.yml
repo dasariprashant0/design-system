@@ -38,9 +38,35 @@ jobs:
         run: npm run test:css-browser
         env:
           CHROME: /usr/bin/google-chrome
+  overlays:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - name: Open every overlay on every page; contrast, text overlap, hover and focus in each state
+        run: node scripts/audit.mjs --overlays
+        env:
+          CHROME: /usr/bin/google-chrome
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - name: Example apps in a real browser (flows, overlays, hover, focus)
+        run: |
+          for n in dashboard auth-settings landing; do (cd examples/$n && npx vite build); done
+          node scripts/audit-examples.mjs
+        env:
+          CHROME: /usr/bin/google-chrome
   # Single check name for the whole audit, so anything that waits for "a11y" keeps working.
   a11y:
-    needs: [audit, css-computed]
+    needs: [audit, css-computed, overlays, examples]
     runs-on: ubuntu-latest
     steps:
       - run: echo "all accents and the computed-style test passed"

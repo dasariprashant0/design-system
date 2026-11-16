@@ -8,7 +8,7 @@ Monoline is an open-source UI kit with two layers:
 
 | Layer | Package | What |
 |---|---|---|
-| Core | `packages/css` → `@monoline/css` | Plain CSS: tokens, 3 themes, 9 accents, look options (font, corners, density), base, one stylesheet per component. Works with any framework or none. |
+| Core | `packages/css` → `@monoline/css` | Plain CSS: tokens, 3 themes, 8 accents, look options (font, corners, density), base, one stylesheet per component. Works with any framework or none. |
 | CLI | `packages/cli` → `monoline` | `npx monoline add <component>` copies a component and its CSS from `registry/` into a project. No dependencies. |
 | React | `packages/react` → `@monoline/react` | Accessible, typed React components that render the core's classes. Complex behaviour comes from Radix (`radix-ui`). |
 | Docs | `apps/docs` | The documentation site. Discovers components automatically. |
@@ -117,7 +117,7 @@ Several agents may build at once, each in its own worktree. To avoid conflicts:
 ## Definition of done (per component)
 
 - [ ] Folder has all five files; `meta.json` valid; `index.ts` exports component and `*Props` types.
-- [ ] CSS in its own file, tokens only, works in warm/dark/midnight, all nine accents and the font/corner/density options, at 360px and 1200px.
+- [ ] CSS in its own file, tokens only, works in warm/dark/midnight, all eight accents and the font/corner/density options, at 360px and 1200px.
 - [ ] Keyboard and screen reader behaviour implemented, listed in `meta.json`, and tested.
 - [ ] `npm test`, `npm run typecheck` and `npm run check` pass.
 - [ ] Your demos render in `packages/react/src/all-demos.test.tsx` (axe, no console errors; it runs automatically).

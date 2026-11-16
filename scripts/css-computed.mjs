@@ -202,6 +202,42 @@ try {
 } finally {
   b.close();
 }
+
+// App CSS wins: the kit lives in @layer monoline.*, so the app's own unlayered `.card`, `.badge`, `.container`, `.toolbar`, `.row`,
+// `.section`, `.tag`, `.btn` rules must apply as written, wherever the app stylesheet sits (first or last in <head>) and
+// whatever its specificity (docs/dogfood-log.md C7). A test app is simulated: a <style> with those class names, then fresh elements.
+if (!dump) {
+  const APP = '.card { padding: 0; border: 7px solid red; } .badge { padding: 13px; } .container { max-width: 333px; } .toolbar { border-width: 0; padding: 11px; } .row { display: block; gap: 0; } .section { padding: 17px; } .tag { padding: 19px; } .stack { gap: 23px; } .btn { height: 59px; }';
+  const b2 = await openBrowser({dist});
+  try {
+    await b2.setViewport(1280, 800);
+    await b2.navigate(b2.base);
+    for (const where of ['first', 'last']) {
+      const m = await b2.evaluate(`(() => {
+        document.getElementById('app-css')?.remove(); document.getElementById('appfx')?.remove();
+        const st = document.createElement('style'); st.id = 'app-css'; st.textContent = ${JSON.stringify(APP)};
+        ${where === 'first' ? 'document.head.prepend(st)' : 'document.head.append(st)'};
+        const h = document.createElement('div'); h.id = 'appfx'; h.style.cssText = 'position:absolute;left:0;top:0;width:900px';
+        h.innerHTML = '<div class="card"></div><span class="badge">b</span><div class="container"></div><div class="toolbar"></div><div class="row"></div><section class="section"></section><span class="tag">t</span><div class="stack"><i></i><i></i></div><button class="btn btn-solid">x</button>';
+        document.body.append(h);
+        const c = (sel, p) => getComputedStyle(h.querySelector(sel))[p];
+        return {card: c('.card', 'paddingTop') + '/' + c('.card', 'borderTopWidth'), badge: c('.badge', 'paddingTop'), container: c('.container', 'maxWidth'), toolbar: c('.toolbar', 'paddingTop') + '/' + c('.toolbar', 'borderTopWidth'), row: c('.row', 'display'), section: c('.section', 'paddingTop'), tag: c('.tag', 'paddingTop'), stack: c('.stack', 'rowGap'), btn: c('.btn', 'height')};
+      })()`);
+      const exp = {card: '0px/7px', badge: '13px', container: '333px', toolbar: '11px/0px', row: 'block', section: '17px', tag: '19px', stack: '23px', btn: '59px'};
+      for (const [k, v] of Object.entries(exp)) { n++; if (m[k] !== v) fails.push(`[app css ${where} in <head>] the app's own .${k === 'row' ? 'row' : k} rule must win: got ${m[k]}, expected ${v}`); }
+    }
+  } finally { b2.close(); }
+}
+if (!dump) {
+  // The heading scale must keep its order on a phone too (h1 and h2 used to be 28px both at 375px).
+  const b3 = await openBrowser({dist});
+  try {
+    await b3.setViewport(375, 800); await b3.navigate(b3.base);
+    const m = await b3.evaluate(MEASURE); n++;
+    const z = ['display', 'xl', 'lg', 'md', 'sm'].map((k) => m['h:' + k + ':size']);
+    if (!z.every((v, i) => i === 0 || z[i - 1] > v)) fails.push(`[375px] heading sizes must strictly descend display > xl > lg > md > sm, got ${z.join(', ')}`);
+  } finally { b3.close(); }
+}
 if (dump) process.exit(0);
 if (fails.length) { console.error(fails.map((f) => 'FAIL ' + f).join('\n')); console.error(`${fails.length} of ${n} computed-style checks failed`); process.exit(1); }
 console.log(`ok: ${n} computed-style checks across ${THEMES.length} themes and 3 font looks`);

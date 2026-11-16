@@ -1,13 +1,13 @@
 # Loading only the CSS you use
 
-`@monoline/css` ships one 16.3 KB (gzip) file with everything, and also a small core plus one file per component. A page with Button, Card and Dialog needs about 5 KB instead of 16.
+`@monoline/css` ships one 18.3 KB (gzip) file with everything, and also a small core plus one file per component. A page with Button, Card and Dialog needs about 5 KB instead of 18.
 
 ## Sizes (minified, gzip, measured by `npm run size:css -w @monoline/css`)
 
 | Import | Size |
 |---|---|
-| `@monoline/css` (everything, `monoline.min.css`) | 16.3 KB (was 16.4 KB before layers) |
-| `@monoline/css/core.css` (tokens, 3 themes, 9 accents, options, base, utilities) | 3.3 KB |
+| `@monoline/css` (everything, `monoline.min.css`) | 18.3 KB |
+| `@monoline/css/core.css` (tokens, 3 themes, 8 accents, options, base, utilities) | 3.4 KB |
 | a component bundle (`button` 0.6, `dialog` 0.5, `card` 0.5, `select` 0.5, `data-grid` 0.7) | 0.1 to 2.3 KB; the largest is `block-settings-form` |
 | core + button + card + dialog | about 5.0 KB |
 
