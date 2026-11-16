@@ -401,7 +401,9 @@ function publish({dryRun, yes, provenance}) {
   for (const name of order) {
     const p = byName.get(name);
     const {version} = p.json;
-    if (yes && run('npm', ['view', `${name}@${version}`, 'version', '--json']).stdout.trim() !== '') {
+    // npm view prints an error JSON on stdout for a 404, so only a successful exit means the version exists
+    const onNpm = yes && (() => { const r = run('npm', ['view', `${name}@${version}`, 'version', '--json']); return r.status === 0 && r.stdout.trim() !== ''; })();
+    if (onNpm) {
       console.log(`skip ${name}@${version}: already on npm`);
       continue;
     }
