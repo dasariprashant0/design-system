@@ -4,8 +4,10 @@ import {useEffect, useRef, useState, type ReactNode} from 'react';
 import {Button, DirectionProvider} from '@monoline/react';
 import {Astro, Editor, Extensions, IconsLibrary, IconsPage, Nextjs, Overview, PlainCss, Remix, Upgrade, Vite} from '../site/Pages';
 import {PlaygroundPage} from '../page/live';
+import {Tokens} from '../site/Tokens';
 import {CopyMarkdown, OpenMenu, domToMarkdown} from '../page/doc-actions';
 import {GITHUB} from './Topbar';
+import {VERSION} from './registry';
 import {Blocks} from '../site/Blocks';
 import {Compare} from '../site/Compare';
 import {Changelog, Roadmap} from '../site/Doc';
@@ -32,7 +34,7 @@ function setMeta(title: string, description: string) {
   m.content = description;
 }
 
-const SITE_BODIES: Record<string, () => ReactNode> = {blocks: Blocks, themes: Themes, compare: Compare, changelog: Changelog, roadmap: Roadmap, components: Overview, nextjs: Nextjs, vite: Vite, astro: Astro, remix: Remix, 'plain-css': PlainCss, icons: IconsPage, 'icons-library': IconsLibrary, editor: Editor, tools: Extensions, upgrade: Upgrade};
+const SITE_BODIES: Record<string, () => ReactNode> = {blocks: Blocks, themes: Themes, compare: Compare, changelog: Changelog, roadmap: Roadmap, components: Overview, tokens: Tokens, nextjs: Nextjs, vite: Vite, astro: Astro, remix: Remix, 'plain-css': PlainCss, icons: IconsPage, 'icons-library': IconsLibrary, editor: Editor, tools: Extensions, upgrade: Upgrade};
 
 /** Title area of every page that is not a component: 30px heading and a grey description. */
 export function PageHead({title, description, actions = true}: {title: string; description: string; actions?: boolean}) {
@@ -126,6 +128,10 @@ export function App() {
       <a className="skip-link" href="#main" onClick={(e) => { e.preventDefault(); const m = main.current; if (m) { m.tabIndex = -1; m.focus(); } }}>Skip to main content</a>
       <Topbar path={path} route={route} prefs={prefs} set={set} onSearch={() => setSearch(true)} />
       <aside className="docs-side" id="docs-side">
+        <button type="button" className="side-search" aria-haspopup="dialog" onClick={() => setSearch(true)}>
+          <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.5" /><path d="m10.5 10.5 3.5 3.5" /></svg>
+          <span>Search</span><kbd className="kbd" aria-hidden="true">/</kbd>
+        </button>
         <Nav tab={route.kind === 'page' ? route.entry.tab : undefined} current={route.kind === 'page' ? route.entry.path : ''} />
       </aside>
       <main className="docs-main" id="main" ref={main}>
@@ -136,7 +142,19 @@ export function App() {
           </>
         )}
       </main>
-      {headings.length > 1 && route.kind !== 'home' && <Toc headings={headings} />}
+      {headings.length > 1 && route.kind !== 'home' && (
+        <Toc headings={headings} extra={route.kind === 'page' && (route.entry.kind === 'component' || route.entry.kind === 'hook') ? (
+          <dl className="docs-facts" aria-label="Package facts">
+            <dt>Version</dt><dd>{VERSION}</dd>
+            <dt>Links</dt>
+            <dd>
+              <a href={`${GITHUB}/tree/master/packages/react/src/${route.entry.kind === 'hook' ? 'hooks' : 'components'}/${route.entry.name}`}>View source</a>
+              <a href={`${GITHUB}/issues/new`}>Report an issue</a>
+              <a href={`${import.meta.env.BASE_URL}docs/${route.entry.name}.md`}>View as Markdown</a>
+            </dd>
+          </dl>
+        ) : undefined} />
+      )}
       <Search open={search} onOpenChange={setSearch} />
     </div>
     )}

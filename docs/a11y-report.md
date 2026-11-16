@@ -13,7 +13,7 @@ What it cannot tell you: how a given screen reader words those things, whether t
 ## Summary
 
 - Components and examples checked: **41**, plus the docs page landmarks and heading order.
-- Checks that fail: **0**. Open findings that are understood and not fixed: **9**.
+- Checks that fail: **0**. Open findings that are understood and not fixed: **11**.
 - Problems found and fixed in components while building this check: **5 groups** (listed below).
 - Generic checks on every example: every control has a role and a non-empty name; no focusable element with no role ("generic"); `aria-labelledby` and `aria-describedby` resolve to text; an invalid field says why; every dialog has a name, a description (unless noted) and reports modal, and nothing outside it stays in the tree.
 - Chrome does not surface `aria-current` or `aria-sort` in the tree through this protocol; those are read from the DOM and marked as such.
@@ -562,7 +562,7 @@ Page `components/table`, example "Basic".
 | Role | Name | States | Expected announcement |
 |---|---|---|---|
 | table | Team members | none | Team members, table |
-| columnheader | NAME | none | NAME, column header |
+| columnheader | Name | none | Name, column header |
 | cell | Ada Lovelace | none | Ada Lovelace, cell |
 
 ### data-table
@@ -573,17 +573,17 @@ Page `components/data-table`, example "Sortable".
 
 | Role | Name | States | Expected announcement |
 |---|---|---|---|
-| columnheader | NAME | none | NAME, column header |
-| button | NAME | none | NAME, button |
+| columnheader | Name | none | Name, column header |
+| button | Name | none | Name, button |
 | status | (none) | live=polite | status |
 
 **Enter on a header sorts** (steps: focus th button|Name, then key Enter)
 
 | Role | Name | States | Expected announcement |
 |---|---|---|---|
-| button (focused) | NAME | none | NAME, button |
+| button (focused) | Name | none | Name, button |
 
-Focus after the steps: button "NAME".
+Focus after the steps: button "Name".
 
 Read from the DOM (not in the tree): `th[aria-sort]` has `aria-sort`.
 
@@ -761,8 +761,10 @@ Page `components/button`.
 | main | (none) | none | main |
 | navigation | Main | none | Main, navigation |
 | banner | (none) | none | banner |
-| heading | BUTTON | level=1 | BUTTON, heading level 1 |
+| heading | Button | level=1 | Button, heading level 1 |
 
+- Open finding (generic): focusable element with role "generic" : a screen reader has nothing to announce
+- Open finding (generic): focusable element with role "generic" : a screen reader has nothing to announce
 - Open finding (generic): focusable element with role "generic" : a screen reader has nothing to announce
 - Open finding (generic): focusable element with role "generic" : a screen reader has nothing to announce
 - Open finding (generic): focusable element with role "generic" : a screen reader has nothing to announce

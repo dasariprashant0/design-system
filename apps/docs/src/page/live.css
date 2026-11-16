@@ -1,7 +1,7 @@
 /* Playground page: full height, two panes side by side, stacked on a phone. Tokens only. */
 .pl { display: grid; grid-template-rows: auto 1fr; min-height: 100vh; background: var(--background); color: var(--foreground); }
 .pl-bar { display: flex; flex-wrap: wrap; align-items: end; gap: var(--s3) var(--s5); padding: var(--s3) var(--s5); border-bottom: 1px solid var(--rule); }
-.pl-bar .brand { align-self: center; color: var(--foreground); text-decoration: none; }
+.pl-bar .brand { align-self: center; padding: 0; color: var(--foreground); text-decoration: none; }
 .pl-title { align-self: center; font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; }
 .pl-pick { display: flex; flex-wrap: wrap; gap: var(--s3); }
 .pl-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-inline-start: auto; }

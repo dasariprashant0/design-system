@@ -9,6 +9,9 @@ export type {Guide};
 const metas = import.meta.glob<ComponentMeta>('../../../../packages/react/src/{components,hooks}/*/meta.json', {eager: true, import: 'default'});
 const demoModules = import.meta.glob<{demos: Demo[]}>('../../../../packages/react/src/{components,hooks}/*/*.demo.tsx', {eager: true});
 
+/** Version of @monoline/react, read from its package.json. */
+export const VERSION = Object.values(import.meta.glob<string>('../../../../packages/react/package.json', {eager: true, import: 'version'}))[0] ?? '';
+
 export const isHook = (m: ComponentMeta) => m.category === 'hooks';
 export const nice = (c: string) => c.replaceAll('-', ' ');
 
@@ -50,6 +53,7 @@ export interface Entry {
 /** Whole-site pages that are not a component or a guide. Their bodies live in ../site and are mapped in App.tsx. `path` is relative to `docs/`. */
 export const sitePages = [
   {slug: 'components', path: 'components', tab: 'components', group: 'Overview', title: 'Overview', description: 'Every component and hook, grouped by category, with a preview, a short description and a link to each page.'},
+  {slug: 'tokens', path: 'tokens', tab: 'start', group: 'Overview', title: 'Tokens', description: 'Every colour, type, spacing, size, radius, motion and layer token with its real value, per theme and accent.'},
   {slug: 'nextjs', path: 'frameworks/nextjs', tab: 'start', group: 'Frameworks usage', title: 'Next.js', description: 'Load the stylesheet in the App Router layout and use Monoline from Server and Client Components.'},
   {slug: 'vite', path: 'frameworks/vite', tab: 'start', group: 'Frameworks usage', title: 'Vite', description: 'Install the packages, import the stylesheet once in main.tsx and render your first component.'},
   {slug: 'astro', path: 'frameworks/astro', tab: 'start', group: 'Frameworks usage', title: 'Astro', description: 'Add the React integration, load the CSS in a layout and hydrate interactive components with a client directive.'},
@@ -114,6 +118,8 @@ export function navGroups(tab: Tab): NavGroup[] {
     g.items.push(e);
   }
   if (order.length) out.sort((a, b) => order.indexOf(a.title) - order.indexOf(b.title));
+  const first = ['docs/getting-started', 'docs/theming', 'docs/tokens'];
+  for (const g of out) g.items.sort((a, b) => (first.indexOf(a.path) + 1 || 99) - (first.indexOf(b.path) + 1 || 99));
   return out;
 }
 

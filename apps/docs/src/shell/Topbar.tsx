@@ -5,7 +5,7 @@ import {Button, Drawer, DrawerContent, DrawerTitle, DrawerTrigger, Kbd} from '@m
 import {CustomisePanel, type Prefs} from './prefs';
 import {GithubIcon, Logo, MenuIcon, SearchIcon} from './Logo';
 import {Nav} from './Nav';
-import {tabHome, type Tab} from './registry';
+import {VERSION, tabHome, type Tab} from './registry';
 import {href, type Route} from './router';
 
 export const GITHUB = 'https://github.com/dasariprashant0/monoline';
@@ -20,11 +20,11 @@ export const TABS: Array<{id: Tab; label: string}> = [
   {id: 'tools', label: 'Tools'},
 ];
 
-/** The ⌘K chip. Mac or not is only known in the browser, so the server and the first client render both say Ctrl. */
+/** The shortcut chips, one box per key as in the Twigs search button. Mac or not is only known in the browser, so the server and the first client render both say Ctrl. */
 function ShortcutHint() {
   const [mac, setMac] = useState(false);
   useEffect(() => setMac(/Mac|iPhone|iPad/.test(navigator.platform)), []);
-  return <Kbd aria-hidden="true">{mac ? '⌘ K' : 'Ctrl K'}</Kbd>;
+  return <span className="docs-keys" aria-hidden="true"><Kbd>{mac ? '⌘' : 'Ctrl'}</Kbd><Kbd>K</Kbd></span>;
 }
 
 export function Topbar({path, route, prefs, set, onSearch}: {path: string; route: Route; prefs: Prefs; set: (k: keyof Prefs, v: string) => void; onSearch: () => void}) {
@@ -47,12 +47,17 @@ export function Topbar({path, route, prefs, set, onSearch}: {path: string; route
           </Drawer>
         )}
         <a className="brand" href={href()} aria-label="Monoline home"><Logo /></a>
+        <a className="docs-version" href={href('docs/tools/changelog')} aria-label={`v${VERSION} changelog`}>v{VERSION}</a>
         </div>
-        <button type="button" className="docs-search" aria-label="Search" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K /" onClick={onSearch}>
+        <button type="button" className="docs-search" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K /" onClick={onSearch}>
           <SearchIcon /><span className="docs-search-text">Search</span><ShortcutHint />
         </button>
         <div className="docs-bar-end">
-          <a className="docs-playground" href={href(PLAYGROUND)} target="_blank" rel="noopener">Playground <span aria-hidden="true">↗</span></a>
+          <a className="docs-playground" href={href(PLAYGROUND)} target="_blank" rel="noopener">Playground <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><path d="M5 11 11 5M6 5h5v5" /></svg></a>
+          <button type="button" className="docs-theme" aria-label="Toggle light and dark theme" onClick={() => set('theme', document.documentElement.dataset.theme === 'warm' ? 'dark' : 'warm')}>
+            <svg className="theme-moon" viewBox="0 0 16 16" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7Z" /></svg>
+            <svg className="theme-sun" viewBox="0 0 16 16" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="3" /><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1" /></svg>
+          </button>
           <a className="docs-github" href={GITHUB} aria-label="Monoline on GitHub"><GithubIcon /></a>
           <CustomisePanel prefs={prefs} set={set} />
         </div>
