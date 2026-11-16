@@ -28,7 +28,7 @@ const metas = import.meta.glob<ComponentMeta>('../../../../packages/react/src/{c
 const demoModules = import.meta.glob<{demos: Demo[]}>('../../../../packages/react/src/{components,hooks}/*/*.demo.tsx', {eager: true});
 const allMetas = Object.values(metas).sort((a, b) => a.name.localeCompare(b.name));
 
-const GITHUB = 'https://github.com/dasariprashant0/design-system/tree/master/packages/react/src';
+const GITHUB = 'https://github.com/dasariprashant0/monoline/tree/master/packages/react/src';
 const PMS = ['npm', 'pnpm', 'yarn', 'bun'] as const;
 type Pm = (typeof PMS)[number];
 const INSTALL: Record<Pm, string> = {npm: 'npm install', pnpm: 'pnpm add', yarn: 'yarn add', bun: 'bun add'};

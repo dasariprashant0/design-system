@@ -1,6 +1,6 @@
 # Monoline design rules
 
-> Read this before building or changing any screen. The code is in `packages/css/src/` and `react/`; see it all in the docs page (`index.html`, or https://dasariprashant0.github.io/design-system/).
+> Read this before building or changing any screen. The code is in `packages/css/src/` and `react/`; see it all in the docs page (`index.html`, or https://dasariprashant0.github.io/monoline/).
 
 **The look in one line:** paper and ink, monospace type, square edges, thin rules instead of boxes, and one loud accent.
 
@@ -20,7 +20,7 @@ Everything is shared. A project picks only its theme and its accent.
 **Plain HTML, no build step:**
 
 ```html
-<link rel="stylesheet" href="https://dasariprashant0.github.io/design-system/css/monoline.css">
+<link rel="stylesheet" href="https://dasariprashant0.github.io/monoline/css/monoline.css">
 <html data-theme="warm" data-accent="green">
 ```
 
@@ -29,7 +29,7 @@ Everything is shared. A project picks only its theme and its accent.
 **With npm** (React + TypeScript + Vite is the tested stack):
 
 ```bash
-npm install --save "monoline-ui@git+https://github.com/dasariprashant0/design-system.git#<commit>"
+npm install --save "monoline-ui@git+https://github.com/dasariprashant0/monoline.git#<commit>"
 ```
 
 Pin a full commit hash, so CI and clean checkouts build the same kit. To take a newer kit, change the hash and run `npm install`. While changing the kit itself, `npm install --save monoline-ui@file:<path to this repo>` links it live; switch back to the pinned hash before you commit.

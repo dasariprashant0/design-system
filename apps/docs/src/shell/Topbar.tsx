@@ -8,7 +8,7 @@ import {Nav} from './Nav';
 import {tabHome, type Tab} from './registry';
 import {href, type Route} from './router';
 
-export const GITHUB = 'https://github.com/dasariprashant0/design-system';
+export const GITHUB = 'https://github.com/dasariprashant0/monoline';
 /** The separate Playground page: a code editor with a live preview. */
 export const PLAYGROUND = 'playground';
 

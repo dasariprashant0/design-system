@@ -22,7 +22,7 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          DOCS_BASE: /design-system/
+          DOCS_BASE: /monoline/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/docs/dist

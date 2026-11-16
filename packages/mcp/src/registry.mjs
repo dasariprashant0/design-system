@@ -3,7 +3,7 @@ import {existsSync} from 'node:fs';
 import {readFile} from 'node:fs/promises';
 import {join, resolve} from 'node:path';
 
-export const DEFAULT_URL = 'https://raw.githubusercontent.com/dasariprashant0/design-system/master/registry';
+export const DEFAULT_URL = 'https://raw.githubusercontent.com/dasariprashant0/monoline/master/registry';
 const NAME = /^[a-z0-9][a-z0-9-]*$/;
 
 export const isUrl = (s) => /^https?:\/\//.test(s);

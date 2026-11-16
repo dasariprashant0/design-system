@@ -34,7 +34,7 @@ export function componentMarkdown({meta, extra, props = [], styling = [], hook})
   out.push(hook ? '## Behaviour' : '## Accessibility', '', ...meta.a11y.map((a) => `- ${a}`), '');
   const keys = keyboardRows(meta.a11y);
   if (keys.length) out.push('### Keyboard', '', table(['Keys', 'Action'], keys.map((k) => [k.keys, k.action])), '');
-  out.push('## Details', '', `- Stylesheets: ${meta.css.length ? meta.css.join(', ') : 'none'}`, `- Status: ${meta.status}`, `- Source: https://github.com/dasariprashant0/design-system/tree/master/packages/react/src/${hook ? 'hooks' : 'components'}/${meta.name}`);
+  out.push('## Details', '', `- Stylesheets: ${meta.css.length ? meta.css.join(', ') : 'none'}`, `- Status: ${meta.status}`, `- Source: https://github.com/dasariprashant0/monoline/tree/master/packages/react/src/${hook ? 'hooks' : 'components'}/${meta.name}`);
   if (meta.keywords?.length) out.push(`- Also called: ${meta.keywords.join(', ')}`);
   return out.join('\n') + '\n';
 }
