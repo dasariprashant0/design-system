@@ -59,7 +59,7 @@ html, body, #root { height: auto; min-height: 100%; }
 .h-anchor { display: inline-block; min-width: var(--s5); margin-inline-start: var(--s2); text-align: center; color: var(--muted); text-decoration: none; font-weight: 400; opacity: 0; }
 :is(h2, h3):hover > .h-anchor, .h-anchor:focus-visible { opacity: 1; }
 .h-anchor:hover { color: var(--accent-text); }
-@media (hover: none) { .h-anchor { opacity: 0.6; } }
+@media (hover: none) { .h-anchor { opacity: 1; } }
 .hero-title { margin-top: var(--s2); }
 .lede { max-width: var(--measure); color: var(--ink-2); font-size: var(--text-lg); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
