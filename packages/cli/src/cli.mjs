@@ -5,7 +5,7 @@ import {basename, dirname, join, resolve} from 'node:path';
 import {createInterface} from 'node:readline/promises';
 import {parseArgs} from 'node:util';
 
-const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/dasariprashant0/design-system/master/registry';
+const DEFAULT_REGISTRY = 'https://raw.githubusercontent.com/dasariprashant0/monoline/master/registry';
 const DEFAULTS = {components: 'src/components/monoline', styles: 'src/styles/monoline'};
 const CX = `/** Join class names, skipping falsy values. \`cx('btn', loading && 'is-loading', className)\` */
 export function cx(...parts: Array<string | false | null | undefined>): string {

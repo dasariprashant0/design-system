@@ -24,7 +24,7 @@ function monolineCss(): Plugin {
   };
 }
 
-/** Site base. Real paths need an absolute base: DOCS_BASE=/design-system/ for GitHub Pages, default '/'. */
+/** Site base. Real paths need an absolute base: DOCS_BASE=/monoline/ for GitHub Pages, default '/'. */
 const base = `/${(process.env.DOCS_BASE ?? '/').replace(/^\/+|\/+$/g, '')}/`.replace('//', '/');
 
 /** Writes the base into dist/404.html (public/404.html holds __BASE__ as a placeholder). */

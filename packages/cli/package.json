@@ -12,13 +12,13 @@
     "design-system",
     "ui"
   ],
-  "homepage": "https://dasariprashant0.github.io/design-system/",
+  "homepage": "https://dasariprashant0.github.io/monoline/",
   "bugs": {
-    "url": "https://github.com/dasariprashant0/design-system/issues"
+    "url": "https://github.com/dasariprashant0/monoline/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dasariprashant0/design-system.git",
+    "url": "git+https://github.com/dasariprashant0/monoline.git",
     "directory": "packages/cli"
   },
   "publishConfig": {

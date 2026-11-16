@@ -17,7 +17,7 @@ Either one, not both.
 **For one project.** Copy the file into the project's `.vscode` folder. VS Code reads `.vscode/*.code-snippets` in the workspace:
 
 ```bash
-mkdir -p .vscode && cp path/to/design-system/packages/vscode/snippets/monoline.code-snippets .vscode/
+mkdir -p .vscode && cp path/to/monoline/packages/vscode/snippets/monoline.code-snippets .vscode/
 ```
 
 **For every project.** Open *Snippets: Configure User Snippets* in VS Code (Cmd/Ctrl+Shift+P), choose *New Global Snippets file* or pick `typescriptreact.json`, then paste the contents of `monoline.code-snippets` into it. Keep the `Monoline` entries in one file so you can remove them together.

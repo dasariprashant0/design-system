@@ -10,7 +10,7 @@ type Size = {name: string; kb: number; budget: number};
 type Report = {js: Size[]; css: {name: string; kb: number; budget: number} | null};
 const sizes: Report = Object.values(import.meta.glob<Report>('./size.generated.json', {eager: true, import: 'default'}))[0] ?? {js: [], css: null};
 
-const RESEARCH = 'https://github.com/dasariprashant0/design-system/blob/master/docs/research/';
+const RESEARCH = 'https://github.com/dasariprashant0/monoline/blob/master/docs/research/';
 
 type Row = {lib: string; note: string; distribution: string; styling: string; a11y: string};
 const rows: Row[] = [
