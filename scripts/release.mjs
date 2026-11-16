@@ -7,7 +7,7 @@
 //   node scripts/release.mjs publish --yes [--provenance]
 //   node scripts/release.mjs notes <x.y.z>
 //
-// check    verifies every package: name, version, MIT, not private, README, LICENSE (copied from the root
+// check    verifies every public package ("private": true packages are skipped): name, version, MIT, not private, README, LICENSE (copied from the root
 //          if missing), exports and bin resolve to files that exist and are in the npm tarball, no test,
 //          demo or config files in the tarball, and prints the size and file list from `npm pack --dry-run`.
 // version  bumps every package to the same version, updates internal dependency ranges, and prepends a
@@ -289,7 +289,7 @@ const kb = (bytes) => `${(bytes / 1024).toFixed(1)} kB`;
 
 /** Runs every check, prints the report and returns true when nothing is wrong. */
 function runCheck({expect, list = true} = {}) {
-  const pkgs = loadPackages();
+  const pkgs = loadPackages().filter((p) => !p.json.private); // private packages (not ready to publish) are skipped
   const problems = [];
   if (pkgs.length === 0) problems.push('no packages found under packages/');
 
@@ -386,7 +386,7 @@ function bump(spec, {tag, allowDirty, date}) {
 function publish({dryRun, yes, provenance}) {
   if (dryRun === yes) fail('choose one: --dry-run (rehearsal) or --yes (publish for real)');
   if (!runCheck()) fail('check failed; nothing was published');
-  const pkgs = loadPackages();
+  const pkgs = loadPackages().filter((p) => !p.json.private);
   const order = publishOrder(pkgs.map((p) => ({name: p.name, json: p.json})));
   const byName = new Map(pkgs.map((p) => [p.name, p]));
 

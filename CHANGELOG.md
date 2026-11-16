@@ -2,19 +2,33 @@
 
 Versions follow [semver](https://semver.org). Before 1.0, a minor version may change class names; each change is listed here.
 
-## Unreleased
+## 0.4.0 - 2026-11-16
 
-Lighter bundles, same public API and the same keyboard behaviour (114 real-browser tests, 1,394 unit tests).
+Much lighter, with a few breaking changes. Whole library 123.6 to about 95 KB gzip; a Dialog is 1.8 KB (was 14.1), a Select 4.9 KB (was 32.4), a Button 0.7 KB (was 1.8).
 
-- **Dialog, AlertDialog, Drawer and Command** now use the native `<dialog>` element with `showModal()`: free focus trap, inert page, Escape and top layer. The backdrop is `::backdrop`, scroll lock is `html:has(dialog[open]:modal)` in `dialog.css`. Dialog 14.1 to 1.8 KB gzip.
-- **Popover, Tooltip, HoverCard, Select, DropdownMenu, ContextMenu and Menubar** use one shared floating layer (`popover/float.tsx`: side, align, offsets, flip, shift, `--available-height`, `--anchor-width`) and one dismiss stack, instead of Radix and floating-ui. Select 32.4 to 5.0 KB, Popover 24.3 to 2.3 KB, Tooltip 20.0 to 2.2 KB, DropdownMenu 31.7 to 3.3 KB. DatePicker and DateRangePicker use the new Popover.
-- **Smaller `asChild`.** An own `Slot` (`utils/slot.tsx`) replaces Radix's, taking Button from 1.8 to 0.7 KB.
-- Whole library 123.6 to 93.1 KB gzip. `node scripts/size.mjs --detail` writes `docs/bundle-report.md` with every component and its top contributing packages; budgets in `scripts/size.mjs` are tightened to the new sizes plus 10 percent.
-- **Behaviour notes.** Content refs are now `HTMLDialogElement` (dialog family) and `HTMLDivElement`; `forceMount`, `asChild` on content and the Radix `modal` prop of menus and popovers are gone (Dialog keeps `modal`). Menus and popovers are non-modal: the page stays interactive and a press outside closes them. `--radix-select-*` and `--radix-popover-*` custom properties are replaced by `--anchor-width` and `--available-height`. The Select list keeps its items mounted (hidden) while closed so the trigger can show the chosen text.
+### Breaking
 
-- **Breaking: `Button` now defaults to `variant="solid"`** (was `line`), the primary action, as in shadcn/ui, Mantine and Chakra. Use `variant="line"` for secondary buttons. `IconButton`, `CopyButton`, `ButtonGroup` children in our demos, and the other internal buttons keep the outlined look because they pass `variant="line"` themselves. The CSS classes are unchanged: `.btn` plus `.btn-solid` or `.btn-line`.
-- **Per-component CSS is the recommended path.** `@monoline/css/core.css` plus `@monoline/css/components/<name>.css`. Each bundle now includes the CSS of every component it renders (transitively, from `meta.json` `uses`); `Form`, `Select`, `Checkbox` and others were missing parts before. `@monoline/react` exports a generated `styles` map (component name to bundle path). Measured: core 3.4 KB gzip, core plus the landing example 6.2 KB, plus the dashboard example 10.3 KB, against 18.3 KB for everything.
-- `.flow` (and `--flow`) is documented; Card, Dialog and `.prose` content apply it by default.
+- **`Button` now defaults to `variant="solid"`** (was `line`): the primary action, as in shadcn/ui, Mantine and Chakra. Use `variant="line"` for secondary buttons. `IconButton`, `CopyButton` and the other built-in buttons pass `variant="line"` themselves, so their look does not change. The CSS classes are unchanged: `.btn` plus `.btn-solid` or `.btn-line`.
+- **Dialog, AlertDialog, Drawer and Command** use the native `<dialog>` element with `showModal()` (free focus trap, inert page, Escape, top layer). Content refs are `HTMLDialogElement`. `forceMount` and `asChild` on content are gone; Dialog keeps `modal`.
+- **Popover, Tooltip, HoverCard, Select, DropdownMenu, ContextMenu and Menubar** use one shared floating layer (side, align, offsets, flip, shift) instead of Radix and floating-ui. Menus and popovers are non-modal: the page stays interactive and a press outside closes them. The Radix `modal` prop and `forceMount`/`asChild` on content are gone. `--radix-select-*` and `--radix-popover-*` custom properties are replaced by `--anchor-width` and `--available-height`. The Select list keeps its items mounted (hidden) while closed so the trigger can show the chosen text.
+- The `asChild` Slot is Monoline's own (`utils/slot.tsx`), not Radix's.
+
+### Added
+
+- **Shell components:** `Sidebar`, `Navbar`, `AppShell`, `PageHeader` and `BreadcrumbsAuto`; `block-dashboard-shell` is rebuilt on them with the same props.
+- **`@monoline/tokens`:** design tokens as W3C JSON, Figma variables, CSS and TypeScript types, generated from `@monoline/css`.
+- **CLI:** `monoline diff`, `update` and `search`, plus `add --all` and `add --category`.
+- **VS Code snippets** generated from the registry.
+- **Per-component CSS is the recommended path:** `@monoline/css/core.css` plus `@monoline/css/components/<name>.css`. Each bundle includes the CSS of every component it renders, and `@monoline/react` exports a generated `styles` map. Measured: core 3.4 KB gzip, core plus the landing example 6.2 KB, plus the dashboard example 10.3 KB, against about 19 KB for everything.
+- `Text` accepts `fullWidth`; heading scale tokens `--heading-1` and `--heading-2`; `.flow` (and `--flow`) is documented and applied by Card, Dialog and `.prose` content.
+- **Docs:** every docs route is prerendered to `dist/<route>/index.html` with a sitemap and robots.txt (deep links work on static hosts); a load-only-what-you-use guide; `docs/bundle-report.md` from `node scripts/size.mjs --detail`.
+
+### Accessibility and quality
+
+- An accessibility-tree check for 41 components (`npm run ax`, report in `docs/a11y-report.md`) and a screen-reader testing guide. This is a proxy for screen-reader behaviour, not a replacement for testing with NVDA, JAWS or VoiceOver.
+- New real-browser audits: every overlay on every docs page, and the three example apps (contrast, text overlap, hover and focus in each state).
+- Fixes: native select arrow matches the custom select in every theme; horizontal tab lists scroll instead of widening the page on phones; dialog titles leave room for the Close link; a docs heading anchor no longer leaks into a dialog's accessible name; calendar outside-day hover contrast.
+- 1,446 unit tests and 123 real-browser tests; CI runs the accent audits in parallel.
 
 ## 0.3.0
 
