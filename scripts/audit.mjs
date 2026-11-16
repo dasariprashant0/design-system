@@ -64,6 +64,11 @@ await cdp('Emulation.setDeviceMetricsOverride', {width: 1280, height: 800, devic
 await cdp('Page.navigate', {url: base});
 await new Promise((r) => setTimeout(r, 1500));
 let pages = await evaluate(`[...document.querySelectorAll('.nav-item')].map(a => a.getAttribute('href'))`);
+// slow CI runners can need longer than the fixed pause: wait for the sidebar, up to 30 s more
+for (let i = 0; i < 30 && !pages.length; i++) {
+  await new Promise((r) => setTimeout(r, 1000));
+  pages = await evaluate(`[...document.querySelectorAll('.nav-item')].map(a => a.getAttribute('href'))`);
+}
 if (!pages.length) { console.error('No pages found in the docs sidebar.'); cleanup(); process.exit(2); }
 const only = opt('pages', '');
 const slug = (p) => p.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'home';
