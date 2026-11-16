@@ -7,7 +7,7 @@
   "css": [
     {
       "path": "packages/css/src/components/carousel.css",
-      "content": ".carousel { display: grid; gap: var(--s3); }\n.carousel-track { display: flex; gap: var(--s3); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }\n.carousel-track:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }\n.carousel-slide { flex: 0 0 min(80%, 20rem); scroll-snap-align: start; }\n.carousel-controls { display: flex; gap: var(--s2); justify-content: flex-end; }\n@media (prefers-reduced-motion: reduce) { .carousel-track { scroll-behavior: auto; } }\n"
+      "content": ".carousel { display: grid; gap: var(--s3); }\n.carousel-track { display: flex; gap: var(--s3); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }\n.carousel-track:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }\n.carousel-slide { flex: 0 0 min(80%, 20rem); scroll-snap-align: start; }\n.carousel-controls { display: flex; gap: var(--s2); justify-content: flex-end; }\n@media (prefers-reduced-motion: reduce) { .carousel-track { scroll-behavior: auto; } }\n"
     }
   ],
   "a11y": [

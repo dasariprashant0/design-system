@@ -7,7 +7,7 @@
   "css": [
     {
       "path": "packages/css/src/components/empty-state.css",
-      "content": "/* Empty state: centred message inside a dashed frame. */\n.empty { display: grid; justify-items: center; gap: var(--s3); padding: var(--s7) var(--s5); text-align: center; border: 1px dashed var(--rule); }\n.empty-icon { color: var(--muted); font-size: var(--text-lg); }\n.empty-title { font-size: var(--text-lg); font-weight: 500; }\n.empty-description { color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.empty-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); margin-top: var(--s2); }\n"
+      "content": "/* Empty state: centred message inside a dashed frame. */\n.empty { border-radius: var(--radius-md); display: grid; justify-items: center; gap: var(--s3); padding: var(--s7) var(--s5); text-align: center; border: 1px dashed var(--rule); }\n.empty-icon { color: var(--muted); font-size: var(--text-lg); }\n.empty-title { font-size: var(--text-lg); font-weight: var(--weight-medium); }\n.empty-description { color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }\n.empty-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s3); margin-top: var(--s2); }\n"
     }
   ],
   "a11y": [

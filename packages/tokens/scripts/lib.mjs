@@ -65,6 +65,8 @@ export function toRgba(value) {
 
 // Resolved length -> px number, for px literals and calc(a + b) of them. Null for anything else (clamp, ch).
 export function toPx(value) {
+  const mul = value.match(/^calc\(([\d.]+)(?:px)? \* ([\d.]+)\)$/); // calc(6px * 0.5)
+  if (mul) return Number(mul[1]) * Number(mul[2]);
   const calc = value.match(/^calc\((.+)\)$/);
   const nums = (calc ? calc[1].split(' + ') : [value]).map((p) => p.match(/^(-?[\d.]+)(px)?$/)?.[1]); // a bare 0 is a length too
   return nums.every((n) => n !== undefined) ? nums.reduce((s, n) => s + Number(n), 0) : null;
@@ -76,10 +78,11 @@ const GROUPS = [
   ['zIndex', /^--z-/],
   ['control', /^--control-/],
   ['space', /^--s\d$/],
-  ['type', /^--(font|text|display)-/],
+  ['type', /^--(font|text|display|weight|leading)-/],
   ['motion', /^--(ease|fast|base|slow)$/],
-  ['layout', /^--(side|measure|content|window-pad)$/],
-  ['radius', /^--(radius|round)$/],
+  ['layout', /^--(side|measure|content|window-pad|container-[\w]+|bp-[\w]+)$/],
+  ['radius', /^--(radius(-sm|-md|-lg)?|round)$/],
+  ['effect', /^--(shadow-[\w]+|focus-ring|border-width|opacity-disabled)$/],
   ['color', /^--/],
 ];
 const PREFIX = {code: '--code-', zIndex: '--z-', control: '--control-'};
@@ -190,7 +193,7 @@ export function figmaVariables(src) {
     scalarCollection('Radius', radii, (r) => ({...src.base, ...(src.options.radius?.[r] ?? {})}), ['radius']),
     scalarCollection('Typography', typeModes, typeEnv, ['type']),
   ];
-  for (const n of Object.keys(src.base)) if (['motion', 'zIndex'].includes(classify(n).group)) skipped.add(n);
+  for (const n of Object.keys(src.base)) if (['motion', 'zIndex', 'effect'].includes(classify(n).group)) skipped.add(n);
   return {$format: 'monoline-figma-variables', $skipped: [...skipped].sort(), collections};
 }
 
@@ -221,6 +224,7 @@ export type LayoutToken = ${union(leaves(json.base, 'layout'))};
 export type TypeToken = ${union(leaves(json.base, 'type'))};
 export type RadiusToken = ${union(leaves(json.base, 'radius'))};
 export type MotionToken = ${union(leaves(json.base, 'motion'))};
+export type EffectToken = ${union(leaves(json.base, 'effect'))};
 export type ZIndexToken = ${union(leaves(json.base, 'zIndex'))};
 export type CodeToken = ${union(leaves(json.base, 'code').map((c) => `code-${c}`))};
 

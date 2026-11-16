@@ -2,6 +2,17 @@
 
 Versions follow [semver](https://semver.org). Before 1.0, a minor version may change class names; each change is listed here.
 
+## Unreleased
+
+### Added
+
+- **More design tokens in `@monoline/css`**, all additive and with no visual change at the default settings: `--weight-regular|medium|bold`, `--leading-tight|normal|relaxed`, a radius scale `--radius-sm|md|lg` derived from `--radius` (so `data-radius="soft|round"` moves every step), `--container-sm` to `--container-2xl`, breakpoints `--bp-xs` to `--bp-2xl`, `--shadow-popover`, `--shadow-toast`, `--focus-ring`, `--border-width` and `--opacity-disabled`. Component stylesheets now read the weight, leading, focus ring, disabled opacity and toast shadow tokens instead of literals. `@monoline/tokens` exports the new tokens (weights and leading in `Typography`, containers and breakpoints in `Spacing`, the radius scale in `Radius`; shadows, focus ring, border width and disabled opacity are listed in `$skipped`).
+- The breakpoint tokens are for JavaScript and documentation only: CSS cannot use a variable inside `@media`. The built-in stylesheets still use their own widths (560, 600, 760, 800, 860, 900, 1100 px and 40rem, 64rem); aligning them would change tablet layouts and is a separate decision.
+
+### Changed
+
+- Card, dialog, alert, code block, empty state, segmented control and kbd set `border-radius: var(--radius-md)` in their own stylesheets; the `[data-radius]` selectors for them in `options.css` are gone. Badge, tag and button keep their `options.css` rules (round makes them pills).
+
 ## 0.4.0 - 2026-11-16
 
 Much lighter, with a few breaking changes. Whole library 123.6 to about 95 KB gzip; a Dialog is 1.8 KB (was 14.1), a Select 4.9 KB (was 32.4), a Button 0.7 KB (was 1.8).
