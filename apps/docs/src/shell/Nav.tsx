@@ -1,24 +1,27 @@
-// Left navigation: guides, then components by category, then hooks. Used in the sidebar and in the mobile drawer.
+// Left navigation of the current top tab: pages grouped under category headings. All tabs are rendered; the ones
+// that are not current are `hidden`, so a link to any page stays in the DOM (the audit and tests click through them)
+// without screen readers or keyboards reaching it. Used in the sidebar and in the mobile drawer.
 import {useEffect, useRef} from 'react';
-import {categories, guides, guidePath, hooks, inCategory, nice, pathOf, sitePages} from './registry';
+import {navGroups, type Tab} from './registry';
 import {href} from './router';
 
-const Group = ({title, items, current}: {title: string; items: Array<{path: string; title: string}>; current: string}) => (
-  <div className="nav-group">
-    <p className="label">{title} <span className="count">{items.length}</span></p>
-    {items.map((i) => <a key={i.path} className="nav-item" href={href(i.path)} aria-current={i.path === current ? 'page' : undefined}>{i.title}</a>)}
-  </div>
-);
+const ALL: Tab[] = ['start', 'components', 'icons', 'editor', 'tools'];
 
-export function Nav({current}: {current: string}) {
+export function Nav({tab, current}: {tab: Tab | undefined; current: string}) {
   const ref = useRef<HTMLElement>(null);
   useEffect(() => { ref.current?.querySelector('[aria-current="page"]')?.scrollIntoView({block: 'nearest'}); }, [current]);
   return (
     <nav ref={ref} aria-label="Documentation">
-      <Group title="Explore" current={current} items={sitePages.map((p) => ({path: p.slug, title: p.title}))} />
-      <Group title="Guides" current={current} items={guides.map((g) => ({path: guidePath(g), title: g.title}))} />
-      {categories.map((c) => <Group key={c} title={nice(c)} current={current} items={inCategory(c).map((m) => ({path: pathOf(m), title: m.title}))} />)}
-      <Group title="Hooks" current={current} items={hooks.map((m) => ({path: pathOf(m), title: m.title}))} />
+      {ALL.map((t) => (
+        <div key={t} hidden={t !== tab}>
+          {navGroups(t).map((g) => (
+            <div key={g.title} className="nav-group">
+              <p className="nav-head">{g.title}</p>
+              {g.items.map((i) => <a key={i.path} className="nav-item" href={href(i.path)} aria-current={i.path === current ? 'page' : undefined}>{i.title}</a>)}
+            </div>
+          ))}
+        </div>
+      ))}
     </nav>
   );
 }

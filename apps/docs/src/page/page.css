@@ -7,7 +7,7 @@
 .cdoc-status { min-width: 8ch; color: var(--muted); font-size: var(--text-sm); }
 
 .cdoc-section { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s4); min-width: 0; scroll-margin-top: var(--s8); }
-.cdoc-h2 { font-size: var(--text-lg); font-weight: 500; padding-bottom: var(--s2); border-bottom: 1px solid var(--rule); scroll-margin-top: var(--s8); }
+.cdoc-h2 { font-family: var(--font-display); font-size: 22px; font-weight: 700; padding-bottom: var(--s2); border-bottom: 1px solid var(--rule); scroll-margin-top: var(--s8); }
 .cdoc-h3 { font-size: var(--text-base); font-weight: 500; scroll-margin-top: var(--s8); }
 .cdoc-muted { color: var(--muted); font-size: var(--text-sm); max-width: var(--measure); }
 
@@ -43,3 +43,55 @@
 .pg-control { display: grid; gap: var(--s1); min-width: 0; }
 .pg-label { font-size: var(--text-sm); color: var(--muted); }
 .pg-code { min-width: 0; }
+
+/* Example: live preview above its code */
+.cdoc-preview { gap: 0; }
+.cdoc-preview .tabs-list { border-bottom: 0; }
+.cdoc-example { gap: var(--s3); }
+
+/* Components overview: a grid of wireframe thumbnails */
+.ov-group { display: grid; gap: var(--s4); margin-bottom: var(--s7); }
+.ov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: var(--s4); }
+.ov-card { display: grid; gap: var(--s2); text-decoration: none; color: var(--foreground); }
+.ov-thumb { width: 100%; height: auto; color: var(--foreground); background: var(--wash); border: 1px solid var(--rule); }
+.ov-card:hover .ov-thumb { border-color: var(--foreground); background: color-mix(in srgb, var(--accent) 10%, var(--background)); }
+.ov-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ov-name { font-size: var(--text-sm); }
+
+/* Icons page */
+.ic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: var(--s3); }
+.ic-card { position: relative; display: grid; justify-items: center; gap: var(--s2); padding: var(--s4) var(--s3) var(--s3); border: 1px solid var(--rule); }
+.ic-glyph { color: var(--foreground); }
+.ic-name { font-size: var(--text-xs); color: var(--muted); }
+.ic-copy { position: absolute; inset-block-start: var(--s1); inset-inline-end: var(--s1); display: grid; place-items: center; width: var(--s6); height: var(--s6); color: var(--muted); border: 1px solid transparent; }
+.ic-copy:hover { color: var(--foreground); border-color: var(--rule); }
+.ic-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.cdoc-preview-head { display: flex; align-items: end; justify-content: space-between; gap: var(--s3); border-bottom: 1px solid var(--rule); }
+.cdoc-preview-head .tabs-list { border-bottom: 0; }
+.cdoc-open-pg { padding: var(--s2) var(--s1); font-size: var(--text-sm); color: var(--accent-text); text-decoration: none; white-space: nowrap; }
+.cdoc-open-pg:hover { text-decoration: underline; }
+.cdoc-usage-live { display: grid; gap: var(--s2); }
+
+/* Numbered install steps (Twigs-style) */
+.doc-steps { display: grid; gap: var(--s5); list-style: none; padding: 0; }
+.doc-step { display: grid; grid-template-columns: var(--s6) minmax(0, 1fr); gap: var(--s3); }
+.doc-step-n { display: grid; place-items: center; width: var(--s6); height: var(--s6); border-radius: var(--round); background: var(--wash-2); font-size: var(--text-sm); }
+.doc-step-body { display: grid; gap: var(--s3); min-width: 0; }
+
+/* Components overview: bordered cards with a thumbnail, title and description */
+.ov-h2 { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; text-transform: capitalize; }
+.ov-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+.ov-card { grid-template-rows: auto 1fr; gap: 0 !important; border: 1px solid var(--rule); background: var(--background); height: 100%; }
+.ov-card:hover { border-color: var(--foreground); }
+.ov-thumb { border: 0 !important; border-bottom: 1px solid var(--rule) !important; }
+.ov-body { display: grid; gap: var(--s1); padding: var(--s3) var(--s4) var(--s4); align-content: start; }
+.ov-name { font-weight: 500; }
+.ov-desc { color: var(--muted); font-size: var(--text-xs); }
+@media (max-width: 880px) { .ov-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 520px) { .ov-grid { grid-template-columns: minmax(0, 1fr) !important; } }
+
+/* Upgrade guide tool */
+.up-pick { display: grid; grid-template-columns: repeat(2, minmax(0, 14rem)); gap: var(--s4); }
+.up-result { padding: var(--s4); border: 1px solid var(--rule); min-height: 6rem; }
+@media (max-width: 520px) { .up-pick { grid-template-columns: minmax(0, 1fr); } }

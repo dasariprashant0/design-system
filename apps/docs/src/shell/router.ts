@@ -15,11 +15,12 @@ export const routeOf = (pathname: string) => {
   return rest.replace(/\/$/, '');
 };
 
-export type Route = {kind: 'home'} | {kind: 'page'; entry: Entry} | {kind: 'missing'; path: string};
+export type Route = {kind: 'home'} | {kind: 'playground'} | {kind: 'page'; entry: Entry} | {kind: 'missing'; path: string};
 
 export const resolve = (pathname: string): Route => {
   const path = routeOf(pathname);
   if (!path) return {kind: 'home'};
+  if (path === 'playground' || path === 'docs/playground') return {kind: 'playground'};
   const entry = entryAt(path);
   return entry ? {kind: 'page', entry} : {kind: 'missing', path};
 };

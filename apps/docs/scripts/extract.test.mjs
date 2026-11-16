@@ -113,7 +113,7 @@ test('componentMarkdown has the sections in order and marks required props', () 
     styling: [{file: 'x.css', classes: ['x'], attributes: ['[data-state="open"]']}],
     hook: false,
   });
-  const order = ['# X', '## Installation', '## Usage', '## Examples', '### One', '## API Reference', '## Accessibility', '### Keyboard', '## Styling', '## Details'].map((h) => md.indexOf(h));
+  const order = ['# X', '## Import', '## Usage', '## Examples', '### One', '## Props', '## Data Attributes', '## Accessibility', '### Keyboard', '## Details'].map((h) => md.indexOf(h));
   assert.ok(order.every((n, i) => n >= 0 && (i === 0 || n > order[i - 1])), order.join());
   assert.match(md, /`a` \(required\)/);
   assert.match(md, /A \\\| B/);
