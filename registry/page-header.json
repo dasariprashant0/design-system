@@ -7,7 +7,7 @@
   "css": [
     {
       "path": "packages/css/src/components/page-header.css",
-      "content": "/* Page header: breadcrumbs, title, description, actions. */\n.page-header { display: flex; flex-direction: column; gap: var(--s3); margin-block-end: var(--s5); }\n.page-header-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s4); }\n.page-header-text { min-inline-size: 0; display: flex; flex-direction: column; gap: var(--s2); }\n.page-header-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--display-sm); line-height: 1.15; }\n.page-header-description { margin: 0; max-inline-size: var(--measure); color: var(--muted); }\n.page-header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); }\n"
+      "content": "/* Page header: breadcrumbs, title, description, actions. */\n.page-header { display: flex; flex-direction: column; gap: var(--s3); margin-block-end: var(--s5); }\n.page-header-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s4); }\n.page-header-text { min-inline-size: 0; display: flex; flex-direction: column; gap: var(--s2); }\n.page-header-title { margin: 0; font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--display-sm); line-height: 1.15; }\n.page-header-description { margin: 0; max-inline-size: var(--measure); color: var(--muted); }\n.page-header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); }\n"
     }
   ],
   "a11y": [

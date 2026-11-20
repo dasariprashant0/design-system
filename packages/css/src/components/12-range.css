@@ -4,7 +4,7 @@
 .range::-moz-range-track { height: 2px; background: var(--foreground); }
 .range::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; margin-top: -6px; background: var(--foreground); border: 0; border-radius: var(--radius); }
 .range::-moz-range-thumb { width: 14px; height: 14px; background: var(--foreground); border: 0; border-radius: var(--radius); }
-.range:disabled { opacity: 0.5; cursor: not-allowed; }
+.range:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
 .progress { appearance: none; display: block; width: 100%; height: 8px; border: 1px solid var(--foreground); background: transparent; border-radius: var(--radius); overflow: hidden; }
 .progress::-webkit-progress-bar { background: transparent; }
 .progress::-webkit-progress-value { background: var(--accent); }

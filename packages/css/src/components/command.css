@@ -7,6 +7,6 @@
 .command-heading { padding: var(--s2) var(--s5); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
 .command-item { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s2) var(--s5); font-size: var(--text-sm); cursor: pointer; }
 .command-item[data-active] { background: var(--foreground); color: var(--background); }
-.command-item[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.command-item[aria-disabled="true"] { opacity: var(--opacity-disabled); cursor: not-allowed; }
 .command-hint { font: inherit; font-size: var(--text-xs); opacity: 0.7; }
 .command-empty { padding: var(--s5); font-size: var(--text-sm); color: var(--muted); text-align: center; }

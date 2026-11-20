@@ -1,7 +1,7 @@
 /* ─── App shell: sidebar + main ─── */
 .shell { display: grid; grid-template-columns: var(--side) 1fr; height: 100vh; }
 .side { display: flex; flex-direction: column; gap: var(--s2); padding: var(--s5) var(--s4); border-inline-end: 1px solid var(--rule); overflow-y: auto; }
-.brand { display: flex; align-items: center; gap: var(--s3); font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); text-transform: uppercase; letter-spacing: -0.02em; padding: 0 var(--s2) var(--s5); }
+.brand { display: flex; align-items: center; gap: var(--s3); font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-lg); text-transform: uppercase; letter-spacing: -0.02em; padding: 0 var(--s2) var(--s5); }
 .brand-mark { width: 14px; height: 14px; background: var(--foreground); box-shadow: calc(18px * var(--dir, 1)) 0 0 -3px var(--accent); margin-inline-end: 8px; flex: none; }
 .side-label, .side-note { padding: 0 var(--s2); }
 .side-foot { margin-top: auto; display: grid; gap: var(--s4); padding-top: var(--s5); }
@@ -19,7 +19,7 @@
 .head { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s5); flex-wrap: wrap; }
 .head-title { min-width: 0; display: grid; gap: var(--s3); }
 .tabs { display: flex; gap: var(--s5); margin-top: var(--s6); border-top: 1px solid var(--rule); }
-.tab { padding: var(--s3) 0; font-weight: 500; color: var(--muted); margin-top: -1px; }
+.tab { padding: var(--s3) 0; font-weight: var(--weight-medium); color: var(--muted); margin-top: -1px; }
 .tab[aria-current="page"] { color: var(--foreground); box-shadow: inset 0 2px 0 var(--foreground); }
 .tab:hover { color: var(--foreground); }
 

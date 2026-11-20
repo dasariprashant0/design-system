@@ -6,7 +6,7 @@
 /* Native select: one chevron in every browser and theme. Two gradients in currentColor draw the V, so there is no image to colour per theme. */
 .select { appearance: none; -webkit-appearance: none; padding-inline-end: calc(var(--s4) + 1em); background-image: linear-gradient(to bottom left, transparent 40%, currentColor 40%, currentColor 60%, transparent 60%), linear-gradient(to bottom right, transparent 40%, currentColor 40%, currentColor 60%, transparent 60%); background-repeat: no-repeat; background-size: 0.4em 0.4em, 0.4em 0.4em; background-position: calc(100% - var(--s4) - 0.4em) 50%, calc(100% - var(--s4)) 50%; }
 .input::placeholder, .textarea::placeholder { color: var(--muted); }
-.input:focus, .select:focus, .textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; }
+.input:focus, .select:focus, .textarea:focus { outline: var(--focus-ring); outline-offset: 0; }
 .input[aria-invalid="true"] { border-color: var(--danger); }
 .textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
 .input-sm { height: var(--control-sm); padding: 0 10px; font-size: var(--text-sm); }
@@ -25,7 +25,7 @@
 .switch input::after { content: ""; position: absolute; top: 3px; inset-inline-start: 3px; width: 12px; height: 12px; background: var(--foreground); transition: transform var(--base) var(--ease), background var(--fast); }
 .switch input:checked { background: var(--foreground); }
 .switch input:checked::after { transform: translateX(calc(16px * var(--dir, 1))); background: var(--background); }
-.switch input:disabled { opacity: 0.5; cursor: not-allowed; }
+.switch input:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
 /* Settings: label left, control right, a rule between rows. */
 .setting { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--s2) var(--s5); padding: var(--s4) 0; }
 .setting + .setting { border-top: 1px solid var(--rule); }

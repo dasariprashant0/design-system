@@ -3,7 +3,7 @@
 .toast-item { display: grid; grid-template-columns: 1fr auto; gap: var(--s1) var(--s4); align-items: start; padding: var(--s4); background: var(--surface); color: var(--surface-text); border: 1px solid var(--rule); font-size: var(--text-sm); }
 .toast-item[data-state="open"] { animation: rise-in-r var(--base) var(--ease); }
 .toast-item[data-state="closed"] { animation: toast-out var(--fast) var(--ease) forwards; }
-.toast-title { overflow-wrap: anywhere; font-weight: 500; grid-column: 1; }
+.toast-title { overflow-wrap: anywhere; font-weight: var(--weight-medium); grid-column: 1; }
 .toast-description { overflow-wrap: anywhere; grid-column: 1; opacity: 0.8; }
 .toast-action, .toast-close { grid-column: 2; font-size: var(--text-xs); text-decoration: underline; text-underline-offset: 3px; color: var(--surface-text); }
 .toast-action { grid-row: 1; } .toast-close { grid-row: 2; opacity: 0.7; }

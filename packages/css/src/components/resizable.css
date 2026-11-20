@@ -9,4 +9,4 @@
 .resizable[data-direction="horizontal"] > .resizable-handle::before { inset-block: 0; inset-inline: calc(var(--s3) * -1); }
 .resizable[data-direction="vertical"] > .resizable-handle::before { inset-inline: 0; inset-block: calc(var(--s3) * -1); }
 .resizable-handle:hover, .resizable-handle[data-dragging] { background: var(--foreground); }
-.resizable-handle:focus-visible { background: var(--accent); outline: 2px solid var(--accent); outline-offset: 1px; }
+.resizable-handle:focus-visible { background: var(--accent); outline: var(--focus-ring); outline-offset: 1px; }

@@ -17,7 +17,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-body);
   font-size: var(--text-base);
-  line-height: 1.55;
+  line-height: var(--leading-normal);
   -webkit-font-smoothing: antialiased;
   font-variant-numeric: tabular-nums;
 }
@@ -27,7 +27,7 @@ p, h1, h2, h3, h4, dl, dd, ol, ul, figure { margin: 0; }
 ol, ul { padding: 0; list-style: none; }
 a { color: inherit; text-underline-offset: 4px; text-decoration-color: var(--muted); }
 a:hover { text-decoration-color: currentColor; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
 ::selection { background: var(--accent); color: var(--on-accent); }
 
 /* Film grain, as on the portfolio; static (a desktop app stays open). */
@@ -38,7 +38,7 @@ body::after {
 }
 
 /* Type roles. Display is for page titles and big numbers only. */
-.display { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.035em; line-height: 0.95; text-wrap: balance; }
+.display { font-family: var(--font-display); font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: -0.035em; line-height: 0.95; text-wrap: balance; }
 .display-md { font-size: var(--display-md); }
 .display-sm { font-size: var(--display-sm); letter-spacing: -0.03em; }
 .display-xl { font-size: var(--display-xl); letter-spacing: -0.04em; line-height: 1; text-transform: none; }

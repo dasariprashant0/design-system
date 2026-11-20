@@ -11,7 +11,7 @@
     },
     {
       "path": "packages/css/src/components/link.css",
-      "content": ".link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }\n"
+      "content": ".link:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }\n"
     }
   ],
   "a11y": [
