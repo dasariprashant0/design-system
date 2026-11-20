@@ -3,9 +3,9 @@
 .slider-track { position: relative; flex: 1; height: 2px; background: var(--rule); }
 .slider-range { position: absolute; height: 100%; background: var(--foreground); }
 .slider-thumb { display: block; width: 14px; height: 14px; background: var(--foreground); border: 0; cursor: grab; }
-.slider[data-disabled] { opacity: 0.5; }
+.slider[data-disabled] { opacity: var(--opacity-disabled); }
 .toggle { padding: var(--s2) var(--s4); border: 1px solid var(--rule); color: var(--muted); font-size: var(--text-sm); }
 .toggle:not([data-state="on"]):hover:not(:disabled) { color: var(--foreground); border-color: var(--foreground); }
 .toggle[data-state="on"] { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
-.toggle:disabled { opacity: 0.5; cursor: not-allowed; }
+.toggle:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
 .toggle-group { display: inline-flex; gap: var(--s2); }

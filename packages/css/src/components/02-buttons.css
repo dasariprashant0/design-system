@@ -1,5 +1,5 @@
 /* ─── Buttons: solid (one per view), line (the rest), danger, ghost ─── */
-.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }
+.btn { height: var(--control-md); display: inline-flex; align-items: center; justify-content: center; gap: var(--s3); padding: 0 24px; font-size: var(--text-sm); font-weight: var(--weight-medium); white-space: nowrap; border-radius: var(--radius); transition: transform var(--base), background var(--fast), color var(--fast); }
 .btn:active:not(:disabled) { transform: scale(0.98); }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .btn-solid { background: var(--foreground); color: var(--background); }

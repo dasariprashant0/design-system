@@ -2,11 +2,16 @@
   "$format": "monoline-figma-variables",
   "$skipped": [
     "--base",
+    "--border-width",
     "--ease",
     "--fast",
+    "--focus-ring",
     "--hatch",
     "--heading-1",
     "--heading-2",
+    "--opacity-disabled",
+    "--shadow-popover",
+    "--shadow-toast",
     "--slow",
     "--z-drawer",
     "--z-grain",
@@ -4388,6 +4393,105 @@
           }
         },
         {
+          "name": "layout/container-sm",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 640,
+            "compact": 640,
+            "spacious": 640
+          }
+        },
+        {
+          "name": "layout/container-md",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 768,
+            "compact": 768,
+            "spacious": 768
+          }
+        },
+        {
+          "name": "layout/container-lg",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 1024,
+            "compact": 1024,
+            "spacious": 1024
+          }
+        },
+        {
+          "name": "layout/container-xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 1280,
+            "compact": 1280,
+            "spacious": 1280
+          }
+        },
+        {
+          "name": "layout/container-2xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 1536,
+            "compact": 1536,
+            "spacious": 1536
+          }
+        },
+        {
+          "name": "layout/bp-xs",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 480,
+            "compact": 480,
+            "spacious": 480
+          }
+        },
+        {
+          "name": "layout/bp-sm",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 640,
+            "compact": 640,
+            "spacious": 640
+          }
+        },
+        {
+          "name": "layout/bp-md",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 768,
+            "compact": 768,
+            "spacious": 768
+          }
+        },
+        {
+          "name": "layout/bp-lg",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 1024,
+            "compact": 1024,
+            "spacious": 1024
+          }
+        },
+        {
+          "name": "layout/bp-xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 1280,
+            "compact": 1280,
+            "spacious": 1280
+          }
+        },
+        {
+          "name": "layout/bp-2xl",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "comfortable": 1536,
+            "compact": 1536,
+            "spacious": 1536
+          }
+        },
+        {
           "name": "layout/window-pad",
           "resolvedType": "FLOAT",
           "valuesByMode": {
@@ -4422,6 +4526,33 @@
             "square": 999,
             "soft": 999,
             "round": 999
+          }
+        },
+        {
+          "name": "radius/radius-sm",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "square": 0,
+            "soft": 3,
+            "round": 6
+          }
+        },
+        {
+          "name": "radius/radius-md",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "square": 0,
+            "soft": 6,
+            "round": 12
+          }
+        },
+        {
+          "name": "radius/radius-lg",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "square": 0,
+            "soft": 9,
+            "round": 18
           }
         }
       ]
@@ -4573,6 +4704,96 @@
             "serif / comfortable": "clamp(44px, 8vw, 104px)",
             "serif / compact": "clamp(44px, 8vw, 104px)",
             "serif / spacious": "clamp(44px, 8vw, 104px)"
+          }
+        },
+        {
+          "name": "type/weight-regular",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "mono / comfortable": 400,
+            "mono / compact": 400,
+            "mono / spacious": 400,
+            "sans / comfortable": 400,
+            "sans / compact": 400,
+            "sans / spacious": 400,
+            "serif / comfortable": 400,
+            "serif / compact": 400,
+            "serif / spacious": 400
+          }
+        },
+        {
+          "name": "type/weight-medium",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "mono / comfortable": 500,
+            "mono / compact": 500,
+            "mono / spacious": 500,
+            "sans / comfortable": 500,
+            "sans / compact": 500,
+            "sans / spacious": 500,
+            "serif / comfortable": 500,
+            "serif / compact": 500,
+            "serif / spacious": 500
+          }
+        },
+        {
+          "name": "type/weight-bold",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "mono / comfortable": 700,
+            "mono / compact": 700,
+            "mono / spacious": 700,
+            "sans / comfortable": 700,
+            "sans / compact": 700,
+            "sans / spacious": 700,
+            "serif / comfortable": 700,
+            "serif / compact": 700,
+            "serif / spacious": 700
+          }
+        },
+        {
+          "name": "type/leading-tight",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "mono / comfortable": 1.2,
+            "mono / compact": 1.2,
+            "mono / spacious": 1.2,
+            "sans / comfortable": 1.2,
+            "sans / compact": 1.2,
+            "sans / spacious": 1.2,
+            "serif / comfortable": 1.2,
+            "serif / compact": 1.2,
+            "serif / spacious": 1.2
+          }
+        },
+        {
+          "name": "type/leading-normal",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "mono / comfortable": 1.55,
+            "mono / compact": 1.55,
+            "mono / spacious": 1.55,
+            "sans / comfortable": 1.55,
+            "sans / compact": 1.55,
+            "sans / spacious": 1.55,
+            "serif / comfortable": 1.55,
+            "serif / compact": 1.55,
+            "serif / spacious": 1.55
+          }
+        },
+        {
+          "name": "type/leading-relaxed",
+          "resolvedType": "FLOAT",
+          "valuesByMode": {
+            "mono / comfortable": 1.6,
+            "mono / compact": 1.6,
+            "mono / spacious": 1.6,
+            "sans / comfortable": 1.6,
+            "sans / compact": 1.6,
+            "sans / spacious": 1.6,
+            "serif / comfortable": 1.6,
+            "serif / compact": 1.6,
+            "serif / spacious": 1.6
           }
         }
       ]

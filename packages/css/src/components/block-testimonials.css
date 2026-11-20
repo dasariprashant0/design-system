@@ -7,6 +7,6 @@
 .block-testimonial figcaption { display: flex; align-items: center; gap: var(--s3); font-size: var(--text-sm); }
 .block-testimonial figcaption > span:last-child { display: flex; flex-direction: column; }
 .block-testimonial-avatar { display: inline-flex; }
-.block-testimonial-name { font-weight: 500; }
+.block-testimonial-name { font-weight: var(--weight-medium); }
 .block-testimonial-role { color: var(--muted); }
 @media (min-width: 760px) { .block-testimonials-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }

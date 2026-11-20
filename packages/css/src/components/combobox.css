@@ -4,5 +4,5 @@
 .combobox-option { padding: var(--s2) var(--s4); font-size: var(--text-sm); cursor: pointer; }
 .combobox-option[data-active] { background: var(--foreground); color: var(--background); }
 .combobox-option[aria-selected="true"]::after { content: " ✓" / ""; }
-.combobox-option[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.combobox-option[aria-disabled="true"] { opacity: var(--opacity-disabled); cursor: not-allowed; }
 .combobox-empty { padding: var(--s3) var(--s4); font-size: var(--text-sm); color: var(--muted); }

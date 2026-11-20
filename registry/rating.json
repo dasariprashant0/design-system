@@ -7,7 +7,7 @@
   "css": [
     {
       "path": "packages/css/src/components/rating.css",
-      "content": "/* Rating: native radios hidden visually, stars drawn in currentColor. */\n.rating { display: inline-flex; gap: var(--s1); font-size: var(--text-lg); }\n.rating-star { display: inline-grid; position: relative; color: var(--ink-4); cursor: pointer; line-height: 0; }\n.rating-star[data-on] { color: var(--accent); }\n.rating-star:hover { color: var(--accent); }\n.rating-star:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }\ndiv[role=\"img\"].rating .rating-star { cursor: default; }\ndiv[role=\"img\"].rating .rating-star:hover { color: var(--ink-4); }\ndiv[role=\"img\"].rating .rating-star[data-on]:hover { color: var(--accent); }\n"
+      "content": "/* Rating: native radios hidden visually, stars drawn in currentColor. */\n.rating { display: inline-flex; gap: var(--s1); font-size: var(--text-lg); }\n.rating-star { display: inline-grid; position: relative; color: var(--ink-4); cursor: pointer; line-height: 0; }\n.rating-star[data-on] { color: var(--accent); }\n.rating-star:hover { color: var(--accent); }\n.rating-star:has(input:focus-visible) { outline: var(--focus-ring); outline-offset: 2px; }\ndiv[role=\"img\"].rating .rating-star { cursor: default; }\ndiv[role=\"img\"].rating .rating-star:hover { color: var(--ink-4); }\ndiv[role=\"img\"].rating .rating-star[data-on]:hover { color: var(--accent); }\n"
     }
   ],
   "a11y": [

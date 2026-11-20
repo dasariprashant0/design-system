@@ -90,6 +90,14 @@
   --display-sm: clamp(28px, 3.4vw, 40px);
   --display-md: clamp(34px, 5vw, 64px);
   --display-xl: clamp(44px, 8vw, 104px);
+  /* Weights: the three the bundled fonts ship (400 and 700 Space Mono, 400 and 500 DM Mono). No 600 is used. */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    700;
+  /* Line heights: tight for headings, normal for body text (the page default), relaxed for code and long form. */
+  --leading-tight:   1.2;
+  --leading-normal:  1.55;
+  --leading-relaxed: 1.6;
 
   /* Lines: a 20% mix of the text colour. --border alone is ~1.1:1 in the
      dark themes, so dividers use --rule. */
@@ -115,6 +123,19 @@
   /* Shape: square. One radius for the rare round thing (a ring, a dot). */
   --radius: 0;
   --round: 999px;
+  /* Radius scale, derived from --radius so data-radius="soft" | "round" moves every step: square 0/0/0,
+     soft 3/6/9px, round 6/12/18px. --radius-md is --radius. Set data-radius on <html>: these are resolved there. */
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 1.5);
+  /* Lines and states. */
+  --border-width: 1px;
+  --opacity-disabled: 0.5;
+  /* Focus: the one ring. Add outline-offset where the control needs room (base.css uses 3px). Resolved on <html>, like the accent. */
+  --focus-ring: 2px solid var(--accent);
+  /* Elevation. Popovers and menus are flat panels with a rule, so --shadow-popover is none (a hook for apps that want a lift). The toast floats over the page. */
+  --shadow-popover: none;
+  --shadow-toast: 0 8px 30px -12px rgba(0, 0, 0, 0.5);
 
   /* Motion. */
   --ease: cubic-bezier(0.76, 0, 0.24, 1);
@@ -126,6 +147,21 @@
   --side: 264px;        /* sidebar width */
   --measure: 64ch;      /* longest comfortable line */
   --content: 1080px;    /* widest main column */
+  /* Container widths (Tailwind's steps), for max-width on a centred column. */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  /* Breakpoints, for JavaScript (matchMedia) and documentation. CSS cannot read a variable inside @media,
+     so a stylesheet must write the number out; these are the values to write. The built-in stylesheets still
+     use older widths, listed in CHANGELOG.md; do not copy them. */
+  --bp-xs: 480px;
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
   --window-pad: var(--s6); /* a small window's inset from every edge (Settings, a panel) */
 
   /* Layers. */

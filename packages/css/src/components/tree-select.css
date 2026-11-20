@@ -4,7 +4,7 @@
 .tree-select-item { display: flex; align-items: center; gap: var(--s2); min-height: 24px; padding-block: var(--s2); padding-inline-end: var(--s4); font-size: var(--text-sm); cursor: pointer; }
 .tree-select-item[data-active] { background: var(--foreground); color: var(--background); }
 .tree-select-item[aria-selected="true"]::after { content: "✓" / ""; margin-inline-start: auto; }
-.tree-select-item[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+.tree-select-item[aria-disabled="true"] { opacity: var(--opacity-disabled); cursor: not-allowed; }
 .tree-select-twisty { width: 1.5ch; flex: none; text-align: center; color: var(--muted); }
 .tree-select-item[data-active] .tree-select-twisty { color: inherit; }
 .tree-select-empty { padding: var(--s3) var(--s4); font-size: var(--text-sm); color: var(--muted); }

@@ -7,7 +7,7 @@
 .choice input[type="radio"]:checked::after { content: ""; position: absolute; inset: 4px; border-radius: var(--round); background: var(--background); }
 .choice input[type="checkbox"]:indeterminate { background: var(--foreground); }
 .choice input[type="checkbox"]:indeterminate::after { content: ""; position: absolute; inset-inline: 3px; top: 7px; height: 2px; background: var(--background); }
-.choice input:disabled { opacity: 0.5; cursor: not-allowed; }
+.choice input:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
 .choice:has(input:disabled) { color: var(--muted); cursor: not-allowed; }
 .choice-group { display: grid; gap: var(--s3); border: 0; padding: 0; margin: 0; min-width: 0; }
 .choice-group > legend { padding: 0; margin-bottom: var(--s3); }

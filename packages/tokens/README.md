@@ -21,11 +21,11 @@ npm run test:tokens  # round-trip and figma checks
 | Collection | Modes | Variables |
 |---|---|---|
 | `Colors` | 24: `<theme> / <accent>` (`warm / orange` … `midnight / slate`) | 28 colours: theme and accent colours, code colours, derived lines and washes (`color/ink-2`, `color/rule` …). Values are `{r, g, b, a}` in 0 to 1; alpha washes are resolved. |
-| `Spacing` | 3: `comfortable`, `compact`, `spacious` | `space/s1`–`s9`, `control/sm|md|lg` (control heights), `layout/*` |
-| `Radius` | 3: `square`, `soft`, `round` | `radius/radius`, `radius/round` |
-| `Typography` | 9: `<font> / <density>` (`mono`, `sans`, `serif` × density) | `type/*`. Sizes are numbers; font stacks and `clamp()` display sizes are strings. |
+| `Spacing` | 3: `comfortable`, `compact`, `spacious` | `space/s1`–`s9`, `control/sm|md|lg` (control heights), `layout/*` (including `container-*` widths and `bp-*` breakpoints) |
+| `Radius` | 3: `square`, `soft`, `round` | `radius/radius`, `radius/sm|md|lg` (derived from `radius`), `radius/round` |
+| `Typography` | 9: `<font> / <density>` (`mono`, `sans`, `serif` × density) | `type/*` (including `weight-*` and `leading-*`). Sizes are numbers; font stacks and `clamp()` display sizes are strings. |
 
-Not exported, because Figma has no variable type for them: motion (`--ease`, `--fast`, `--base`, `--slow`), z-index (`--z-*`), and the `--hatch` gradient. They are listed in `$skipped`.
+Not exported, because Figma has no variable type for them: motion (`--ease`, `--fast`, `--base`, `--slow`), z-index (`--z-*`), the effect group (`--shadow-*`, `--focus-ring`, `--border-width`, `--opacity-disabled`) and the `--hatch` gradient. They are listed in `$skipped`.
 
 The shape is `{$format, $skipped, collections: [{name, modes, variables: [{name, resolvedType, valuesByMode}]}]}`. Modes are named, not given ids. It follows the REST variable model (`resolvedType`, `valuesByMode`), but it is **not** a request body for Figma's REST API.
 
