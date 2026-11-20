@@ -1,14 +1,14 @@
 // After `vite build`: writes dist/<route>/index.html for every docs route (real HTML, status 200 on GitHub Pages),
 // plus dist/sitemap.xml and dist/robots.txt. Each page is the built index.html with its own title, description,
 // canonical URL, Open Graph and Twitter tags, and the server-rendered page inside #root (the client hydrates it).
-// Env: DOCS_ORIGIN (default https://dasariprashant0.github.io), DOCS_BASE (same value the build used).
+// Env: DOCS_ORIGIN (default https://monoline.prashantdasari.com), DOCS_BASE (same value the build used).
 import {mkdirSync, readFileSync, rmSync, writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {build} from 'vite';
 import {docsRoot} from './lib/load.mjs';
 
-const origin = (process.env.DOCS_ORIGIN ?? 'https://dasariprashant0.github.io').replace(/\/+$/, '');
+const origin = (process.env.DOCS_ORIGIN ?? 'https://monoline.prashantdasari.com').replace(/\/+$/, '');
 const base = `/${(process.env.DOCS_BASE ?? '/').replace(/^\/+|\/+$/g, '')}/`.replace('//', '/');
 const dist = join(docsRoot, 'dist');
 const ssrOut = join(docsRoot, 'node_modules/.prerender');
