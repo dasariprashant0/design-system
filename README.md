@@ -1,6 +1,12 @@
 # Monoline
 
-[Live docs and demos](https://monoline.prashantdasari.com). An open-source UI kit with a plain CSS core and accessible React components. Thin rules, one accent, monospace by default, and every part of the look can be changed: eight accents, three themes, three font families, three corner styles and three densities.
+[![npm](https://img.shields.io/npm/v/@monoline/react?label=%40monoline%2Freact)](https://www.npmjs.com/package/@monoline/react)
+[![CI](https://github.com/dasariprashant0/monoline/actions/workflows/ci.yml/badge.svg)](https://github.com/dasariprashant0/monoline/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
+
+**[Docs and live demos](https://monoline.prashantdasari.com)** · [Components](https://monoline.prashantdasari.com/docs/components/) · [Playground](https://monoline.prashantdasari.com/playground/) · [Changelog](CHANGELOG.md)
+
+An open-source UI kit with a plain CSS core and accessible React components. Thin rules, one accent, monospace by default, and every part of the look can be changed: eight accents, three themes, three font families, three corner styles and three densities.
 
 - **129 components and hooks**: buttons, forms (combobox, calendar, date picker, OTP, file upload), overlays (dialog, drawer, menus, toast), data display (data table, tree, timeline), navigation, effects and page blocks.
 - **Accessible by default**: built on native elements (`<dialog>`, a small floating layer) or Radix, with keyboard and axe tests for every component.
