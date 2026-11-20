@@ -1,11 +1,14 @@
-// What goes inside a component page: header, Installation, Usage, Examples, Anatomy, API Reference, Accessibility,
-// Styling, Related, Details. Everything is data-driven from meta.json plus the build-time JSON written by
+// What goes inside a component page: header, Import, Usage, Examples, Props, Data Attributes, Playground, Accessibility,
+// Related. Everything is data-driven from meta.json plus the build-time JSON written by
 // scripts/gen-props, gen-demos and gen-styling, so a new component needs no change here.
-import {useCallback, useEffect, useMemo, useState, useSyncExternalStore, type ReactNode} from 'react';
+import {useMemo, useState, useSyncExternalStore, type ReactNode} from 'react';
 import {
-  Badge, Button, CodeBlock, Collapsible, CollapsibleTrigger, Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-  Tabs, TabsContent, TabsList, TabsTrigger,
+  Badge, Button, CodeBlock, Collapsible, CollapsibleTrigger,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Tabs, TabsContent, TabsList, TabsTrigger,
 } from '@monoline/react';
+import {href} from '../shell/router';
+import {VERSION, entryAt, neighbours} from '../shell/registry';
+import {CopyMarkdown, OpenMenu} from './doc-actions';
 import type {ComponentMeta, Demo} from '@monoline/react';
 import {keyboardRows} from '../../scripts/lib/a11y.mjs';
 import {Playground} from './playground';
@@ -62,33 +65,28 @@ function Section({id, title, children}: {id: string; title: string; children: Re
 }
 
 /** Doc URL for the Markdown page, relative to the site base so it works under a sub-path. */
-const markdownUrl = (name: string) => new URL(`docs/${name}.md`, new URL(import.meta.env.BASE_URL, typeof document === 'undefined' ? 'http://localhost/' : document.baseURI)).href;
-
-function CopyMarkdown({name}: {name: string}) {
-  const [state, setState] = useState<'idle' | 'copied' | 'failed'>('idle');
-  useEffect(() => { if (state === 'idle') return; const t = setTimeout(() => setState('idle'), 2000); return () => clearTimeout(t); }, [state]);
-  const copy = useCallback(async () => {
-    try {
-      const res = await fetch(markdownUrl(name));
-      if (!res.ok) throw new Error(String(res.status));
-      await navigator.clipboard.writeText(await res.text());
-      setState('copied');
-    } catch { setState('failed'); }
-  }, [name]);
+/** Arrow buttons to the previous and next page, beside Copy and Open (as on shadcn/ui). */
+function PrevNext({path}: {path: string}) {
+  const e = entryAt(path);
+  if (!e) return null;
+  const {prev, next} = neighbours(e);
+  const arrow = (back: boolean) => <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><path d={back ? 'M13 8H3M7 4 3 8l4 4' : 'M3 8h10M9 4l4 4-4 4'} /></svg>;
   return (
-    <>
-      <Button size="sm" variant="line" onClick={copy}>Copy page as Markdown</Button>
-      <span className="cdoc-status" role="status">{state === 'copied' ? 'Copied' : state === 'failed' ? 'Copy failed' : ''}</span>
-    </>
+    <span className="doc-prevnext">
+      {prev ? <a href={href(prev.path)} aria-label={`Previous: ${prev.title}`} rel="prev">{arrow(true)}</a> : <span aria-hidden="true" />}
+      {next ? <a href={href(next.path)} aria-label={`Next: ${next.title}`} rel="next">{arrow(false)}</a> : <span aria-hidden="true" />}
+    </span>
   );
 }
+
+export const markdownUrl = (name: string) => new URL(`docs/${name}.md`, new URL(import.meta.env.BASE_URL, typeof document === 'undefined' ? 'http://localhost/' : document.baseURI)).href;
 
 const noop = () => () => {};
 /** False in the prerendered HTML and during hydration, true afterwards. Live demos wait for it: they may depend on the viewer's clock, locale or screen. */
 const useHydrated = () => useSyncExternalStore(noop, () => true, () => false);
 
-/** One example: Preview / Code tabs. The Code tab holds only this demo's source and collapses when long. */
-function Example({id, demo, code}: {id: string; demo: Demo; code?: DemoCode}) {
+/** One example: the live preview, then its code in a card below. The code collapses when long. */
+function Example({id, demo, code, playground}: {id: string; demo: Demo; code?: DemoCode; playground: string}) {
   const [open, setOpen] = useState(false);
   const hydrated = useHydrated();
   const long = !!code && code.code.split('\n').length > 14;
@@ -96,16 +94,19 @@ function Example({id, demo, code}: {id: string; demo: Demo; code?: DemoCode}) {
     <div className="cdoc-example">
       <h3 id={id} className="cdoc-h3">{demo.title}</h3>
       {demo.description && <p className="cdoc-muted">{demo.description}</p>}
-      <Tabs defaultValue="preview" className="cdoc-tabs">
-        <TabsList aria-label={`${demo.title}: preview or code`}>
-          <TabsTrigger value="preview">Preview</TabsTrigger>
-          {code && <TabsTrigger value="code">Code</TabsTrigger>}
-        </TabsList>
+      <Tabs defaultValue="preview" className="cdoc-tabs cdoc-preview">
+        <div className="cdoc-preview-head">
+          <TabsList aria-label={`${demo.title}: preview or code`}>
+            <TabsTrigger value="preview">Preview</TabsTrigger>
+            {code && <TabsTrigger value="code">Code</TabsTrigger>}
+          </TabsList>
+          {code && <a className="cdoc-open-pg" href={playground} target="_blank" rel="noopener">Open playground <span aria-hidden="true">↗</span></a>}
+        </div>
         <TabsContent value="preview"><div className="cdoc-stage">{hydrated && demo.render()}</div></TabsContent>
         {code && (
           <TabsContent value="code">
             <Collapsible open={open || !long} onOpenChange={setOpen} className="cdoc-code" data-long={long || undefined}>
-              <div className="cdoc-code-body"><CodeBlock title="example.tsx" language="tsx" code={code.code} /></div>
+              <div className="cdoc-code-body"><CodeBlock title="example.tsx" language="tsx" code={code.code} lineNumbers={code.code.split('\n').length > 8} /></div>
               {long && <CollapsibleTrigger asChild><Button size="sm" variant="line">{open ? 'Hide code' : 'View code'}</Button></CollapsibleTrigger>}
             </Collapsible>
           </TabsContent>
@@ -144,7 +145,9 @@ function Installation({meta, extra}: {meta: ComponentMeta; extra: Extra}) {
   const deps = extra.dependencies.join(' ');
   const importLine = `import '@monoline/css';\nimport {${extra.importName}} from '@monoline/react';`;
   return (
-    <Section id="installation" title="Installation">
+    <Section id="import" title="Import">
+      <CodeBlock language="tsx" code={importLine} />
+      <p className="cdoc-muted">Not installed yet? Pick a route.</p>
       <Tabs defaultValue="cli" className="cdoc-tabs">
         <TabsList aria-label="Installation method">
           <TabsTrigger value="cli">CLI</TabsTrigger>
@@ -166,7 +169,6 @@ function Installation({meta, extra}: {meta: ComponentMeta; extra: Extra}) {
         </TabsContent>
         <TabsContent value="npm">
           <PmCode packages="@monoline/react @monoline/css" label="npm" />
-          <CodeBlock language="tsx" code={importLine} />
           {meta.css.length > 0 && <><p className="cdoc-muted">Load only this component's styles instead of all of <code>@monoline/css</code> (add the core once):</p><CodeBlock language="tsx" code={`import '@monoline/css/core.css';\nimport '@monoline/css/components/${meta.name}.css';`} /></>}
         </TabsContent>
       </Tabs>
@@ -200,42 +202,86 @@ export function ComponentDoc({meta, linkTo = (n) => `#${n}`}: ComponentDocProps)
   const related = allMetas.filter((m) => m.category === meta.category && m.name !== meta.name).slice(0, 4);
   const usage = extra.demos[0]?.code ?? `import {${extra.importName}} from '@monoline/react';`;
   const kind = hook ? 'hooks' : 'components';
-  const styleRows = styleFiles.flatMap((s) => [...s.classes.map((c) => ({sel: `.${c}`, file: s.file})), ...s.attributes.map((a) => ({sel: a, file: s.file}))]);
   const showAnatomy = !hook && extra.parts.length > 1;
+
+  const attrRows = styleFiles.flatMap((s) => s.attributes.map((a) => ({sel: a, file: s.file})));
+  const classRows = styleFiles.flatMap((s) => s.classes.map((c) => ({sel: `.${c}`, file: s.file})));
 
   return (
     <div className="cdoc">
-      <header className="cdoc-head">
-        <h1 className="cdoc-title display display-md">{meta.title}</h1>
-        <p className="cdoc-lede">{meta.description}</p>
-        <div className="cdoc-links">
-          <a href={`${GITHUB}/${kind}/${meta.name}`}>Source on GitHub</a>
-          <a href="https://www.npmjs.com/package/@monoline/react"><code>@monoline/react</code></a>
-          <a href={markdownUrl(meta.name)}>Markdown</a>
-          <CopyMarkdown name={meta.name} />
+      <header className="doc-head">
+        <h1 className="doc-title">{meta.title}</h1>
+        <p className="doc-lede">{meta.description}</p>
+        <p className="doc-links">
+          <a className="doc-chip" href={`${GITHUB}/${kind}/${meta.name}`}>Source</a>
+          {meta.css[0] && <a className="doc-chip" href={`https://github.com/dasariprashant0/monoline/blob/master/packages/css/src/components/${meta.css[0]}`}>Styles source</a>}
+          <a className="doc-chip" href="https://www.npmjs.com/package/@monoline/react">@monoline/react {VERSION}</a>
+          <a className="doc-chip" href={markdownUrl(meta.name)}>Markdown for AI tools</a>
+          <Badge>{meta.status}</Badge>
+        </p>
+        <div className="doc-actions">
+          <CopyMarkdown source={markdownUrl(meta.name)} />
+          <OpenMenu title={meta.title} pageUrl={markdownUrl(meta.name)} source={`${GITHUB}/${kind}/${meta.name}`} markdown={markdownUrl(meta.name)} />
+          <PrevNext path={`docs/${hook ? 'hooks' : 'components'}/${meta.name}`} />
         </div>
+        <ul className="doc-features" aria-label="Features">
+          {!hook && <li>{meta.primitive ? `Built on ${meta.primitive}` : 'Built on native elements'}</li>}
+          {extra.parts.length > 1 && <li>{extra.parts.length} parts, named exports</li>}
+          {meta.a11y.slice(0, 3).map((a) => <li key={a}>{a}</li>)}
+          {meta.css.length > 0 && <li>Styles in one file: <code>{meta.css[0]}</code></li>}
+        </ul>
       </header>
 
       <Installation meta={meta} extra={extra} />
 
-      <Section id="usage" title="Usage"><CodeBlock title="example.tsx" language="tsx" code={usage} /></Section>
-
-      {!hook && <Playground name={meta.name} importName={extra.importName} groups={groups} />}
+      <Section id="usage" title="Usage">
+        <CodeBlock language="tsx" code={usage} />
+        {showAnatomy && (
+          <>
+            <h3 id="anatomy" className="cdoc-h3">Anatomy</h3>
+            <p className="cdoc-muted">Import the parts you need and nest them like this.</p>
+            <CodeBlock language="tsx" code={`import {${extra.parts.join(', ')}} from '@monoline/react';\n\n${anatomySnippet(extra.parts)}`} />
+          </>
+        )}
+      </Section>
 
       {demos.length > 0 && (
         <Section id="examples" title="Examples">
-          {demos.map((d, i) => <Example key={d.title} id={`example-${slug(d.title)}`} demo={d} code={extra.demos[i]?.title === d.title ? extra.demos[i] : extra.demos.find((x) => x.title === d.title)} />)}
+          {demos.map((d, i) => <Example key={d.title} id={`example-${slug(d.title)}`} playground={href(`playground?c=${meta.name}&d=${i}`)} demo={d} code={extra.demos[i]?.title === d.title ? extra.demos[i] : extra.demos.find((x) => x.title === d.title)} />)}
         </Section>
       )}
 
-      {showAnatomy && (
-        <Section id="anatomy" title="Anatomy">
-          <p className="cdoc-muted">Import the parts you need and nest them like this.</p>
-          <CodeBlock language="tsx" code={`import {${extra.parts.join(', ')}} from '@monoline/react';\n\n${anatomySnippet(extra.parts)}`} />
+      {groups.length > 0 && <Section id="props" title="Props"><PropsTables groups={groups} /></Section>}
+
+      {(attrRows.length > 0 || classRows.length > 0) && (
+        <Section id="data-attributes" title="Data Attributes">
+          <p className="cdoc-muted">State is exposed through attributes. Style it with these selectors, not with class toggles.</p>
+          {attrRows.length > 0 ? (
+            <Table wrapperLabel="Attribute selectors">
+              <TableHeader><TableRow><TableHead scope="col">Attribute</TableHead><TableHead scope="col">Stylesheet</TableHead></TableRow></TableHeader>
+              <TableBody>{attrRows.map((r) => <TableRow key={`${r.file}${r.sel}`}><TableCell><code>{r.sel}</code></TableCell><TableCell><code>{r.file}</code></TableCell></TableRow>)}</TableBody>
+            </Table>
+          ) : <p className="cdoc-muted">This component sets no state attributes.</p>}
+          {classRows.length > 0 && (
+            <>
+              <h3 id="css-classes" className="cdoc-h3">CSS classes</h3>
+              <Table wrapperLabel="CSS classes">
+                <TableHeader><TableRow><TableHead scope="col">Class</TableHead><TableHead scope="col">Stylesheet</TableHead></TableRow></TableHeader>
+                <TableBody>{classRows.map((r) => <TableRow key={`${r.file}${r.sel}`}><TableCell><code>{r.sel}</code></TableCell><TableCell><code>{r.file}</code></TableCell></TableRow>)}</TableBody>
+              </Table>
+            </>
+          )}
         </Section>
       )}
 
-      {groups.length > 0 && <Section id="api-reference" title="API Reference"><PropsTables groups={groups} /></Section>}
+      {!hook && classRows.length > 0 && (
+        <Section id="customization" title="Customization">
+          <p className="cdoc-muted">Style it with the kit's tokens in your own CSS, loaded after <code>@monoline/css</code>. Prefer the attributes above over extra classes. See <a href={href('docs/theming')}>Theming</a> for every token.</p>
+          <CodeBlock title="app.css" language="css" code={`${classRows[0]!.sel} {\n  border-color: var(--accent);\n}\n${attrRows[0] ? `${classRows[0]!.sel}${attrRows[0].sel} {\n  background: var(--wash);\n}\n` : ''}`} />
+        </Section>
+      )}
+
+      {!hook && <Playground name={meta.name} importName={extra.importName} groups={groups} />}
 
       <Section id="accessibility" title={hook ? 'Behaviour' : 'Accessibility'}>
         <ul className="cdoc-list">{meta.a11y.map((a) => <li key={a}>{a}</li>)}</ul>
@@ -250,29 +296,11 @@ export function ComponentDoc({meta, linkTo = (n) => `#${n}`}: ComponentDocProps)
         )}
       </Section>
 
-      {styleRows.length > 0 && (
-        <Section id="styling" title="Styling">
-          <p className="cdoc-muted">Classes and attribute selectors in the stylesheets this component uses. Style state through the attributes, not through class toggles.</p>
-          <Table wrapperLabel="Styling selectors">
-            <TableHeader><TableRow><TableHead scope="col">Selector</TableHead><TableHead scope="col">Stylesheet</TableHead></TableRow></TableHeader>
-            <TableBody>{styleRows.map((r) => <TableRow key={`${r.file}${r.sel}`}><TableCell><code>{r.sel}</code></TableCell><TableCell><code>{r.file}</code></TableCell></TableRow>)}</TableBody>
-          </Table>
-        </Section>
-      )}
-
       {related.length > 0 && (
         <Section id="related" title="Related">
           <ul className="cdoc-related">{related.map((m) => <li key={m.name}><a href={linkTo(m.name)}>{m.title}</a><span className="cdoc-muted">{m.description}</span></li>)}</ul>
         </Section>
       )}
-
-      <Section id="details" title="Details">
-        <dl className="cdoc-kv">
-          {!hook && <><dt>Built on</dt><dd>{meta.primitive ?? 'native elements'}</dd><dt>Stylesheet</dt><dd>{meta.css.length ? <code>@monoline/css/components/{meta.name}.css</code> : 'none'}</dd></>}
-          <dt>Status</dt><dd>{meta.status}</dd>
-          {meta.keywords?.length ? <><dt>Also called</dt><dd>{meta.keywords.join(', ')}</dd></> : null}
-        </dl>
-      </Section>
     </div>
   );
 }

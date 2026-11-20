@@ -2,6 +2,12 @@
 // Routing, titles, scroll and focus are handled here; page bodies come from ../page and ../guides.
 import {useEffect, useRef, useState, type ReactNode} from 'react';
 import {Button, DirectionProvider} from '@monoline/react';
+import {Astro, Editor, Extensions, IconsLibrary, IconsPage, Nextjs, Overview, PlainCss, Remix, Upgrade, Vite} from '../site/Pages';
+import {PlaygroundPage} from '../page/live';
+import {Tokens} from '../site/Tokens';
+import {CopyMarkdown, OpenMenu, domToMarkdown} from '../page/doc-actions';
+import {GITHUB} from './Topbar';
+import {VERSION} from './registry';
 import {Blocks} from '../site/Blocks';
 import {Compare} from '../site/Compare';
 import {Changelog, Roadmap} from '../site/Doc';
@@ -28,16 +34,30 @@ function setMeta(title: string, description: string) {
   m.content = description;
 }
 
-const SITE_BODIES: Record<string, () => ReactNode> = {blocks: Blocks, themes: Themes, compare: Compare, changelog: Changelog, roadmap: Roadmap};
+const SITE_BODIES: Record<string, () => ReactNode> = {blocks: Blocks, themes: Themes, compare: Compare, changelog: Changelog, roadmap: Roadmap, components: Overview, tokens: Tokens, nextjs: Nextjs, vite: Vite, astro: Astro, remix: Remix, 'plain-css': PlainCss, icons: IconsPage, 'icons-library': IconsLibrary, editor: Editor, tools: Extensions, upgrade: Upgrade};
+
+/** Title area of every page that is not a component: 30px heading and a grey description. */
+export function PageHead({title, description, actions = true}: {title: string; description: string; actions?: boolean}) {
+  return (
+    <header className="doc-head">
+      <h1 className="doc-title">{title}</h1>
+      <p className="doc-lede">{description}</p>
+      {actions && (
+        <div className="doc-actions">
+          <CopyMarkdown source={() => domToMarkdown(document.querySelector('.docs-main')!)} />
+          <OpenMenu title={title} pageUrl={() => location.href} source={`${GITHUB}/tree/master/apps/docs/src`} />
+        </div>
+      )}
+    </header>
+  );
+}
 
 function Page({entry}: {entry: Entry}) {
   if (entry.kind === 'site') {
     const Body = SITE_BODIES[entry.name]!;
     return (
       <>
-        <p className="label">explore</p>
-        <h1 className="display display-md">{entry.title}</h1>
-        <p className="lede">{entry.description}</p>
+        <PageHead title={entry.title} description={entry.description} />
         <Body />
       </>
     );
@@ -46,9 +66,7 @@ function Page({entry}: {entry: Entry}) {
     const guide = guides.find((g) => g.slug === entry.name)!;
     return (
       <>
-        <p className="label">guide</p>
-        <h1 className="display display-md">{guide.title}</h1>
-        <p className="lede">{guide.summary}</p>
+        <PageHead title={guide.title} description={guide.summary} />
         {guide.body()}
       </>
     );
@@ -60,9 +78,7 @@ function Page({entry}: {entry: Entry}) {
 function Missing({path}: {path: string}) {
   return (
     <>
-      <p className="label">404</p>
-      <h1 className="display display-md">Page not found</h1>
-      <p className="lede">There is no page at <code>/{path}</code>. Search with <kbd className="kbd">/</kbd>, or start from the home page.</p>
+      <PageHead actions={false} title="Page not found" description={`There is no page at /${path}. Search with the / key, or start from the home page.`} />
       <div className="hero-actions"><Button variant="solid" asChild><a href={href()}>Home</a></Button></div>
     </>
   );
@@ -72,6 +88,7 @@ function Missing({path}: {path: string}) {
 export function pageMeta(route: Route) {
   if (route.kind === 'page') return {title: `${route.entry.title} · ${SITE}`, description: route.entry.description};
   if (route.kind === 'missing') return {title: `Page not found · ${SITE}`, description: HOME_DESCRIPTION};
+  if (route.kind === 'playground') return {title: `Playground · ${SITE}`, description: 'Edit Monoline code and see it run: every component, no setup.'};
   return {title: `${SITE}: plain CSS and accessible React components`, description: HOME_DESCRIPTION};
 }
 
@@ -79,7 +96,7 @@ export function App() {
   const pathname = usePathname();
   const navs = useNavCount();
   const route = resolve(pathname);
-  const path = route.kind === 'page' ? route.entry.path : route.kind === 'missing' ? route.path : '';
+  const path = route.kind === 'page' ? route.entry.path : route.kind === 'missing' ? route.path : route.kind === 'playground' ? 'playground' : '';
   const [prefs, set] = usePrefs();
   const [search, setSearch] = useState(false);
   const main = useRef<HTMLElement>(null);
@@ -106,11 +123,16 @@ export function App() {
     // Radix reads its direction from a provider, not from <html dir>: without this the RTL preference flips the CSS but not the arrow keys.
     <DirectionProvider dir={prefs.dir === 'rtl' ? 'rtl' : 'ltr'}>
     <PrefsContext.Provider value={[prefs, set] as const}>
-    <div className="docs" data-home={route.kind === 'home' || undefined} data-rail={headings.length > 1 || undefined}>
+    {route.kind === 'playground' ? <PlaygroundPage /> : (
+    <div className="docs" data-home={route.kind === 'home' || undefined} data-rail={(route.kind !== 'home' && headings.length > 1) || undefined}>
       <a className="skip-link" href="#main" onClick={(e) => { e.preventDefault(); const m = main.current; if (m) { m.tabIndex = -1; m.focus(); } }}>Skip to main content</a>
       <Topbar path={path} route={route} prefs={prefs} set={set} onSearch={() => setSearch(true)} />
       <aside className="docs-side" id="docs-side">
-        <Nav current={route.kind === 'page' ? route.entry.path : ''} />
+        <button type="button" className="side-search" aria-haspopup="dialog" onClick={() => setSearch(true)}>
+          <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.5" /><path d="m10.5 10.5 3.5 3.5" /></svg>
+          <span>Search</span><kbd className="kbd" aria-hidden="true">/</kbd>
+        </button>
+        <Nav tab={route.kind === 'page' ? route.entry.tab : undefined} current={route.kind === 'page' ? route.entry.path : ''} />
       </aside>
       <main className="docs-main" id="main" ref={main}>
         {route.kind === 'home' ? <Home /> : route.kind === 'missing' ? <Missing path={route.path} /> : (
@@ -120,9 +142,22 @@ export function App() {
           </>
         )}
       </main>
-      {headings.length > 1 && route.kind !== 'home' && <Toc headings={headings} />}
+      {headings.length > 1 && route.kind !== 'home' && (
+        <Toc headings={headings} extra={route.kind === 'page' && (route.entry.kind === 'component' || route.entry.kind === 'hook') ? (
+          <dl className="docs-facts" aria-label="Package facts">
+            <dt>Version</dt><dd>{VERSION}</dd>
+            <dt>Links</dt>
+            <dd>
+              <a href={`${GITHUB}/tree/master/packages/react/src/${route.entry.kind === 'hook' ? 'hooks' : 'components'}/${route.entry.name}`}>View source</a>
+              <a href={`${GITHUB}/issues/new`}>Report an issue</a>
+              <a href={`${import.meta.env.BASE_URL}docs/${route.entry.name}.md`}>View as Markdown</a>
+            </dd>
+          </dl>
+        ) : undefined} />
+      )}
       <Search open={search} onOpenChange={setSearch} />
     </div>
+    )}
     </PrefsContext.Provider>
     </DirectionProvider>
   );

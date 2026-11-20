@@ -1,6 +1,7 @@
 // Props playground: controls generated from the props JSON (select for unions, switch for booleans, text for
 // strings, number for numbers) that drive the real component live and print the matching JSX.
 // Components that cannot be rendered from their props alone have a small config in ./playgrounds.ts.
+import {href} from '../shell/router';
 import {Component, createElement, useEffect, useId, useMemo, useState, type ReactNode} from 'react';
 import * as M from '@monoline/react';
 import {Button, CodeBlock, Input, NativeSelect, Switch} from '@monoline/react';
@@ -164,9 +165,9 @@ function Auto({importName, group}: {importName: string; group: PropGroup}) {
 }
 
 const Section = ({children}: {children: ReactNode}) => (
-  <section className="cdoc-section" aria-labelledby="playground">
-    <h2 id="playground" className="cdoc-h2">Playground</h2>
-    <p className="cdoc-muted">Change the props and the component updates. The code below is what you would write.</p>
+  <section className="cdoc-section" aria-labelledby="try-props">
+    <h2 id="try-props" className="cdoc-h2">Try the props</h2>
+    <p className="cdoc-muted">Change a prop and the component above updates; the code below is what you would write. To edit the code itself, use the <a href={href('playground')} target="_blank" rel="noopener">Playground</a>.</p>
     {children}
   </section>
 );

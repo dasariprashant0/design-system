@@ -2,9 +2,9 @@
 import {createContext, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, SegmentedControl} from '@monoline/react';
 
-const ACCENTS = ['orange', 'rose', 'amber', 'green', 'teal', 'blue', 'violet', 'slate'] as const;
-const SWATCH: Record<string, string> = {orange: '#FF4500', rose: '#E11D48', amber: '#D97706', green: '#0E7A5F', teal: '#0F766E', blue: '#2563EB', violet: '#7C3AED', slate: '#334155'};
-const DEFAULTS = {theme: 'system', accent: 'orange', font: 'mono', radius: 'square', density: 'comfortable', dir: 'ltr', tokens: ''};
+export const ACCENTS = ['orange', 'rose', 'amber', 'green', 'teal', 'blue', 'violet', 'slate'] as const;
+export const SWATCH: Record<string, string> = {orange: '#FF4500', rose: '#E11D48', amber: '#D97706', green: '#0E7A5F', teal: '#0F766E', blue: '#2563EB', violet: '#7C3AED', slate: '#334155'};
+const DEFAULTS = {theme: 'system', accent: 'orange', font: 'pair', radius: 'soft', density: 'comfortable', dir: 'ltr', tokens: ''};
 export type Prefs = typeof DEFAULTS;
 type Set = (k: keyof Prefs, v: string) => void;
 /** Named accents plus the default setting (no `data-accent`), the way `npm run check` counts them. */
@@ -55,7 +55,7 @@ function Customize({prefs, set}: {prefs: Prefs; set: Set}) {
           {ACCENTS.map((a) => <button key={a} type="button" role="radio" aria-checked={prefs.accent === a} aria-label={a} title={a} className="swatch" style={{background: SWATCH[a]}} onClick={() => set('accent', a)} />)}
         </div>
       </div>
-      <div className="custom-row"><span className="label">Font</span><SegmentedControl aria-label="Font" value={prefs.font} onValueChange={(v) => set('font', v)} options={opt(['mono', 'sans', 'serif'])} /></div>
+      <div className="custom-row"><span className="label">Font</span><SegmentedControl aria-label="Font" value={prefs.font} onValueChange={(v) => set('font', v)} options={[{value: 'pair', label: 'mono + sans'}, {value: 'mono', label: 'mono'}, {value: 'sans', label: 'sans'}, {value: 'serif', label: 'serif'}]} /></div>
       <div className="custom-row"><span className="label">Corners</span><SegmentedControl aria-label="Corners" value={prefs.radius} onValueChange={(v) => set('radius', v)} options={opt(['square', 'soft', 'round'])} /></div>
       <div className="custom-row"><span className="label">Density</span><SegmentedControl aria-label="Density" value={prefs.density} onValueChange={(v) => set('density', v)} options={opt(['compact', 'comfortable', 'spacious'])} /></div>
       <div className="custom-row"><span className="label">Direction</span><SegmentedControl aria-label="Direction" value={prefs.dir} onValueChange={(v) => set('dir', v)} options={[{value: 'ltr', label: 'LTR'}, {value: 'rtl', label: 'RTL'}]} /></div>

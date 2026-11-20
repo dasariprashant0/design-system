@@ -1,0 +1,27 @@
+/* Playground page: full height, two panes side by side, stacked on a phone. Tokens only. */
+.pl { display: grid; grid-template-rows: auto 1fr; min-height: 100vh; background: var(--background); color: var(--foreground); }
+.pl-bar { display: flex; flex-wrap: wrap; align-items: end; gap: var(--s3) var(--s5); padding: var(--s3) var(--s5); border-bottom: 1px solid var(--rule); }
+.pl-bar .brand { align-self: center; padding: 0; color: var(--foreground); text-decoration: none; }
+.pl-title { align-self: center; font-family: var(--font-display); font-size: var(--text-lg); font-weight: 700; }
+.pl-pick { display: flex; flex-wrap: wrap; gap: var(--s3); }
+.pl-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-inline-start: auto; }
+.pl-docs { font-size: var(--text-sm); color: var(--foreground); padding: var(--s2); }
+.pl-note { flex-basis: 100%; min-height: 1.2em; font-size: var(--text-xs); color: var(--muted); }
+.pl-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 0; }
+.pl-pane { display: grid; grid-template-rows: auto 1fr auto; gap: var(--s2); min-width: 0; padding: var(--s4) var(--s5); }
+.pl-pane + .pl-pane { border-inline-start: 1px solid var(--rule); background: var(--wash); }
+.pl-h { font-size: var(--text-sm); font-weight: 700; font-family: var(--font-display); }
+.pl-file { margin-inline-start: var(--s2); font-weight: 400; color: var(--muted); }
+.pl-editor { width: 100%; min-height: 24rem; height: 100%; resize: vertical; padding: var(--s4); border: 1px solid var(--rule); background: var(--background); color: var(--foreground); font-family: var(--font-body); font-size: var(--text-sm); line-height: 1.6; tab-size: 2; white-space: pre; overflow: auto; }
+.pl-editor:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.pl-help { color: var(--muted); font-size: var(--text-xs); max-width: 70ch; }
+.pl-stage { padding: var(--s6) var(--s5); border: 1px solid var(--rule); background: var(--background); background-image: radial-gradient(var(--ink-5) 1px, transparent 1px); background-size: var(--s5) var(--s5); min-height: 24rem; overflow: auto; }
+.pl[data-busy] .pl-stage { opacity: 0.7; }
+.pl-error { margin: 0; padding: var(--s3) var(--s4); border: 1px solid var(--danger); color: var(--danger); background: var(--background); font-family: var(--font-body); font-size: var(--text-sm); white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (max-width: 880px) {
+  .pl-bar { padding-inline: var(--s4); }
+  .pl-actions { margin-inline-start: 0; }
+  .pl-main { grid-template-columns: minmax(0, 1fr); }
+  .pl-pane { padding-inline: var(--s4); }
+  .pl-pane + .pl-pane { border-inline-start: 0; border-top: 1px solid var(--rule); }
+}
