@@ -1,6 +1,6 @@
 {
   "name": "@monoline/css",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Monoline core: plain CSS design tokens, themes, accents and components. No framework, no build step needed to use it.",
   "license": "MIT",
   "type": "module",

@@ -1,7 +1,7 @@
 {
   "name": "monoline",
   "private": true,
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Monoline: an open-source UI kit. Plain CSS core, accessible React components, docs, and an AI-readable registry.",
   "license": "MIT",
   "type": "module",
