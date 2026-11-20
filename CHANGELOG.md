@@ -2,7 +2,9 @@
 
 Versions follow [semver](https://semver.org). Before 1.0, a minor version may change class names; each change is listed here.
 
-## Unreleased
+## 0.5.0 - 2026-11-20
+
+New design tokens, a redesigned docs site, and the docs now live at https://monoline.prashantdasari.com.
 
 ### Added
 
@@ -11,6 +13,8 @@ Versions follow [semver](https://semver.org). Before 1.0, a minor version may ch
 
 ### Changed
 
+- The repository is now `dasariprashant0/monoline` and the docs moved from GitHub Pages to https://monoline.prashantdasari.com; the package `homepage` fields point there.
+- The docs site is redesigned (home, `/docs` routes, tabs, sidebar, playground page).
 - Card, dialog, alert, code block, empty state, segmented control and kbd set `border-radius: var(--radius-md)` in their own stylesheets; the `[data-radius]` selectors for them in `options.css` are gone. Badge, tag and button keep their `options.css` rules (round makes them pills).
 
 ## 0.4.0 - 2026-11-16

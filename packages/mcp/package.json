@@ -1,6 +1,6 @@
 {
   "name": "@monoline/mcp",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Model Context Protocol server for Monoline: list, search and read components, install commands and the theming guide from any AI tool.",
   "license": "MIT",
   "type": "module",
